@@ -20,20 +20,20 @@ The business functions of **fundsonline.com** include:
 ## 3 Project Structure
 This project can be divided into two parts: backend management and frontend membership. Its overall framework diagram is as follows:
 
-![[2024021301.png]]
+![[img/2024021301.png]]
 
 ### 3.1 Backend management system
 The backend management system has a single architecture, implemented by the SSM framework, and integrates SpringSecurity to control user permissions. The picture below shows the control panel page of the backend management system. You can see that the backend management mainly has three major functions, namely authority management, business review and business management. Although the Shangcho.com project has only completed the permission management part, it is enough for us to be familiar with the SSM framework.
 
-![[20200803140926683.png]]
+![[img/20200803140926683.png]]
 ### 3.2 Front desk membership system
 The front-end membership system is a distributed microservice architecture, implemented by SpringBoot + SpringCloud. At the same time, it integrates the oss service for uploading project pictures, and integrates Alibaba's payment API for payment. The picture below shows the user center page of the front-end membership system. Since the  **fundsonline.com** project is mainly used for teaching, most of the data in the picture is fake data. The most important function of this page is to initiate crowdfunding:
 
-![[2020080314203573.png]]
+![[img/2020080314203573.png]]
 
 The picture shows the page after clicking to initiate crowdfunding:
 
-![[20200813212725196.png]]
+![[img/20200813212725196.png]]
 
 ## 4 Development / Deployment Environment
 Аппаратные среды, использованные для разработки, показаны в Таблице 1:
