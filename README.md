@@ -52,17 +52,21 @@ The software environments used in development are shown in Table 1:
 
 | Item | version | Comments |
 | ---- | ---- | ---- |
-| Java | 17.0.8 | This or higher version |
+| Java | 8u121 | This or higher version |
 | IntelliJ IDEA | 2023.2.2 (Educational Edition) | This or higher version |
+| MySQL | 8.0.35 Community | This or higher version |
+| Redis | 4.0.2 | This or higher version |
 | Checkstyle | 8.1 | This or higher version |
 | JUnit | 5.7.0 | This or higher version |
+
+
 ## 5 Test Environment
 а) название приложения и ссылка, где оно находится в Интернете (если это open-source приложение), год выпуска приложения (разрешённый период с 2019 по настоящее время)
 - название приложения: **fundsonline.com**
 - ссылка: https://github.com/liyijiadou2020/FundsOnline.git
 
 б) язык программирования <название и версия>;
-- язык программирования: Java 17.0.8
+- язык программирования: Java 8u121
 
 в) размер всего приложения или размер фрагмента кода, который вы будете проверять, если размер приложения больше 1К (в исходных строках кода);
  - размер фрагмента кода, который вы будете проверять: 300 lines
