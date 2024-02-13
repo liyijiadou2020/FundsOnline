@@ -6,11 +6,11 @@
 
 ## 2 Project Functions
 The business functions of **fundsonline.com** include:
-1. Users view crowdfunding projects
-2. Users view crowdfunding project details
-3. User Support Project
+1. Users views crowdfunding projects
+2. Users views crowdfunding project details
+3. User supports Project
 4. User views personal center
-5. Users initiate crowdfunding
+5. Users initiates crowdfunding
 6. Administrator login
 7. Administrator maintains data
 8. Administrator maintains role data
