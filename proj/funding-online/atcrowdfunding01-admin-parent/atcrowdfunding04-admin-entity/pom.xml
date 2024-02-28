@@ -10,11 +10,13 @@
     </parent>
 
     <artifactId>atcrowdfunding04-admin-entity</artifactId>
+    <groupId>com.atguigu.crowd</groupId>
+    <packaging>jar</packaging>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
 </project>

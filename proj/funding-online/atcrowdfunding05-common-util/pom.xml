@@ -10,9 +10,22 @@
     <packaging>jar</packaging>
 
     <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <!--maven项目构建使用的utf-8，防止中文的乱码-->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--编译java代码使用的jdk版本-->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <!--你的java项目应该运行在什么样的jdk版本-->
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
+
+    <dependencies>
+        <!-- 引入Servlet容器中相关依赖 -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+            <version>2.5</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
 </project>
