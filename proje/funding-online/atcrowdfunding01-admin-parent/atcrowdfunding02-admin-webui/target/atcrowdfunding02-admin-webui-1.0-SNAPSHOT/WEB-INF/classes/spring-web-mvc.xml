@@ -9,10 +9,11 @@
 
     <!-- 配置自动扫描的包：扫描handler -->
     <context:component-scan base-package="com.atguigu.crowd.mvc"/>
+
     <!-- 配置SpringMVC的注解驱动 -->
     <mvc:annotation-driven/>
+
     <!-- 配置视图解析器 -->
-    <!--返回 .jsp，且jsp放在WEB-INF下 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/"/>
         <property name="suffix" value=".jsp"/>
@@ -31,7 +32,6 @@
         </property>
     </bean>
 
-
     <!-- 配置view-controller，直接把请求地址和视图名称关联起来，不必写handler方法了 -->
     <!--
         @RequestMapping("/admin/to/login/page.html")
@@ -41,6 +41,8 @@
      -->
     <mvc:view-controller path="/admin/to/login/page.html" view-name="admin-login"/>
     <mvc:view-controller path="/admin/to/main/page.html" view-name="admin-main"/>
+    <mvc:view-controller path="/admin/to/add/page.html" view-name="admin-add"/>
+    <mvc:view-controller path="/role/to/page.html" view-name="role-page"/>
 
     <!-- 注册拦截器 -->
     <mvc:interceptors>
@@ -59,6 +61,5 @@
             <bean class="com.atguigu.crowd.mvc.interceptor.LoginInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>
-
 
 </beans>
