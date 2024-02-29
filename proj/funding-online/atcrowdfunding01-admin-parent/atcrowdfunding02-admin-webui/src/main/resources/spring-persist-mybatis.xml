@@ -20,10 +20,8 @@
     <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!-- 指定MyBatis全局配置文件位置 -->
         <property name="configLocation" value="classpath:mybatis-config.xml"/>
-
         <!-- 指定Mapper.xml配置文件位置 -->
         <property name="mapperLocations" value="classpath:mybatis/mapper/*Mapper.xml"/>
-
         <!-- 装配数据源 -->
         <property name="dataSource" ref="dataSource"/>
     </bean>

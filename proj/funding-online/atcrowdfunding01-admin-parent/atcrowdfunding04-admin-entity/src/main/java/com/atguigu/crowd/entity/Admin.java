@@ -2,6 +2,18 @@ package com.atguigu.crowd.entity;
 
 public class Admin {
 
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "id=" + id +
+                ", loginAcct='" + loginAcct + '\'' +
+                ", userPswd='" + userPswd + '\'' +
+                ", userName='" + userName + '\'' +
+                ", email='" + email + '\'' +
+                ", createTime='" + createTime + '\'' +
+                '}';
+    }
+
     public Admin() {
     }
 
