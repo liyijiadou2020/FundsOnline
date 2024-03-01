@@ -9,12 +9,16 @@
 <script type="text/javascript">
 
 	$(function(){
+		
 		// 调用专门封装好的函数初始化树形结构
 		generateTree();
+		
 		// 给添加子节点按钮绑定单击响应函数
 		$("#treeDemo").on("click",".addBtn",function(){
+			
 			// 将当前节点的id，作为新节点的pid保存到全局变量
 			window.pid = this.id;
+			
 			// 打开模态框
 			$("#menuAddModal").modal("show");
 			
@@ -23,6 +27,7 @@
 		
 		// 给添加子节点的模态框中的保存按钮绑定单击响应函数
 		$("#menuSaveBtn").click(function(){
+			
 			// 收集表单项中用户输入的数据
 			var name = $.trim($("#menuAddModal [name=name]").val());
 			var url = $.trim($("#menuAddModal [name=url]").val());
@@ -230,6 +235,7 @@
 					</div>
 				</div>
 			</div>
+	
 		</div>
 	</div>
 	

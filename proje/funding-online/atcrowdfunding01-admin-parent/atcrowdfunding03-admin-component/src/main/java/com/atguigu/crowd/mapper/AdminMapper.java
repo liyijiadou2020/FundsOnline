@@ -27,12 +27,10 @@ public interface AdminMapper {
     int updateByPrimaryKeySelective(Admin record);
 
     int updateByPrimaryKey(Admin record);
-
-    /**
-     * 分页显示Admin列表
-     * @param keyword 搜索关键字
-     * @return Admin列表
-     */
+    
     List<Admin> selectAdminByKeyword(String keyword);
 
+	void deleteOLdRelationship(Integer adminId);
+
+	void insertNewRelationship(@Param("adminId") Integer adminId, @Param("roleIdList") List<Integer> roleIdList);
 }
