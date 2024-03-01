@@ -154,7 +154,7 @@ jQuery.fn.pagination = function(maxentries, opts){
 		}
 		// 所有初始化完成，绘制链接
 		drawLinks();
-        // 回调函数. 下面一行需要注释掉!
+        // 回调函数
         // opts.callback(current_page, this);
 	});
 }

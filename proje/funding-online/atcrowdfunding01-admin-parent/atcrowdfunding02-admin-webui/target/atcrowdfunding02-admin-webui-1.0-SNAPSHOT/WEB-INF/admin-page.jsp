@@ -7,17 +7,13 @@
 <link rel="stylesheet" href="css/pagination.css" />
 <script type="text/javascript" src="jquery/jquery.pagination.js"></script>
 <script type="text/javascript">
-	
 	$(function(){
-		
 		// 调用后面声明的函数对页码导航条进行初始化操作
 		initPagination();
-		
 	});
 	
 	// 生成页码导航条的函数
 	function initPagination() {
-		
 		// 获取总记录数
 		var totalRecord = ${requestScope.pageInfo.total};
 		
