@@ -24,9 +24,7 @@ public class RoleHandler {
 	// @ResponseBody
 	@RequestMapping("/role/remove/by/role/id/array.json")
 	public ResultEntity<String> removeByRoleIdAarry(@RequestBody List<Integer> roleIdList) {
-		
 		roleService.removeRole(roleIdList);
-		
 		return ResultEntity.successWithoutData();
 	}
 	

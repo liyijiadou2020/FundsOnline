@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import com.sun.xml.internal.bind.v2.TODO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -155,6 +156,10 @@ public class AdminServiceImpl implements AdminService {
 		}
 	}
 
+	/**
+	 * @param adminId
+	 * @param roleIdList
+	 */
 	@Override
 	public void saveAdminRoleRelationship(Integer adminId, List<Integer> roleIdList) {
 		
@@ -173,10 +178,8 @@ public class AdminServiceImpl implements AdminService {
 		// 1		6（新）
 		// 1		7（新）
 		// 为了简化操作：先根据adminId删除旧的数据，再根据roleIdList保存全部新的数据
-		
 		// 1.根据adminId删除旧的关联关系数据
 		adminMapper.deleteOLdRelationship(adminId);
-		
 		// 2.根据roleIdList和adminId保存新的关联关系
 		if(roleIdList != null && roleIdList.size() > 0) {
 			adminMapper.insertNewRelationship(adminId, roleIdList);

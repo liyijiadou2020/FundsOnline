@@ -60,7 +60,7 @@ public class AssignHandler {
 	}
 
 	/**
-	 * 执行分配角色
+	 * 为Admin分配Role
 	 * @param adminId
 	 * @param pageNum
 	 * @param keyword
