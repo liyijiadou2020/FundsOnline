@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="MavenProjectsManager">
@@ -10,6 +11,7 @@
         <option value="$PROJECT_DIR$/atcrowdfunding04-admin-entity/pom.xml" />
         <option value="$PROJECT_DIR$/atcrowdfunding05-common-util/pom.xml" />
         <option value="$PROJECT_DIR$/atcrowdfunding06-common-reverse/pom.xml" />
+        <option value="$PROJECT_DIR$/pro05-spring-security/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
@@ -17,6 +19,7 @@
         <option value="$PROJECT_DIR$/atcrowdfunding02-admin-parent/pom.xml" />
         <option value="$PROJECT_DIR$/atcrowdfunding03-admin-component/pom.xml" />
         <option value="$PROJECT_DIR$/atcrowdfunding04-admin-entity/pom.xml" />
+        <option value="$PROJECT_DIR$/pro05-spring-security/pom.xml" />
       </set>
     </option>
   </component>

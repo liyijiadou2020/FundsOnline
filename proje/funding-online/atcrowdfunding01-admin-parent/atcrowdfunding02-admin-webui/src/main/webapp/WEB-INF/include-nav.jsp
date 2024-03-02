@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	<div class="container-fluid">
 		<div class="navbar-header">
@@ -16,7 +17,8 @@
 							class="btn btn-default btn-success dropdown-toggle"
 							data-toggle="dropdown">
 							<i class="glyphicon glyphicon-user"></i>
-							${sessionScope.loginAdmin.userName } <span class="caret"></span>
+							<security:authentication property="principal.originalAdmin.userName"/>
+							<span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="#"><i class="glyphicon glyphicon-cog"></i>
@@ -24,7 +26,7 @@
 							<li><a href="#"><i class="glyphicon glyphicon-comment"></i>
 									消息</a></li>
 							<li class="divider"></li>
-							<li><a href="admin/do/logout.html"><i
+							<li><a href="seucrity/do/logout.html"><i
 									class="glyphicon glyphicon-off"></i> 退出系统</a></li>
 						</ul>
 					</div>
