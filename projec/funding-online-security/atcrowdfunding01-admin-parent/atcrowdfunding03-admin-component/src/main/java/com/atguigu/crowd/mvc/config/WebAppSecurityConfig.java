@@ -48,13 +48,13 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder builder) throws Exception {
 		
 		// 临时使用内存版登录的模式测试代码
+		// 不行！
 		// builder.inMemoryAuthentication().withUser("tom").password("123123").roles("ADMIN");
 		
 		// 正式功能中使用基于数据库的认证
 		builder
 			.userDetailsService(userDetailsService)
 			.passwordEncoder(passwordEncoder);
-		
 	}
 	
 	@Override
@@ -90,7 +90,6 @@ public class WebAppSecurityConfig extends WebSecurityConfigurerAdapter {
 			.and()
 			.exceptionHandling()
 			.accessDeniedHandler(new AccessDeniedHandler() {
-				
 				@Override
 				public void handle(HttpServletRequest request, HttpServletResponse response,
 						AccessDeniedException accessDeniedException) throws IOException, ServletException {

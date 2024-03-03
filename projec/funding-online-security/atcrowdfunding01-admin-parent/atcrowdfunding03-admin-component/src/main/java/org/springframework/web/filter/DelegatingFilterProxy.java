@@ -243,29 +243,29 @@ public class DelegatingFilterProxy extends GenericFilterBean {
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException {
-	
+
 		// Lazily initialize the delegate if necessary.
 		Filter delegateToUse = this.delegate;
 		if (delegateToUse == null) {
 			synchronized (this.delegateMonitor) {
 				delegateToUse = this.delegate;
 				if (delegateToUse == null) {
-					
+
 					// 把原来的查找IOC容器的代码注释掉
 					// WebApplicationContext wac = findWebApplicationContext();
-					
+
 					// 按我们自己的需要重新编写
 					// 1.获取ServletContext对象
 					ServletContext sc = this.getServletContext();
-					
+
 					// 2.拼接SpringMVC将IOC容器存入ServletContext域的时候使用的属性名
 					String servletName = "springDispatcherServlet";
-					
+
 					String attrName = FrameworkServlet.SERVLET_CONTEXT_PREFIX + servletName;
-					
+
 					// 3.根据attrName从ServletContext域中获取IOC容器对象
 					WebApplicationContext wac = (WebApplicationContext) sc.getAttribute(attrName);
-					
+
 					if (wac == null) {
 						throw new IllegalStateException("No WebApplicationContext found: " +
 								"no ContextLoaderListener or DispatcherServlet registered?");
@@ -275,7 +275,7 @@ public class DelegatingFilterProxy extends GenericFilterBean {
 				this.delegate = delegateToUse;
 			}
 		}
-	
+
 		// Let the delegate perform the actual doFilter operation.
 		invokeDelegate(delegateToUse, request, response, filterChain);
 	}

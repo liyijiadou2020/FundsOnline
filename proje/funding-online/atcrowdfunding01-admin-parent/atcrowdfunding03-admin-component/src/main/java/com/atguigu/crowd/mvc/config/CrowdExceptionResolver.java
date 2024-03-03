@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.atguigu.crowd.constant.CrowdConstant;
+import com.atguigu.crowd.exception.AccessForbiddenException;
 import com.atguigu.crowd.exception.LoginAcctAlreadyInUseException;
 import com.atguigu.crowd.exception.LoginAcctAlreadyInUseForUpdateException;
 import com.atguigu.crowd.exception.LoginFailedException;
@@ -57,14 +58,14 @@ public class CrowdExceptionResolver {
 		return commonResolve(viewName, exception, request, response);
 	}
 	
-	@ExceptionHandler(value = Exception.class)
-	public ModelAndView resolveException(
-			Exception exception,
+	@ExceptionHandler(value = AccessForbiddenException.class)
+	public ModelAndView resolveAccessForbiddenException(
+			AccessForbiddenException exception,
 			HttpServletRequest request,
 			HttpServletResponse response
 			) throws IOException {
 		
-		String viewName = "system-error";
+		String viewName = "admin-login";
 		
 		return commonResolve(viewName, exception, request, response);
 	}

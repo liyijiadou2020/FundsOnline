@@ -1,25 +1,17 @@
 package com.atguigu.crowd.mvc.handler;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PostAuthorize;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.access.prepost.PreFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.atguigu.crowd.constant.CrowdConstant;
 import com.atguigu.crowd.entity.Admin;
 import com.atguigu.crowd.service.api.AdminService;
-import com.atguigu.crowd.util.ResultEntity;
 import com.github.pagehelper.PageInfo;
 
 @Controller
@@ -51,7 +43,6 @@ public class AdminHandler {
 		return "admin-edit";
 	}
 	
-	@PreAuthorize("hasAuthority('user:save')")
 	@RequestMapping("/admin/save.html")
 	public String save(Admin admin) {
 		
@@ -133,25 +124,6 @@ public class AdminHandler {
 		session.setAttribute(CrowdConstant.ATTR_NAME_LOGIN_ADMIN, admin);
 		
 		return "redirect:/admin/to/main/page.html";
-	}
-	
-	@ResponseBody
-	@PostAuthorize("returnObject.data.loginAcct == principal.username")
-	@RequestMapping("/admin/test/post/filter.json")
-	public ResultEntity<Admin> getAdminById() {
-		
-		Admin admin = new Admin();
-		
-		admin.setLoginAcct("adminOperator");
-		
-		return ResultEntity.successWithData(admin);
-	}
-	
-	@PreFilter(value="filterObject%2==0")
-	@ResponseBody
-	@RequestMapping("/admin/test/pre/filter")
-	public ResultEntity<List<Integer>> saveList(@RequestBody List<Integer> valueList) {
-		return ResultEntity.successWithData(valueList);
 	}
 
 }

@@ -46,22 +46,21 @@
 	<mvc:view-controller path="/menu/to/page.html" view-name="menu-page"/>
 	
 	<!-- 注册拦截器 -->
-	<!-- 注册拦截器：使用SpringSecurity后当前自定义的登录拦截器不再使用了-->
-	<!--<mvc:interceptors>-->
-	<!--	<mvc:interceptor>-->
-	<!--		&lt;!&ndash; mvc:mapping配置要拦截的资源 &ndash;&gt;-->
-	<!--		&lt;!&ndash; /*对应一层路径，比如：/aaa &ndash;&gt;-->
-	<!--		&lt;!&ndash; /**对应多层路径，比如：/aaa/bbb或/aaa/bbb/ccc或/aaa/bbb/ccc/ddd &ndash;&gt;-->
-	<!--		<mvc:mapping path="/**"/>-->
-	<!--		-->
-	<!--		&lt;!&ndash; mvc:exclude-mapping配置不拦截的资源 &ndash;&gt;-->
-	<!--		<mvc:exclude-mapping path="/admin/to/login/page.html"/>-->
-	<!--		<mvc:exclude-mapping path="/admin/do/login.html"/>-->
-	<!--		<mvc:exclude-mapping path="/admin/do/logout.html"/>-->
-	<!--		-->
-	<!--		&lt;!&ndash; 配置拦截器类 &ndash;&gt;-->
-	<!--		<bean class="com.atguigu.crowd.mvc.interceptor.LoginInterceptor"/>-->
-	<!--	</mvc:interceptor>-->
-	<!--</mvc:interceptors>-->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- mvc:mapping配置要拦截的资源 -->
+			<!-- /*对应一层路径，比如：/aaa -->
+			<!-- /**对应多层路径，比如：/aaa/bbb或/aaa/bbb/ccc或/aaa/bbb/ccc/ddd -->
+			<mvc:mapping path="/**"/>
+			
+			<!-- mvc:exclude-mapping配置不拦截的资源 -->
+			<mvc:exclude-mapping path="/admin/to/login/page.html"/>
+			<mvc:exclude-mapping path="/admin/do/login.html"/>
+			<mvc:exclude-mapping path="/admin/do/logout.html"/>
+			
+			<!-- 配置拦截器类 -->
+			<bean class="com.atguigu.crowd.mvc.interceptor.LoginInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
 	
 </beans>

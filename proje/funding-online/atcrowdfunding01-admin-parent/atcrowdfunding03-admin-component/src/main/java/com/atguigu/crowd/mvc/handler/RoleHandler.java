@@ -3,7 +3,6 @@ package com.atguigu.crowd.mvc.handler;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 // import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,7 +48,6 @@ public class RoleHandler {
 		return ResultEntity.successWithoutData();
 	}
 	
-	@PreAuthorize("hasRole('部长')")
 	// @ResponseBody
 	@RequestMapping("/role/get/page/info.json")
 	public ResultEntity<PageInfo<Role>> getPageInfo(
