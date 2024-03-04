@@ -1,0 +1,1328 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mapper/AdminMapper.java</file>
+  <line>8</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mapper</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.mapper.AdminMapper" />
+  <language>JAVA</language>
+  <offset>17</offset>
+  <length>11</length>
+  <highlighted_element>AdminMapper</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>&amp;nbsp;Interface is not implemented.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mapper/AuthMapper.java</file>
+  <line>8</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mapper</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.mapper.AuthMapper" />
+  <language>JAVA</language>
+  <offset>17</offset>
+  <length>10</length>
+  <highlighted_element>AuthMapper</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>&amp;nbsp;Interface is not implemented.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mapper/MenuMapper.java</file>
+  <line>8</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mapper</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.mapper.MenuMapper" />
+  <language>JAVA</language>
+  <offset>17</offset>
+  <length>10</length>
+  <highlighted_element>MenuMapper</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>&amp;nbsp;Interface is not implemented.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mapper/RoleMapper.java</file>
+  <line>8</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mapper</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.mapper.RoleMapper" />
+  <language>JAVA</language>
+  <offset>17</offset>
+  <length>10</length>
+  <highlighted_element>RoleMapper</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>&amp;nbsp;Interface is not implemented.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/config/CrowdExceptionResolver.java</file>
+  <line>23</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.config</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.mvc.config.CrowdExceptionResolver" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>22</length>
+  <highlighted_element>CrowdExceptionResolver</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/config/CrowdExceptionResolver.java</file>
+  <line>26</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.config</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.config.CrowdExceptionResolver org.springframework.web.servlet.ModelAndView resolveLoginAcctAlreadyInUseForUpdateException(com.atguigu.crowd.exception.LoginAcctAlreadyInUseForUpdateException exception, javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response)" />
+  <language>JAVA</language>
+  <offset>21</offset>
+  <length>46</length>
+  <highlighted_element>resolveLoginAcctAlreadyInUseForUpdateException</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/config/CrowdExceptionResolver.java</file>
+  <line>38</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.config</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.config.CrowdExceptionResolver org.springframework.web.servlet.ModelAndView resolveLoginAcctAlreadyInUseException(com.atguigu.crowd.exception.LoginAcctAlreadyInUseException exception, javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response)" />
+  <language>JAVA</language>
+  <offset>21</offset>
+  <length>37</length>
+  <highlighted_element>resolveLoginAcctAlreadyInUseException</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/config/CrowdExceptionResolver.java</file>
+  <line>50</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.config</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.config.CrowdExceptionResolver org.springframework.web.servlet.ModelAndView resolveLoginFailedException(com.atguigu.crowd.exception.LoginFailedException exception, javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response)" />
+  <language>JAVA</language>
+  <offset>21</offset>
+  <length>27</length>
+  <highlighted_element>resolveLoginFailedException</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/config/CrowdExceptionResolver.java</file>
+  <line>62</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.config</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.config.CrowdExceptionResolver org.springframework.web.servlet.ModelAndView resolveAccessForbiddenException(com.atguigu.crowd.exception.AccessForbiddenException exception, javax.servlet.http.HttpServletRequest request, javax.servlet.http.HttpServletResponse response)" />
+  <language>JAVA</language>
+  <offset>21</offset>
+  <length>31</length>
+  <highlighted_element>resolveAccessForbiddenException</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AdminHandler.java</file>
+  <line>18</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.mvc.handler.AdminHandler" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>12</length>
+  <highlighted_element>AdminHandler</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AdminHandler.java</file>
+  <line>21</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.mvc.handler.AdminHandler adminService" />
+  <language>JAVA</language>
+  <offset>22</offset>
+  <length>12</length>
+  <highlighted_element>adminService</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Field has 6 usages, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AdminHandler.java</file>
+  <line>24</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AdminHandler java.lang.String update(com.atguigu.crowd.entity.Admin admin, java.lang.Integer pageNum, java.lang.String keyword)" />
+  <language>JAVA</language>
+  <offset>15</offset>
+  <length>6</length>
+  <highlighted_element>update</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AdminHandler.java</file>
+  <line>32</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AdminHandler java.lang.String toEditPage(java.lang.Integer adminId, org.springframework.ui.ModelMap modelMap)" />
+  <language>JAVA</language>
+  <offset>15</offset>
+  <length>10</length>
+  <highlighted_element>toEditPage</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AdminHandler.java</file>
+  <line>47</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AdminHandler java.lang.String save(com.atguigu.crowd.entity.Admin admin)" />
+  <language>JAVA</language>
+  <offset>15</offset>
+  <length>4</length>
+  <highlighted_element>save</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AdminHandler.java</file>
+  <line>55</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AdminHandler java.lang.String remove(java.lang.Integer adminId, java.lang.Integer pageNum, java.lang.String keyword)" />
+  <language>JAVA</language>
+  <offset>15</offset>
+  <length>6</length>
+  <highlighted_element>remove</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AdminHandler.java</file>
+  <line>78</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AdminHandler java.lang.String getPageInfo(java.lang.String keyword, java.lang.Integer pageNum, java.lang.Integer pageSize, org.springframework.ui.ModelMap modelMap)" />
+  <language>JAVA</language>
+  <offset>15</offset>
+  <length>11</length>
+  <highlighted_element>getPageInfo</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AdminHandler.java</file>
+  <line>104</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AdminHandler java.lang.String doLogout(javax.servlet.http.HttpSession session)" />
+  <language>JAVA</language>
+  <offset>15</offset>
+  <length>8</length>
+  <highlighted_element>doLogout</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AdminHandler.java</file>
+  <line>113</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AdminHandler java.lang.String doLogin(java.lang.String loginAcct, java.lang.String userPswd, javax.servlet.http.HttpSession session)" />
+  <language>JAVA</language>
+  <offset>15</offset>
+  <length>7</length>
+  <highlighted_element>doLogin</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AssignHandler.java</file>
+  <line>22</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.mvc.handler.AssignHandler" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>13</length>
+  <highlighted_element>AssignHandler</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AssignHandler.java</file>
+  <line>25</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.mvc.handler.AssignHandler adminService" />
+  <language>JAVA</language>
+  <offset>22</offset>
+  <length>12</length>
+  <highlighted_element>adminService</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Field has one usage, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AssignHandler.java</file>
+  <line>28</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.mvc.handler.AssignHandler roleService" />
+  <language>JAVA</language>
+  <offset>21</offset>
+  <length>11</length>
+  <highlighted_element>roleService</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Field has one usage, but it is not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AssignHandler.java</file>
+  <line>31</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.mvc.handler.AssignHandler authService" />
+  <language>JAVA</language>
+  <offset>21</offset>
+  <length>11</length>
+  <highlighted_element>authService</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Field has 3 usages, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AssignHandler.java</file>
+  <line>35</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AssignHandler com.atguigu.crowd.util.ResultEntity&lt;java.lang.String&gt; saveRoleAuthRelathinship(java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.Integer&gt;&gt; map)" />
+  <language>JAVA</language>
+  <offset>29</offset>
+  <length>24</length>
+  <highlighted_element>saveRoleAuthRelathinship</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AssignHandler.java</file>
+  <line>45</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AssignHandler com.atguigu.crowd.util.ResultEntity&lt;java.util.List&lt;java.lang.Integer&gt;&gt; getAssignedAuthIdByRoleId(java.lang.Integer roleId)" />
+  <language>JAVA</language>
+  <offset>36</offset>
+  <length>25</length>
+  <highlighted_element>getAssignedAuthIdByRoleId</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AssignHandler.java</file>
+  <line>55</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AssignHandler com.atguigu.crowd.util.ResultEntity&lt;java.util.List&lt;com.atguigu.crowd.entity.Auth&gt;&gt; getAllAuth()" />
+  <language>JAVA</language>
+  <offset>33</offset>
+  <length>10</length>
+  <highlighted_element>getAllAuth</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AssignHandler.java</file>
+  <line>63</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AssignHandler java.lang.String saveAdminRoleRelationship(java.lang.Integer adminId, java.lang.Integer pageNum, java.lang.String keyword, java.util.List&lt;java.lang.Integer&gt; roleIdList)" />
+  <language>JAVA</language>
+  <offset>15</offset>
+  <length>25</length>
+  <highlighted_element>saveAdminRoleRelationship</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AssignHandler.java</file>
+  <line>79</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AssignHandler java.lang.String toAssignRolePage(java.lang.Integer adminId, org.springframework.ui.ModelMap modelMap)" />
+  <language>JAVA</language>
+  <offset>15</offset>
+  <length>16</length>
+  <highlighted_element>toAssignRolePage</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/MenuHandler.java</file>
+  <line>22</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.mvc.handler.MenuHandler" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>11</length>
+  <highlighted_element>MenuHandler</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/MenuHandler.java</file>
+  <line>25</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.mvc.handler.MenuHandler menuService" />
+  <language>JAVA</language>
+  <offset>21</offset>
+  <length>11</length>
+  <highlighted_element>menuService</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Field has 5 usages, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/MenuHandler.java</file>
+  <line>29</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.MenuHandler com.atguigu.crowd.util.ResultEntity&lt;java.lang.String&gt; removeMenu(java.lang.Integer id)" />
+  <language>JAVA</language>
+  <offset>29</offset>
+  <length>10</length>
+  <highlighted_element>removeMenu</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/MenuHandler.java</file>
+  <line>38</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.MenuHandler com.atguigu.crowd.util.ResultEntity&lt;java.lang.String&gt; updateMenu(com.atguigu.crowd.entity.Menu menu)" />
+  <language>JAVA</language>
+  <offset>29</offset>
+  <length>10</length>
+  <highlighted_element>updateMenu</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/MenuHandler.java</file>
+  <line>47</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.MenuHandler com.atguigu.crowd.util.ResultEntity&lt;java.lang.String&gt; saveMenu(com.atguigu.crowd.entity.Menu menu)" />
+  <language>JAVA</language>
+  <offset>29</offset>
+  <length>8</length>
+  <highlighted_element>saveMenu</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/MenuHandler.java</file>
+  <line>58</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.MenuHandler com.atguigu.crowd.util.ResultEntity&lt;com.atguigu.crowd.entity.Menu&gt; getWholeTreeNew()" />
+  <language>JAVA</language>
+  <offset>27</offset>
+  <length>15</length>
+  <highlighted_element>getWholeTreeNew</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/RoleHandler.java</file>
+  <line>19</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.mvc.handler.RoleHandler" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>11</length>
+  <highlighted_element>RoleHandler</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/RoleHandler.java</file>
+  <line>22</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.mvc.handler.RoleHandler roleService" />
+  <language>JAVA</language>
+  <offset>21</offset>
+  <length>11</length>
+  <highlighted_element>roleService</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Field has 4 usages, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/RoleHandler.java</file>
+  <line>26</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.RoleHandler com.atguigu.crowd.util.ResultEntity&lt;java.lang.String&gt; removeByRoleIdAarry(java.util.List&lt;java.lang.Integer&gt; roleIdList)" />
+  <language>JAVA</language>
+  <offset>29</offset>
+  <length>19</length>
+  <highlighted_element>removeByRoleIdAarry</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/RoleHandler.java</file>
+  <line>35</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.RoleHandler com.atguigu.crowd.util.ResultEntity&lt;java.lang.String&gt; updateRole(com.atguigu.crowd.entity.Role role)" />
+  <language>JAVA</language>
+  <offset>29</offset>
+  <length>10</length>
+  <highlighted_element>updateRole</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/RoleHandler.java</file>
+  <line>44</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.RoleHandler com.atguigu.crowd.util.ResultEntity&lt;java.lang.String&gt; saveRole(com.atguigu.crowd.entity.Role role)" />
+  <language>JAVA</language>
+  <offset>29</offset>
+  <length>8</length>
+  <highlighted_element>saveRole</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/RoleHandler.java</file>
+  <line>53</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.RoleHandler com.atguigu.crowd.util.ResultEntity&lt;com.github.pagehelper.PageInfo&lt;com.atguigu.crowd.entity.Role&gt;&gt; getPageInfo(java.lang.Integer pageNum, java.lang.Integer pageSize, java.lang.String keyword)" />
+  <language>JAVA</language>
+  <offset>37</offset>
+  <length>11</length>
+  <highlighted_element>getPageInfo</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/TestHandler.java</file>
+  <line>8</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.mvc.handler.TestHandler" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>11</length>
+  <highlighted_element>TestHandler</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/TestHandler.java</file>
+  <line>12</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.TestHandler java.lang.String testAsync()" />
+  <language>JAVA</language>
+  <offset>15</offset>
+  <length>9</length>
+  <highlighted_element>testAsync</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/interceptor/LoginInterceptor.java</file>
+  <line>13</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.interceptor</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.mvc.interceptor.LoginInterceptor" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>16</length>
+  <highlighted_element>LoginInterceptor</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/impl/AdminServiceImpl.java</file>
+  <line>28</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.impl</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.service.impl.AdminServiceImpl" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>16</length>
+  <highlighted_element>AdminServiceImpl</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/impl/AdminServiceImpl.java</file>
+  <line>31</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.impl</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.service.impl.AdminServiceImpl adminMapper" />
+  <language>JAVA</language>
+  <offset>21</offset>
+  <length>11</length>
+  <highlighted_element>adminMapper</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Field has 8 usages, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/impl/AuthServiceImpl.java</file>
+  <line>15</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.impl</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.service.impl.AuthServiceImpl" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>15</length>
+  <highlighted_element>AuthServiceImpl</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/impl/AuthServiceImpl.java</file>
+  <line>18</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.impl</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.service.impl.AuthServiceImpl authMapper" />
+  <language>JAVA</language>
+  <offset>20</offset>
+  <length>10</length>
+  <highlighted_element>authMapper</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Field has 3 usages, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/impl/MenuServiceImpl.java</file>
+  <line>14</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.impl</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.service.impl.MenuServiceImpl" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>15</length>
+  <highlighted_element>MenuServiceImpl</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/impl/MenuServiceImpl.java</file>
+  <line>17</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.impl</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.service.impl.MenuServiceImpl menuMapper" />
+  <language>JAVA</language>
+  <offset>20</offset>
+  <length>10</length>
+  <highlighted_element>menuMapper</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Field has 4 usages, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/impl/RoleServiceImpl.java</file>
+  <line>17</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.impl</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.service.impl.RoleServiceImpl" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>15</length>
+  <highlighted_element>RoleServiceImpl</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/impl/RoleServiceImpl.java</file>
+  <line>20</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.impl</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.service.impl.RoleServiceImpl roleMapper" />
+  <language>JAVA</language>
+  <offset>20</offset>
+  <length>10</length>
+  <highlighted_element>roleMapper</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Field has 6 usages, but they are not reachable from entry points.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/Admin.java</file>
+  <line>3</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.entity.Admin" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>5</length>
+  <highlighted_element>Admin</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/Admin.java</file>
+  <line>16</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.Admin Admin()" />
+  <language>JAVA</language>
+  <offset>11</offset>
+  <length>5</length>
+  <highlighted_element>Admin</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Constructor is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/Admin.java</file>
+  <line>20</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.Admin Admin(java.lang.Integer id, java.lang.String loginAcct, java.lang.String userPswd, java.lang.String userName, java.lang.String email, java.lang.String createTime)" />
+  <language>JAVA</language>
+  <offset>11</offset>
+  <length>5</length>
+  <highlighted_element>Admin</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Constructor is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/Admin.java</file>
+  <line>60</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.Admin java.lang.String getUserName()" />
+  <language>JAVA</language>
+  <offset>18</offset>
+  <length>11</length>
+  <highlighted_element>getUserName</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Method is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/Auth.java</file>
+  <line>3</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.entity.Auth" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>4</length>
+  <highlighted_element>Auth</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/Auth.java</file>
+  <line>12</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.Auth Auth()" />
+  <language>JAVA</language>
+  <offset>11</offset>
+  <length>4</length>
+  <highlighted_element>Auth</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Constructor is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/Auth.java</file>
+  <line>16</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.Auth Auth(java.lang.Integer id, java.lang.String name, java.lang.String title, java.lang.Integer categoryId)" />
+  <language>JAVA</language>
+  <offset>11</offset>
+  <length>4</length>
+  <highlighted_element>Auth</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Constructor is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/Menu.java</file>
+  <line>6</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.entity.Menu" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>4</length>
+  <highlighted_element>Menu</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/Menu.java</file>
+  <line>29</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.Menu Menu()" />
+  <language>JAVA</language>
+  <offset>11</offset>
+  <length>4</length>
+  <highlighted_element>Menu</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Constructor is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/Menu.java</file>
+  <line>33</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.Menu Menu(java.lang.Integer id, java.lang.Integer pid, java.lang.String name, java.lang.String url, java.lang.String icon, java.util.List&lt;com.atguigu.crowd.entity.Menu&gt; children, java.lang.Boolean open)" />
+  <language>JAVA</language>
+  <offset>11</offset>
+  <length>4</length>
+  <highlighted_element>Menu</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Constructor is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/Role.java</file>
+  <line>3</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.entity.Role" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>4</length>
+  <highlighted_element>Role</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/Role.java</file>
+  <line>8</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.Role Role()" />
+  <language>JAVA</language>
+  <offset>11</offset>
+  <length>4</length>
+  <highlighted_element>Role</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Constructor is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/Role.java</file>
+  <line>12</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.Role Role(java.lang.Integer id, java.lang.String name)" />
+  <language>JAVA</language>
+  <offset>11</offset>
+  <length>4</length>
+  <highlighted_element>Role</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Constructor is never used.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding05-common-util/src/main/java/com/atguigu/crowd/exception/AccessForbiddenException.java</file>
+  <line>10</line>
+  <module>atcrowdfunding05-common-util</module>
+  <package>com.atguigu.crowd.exception</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.exception.AccessForbiddenException serialVersionUID" />
+  <language>JAVA</language>
+  <offset>27</offset>
+  <length>16</length>
+  <highlighted_element>serialVersionUID</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Field has no usages.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding05-common-util/src/main/java/com/atguigu/crowd/exception/LoginAcctAlreadyInUseException.java</file>
+  <line>10</line>
+  <module>atcrowdfunding05-common-util</module>
+  <package>com.atguigu.crowd.exception</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.exception.LoginAcctAlreadyInUseException serialVersionUID" />
+  <language>JAVA</language>
+  <offset>27</offset>
+  <length>16</length>
+  <highlighted_element>serialVersionUID</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Field has no usages.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding05-common-util/src/main/java/com/atguigu/crowd/exception/LoginAcctAlreadyInUseForUpdateException.java</file>
+  <line>10</line>
+  <module>atcrowdfunding05-common-util</module>
+  <package>com.atguigu.crowd.exception</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.exception.LoginAcctAlreadyInUseForUpdateException serialVersionUID" />
+  <language>JAVA</language>
+  <offset>27</offset>
+  <length>16</length>
+  <highlighted_element>serialVersionUID</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Field has no usages.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding05-common-util/src/main/java/com/atguigu/crowd/exception/LoginFailedException.java</file>
+  <line>10</line>
+  <module>atcrowdfunding05-common-util</module>
+  <package>com.atguigu.crowd.exception</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.exception.LoginFailedException serialVersionUID" />
+  <language>JAVA</language>
+  <offset>27</offset>
+  <length>16</length>
+  <highlighted_element>serialVersionUID</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Field has no usages.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/config/CrowdExceptionResolver.java</file>
+  <line>23</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.config</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.mvc.config.CrowdExceptionResolver" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>22</length>
+  <highlighted_element>CrowdExceptionResolver</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AdminHandler.java</file>
+  <line>18</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.mvc.handler.AdminHandler" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>12</length>
+  <highlighted_element>AdminHandler</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AssignHandler.java</file>
+  <line>22</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.mvc.handler.AssignHandler" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>13</length>
+  <highlighted_element>AssignHandler</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/MenuHandler.java</file>
+  <line>22</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.mvc.handler.MenuHandler" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>11</length>
+  <highlighted_element>MenuHandler</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/RoleHandler.java</file>
+  <line>19</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.mvc.handler.RoleHandler" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>11</length>
+  <highlighted_element>RoleHandler</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/TestHandler.java</file>
+  <line>8</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.mvc.handler.TestHandler" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>11</length>
+  <highlighted_element>TestHandler</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/interceptor/LoginInterceptor.java</file>
+  <line>13</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.interceptor</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.mvc.interceptor.LoginInterceptor" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>16</length>
+  <highlighted_element>LoginInterceptor</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/impl/AdminServiceImpl.java</file>
+  <line>28</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.impl</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.service.impl.AdminServiceImpl" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>16</length>
+  <highlighted_element>AdminServiceImpl</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/impl/AuthServiceImpl.java</file>
+  <line>15</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.impl</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.service.impl.AuthServiceImpl" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>15</length>
+  <highlighted_element>AuthServiceImpl</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/impl/MenuServiceImpl.java</file>
+  <line>14</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.impl</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.service.impl.MenuServiceImpl" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>15</length>
+  <highlighted_element>MenuServiceImpl</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/impl/RoleServiceImpl.java</file>
+  <line>17</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.impl</package>
+  <entry_point TYPE="class" FQNAME="com.atguigu.crowd.service.impl.RoleServiceImpl" />
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>15</length>
+  <highlighted_element>RoleServiceImpl</highlighted_element>
+  <problem_class id="" severity="WARNING" attribute_key="NOT_USED_ELEMENT_ATTRIBUTES">unused declaration</problem_class>
+  <hints>
+    <hint value="comment" />
+    <hint value="delete" />
+  </hints>
+  <description>Class is not instantiated.</description>
+</problem>
+</problems>

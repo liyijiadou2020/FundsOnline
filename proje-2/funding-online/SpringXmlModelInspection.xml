@@ -1,0 +1,14 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/spring-persist-tx.xml</file>
+  <line>18</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/spring-persist-tx.xml" />
+  <problem_class id="SpringXmlModelInspection" severity="ERROR" attribute_key="WRONG_REFERENCES_ATTRIBUTES">Incorrect Spring Core XML-based application context</problem_class>
+  <description>Cannot resolve bean 'dataSource'</description>
+  <highlighted_element>dataSource</highlighted_element>
+  <language>XML</language>
+  <offset>35</offset>
+  <length>10</length>
+</problem>
+</problems>

@@ -1,0 +1,86 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AdminHandler.java</file>
+  <line>32</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AdminHandler java.lang.String toEditPage(java.lang.Integer adminId, org.springframework.ui.ModelMap modelMap)" />
+  <problem_class id="SameReturnValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method always returns the same value</problem_class>
+  <hints />
+  <description>Method &lt;code&gt;toEditPage()&lt;/code&gt; always returns &lt;code&gt;admin-edit&lt;/code&gt;</description>
+  <highlighted_element>toEditPage</highlighted_element>
+  <language>JAVA</language>
+  <offset>15</offset>
+  <length>10</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AdminHandler.java</file>
+  <line>78</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AdminHandler java.lang.String getPageInfo(java.lang.String keyword, java.lang.Integer pageNum, java.lang.Integer pageSize, org.springframework.ui.ModelMap modelMap)" />
+  <problem_class id="SameReturnValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method always returns the same value</problem_class>
+  <hints />
+  <description>Method &lt;code&gt;getPageInfo()&lt;/code&gt; always returns &lt;code&gt;admin-page&lt;/code&gt;</description>
+  <highlighted_element>getPageInfo</highlighted_element>
+  <language>JAVA</language>
+  <offset>15</offset>
+  <length>11</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AdminHandler.java</file>
+  <line>104</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AdminHandler java.lang.String doLogout(javax.servlet.http.HttpSession session)" />
+  <problem_class id="SameReturnValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method always returns the same value</problem_class>
+  <hints />
+  <description>Method &lt;code&gt;doLogout()&lt;/code&gt; always returns &lt;code&gt;redirect:/admin/to/login/page.html&lt;/code&gt;</description>
+  <highlighted_element>doLogout</highlighted_element>
+  <language>JAVA</language>
+  <offset>15</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AdminHandler.java</file>
+  <line>113</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AdminHandler java.lang.String doLogin(java.lang.String loginAcct, java.lang.String userPswd, javax.servlet.http.HttpSession session)" />
+  <problem_class id="SameReturnValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method always returns the same value</problem_class>
+  <hints />
+  <description>Method &lt;code&gt;doLogin()&lt;/code&gt; always returns &lt;code&gt;redirect:/admin/to/main/page.html&lt;/code&gt;</description>
+  <highlighted_element>doLogin</highlighted_element>
+  <language>JAVA</language>
+  <offset>15</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AssignHandler.java</file>
+  <line>79</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AssignHandler java.lang.String toAssignRolePage(java.lang.Integer adminId, org.springframework.ui.ModelMap modelMap)" />
+  <problem_class id="SameReturnValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method always returns the same value</problem_class>
+  <hints />
+  <description>Method &lt;code&gt;toAssignRolePage()&lt;/code&gt; always returns &lt;code&gt;assign-role&lt;/code&gt;</description>
+  <highlighted_element>toAssignRolePage</highlighted_element>
+  <language>JAVA</language>
+  <offset>15</offset>
+  <length>16</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/TestHandler.java</file>
+  <line>12</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.TestHandler java.lang.String testAsync()" />
+  <problem_class id="SameReturnValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method always returns the same value</problem_class>
+  <hints />
+  <description>Method &lt;code&gt;testAsync()&lt;/code&gt; always returns &lt;code&gt;success&lt;/code&gt;</description>
+  <highlighted_element>testAsync</highlighted_element>
+  <language>JAVA</language>
+  <offset>15</offset>
+  <length>9</length>
+</problem>
+</problems>

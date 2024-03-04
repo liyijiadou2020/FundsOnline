@@ -1,0 +1,128 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mapper/AdminMapper.java</file>
+  <line>13</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mapper</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mapper.AdminMapper int deleteByPrimaryKey(java.lang.Integer id)" />
+  <problem_class id="UnusedReturnValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method can be made 'void'</problem_class>
+  <hints />
+  <description>Return value of the method is never used</description>
+  <highlighted_element>deleteByPrimaryKey</highlighted_element>
+  <language>JAVA</language>
+  <offset>8</offset>
+  <length>18</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mapper/AdminMapper.java</file>
+  <line>27</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mapper</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mapper.AdminMapper int updateByPrimaryKeySelective(com.atguigu.crowd.entity.Admin record)" />
+  <problem_class id="UnusedReturnValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method can be made 'void'</problem_class>
+  <hints />
+  <description>Return value of the method is never used</description>
+  <highlighted_element>updateByPrimaryKeySelective</highlighted_element>
+  <language>JAVA</language>
+  <offset>8</offset>
+  <length>27</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mapper/MenuMapper.java</file>
+  <line>13</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mapper</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mapper.MenuMapper int deleteByPrimaryKey(java.lang.Integer id)" />
+  <problem_class id="UnusedReturnValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method can be made 'void'</problem_class>
+  <hints />
+  <description>Return value of the method is never used</description>
+  <highlighted_element>deleteByPrimaryKey</highlighted_element>
+  <language>JAVA</language>
+  <offset>8</offset>
+  <length>18</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mapper/MenuMapper.java</file>
+  <line>15</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mapper</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mapper.MenuMapper int insert(com.atguigu.crowd.entity.Menu record)" />
+  <problem_class id="UnusedReturnValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method can be made 'void'</problem_class>
+  <hints />
+  <description>Return value of the method is never used</description>
+  <highlighted_element>insert</highlighted_element>
+  <language>JAVA</language>
+  <offset>8</offset>
+  <length>6</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mapper/MenuMapper.java</file>
+  <line>27</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mapper</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mapper.MenuMapper int updateByPrimaryKeySelective(com.atguigu.crowd.entity.Menu record)" />
+  <problem_class id="UnusedReturnValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method can be made 'void'</problem_class>
+  <hints />
+  <description>Return value of the method is never used</description>
+  <highlighted_element>updateByPrimaryKeySelective</highlighted_element>
+  <language>JAVA</language>
+  <offset>8</offset>
+  <length>27</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mapper/RoleMapper.java</file>
+  <line>11</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mapper</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mapper.RoleMapper int deleteByExample(com.atguigu.crowd.entity.RoleExample example)" />
+  <problem_class id="UnusedReturnValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method can be made 'void'</problem_class>
+  <hints />
+  <description>Return value of the method is never used</description>
+  <highlighted_element>deleteByExample</highlighted_element>
+  <language>JAVA</language>
+  <offset>8</offset>
+  <length>15</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mapper/RoleMapper.java</file>
+  <line>29</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mapper</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mapper.RoleMapper int updateByPrimaryKey(com.atguigu.crowd.entity.Role record)" />
+  <problem_class id="UnusedReturnValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method can be made 'void'</problem_class>
+  <hints />
+  <description>Return value of the method is never used</description>
+  <highlighted_element>updateByPrimaryKey</highlighted_element>
+  <language>JAVA</language>
+  <offset>8</offset>
+  <length>18</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>178</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andLoginAcctEqualTo(java.lang.String value)" />
+  <problem_class id="UnusedReturnValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method can be made 'void'</problem_class>
+  <hints />
+  <description>Return value of the method is never used</description>
+  <highlighted_element>andLoginAcctEqualTo</highlighted_element>
+  <language>JAVA</language>
+  <offset>24</offset>
+  <length>19</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/RoleExample.java</file>
+  <line>147</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.RoleExample.GeneratedCriteria com.atguigu.crowd.entity.RoleExample.Criteria andIdIn(java.util.List&lt;java.lang.Integer&gt; values)" />
+  <problem_class id="UnusedReturnValue" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Method can be made 'void'</problem_class>
+  <hints />
+  <description>Return value of the method is never used</description>
+  <highlighted_element>andIdIn</highlighted_element>
+  <language>JAVA</language>
+  <offset>24</offset>
+  <length>7</length>
+</problem>
+</problems>

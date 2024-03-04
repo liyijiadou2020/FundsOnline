@@ -1,0 +1,54 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>583</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.Criterion Criterion(java.lang.String condition, java.lang.Object value, java.lang.String typeHandler)" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 583-591</description>
+  <highlighted_element>super();</highlighted_element>
+  <language>JAVA</language>
+  <offset>12</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AuthExample.java</file>
+  <line>432</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AuthExample.Criterion Criterion(java.lang.String condition, java.lang.Object value, java.lang.String typeHandler)" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 432-440</description>
+  <highlighted_element>super();</highlighted_element>
+  <language>JAVA</language>
+  <offset>12</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/MenuExample.java</file>
+  <line>502</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.MenuExample.Criterion Criterion(java.lang.String condition, java.lang.Object value, java.lang.String typeHandler)" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 502-510</description>
+  <highlighted_element>super();</highlighted_element>
+  <language>JAVA</language>
+  <offset>12</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/RoleExample.java</file>
+  <line>302</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.RoleExample.Criterion Criterion(java.lang.String condition, java.lang.Object value, java.lang.String typeHandler)" />
+  <problem_class id="DuplicatedCode" severity="WEAK WARNING" attribute_key="INFO_ATTRIBUTES">Duplicated code fragment</problem_class>
+  <description>Duplicate code: lines 302-310</description>
+  <highlighted_element>super();</highlighted_element>
+  <language>JAVA</language>
+  <offset>12</offset>
+  <length>8</length>
+</problem>
+</problems>

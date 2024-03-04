@@ -1,0 +1,119 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/impl/AdminServiceImpl.java</file>
+  <line>33</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.impl</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.service.impl.AdminServiceImpl logger" />
+  <problem_class id="FieldMayBeFinal" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Field may be 'final'</problem_class>
+  <description>Field &lt;code&gt;logger&lt;/code&gt; may be 'final' #loc</description>
+  <highlighted_element>logger</highlighted_element>
+  <language>JAVA</language>
+  <offset>16</offset>
+  <length>6</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>527</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.entity.AdminExample.Criterion condition" />
+  <problem_class id="FieldMayBeFinal" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Field may be 'final'</problem_class>
+  <description>Field &lt;code&gt;condition&lt;/code&gt; may be 'final' #loc</description>
+  <highlighted_element>condition</highlighted_element>
+  <language>JAVA</language>
+  <offset>23</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>541</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.entity.AdminExample.Criterion typeHandler" />
+  <problem_class id="FieldMayBeFinal" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Field may be 'final'</problem_class>
+  <description>Field &lt;code&gt;typeHandler&lt;/code&gt; may be 'final' #loc</description>
+  <highlighted_element>typeHandler</highlighted_element>
+  <language>JAVA</language>
+  <offset>23</offset>
+  <length>11</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AuthExample.java</file>
+  <line>376</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.entity.AuthExample.Criterion condition" />
+  <problem_class id="FieldMayBeFinal" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Field may be 'final'</problem_class>
+  <description>Field &lt;code&gt;condition&lt;/code&gt; may be 'final' #loc</description>
+  <highlighted_element>condition</highlighted_element>
+  <language>JAVA</language>
+  <offset>23</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AuthExample.java</file>
+  <line>390</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.entity.AuthExample.Criterion typeHandler" />
+  <problem_class id="FieldMayBeFinal" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Field may be 'final'</problem_class>
+  <description>Field &lt;code&gt;typeHandler&lt;/code&gt; may be 'final' #loc</description>
+  <highlighted_element>typeHandler</highlighted_element>
+  <language>JAVA</language>
+  <offset>23</offset>
+  <length>11</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/MenuExample.java</file>
+  <line>446</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.entity.MenuExample.Criterion condition" />
+  <problem_class id="FieldMayBeFinal" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Field may be 'final'</problem_class>
+  <description>Field &lt;code&gt;condition&lt;/code&gt; may be 'final' #loc</description>
+  <highlighted_element>condition</highlighted_element>
+  <language>JAVA</language>
+  <offset>23</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/MenuExample.java</file>
+  <line>460</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.entity.MenuExample.Criterion typeHandler" />
+  <problem_class id="FieldMayBeFinal" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Field may be 'final'</problem_class>
+  <description>Field &lt;code&gt;typeHandler&lt;/code&gt; may be 'final' #loc</description>
+  <highlighted_element>typeHandler</highlighted_element>
+  <language>JAVA</language>
+  <offset>23</offset>
+  <length>11</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/RoleExample.java</file>
+  <line>246</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.entity.RoleExample.Criterion condition" />
+  <problem_class id="FieldMayBeFinal" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Field may be 'final'</problem_class>
+  <description>Field &lt;code&gt;condition&lt;/code&gt; may be 'final' #loc</description>
+  <highlighted_element>condition</highlighted_element>
+  <language>JAVA</language>
+  <offset>23</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/RoleExample.java</file>
+  <line>260</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.entity.RoleExample.Criterion typeHandler" />
+  <problem_class id="FieldMayBeFinal" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Field may be 'final'</problem_class>
+  <description>Field &lt;code&gt;typeHandler&lt;/code&gt; may be 'final' #loc</description>
+  <highlighted_element>typeHandler</highlighted_element>
+  <language>JAVA</language>
+  <offset>23</offset>
+  <length>11</length>
+</problem>
+</problems>

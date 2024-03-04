@@ -1,0 +1,1604 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/logback.xml</file>
+  <line>21</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/logback.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>19</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml</file>
+  <line>3</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>23</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml</file>
+  <line>5</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>12</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml</file>
+  <line>9</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'pswd'</description>
+  <highlighted_element>pswd</highlighted_element>
+  <language>XML</language>
+  <offset>23</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml</file>
+  <line>9</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>XML</language>
+  <offset>43</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml</file>
+  <line>18</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'ored'</description>
+  <highlighted_element>ored</highlighted_element>
+  <language>XML</language>
+  <offset>24</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml</file>
+  <line>50</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'ored'</description>
+  <highlighted_element>ored</highlighted_element>
+  <language>XML</language>
+  <offset>32</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml</file>
+  <line>92</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml</file>
+  <line>122</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml</file>
+  <line>133</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml</file>
+  <line>143</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml</file>
+  <line>152</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>XML</language>
+  <offset>17</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml</file>
+  <line>172</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>XML</language>
+  <offset>17</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml</file>
+  <line>187</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml</file>
+  <line>203</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>XML</language>
+  <offset>24</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml</file>
+  <line>233</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml</file>
+  <line>239</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>XML</language>
+  <offset>17</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml</file>
+  <line>255</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AdminMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml</file>
+  <line>3</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>23</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml</file>
+  <line>5</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>12</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml</file>
+  <line>14</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'ored'</description>
+  <highlighted_element>ored</highlighted_element>
+  <language>XML</language>
+  <offset>24</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml</file>
+  <line>46</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'ored'</description>
+  <highlighted_element>ored</highlighted_element>
+  <language>XML</language>
+  <offset>32</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml</file>
+  <line>80</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml</file>
+  <line>110</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml</file>
+  <line>121</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml</file>
+  <line>129</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml</file>
+  <line>165</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml</file>
+  <line>203</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml</file>
+  <line>219</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/AuthMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml</file>
+  <line>3</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>23</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml</file>
+  <line>5</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>12</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml</file>
+  <line>14</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'ored'</description>
+  <highlighted_element>ored</highlighted_element>
+  <language>XML</language>
+  <offset>24</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml</file>
+  <line>46</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'ored'</description>
+  <highlighted_element>ored</highlighted_element>
+  <language>XML</language>
+  <offset>32</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml</file>
+  <line>80</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml</file>
+  <line>107</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml</file>
+  <line>114</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml</file>
+  <line>122</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml</file>
+  <line>160</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml</file>
+  <line>202</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml</file>
+  <line>221</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/MenuMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml</file>
+  <line>3</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>23</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml</file>
+  <line>5</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>12</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml</file>
+  <line>11</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'ored'</description>
+  <highlighted_element>ored</highlighted_element>
+  <language>XML</language>
+  <offset>24</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml</file>
+  <line>43</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'ored'</description>
+  <highlighted_element>ored</highlighted_element>
+  <language>XML</language>
+  <offset>32</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml</file>
+  <line>87</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml</file>
+  <line>114</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml</file>
+  <line>121</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml</file>
+  <line>126</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml</file>
+  <line>146</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml</file>
+  <line>176</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml</file>
+  <line>186</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/mybatis/mapper/RoleMapper.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>21</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/spring-persist-mybatis.xml</file>
+  <line>34</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/spring-persist-mybatis.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'pagehelper'</description>
+  <highlighted_element>pagehelper</highlighted_element>
+  <language>XML</language>
+  <offset>28</offset>
+  <length>10</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/spring-persist-mybatis.xml</file>
+  <line>51</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/spring-persist-mybatis.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>42</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/spring-persist-tx.xml</file>
+  <line>13</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/spring-persist-tx.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>43</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/spring-web-mvc.xml</file>
+  <line>11</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/spring-web-mvc.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>43</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/spring-web-mvc.xml</file>
+  <line>30</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/spring-web-mvc.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>19</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/spring-web-mvc.xml</file>
+  <line>62</line>
+  <module>atcrowdfunding02-admin-webui</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding02-admin-webui/src/main/resources/spring-web-mvc.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>20</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AdminHandler.java</file>
+  <line>115</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AdminHandler java.lang.String doLogin(java.lang.String loginAcct, java.lang.String userPswd, javax.servlet.http.HttpSession session)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>23</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AdminHandler.java</file>
+  <line>115</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AdminHandler java.lang.String doLogin(java.lang.String loginAcct, java.lang.String userPswd, javax.servlet.http.HttpSession session)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>41</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AssignHandler.java</file>
+  <line>35</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AssignHandler com.atguigu.crowd.util.ResultEntity&lt;java.lang.String&gt; saveRoleAuthRelathinship(java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.Integer&gt;&gt; map)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Relathinship'</description>
+  <highlighted_element>Relathinship</highlighted_element>
+  <language>JAVA</language>
+  <offset>41</offset>
+  <length>12</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/AssignHandler.java</file>
+  <line>54</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.AssignHandler com.atguigu.crowd.util.ResultEntity&lt;java.util.List&lt;com.atguigu.crowd.entity.Auth&gt;&gt; getAllAuth()" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'assgin'</description>
+  <highlighted_element>assgin</highlighted_element>
+  <language>JAVA</language>
+  <offset>19</offset>
+  <length>6</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/mvc/handler/RoleHandler.java</file>
+  <line>26</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.mvc.handler</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.mvc.handler.RoleHandler com.atguigu.crowd.util.ResultEntity&lt;java.lang.String&gt; removeByRoleIdAarry(java.util.List&lt;java.lang.Integer&gt; roleIdList)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Aarry'</description>
+  <highlighted_element>Aarry</highlighted_element>
+  <language>JAVA</language>
+  <offset>43</offset>
+  <length>5</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/api/AdminService.java</file>
+  <line>14</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.api</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.service.api.AdminService com.atguigu.crowd.entity.Admin getAdminByLoginAcct(java.lang.String loginAcct, java.lang.String userPswd)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>56</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/api/AuthService.java</file>
+  <line>14</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.api</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.service.api.AuthService void saveRoleAuthRelathinship(java.util.Map&lt;java.lang.String,java.util.List&lt;java.lang.Integer&gt;&gt; map)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Relathinship'</description>
+  <highlighted_element>Relathinship</highlighted_element>
+  <language>JAVA</language>
+  <offset>18</offset>
+  <length>12</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/impl/AdminServiceImpl.java</file>
+  <line>39</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.impl</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.service.impl.AdminServiceImpl void saveAdmin(com.atguigu.crowd.entity.Admin admin)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/impl/AdminServiceImpl.java</file>
+  <line>70</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.impl</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.service.impl.AdminServiceImpl com.atguigu.crowd.entity.Admin getAdminByLoginAcct(java.lang.String loginAcct, java.lang.String userPswd)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>63</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/impl/AdminServiceImpl.java</file>
+  <line>102</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.impl</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.service.impl.AdminServiceImpl com.atguigu.crowd.entity.Admin getAdminByLoginAcct(java.lang.String loginAcct, java.lang.String userPswd)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/impl/AdminServiceImpl.java</file>
+  <line>105</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.impl</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.service.impl.AdminServiceImpl com.atguigu.crowd.entity.Admin getAdminByLoginAcct(java.lang.String loginAcct, java.lang.String userPswd)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>13</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/Admin.java</file>
+  <line>8</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.entity.Admin userPswd" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>23</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/Admin.java</file>
+  <line>20</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.Admin Admin(java.lang.Integer id, java.lang.String loginAcct, java.lang.String userPswd, java.lang.String userName, java.lang.String email, java.lang.String createTime)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>58</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/Admin.java</file>
+  <line>32</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.Admin java.lang.String toString()" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>65</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/Admin.java</file>
+  <line>52</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.Admin java.lang.String getUserPswd()" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>25</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/Admin.java</file>
+  <line>56</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.Admin void setUserPswd(java.lang.String userPswd)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>23</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/Admin.java</file>
+  <line>56</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.Admin void setUserPswd(java.lang.String userPswd)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>39</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>12</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.entity.AdminExample oredCriteria" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'ored'</description>
+  <highlighted_element>ored</highlighted_element>
+  <language>JAVA</language>
+  <offset>29</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>34</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample java.util.List&lt;com.atguigu.crowd.entity.AdminExample.Criteria&gt; getOredCriteria()" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Ored'</description>
+  <highlighted_element>Ored</highlighted_element>
+  <language>JAVA</language>
+  <offset>29</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>238</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdIsNull()" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>239</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdIsNull()" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'pswd'</description>
+  <highlighted_element>pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>243</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdIsNotNull()" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>244</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdIsNotNull()" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'pswd'</description>
+  <highlighted_element>pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>248</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdEqualTo(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>249</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdEqualTo(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'pswd'</description>
+  <highlighted_element>pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>249</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdEqualTo(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>52</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>253</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdNotEqualTo(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>254</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdNotEqualTo(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'pswd'</description>
+  <highlighted_element>pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>254</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdNotEqualTo(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>53</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>258</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdGreaterThan(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>259</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdGreaterThan(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'pswd'</description>
+  <highlighted_element>pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>259</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdGreaterThan(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>52</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>263</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdGreaterThanOrEqualTo(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>264</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdGreaterThanOrEqualTo(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'pswd'</description>
+  <highlighted_element>pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>264</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdGreaterThanOrEqualTo(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>53</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>268</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdLessThan(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>269</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdLessThan(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'pswd'</description>
+  <highlighted_element>pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>269</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdLessThan(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>52</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>273</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdLessThanOrEqualTo(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>274</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdLessThanOrEqualTo(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'pswd'</description>
+  <highlighted_element>pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>274</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdLessThanOrEqualTo(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>53</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>278</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdLike(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>279</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdLike(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'pswd'</description>
+  <highlighted_element>pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>279</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdLike(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>55</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>283</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdNotLike(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>284</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdNotLike(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'pswd'</description>
+  <highlighted_element>pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>284</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdNotLike(java.lang.String value)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>59</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>288</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdIn(java.util.List&lt;java.lang.String&gt; values)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>289</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdIn(java.util.List&lt;java.lang.String&gt; values)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'pswd'</description>
+  <highlighted_element>pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>289</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdIn(java.util.List&lt;java.lang.String&gt; values)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>54</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>293</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdNotIn(java.util.List&lt;java.lang.String&gt; values)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>294</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdNotIn(java.util.List&lt;java.lang.String&gt; values)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'pswd'</description>
+  <highlighted_element>pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>294</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdNotIn(java.util.List&lt;java.lang.String&gt; values)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>58</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>298</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdBetween(java.lang.String value1, java.lang.String value2)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>299</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdBetween(java.lang.String value1, java.lang.String value2)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'pswd'</description>
+  <highlighted_element>pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>299</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdBetween(java.lang.String value1, java.lang.String value2)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>67</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>303</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdNotBetween(java.lang.String value1, java.lang.String value2)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>304</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdNotBetween(java.lang.String value1, java.lang.String value2)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'pswd'</description>
+  <highlighted_element>pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>31</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java</file>
+  <line>304</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AdminExample.GeneratedCriteria com.atguigu.crowd.entity.AdminExample.Criteria andUserPswdNotBetween(java.lang.String value1, java.lang.String value2)" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Pswd'</description>
+  <highlighted_element>Pswd</highlighted_element>
+  <language>JAVA</language>
+  <offset>71</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AuthExample.java</file>
+  <line>11</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.entity.AuthExample oredCriteria" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'ored'</description>
+  <highlighted_element>ored</highlighted_element>
+  <language>JAVA</language>
+  <offset>29</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AuthExample.java</file>
+  <line>33</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.AuthExample java.util.List&lt;com.atguigu.crowd.entity.AuthExample.Criteria&gt; getOredCriteria()" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Ored'</description>
+  <highlighted_element>Ored</highlighted_element>
+  <language>JAVA</language>
+  <offset>29</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/MenuExample.java</file>
+  <line>11</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.entity.MenuExample oredCriteria" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'ored'</description>
+  <highlighted_element>ored</highlighted_element>
+  <language>JAVA</language>
+  <offset>29</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/MenuExample.java</file>
+  <line>33</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.MenuExample java.util.List&lt;com.atguigu.crowd.entity.MenuExample.Criteria&gt; getOredCriteria()" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Ored'</description>
+  <highlighted_element>Ored</highlighted_element>
+  <language>JAVA</language>
+  <offset>29</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/RoleExample.java</file>
+  <line>11</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.entity.RoleExample oredCriteria" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'ored'</description>
+  <highlighted_element>ored</highlighted_element>
+  <language>JAVA</language>
+  <offset>29</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/RoleExample.java</file>
+  <line>33</line>
+  <module>atcrowdfunding04-admin-entity</module>
+  <package>com.atguigu.crowd.entity</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.entity.RoleExample java.util.List&lt;com.atguigu.crowd.entity.RoleExample.Criteria&gt; getOredCriteria()" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'Ored'</description>
+  <highlighted_element>Ored</highlighted_element>
+  <language>JAVA</language>
+  <offset>29</offset>
+  <length>4</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding05-common-util/src/main/java/com/atguigu/crowd/constant/CrowdConstant.java</file>
+  <line>7</line>
+  <module>atcrowdfunding05-common-util</module>
+  <package>com.atguigu.crowd.constant</package>
+  <entry_point TYPE="field" FQNAME="com.atguigu.crowd.constant.CrowdConstant MESSAGE_ACCESS_FORBIDEN" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'FORBIDEN'</description>
+  <highlighted_element>FORBIDEN</highlighted_element>
+  <language>JAVA</language>
+  <offset>43</offset>
+  <length>8</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding06-common-reverse/src/main/resources/generatorConfig.xml</file>
+  <line>7</line>
+  <module>atcrowdfunding06-common-reverse</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding06-common-reverse/src/main/resources/generatorConfig.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>14</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding06-common-reverse/src/main/resources/generatorConfig.xml</file>
+  <line>29</line>
+  <module>atcrowdfunding06-common-reverse</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding06-common-reverse/src/main/resources/generatorConfig.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>22</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding06-common-reverse/src/main/resources/generatorConfig.xml</file>
+  <line>38</line>
+  <module>atcrowdfunding06-common-reverse</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding06-common-reverse/src/main/resources/generatorConfig.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>22</offset>
+  <length>7</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding06-common-reverse/src/main/resources/generatorConfig.xml</file>
+  <line>44</line>
+  <module>atcrowdfunding06-common-reverse</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding06-common-reverse/src/main/resources/generatorConfig.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'XMLMAPPER'</description>
+  <highlighted_element>XMLMAPPER</highlighted_element>
+  <language>XML</language>
+  <offset>29</offset>
+  <length>9</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding06-common-reverse/src/main/resources/generatorConfig.xml</file>
+  <line>46</line>
+  <module>atcrowdfunding06-common-reverse</module>
+  <entry_point TYPE="file" FQNAME="file://$PROJECT_DIR$/atcrowdfunding06-common-reverse/src/main/resources/generatorConfig.xml" />
+  <problem_class id="SpellCheckingInspection" severity="TYPO" attribute_key="TYPO">Typo</problem_class>
+  <description>Typo: In word 'atguigu'</description>
+  <highlighted_element>atguigu</highlighted_element>
+  <language>XML</language>
+  <offset>22</offset>
+  <length>7</length>
+</problem>
+</problems>

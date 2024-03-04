@@ -1,0 +1,41 @@
+<problems>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/impl/AdminServiceImpl.java</file>
+  <line>53</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.impl</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.service.impl.AdminServiceImpl void saveAdmin(com.atguigu.crowd.entity.Admin admin)" />
+  <problem_class id="ThrowablePrintStackTrace" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Call to 'printStackTrace()'</problem_class>
+  <description>Call to &lt;code&gt;printStackTrace()&lt;/code&gt; should probably be replaced with more robust logging #loc</description>
+  <highlighted_element>printStackTrace</highlighted_element>
+  <language>JAVA</language>
+  <offset>5</offset>
+  <length>15</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding03-admin-component/src/main/java/com/atguigu/crowd/service/impl/AdminServiceImpl.java</file>
+  <line>148</line>
+  <module>atcrowdfunding03-admin-component</module>
+  <package>com.atguigu.crowd.service.impl</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.service.impl.AdminServiceImpl void update(com.atguigu.crowd.entity.Admin admin)" />
+  <problem_class id="ThrowablePrintStackTrace" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Call to 'printStackTrace()'</problem_class>
+  <description>Call to &lt;code&gt;printStackTrace()&lt;/code&gt; should probably be replaced with more robust logging #loc</description>
+  <highlighted_element>printStackTrace</highlighted_element>
+  <language>JAVA</language>
+  <offset>5</offset>
+  <length>15</length>
+</problem>
+<problem>
+  <file>file://$PROJECT_DIR$/atcrowdfunding05-common-util/src/main/java/com/atguigu/crowd/util/CrowdUtil.java</file>
+  <line>55</line>
+  <module>atcrowdfunding05-common-util</module>
+  <package>com.atguigu.crowd.util</package>
+  <entry_point TYPE="method" FQNAME="com.atguigu.crowd.util.CrowdUtil java.lang.String md5(java.lang.String source)" />
+  <problem_class id="ThrowablePrintStackTrace" severity="WARNING" attribute_key="WARNING_ATTRIBUTES">Call to 'printStackTrace()'</problem_class>
+  <description>Call to &lt;code&gt;printStackTrace()&lt;/code&gt; should probably be replaced with more robust logging #loc</description>
+  <highlighted_element>printStackTrace</highlighted_element>
+  <language>JAVA</language>
+  <offset>5</offset>
+  <length>15</length>
+</problem>
+</problems>
