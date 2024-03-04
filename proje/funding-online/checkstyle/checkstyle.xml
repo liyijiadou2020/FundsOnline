@@ -11,7 +11,7 @@
     </module>
 
     <module name="TreeWalker">
-        <!-- ******************************** javadoc的检查 ********************-->
+        <!-- ******************************** javadoc Check ********************-->
         <module name="JavadocStyle">
             <property name='checkFirstSentence' value='false'/>
             <property name='checkEmptyJavadoc' value='true'/>
@@ -29,7 +29,7 @@
             <property name='ignoreNamePattern' value='.*Business|.*Service|.*Handler|.*Mapper|.*Template|.*Client|.*Util.*|LOG|LOGGER'/>
         </module>
 
-        <!-- ******************************** import方面的检查 *********** -->
+        <!-- ******************************** import Check *********** -->
         <module name="AvoidStarImport"/>
         <module name="IllegalImport"/>
         <module name="RedundantImport"/>

@@ -15,55 +15,55 @@ import com.github.pagehelper.PageInfo;
 
 @Service
 public class RoleServiceImpl implements RoleService {
-	
-	@Autowired
-	private RoleMapper roleMapper;
 
-	@Override
-	public PageInfo<Role> getPageInfo(Integer pageNum, Integer pageSize, String keyword) {
-		
-		// 1.开启分页功能
-		PageHelper.startPage(pageNum, pageSize);
-		
-		// 2.执行查询
-		List<Role> roleList = roleMapper.selectRoleByKeyword(keyword);
-		
-		// 3.封装为PageInfo对象返回
-		return new PageInfo<>(roleList);
-	}
+    @Autowired
+    private RoleMapper roleMapper;
 
-	@Override
-	public void saveRole(Role role) {
-		roleMapper.insert(role);
-	}
+    @Override
+    public PageInfo<Role> getPageInfo(Integer pageNum, Integer pageSize, String keyword) {
 
-	@Override
-	public void updateRole(Role role) {
-		roleMapper.updateByPrimaryKey(role);
-	}
+        // 1.开启分页功能
+        PageHelper.startPage(pageNum, pageSize);
 
-	@Override
-	public void removeRole(List<Integer> roleIdList) {
-		
-		RoleExample example = new RoleExample();
-		
-		Criteria criteria = example.createCriteria();
-		
-		//delete from t_role where id in (5,8,12)
-		criteria.andIdIn(roleIdList);
-		
-		roleMapper.deleteByExample(example);
-	}
+        // 2.执行查询
+        List<Role> roleList = roleMapper.selectRoleByKeyword(keyword);
 
-	@Override
-	public List<Role> getAssignedRole(Integer adminId) {
-		
-		return roleMapper.selectAssignedRole(adminId);
-	}
+        // 3.封装为PageInfo对象返回
+        return new PageInfo<>(roleList);
+    }
 
-	@Override
-	public List<Role> getUnAssignedRole(Integer adminId) {
-		return roleMapper.selectUnAssignedRole(adminId);
-	}
+    @Override
+    public void saveRole(Role role) {
+        roleMapper.insert(role);
+    }
+
+    @Override
+    public void updateRole(Role role) {
+        roleMapper.updateByPrimaryKey(role);
+    }
+
+    @Override
+    public void removeRole(List<Integer> roleIdList) {
+
+        RoleExample example = new RoleExample();
+
+        Criteria criteria = example.createCriteria();
+
+        // delete from t_role where id in (5,8,12)
+        criteria.andIdIn(roleIdList);
+
+        roleMapper.deleteByExample(example);
+    }
+
+    @Override
+    public List<Role> getAssignedRole(Integer adminId) {
+
+        return roleMapper.selectAssignedRole(adminId);
+    }
+
+    @Override
+    public List<Role> getUnAssignedRole(Integer adminId) {
+        return roleMapper.selectUnAssignedRole(adminId);
+    }
 
 }

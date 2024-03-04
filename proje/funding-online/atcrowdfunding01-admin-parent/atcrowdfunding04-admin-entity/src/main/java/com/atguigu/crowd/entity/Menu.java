@@ -4,50 +4,64 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
-	
-	// 主键
+
+    /**
+     * 主键
+     */
     private Integer id;
 
-    // 父节点的id
+    /**
+     * 父节点的id
+     */
     private Integer pid;
 
-    // 节点名称
+    /**
+     * 节点名称
+     */
     private String name;
 
-    // 节点附带的URL地址，是将来点击菜单项时要跳转的地址
+    /**
+     * 节点附带的URL地址，是将来点击菜单项时要跳转的地址
+     */
     private String url;
 
-    // 节点图标的样式
+    /**
+     * 节点图标的样式
+     */
     private String icon;
-    
-    // 存储子节点的集合，初始化是为了避免空指针异常
+
+    /**
+     * 存储子节点的集合，初始化是为了避免空指针异常
+     */
     private List<Menu> children = new ArrayList<>();
-    
-    // 控制节点是否默认为打开装，设置为true表示默认打开
+
+    /**
+     * 控制节点是否默认为打开装，设置为true表示默认打开
+     */
     private Boolean open = true;
-    
+
     public Menu() {
-		// TODO Auto-generated constructor stub
-	}
+
+    }
 
     public Menu(Integer id, Integer pid, String name, String url, String icon, List<Menu> children, Boolean open) {
-		super();
-		this.id = id;
-		this.pid = pid;
-		this.name = name;
-		this.url = url;
-		this.icon = icon;
-		this.children = children;
-		this.open = open;
-	}
+        super();
+        this.id = id;
+        this.pid = pid;
+        this.name = name;
+        this.url = url;
+        this.icon = icon;
+        this.children = children;
+        this.open = open;
+    }
 
-	@Override
-	public String toString() {
-		return "Menu [id=" + id + ", pid=" + pid + ", name=" + name + ", url=" + url + ", icon=" + icon + ", children="
-				+ children + ", open=" + open + "]";
-	}
+    @Override
+    public String toString() {
+        return "Menu [id=" + id + ", pid=" + pid + ", name=" + name + ", url=" + url + ", icon=" + icon + ", children="
+                + children + ", open=" + open + "]";
+    }
 
-	public Integer getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -87,20 +101,20 @@ public class Menu {
         this.icon = icon == null ? null : icon.trim();
     }
 
-	public List<Menu> getChildren() {
-		return children;
-	}
+    public List<Menu> getChildren() {
+        return children;
+    }
 
-	public void setChildren(List<Menu> children) {
-		this.children = children;
-	}
+    public void setChildren(List<Menu> children) {
+        this.children = children;
+    }
 
-	public Boolean getOpen() {
-		return open;
-	}
+    public Boolean getOpen() {
+        return open;
+    }
 
-	public void setOpen(Boolean open) {
-		this.open = open;
-	}
-    
+    public void setOpen(Boolean open) {
+        this.open = open;
+    }
+
 }

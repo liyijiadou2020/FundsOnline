@@ -6,21 +6,21 @@ import com.atguigu.crowd.entity.Admin;
 import com.github.pagehelper.PageInfo;
 
 public interface AdminService {
-	
-	void saveAdmin(Admin admin);
 
-	List<Admin> getAll();
+    void saveAdmin(Admin admin);
 
-	Admin getAdminByLoginAcct(String loginAcct, String userPswd);
-	
-	PageInfo<Admin> getPageInfo(String keyword, Integer pageNum, Integer pageSize);
+    List<Admin> getAll();
 
-	void remove(Integer adminId);
+    Admin getAdminByLoginAcct(String loginAcct, String userPswd);
 
-	Admin getAdminById(Integer adminId);
+    PageInfo<Admin> getPageInfo(String keyword, Integer pageNum, Integer pageSize);
 
-	void update(Admin admin);
+    void remove(Integer adminId);
 
-	void saveAdminRoleRelationship(Integer adminId, List<Integer> roleIdList);
+    Admin getAdminById(Integer adminId);
+
+    void update(Admin admin);
+
+    void saveAdminRoleRelationship(Integer adminId, List<Integer> roleIdList);
 
 }

@@ -7,10 +7,10 @@ import com.atguigu.crowd.entity.Auth;
 
 public interface AuthService {
 
-	List<Auth> getAll();
+    List<Auth> getAll();
 
-	List<Integer> getAssignedAuthIdByRoleId(Integer roleId);
+    List<Integer> getAssignedAuthIdByRoleId(Integer roleId);
 
-	void saveRoleAuthRelathinship(Map<String, List<Integer>> map);
+    void saveRoleAuthRelathinship(Map<String, List<Integer>> map);
 
 }
