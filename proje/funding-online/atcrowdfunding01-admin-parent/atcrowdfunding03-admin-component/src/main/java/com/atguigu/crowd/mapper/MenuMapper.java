@@ -1,9 +1,11 @@
 package com.atguigu.crowd.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.atguigu.crowd.entity.Menu;
 import com.atguigu.crowd.entity.MenuExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface MenuMapper {
 

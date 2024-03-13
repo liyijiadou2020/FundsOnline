@@ -2,11 +2,13 @@ package com.atguigu.crowd.util;
 
 import static com.atguigu.crowd.constant.CrowdConstant.RADIX;
 
-import com.atguigu.crowd.constant.CrowdConstant;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
 import javax.servlet.http.HttpServletRequest;
+
+import com.atguigu.crowd.constant.CrowdConstant;
 
 public final class CrowdUtil {
 

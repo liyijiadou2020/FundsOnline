@@ -1,9 +1,11 @@
 package com.atguigu.crowd.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.atguigu.crowd.entity.Admin;
 import com.atguigu.crowd.entity.AdminExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 /**
  * Admin映射类.

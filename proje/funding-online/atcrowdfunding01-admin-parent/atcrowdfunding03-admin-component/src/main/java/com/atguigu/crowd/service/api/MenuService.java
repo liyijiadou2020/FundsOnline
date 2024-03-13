@@ -1,7 +1,8 @@
 package com.atguigu.crowd.service.api;
 
-import com.atguigu.crowd.entity.Menu;
 import java.util.List;
+
+import com.atguigu.crowd.entity.Menu;
 
 public interface MenuService {
 

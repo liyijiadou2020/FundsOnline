@@ -7,6 +7,7 @@
 		<artifactId>atcrowdfunding01-admin-parent</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
+	<packaging>jar</packaging>
 	<artifactId>atcrowdfunding03-admin-component</artifactId>
 	<dependencies>
 		<dependency>

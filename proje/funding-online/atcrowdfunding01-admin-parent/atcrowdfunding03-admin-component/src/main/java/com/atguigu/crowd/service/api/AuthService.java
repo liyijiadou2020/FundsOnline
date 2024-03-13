@@ -1,8 +1,9 @@
 package com.atguigu.crowd.service.api;
 
-import com.atguigu.crowd.entity.Auth;
 import java.util.List;
 import java.util.Map;
+
+import com.atguigu.crowd.entity.Auth;
 
 public interface AuthService {
 

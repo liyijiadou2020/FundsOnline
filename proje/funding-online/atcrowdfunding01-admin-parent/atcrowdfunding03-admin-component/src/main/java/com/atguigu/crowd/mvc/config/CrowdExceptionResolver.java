@@ -1,5 +1,14 @@
 package com.atguigu.crowd.mvc.config;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.atguigu.crowd.constant.CrowdConstant;
 import com.atguigu.crowd.exception.AccessForbiddenException;
 import com.atguigu.crowd.exception.LoginAcctAlreadyInUseException;
@@ -8,12 +17,6 @@ import com.atguigu.crowd.exception.LoginFailedException;
 import com.atguigu.crowd.util.CrowdUtil;
 import com.atguigu.crowd.util.ResultEntity;
 import com.google.gson.Gson;
-import java.io.IOException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.ModelAndView;
 
 // @ControllerAdvice表示当前类是一个基于注解的异常处理器类
 @ControllerAdvice

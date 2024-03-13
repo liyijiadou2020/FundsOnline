@@ -6,4 +6,5 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>atcrowdfunding04-admin-entity</artifactId>
+  <packaging>jar</packaging>
 </project>

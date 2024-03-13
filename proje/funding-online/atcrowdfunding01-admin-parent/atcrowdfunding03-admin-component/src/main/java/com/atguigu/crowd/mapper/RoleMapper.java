@@ -1,9 +1,11 @@
 package com.atguigu.crowd.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.atguigu.crowd.entity.Role;
 import com.atguigu.crowd.entity.RoleExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface RoleMapper {
 

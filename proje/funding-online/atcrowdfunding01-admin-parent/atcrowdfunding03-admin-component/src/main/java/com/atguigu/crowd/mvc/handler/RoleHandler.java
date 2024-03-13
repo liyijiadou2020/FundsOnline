@@ -1,15 +1,17 @@
 package com.atguigu.crowd.mvc.handler;
 
-import com.atguigu.crowd.entity.Role;
-import com.atguigu.crowd.service.api.RoleService;
-import com.atguigu.crowd.util.ResultEntity;
-import com.github.pagehelper.PageInfo;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.atguigu.crowd.entity.Role;
+import com.atguigu.crowd.service.api.RoleService;
+import com.atguigu.crowd.util.ResultEntity;
+import com.github.pagehelper.PageInfo;
 
 @RestController
 public class RoleHandler {

@@ -15,6 +15,11 @@
 		</dependency>
 	</dependencies>
 
+	<properties>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
 	<!-- 控制Maven在构建过程中相关配置 -->
 	<build>
 

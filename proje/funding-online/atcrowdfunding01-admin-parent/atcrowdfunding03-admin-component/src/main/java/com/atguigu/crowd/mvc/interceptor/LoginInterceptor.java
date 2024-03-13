@@ -1,12 +1,14 @@
 package com.atguigu.crowd.mvc.interceptor;
 
-import com.atguigu.crowd.constant.CrowdConstant;
-import com.atguigu.crowd.entity.Admin;
-import com.atguigu.crowd.exception.AccessForbiddenException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import com.atguigu.crowd.constant.CrowdConstant;
+import com.atguigu.crowd.entity.Admin;
+import com.atguigu.crowd.exception.AccessForbiddenException;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
