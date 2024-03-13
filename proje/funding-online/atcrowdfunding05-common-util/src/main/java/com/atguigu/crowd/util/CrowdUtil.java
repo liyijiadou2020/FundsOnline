@@ -1,17 +1,16 @@
 package com.atguigu.crowd.util;
+
+import static com.atguigu.crowd.constant.CrowdConstant.RADIX;
+
+import com.atguigu.crowd.constant.CrowdConstant;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import javax.servlet.http.HttpServletRequest;
 
-import com.atguigu.crowd.constant.CrowdConstant;
-
-import static com.atguigu.crowd.constant.CrowdConstant.RADIX;
-
 public final class CrowdUtil {
 
-    private CrowdUtil() {
-    }
+    private CrowdUtil() {}
 
     /**
      * 对明文字符串进行MD5加密
@@ -61,8 +60,7 @@ public final class CrowdUtil {
      * 判断当前请求是否为Ajax请求
      *
      * @param request 请求对象
-     * @return true：当前请求是Ajax请求
-     * false：当前请求不是Ajax请求
+     * @return true：当前请求是Ajax请求 false：当前请求不是Ajax请求
      */
     public static boolean judgeRequestType(HttpServletRequest request) {
         // 1.获取请求消息头
@@ -70,6 +68,8 @@ public final class CrowdUtil {
         String xRequestHeader = request.getHeader("X-Requested-With");
         // 2.判断
         return (acceptHeader != null && acceptHeader.contains("application/json"))
-                || (xRequestHeader != null && xRequestHeader.equals("XMLHttpRequest"));
+            || (xRequestHeader != null && "XMLHttpRequest".equals(xRequestHeader)); // fix bug: was || (xRequestHeader
+                                                                                    // != null &&
+                                                                                    // xRequestHeader.equals("XMLHttpRequest"));
     }
 }

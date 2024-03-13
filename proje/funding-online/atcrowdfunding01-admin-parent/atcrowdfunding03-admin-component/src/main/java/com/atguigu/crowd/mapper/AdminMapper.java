@@ -2,12 +2,14 @@ package com.atguigu.crowd.mapper;
 
 import com.atguigu.crowd.entity.Admin;
 import com.atguigu.crowd.entity.AdminExample;
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
+/**
+ * Admin映射类.
+ */
 public interface AdminMapper {
+
     int countByExample(AdminExample example);
 
     int deleteByExample(AdminExample example);

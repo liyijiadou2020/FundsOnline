@@ -1,9 +1,8 @@
 package com.atguigu.crowd.service.api;
 
-import java.util.List;
-
 import com.atguigu.crowd.entity.Admin;
 import com.github.pagehelper.PageInfo;
+import java.util.List;
 
 public interface AdminService {
 

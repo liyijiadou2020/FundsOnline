@@ -1,6 +1,7 @@
 package com.atguigu.crowd.entity;
 
 public class Auth {
+
     /**
      * 权限id
      */

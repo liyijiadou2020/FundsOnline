@@ -58,7 +58,7 @@ public class Menu {
     @Override
     public String toString() {
         return "Menu [id=" + id + ", pid=" + pid + ", name=" + name + ", url=" + url + ", icon=" + icon + ", children="
-                + children + ", open=" + open + "]";
+            + children + ", open=" + open + "]";
     }
 
     public Integer getId() {

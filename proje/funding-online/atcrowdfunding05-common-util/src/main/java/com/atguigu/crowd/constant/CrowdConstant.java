@@ -1,8 +1,6 @@
 package com.atguigu.crowd.constant;
 
 public final class CrowdConstant {
-    private CrowdConstant() {
-    }
 
     /**
      * 账号密码错误提示
@@ -40,5 +38,7 @@ public final class CrowdConstant {
      * 按照16进制将bigInteger的值转换为字符串
      */
     public static final int RADIX = 16;
+
+    private CrowdConstant() {}
 
 }

@@ -1,19 +1,15 @@
 package com.atguigu.crowd.mvc.handler;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-// import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.atguigu.crowd.entity.Role;
 import com.atguigu.crowd.service.api.RoleService;
 import com.atguigu.crowd.util.ResultEntity;
 import com.github.pagehelper.PageInfo;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class RoleHandler {
@@ -51,10 +47,9 @@ public class RoleHandler {
     // @ResponseBody
     @RequestMapping("/role/get/page/info.json")
     public ResultEntity<PageInfo<Role>> getPageInfo(
-            @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-            @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
-            @RequestParam(value = "keyword", defaultValue = "") String keyword
-    ) {
+        @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+        @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize,
+        @RequestParam(value = "keyword", defaultValue = "") String keyword) {
 
         // 调用Service方法获取分页数据
         PageInfo<Role> pageInfo = roleService.getPageInfo(pageNum, pageSize, keyword);

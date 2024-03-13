@@ -1,6 +1,7 @@
 package com.atguigu.crowd.entity;
 
 public class Role {
+
     /**
      * 角色的标识
      */

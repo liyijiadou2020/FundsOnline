@@ -1,18 +1,22 @@
 package com.atguigu.crowd.entity;
 
+/**
+ * 管理员实体类.
+ */
 public class Admin {
+
     /**
-     * 管理员id
+     * 管理员id.
      */
     private Integer id;
 
     /**
-     * 登录账户
+     * 登录账户.
      */
     private String loginAcct;
 
     /**
-     * 用户密码
+     * 用户密码.
      */
     private String userPswd;
 
@@ -48,7 +52,7 @@ public class Admin {
     @Override
     public String toString() {
         return "Admin [id=" + id + ", loginAcct=" + loginAcct + ", userPswd=" + userPswd + ", userName=" + userName
-                + ", email=" + email + ", createTime=" + createTime + "]";
+            + ", email=" + email + ", createTime=" + createTime + "]";
     }
 
     public Integer getId() {

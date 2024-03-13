@@ -14,7 +14,7 @@ public class LoginAcctAlreadyInUseException extends RuntimeException {
     }
 
     public LoginAcctAlreadyInUseException(String message, Throwable cause, boolean enableSuppression,
-                                          boolean writableStackTrace) {
+        boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 

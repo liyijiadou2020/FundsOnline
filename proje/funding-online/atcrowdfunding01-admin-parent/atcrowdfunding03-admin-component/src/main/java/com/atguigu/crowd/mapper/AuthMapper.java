@@ -2,12 +2,11 @@ package com.atguigu.crowd.mapper;
 
 import com.atguigu.crowd.entity.Auth;
 import com.atguigu.crowd.entity.AuthExample;
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface AuthMapper {
+
     int countByExample(AuthExample example);
 
     int deleteByExample(AuthExample example);

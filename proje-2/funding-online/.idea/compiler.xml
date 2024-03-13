@@ -13,9 +13,5 @@
         <module name="atcrowdfunding03-admin-component" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="atcrowdfunding02-admin-parent" target="1.7" />
-      <module name="pro05-spring-security" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>

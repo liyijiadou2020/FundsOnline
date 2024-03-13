@@ -2,12 +2,11 @@ package com.atguigu.crowd.mapper;
 
 import com.atguigu.crowd.entity.Role;
 import com.atguigu.crowd.entity.RoleExample;
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
 public interface RoleMapper {
+
     int countByExample(RoleExample example);
 
     int deleteByExample(RoleExample example);

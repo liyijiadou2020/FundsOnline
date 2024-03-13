@@ -1,10 +1,5 @@
 package com.atguigu.crowd.service.impl;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.atguigu.crowd.entity.Role;
 import com.atguigu.crowd.entity.RoleExample;
 import com.atguigu.crowd.entity.RoleExample.Criteria;
@@ -12,6 +7,9 @@ import com.atguigu.crowd.mapper.RoleMapper;
 import com.atguigu.crowd.service.api.RoleService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class RoleServiceImpl implements RoleService {

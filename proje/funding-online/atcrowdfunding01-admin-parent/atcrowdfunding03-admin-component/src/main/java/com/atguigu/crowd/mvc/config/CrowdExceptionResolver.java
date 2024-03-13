@@ -1,10 +1,5 @@
 package com.atguigu.crowd.mvc.config;
-import java.io.IOException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import org.springframework.web.bind.annotation.ControllerAdvice;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.ModelAndView;
+
 import com.atguigu.crowd.constant.CrowdConstant;
 import com.atguigu.crowd.exception.AccessForbiddenException;
 import com.atguigu.crowd.exception.LoginAcctAlreadyInUseException;
@@ -13,6 +8,12 @@ import com.atguigu.crowd.exception.LoginFailedException;
 import com.atguigu.crowd.util.CrowdUtil;
 import com.atguigu.crowd.util.ResultEntity;
 import com.google.gson.Gson;
+import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
 
 // @ControllerAdvice表示当前类是一个基于注解的异常处理器类
 @ControllerAdvice
@@ -20,10 +21,8 @@ public class CrowdExceptionResolver {
 
     @ExceptionHandler(value = LoginAcctAlreadyInUseForUpdateException.class)
     public ModelAndView resolveLoginAcctAlreadyInUseForUpdateException(
-            LoginAcctAlreadyInUseForUpdateException exception,
-            HttpServletRequest request,
-            HttpServletResponse response
-    ) throws IOException {
+        LoginAcctAlreadyInUseForUpdateException exception, HttpServletRequest request, HttpServletResponse response)
+        throws IOException {
 
         String viewName = "system-error";
 
@@ -31,11 +30,8 @@ public class CrowdExceptionResolver {
     }
 
     @ExceptionHandler(value = LoginAcctAlreadyInUseException.class)
-    public ModelAndView resolveLoginAcctAlreadyInUseException(
-            LoginAcctAlreadyInUseException exception,
-            HttpServletRequest request,
-            HttpServletResponse response
-    ) throws IOException {
+    public ModelAndView resolveLoginAcctAlreadyInUseException(LoginAcctAlreadyInUseException exception,
+        HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         String viewName = "admin-add";
 
@@ -43,11 +39,8 @@ public class CrowdExceptionResolver {
     }
 
     @ExceptionHandler(value = LoginFailedException.class)
-    public ModelAndView resolveLoginFailedException(
-            LoginFailedException exception,
-            HttpServletRequest request,
-            HttpServletResponse response
-    ) throws IOException {
+    public ModelAndView resolveLoginFailedException(LoginFailedException exception, HttpServletRequest request,
+        HttpServletResponse response) throws IOException {
 
         String viewName = "admin-login";
 
@@ -55,11 +48,8 @@ public class CrowdExceptionResolver {
     }
 
     @ExceptionHandler(value = AccessForbiddenException.class)
-    public ModelAndView resolveAccessForbiddenException(
-            AccessForbiddenException exception,
-            HttpServletRequest request,
-            HttpServletResponse response
-    ) throws IOException {
+    public ModelAndView resolveAccessForbiddenException(AccessForbiddenException exception, HttpServletRequest request,
+        HttpServletResponse response) throws IOException {
 
         String viewName = "admin-login";
 
@@ -69,17 +59,17 @@ public class CrowdExceptionResolver {
     // @ExceptionHandler将一个具体的异常类型和一个方法关联起来
     private ModelAndView commonResolve(
 
-            // 异常处理完成后要去的页面
-            String viewName,
+        // 异常处理完成后要去的页面
+        String viewName,
 
-            // 实际捕获到的异常类型
-            Exception exception,
+        // 实际捕获到的异常类型
+        Exception exception,
 
-            // 当前请求对象
-            HttpServletRequest request,
+        // 当前请求对象
+        HttpServletRequest request,
 
-            // 当前响应对象
-            HttpServletResponse response) throws IOException {
+        // 当前响应对象
+        HttpServletResponse response) throws IOException {
 
         // 1.判断当前请求类型
         boolean judgeResult = CrowdUtil.judgeRequestType(request);

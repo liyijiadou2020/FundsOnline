@@ -44,8 +44,9 @@ public class ResultEntity<T> {
 
     /**
      * 请求处理成功且不需要返回数据时使用的工具方法
-     * @return 没有数据的ResultEntity对象
+     *
      * @param <Type> 结果数据类型
+     * @return 没有数据的ResultEntity对象
      */
     public static <Type> ResultEntity<Type> successWithoutData() {
         return new ResultEntity<Type>(SUCCESS, null, null);
@@ -53,9 +54,10 @@ public class ResultEntity<T> {
 
     /**
      * 请求处理成功且需要返回数据时使用的工具方法
+     *
      * @param data 要返回的数据
-     * @return 带有数据的ResultEntity对象
      * @param <Type> 结果数据类型
+     * @return 带有数据的ResultEntity对象
      */
     public static <Type> ResultEntity<Type> successWithData(Type data) {
         return new ResultEntity<Type>(SUCCESS, null, data);
@@ -63,9 +65,10 @@ public class ResultEntity<T> {
 
     /**
      * 请求处理失败后使用的工具方法
+     *
      * @param message 失败的错误消息
-     * @return 带有失败信息的ResultEntity对象
      * @param <Type> 结果数据类型
+     * @return 带有失败信息的ResultEntity对象
      */
     public static <Type> ResultEntity<Type> failed(String message) {
         return new ResultEntity<Type>(FAILED, message, null);
