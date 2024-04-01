@@ -1,0 +1,165 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > Auth</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.atguigu.crowd.entity</a>
+</div>
+
+<h1>Coverage Summary for Class: Auth (com.atguigu.crowd.entity)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Auth</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.atguigu.crowd.entity;
+&nbsp;
+&nbsp;public class Auth {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 权限id
+&nbsp;     */
+&nbsp;    private Integer id;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 权限名。用于比对
+&nbsp;     */
+&nbsp;    private String name;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 权限的身份。用户阅读
+&nbsp;     */
+&nbsp;    private String title;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * 权限类型
+&nbsp;     */
+&nbsp;    private Integer categoryId;
+<b class="fc">&nbsp;</b>
+&nbsp;    public Auth() {
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Auth(Integer id, String name, String title, Integer categoryId) {
+&nbsp;        super();
+&nbsp;        this.id = id;
+&nbsp;        this.name = name;
+&nbsp;        this.title = title;
+&nbsp;        this.categoryId = categoryId;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String toString() {
+&nbsp;        return &quot;Auth [id=&quot; + id + &quot;, name=&quot; + name + &quot;, title=&quot; + title + &quot;, categoryId=&quot; + categoryId + &quot;]&quot;;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Integer getId() {
+&nbsp;        return id;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setId(Integer id) {
+&nbsp;        this.id = id;
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getName() {
+&nbsp;        return name;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setName(String name) {
+&nbsp;        this.name = name == null ? null : name.trim();
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getTitle() {
+&nbsp;        return title;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setTitle(String title) {
+&nbsp;        this.title = title == null ? null : title.trim();
+&nbsp;    }
+&nbsp;
+&nbsp;    public Integer getCategoryId() {
+&nbsp;        return categoryId;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCategoryId(Integer categoryId) {
+&nbsp;        this.categoryId = categoryId;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:49</div>
+</div>
+</body>
+</html>

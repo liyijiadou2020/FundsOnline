@@ -1,0 +1,900 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ParameterDescription</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.description.method</a>
+</div>
+
+<h1>Coverage Summary for Class: ParameterDescription (net.bytebuddy.description.method)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">ParameterDescription$AbstractBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParameterDescription$ForLoadedParameter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParameterDescription$ForLoadedParameter$OfMethod</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParameterDescription$InDefinedShape$AbstractBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParameterDescription$Latent</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (19/19)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParameterDescription$Token</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParameterDescription$Token$TypeList</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParameterDescription$TypeSubstituting</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (71/71)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.description.method;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.AccessibleObject;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import java.security.AccessController;
+&nbsp;import java.security.PrivilegedAction;
+&nbsp;import java.util.AbstractList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.List;
+&nbsp;import javax.annotation.CheckForNull;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.build.CachedReturnPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.ByteCodeElement;
+&nbsp;import net.bytebuddy.description.ModifierReviewable;
+&nbsp;import net.bytebuddy.description.NamedElement;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationDescription;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationList;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationSource;
+&nbsp;import net.bytebuddy.description.method.ParameterList.ForLoadedExecutable;
+&nbsp;import net.bytebuddy.description.type.TypeDefinition;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.Generic.OfNonGenericType.ForLoadedType;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.Generic.Visitor.Substitutor.ForAttachment;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackSize;
+&nbsp;import net.bytebuddy.matcher.ElementMatcher;
+&nbsp;import net.bytebuddy.utility.dispatcher.JavaDispatcher;
+&nbsp;import net.bytebuddy.utility.dispatcher.JavaDispatcher.Proxied;
+&nbsp;
+&nbsp;public interface ParameterDescription extends AnnotationSource, NamedElement.WithRuntimeName, NamedElement.WithOptionalName, ModifierReviewable.ForParameterDescription, ByteCodeElement.TypeDependant&lt;InDefinedShape, Token&gt; {
+&nbsp;    String NAME_PREFIX = &quot;arg&quot;;
+&nbsp;
+&nbsp;    TypeDescription.Generic getType();
+&nbsp;
+&nbsp;    MethodDescription getDeclaringMethod();
+&nbsp;
+&nbsp;    int getIndex();
+&nbsp;
+&nbsp;    boolean hasModifiers();
+&nbsp;
+&nbsp;    int getOffset();
+&nbsp;
+&nbsp;    public static class Token implements ByteCodeElement.Token&lt;Token&gt; {
+&nbsp;        @Nonnull(
+&nbsp;            when = When.NEVER
+&nbsp;        )
+&nbsp;        public static final String NO_NAME = null;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.NEVER
+&nbsp;        )
+&nbsp;        public static final Integer NO_MODIFIERS = null;
+&nbsp;        private final TypeDescription.Generic type;
+&nbsp;        private final List&lt;? extends AnnotationDescription&gt; annotations;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        private final String name;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        private final Integer modifiers;
+&nbsp;
+&nbsp;        public Token(TypeDescription.Generic type) {
+&nbsp;            this(type, Collections.emptyList());
+&nbsp;        }
+&nbsp;
+&nbsp;        public Token(TypeDescription.Generic type, List&lt;? extends AnnotationDescription&gt; annotations) {
+&nbsp;            this(type, annotations, NO_NAME, NO_MODIFIERS);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Token(TypeDescription.Generic type, @Nonnull(when = When.MAYBE) String name, @Nonnull(when = When.MAYBE) Integer modifiers) {
+&nbsp;            this(type, Collections.emptyList(), name, modifiers);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Token(TypeDescription.Generic type, List&lt;? extends AnnotationDescription&gt; annotations, @Nonnull(when = When.MAYBE) String name, @Nonnull(when = When.MAYBE) Integer modifiers) {
+&nbsp;            this.type = type;
+&nbsp;            this.annotations = annotations;
+&nbsp;            this.name = name;
+&nbsp;            this.modifiers = modifiers;
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeDescription.Generic getType() {
+&nbsp;            return this.type;
+&nbsp;        }
+&nbsp;
+&nbsp;        public AnnotationList getAnnotations() {
+&nbsp;            return new AnnotationList.Explicit(this.annotations);
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        public String getName() {
+&nbsp;            return this.name;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        public Integer getModifiers() {
+&nbsp;            return this.modifiers;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Token accept(TypeDescription.Generic.Visitor&lt;? extends TypeDescription.Generic&gt; visitor) {
+&nbsp;            return new Token((TypeDescription.Generic)this.type.accept(visitor), this.annotations, this.name, this.modifiers);
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance(&quot;hashCode&quot;)
+&nbsp;        public int hashCode() {
+&nbsp;            int var1 = this.hashCode;
+&nbsp;            int var10000;
+<b class="fc">&nbsp;            if (var1 != 0) {</b>
+&nbsp;                var10000 = 0;
+&nbsp;            } else {
+&nbsp;                int result = this.type.hashCode();
+&nbsp;                result = 31 * result + this.annotations.hashCode();
+&nbsp;                result = 31 * result + (this.name != null ? this.name.hashCode() : 0);
+&nbsp;                result = 31 * result + (this.modifiers != null ? this.modifiers.hashCode() : 0);
+&nbsp;                var10000 = result;
+&nbsp;            }
+&nbsp;
+&nbsp;            int var2 = var10000;
+&nbsp;            if (var2 == 0) {
+&nbsp;                var2 = this.hashCode;
+&nbsp;            } else {
+<b class="fc">&nbsp;                this.hashCode = var2;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            return var2;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(@CheckForNull Object other) {
+&nbsp;            if (this == other) {
+&nbsp;                return true;
+&nbsp;            } else if (!(other instanceof Token)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                Token token = (Token)other;
+&nbsp;                boolean var10000;
+&nbsp;                if (this.type.equals(token.type) &amp;&amp; this.annotations.equals(token.annotations)) {
+&nbsp;                    label52: {
+&nbsp;                        if (this.name != null) {
+&nbsp;                            if (!this.name.equals(token.name)) {
+&nbsp;                                break label52;
+&nbsp;                            }
+&nbsp;                        } else if (token.name != null) {
+&nbsp;                            break label52;
+&nbsp;                        }
+&nbsp;
+&nbsp;                        if (this.modifiers != null) {
+&nbsp;                            if (!this.modifiers.equals(token.modifiers)) {
+&nbsp;                                break label52;
+&nbsp;                            }
+&nbsp;                        } else if (token.modifiers != null) {
+&nbsp;                            break label52;
+&nbsp;                        }
+&nbsp;
+&nbsp;                        var10000 = true;
+&nbsp;                        return var10000;
+&nbsp;                    }
+&nbsp;                }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                var10000 = false;</b>
+&nbsp;                return var10000;
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public String toString() {
+<b class="fc">&nbsp;            return &quot;ParameterDescription.Token{type=&quot; + this.type + &quot;, annotations=&quot; + this.annotations + &quot;, name=&#39;&quot; + this.name + &#39;\&#39;&#39; + &quot;, modifiers=&quot; + this.modifiers + &#39;}&#39;;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public static class TypeList extends AbstractList&lt;Token&gt; {
+&nbsp;            private final List&lt;? extends TypeDefinition&gt; typeDescriptions;
+&nbsp;
+&nbsp;            public TypeList(List&lt;? extends TypeDefinition&gt; typeDescriptions) {
+<b class="fc">&nbsp;                this.typeDescriptions = typeDescriptions;</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;            public Token get(int index) {
+&nbsp;                return new Token(((TypeDefinition)this.typeDescriptions.get(index)).asGenericType());
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            public int size() {
+&nbsp;                return this.typeDescriptions.size();
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public static class TypeSubstituting extends AbstractBase implements InGenericShape {</b>
+&nbsp;        private final MethodDescription.InGenericShape declaringMethod;
+&nbsp;        private final ParameterDescription parameterDescription;
+&nbsp;        private final TypeDescription.Generic.Visitor&lt;? extends TypeDescription.Generic&gt; visitor;
+&nbsp;
+&nbsp;        public TypeSubstituting(MethodDescription.InGenericShape declaringMethod, ParameterDescription parameterDescription, TypeDescription.Generic.Visitor&lt;? extends TypeDescription.Generic&gt; visitor) {
+&nbsp;            this.declaringMethod = declaringMethod;
+&nbsp;            this.parameterDescription = parameterDescription;
+&nbsp;            this.visitor = visitor;
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeDescription.Generic getType() {
+&nbsp;            return (TypeDescription.Generic)this.parameterDescription.getType().accept(this.visitor);
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDescription.InGenericShape getDeclaringMethod() {
+&nbsp;            return this.declaringMethod;
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getIndex() {
+&nbsp;            return this.parameterDescription.getIndex();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isNamed() {
+&nbsp;            return this.parameterDescription.isNamed();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean hasModifiers() {
+&nbsp;            return this.parameterDescription.hasModifiers();
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getOffset() {
+&nbsp;            return this.parameterDescription.getOffset();
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getName() {
+&nbsp;            return this.parameterDescription.getName();
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public int getModifiers() {
+&nbsp;            return this.parameterDescription.getModifiers();
+&nbsp;        }
+&nbsp;
+&nbsp;        public AnnotationList getDeclaredAnnotations() {
+&nbsp;            return this.parameterDescription.getDeclaredAnnotations();
+&nbsp;        }
+&nbsp;
+&nbsp;        public InDefinedShape asDefined() {
+&nbsp;            return (InDefinedShape)this.parameterDescription.asDefined();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class Latent extends InDefinedShape.AbstractBase {
+&nbsp;        private final MethodDescription.InDefinedShape declaringMethod;
+&nbsp;        private final TypeDescription.Generic parameterType;
+&nbsp;        private final List&lt;? extends AnnotationDescription&gt; declaredAnnotations;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        private final String name;
+&nbsp;        @Nonnull(
+<b class="fc">&nbsp;            when = When.MAYBE</b>
+<b class="fc">&nbsp;        )</b>
+<b class="fc">&nbsp;        private final Integer modifiers;</b>
+<b class="fc">&nbsp;        private final int index;</b>
+&nbsp;        private final int offset;
+&nbsp;
+&nbsp;        public Latent(MethodDescription.InDefinedShape declaringMethod, Token token, int index, int offset) {
+&nbsp;            this(declaringMethod, token.getType(), token.getAnnotations(), token.getName(), token.getModifiers(), index, offset);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Latent(MethodDescription.InDefinedShape declaringMethod, TypeDescription.Generic parameterType, int index, int offset) {
+&nbsp;            this(declaringMethod, parameterType, Collections.emptyList(), ParameterDescription.Token.NO_NAME, ParameterDescription.Token.NO_MODIFIERS, index, offset);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Latent(MethodDescription.InDefinedShape declaringMethod, TypeDescription.Generic parameterType, List&lt;? extends AnnotationDescription&gt; declaredAnnotations, @Nonnull(when = When.MAYBE) String name, @Nonnull(when = When.MAYBE) Integer modifiers, int index, int offset) {
+&nbsp;            this.declaringMethod = declaringMethod;
+&nbsp;            this.parameterType = parameterType;
+&nbsp;            this.declaredAnnotations = declaredAnnotations;
+&nbsp;            this.name = name;
+&nbsp;            this.modifiers = modifiers;
+&nbsp;            this.index = index;
+&nbsp;            this.offset = offset;
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeDescription.Generic getType() {
+&nbsp;            return (TypeDescription.Generic)this.parameterType.accept(ForAttachment.of(this));
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDescription.InDefinedShape getDeclaringMethod() {
+<b class="fc">&nbsp;            return this.declaringMethod;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getIndex() {
+&nbsp;            return this.index;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public int getOffset() {</b>
+&nbsp;            return this.offset;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isNamed() {
+&nbsp;            return this.name != null;
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        public boolean hasModifiers() {
+&nbsp;            return this.modifiers != null;
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getName() {
+&nbsp;            return this.name == null ? super.getName() : this.name;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public int getModifiers() {</b>
+&nbsp;            return this.modifiers == null ? super.getModifiers() : this.modifiers;
+&nbsp;        }
+&nbsp;
+&nbsp;        public AnnotationList getDeclaredAnnotations() {
+&nbsp;            return new AnnotationList.Explicit(this.declaredAnnotations);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract static class ForLoadedParameter&lt;T extends AccessibleObject&gt; extends InDefinedShape.AbstractBase {
+&nbsp;        private static final Parameter PARAMETER;
+&nbsp;        protected final T executable;
+&nbsp;        protected final int index;
+&nbsp;        protected final ParameterAnnotationSource parameterAnnotationSource;
+&nbsp;        private static final boolean ACCESS_CONTROLLER;
+&nbsp;
+&nbsp;        protected ForLoadedParameter(T executable, int index, ParameterAnnotationSource parameterAnnotationSource) {
+&nbsp;            this.executable = executable;
+&nbsp;            this.index = index;
+&nbsp;            this.parameterAnnotationSource = parameterAnnotationSource;
+&nbsp;        }
+&nbsp;
+&nbsp;        @net.bytebuddy.build.AccessControllerPlugin.Enhance
+&nbsp;        private static &lt;T&gt; T doPrivileged(PrivilegedAction&lt;T&gt; action) {
+&nbsp;            return ACCESS_CONTROLLER ? AccessController.doPrivileged(action) : action.run();
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getName() {
+&nbsp;            return PARAMETER.getName(ForLoadedExecutable.EXECUTABLE.getParameters(this.executable)[this.index]);
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getIndex() {
+&nbsp;            return this.index;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isNamed() {
+&nbsp;            return PARAMETER.isNamePresent(ForLoadedExecutable.EXECUTABLE.getParameters(this.executable)[this.index]);
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getModifiers() {
+&nbsp;            return PARAMETER.getModifiers(ForLoadedExecutable.EXECUTABLE.getParameters(this.executable)[this.index]);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean hasModifiers() {
+&nbsp;            return this.isNamed() || this.getModifiers() != 0;
+&nbsp;        }
+&nbsp;
+&nbsp;        static {
+&nbsp;            try {
+&nbsp;                Class.forName(&quot;java.security.AccessController&quot;, false, (ClassLoader)null);
+&nbsp;                ACCESS_CONTROLLER = Boolean.parseBoolean(System.getProperty(&quot;net.bytebuddy.securitymanager&quot;, &quot;true&quot;));
+&nbsp;            } catch (ClassNotFoundException var0) {
+&nbsp;                ACCESS_CONTROLLER = false;
+&nbsp;            } catch (SecurityException var1) {
+&nbsp;                ACCESS_CONTROLLER = true;
+&nbsp;            }
+&nbsp;
+&nbsp;            PARAMETER = (Parameter)doPrivileged(JavaDispatcher.of(Parameter.class));
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static class OfLegacyVmConstructor extends InDefinedShape.AbstractBase {
+&nbsp;            private final Constructor&lt;?&gt; constructor;
+&nbsp;            private final int index;
+&nbsp;            private final Class&lt;?&gt;[] parameterType;
+&nbsp;            private final ParameterAnnotationSource parameterAnnotationSource;
+&nbsp;
+&nbsp;            protected OfLegacyVmConstructor(Constructor&lt;?&gt; constructor, int index, Class&lt;?&gt;[] parameterType, ParameterAnnotationSource parameterAnnotationSource) {
+&nbsp;                this.constructor = constructor;
+&nbsp;                this.index = index;
+&nbsp;                this.parameterType = parameterType;
+&nbsp;                this.parameterAnnotationSource = parameterAnnotationSource;
+&nbsp;            }
+&nbsp;
+&nbsp;            public TypeDescription.Generic getType() {
+&nbsp;                return (TypeDescription.Generic)(net.bytebuddy.description.type.TypeDescription.AbstractBase.RAW_TYPES ? ForLoadedType.of(this.parameterType[this.index]) : new TypeDescription.Generic.LazyProjection.OfConstructorParameter(this.constructor, this.index, this.parameterType));
+&nbsp;            }
+&nbsp;
+&nbsp;            public MethodDescription.InDefinedShape getDeclaringMethod() {
+&nbsp;                return new MethodDescription.ForLoadedConstructor(this.constructor);
+&nbsp;            }
+&nbsp;
+&nbsp;            public int getIndex() {
+&nbsp;                return this.index;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean isNamed() {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean hasModifiers() {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;
+&nbsp;            public AnnotationList getDeclaredAnnotations() {
+&nbsp;                MethodDescription.InDefinedShape declaringMethod = this.getDeclaringMethod();
+&nbsp;                Annotation[][] parameterAnnotation = this.parameterAnnotationSource.getParameterAnnotations();
+&nbsp;                return (AnnotationList)(parameterAnnotation.length != declaringMethod.getParameters().size() &amp;&amp; declaringMethod.getDeclaringType().isInnerClass() ? (AnnotationList)(this.index == 0 ? new AnnotationList.Empty() : new AnnotationList.ForLoadedAnnotations(parameterAnnotation[this.index - 1])) : new AnnotationList.ForLoadedAnnotations(parameterAnnotation[this.index]));
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static class OfLegacyVmMethod extends InDefinedShape.AbstractBase {
+&nbsp;            private final Method method;
+&nbsp;            private final int index;
+&nbsp;            private final Class&lt;?&gt;[] parameterType;
+&nbsp;            private final ParameterAnnotationSource parameterAnnotationSource;
+&nbsp;
+&nbsp;            protected OfLegacyVmMethod(Method method, int index, Class&lt;?&gt;[] parameterType, ParameterAnnotationSource parameterAnnotationSource) {
+&nbsp;                this.method = method;
+&nbsp;                this.index = index;
+&nbsp;                this.parameterType = parameterType;
+&nbsp;                this.parameterAnnotationSource = parameterAnnotationSource;
+&nbsp;            }
+&nbsp;
+&nbsp;            public TypeDescription.Generic getType() {
+&nbsp;                return (TypeDescription.Generic)(net.bytebuddy.description.type.TypeDescription.AbstractBase.RAW_TYPES ? ForLoadedType.of(this.parameterType[this.index]) : new TypeDescription.Generic.LazyProjection.OfMethodParameter(this.method, this.index, this.parameterType));
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+&nbsp;            public MethodDescription.InDefinedShape getDeclaringMethod() {
+&nbsp;                return new MethodDescription.ForLoadedMethod(this.method);
+&nbsp;            }
+&nbsp;
+&nbsp;            public int getIndex() {
+&nbsp;                return this.index;
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+&nbsp;            public boolean isNamed() {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean hasModifiers() {
+&nbsp;                return false;
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+&nbsp;            public AnnotationList getDeclaredAnnotations() {
+&nbsp;                return new AnnotationList.ForLoadedAnnotations(this.parameterAnnotationSource.getParameterAnnotations()[this.index]);
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static class OfConstructor extends ForLoadedParameter&lt;Constructor&lt;?&gt;&gt; {
+&nbsp;            protected OfConstructor(Constructor&lt;?&gt; constructor, int index, ParameterAnnotationSource parameterAnnotationSource) {
+&nbsp;                super(constructor, index, parameterAnnotationSource);
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            @SuppressFBWarnings(</b>
+&nbsp;                value = {&quot;BC_UNCONFIRMED_CAST&quot;},
+&nbsp;                justification = &quot;The implicit field type casting is not understood by Findbugs.&quot;
+&nbsp;            )
+&nbsp;            public MethodDescription.InDefinedShape getDeclaringMethod() {
+&nbsp;                return new MethodDescription.ForLoadedConstructor((Constructor)this.executable);
+&nbsp;            }
+&nbsp;
+&nbsp;            @SuppressFBWarnings(
+&nbsp;                value = {&quot;BC_UNCONFIRMED_CAST&quot;},
+&nbsp;                justification = &quot;The implicit field type casting is not understood by Findbugs.&quot;
+&nbsp;            )
+&nbsp;            public TypeDescription.Generic getType() {
+&nbsp;                return (TypeDescription.Generic)(net.bytebuddy.description.type.TypeDescription.AbstractBase.RAW_TYPES ? ForLoadedType.of(((Constructor)this.executable).getParameterTypes()[this.index]) : new TypeDescription.Generic.LazyProjection.OfConstructorParameter((Constructor)this.executable, this.index, ((Constructor)this.executable).getParameterTypes()));
+&nbsp;            }
+&nbsp;
+&nbsp;            @SuppressFBWarnings(
+&nbsp;                value = {&quot;BC_UNCONFIRMED_CAST&quot;},
+&nbsp;                justification = &quot;The implicit field type casting is not understood by Findbugs&quot;
+&nbsp;            )
+&nbsp;            public AnnotationList getDeclaredAnnotations() {
+&nbsp;                Annotation[][] annotation = this.parameterAnnotationSource.getParameterAnnotations();
+&nbsp;                MethodDescription.InDefinedShape declaringMethod = this.getDeclaringMethod();
+&nbsp;                return (AnnotationList)(annotation.length != declaringMethod.getParameters().size() &amp;&amp; declaringMethod.getDeclaringType().isInnerClass() ? (AnnotationList)(this.index == 0 ? new AnnotationList.Empty() : new AnnotationList.ForLoadedAnnotations(annotation[this.index - 1])) : new AnnotationList.ForLoadedAnnotations(annotation[this.index]));
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static class OfMethod extends ForLoadedParameter&lt;Method&gt; {
+&nbsp;            protected OfMethod(Method method, int index, ParameterAnnotationSource parameterAnnotationSource) {
+&nbsp;                super(method, index, parameterAnnotationSource);
+&nbsp;            }
+&nbsp;
+&nbsp;            @SuppressFBWarnings(
+&nbsp;                value = {&quot;BC_UNCONFIRMED_CAST&quot;},
+&nbsp;                justification = &quot;The implicit field type casting is not understood by Findbugs.&quot;
+&nbsp;            )
+&nbsp;            public MethodDescription.InDefinedShape getDeclaringMethod() {
+&nbsp;                return new MethodDescription.ForLoadedMethod((Method)this.executable);
+&nbsp;            }
+&nbsp;
+&nbsp;            @SuppressFBWarnings(
+&nbsp;                value = {&quot;BC_UNCONFIRMED_CAST&quot;},
+&nbsp;                justification = &quot;The implicit field type casting is not understood by Findbugs.&quot;
+&nbsp;            )
+&nbsp;            public TypeDescription.Generic getType() {
+&nbsp;                return (TypeDescription.Generic)(net.bytebuddy.description.type.TypeDescription.AbstractBase.RAW_TYPES ? ForLoadedType.of(((Method)this.executable).getParameterTypes()[this.index]) : new TypeDescription.Generic.LazyProjection.OfMethodParameter((Method)this.executable, this.index, ((Method)this.executable).getParameterTypes()));
+&nbsp;            }
+&nbsp;
+&nbsp;            @SuppressFBWarnings(
+&nbsp;                value = {&quot;BC_UNCONFIRMED_CAST&quot;},
+&nbsp;                justification = &quot;The implicit field type casting is not understood by Findbugs.&quot;
+&nbsp;            )
+&nbsp;            public AnnotationList getDeclaredAnnotations() {
+&nbsp;                return new AnnotationList.ForLoadedAnnotations(this.parameterAnnotationSource.getParameterAnnotations()[this.index]);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Proxied(&quot;java.lang.reflect.Parameter&quot;)
+&nbsp;        protected interface Parameter {
+&nbsp;            @Proxied(&quot;getModifiers&quot;)
+&nbsp;            int getModifiers(Object var1);
+&nbsp;
+&nbsp;            @Proxied(&quot;isNamePresent&quot;)
+&nbsp;            boolean isNamePresent(Object var1);
+&nbsp;
+&nbsp;            @Proxied(&quot;getName&quot;)
+&nbsp;            String getName(Object var1);
+&nbsp;        }
+&nbsp;
+&nbsp;        public interface ParameterAnnotationSource {
+&nbsp;            Annotation[][] getParameterAnnotations();
+&nbsp;
+&nbsp;            @net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance
+&nbsp;            public static class ForLoadedMethod implements ParameterAnnotationSource {
+&nbsp;                private final Method method;
+&nbsp;
+&nbsp;                public ForLoadedMethod(Method method) {
+&nbsp;                    this.method = method;
+&nbsp;                }
+&nbsp;
+&nbsp;                public Annotation[][] getParameterAnnotations() {
+&nbsp;                    return this.method.getParameterAnnotations();
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.method.equals(((ForLoadedMethod)var1).method);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return this.getClass().hashCode() * 31 + this.method.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            @net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance
+&nbsp;            public static class ForLoadedConstructor implements ParameterAnnotationSource {
+&nbsp;                private final Constructor&lt;?&gt; constructor;
+&nbsp;
+&nbsp;                public ForLoadedConstructor(Constructor&lt;?&gt; constructor) {
+&nbsp;                    this.constructor = constructor;
+&nbsp;                }
+&nbsp;
+&nbsp;                public Annotation[][] getParameterAnnotations() {
+&nbsp;                    return this.constructor.getParameterAnnotations();
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.constructor.equals(((ForLoadedConstructor)var1).constructor);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return this.getClass().hashCode() * 31 + this.constructor.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract static class AbstractBase extends ModifierReviewable.AbstractBase implements ParameterDescription {
+&nbsp;        public AbstractBase() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getName() {
+&nbsp;            return &quot;arg&quot;.concat(String.valueOf(this.getIndex()));
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getInternalName() {
+&nbsp;            return this.getName();
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getActualName() {
+&nbsp;            return this.isNamed() ? this.getName() : &quot;&quot;;
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getModifiers() {
+&nbsp;            return 0;
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getOffset() {
+&nbsp;            net.bytebuddy.description.type.TypeList parameterType = this.getDeclaringMethod().getParameters().asTypeList().asErasures();
+&nbsp;            int offset = this.getDeclaringMethod().isStatic() ? StackSize.ZERO.getSize() : StackSize.SINGLE.getSize();
+&nbsp;
+&nbsp;            for(int i = 0; i &lt; this.getIndex(); ++i) {
+&nbsp;                offset += ((TypeDescription)parameterType.get(i)).getStackSize().getSize();
+&nbsp;            }
+&nbsp;
+&nbsp;            return offset;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Token asToken(ElementMatcher&lt;? super TypeDescription&gt; matcher) {
+&nbsp;            return new Token((TypeDescription.Generic)this.getType().accept(new TypeDescription.Generic.Visitor.Substitutor.ForDetachment(matcher)), this.getDeclaredAnnotations(), this.isNamed() ? this.getName() : ParameterDescription.Token.NO_NAME, this.hasModifiers() ? this.getModifiers() : ParameterDescription.Token.NO_MODIFIERS);
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance(&quot;hashCode&quot;)
+&nbsp;        public int hashCode() {
+&nbsp;            int var1 = this.hashCode;
+&nbsp;            int var2 = var1 != 0 ? 0 : this.getDeclaringMethod().hashCode() ^ this.getIndex();
+&nbsp;            if (var2 == 0) {
+&nbsp;                var2 = this.hashCode;
+&nbsp;            } else {
+&nbsp;                this.hashCode = var2;
+&nbsp;            }
+&nbsp;
+&nbsp;            return var2;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(@CheckForNull Object other) {
+&nbsp;            if (this == other) {
+&nbsp;                return true;
+&nbsp;            } else if (!(other instanceof ParameterDescription)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                ParameterDescription parameterDescription = (ParameterDescription)other;
+&nbsp;                return this.getDeclaringMethod().equals(parameterDescription.getDeclaringMethod()) &amp;&amp; this.getIndex() == parameterDescription.getIndex();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public String toString() {
+&nbsp;            StringBuilder stringBuilder = new StringBuilder(Modifier.toString(this.getModifiers()));
+&nbsp;            if (this.getModifiers() != 0) {
+&nbsp;                stringBuilder.append(&#39; &#39;);
+&nbsp;            }
+&nbsp;
+&nbsp;            stringBuilder.append(this.isVarArgs() ? this.getType().asErasure().getName().replaceFirst(&quot;\\[]$&quot;, &quot;...&quot;) : this.getType().asErasure().getName());
+&nbsp;            return stringBuilder.append(&#39; &#39;).append(this.getName()).toString();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface InDefinedShape extends ParameterDescription {
+&nbsp;        MethodDescription.InDefinedShape getDeclaringMethod();
+&nbsp;
+&nbsp;        public abstract static class AbstractBase extends AbstractBase implements InDefinedShape {
+&nbsp;            public AbstractBase() {
+&nbsp;            }
+&nbsp;
+&nbsp;            public InDefinedShape asDefined() {
+&nbsp;                return this;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface InGenericShape extends ParameterDescription {
+&nbsp;        MethodDescription.InGenericShape getDeclaringMethod();
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

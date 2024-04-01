@@ -1,0 +1,197 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > PluginInitializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.configuration.plugins</a>
+</div>
+
+<h1>Coverage Summary for Class: PluginInitializer (org.mockito.internal.configuration.plugins)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PluginInitializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (21/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.configuration.plugins;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Enumeration;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;import org.mockito.internal.util.collections.Iterables;
+&nbsp;import org.mockito.plugins.PluginSwitch;
+&nbsp;
+&nbsp;class PluginInitializer {
+&nbsp;    private final PluginSwitch pluginSwitch;
+&nbsp;    private final Set&lt;String&gt; alias;
+&nbsp;    private final DefaultMockitoPlugins plugins;
+&nbsp;
+<b class="fc">&nbsp;    PluginInitializer(PluginSwitch pluginSwitch, Set&lt;String&gt; alias, DefaultMockitoPlugins plugins) {</b>
+<b class="fc">&nbsp;        this.pluginSwitch = pluginSwitch;</b>
+<b class="fc">&nbsp;        this.alias = alias;</b>
+<b class="fc">&nbsp;        this.plugins = plugins;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T loadImpl(Class&lt;T&gt; service) {
+&nbsp;        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+&nbsp;        if (loader == null) {
+&nbsp;            loader = ClassLoader.getSystemClassLoader();
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        Enumeration resources;</b>
+&nbsp;        try {
+&nbsp;            resources = loader.getResources(&quot;mockito-extensions/&quot; + service.getName());
+&nbsp;        } catch (IOException var8) {
+&nbsp;            throw new IllegalStateException(&quot;Failed to load &quot; + service, var8);
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        try {
+<b class="fc">&nbsp;            String classOrAlias = (new PluginFinder(this.pluginSwitch)).findPluginClass(Iterables.toIterable(resources));</b>
+&nbsp;            if (classOrAlias != null) {
+&nbsp;                if (this.alias.contains(classOrAlias)) {
+<b class="fc">&nbsp;                    classOrAlias = this.plugins.getDefaultPluginClass(classOrAlias);</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;                Class&lt;?&gt; pluginClass = loader.loadClass(classOrAlias);
+&nbsp;                Object plugin = pluginClass.getDeclaredConstructor().newInstance();
+&nbsp;                return service.cast(plugin);
+&nbsp;            } else {
+&nbsp;                return null;
+&nbsp;            }
+&nbsp;        } catch (Exception var7) {
+<b class="fc">&nbsp;            throw new IllegalStateException(&quot;Failed to load &quot; + service + &quot; implementation declared in &quot; + resources, var7);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; List&lt;T&gt; loadImpls(Class&lt;T&gt; service) {
+&nbsp;        ClassLoader loader = Thread.currentThread().getContextClassLoader();
+&nbsp;        if (loader == null) {
+&nbsp;            loader = ClassLoader.getSystemClassLoader();
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        Enumeration resources;
+&nbsp;        try {
+&nbsp;            resources = loader.getResources(&quot;mockito-extensions/&quot; + service.getName());
+&nbsp;        } catch (IOException var11) {
+<b class="fc">&nbsp;            throw new IllegalStateException(&quot;Failed to load &quot; + service, var11);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        try {</b>
+&nbsp;            List&lt;String&gt; classesOrAliases = (new PluginFinder(this.pluginSwitch)).findPluginClasses(Iterables.toIterable(resources));
+&nbsp;            List&lt;T&gt; impls = new ArrayList();
+<b class="fc">&nbsp;            Iterator var6 = classesOrAliases.iterator();</b>
+&nbsp;
+<b class="fc">&nbsp;            while(var6.hasNext()) {</b>
+<b class="fc">&nbsp;                String classOrAlias = (String)var6.next();</b>
+<b class="fc">&nbsp;                if (this.alias.contains(classOrAlias)) {</b>
+&nbsp;                    classOrAlias = this.plugins.getDefaultPluginClass(classOrAlias);
+&nbsp;                }
+&nbsp;
+&nbsp;                Class&lt;?&gt; pluginClass = loader.loadClass(classOrAlias);
+&nbsp;                Object plugin = pluginClass.getDeclaredConstructor().newInstance();
+&nbsp;                impls.add(service.cast(plugin));
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+&nbsp;            return impls;
+&nbsp;        } catch (Exception var10) {
+&nbsp;            throw new IllegalStateException(&quot;Failed to load &quot; + service + &quot; implementation declared in &quot; + resources, var10);
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

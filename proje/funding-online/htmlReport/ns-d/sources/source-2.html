@@ -1,0 +1,257 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > StatusBase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ch.qos.logback.core.status</a>
+</div>
+
+<h1>Coverage Summary for Class: StatusBase (ch.qos.logback.core.status)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StatusBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package ch.qos.logback.core.status;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public abstract class StatusBase implements Status {
+&nbsp;    private static final List&lt;Status&gt; EMPTY_LIST = new ArrayList(0);
+&nbsp;    int level;
+&nbsp;    final String message;
+&nbsp;    final Object origin;
+&nbsp;    List&lt;Status&gt; childrenList;
+&nbsp;    Throwable throwable;
+&nbsp;    long date;
+&nbsp;
+<b class="fc">&nbsp;    StatusBase(int level, String msg, Object origin) {</b>
+&nbsp;        this(level, msg, origin, (Throwable)null);
+&nbsp;    }
+&nbsp;
+&nbsp;    StatusBase(int level, String msg, Object origin, Throwable t) {
+&nbsp;        this.level = level;
+&nbsp;        this.message = msg;
+&nbsp;        this.origin = origin;
+&nbsp;        this.throwable = t;
+&nbsp;        this.date = System.currentTimeMillis();
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public synchronized void add(Status child) {
+<b class="fc">&nbsp;        if (child == null) {</b>
+<b class="fc">&nbsp;            throw new NullPointerException(&quot;Null values are not valid Status.&quot;);</b>
+<b class="fc">&nbsp;        } else {</b>
+<b class="fc">&nbsp;            if (this.childrenList == null) {</b>
+<b class="fc">&nbsp;                this.childrenList = new ArrayList();</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            this.childrenList.add(child);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public synchronized boolean hasChildren() {
+&nbsp;        return this.childrenList != null &amp;&amp; this.childrenList.size() &gt; 0;
+&nbsp;    }
+&nbsp;
+&nbsp;    public synchronized Iterator&lt;Status&gt; iterator() {
+&nbsp;        return this.childrenList != null ? this.childrenList.iterator() : EMPTY_LIST.iterator();
+&nbsp;    }
+&nbsp;
+&nbsp;    public synchronized boolean remove(Status statusToRemove) {
+&nbsp;        return this.childrenList == null ? false : this.childrenList.remove(statusToRemove);
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getLevel() {
+&nbsp;        return this.level;
+&nbsp;    }
+&nbsp;
+&nbsp;    public synchronized int getEffectiveLevel() {
+&nbsp;        int result = this.level;
+&nbsp;        Iterator&lt;Status&gt; it = this.iterator();
+&nbsp;
+&nbsp;        while(it.hasNext()) {
+&nbsp;            Status s = (Status)it.next();
+&nbsp;            int effLevel = s.getEffectiveLevel();
+&nbsp;            if (effLevel &gt; result) {
+&nbsp;                result = effLevel;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return result;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getMessage() {
+&nbsp;        return this.message;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object getOrigin() {
+&nbsp;        return this.origin;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Throwable getThrowable() {
+&nbsp;        return this.throwable;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Long getDate() {
+&nbsp;        return this.date;
+&nbsp;    }
+&nbsp;
+&nbsp;    public String toString() {
+&nbsp;        StringBuilder buf = new StringBuilder();
+&nbsp;        switch (this.getEffectiveLevel()) {
+&nbsp;            case 0:
+&nbsp;                buf.append(&quot;INFO&quot;);
+&nbsp;                break;
+&nbsp;            case 1:
+&nbsp;                buf.append(&quot;WARN&quot;);
+&nbsp;                break;
+&nbsp;            case 2:
+&nbsp;                buf.append(&quot;ERROR&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.origin != null) {
+&nbsp;            buf.append(&quot; in &quot;);
+&nbsp;            buf.append(this.origin);
+&nbsp;            buf.append(&quot; -&quot;);
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        buf.append(&quot; &quot;);
+&nbsp;        buf.append(this.message);
+&nbsp;        if (this.throwable != null) {
+&nbsp;            buf.append(&quot; &quot;);
+&nbsp;            buf.append(this.throwable);
+&nbsp;        }
+&nbsp;
+&nbsp;        return buf.toString();
+&nbsp;    }
+&nbsp;
+&nbsp;    public int hashCode() {
+&nbsp;        int prime = true;
+&nbsp;        int result = 1;
+&nbsp;        result = 31 * result + this.level;
+&nbsp;        result = 31 * result + (this.message == null ? 0 : this.message.hashCode());
+&nbsp;        return result;
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean equals(Object obj) {
+&nbsp;        if (this == obj) {
+&nbsp;            return true;
+&nbsp;        } else if (obj == null) {
+&nbsp;            return false;
+&nbsp;        } else if (this.getClass() != obj.getClass()) {
+&nbsp;            return false;
+&nbsp;        } else {
+&nbsp;            StatusBase other = (StatusBase)obj;
+&nbsp;            if (this.level != other.level) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                if (this.message == null) {
+&nbsp;                    if (other.message != null) {
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;                } else if (!this.message.equals(other.message)) {
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;
+&nbsp;                return true;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

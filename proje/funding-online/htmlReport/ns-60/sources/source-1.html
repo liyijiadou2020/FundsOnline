@@ -1,0 +1,211 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > BaseStubbing</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.stubbing</a>
+</div>
+
+<h1>Coverage Summary for Class: BaseStubbing (org.mockito.internal.stubbing)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BaseStubbing</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.stubbing;
+&nbsp;
+&nbsp;import org.mockito.internal.exceptions.Reporter;
+&nbsp;import org.mockito.internal.progress.ThreadSafeMockingProgress;
+&nbsp;import org.mockito.internal.stubbing.answers.CallsRealMethods;
+&nbsp;import org.mockito.internal.stubbing.answers.Returns;
+&nbsp;import org.mockito.internal.stubbing.answers.ThrowsException;
+&nbsp;import org.mockito.internal.stubbing.answers.ThrowsExceptionForClassType;
+&nbsp;import org.mockito.stubbing.Answer;
+&nbsp;import org.mockito.stubbing.OngoingStubbing;
+&nbsp;
+&nbsp;public abstract class BaseStubbing&lt;T&gt; implements OngoingStubbing&lt;T&gt; {
+&nbsp;    private final Object strongMockRef;
+&nbsp;
+&nbsp;    BaseStubbing(Object mock) {
+&nbsp;        this.strongMockRef = mock;
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public OngoingStubbing&lt;T&gt; then(Answer&lt;?&gt; answer) {
+&nbsp;        return this.thenAnswer(answer);
+&nbsp;    }
+&nbsp;
+&nbsp;    public OngoingStubbing&lt;T&gt; thenReturn(T value) {
+&nbsp;        return this.thenAnswer(new Returns(value));
+&nbsp;    }
+&nbsp;
+&nbsp;    public OngoingStubbing&lt;T&gt; thenReturn(T value, T... values) {
+<b class="fc">&nbsp;        OngoingStubbing&lt;T&gt; stubbing = this.thenReturn(value);</b>
+&nbsp;        if (values == null) {
+&nbsp;            return stubbing.thenReturn((Object)null);
+&nbsp;        } else {
+&nbsp;            Object[] var4 = values;
+&nbsp;            int var5 = values.length;
+&nbsp;
+&nbsp;            for(int var6 = 0; var6 &lt; var5; ++var6) {
+&nbsp;                T v = var4[var6];
+&nbsp;                stubbing = stubbing.thenReturn(v);
+&nbsp;            }
+&nbsp;
+&nbsp;            return stubbing;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private OngoingStubbing&lt;T&gt; thenThrow(Throwable throwable) {
+&nbsp;        return this.thenAnswer(new ThrowsException(throwable));
+&nbsp;    }
+&nbsp;
+&nbsp;    public OngoingStubbing&lt;T&gt; thenThrow(Throwable... throwables) {
+&nbsp;        if (throwables == null) {
+&nbsp;            return this.thenThrow((Throwable)null);
+&nbsp;        } else {
+&nbsp;            OngoingStubbing&lt;T&gt; stubbing = null;
+&nbsp;            Throwable[] var3 = throwables;
+&nbsp;            int var4 = throwables.length;
+&nbsp;
+&nbsp;            for(int var5 = 0; var5 &lt; var4; ++var5) {
+&nbsp;                Throwable t = var3[var5];
+&nbsp;                if (stubbing == null) {
+&nbsp;                    stubbing = this.thenThrow(t);
+&nbsp;                } else {
+&nbsp;                    stubbing = stubbing.thenThrow(new Throwable[]{t});
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            return stubbing;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public OngoingStubbing&lt;T&gt; thenThrow(Class&lt;? extends Throwable&gt; throwableType) {
+&nbsp;        if (throwableType == null) {
+&nbsp;            ThreadSafeMockingProgress.mockingProgress().reset();
+&nbsp;            throw Reporter.notAnException();
+&nbsp;        } else {
+&nbsp;            return this.thenAnswer(new ThrowsExceptionForClassType(throwableType));
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public OngoingStubbing&lt;T&gt; thenThrow(Class&lt;? extends Throwable&gt; toBeThrown, Class&lt;? extends Throwable&gt;... nextToBeThrown) {
+&nbsp;        if (nextToBeThrown == null) {
+&nbsp;            return this.thenThrow((Class)null);
+&nbsp;        } else {
+&nbsp;            OngoingStubbing&lt;T&gt; stubbing = this.thenThrow(toBeThrown);
+&nbsp;            Class[] var4 = nextToBeThrown;
+&nbsp;            int var5 = nextToBeThrown.length;
+&nbsp;
+&nbsp;            for(int var6 = 0; var6 &lt; var5; ++var6) {
+&nbsp;                Class&lt;? extends Throwable&gt; t = var4[var6];
+&nbsp;                stubbing = stubbing.thenThrow(t);
+&nbsp;            }
+&nbsp;
+&nbsp;            return stubbing;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public OngoingStubbing&lt;T&gt; thenCallRealMethod() {
+&nbsp;        return this.thenAnswer(new CallsRealMethods());
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;M&gt; M getMock() {
+&nbsp;        return this.strongMockRef;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

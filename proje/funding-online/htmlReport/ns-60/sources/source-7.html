@@ -1,0 +1,230 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > StubberImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.stubbing</a>
+</div>
+
+<h1>Coverage Summary for Class: StubberImpl (org.mockito.internal.stubbing)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StubberImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.stubbing;
+&nbsp;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;import org.mockito.internal.exceptions.Reporter;
+&nbsp;import org.mockito.internal.progress.ThreadSafeMockingProgress;
+&nbsp;import org.mockito.internal.stubbing.answers.CallsRealMethods;
+&nbsp;import org.mockito.internal.stubbing.answers.DoesNothing;
+&nbsp;import org.mockito.internal.stubbing.answers.Returns;
+&nbsp;import org.mockito.internal.stubbing.answers.ThrowsException;
+&nbsp;import org.mockito.internal.stubbing.answers.ThrowsExceptionForClassType;
+&nbsp;import org.mockito.internal.util.MockUtil;
+&nbsp;import org.mockito.quality.Strictness;
+&nbsp;import org.mockito.stubbing.Answer;
+&nbsp;import org.mockito.stubbing.Stubber;
+&nbsp;
+&nbsp;public class StubberImpl implements Stubber {
+&nbsp;    private final Strictness strictness;
+&nbsp;    private final List&lt;Answer&lt;?&gt;&gt; answers = new LinkedList();
+&nbsp;
+&nbsp;    public StubberImpl(Strictness strictness) {
+&nbsp;        this.strictness = strictness;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public &lt;T&gt; T when(T mock) {</b>
+&nbsp;        if (mock == null) {
+&nbsp;            ThreadSafeMockingProgress.mockingProgress().reset();
+<b class="fc">&nbsp;            throw Reporter.nullPassedToWhenMethod();</b>
+&nbsp;        } else if (!MockUtil.isMock(mock)) {
+&nbsp;            ThreadSafeMockingProgress.mockingProgress().reset();
+&nbsp;            throw Reporter.notAMockPassedToWhenMethod();
+<b class="fc">&nbsp;        } else {</b>
+&nbsp;            MockUtil.getInvocationContainer(mock).setAnswersForStubbing(this.answers, this.strictness);
+&nbsp;            return mock;
+&nbsp;        }
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public Stubber doReturn(Object toBeReturned) {
+&nbsp;        return this.doReturnValues(toBeReturned);
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public Stubber doReturn(Object toBeReturned, Object... nextToBeReturned) {</b>
+&nbsp;        return this.doReturnValues(toBeReturned).doReturnValues(nextToBeReturned);
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private StubberImpl doReturnValues(Object... toBeReturned) {
+&nbsp;        if (toBeReturned == null) {
+&nbsp;            this.answers.add(new Returns((Object)null));
+&nbsp;            return this;
+&nbsp;        } else {
+&nbsp;            Object[] var2 = toBeReturned;
+&nbsp;            int var3 = toBeReturned.length;
+&nbsp;
+&nbsp;            for(int var4 = 0; var4 &lt; var3; ++var4) {
+&nbsp;                Object r = var2[var4];
+&nbsp;                this.answers.add(new Returns(r));
+&nbsp;            }
+&nbsp;
+&nbsp;            return this;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Stubber doThrow(Throwable... toBeThrown) {
+&nbsp;        if (toBeThrown == null) {
+&nbsp;            this.answers.add(new ThrowsException((Throwable)null));
+&nbsp;            return this;
+&nbsp;        } else {
+&nbsp;            Throwable[] var2 = toBeThrown;
+&nbsp;            int var3 = toBeThrown.length;
+<b class="fc">&nbsp;</b>
+&nbsp;            for(int var4 = 0; var4 &lt; var3; ++var4) {
+&nbsp;                Throwable throwable = var2[var4];
+&nbsp;                this.answers.add(new ThrowsException(throwable));
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;            return this;
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Stubber doThrow(Class&lt;? extends Throwable&gt; toBeThrown) {
+&nbsp;        if (toBeThrown == null) {
+&nbsp;            ThreadSafeMockingProgress.mockingProgress().reset();
+&nbsp;            throw Reporter.notAnException();
+&nbsp;        } else {
+&nbsp;            return this.doAnswer(new ThrowsExceptionForClassType(toBeThrown));
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Stubber doThrow(Class&lt;? extends Throwable&gt; toBeThrown, Class&lt;? extends Throwable&gt;... nextToBeThrown) {
+&nbsp;        Stubber stubber = this.doThrow(toBeThrown);
+&nbsp;        if (nextToBeThrown == null) {
+&nbsp;            ThreadSafeMockingProgress.mockingProgress().reset();
+&nbsp;            throw Reporter.notAnException();
+&nbsp;        } else {
+&nbsp;            Class[] var4 = nextToBeThrown;
+&nbsp;            int var5 = nextToBeThrown.length;
+&nbsp;
+&nbsp;            for(int var6 = 0; var6 &lt; var5; ++var6) {
+&nbsp;                Class&lt;? extends Throwable&gt; next = var4[var6];
+&nbsp;                stubber = stubber.doThrow(next);
+&nbsp;            }
+&nbsp;
+&nbsp;            return stubber;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public Stubber doNothing() {</b>
+<b class="fc">&nbsp;        this.answers.add(DoesNothing.doesNothing());</b>
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Stubber doAnswer(Answer answer) {
+&nbsp;        this.answers.add(answer);
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Stubber doCallRealMethod() {
+&nbsp;        this.answers.add(new CallsRealMethods());
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

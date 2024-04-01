@@ -1,0 +1,347 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ByteVector</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.jar.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: ByteVector (net.bytebuddy.jar.asm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ByteVector</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (93/93)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.jar.asm;
+&nbsp;
+&nbsp;public class ByteVector {
+&nbsp;    byte[] data;
+&nbsp;    int length;
+&nbsp;
+&nbsp;    public ByteVector() {
+&nbsp;        this.data = new byte[64];
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteVector(int initialCapacity) {
+&nbsp;        this.data = new byte[initialCapacity];
+&nbsp;    }
+&nbsp;
+&nbsp;    ByteVector(byte[] data) {
+&nbsp;        this.data = data;
+&nbsp;        this.length = data.length;
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteVector putByte(int byteValue) {
+&nbsp;        int currentLength = this.length;
+&nbsp;        if (currentLength + 1 &gt; this.data.length) {
+&nbsp;            this.enlarge(1);
+&nbsp;        }
+&nbsp;
+&nbsp;        this.data[currentLength++] = (byte)byteValue;
+&nbsp;        this.length = currentLength;
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    final ByteVector put11(int byteValue1, int byteValue2) {
+&nbsp;        int currentLength = this.length;
+&nbsp;        if (currentLength + 2 &gt; this.data.length) {
+&nbsp;            this.enlarge(2);
+&nbsp;        }
+&nbsp;
+&nbsp;        byte[] currentData = this.data;
+&nbsp;        currentData[currentLength++] = (byte)byteValue1;
+<b class="fc">&nbsp;        currentData[currentLength++] = (byte)byteValue2;</b>
+<b class="fc">&nbsp;        this.length = currentLength;</b>
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteVector putShort(int shortValue) {
+&nbsp;        int currentLength = this.length;
+&nbsp;        if (currentLength + 2 &gt; this.data.length) {
+&nbsp;            this.enlarge(2);
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        byte[] currentData = this.data;
+&nbsp;        currentData[currentLength++] = (byte)(shortValue &gt;&gt;&gt; 8);
+&nbsp;        currentData[currentLength++] = (byte)shortValue;
+&nbsp;        this.length = currentLength;
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    final ByteVector put12(int byteValue, int shortValue) {
+&nbsp;        int currentLength = this.length;
+&nbsp;        if (currentLength + 3 &gt; this.data.length) {
+&nbsp;            this.enlarge(3);
+&nbsp;        }
+&nbsp;
+&nbsp;        byte[] currentData = this.data;
+&nbsp;        currentData[currentLength++] = (byte)byteValue;
+&nbsp;        currentData[currentLength++] = (byte)(shortValue &gt;&gt;&gt; 8);
+&nbsp;        currentData[currentLength++] = (byte)shortValue;
+&nbsp;        this.length = currentLength;
+&nbsp;        return this;
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    final ByteVector put112(int byteValue1, int byteValue2, int shortValue) {</b>
+&nbsp;        int currentLength = this.length;
+<b class="fc">&nbsp;        if (currentLength + 4 &gt; this.data.length) {</b>
+<b class="fc">&nbsp;            this.enlarge(4);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        byte[] currentData = this.data;
+&nbsp;        currentData[currentLength++] = (byte)byteValue1;
+&nbsp;        currentData[currentLength++] = (byte)byteValue2;
+&nbsp;        currentData[currentLength++] = (byte)(shortValue &gt;&gt;&gt; 8);
+&nbsp;        currentData[currentLength++] = (byte)shortValue;
+&nbsp;        this.length = currentLength;
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public ByteVector putInt(int intValue) {</b>
+<b class="fc">&nbsp;        int currentLength = this.length;</b>
+<b class="fc">&nbsp;        if (currentLength + 4 &gt; this.data.length) {</b>
+&nbsp;            this.enlarge(4);
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        byte[] currentData = this.data;</b>
+<b class="fc">&nbsp;        currentData[currentLength++] = (byte)(intValue &gt;&gt;&gt; 24);</b>
+<b class="fc">&nbsp;        currentData[currentLength++] = (byte)(intValue &gt;&gt;&gt; 16);</b>
+&nbsp;        currentData[currentLength++] = (byte)(intValue &gt;&gt;&gt; 8);
+&nbsp;        currentData[currentLength++] = (byte)intValue;
+&nbsp;        this.length = currentLength;
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    final ByteVector put122(int byteValue, int shortValue1, int shortValue2) {
+&nbsp;        int currentLength = this.length;
+&nbsp;        if (currentLength + 5 &gt; this.data.length) {
+<b class="fc">&nbsp;            this.enlarge(5);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        byte[] currentData = this.data;
+<b class="fc">&nbsp;        currentData[currentLength++] = (byte)byteValue;</b>
+<b class="fc">&nbsp;        currentData[currentLength++] = (byte)(shortValue1 &gt;&gt;&gt; 8);</b>
+<b class="fc">&nbsp;        currentData[currentLength++] = (byte)shortValue1;</b>
+<b class="fc">&nbsp;        currentData[currentLength++] = (byte)(shortValue2 &gt;&gt;&gt; 8);</b>
+<b class="fc">&nbsp;        currentData[currentLength++] = (byte)shortValue2;</b>
+&nbsp;        this.length = currentLength;
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteVector putLong(long longValue) {
+&nbsp;        int currentLength = this.length;
+&nbsp;        if (currentLength + 8 &gt; this.data.length) {
+&nbsp;            this.enlarge(8);
+&nbsp;        }
+&nbsp;
+&nbsp;        byte[] currentData = this.data;
+<b class="fc">&nbsp;        int intValue = (int)(longValue &gt;&gt;&gt; 32);</b>
+<b class="fc">&nbsp;        currentData[currentLength++] = (byte)(intValue &gt;&gt;&gt; 24);</b>
+<b class="fc">&nbsp;        currentData[currentLength++] = (byte)(intValue &gt;&gt;&gt; 16);</b>
+&nbsp;        currentData[currentLength++] = (byte)(intValue &gt;&gt;&gt; 8);
+<b class="fc">&nbsp;        currentData[currentLength++] = (byte)intValue;</b>
+<b class="fc">&nbsp;        intValue = (int)longValue;</b>
+<b class="fc">&nbsp;        currentData[currentLength++] = (byte)(intValue &gt;&gt;&gt; 24);</b>
+<b class="fc">&nbsp;        currentData[currentLength++] = (byte)(intValue &gt;&gt;&gt; 16);</b>
+<b class="fc">&nbsp;        currentData[currentLength++] = (byte)(intValue &gt;&gt;&gt; 8);</b>
+<b class="fc">&nbsp;        currentData[currentLength++] = (byte)intValue;</b>
+&nbsp;        this.length = currentLength;
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteVector putUTF8(String stringValue) {
+&nbsp;        int charLength = stringValue.length();
+&nbsp;        if (charLength &gt; 65535) {
+&nbsp;            throw new IllegalArgumentException(&quot;UTF8 string too large&quot;);
+&nbsp;        } else {
+&nbsp;            int currentLength = this.length;
+&nbsp;            if (currentLength + 2 + charLength &gt; this.data.length) {
+&nbsp;                this.enlarge(2 + charLength);
+&nbsp;            }
+&nbsp;
+&nbsp;            byte[] currentData = this.data;
+&nbsp;            currentData[currentLength++] = (byte)(charLength &gt;&gt;&gt; 8);
+&nbsp;            currentData[currentLength++] = (byte)charLength;
+&nbsp;
+&nbsp;            for(int i = 0; i &lt; charLength; ++i) {
+&nbsp;                char charValue = stringValue.charAt(i);
+&nbsp;                if (charValue &lt; 1 || charValue &gt; 127) {
+&nbsp;                    this.length = currentLength;
+&nbsp;                    return this.encodeUtf8(stringValue, i, 65535);
+&nbsp;                }
+&nbsp;
+&nbsp;                currentData[currentLength++] = (byte)charValue;
+&nbsp;            }
+&nbsp;
+&nbsp;            this.length = currentLength;
+&nbsp;            return this;
+&nbsp;        }
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    final ByteVector encodeUtf8(String stringValue, int offset, int maxByteLength) {</b>
+&nbsp;        int charLength = stringValue.length();
+&nbsp;        int byteLength = offset;
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        int byteLengthOffset;</b>
+<b class="fc">&nbsp;        int currentLength;</b>
+<b class="fc">&nbsp;        for(byteLengthOffset = offset; byteLengthOffset &lt; charLength; ++byteLengthOffset) {</b>
+<b class="fc">&nbsp;            currentLength = stringValue.charAt(byteLengthOffset);</b>
+<b class="fc">&nbsp;            if (currentLength &gt;= 1 &amp;&amp; currentLength &lt;= 127) {</b>
+<b class="fc">&nbsp;                ++byteLength;</b>
+&nbsp;            } else if (currentLength &lt;= 2047) {
+&nbsp;                byteLength += 2;
+&nbsp;            } else {
+&nbsp;                byteLength += 3;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        if (byteLength &gt; maxByteLength) {
+&nbsp;            throw new IllegalArgumentException(&quot;UTF8 string too large&quot;);
+&nbsp;        } else {
+&nbsp;            byteLengthOffset = this.length - offset - 2;
+&nbsp;            if (byteLengthOffset &gt;= 0) {
+<b class="fc">&nbsp;                this.data[byteLengthOffset] = (byte)(byteLength &gt;&gt;&gt; 8);</b>
+<b class="fc">&nbsp;                this.data[byteLengthOffset + 1] = (byte)byteLength;</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+<b class="fc">&nbsp;            if (this.length + byteLength - offset &gt; this.data.length) {</b>
+<b class="fc">&nbsp;                this.enlarge(byteLength - offset);</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            currentLength = this.length;</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            for(int i = offset; i &lt; charLength; ++i) {</b>
+<b class="fc">&nbsp;                char charValue = stringValue.charAt(i);</b>
+&nbsp;                if (charValue &gt;= 1 &amp;&amp; charValue &lt;= 127) {
+&nbsp;                    this.data[currentLength++] = (byte)charValue;
+&nbsp;                } else if (charValue &lt;= 2047) {
+&nbsp;                    this.data[currentLength++] = (byte)(192 | charValue &gt;&gt; 6 &amp; 31);
+&nbsp;                    this.data[currentLength++] = (byte)(128 | charValue &amp; 63);
+&nbsp;                } else {
+&nbsp;                    this.data[currentLength++] = (byte)(224 | charValue &gt;&gt; 12 &amp; 15);
+&nbsp;                    this.data[currentLength++] = (byte)(128 | charValue &gt;&gt; 6 &amp; 63);
+&nbsp;                    this.data[currentLength++] = (byte)(128 | charValue &amp; 63);
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            this.length = currentLength;
+<b class="fc">&nbsp;            return this;</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public ByteVector putByteArray(byte[] byteArrayValue, int byteOffset, int byteLength) {</b>
+<b class="fc">&nbsp;        if (this.length + byteLength &gt; this.data.length) {</b>
+<b class="fc">&nbsp;            this.enlarge(byteLength);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        if (byteArrayValue != null) {</b>
+<b class="fc">&nbsp;            System.arraycopy(byteArrayValue, byteOffset, this.data, this.length, byteLength);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        this.length += byteLength;
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void enlarge(int size) {
+&nbsp;        int doubleCapacity = 2 * this.data.length;
+&nbsp;        int minimalCapacity = this.length + size;
+&nbsp;        byte[] newData = new byte[doubleCapacity &gt; minimalCapacity ? doubleCapacity : minimalCapacity];
+&nbsp;        System.arraycopy(this.data, 0, newData, 0, this.length);
+&nbsp;        this.data = newData;
+&nbsp;    }
+<b class="fc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

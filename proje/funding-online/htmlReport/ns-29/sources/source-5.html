@@ -1,0 +1,545 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > MethodAttributeAppender</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.attribute</a>
+</div>
+
+<h1>Coverage Summary for Class: MethodAttributeAppender (net.bytebuddy.implementation.attribute)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">MethodAttributeAppender$Compound</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodAttributeAppender$Factory$Compound</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodAttributeAppender$ForInstrumentedMethod</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (23/23)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodAttributeAppender$ForInstrumentedMethod$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodAttributeAppender$ForInstrumentedMethod$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodAttributeAppender$NoOp</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (55/55)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.attribute;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationDescription;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationList;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.method.ParameterDescription;
+&nbsp;import net.bytebuddy.description.method.ParameterList;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.implementation.attribute.AnnotationAppender.ForTypeAnnotations;
+&nbsp;import net.bytebuddy.jar.asm.MethodVisitor;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;
+&nbsp;public interface MethodAttributeAppender {
+&nbsp;    void apply(MethodVisitor var1, MethodDescription var2, AnnotationValueFilter var3);
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class Compound implements MethodAttributeAppender {
+&nbsp;        private final List&lt;MethodAttributeAppender&gt; methodAttributeAppenders;
+&nbsp;
+&nbsp;        public Compound(MethodAttributeAppender... methodAttributeAppender) {
+&nbsp;            this(Arrays.asList(methodAttributeAppender));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Compound(List&lt;? extends MethodAttributeAppender&gt; methodAttributeAppenders) {
+&nbsp;            this.methodAttributeAppenders = new ArrayList();
+&nbsp;            Iterator var2 = methodAttributeAppenders.iterator();
+&nbsp;
+&nbsp;            while(var2.hasNext()) {
+&nbsp;                MethodAttributeAppender methodAttributeAppender = (MethodAttributeAppender)var2.next();
+&nbsp;                if (methodAttributeAppender instanceof Compound) {
+&nbsp;                    this.methodAttributeAppenders.addAll(((Compound)methodAttributeAppender).methodAttributeAppenders);
+&nbsp;                } else if (!(methodAttributeAppender instanceof NoOp)) {
+&nbsp;                    this.methodAttributeAppenders.add(methodAttributeAppender);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void apply(MethodVisitor methodVisitor, MethodDescription methodDescription, AnnotationValueFilter annotationValueFilter) {
+<b class="fc">&nbsp;            Iterator var4 = this.methodAttributeAppenders.iterator();</b>
+&nbsp;
+&nbsp;            while(var4.hasNext()) {
+&nbsp;                MethodAttributeAppender methodAttributeAppender = (MethodAttributeAppender)var4.next();
+&nbsp;                methodAttributeAppender.apply(methodVisitor, methodDescription, annotationValueFilter);
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+<b class="fc">&nbsp;                return true;</b>
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.methodAttributeAppenders.equals(((Compound)var1).methodAttributeAppenders);
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.methodAttributeAppenders.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class ForReceiverType implements MethodAttributeAppender, Factory {
+&nbsp;        private final TypeDescription.Generic receiverType;
+&nbsp;
+&nbsp;        public ForReceiverType(TypeDescription.Generic receiverType) {
+&nbsp;            this.receiverType = receiverType;
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodAttributeAppender make(TypeDescription typeDescription) {
+&nbsp;            return this;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void apply(MethodVisitor methodVisitor, MethodDescription methodDescription, AnnotationValueFilter annotationValueFilter) {
+&nbsp;            this.receiverType.accept(ForTypeAnnotations.ofReceiverType(new AnnotationAppender.Default(new AnnotationAppender.Target.OnMethod(methodVisitor)), annotationValueFilter));
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.receiverType.equals(((ForReceiverType)var1).receiverType);
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.receiverType.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class Explicit implements MethodAttributeAppender, Factory {
+<b class="fc">&nbsp;        private final Target target;</b>
+<b class="fc">&nbsp;        private final List&lt;? extends AnnotationDescription&gt; annotations;</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public Explicit(int parameterIndex, List&lt;? extends AnnotationDescription&gt; annotations) {</b>
+&nbsp;            this(new Target.OnMethodParameter(parameterIndex), annotations);
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        public Explicit(List&lt;? extends AnnotationDescription&gt; annotations) {
+<b class="fc">&nbsp;            this(MethodAttributeAppender.Explicit.Target.OnMethod.INSTANCE, annotations);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        protected Explicit(Target target, List&lt;? extends AnnotationDescription&gt; annotations) {
+&nbsp;            this.target = target;
+&nbsp;            this.annotations = annotations;
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public static Factory of(MethodDescription methodDescription) {</b>
+<b class="fc">&nbsp;            return new Factory.Compound(new Factory[]{ofMethodAnnotations(methodDescription), ofParameterAnnotations(methodDescription)});</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        public static Factory ofMethodAnnotations(MethodDescription methodDescription) {
+&nbsp;            return new Explicit(methodDescription.getDeclaredAnnotations());
+&nbsp;        }
+&nbsp;
+&nbsp;        public static Factory ofParameterAnnotations(MethodDescription methodDescription) {
+&nbsp;            ParameterList&lt;?&gt; parameters = methodDescription.getParameters();
+&nbsp;            List&lt;Factory&gt; factories = new ArrayList(parameters.size());
+&nbsp;            Iterator var3 = parameters.iterator();
+&nbsp;
+&nbsp;            while(var3.hasNext()) {
+&nbsp;                ParameterDescription parameter = (ParameterDescription)var3.next();
+&nbsp;                factories.add(new Explicit(parameter.getIndex(), parameter.getDeclaredAnnotations()));
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return new Factory.Compound(factories);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodAttributeAppender make(TypeDescription typeDescription) {
+&nbsp;            return this;
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public void apply(MethodVisitor methodVisitor, MethodDescription methodDescription, AnnotationValueFilter annotationValueFilter) {
+&nbsp;            AnnotationAppender appender = new AnnotationAppender.Default(this.target.make(methodVisitor, methodDescription));
+&nbsp;
+&nbsp;            AnnotationDescription annotation;
+&nbsp;            for(Iterator var5 = this.annotations.iterator(); var5.hasNext(); appender = ((AnnotationAppender)appender).append(annotation, annotationValueFilter)) {
+&nbsp;                annotation = (AnnotationDescription)var5.next();
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.target.equals(((Explicit)var1).target)) {
+&nbsp;                return false;
+<b class="fc">&nbsp;            } else {</b>
+&nbsp;                return this.annotations.equals(((Explicit)var1).annotations);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public int hashCode() {</b>
+<b class="fc">&nbsp;            return (this.getClass().hashCode() * 31 + this.target.hashCode()) * 31 + this.annotations.hashCode();</b>
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        protected interface Target {
+&nbsp;            AnnotationAppender.Target make(MethodVisitor var1, MethodDescription var2);
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public static class OnMethodParameter implements Target {
+&nbsp;                private final int parameterIndex;
+&nbsp;
+<b class="fc">&nbsp;                protected OnMethodParameter(int parameterIndex) {</b>
+&nbsp;                    this.parameterIndex = parameterIndex;
+&nbsp;                }
+&nbsp;
+&nbsp;                public AnnotationAppender.Target make(MethodVisitor methodVisitor, MethodDescription methodDescription) {
+&nbsp;                    if (this.parameterIndex &gt;= methodDescription.getParameters().size()) {
+&nbsp;                        throw new IllegalArgumentException(&quot;Method &quot; + methodDescription + &quot; has less then &quot; + this.parameterIndex + &quot; parameters&quot;);
+<b class="fc">&nbsp;                    } else {</b>
+<b class="fc">&nbsp;                        return new AnnotationAppender.Target.OnMethodParameter(methodVisitor, this.parameterIndex);</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                }</b>
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+<b class="fc">&nbsp;                    if (this == var1) {</b>
+<b class="fc">&nbsp;                        return true;</b>
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+<b class="fc">&nbsp;                    } else if (this.getClass() != var1.getClass()) {</b>
+<b class="fc">&nbsp;                        return false;</b>
+<b class="fc">&nbsp;                    } else {</b>
+<b class="fc">&nbsp;                        return this.parameterIndex == ((OnMethodParameter)var1).parameterIndex;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                public int hashCode() {</b>
+<b class="fc">&nbsp;                    return this.getClass().hashCode() * 31 + this.parameterIndex;</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            public static enum OnMethod implements Target {</b>
+<b class="fc">&nbsp;                INSTANCE;</b>
+&nbsp;
+&nbsp;                private OnMethod() {
+<b class="fc">&nbsp;                }</b>
+&nbsp;
+&nbsp;                public AnnotationAppender.Target make(MethodVisitor methodVisitor, MethodDescription methodDescription) {
+&nbsp;                    return new AnnotationAppender.Target.OnMethod(methodVisitor);
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum ForInstrumentedMethod implements MethodAttributeAppender, Factory {
+&nbsp;        EXCLUDING_RECEIVER {
+&nbsp;            protected AnnotationAppender appendReceiver(AnnotationAppender annotationAppender, AnnotationValueFilter annotationValueFilter, MethodDescription methodDescription) {
+&nbsp;                return annotationAppender;
+&nbsp;            }
+&nbsp;        },
+&nbsp;        INCLUDING_RECEIVER {
+&nbsp;            protected AnnotationAppender appendReceiver(AnnotationAppender annotationAppender, AnnotationValueFilter annotationValueFilter, MethodDescription methodDescription) {
+&nbsp;                TypeDescription.Generic receiverType = methodDescription.getReceiverType();
+&nbsp;                return receiverType == null ? annotationAppender : (AnnotationAppender)receiverType.accept(ForTypeAnnotations.ofReceiverType(annotationAppender, annotationValueFilter));
+&nbsp;            }
+&nbsp;        };
+&nbsp;
+&nbsp;        private ForInstrumentedMethod() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodAttributeAppender make(TypeDescription typeDescription) {
+&nbsp;            return this;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void apply(MethodVisitor methodVisitor, MethodDescription methodDescription, AnnotationValueFilter annotationValueFilter) {
+&nbsp;            AnnotationAppender annotationAppender = new AnnotationAppender.Default(new AnnotationAppender.Target.OnMethod(methodVisitor));
+&nbsp;            AnnotationAppender annotationAppender = (AnnotationAppender)methodDescription.getReturnType().accept(ForTypeAnnotations.ofMethodReturnType(annotationAppender, annotationValueFilter));
+&nbsp;            annotationAppender = ForTypeAnnotations.ofTypeVariable(annotationAppender, annotationValueFilter, false, methodDescription.getTypeVariables());
+&nbsp;
+&nbsp;            Iterator var5;
+&nbsp;            AnnotationDescription annotation;
+&nbsp;            for(var5 = ((AnnotationList)methodDescription.getDeclaredAnnotations().filter(ElementMatchers.not(ElementMatchers.annotationType(ElementMatchers.nameStartsWith(&quot;jdk.internal.&quot;))))).iterator(); var5.hasNext(); annotationAppender = annotationAppender.append(annotation, annotationValueFilter)) {
+&nbsp;                annotation = (AnnotationDescription)var5.next();
+&nbsp;            }
+&nbsp;
+&nbsp;            var5 = methodDescription.getParameters().iterator();
+&nbsp;
+&nbsp;            while(var5.hasNext()) {
+&nbsp;                ParameterDescription parameterDescription = (ParameterDescription)var5.next();
+&nbsp;                AnnotationAppender parameterAppender = new AnnotationAppender.Default(new AnnotationAppender.Target.OnMethodParameter(methodVisitor, parameterDescription.getIndex()));
+&nbsp;                AnnotationAppender parameterAppender = (AnnotationAppender)parameterDescription.getType().accept(ForTypeAnnotations.ofMethodParameterType(parameterAppender, annotationValueFilter, parameterDescription.getIndex()));
+&nbsp;
+&nbsp;                AnnotationDescription annotation;
+&nbsp;                for(Iterator var8 = parameterDescription.getDeclaredAnnotations().iterator(); var8.hasNext(); parameterAppender = parameterAppender.append(annotation, annotationValueFilter)) {
+&nbsp;                    annotation = (AnnotationDescription)var8.next();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            annotationAppender = this.appendReceiver(annotationAppender, annotationValueFilter, methodDescription);
+&nbsp;            int exceptionTypeIndex = 0;
+&nbsp;
+&nbsp;            TypeDescription.Generic exceptionType;
+&nbsp;            for(Iterator var13 = methodDescription.getExceptionTypes().iterator(); var13.hasNext(); annotationAppender = (AnnotationAppender)exceptionType.accept(ForTypeAnnotations.ofExceptionType(annotationAppender, annotationValueFilter, exceptionTypeIndex++))) {
+&nbsp;                exceptionType = (TypeDescription.Generic)var13.next();
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        protected abstract AnnotationAppender appendReceiver(AnnotationAppender var1, AnnotationValueFilter var2, MethodDescription var3);
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface Factory {
+&nbsp;        MethodAttributeAppender make(TypeDescription var1);
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class Compound implements Factory {
+&nbsp;            private final List&lt;Factory&gt; factories;
+&nbsp;
+&nbsp;            public Compound(Factory... factory) {
+&nbsp;                this(Arrays.asList(factory));
+&nbsp;            }
+&nbsp;
+&nbsp;            public Compound(List&lt;? extends Factory&gt; factories) {
+&nbsp;                this.factories = new ArrayList();
+&nbsp;                Iterator var2 = factories.iterator();
+&nbsp;
+&nbsp;                while(var2.hasNext()) {
+&nbsp;                    Factory factory = (Factory)var2.next();
+&nbsp;                    if (factory instanceof Compound) {
+&nbsp;                        this.factories.addAll(((Compound)factory).factories);
+&nbsp;                    } else if (!(factory instanceof NoOp)) {
+&nbsp;                        this.factories.add(factory);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;            }
+&nbsp;
+&nbsp;            public MethodAttributeAppender make(TypeDescription typeDescription) {
+&nbsp;                List&lt;MethodAttributeAppender&gt; methodAttributeAppenders = new ArrayList(this.factories.size());
+&nbsp;                Iterator var3 = this.factories.iterator();
+&nbsp;
+&nbsp;                while(var3.hasNext()) {
+&nbsp;                    Factory factory = (Factory)var3.next();
+&nbsp;                    methodAttributeAppenders.add(factory.make(typeDescription));
+&nbsp;                }
+&nbsp;
+&nbsp;                return new Compound(methodAttributeAppenders);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.factories.equals(((Compound)var1).factories);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.factories.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum NoOp implements MethodAttributeAppender, Factory {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private NoOp() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodAttributeAppender make(TypeDescription typeDescription) {
+&nbsp;            return this;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void apply(MethodVisitor methodVisitor, MethodDescription methodDescription, AnnotationValueFilter annotationValueFilter) {
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

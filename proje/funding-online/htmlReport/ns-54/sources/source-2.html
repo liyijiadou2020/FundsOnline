@@ -1,0 +1,373 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > MockSettingsImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.creation</a>
+</div>
+
+<h1>Coverage Summary for Class: MockSettingsImpl (org.mockito.internal.creation)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MockSettingsImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (26/26)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.creation;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;import org.mockito.MockSettings;
+&nbsp;import org.mockito.exceptions.base.MockitoException;
+&nbsp;import org.mockito.internal.creation.settings.CreationSettings;
+&nbsp;import org.mockito.internal.debugging.VerboseMockInvocationLogger;
+&nbsp;import org.mockito.internal.exceptions.Reporter;
+&nbsp;import org.mockito.internal.util.Checks;
+&nbsp;import org.mockito.internal.util.MockCreationValidator;
+&nbsp;import org.mockito.internal.util.MockNameImpl;
+&nbsp;import org.mockito.internal.util.collections.Sets;
+&nbsp;import org.mockito.listeners.InvocationListener;
+&nbsp;import org.mockito.listeners.StubbingLookupListener;
+&nbsp;import org.mockito.listeners.VerificationStartedListener;
+&nbsp;import org.mockito.mock.MockCreationSettings;
+&nbsp;import org.mockito.mock.MockName;
+&nbsp;import org.mockito.mock.SerializableMode;
+&nbsp;import org.mockito.stubbing.Answer;
+&nbsp;
+&nbsp;public class MockSettingsImpl&lt;T&gt; extends CreationSettings&lt;T&gt; implements MockSettings, MockCreationSettings&lt;T&gt; {
+&nbsp;    private static final long serialVersionUID = 4475297236197939569L;
+&nbsp;    private boolean useConstructor;
+&nbsp;    private Object outerClassInstance;
+&nbsp;    private Object[] constructorArgs;
+&nbsp;
+<b class="fc">&nbsp;    public MockSettingsImpl() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MockSettings serializable() {
+&nbsp;        return this.serializable(SerializableMode.BASIC);
+&nbsp;    }
+&nbsp;
+&nbsp;    public MockSettings serializable(SerializableMode mode) {
+&nbsp;        this.serializableMode = mode;
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public MockSettings extraInterfaces(Class&lt;?&gt;... extraInterfaces) {
+&nbsp;        if (extraInterfaces != null &amp;&amp; extraInterfaces.length != 0) {
+&nbsp;            Class[] var2 = extraInterfaces;
+&nbsp;            int var3 = extraInterfaces.length;
+&nbsp;
+&nbsp;            for(int var4 = 0; var4 &lt; var3; ++var4) {
+&nbsp;                Class&lt;?&gt; i = var2[var4];
+&nbsp;                if (i == null) {
+&nbsp;                    throw Reporter.extraInterfacesDoesNotAcceptNullParameters();
+&nbsp;                }
+&nbsp;
+&nbsp;                if (!i.isInterface()) {
+&nbsp;                    throw Reporter.extraInterfacesAcceptsOnlyInterfaces(i);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            this.extraInterfaces = Sets.newSet(extraInterfaces);
+&nbsp;            return this;
+&nbsp;        } else {
+&nbsp;            throw Reporter.extraInterfacesRequiresAtLeastOneInterface();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public MockName getMockName() {
+&nbsp;        return this.mockName;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Set&lt;Class&lt;?&gt;&gt; getExtraInterfaces() {
+&nbsp;        return this.extraInterfaces;
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public Object getSpiedInstance() {</b>
+&nbsp;        return this.spiedInstance;
+&nbsp;    }
+&nbsp;
+&nbsp;    public MockSettings name(String name) {
+<b class="fc">&nbsp;        this.name = name;</b>
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public MockSettings spiedInstance(Object spiedInstance) {
+<b class="fc">&nbsp;        this.spiedInstance = spiedInstance;</b>
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public MockSettings defaultAnswer(Answer defaultAnswer) {
+&nbsp;        this.defaultAnswer = defaultAnswer;
+&nbsp;        if (defaultAnswer == null) {
+&nbsp;            throw Reporter.defaultAnswerDoesNotAcceptNullParameter();
+&nbsp;        } else {
+&nbsp;            return this;
+&nbsp;        }
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public Answer&lt;Object&gt; getDefaultAnswer() {</b>
+&nbsp;        return this.defaultAnswer;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public MockSettingsImpl&lt;T&gt; stubOnly() {
+&nbsp;        this.stubOnly = true;
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public MockSettings useConstructor(Object... constructorArgs) {
+&nbsp;        Checks.checkNotNull(constructorArgs, &quot;constructorArgs&quot;, &quot;If you need to pass null, please cast it to the right type, e.g.: useConstructor((String) null)&quot;);
+&nbsp;        this.useConstructor = true;
+&nbsp;        this.constructorArgs = constructorArgs;
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public MockSettings outerInstance(Object outerClassInstance) {
+&nbsp;        this.outerClassInstance = outerClassInstance;
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public MockSettings withoutAnnotations() {
+&nbsp;        this.stripAnnotations = true;
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isUsingConstructor() {
+&nbsp;        return this.useConstructor;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object getOuterClassInstance() {
+&nbsp;        return this.outerClassInstance;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object[] getConstructorArgs() {
+&nbsp;        if (this.outerClassInstance == null) {
+&nbsp;            return this.constructorArgs;
+&nbsp;        } else {
+&nbsp;            List&lt;Object&gt; resultArgs = new ArrayList(this.constructorArgs.length + 1);
+&nbsp;            resultArgs.add(this.outerClassInstance);
+&nbsp;            resultArgs.addAll(Arrays.asList(this.constructorArgs));
+&nbsp;            return resultArgs.toArray(new Object[this.constructorArgs.length + 1]);
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isStubOnly() {
+&nbsp;        return this.stubOnly;
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public MockSettings verboseLogging() {
+&nbsp;        if (!this.invocationListenersContainsType(VerboseMockInvocationLogger.class)) {
+&nbsp;            this.invocationListeners(new VerboseMockInvocationLogger());
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public MockSettings invocationListeners(InvocationListener... listeners) {
+&nbsp;        addListeners(listeners, this.invocationListeners, &quot;invocationListeners&quot;);
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public MockSettings stubbingLookupListeners(StubbingLookupListener... listeners) {
+&nbsp;        addListeners(listeners, this.stubbingLookupListeners, &quot;stubbingLookupListeners&quot;);
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    static &lt;T&gt; void addListeners(T[] listeners, List&lt;T&gt; container, String method) {
+&nbsp;        if (listeners == null) {
+&nbsp;            throw Reporter.methodDoesNotAcceptParameter(method, &quot;null vararg array.&quot;);
+&nbsp;        } else if (listeners.length == 0) {
+&nbsp;            throw Reporter.requiresAtLeastOneListener(method);
+&nbsp;        } else {
+&nbsp;            Object[] var3 = listeners;
+&nbsp;            int var4 = listeners.length;
+&nbsp;
+&nbsp;            for(int var5 = 0; var5 &lt; var4; ++var5) {
+&nbsp;                T listener = var3[var5];
+&nbsp;                if (listener == null) {
+&nbsp;                    throw Reporter.methodDoesNotAcceptParameter(method, &quot;null listeners.&quot;);
+&nbsp;                }
+&nbsp;
+&nbsp;                container.add(listener);
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public MockSettings verificationStartedListeners(VerificationStartedListener... listeners) {
+&nbsp;        addListeners(listeners, this.verificationStartedListeners, &quot;verificationStartedListeners&quot;);
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean invocationListenersContainsType(Class&lt;?&gt; clazz) {
+&nbsp;        Iterator var2 = this.invocationListeners.iterator();
+&nbsp;
+&nbsp;        InvocationListener listener;
+&nbsp;        do {
+&nbsp;            if (!var2.hasNext()) {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;
+&nbsp;            listener = (InvocationListener)var2.next();
+&nbsp;        } while(!listener.getClass().equals(clazz));
+&nbsp;
+&nbsp;        return true;
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasInvocationListeners() {
+&nbsp;        return !this.getInvocationListeners().isEmpty();
+&nbsp;    }
+&nbsp;
+&nbsp;    public Class&lt;T&gt; getTypeToMock() {
+&nbsp;        return this.typeToMock;
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T2&gt; MockCreationSettings&lt;T2&gt; build(Class&lt;T2&gt; typeToMock) {
+&nbsp;        return validatedSettings(typeToMock, this);
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T2&gt; MockCreationSettings&lt;T2&gt; buildStatic(Class&lt;T2&gt; classToMock) {
+&nbsp;        return validatedStaticSettings(classToMock, this);
+&nbsp;    }
+&nbsp;
+&nbsp;    public MockSettings lenient() {
+&nbsp;        this.lenient = true;
+&nbsp;        return this;
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private static &lt;T&gt; CreationSettings&lt;T&gt; validatedSettings(Class&lt;T&gt; typeToMock, CreationSettings&lt;T&gt; source) {
+&nbsp;        MockCreationValidator validator = new MockCreationValidator();
+&nbsp;        validator.validateType(typeToMock);
+&nbsp;        validator.validateExtraInterfaces(typeToMock, source.getExtraInterfaces());
+&nbsp;        validator.validateMockedType(typeToMock, source.getSpiedInstance());
+&nbsp;        validator.validateConstructorUse(source.isUsingConstructor(), source.getSerializableMode());
+&nbsp;        CreationSettings&lt;T&gt; settings = new CreationSettings(source);
+&nbsp;        settings.setMockName(new MockNameImpl(source.getName(), typeToMock, false));
+&nbsp;        settings.setTypeToMock(typeToMock);
+&nbsp;        settings.setExtraInterfaces(prepareExtraInterfaces(source));
+&nbsp;        return settings;
+&nbsp;    }
+&nbsp;
+&nbsp;    private static &lt;T&gt; CreationSettings&lt;T&gt; validatedStaticSettings(Class&lt;T&gt; classToMock, CreationSettings&lt;T&gt; source) {
+<b class="fc">&nbsp;        if (classToMock.isPrimitive()) {</b>
+&nbsp;            throw new MockitoException(&quot;Cannot create static mock of primitive type &quot; + classToMock);
+<b class="fc">&nbsp;        } else if (!source.getExtraInterfaces().isEmpty()) {</b>
+<b class="fc">&nbsp;            throw new MockitoException(&quot;Cannot specify additional interfaces for static mock of &quot; + classToMock);</b>
+<b class="fc">&nbsp;        } else if (source.getSpiedInstance() != null) {</b>
+&nbsp;            throw new MockitoException(&quot;Cannot specify spied instance for static mock of &quot; + classToMock);
+&nbsp;        } else {
+&nbsp;            CreationSettings&lt;T&gt; settings = new CreationSettings(source);
+&nbsp;            settings.setMockName(new MockNameImpl(source.getName(), classToMock, true));
+<b class="fc">&nbsp;            settings.setTypeToMock(classToMock);</b>
+&nbsp;            return settings;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private static Set&lt;Class&lt;?&gt;&gt; prepareExtraInterfaces(CreationSettings settings) {</b>
+<b class="fc">&nbsp;        Set&lt;Class&lt;?&gt;&gt; interfaces = new HashSet(settings.getExtraInterfaces());</b>
+<b class="fc">&nbsp;        if (settings.isSerializable()) {</b>
+<b class="fc">&nbsp;            interfaces.add(Serializable.class);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        return interfaces;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

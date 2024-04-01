@@ -1,16 +1,13 @@
 package com.atguigu.crowd.service.impl;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
-
 import com.atguigu.crowd.constant.CrowdConstant;
 import com.atguigu.crowd.entity.Admin;
 import com.atguigu.crowd.entity.AdminExample;
@@ -24,6 +21,9 @@ import com.atguigu.crowd.util.CrowdUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+/**
+ * AdminService 接口的具体实现，实现了操作Admin对象的业务逻辑。
+ */
 @Service
 public class AdminServiceImpl implements AdminService {
 
@@ -145,9 +145,7 @@ public class AdminServiceImpl implements AdminService {
             adminMapper.updateByPrimaryKeySelective(admin);
         } catch (Exception e) {
             e.printStackTrace();
-
             logger.info("异常全类名=" + e.getClass().getName());
-
             if (e instanceof DuplicateKeyException) {
                 throw new LoginAcctAlreadyInUseForUpdateException(CrowdConstant.MESSAGE_LOGIN_ACCT_ALREADY_IN_USE);
             }

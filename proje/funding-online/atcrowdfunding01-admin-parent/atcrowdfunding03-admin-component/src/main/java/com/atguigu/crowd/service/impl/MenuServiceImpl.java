@@ -28,7 +28,6 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public void updateMenu(Menu menu) {
-
         // 由于pid没有传入，一定要使用有选择的更新，保证“pid”字段不会被置空
         menuMapper.updateByPrimaryKeySelective(menu);
     }

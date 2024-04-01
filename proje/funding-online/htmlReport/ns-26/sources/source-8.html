@@ -1,0 +1,270 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > TypeInitializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.dynamic.scaffold</a>
+</div>
+
+<h1>Coverage Summary for Class: TypeInitializer (net.bytebuddy.dynamic.scaffold)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">TypeInitializer$Drain$Default</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TypeInitializer$None</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TypeInitializer$Simple</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.dynamic.scaffold;
+&nbsp;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.implementation.attribute.AnnotationValueFilter;
+&nbsp;import net.bytebuddy.implementation.bytecode.ByteCodeAppender;
+&nbsp;import net.bytebuddy.implementation.bytecode.ByteCodeAppender.Size;
+&nbsp;import net.bytebuddy.jar.asm.ClassVisitor;
+&nbsp;import net.bytebuddy.jar.asm.MethodVisitor;
+&nbsp;
+&nbsp;public interface TypeInitializer extends ByteCodeAppender {
+&nbsp;    boolean isDefined();
+&nbsp;
+&nbsp;    TypeInitializer expandWith(ByteCodeAppender var1);
+&nbsp;
+&nbsp;    TypeWriter.MethodPool.Record wrap(TypeWriter.MethodPool.Record var1);
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class Simple implements TypeInitializer {
+&nbsp;        private final ByteCodeAppender byteCodeAppender;
+&nbsp;
+&nbsp;        public Simple(ByteCodeAppender byteCodeAppender) {
+&nbsp;            this.byteCodeAppender = byteCodeAppender;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isDefined() {
+&nbsp;            return true;
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeInitializer expandWith(ByteCodeAppender byteCodeAppender) {
+&nbsp;            return new Simple(new ByteCodeAppender.Compound(new ByteCodeAppender[]{this.byteCodeAppender, byteCodeAppender}));
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeWriter.MethodPool.Record wrap(TypeWriter.MethodPool.Record record) {
+&nbsp;            return record.prepend(this.byteCodeAppender);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ByteCodeAppender.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext, MethodDescription instrumentedMethod) {
+&nbsp;            return this.byteCodeAppender.apply(methodVisitor, implementationContext, instrumentedMethod);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.byteCodeAppender.equals(((Simple)var1).byteCodeAppender);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.byteCodeAppender.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum None implements TypeInitializer {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private None() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isDefined() {
+&nbsp;            return false;
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeInitializer expandWith(ByteCodeAppender byteCodeAppenderFactory) {
+&nbsp;            return new Simple(byteCodeAppenderFactory);
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeWriter.MethodPool.Record wrap(TypeWriter.MethodPool.Record record) {
+&nbsp;            return record;
+&nbsp;        }
+&nbsp;
+&nbsp;        public ByteCodeAppender.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext, MethodDescription instrumentedMethod) {
+&nbsp;            return Size.ZERO;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface Drain {
+&nbsp;        void apply(ClassVisitor var1, TypeInitializer var2, Implementation.Context var3);
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class Default implements Drain {
+&nbsp;            protected final TypeDescription instrumentedType;
+&nbsp;            protected final TypeWriter.MethodPool methodPool;
+&nbsp;            protected final AnnotationValueFilter.Factory annotationValueFilterFactory;
+&nbsp;
+&nbsp;            public Default(TypeDescription instrumentedType, TypeWriter.MethodPool methodPool, AnnotationValueFilter.Factory annotationValueFilterFactory) {
+<b class="fc">&nbsp;                this.instrumentedType = instrumentedType;</b>
+<b class="fc">&nbsp;                this.methodPool = methodPool;</b>
+<b class="fc">&nbsp;                this.annotationValueFilterFactory = annotationValueFilterFactory;</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            public void apply(ClassVisitor classVisitor, TypeInitializer typeInitializer, Implementation.Context implementationContext) {
+&nbsp;                typeInitializer.wrap(this.methodPool.target(new MethodDescription.Latent.TypeInitializer(this.instrumentedType))).apply(classVisitor, implementationContext, this.annotationValueFilterFactory);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+<b class="fc">&nbsp;                if (this == var1) {</b>
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.instrumentedType.equals(((Default)var1).instrumentedType)) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.methodPool.equals(((Default)var1).methodPool)) {
+&nbsp;                    return false;
+<b class="fc">&nbsp;                } else {</b>
+&nbsp;                    return this.annotationValueFilterFactory.equals(((Default)var1).annotationValueFilterFactory);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            public int hashCode() {</b>
+&nbsp;                return ((this.getClass().hashCode() * 31 + this.instrumentedType.hashCode()) * 31 + this.methodPool.hashCode()) * 31 + this.annotationValueFilterFactory.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

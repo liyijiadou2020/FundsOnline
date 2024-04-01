@@ -1,0 +1,380 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ArrayFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.bytecode.collection</a>
+</div>
+
+<h1>Coverage Summary for Class: ArrayFactory (net.bytebuddy.implementation.bytecode.collection)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ArrayFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ArrayFactory$ArrayCreator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ArrayFactory$ArrayCreator$ForReferenceType</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ArrayFactory$ArrayStackManipulation</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/18)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (33/33)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.bytecode.collection;
+&nbsp;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.ValueHandling;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.ValueHandling.Sort;
+&nbsp;import net.bytebuddy.description.type.TypeDefinition;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackSize;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.IntegerConstant;
+&nbsp;import net.bytebuddy.jar.asm.MethodVisitor;
+&nbsp;
+&nbsp;@Enhance
+&nbsp;public class ArrayFactory implements CollectionFactory {
+&nbsp;    private final TypeDescription.Generic componentType;
+&nbsp;    private final ArrayCreator arrayCreator;
+&nbsp;    @ValueHandling(Sort.IGNORE)
+&nbsp;    private final StackManipulation.Size sizeDecrease;
+&nbsp;
+&nbsp;    protected ArrayFactory(TypeDescription.Generic componentType, ArrayCreator arrayCreator) {
+&nbsp;        this.componentType = componentType;
+&nbsp;        this.arrayCreator = arrayCreator;
+&nbsp;        this.sizeDecrease = StackSize.DOUBLE.toDecreasingSize().aggregate(componentType.getStackSize().toDecreasingSize());
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public static ArrayFactory forType(TypeDescription.Generic componentType) {</b>
+&nbsp;        return new ArrayFactory(componentType, makeArrayCreatorFor(componentType));
+&nbsp;    }
+&nbsp;
+&nbsp;    private static ArrayCreator makeArrayCreatorFor(TypeDefinition componentType) {
+&nbsp;        if (!componentType.isPrimitive()) {
+&nbsp;            return new ArrayCreator.ForReferenceType(componentType.asErasure());
+&nbsp;        } else if (componentType.represents(Boolean.TYPE)) {
+&nbsp;            return ArrayFactory.ArrayCreator.ForPrimitiveType.BOOLEAN;
+&nbsp;        } else if (componentType.represents(Byte.TYPE)) {
+&nbsp;            return ArrayFactory.ArrayCreator.ForPrimitiveType.BYTE;
+&nbsp;        } else if (componentType.represents(Short.TYPE)) {
+&nbsp;            return ArrayFactory.ArrayCreator.ForPrimitiveType.SHORT;
+&nbsp;        } else if (componentType.represents(Character.TYPE)) {
+&nbsp;            return ArrayFactory.ArrayCreator.ForPrimitiveType.CHARACTER;
+&nbsp;        } else if (componentType.represents(Integer.TYPE)) {
+&nbsp;            return ArrayFactory.ArrayCreator.ForPrimitiveType.INTEGER;
+&nbsp;        } else if (componentType.represents(Long.TYPE)) {
+&nbsp;            return ArrayFactory.ArrayCreator.ForPrimitiveType.LONG;
+&nbsp;        } else if (componentType.represents(Float.TYPE)) {
+&nbsp;            return ArrayFactory.ArrayCreator.ForPrimitiveType.FLOAT;
+&nbsp;        } else if (componentType.represents(Double.TYPE)) {
+&nbsp;            return ArrayFactory.ArrayCreator.ForPrimitiveType.DOUBLE;
+&nbsp;        } else {
+&nbsp;            throw new IllegalArgumentException(&quot;Cannot create array of type &quot; + componentType);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public StackManipulation withValues(List&lt;? extends StackManipulation&gt; stackManipulations) {
+<b class="fc">&nbsp;        return new ArrayStackManipulation(stackManipulations);</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public TypeDescription.Generic getComponentType() {
+<b class="fc">&nbsp;        return this.componentType;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean equals(Object var1) {
+&nbsp;        if (this == var1) {
+&nbsp;            return true;
+&nbsp;        } else if (var1 == null) {
+&nbsp;            return false;
+&nbsp;        } else if (this.getClass() != var1.getClass()) {
+&nbsp;            return false;
+<b class="fc">&nbsp;        } else if (!this.componentType.equals(((ArrayFactory)var1).componentType)) {</b>
+&nbsp;            return false;
+&nbsp;        } else {
+&nbsp;            return this.arrayCreator.equals(((ArrayFactory)var1).arrayCreator);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public int hashCode() {
+&nbsp;        return (this.getClass().hashCode() * 31 + this.componentType.hashCode()) * 31 + this.arrayCreator.hashCode();
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    @Enhance(</b>
+&nbsp;        includeSyntheticFields = true
+&nbsp;    )
+&nbsp;    protected class ArrayStackManipulation implements StackManipulation {
+&nbsp;        private final List&lt;? extends StackManipulation&gt; stackManipulations;
+&nbsp;
+&nbsp;        protected ArrayStackManipulation(List&lt;? extends StackManipulation&gt; stackManipulations) {
+&nbsp;            this.stackManipulations = stackManipulations;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isValid() {
+&nbsp;            Iterator var1 = this.stackManipulations.iterator();
+&nbsp;
+&nbsp;            StackManipulation stackManipulation;
+&nbsp;            do {
+&nbsp;                if (!var1.hasNext()) {
+&nbsp;                    return ArrayFactory.this.arrayCreator.isValid();
+&nbsp;                }
+&nbsp;
+&nbsp;                stackManipulation = (StackManipulation)var1.next();
+&nbsp;            } while(stackManipulation.isValid());
+&nbsp;
+&nbsp;            return false;
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+<b class="fc">&nbsp;            StackManipulation.Size size = IntegerConstant.forValue(this.stackManipulations.size()).apply(methodVisitor, implementationContext);</b>
+&nbsp;            size = size.aggregate(ArrayFactory.this.arrayCreator.apply(methodVisitor, implementationContext));
+&nbsp;            int index = 0;
+&nbsp;
+&nbsp;            for(Iterator var5 = this.stackManipulations.iterator(); var5.hasNext(); size = size.aggregate(ArrayFactory.this.sizeDecrease)) {
+&nbsp;                StackManipulation stackManipulation = (StackManipulation)var5.next();
+&nbsp;                methodVisitor.visitInsn(89);
+&nbsp;                size = size.aggregate(StackSize.SINGLE.toIncreasingSize());
+&nbsp;                size = size.aggregate(IntegerConstant.forValue(index++).apply(methodVisitor, implementationContext));
+&nbsp;                size = size.aggregate(stackManipulation.apply(methodVisitor, implementationContext));
+&nbsp;                methodVisitor.visitInsn(ArrayFactory.this.arrayCreator.getStorageOpcode());
+&nbsp;            }
+&nbsp;
+&nbsp;            return size;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.stackManipulations.equals(((ArrayStackManipulation)var1).stackManipulations)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return ArrayFactory.this.equals(ArrayFactory.this);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return (this.getClass().hashCode() * 31 + this.stackManipulations.hashCode()) * 31 + ArrayFactory.this.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected interface ArrayCreator extends StackManipulation {
+&nbsp;        StackManipulation.Size ARRAY_CREATION_SIZE_CHANGE = StackSize.ZERO.toDecreasingSize();
+&nbsp;
+&nbsp;        int getStorageOpcode();
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class ForReferenceType extends StackManipulation.AbstractBase implements ArrayCreator {
+&nbsp;            private final String internalTypeName;
+&nbsp;
+&nbsp;            protected ForReferenceType(TypeDescription referenceType) {
+&nbsp;                this.internalTypeName = referenceType.getInternalName();
+&nbsp;            }
+&nbsp;
+&nbsp;            public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;                methodVisitor.visitTypeInsn(189, this.internalTypeName);
+&nbsp;                return ARRAY_CREATION_SIZE_CHANGE;
+&nbsp;            }
+&nbsp;
+&nbsp;            public int getStorageOpcode() {
+&nbsp;                return 83;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.internalTypeName.equals(((ForReferenceType)var1).internalTypeName);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.internalTypeName.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public static enum ForPrimitiveType implements ArrayCreator {
+&nbsp;            BOOLEAN(4, 84),
+&nbsp;            BYTE(8, 84),
+&nbsp;            SHORT(9, 86),
+&nbsp;            CHARACTER(5, 85),
+&nbsp;            INTEGER(10, 79),
+&nbsp;            LONG(11, 80),
+&nbsp;            FLOAT(6, 81),
+&nbsp;            DOUBLE(7, 82);
+&nbsp;
+&nbsp;            private final int creationOpcode;
+&nbsp;            private final int storageOpcode;
+&nbsp;
+&nbsp;            private ForPrimitiveType(int creationOpcode, int storageOpcode) {
+&nbsp;                this.creationOpcode = creationOpcode;
+&nbsp;                this.storageOpcode = storageOpcode;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean isValid() {
+&nbsp;                return true;
+&nbsp;            }
+&nbsp;
+&nbsp;            public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;                methodVisitor.visitIntInsn(188, this.creationOpcode);
+&nbsp;                return ARRAY_CREATION_SIZE_CHANGE;
+&nbsp;            }
+&nbsp;
+&nbsp;            public int getStorageOpcode() {
+&nbsp;                return this.storageOpcode;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,461 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > GenericTypeAwareAssigner</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.bytecode.assign.reference</a>
+</div>
+
+<h1>Coverage Summary for Class: GenericTypeAwareAssigner (net.bytebuddy.implementation.bytecode.assign.reference)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GenericTypeAwareAssigner</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.bytecode.assign.reference;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.Queue;
+&nbsp;import java.util.Set;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeList;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation.Illegal;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation.Trivial;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.Assigner;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.TypeCasting;
+&nbsp;
+&nbsp;public enum GenericTypeAwareAssigner implements Assigner {
+&nbsp;    INSTANCE;
+&nbsp;
+&nbsp;    private GenericTypeAwareAssigner() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public StackManipulation assign(TypeDescription.Generic source, TypeDescription.Generic target, Assigner.Typing typing) {
+&nbsp;        if (!source.isPrimitive() &amp;&amp; !target.isPrimitive()) {
+&nbsp;            if ((Boolean)source.accept(new IsAssignableToVisitor(target))) {
+&nbsp;                return Trivial.INSTANCE;
+&nbsp;            } else if (typing.isDynamic()) {
+<b class="fc">&nbsp;                return (StackManipulation)(source.asErasure().isAssignableTo(target.asErasure()) ? Trivial.INSTANCE : TypeCasting.to(target));</b>
+&nbsp;            } else {
+&nbsp;                return Illegal.INSTANCE;
+&nbsp;            }
+&nbsp;        } else {
+<b class="fc">&nbsp;            return (StackManipulation)(source.equals(target) ? Trivial.INSTANCE : Illegal.INSTANCE);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    protected static class IsAssignableToVisitor implements TypeDescription.Generic.Visitor&lt;Boolean&gt; {
+&nbsp;        private final TypeDescription.Generic typeDescription;
+&nbsp;        private final boolean polymorphic;
+&nbsp;
+&nbsp;        public IsAssignableToVisitor(TypeDescription.Generic typeDescription) {
+&nbsp;            this(typeDescription, true);
+&nbsp;        }
+&nbsp;
+&nbsp;        protected IsAssignableToVisitor(TypeDescription.Generic typeDescription, boolean polymorphic) {
+&nbsp;            this.typeDescription = typeDescription;
+&nbsp;            this.polymorphic = polymorphic;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Boolean onGenericArray(TypeDescription.Generic genericArray) {
+&nbsp;            return (Boolean)this.typeDescription.accept(new OfGenericArray(genericArray, this.polymorphic));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Boolean onWildcard(TypeDescription.Generic wildcard) {
+&nbsp;            return (Boolean)this.typeDescription.accept(new OfWildcard(wildcard));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Boolean onParameterizedType(TypeDescription.Generic parameterizedType) {
+&nbsp;            return (Boolean)this.typeDescription.accept(new OfParameterizedType(parameterizedType, this.polymorphic));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Boolean onTypeVariable(TypeDescription.Generic typeVariable) {
+&nbsp;            if (typeVariable.getTypeVariableSource().isInferrable()) {
+&nbsp;                throw new UnsupportedOperationException(&quot;Assignability checks for type variables declared by methods are not currently supported&quot;);
+&nbsp;            } else if (typeVariable.equals(this.typeDescription)) {
+&nbsp;                return true;
+&nbsp;            } else if (this.polymorphic) {
+&nbsp;                Queue&lt;TypeDescription.Generic&gt; candidates = new LinkedList(typeVariable.getUpperBounds());
+&nbsp;
+&nbsp;                while(!candidates.isEmpty()) {
+&nbsp;                    TypeDescription.Generic candidate = (TypeDescription.Generic)candidates.remove();
+&nbsp;                    if ((Boolean)candidate.accept(new IsAssignableToVisitor(this.typeDescription))) {
+&nbsp;                        return true;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (candidate.getSort().isTypeVariable()) {
+&nbsp;                        candidates.addAll(candidate.getUpperBounds());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public Boolean onNonGenericType(TypeDescription.Generic typeDescription) {
+&nbsp;            return (Boolean)this.typeDescription.accept(new OfNonGenericType(typeDescription, this.polymorphic));
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (this.polymorphic != ((IsAssignableToVisitor)var1).polymorphic) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.typeDescription.equals(((IsAssignableToVisitor)var1).typeDescription);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return (this.getClass().hashCode() * 31 + this.typeDescription.hashCode()) * 31 + this.polymorphic;
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static class OfNonGenericType extends OfSimpleType {
+&nbsp;            protected OfNonGenericType(TypeDescription.Generic typeDescription, boolean polymorphic) {
+&nbsp;                super(typeDescription, polymorphic);
+&nbsp;            }
+&nbsp;
+&nbsp;            public Boolean onGenericArray(TypeDescription.Generic genericArray) {
+&nbsp;                return this.polymorphic ? this.typeDescription.asErasure().isAssignableTo(genericArray.asErasure()) : this.typeDescription.asErasure().equals(genericArray.asErasure());
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static class OfParameterizedType extends OfSimpleType {
+&nbsp;            protected OfParameterizedType(TypeDescription.Generic typeDescription, boolean polymorphic) {
+&nbsp;                super(typeDescription, polymorphic);
+&nbsp;            }
+&nbsp;
+&nbsp;            public Boolean onGenericArray(TypeDescription.Generic genericArray) {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        protected static class OfWildcard implements TypeDescription.Generic.Visitor&lt;Boolean&gt; {
+&nbsp;            private final TypeDescription.Generic wildcard;
+&nbsp;
+&nbsp;            protected OfWildcard(TypeDescription.Generic wildcard) {
+&nbsp;                this.wildcard = wildcard;
+&nbsp;            }
+&nbsp;
+&nbsp;            public Boolean onGenericArray(TypeDescription.Generic genericArray) {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;
+&nbsp;            public Boolean onWildcard(TypeDescription.Generic wildcard) {
+&nbsp;                boolean hasUpperBounds = false;
+&nbsp;                boolean hasLowerBounds = false;
+&nbsp;
+&nbsp;                Iterator var4;
+&nbsp;                TypeDescription.Generic target;
+&nbsp;                Iterator var6;
+&nbsp;                TypeDescription.Generic source;
+&nbsp;                for(var4 = wildcard.getUpperBounds().iterator(); var4.hasNext(); hasUpperBounds = hasUpperBounds || !target.represents(Object.class)) {
+&nbsp;                    target = (TypeDescription.Generic)var4.next();
+&nbsp;                    var6 = this.wildcard.getUpperBounds().iterator();
+&nbsp;
+&nbsp;                    while(var6.hasNext()) {
+&nbsp;                        source = (TypeDescription.Generic)var6.next();
+&nbsp;                        if (!(Boolean)source.accept(new IsAssignableToVisitor(target))) {
+&nbsp;                            return false;
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                for(var4 = wildcard.getLowerBounds().iterator(); var4.hasNext(); hasLowerBounds = true) {
+&nbsp;                    target = (TypeDescription.Generic)var4.next();
+&nbsp;                    var6 = this.wildcard.getLowerBounds().iterator();
+&nbsp;
+&nbsp;                    while(var6.hasNext()) {
+&nbsp;                        source = (TypeDescription.Generic)var6.next();
+&nbsp;                        if (!(Boolean)target.accept(new IsAssignableToVisitor(source))) {
+&nbsp;                            return false;
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                if (hasUpperBounds) {
+&nbsp;                    return this.wildcard.getLowerBounds().isEmpty();
+&nbsp;                } else if (!hasLowerBounds) {
+&nbsp;                    return true;
+&nbsp;                } else {
+&nbsp;                    TypeList.Generic upperBounds = this.wildcard.getUpperBounds();
+&nbsp;                    return upperBounds.size() == 0 || upperBounds.size() == 1 &amp;&amp; ((TypeDescription.Generic)upperBounds.getOnly()).represents(Object.class);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public Boolean onParameterizedType(TypeDescription.Generic parameterizedType) {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;
+&nbsp;            public Boolean onTypeVariable(TypeDescription.Generic typeVariable) {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;
+&nbsp;            public Boolean onNonGenericType(TypeDescription.Generic typeDescription) {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.wildcard.equals(((OfWildcard)var1).wildcard);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.wildcard.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static class OfGenericArray extends OfManifestType {
+&nbsp;            protected OfGenericArray(TypeDescription.Generic typeDescription, boolean polymorphic) {
+&nbsp;                super(typeDescription, polymorphic);
+&nbsp;            }
+&nbsp;
+&nbsp;            @SuppressFBWarnings(
+&nbsp;                value = {&quot;NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE&quot;},
+&nbsp;                justification = &quot;Assuming component type for array type.&quot;
+&nbsp;            )
+&nbsp;            public Boolean onGenericArray(TypeDescription.Generic genericArray) {
+&nbsp;                TypeDescription.Generic source = this.typeDescription.getComponentType();
+&nbsp;
+&nbsp;                TypeDescription.Generic target;
+&nbsp;                for(target = genericArray.getComponentType(); source.getSort().isGenericArray() &amp;&amp; target.getSort().isGenericArray(); target = target.getComponentType()) {
+&nbsp;                    source = source.getComponentType();
+&nbsp;                }
+&nbsp;
+&nbsp;                return !source.getSort().isGenericArray() &amp;&amp; !target.getSort().isGenericArray() &amp;&amp; (Boolean)source.accept(new IsAssignableToVisitor(target));
+&nbsp;            }
+&nbsp;
+&nbsp;            public Boolean onParameterizedType(TypeDescription.Generic parameterizedType) {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;
+&nbsp;            public Boolean onNonGenericType(TypeDescription.Generic typeDescription) {
+&nbsp;                return this.polymorphic ? this.typeDescription.asErasure().isAssignableTo(typeDescription.asErasure()) : this.typeDescription.asErasure().equals(typeDescription.asErasure());
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        protected abstract static class OfSimpleType extends OfManifestType {
+&nbsp;            protected OfSimpleType(TypeDescription.Generic typeDescription, boolean polymorphic) {
+&nbsp;                super(typeDescription, polymorphic);
+&nbsp;            }
+&nbsp;
+&nbsp;            public Boolean onParameterizedType(TypeDescription.Generic parameterizedType) {
+&nbsp;                Queue&lt;TypeDescription.Generic&gt; candidates = new LinkedList(Collections.singleton(this.typeDescription));
+&nbsp;                Set&lt;TypeDescription&gt; previous = new HashSet(Collections.singleton(this.typeDescription.asErasure()));
+&nbsp;
+&nbsp;                do {
+&nbsp;                    TypeDescription.Generic candidate = (TypeDescription.Generic)candidates.remove();
+&nbsp;                    if (candidate.asErasure().equals(parameterizedType.asErasure())) {
+&nbsp;                        if (candidate.getSort().isNonGeneric()) {
+&nbsp;                            return true;
+&nbsp;                        }
+&nbsp;
+&nbsp;                        TypeList.Generic source = candidate.getTypeArguments();
+&nbsp;                        TypeList.Generic target = parameterizedType.getTypeArguments();
+&nbsp;                        int size = target.size();
+&nbsp;                        if (source.size() != size) {
+&nbsp;                            return false;
+&nbsp;                        }
+&nbsp;
+&nbsp;                        for(int index = 0; index &lt; size; ++index) {
+&nbsp;                            if (!(Boolean)((TypeDescription.Generic)source.get(index)).accept(new IsAssignableToVisitor((TypeDescription.Generic)target.get(index), false))) {
+&nbsp;                                return false;
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;
+&nbsp;                        TypeDescription.Generic ownerType = parameterizedType.getOwnerType();
+&nbsp;                        return ownerType == null || (Boolean)ownerType.accept(new IsAssignableToVisitor(ownerType));
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (this.polymorphic) {
+&nbsp;                        TypeDescription.Generic superClass = candidate.getSuperClass();
+&nbsp;                        if (superClass != null &amp;&amp; previous.add(superClass.asErasure())) {
+&nbsp;                            candidates.add(superClass);
+&nbsp;                        }
+&nbsp;
+&nbsp;                        Iterator var6 = candidate.getInterfaces().iterator();
+&nbsp;
+&nbsp;                        while(var6.hasNext()) {
+&nbsp;                            TypeDescription.Generic anInterface = (TypeDescription.Generic)var6.next();
+&nbsp;                            if (previous.add(anInterface.asErasure())) {
+&nbsp;                                candidates.add(anInterface);
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                } while(!candidates.isEmpty());
+&nbsp;
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;
+&nbsp;            public Boolean onNonGenericType(TypeDescription.Generic typeDescription) {
+&nbsp;                return this.polymorphic ? this.typeDescription.asErasure().isAssignableTo(typeDescription.asErasure()) : this.typeDescription.asErasure().equals(typeDescription.asErasure());
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        protected abstract static class OfManifestType implements TypeDescription.Generic.Visitor&lt;Boolean&gt; {
+&nbsp;            protected final TypeDescription.Generic typeDescription;
+&nbsp;            protected final boolean polymorphic;
+&nbsp;
+&nbsp;            protected OfManifestType(TypeDescription.Generic typeDescription, boolean polymorphic) {
+&nbsp;                this.typeDescription = typeDescription;
+&nbsp;                this.polymorphic = polymorphic;
+&nbsp;            }
+&nbsp;
+&nbsp;            public Boolean onWildcard(TypeDescription.Generic wildcard) {
+&nbsp;                Iterator var2 = wildcard.getUpperBounds().iterator();
+&nbsp;
+&nbsp;                TypeDescription.Generic lowerBound;
+&nbsp;                do {
+&nbsp;                    if (!var2.hasNext()) {
+&nbsp;                        var2 = wildcard.getLowerBounds().iterator();
+&nbsp;
+&nbsp;                        do {
+&nbsp;                            if (!var2.hasNext()) {
+&nbsp;                                return true;
+&nbsp;                            }
+&nbsp;
+&nbsp;                            lowerBound = (TypeDescription.Generic)var2.next();
+&nbsp;                        } while((Boolean)lowerBound.accept(new IsAssignableToVisitor(this.typeDescription)));
+&nbsp;
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    lowerBound = (TypeDescription.Generic)var2.next();
+&nbsp;                } while((Boolean)this.typeDescription.accept(new IsAssignableToVisitor(lowerBound)));
+&nbsp;
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;
+&nbsp;            public Boolean onTypeVariable(TypeDescription.Generic typeVariable) {
+&nbsp;                if (typeVariable.getTypeVariableSource().isInferrable()) {
+&nbsp;                    throw new UnsupportedOperationException(&quot;Assignability checks for type variables declared by methods arel not currently supported&quot;);
+&nbsp;                } else {
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.polymorphic != ((OfManifestType)var1).polymorphic) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.typeDescription.equals(((OfManifestType)var1).typeDescription);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return (this.getClass().hashCode() * 31 + this.typeDescription.hashCode()) * 31 + this.polymorphic;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,655 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ClassWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.jar.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: ClassWriter (net.bytebuddy.jar.asm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClassWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (105/105)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.jar.asm;
+&nbsp;
+&nbsp;public class ClassWriter extends ClassVisitor {
+&nbsp;    public static final int COMPUTE_MAXS = 1;
+&nbsp;    public static final int COMPUTE_FRAMES = 2;
+&nbsp;    private int version;
+&nbsp;    private final SymbolTable symbolTable;
+&nbsp;    private int accessFlags;
+&nbsp;    private int thisClass;
+&nbsp;    private int superClass;
+&nbsp;    private int interfaceCount;
+&nbsp;    private int[] interfaces;
+&nbsp;    private FieldWriter firstField;
+&nbsp;    private FieldWriter lastField;
+&nbsp;    private MethodWriter firstMethod;
+&nbsp;    private MethodWriter lastMethod;
+&nbsp;    private int numberOfInnerClasses;
+&nbsp;    private ByteVector innerClasses;
+&nbsp;    private int enclosingClassIndex;
+&nbsp;    private int enclosingMethodIndex;
+&nbsp;    private int signatureIndex;
+&nbsp;    private int sourceFileIndex;
+&nbsp;    private ByteVector debugExtension;
+&nbsp;    private AnnotationWriter lastRuntimeVisibleAnnotation;
+&nbsp;    private AnnotationWriter lastRuntimeInvisibleAnnotation;
+&nbsp;    private AnnotationWriter lastRuntimeVisibleTypeAnnotation;
+&nbsp;    private AnnotationWriter lastRuntimeInvisibleTypeAnnotation;
+&nbsp;    private ModuleWriter moduleWriter;
+&nbsp;    private int nestHostClassIndex;
+&nbsp;    private int numberOfNestMemberClasses;
+&nbsp;    private ByteVector nestMemberClasses;
+&nbsp;    private int numberOfPermittedSubclasses;
+&nbsp;    private ByteVector permittedSubclasses;
+&nbsp;    private RecordComponentWriter firstRecordComponent;
+&nbsp;    private RecordComponentWriter lastRecordComponent;
+&nbsp;    private Attribute firstAttribute;
+&nbsp;    private int compute;
+&nbsp;
+&nbsp;    public ClassWriter(int flags) {
+&nbsp;        this((ClassReader)null, flags);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ClassWriter(ClassReader classReader, int flags) {
+&nbsp;        super(589824);
+&nbsp;        this.symbolTable = classReader == null ? new SymbolTable(this) : new SymbolTable(this, classReader);
+&nbsp;        if ((flags &amp; 2) != 0) {
+&nbsp;            this.compute = 4;
+&nbsp;        } else if ((flags &amp; 1) != 0) {
+&nbsp;            this.compute = 1;
+&nbsp;        } else {
+&nbsp;            this.compute = 0;
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
+&nbsp;        this.version = version;
+&nbsp;        this.accessFlags = access;
+&nbsp;        this.thisClass = this.symbolTable.setMajorVersionAndClassName(version &amp; &#39;\uffff&#39;, name);
+&nbsp;        if (signature != null) {
+&nbsp;            this.signatureIndex = this.symbolTable.addConstantUtf8(signature);
+&nbsp;        }
+&nbsp;
+&nbsp;        this.superClass = superName == null ? 0 : this.symbolTable.addConstantClass(superName).index;
+&nbsp;        if (interfaces != null &amp;&amp; interfaces.length &gt; 0) {
+&nbsp;            this.interfaceCount = interfaces.length;
+&nbsp;            this.interfaces = new int[this.interfaceCount];
+&nbsp;
+&nbsp;            for(int i = 0; i &lt; this.interfaceCount; ++i) {
+&nbsp;                this.interfaces[i] = this.symbolTable.addConstantClass(interfaces[i]).index;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.compute == 1 &amp;&amp; (version &amp; &#39;\uffff&#39;) &gt;= 51) {
+&nbsp;            this.compute = 2;
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void visitSource(String file, String debug) {
+&nbsp;        if (file != null) {
+&nbsp;            this.sourceFileIndex = this.symbolTable.addConstantUtf8(file);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (debug != null) {
+&nbsp;            this.debugExtension = (new ByteVector()).encodeUtf8(debug, 0, Integer.MAX_VALUE);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public final ModuleVisitor visitModule(String name, int access, String version) {
+&nbsp;        return this.moduleWriter = new ModuleWriter(this.symbolTable, this.symbolTable.addConstantModule(name).index, access, version == null ? 0 : this.symbolTable.addConstantUtf8(version));
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void visitNestHost(String nestHost) {
+&nbsp;        this.nestHostClassIndex = this.symbolTable.addConstantClass(nestHost).index;
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void visitOuterClass(String owner, String name, String descriptor) {
+&nbsp;        this.enclosingClassIndex = this.symbolTable.addConstantClass(owner).index;
+&nbsp;        if (name != null &amp;&amp; descriptor != null) {
+&nbsp;            this.enclosingMethodIndex = this.symbolTable.addConstantNameAndType(name, descriptor);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public final AnnotationVisitor visitAnnotation(String descriptor, boolean visible) {
+&nbsp;        return visible ? (this.lastRuntimeVisibleAnnotation = AnnotationWriter.create(this.symbolTable, descriptor, this.lastRuntimeVisibleAnnotation)) : (this.lastRuntimeInvisibleAnnotation = AnnotationWriter.create(this.symbolTable, descriptor, this.lastRuntimeInvisibleAnnotation));
+&nbsp;    }
+&nbsp;
+&nbsp;    public final AnnotationVisitor visitTypeAnnotation(int typeRef, TypePath typePath, String descriptor, boolean visible) {
+&nbsp;        return visible ? (this.lastRuntimeVisibleTypeAnnotation = AnnotationWriter.create(this.symbolTable, typeRef, typePath, descriptor, this.lastRuntimeVisibleTypeAnnotation)) : (this.lastRuntimeInvisibleTypeAnnotation = AnnotationWriter.create(this.symbolTable, typeRef, typePath, descriptor, this.lastRuntimeInvisibleTypeAnnotation));
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void visitAttribute(Attribute attribute) {
+&nbsp;        attribute.nextAttribute = this.firstAttribute;
+&nbsp;        this.firstAttribute = attribute;
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void visitNestMember(String nestMember) {
+&nbsp;        if (this.nestMemberClasses == null) {
+&nbsp;            this.nestMemberClasses = new ByteVector();
+&nbsp;        }
+&nbsp;
+&nbsp;        ++this.numberOfNestMemberClasses;
+&nbsp;        this.nestMemberClasses.putShort(this.symbolTable.addConstantClass(nestMember).index);
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void visitPermittedSubclass(String permittedSubclass) {
+&nbsp;        if (this.permittedSubclasses == null) {
+&nbsp;            this.permittedSubclasses = new ByteVector();
+&nbsp;        }
+&nbsp;
+&nbsp;        ++this.numberOfPermittedSubclasses;
+&nbsp;        this.permittedSubclasses.putShort(this.symbolTable.addConstantClass(permittedSubclass).index);
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void visitInnerClass(String name, String outerName, String innerName, int access) {
+&nbsp;        if (this.innerClasses == null) {
+&nbsp;            this.innerClasses = new ByteVector();
+&nbsp;        }
+&nbsp;
+&nbsp;        Symbol nameSymbol = this.symbolTable.addConstantClass(name);
+&nbsp;        if (nameSymbol.info == 0) {
+&nbsp;            ++this.numberOfInnerClasses;
+&nbsp;            this.innerClasses.putShort(nameSymbol.index);
+&nbsp;            this.innerClasses.putShort(outerName == null ? 0 : this.symbolTable.addConstantClass(outerName).index);
+&nbsp;            this.innerClasses.putShort(innerName == null ? 0 : this.symbolTable.addConstantUtf8(innerName));
+&nbsp;            this.innerClasses.putShort(access);
+&nbsp;            nameSymbol.info = this.numberOfInnerClasses;
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public final RecordComponentVisitor visitRecordComponent(String name, String descriptor, String signature) {
+&nbsp;        RecordComponentWriter recordComponentWriter = new RecordComponentWriter(this.symbolTable, name, descriptor, signature);
+&nbsp;        if (this.firstRecordComponent == null) {
+&nbsp;            this.firstRecordComponent = recordComponentWriter;
+&nbsp;        } else {
+&nbsp;            this.lastRecordComponent.delegate = recordComponentWriter;
+&nbsp;        }
+&nbsp;
+&nbsp;        return this.lastRecordComponent = recordComponentWriter;
+&nbsp;    }
+&nbsp;
+&nbsp;    public final FieldVisitor visitField(int access, String name, String descriptor, String signature, Object value) {
+&nbsp;        FieldWriter fieldWriter = new FieldWriter(this.symbolTable, access, name, descriptor, signature, value);
+&nbsp;        if (this.firstField == null) {
+&nbsp;            this.firstField = fieldWriter;
+&nbsp;        } else {
+&nbsp;            this.lastField.fv = fieldWriter;
+&nbsp;        }
+&nbsp;
+&nbsp;        return this.lastField = fieldWriter;
+&nbsp;    }
+&nbsp;
+&nbsp;    public final MethodVisitor visitMethod(int access, String name, String descriptor, String signature, String[] exceptions) {
+&nbsp;        MethodWriter methodWriter = new MethodWriter(this.symbolTable, access, name, descriptor, signature, exceptions, this.compute);
+&nbsp;        if (this.firstMethod == null) {
+&nbsp;            this.firstMethod = methodWriter;
+&nbsp;        } else {
+&nbsp;            this.lastMethod.mv = methodWriter;
+&nbsp;        }
+&nbsp;
+&nbsp;        return this.lastMethod = methodWriter;
+&nbsp;    }
+&nbsp;
+&nbsp;    public final void visitEnd() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public byte[] toByteArray() {
+&nbsp;        int size = 24 + 2 * this.interfaceCount;
+&nbsp;        int fieldsCount = 0;
+&nbsp;
+&nbsp;        FieldWriter fieldWriter;
+&nbsp;        for(fieldWriter = this.firstField; fieldWriter != null; fieldWriter = (FieldWriter)fieldWriter.fv) {
+&nbsp;            ++fieldsCount;
+&nbsp;            size += fieldWriter.computeFieldInfoSize();
+&nbsp;        }
+&nbsp;
+&nbsp;        int methodsCount = 0;
+&nbsp;
+&nbsp;        MethodWriter methodWriter;
+&nbsp;        for(methodWriter = this.firstMethod; methodWriter != null; methodWriter = (MethodWriter)methodWriter.mv) {
+&nbsp;            ++methodsCount;
+&nbsp;            size += methodWriter.computeMethodInfoSize();
+&nbsp;        }
+&nbsp;
+&nbsp;        int attributesCount = 0;
+&nbsp;        if (this.innerClasses != null) {
+&nbsp;            ++attributesCount;
+&nbsp;            size += 8 + this.innerClasses.length;
+&nbsp;            this.symbolTable.addConstantUtf8(&quot;InnerClasses&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.enclosingClassIndex != 0) {
+&nbsp;            ++attributesCount;
+&nbsp;            size += 10;
+&nbsp;            this.symbolTable.addConstantUtf8(&quot;EnclosingMethod&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        if ((this.accessFlags &amp; 4096) != 0 &amp;&amp; (this.version &amp; &#39;\uffff&#39;) &lt; 49) {
+<b class="fc">&nbsp;            ++attributesCount;</b>
+&nbsp;            size += 6;
+&nbsp;            this.symbolTable.addConstantUtf8(&quot;Synthetic&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.signatureIndex != 0) {
+&nbsp;            ++attributesCount;
+&nbsp;            size += 8;
+&nbsp;            this.symbolTable.addConstantUtf8(&quot;Signature&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.sourceFileIndex != 0) {
+&nbsp;            ++attributesCount;
+&nbsp;            size += 8;
+&nbsp;            this.symbolTable.addConstantUtf8(&quot;SourceFile&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.debugExtension != null) {
+&nbsp;            ++attributesCount;
+&nbsp;            size += 6 + this.debugExtension.length;
+&nbsp;            this.symbolTable.addConstantUtf8(&quot;SourceDebugExtension&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        if ((this.accessFlags &amp; 131072) != 0) {
+&nbsp;            ++attributesCount;
+&nbsp;            size += 6;
+&nbsp;            this.symbolTable.addConstantUtf8(&quot;Deprecated&quot;);
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        if (this.lastRuntimeVisibleAnnotation != null) {</b>
+<b class="fc">&nbsp;            ++attributesCount;</b>
+&nbsp;            size += this.lastRuntimeVisibleAnnotation.computeAnnotationsSize(&quot;RuntimeVisibleAnnotations&quot;);
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        if (this.lastRuntimeInvisibleAnnotation != null) {
+<b class="fc">&nbsp;            ++attributesCount;</b>
+&nbsp;            size += this.lastRuntimeInvisibleAnnotation.computeAnnotationsSize(&quot;RuntimeInvisibleAnnotations&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.lastRuntimeVisibleTypeAnnotation != null) {
+&nbsp;            ++attributesCount;
+&nbsp;            size += this.lastRuntimeVisibleTypeAnnotation.computeAnnotationsSize(&quot;RuntimeVisibleTypeAnnotations&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.lastRuntimeInvisibleTypeAnnotation != null) {
+&nbsp;            ++attributesCount;
+&nbsp;            size += this.lastRuntimeInvisibleTypeAnnotation.computeAnnotationsSize(&quot;RuntimeInvisibleTypeAnnotations&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.symbolTable.computeBootstrapMethodsSize() &gt; 0) {
+&nbsp;            ++attributesCount;
+<b class="fc">&nbsp;            size += this.symbolTable.computeBootstrapMethodsSize();</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        if (this.moduleWriter != null) {</b>
+&nbsp;            attributesCount += this.moduleWriter.getAttributeCount();
+&nbsp;            size += this.moduleWriter.computeAttributesSize();
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        if (this.nestHostClassIndex != 0) {</b>
+<b class="fc">&nbsp;            ++attributesCount;</b>
+<b class="fc">&nbsp;            size += 8;</b>
+<b class="fc">&nbsp;            this.symbolTable.addConstantUtf8(&quot;NestHost&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (this.nestMemberClasses != null) {</b>
+&nbsp;            ++attributesCount;
+&nbsp;            size += 8 + this.nestMemberClasses.length;
+&nbsp;            this.symbolTable.addConstantUtf8(&quot;NestMembers&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.permittedSubclasses != null) {
+&nbsp;            ++attributesCount;
+&nbsp;            size += 8 + this.permittedSubclasses.length;
+&nbsp;            this.symbolTable.addConstantUtf8(&quot;PermittedSubclasses&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        int recordComponentCount = 0;
+&nbsp;        int recordSize = 0;
+&nbsp;        if ((this.accessFlags &amp; 65536) != 0 || this.firstRecordComponent != null) {
+&nbsp;            for(RecordComponentWriter recordComponentWriter = this.firstRecordComponent; recordComponentWriter != null; recordComponentWriter = (RecordComponentWriter)recordComponentWriter.delegate) {
+&nbsp;                ++recordComponentCount;
+&nbsp;                recordSize += recordComponentWriter.computeRecordComponentInfoSize();
+&nbsp;            }
+&nbsp;
+&nbsp;            ++attributesCount;
+&nbsp;            size += 8 + recordSize;
+&nbsp;            this.symbolTable.addConstantUtf8(&quot;Record&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.firstAttribute != null) {
+&nbsp;            attributesCount += this.firstAttribute.getAttributeCount();
+&nbsp;            size += this.firstAttribute.computeAttributesSize(this.symbolTable);
+&nbsp;        }
+&nbsp;
+&nbsp;        size += this.symbolTable.getConstantPoolLength();
+&nbsp;        int constantPoolCount = this.symbolTable.getConstantPoolCount();
+&nbsp;        if (constantPoolCount &gt; 65535) {
+&nbsp;            throw new ClassTooLargeException(this.symbolTable.getClassName(), constantPoolCount);
+&nbsp;        } else {
+&nbsp;            ByteVector result = new ByteVector(size);
+&nbsp;            result.putInt(-889275714).putInt(this.version);
+&nbsp;            this.symbolTable.putConstantPool(result);
+&nbsp;            int mask = (this.version &amp; &#39;\uffff&#39;) &lt; 49 ? 4096 : 0;
+&nbsp;            result.putShort(this.accessFlags &amp; ~mask).putShort(this.thisClass).putShort(this.superClass);
+&nbsp;            result.putShort(this.interfaceCount);
+&nbsp;
+&nbsp;            for(int i = 0; i &lt; this.interfaceCount; ++i) {
+&nbsp;                result.putShort(this.interfaces[i]);
+&nbsp;            }
+&nbsp;
+&nbsp;            result.putShort(fieldsCount);
+&nbsp;
+&nbsp;            for(fieldWriter = this.firstField; fieldWriter != null; fieldWriter = (FieldWriter)fieldWriter.fv) {
+&nbsp;                fieldWriter.putFieldInfo(result);
+&nbsp;            }
+&nbsp;
+&nbsp;            result.putShort(methodsCount);
+&nbsp;            boolean hasFrames = false;
+&nbsp;            boolean hasAsmInstructions = false;
+&nbsp;
+&nbsp;            for(methodWriter = this.firstMethod; methodWriter != null; methodWriter = (MethodWriter)methodWriter.mv) {
+&nbsp;                hasFrames |= methodWriter.hasFrames();
+&nbsp;                hasAsmInstructions |= methodWriter.hasAsmInstructions();
+&nbsp;                methodWriter.putMethodInfo(result);
+&nbsp;            }
+&nbsp;
+&nbsp;            result.putShort(attributesCount);
+&nbsp;            if (this.innerClasses != null) {
+&nbsp;                result.putShort(this.symbolTable.addConstantUtf8(&quot;InnerClasses&quot;)).putInt(this.innerClasses.length + 2).putShort(this.numberOfInnerClasses).putByteArray(this.innerClasses.data, 0, this.innerClasses.length);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.enclosingClassIndex != 0) {
+&nbsp;                result.putShort(this.symbolTable.addConstantUtf8(&quot;EnclosingMethod&quot;)).putInt(4).putShort(this.enclosingClassIndex).putShort(this.enclosingMethodIndex);
+&nbsp;            }
+&nbsp;
+&nbsp;            if ((this.accessFlags &amp; 4096) != 0 &amp;&amp; (this.version &amp; &#39;\uffff&#39;) &lt; 49) {
+&nbsp;                result.putShort(this.symbolTable.addConstantUtf8(&quot;Synthetic&quot;)).putInt(0);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.signatureIndex != 0) {
+&nbsp;                result.putShort(this.symbolTable.addConstantUtf8(&quot;Signature&quot;)).putInt(2).putShort(this.signatureIndex);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.sourceFileIndex != 0) {
+&nbsp;                result.putShort(this.symbolTable.addConstantUtf8(&quot;SourceFile&quot;)).putInt(2).putShort(this.sourceFileIndex);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.debugExtension != null) {
+&nbsp;                int length = this.debugExtension.length;
+&nbsp;                result.putShort(this.symbolTable.addConstantUtf8(&quot;SourceDebugExtension&quot;)).putInt(length).putByteArray(this.debugExtension.data, 0, length);
+&nbsp;            }
+&nbsp;
+&nbsp;            if ((this.accessFlags &amp; 131072) != 0) {
+&nbsp;                result.putShort(this.symbolTable.addConstantUtf8(&quot;Deprecated&quot;)).putInt(0);
+&nbsp;            }
+&nbsp;
+&nbsp;            AnnotationWriter.putAnnotations(this.symbolTable, this.lastRuntimeVisibleAnnotation, this.lastRuntimeInvisibleAnnotation, this.lastRuntimeVisibleTypeAnnotation, this.lastRuntimeInvisibleTypeAnnotation, result);
+&nbsp;            this.symbolTable.putBootstrapMethods(result);
+&nbsp;            if (this.moduleWriter != null) {
+&nbsp;                this.moduleWriter.putAttributes(result);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.nestHostClassIndex != 0) {
+&nbsp;                result.putShort(this.symbolTable.addConstantUtf8(&quot;NestHost&quot;)).putInt(2).putShort(this.nestHostClassIndex);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.nestMemberClasses != null) {
+&nbsp;                result.putShort(this.symbolTable.addConstantUtf8(&quot;NestMembers&quot;)).putInt(this.nestMemberClasses.length + 2).putShort(this.numberOfNestMemberClasses).putByteArray(this.nestMemberClasses.data, 0, this.nestMemberClasses.length);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.permittedSubclasses != null) {
+&nbsp;                result.putShort(this.symbolTable.addConstantUtf8(&quot;PermittedSubclasses&quot;)).putInt(this.permittedSubclasses.length + 2).putShort(this.numberOfPermittedSubclasses).putByteArray(this.permittedSubclasses.data, 0, this.permittedSubclasses.length);
+&nbsp;            }
+&nbsp;
+&nbsp;            if ((this.accessFlags &amp; 65536) != 0 || this.firstRecordComponent != null) {
+&nbsp;                result.putShort(this.symbolTable.addConstantUtf8(&quot;Record&quot;)).putInt(recordSize + 2).putShort(recordComponentCount);
+&nbsp;
+&nbsp;                for(RecordComponentWriter recordComponentWriter = this.firstRecordComponent; recordComponentWriter != null; recordComponentWriter = (RecordComponentWriter)recordComponentWriter.delegate) {
+&nbsp;                    recordComponentWriter.putRecordComponentInfo(result);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.firstAttribute != null) {
+&nbsp;                this.firstAttribute.putAttributes(this.symbolTable, result);
+&nbsp;            }
+&nbsp;
+&nbsp;            return hasAsmInstructions ? this.replaceAsmInstructions(result.data, hasFrames) : result.data;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private byte[] replaceAsmInstructions(byte[] classFile, boolean hasFrames) {
+&nbsp;        Attribute[] attributes = this.getAttributePrototypes();
+&nbsp;        this.firstField = null;
+&nbsp;        this.lastField = null;
+&nbsp;        this.firstMethod = null;
+&nbsp;        this.lastMethod = null;
+&nbsp;        this.lastRuntimeVisibleAnnotation = null;
+&nbsp;        this.lastRuntimeInvisibleAnnotation = null;
+&nbsp;        this.lastRuntimeVisibleTypeAnnotation = null;
+<b class="fc">&nbsp;        this.lastRuntimeInvisibleTypeAnnotation = null;</b>
+&nbsp;        this.moduleWriter = null;
+<b class="fc">&nbsp;        this.nestHostClassIndex = 0;</b>
+<b class="fc">&nbsp;        this.numberOfNestMemberClasses = 0;</b>
+&nbsp;        this.nestMemberClasses = null;
+<b class="fc">&nbsp;        this.numberOfPermittedSubclasses = 0;</b>
+&nbsp;        this.permittedSubclasses = null;
+<b class="fc">&nbsp;        this.firstRecordComponent = null;</b>
+&nbsp;        this.lastRecordComponent = null;
+&nbsp;        this.firstAttribute = null;
+&nbsp;        this.compute = hasFrames ? 3 : 0;
+&nbsp;        (new ClassReader(classFile, 0, false)).accept(this, attributes, (hasFrames ? 8 : 0) | 256);
+&nbsp;        return this.toByteArray();
+&nbsp;    }
+&nbsp;
+&nbsp;    private Attribute[] getAttributePrototypes() {
+&nbsp;        Attribute.Set attributePrototypes = new Attribute.Set();
+<b class="fc">&nbsp;        attributePrototypes.addAttributes(this.firstAttribute);</b>
+&nbsp;
+<b class="fc">&nbsp;        for(FieldWriter fieldWriter = this.firstField; fieldWriter != null; fieldWriter = (FieldWriter)fieldWriter.fv) {</b>
+<b class="fc">&nbsp;            fieldWriter.collectAttributePrototypes(attributePrototypes);</b>
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        for(MethodWriter methodWriter = this.firstMethod; methodWriter != null; methodWriter = (MethodWriter)methodWriter.mv) {
+<b class="fc">&nbsp;            methodWriter.collectAttributePrototypes(attributePrototypes);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        for(RecordComponentWriter recordComponentWriter = this.firstRecordComponent; recordComponentWriter != null; recordComponentWriter = (RecordComponentWriter)recordComponentWriter.delegate) {
+&nbsp;            recordComponentWriter.collectAttributePrototypes(attributePrototypes);
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        return attributePrototypes.toArray();
+&nbsp;    }
+&nbsp;
+&nbsp;    public int newConst(Object value) {
+&nbsp;        return this.symbolTable.addConstant(value).index;
+&nbsp;    }
+&nbsp;
+&nbsp;    public int newUTF8(String value) {
+&nbsp;        return this.symbolTable.addConstantUtf8(value);
+&nbsp;    }
+&nbsp;
+&nbsp;    public int newClass(String value) {
+&nbsp;        return this.symbolTable.addConstantClass(value).index;
+&nbsp;    }
+&nbsp;
+&nbsp;    public int newMethodType(String methodDescriptor) {
+&nbsp;        return this.symbolTable.addConstantMethodType(methodDescriptor).index;
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public int newModule(String moduleName) {</b>
+<b class="fc">&nbsp;        return this.symbolTable.addConstantModule(moduleName).index;</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public int newPackage(String packageName) {</b>
+&nbsp;        return this.symbolTable.addConstantPackage(packageName).index;
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    /** @deprecated */</b>
+<b class="fc">&nbsp;    @Deprecated</b>
+<b class="fc">&nbsp;    public int newHandle(int tag, String owner, String name, String descriptor) {</b>
+<b class="fc">&nbsp;        return this.newHandle(tag, owner, name, descriptor, tag == 9);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int newHandle(int tag, String owner, String name, String descriptor, boolean isInterface) {
+<b class="fc">&nbsp;        return this.symbolTable.addConstantMethodHandle(tag, owner, name, descriptor, isInterface).index;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public int newConstantDynamic(String name, String descriptor, Handle bootstrapMethodHandle, Object... bootstrapMethodArguments) {
+&nbsp;        return this.symbolTable.addConstantDynamic(name, descriptor, bootstrapMethodHandle, bootstrapMethodArguments).index;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public int newInvokeDynamic(String name, String descriptor, Handle bootstrapMethodHandle, Object... bootstrapMethodArguments) {
+&nbsp;        return this.symbolTable.addConstantInvokeDynamic(name, descriptor, bootstrapMethodHandle, bootstrapMethodArguments).index;
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public int newField(String owner, String name, String descriptor) {</b>
+&nbsp;        return this.symbolTable.addConstantFieldref(owner, name, descriptor).index;
+&nbsp;    }
+&nbsp;
+&nbsp;    public int newMethod(String owner, String name, String descriptor, boolean isInterface) {
+<b class="fc">&nbsp;        return this.symbolTable.addConstantMethodref(owner, name, descriptor, isInterface).index;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int newNameType(String name, String descriptor) {
+&nbsp;        return this.symbolTable.addConstantNameAndType(name, descriptor);
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    protected String getCommonSuperClass(String type1, String type2) {
+&nbsp;        ClassLoader classLoader = this.getClassLoader();
+&nbsp;
+<b class="fc">&nbsp;        Class class1;</b>
+&nbsp;        try {
+&nbsp;            class1 = Class.forName(type1.replace(&#39;/&#39;, &#39;.&#39;), false, classLoader);
+&nbsp;        } catch (ClassNotFoundException var8) {
+&nbsp;            throw new TypeNotPresentException(type1, var8);
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        Class class2;
+&nbsp;        try {
+&nbsp;            class2 = Class.forName(type2.replace(&#39;/&#39;, &#39;.&#39;), false, classLoader);
+<b class="fc">&nbsp;        } catch (ClassNotFoundException var7) {</b>
+&nbsp;            throw new TypeNotPresentException(type2, var7);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (class1.isAssignableFrom(class2)) {
+&nbsp;            return type1;
+<b class="fc">&nbsp;        } else if (class2.isAssignableFrom(class1)) {</b>
+&nbsp;            return type2;
+&nbsp;        } else if (!class1.isInterface() &amp;&amp; !class2.isInterface()) {
+&nbsp;            do {
+&nbsp;                class1 = class1.getSuperclass();
+&nbsp;            } while(!class1.isAssignableFrom(class2));
+<b class="fc">&nbsp;</b>
+&nbsp;            return class1.getName().replace(&#39;.&#39;, &#39;/&#39;);
+&nbsp;        } else {
+&nbsp;            return &quot;java/lang/Object&quot;;
+&nbsp;        }
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    protected ClassLoader getClassLoader() {
+&nbsp;        return this.getClass().getClassLoader();
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

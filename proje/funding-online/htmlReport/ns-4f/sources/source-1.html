@@ -1,0 +1,119 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > CaptorAnnotationProcessor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.configuration</a>
+</div>
+
+<h1>Coverage Summary for Class: CaptorAnnotationProcessor (org.mockito.internal.configuration)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CaptorAnnotationProcessor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.configuration;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import org.mockito.ArgumentCaptor;
+&nbsp;import org.mockito.Captor;
+&nbsp;import org.mockito.exceptions.base.MockitoException;
+&nbsp;import org.mockito.internal.util.reflection.GenericMaster;
+&nbsp;
+&nbsp;public class CaptorAnnotationProcessor implements FieldAnnotationProcessor&lt;Captor&gt; {
+&nbsp;    public CaptorAnnotationProcessor() {
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Object process(Captor annotation, Field field) {
+&nbsp;        Class&lt;?&gt; type = field.getType();
+&nbsp;        if (!ArgumentCaptor.class.isAssignableFrom(type)) {
+&nbsp;            throw new MockitoException(&quot;@Captor field must be of the type ArgumentCaptor.\nField: &#39;&quot; + field.getName() + &quot;&#39; has wrong type\nFor info how to use @Captor annotations see examples in javadoc for MockitoAnnotations class.&quot;);
+&nbsp;        } else {
+&nbsp;            Class&lt;?&gt; cls = (new GenericMaster()).getGenericType(field);
+&nbsp;            return ArgumentCaptor.forClass(cls);
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:49</div>
+</div>
+</body>
+</html>

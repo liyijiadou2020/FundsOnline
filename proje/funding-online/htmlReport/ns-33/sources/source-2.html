@@ -1,0 +1,482 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > MethodInvocation</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.bytecode.member</a>
+</div>
+
+<h1>Coverage Summary for Class: MethodInvocation (net.bytebuddy.implementation.bytecode.member)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MethodInvocation</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (25/25)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MethodInvocation$Invocation</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (38/38)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.bytecode.member;
+&nbsp;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import net.bytebuddy.ClassFileVersion;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeList;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackSize;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation.Illegal;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.TypeCasting;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.JavaConstantValue.Visitor;
+&nbsp;import net.bytebuddy.jar.asm.Handle;
+&nbsp;import net.bytebuddy.jar.asm.MethodVisitor;
+&nbsp;import net.bytebuddy.utility.JavaConstant;
+&nbsp;
+&nbsp;public enum MethodInvocation {
+&nbsp;    VIRTUAL(182, 5, 182, 5),
+&nbsp;    INTERFACE(185, 9, 185, 9),
+&nbsp;    STATIC(184, 6, 184, 6),
+&nbsp;    SPECIAL(183, 7, 183, 7),
+&nbsp;    SPECIAL_CONSTRUCTOR(183, 8, 183, 8),
+&nbsp;    VIRTUAL_PRIVATE(182, 5, 183, 7),
+&nbsp;    INTERFACE_PRIVATE(185, 9, 183, 7);
+&nbsp;
+&nbsp;    private final int opcode;
+&nbsp;    private final int handle;
+&nbsp;    private final int legacyOpcode;
+<b class="fc">&nbsp;    private final int legacyHandle;</b>
+&nbsp;
+&nbsp;    private MethodInvocation(int opcode, int handle, int legacyOpcode, int legacyHandle) {
+&nbsp;        this.opcode = opcode;
+&nbsp;        this.handle = handle;
+<b class="fc">&nbsp;        this.legacyOpcode = legacyOpcode;</b>
+&nbsp;        this.legacyHandle = legacyHandle;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static WithImplicitInvocationTargetType invoke(MethodDescription.InDefinedShape methodDescription) {
+<b class="fc">&nbsp;        if (methodDescription.isTypeInitializer()) {</b>
+&nbsp;            return MethodInvocation.IllegalInvocation.INSTANCE;
+&nbsp;        } else if (methodDescription.isStatic()) {
+&nbsp;            return STATIC.new Invocation(methodDescription);
+&nbsp;        } else if (methodDescription.isConstructor()) {
+<b class="fc">&nbsp;            return SPECIAL_CONSTRUCTOR.new Invocation(methodDescription);</b>
+&nbsp;        } else if (methodDescription.isPrivate()) {
+&nbsp;            return methodDescription.getDeclaringType().isInterface() ? INTERFACE_PRIVATE : VIRTUAL_PRIVATE.new Invocation(methodDescription);
+&nbsp;        } else {
+&nbsp;            return methodDescription.getDeclaringType().isInterface() ? INTERFACE.new Invocation(methodDescription) : VIRTUAL.new Invocation(methodDescription);
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static WithImplicitInvocationTargetType invoke(MethodDescription methodDescription) {
+&nbsp;        MethodDescription.InDefinedShape declaredMethod = (MethodDescription.InDefinedShape)methodDescription.asDefined();
+<b class="fc">&nbsp;        return declaredMethod.getReturnType().asErasure().equals(methodDescription.getReturnType().asErasure()) ? invoke(declaredMethod) : MethodInvocation.OfGenericMethod.of(methodDescription, invoke(declaredMethod));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum HandleType {
+&nbsp;        EXACT(&quot;invokeExact&quot;),
+<b class="fc">&nbsp;        REGULAR(&quot;invoke&quot;);</b>
+&nbsp;
+&nbsp;        private final String methodName;
+&nbsp;
+&nbsp;        private HandleType(String methodName) {
+<b class="fc">&nbsp;            this.methodName = methodName;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        protected String getMethodName() {
+&nbsp;            return this.methodName;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    protected static class HandleInvocation extends StackManipulation.AbstractBase {
+&nbsp;        private static final String METHOD_HANDLE = &quot;java/lang/invoke/MethodHandle&quot;;
+&nbsp;        private final MethodDescription.InDefinedShape methodDescription;
+&nbsp;        private final HandleType type;
+&nbsp;
+&nbsp;        protected HandleInvocation(MethodDescription.InDefinedShape methodDescription, HandleType type) {
+&nbsp;            this.methodDescription = methodDescription;
+&nbsp;            this.type = type;
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;            methodVisitor.visitMethodInsn(182, &quot;java/lang/invoke/MethodHandle&quot;, this.type.getMethodName(), !this.methodDescription.isStatic() &amp;&amp; !this.methodDescription.isConstructor() ? &quot;(&quot; + this.methodDescription.getDeclaringType().getDescriptor() + this.methodDescription.getDescriptor().substring(1) : this.methodDescription.getDescriptor(), false);
+&nbsp;            int parameterSize = 1 + this.methodDescription.getStackSize();
+&nbsp;            int returnValueSize = this.methodDescription.getReturnType().getStackSize().getSize();
+&nbsp;            return new StackManipulation.Size(returnValueSize - parameterSize, Math.max(0, returnValueSize - parameterSize));
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+<b class="fc">&nbsp;                return false;</b>
+<b class="fc">&nbsp;            } else if (this.getClass() != var1.getClass()) {</b>
+<b class="fc">&nbsp;                return false;</b>
+<b class="fc">&nbsp;            } else if (!this.type.equals(((HandleInvocation)var1).type)) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            } else {
+&nbsp;                return this.methodDescription.equals(((HandleInvocation)var1).methodDescription);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return (this.getClass().hashCode() * 31 + this.methodDescription.hashCode()) * 31 + this.type.hashCode();
+&nbsp;        }
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    @Enhance(
+<b class="fc">&nbsp;        includeSyntheticFields = true</b>
+<b class="fc">&nbsp;    )</b>
+<b class="fc">&nbsp;    protected class DynamicInvocation extends StackManipulation.AbstractBase {</b>
+<b class="fc">&nbsp;        private final String methodName;</b>
+<b class="fc">&nbsp;        private final TypeDescription returnType;</b>
+&nbsp;        private final List&lt;? extends TypeDescription&gt; parameterTypes;
+&nbsp;        private final MethodDescription.InDefinedShape bootstrapMethod;
+&nbsp;        private final List&lt;? extends JavaConstant&gt; arguments;
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public DynamicInvocation(String methodName, TypeDescription returnType, List&lt;? extends TypeDescription&gt; parameterTypes, MethodDescription.InDefinedShape bootstrapMethod, List&lt;? extends JavaConstant&gt; arguments) {</b>
+&nbsp;            this.methodName = methodName;
+<b class="fc">&nbsp;            this.returnType = returnType;</b>
+&nbsp;            this.parameterTypes = parameterTypes;
+&nbsp;            this.bootstrapMethod = bootstrapMethod;
+&nbsp;            this.arguments = arguments;
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;            StringBuilder stringBuilder = new StringBuilder(&quot;(&quot;);
+&nbsp;            Iterator var4 = this.parameterTypes.iterator();
+&nbsp;
+&nbsp;            while(var4.hasNext()) {
+&nbsp;                TypeDescription parameterType = (TypeDescription)var4.next();
+<b class="fc">&nbsp;                stringBuilder.append(parameterType.getDescriptor());</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;            String methodDescriptor = stringBuilder.append(&#39;)&#39;).append(this.returnType.getDescriptor()).toString();
+&nbsp;            Object[] constant = new Object[this.arguments.size()];
+&nbsp;            int index = 0;
+&nbsp;
+&nbsp;            JavaConstant argument;
+&nbsp;            for(Iterator var7 = this.arguments.iterator(); var7.hasNext(); constant[index++] = argument.accept(Visitor.INSTANCE)) {
+&nbsp;                argument = (JavaConstant)var7.next();
+&nbsp;            }
+&nbsp;
+&nbsp;            methodVisitor.visitInvokeDynamicInsn(this.methodName, methodDescriptor, new Handle(MethodInvocation.this.handle != MethodInvocation.this.legacyHandle &amp;&amp; !implementationContext.getClassFileVersion().isAtLeast(ClassFileVersion.JAVA_V11) ? MethodInvocation.this.legacyHandle : MethodInvocation.this.handle, this.bootstrapMethod.getDeclaringType().getInternalName(), this.bootstrapMethod.getInternalName(), this.bootstrapMethod.getDescriptor(), this.bootstrapMethod.getDeclaringType().isInterface()), constant);
+&nbsp;            int stackSize = this.returnType.getStackSize().getSize() - StackSize.of(this.parameterTypes);
+&nbsp;            return new StackManipulation.Size(stackSize, Math.max(stackSize, 0));
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (!MethodInvocation.this.equals(MethodInvocation.this)) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.methodName.equals(((DynamicInvocation)var1).methodName)) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.returnType.equals(((DynamicInvocation)var1).returnType)) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.parameterTypes.equals(((DynamicInvocation)var1).parameterTypes)) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.bootstrapMethod.equals(((DynamicInvocation)var1).bootstrapMethod)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.arguments.equals(((DynamicInvocation)var1).arguments);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return (((((this.getClass().hashCode() * 31 + this.methodName.hashCode()) * 31 + this.returnType.hashCode()) * 31 + this.parameterTypes.hashCode()) * 31 + this.bootstrapMethod.hashCode()) * 31 + this.arguments.hashCode()) * 31 + MethodInvocation.this.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance(
+&nbsp;        includeSyntheticFields = true
+&nbsp;    )
+&nbsp;    protected class Invocation extends StackManipulation.AbstractBase implements WithImplicitInvocationTargetType {
+&nbsp;        private final TypeDescription typeDescription;
+&nbsp;        private final MethodDescription.InDefinedShape methodDescription;
+&nbsp;
+&nbsp;        protected Invocation(MethodDescription.InDefinedShape methodDescription) {
+&nbsp;            this(methodDescription, methodDescription.getDeclaringType());
+&nbsp;        }
+&nbsp;
+&nbsp;        protected Invocation(MethodDescription.InDefinedShape methodDescription, TypeDescription typeDescription) {
+&nbsp;            this.typeDescription = typeDescription;
+&nbsp;            this.methodDescription = methodDescription;
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;            methodVisitor.visitMethodInsn(MethodInvocation.this.opcode != MethodInvocation.this.legacyOpcode &amp;&amp; !implementationContext.getClassFileVersion().isAtLeast(ClassFileVersion.JAVA_V11) ? MethodInvocation.this.legacyOpcode : MethodInvocation.this.opcode, this.typeDescription.getInternalName(), this.methodDescription.getInternalName(), this.methodDescription.getDescriptor(), this.typeDescription.isInterface());
+&nbsp;            int parameterSize = this.methodDescription.getStackSize();
+&nbsp;            int returnValueSize = this.methodDescription.getReturnType().getStackSize().getSize();
+&nbsp;            return new StackManipulation.Size(returnValueSize - parameterSize, Math.max(0, returnValueSize - parameterSize));
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation virtual(TypeDescription invocationTarget) {
+&nbsp;            if (!this.methodDescription.isConstructor() &amp;&amp; !this.methodDescription.isStatic()) {
+&nbsp;                if (this.methodDescription.isPrivate()) {
+&nbsp;                    return (StackManipulation)(this.methodDescription.getDeclaringType().equals(invocationTarget) ? this : Illegal.INSTANCE);
+&nbsp;                } else if (invocationTarget.isInterface()) {
+&nbsp;                    return this.methodDescription.getDeclaringType().represents(Object.class) ? this : MethodInvocation.INTERFACE.new Invocation(this.methodDescription, invocationTarget);
+&nbsp;                } else {
+&nbsp;                    return MethodInvocation.VIRTUAL.new Invocation(this.methodDescription, invocationTarget);
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                return Illegal.INSTANCE;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation special(TypeDescription invocationTarget) {
+&nbsp;            return (StackManipulation)(this.methodDescription.isSpecializableFor(invocationTarget) ? MethodInvocation.SPECIAL.new Invocation(this.methodDescription, invocationTarget) : Illegal.INSTANCE);
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation dynamic(String methodName, TypeDescription returnType, List&lt;? extends TypeDescription&gt; methodType, List&lt;? extends JavaConstant&gt; arguments) {
+&nbsp;            return (StackManipulation)(this.methodDescription.isInvokeBootstrap() ? MethodInvocation.this.new DynamicInvocation(methodName, returnType, new TypeList.Explicit(methodType), (MethodDescription.InDefinedShape)this.methodDescription.asDefined(), arguments) : Illegal.INSTANCE);
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation onHandle(HandleType type) {
+&nbsp;            return new HandleInvocation(this.methodDescription, type);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (!MethodInvocation.this.equals(MethodInvocation.this)) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.typeDescription.equals(((Invocation)var1).typeDescription)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.methodDescription.equals(((Invocation)var1).methodDescription);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return ((this.getClass().hashCode() * 31 + this.typeDescription.hashCode()) * 31 + this.methodDescription.hashCode()) * 31 + MethodInvocation.this.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    protected static class OfGenericMethod implements WithImplicitInvocationTargetType {
+&nbsp;        private final TypeDescription targetType;
+&nbsp;        private final WithImplicitInvocationTargetType invocation;
+&nbsp;
+&nbsp;        protected OfGenericMethod(TypeDescription targetType, WithImplicitInvocationTargetType invocation) {
+&nbsp;            this.targetType = targetType;
+&nbsp;            this.invocation = invocation;
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static WithImplicitInvocationTargetType of(MethodDescription methodDescription, WithImplicitInvocationTargetType invocation) {
+&nbsp;            return new OfGenericMethod(methodDescription.getReturnType().asErasure(), invocation);
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation virtual(TypeDescription invocationTarget) {
+&nbsp;            return new StackManipulation.Compound(new StackManipulation[]{this.invocation.virtual(invocationTarget), TypeCasting.to(this.targetType)});
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation special(TypeDescription invocationTarget) {
+&nbsp;            return new StackManipulation.Compound(new StackManipulation[]{this.invocation.special(invocationTarget), TypeCasting.to(this.targetType)});
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation dynamic(String methodName, TypeDescription returnType, List&lt;? extends TypeDescription&gt; methodType, List&lt;? extends JavaConstant&gt; arguments) {
+&nbsp;            return this.invocation.dynamic(methodName, returnType, methodType, arguments);
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation onHandle(HandleType type) {
+&nbsp;            return new StackManipulation.Compound(new StackManipulation[]{this.invocation.onHandle(type), TypeCasting.to(this.targetType)});
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isValid() {
+&nbsp;            return this.invocation.isValid();
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;            return (new StackManipulation.Compound(new StackManipulation[]{this.invocation, TypeCasting.to(this.targetType)})).apply(methodVisitor, implementationContext);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.targetType.equals(((OfGenericMethod)var1).targetType)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.invocation.equals(((OfGenericMethod)var1).invocation);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return (this.getClass().hashCode() * 31 + this.targetType.hashCode()) * 31 + this.invocation.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface WithImplicitInvocationTargetType extends StackManipulation {
+&nbsp;        StackManipulation virtual(TypeDescription var1);
+&nbsp;
+&nbsp;        StackManipulation special(TypeDescription var1);
+&nbsp;
+&nbsp;        StackManipulation dynamic(String var1, TypeDescription var2, List&lt;? extends TypeDescription&gt; var3, List&lt;? extends JavaConstant&gt; var4);
+&nbsp;
+&nbsp;        StackManipulation onHandle(HandleType var1);
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static enum IllegalInvocation implements WithImplicitInvocationTargetType {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private IllegalInvocation() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation virtual(TypeDescription invocationTarget) {
+&nbsp;            return Illegal.INSTANCE;
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation special(TypeDescription invocationTarget) {
+&nbsp;            return Illegal.INSTANCE;
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation dynamic(String methodName, TypeDescription returnType, List&lt;? extends TypeDescription&gt; methodType, List&lt;? extends JavaConstant&gt; arguments) {
+&nbsp;            return Illegal.INSTANCE;
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation onHandle(HandleType type) {
+&nbsp;            return Illegal.INSTANCE;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isValid() {
+&nbsp;            return false;
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;            return Illegal.INSTANCE.apply(methodVisitor, implementationContext);
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1554 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > MethodWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.jar.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: MethodWriter (net.bytebuddy.jar.asm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MethodWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (164/164)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.jar.asm;
+&nbsp;
+&nbsp;final class MethodWriter extends MethodVisitor {
+&nbsp;    static final int COMPUTE_NOTHING = 0;
+&nbsp;    static final int COMPUTE_MAX_STACK_AND_LOCAL = 1;
+&nbsp;    static final int COMPUTE_MAX_STACK_AND_LOCAL_FROM_FRAMES = 2;
+&nbsp;    static final int COMPUTE_INSERTED_FRAMES = 3;
+&nbsp;    static final int COMPUTE_ALL_FRAMES = 4;
+&nbsp;    private static final int NA = 0;
+&nbsp;    private static final int[] STACK_SIZE_DELTA = new int[]{0, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 1, 1, 1, 2, 2, 1, 1, 1, 0, 0, 1, 2, 1, 2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -1, 0, -1, 0, -1, -1, -1, -1, -1, -2, -1, -2, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, -3, -4, -3, -4, -3, -3, -3, -3, -1, -2, 1, 1, 1, 2, 2, 2, 0, -1, -2, -1, -2, -1, -2, -1, -2, -1, -2, -1, -2, -1, -2, -1, -2, -1, -2, -1, -2, 0, 0, 0, 0, -1, -1, -1, -1, -1, -1, -1, -2, -1, -2, -1, -2, 0, 1, 0, 1, -1, -1, 0, 0, 1, 1, -1, 0, -1, 0, 0, 0, -3, -1, -1, -3, -3, -1, -1, -1, -1, -1, -1, -2, -2, -2, -2, -2, -2, -2, -2, 0, 1, 0, -1, -1, -1, -2, -1, -2, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, -1, -1, 0, 0, -1, -1, 0, 0};
+&nbsp;    private final SymbolTable symbolTable;
+&nbsp;    private final int accessFlags;
+&nbsp;    private final int nameIndex;
+&nbsp;    private final String name;
+&nbsp;    private final int descriptorIndex;
+&nbsp;    private final String descriptor;
+&nbsp;    private int maxStack;
+&nbsp;    private int maxLocals;
+&nbsp;    private final ByteVector code = new ByteVector();
+&nbsp;    private Handler firstHandler;
+&nbsp;    private Handler lastHandler;
+&nbsp;    private int lineNumberTableLength;
+&nbsp;    private ByteVector lineNumberTable;
+&nbsp;    private int localVariableTableLength;
+&nbsp;    private ByteVector localVariableTable;
+&nbsp;    private int localVariableTypeTableLength;
+&nbsp;    private ByteVector localVariableTypeTable;
+&nbsp;    private int stackMapTableNumberOfEntries;
+&nbsp;    private ByteVector stackMapTableEntries;
+&nbsp;    private AnnotationWriter lastCodeRuntimeVisibleTypeAnnotation;
+&nbsp;    private AnnotationWriter lastCodeRuntimeInvisibleTypeAnnotation;
+&nbsp;    private Attribute firstCodeAttribute;
+&nbsp;    private final int numberOfExceptions;
+&nbsp;    private final int[] exceptionIndexTable;
+&nbsp;    private final int signatureIndex;
+&nbsp;    private AnnotationWriter lastRuntimeVisibleAnnotation;
+&nbsp;    private AnnotationWriter lastRuntimeInvisibleAnnotation;
+&nbsp;    private int visibleAnnotableParameterCount;
+&nbsp;    private AnnotationWriter[] lastRuntimeVisibleParameterAnnotations;
+&nbsp;    private int invisibleAnnotableParameterCount;
+&nbsp;    private AnnotationWriter[] lastRuntimeInvisibleParameterAnnotations;
+&nbsp;    private AnnotationWriter lastRuntimeVisibleTypeAnnotation;
+&nbsp;    private AnnotationWriter lastRuntimeInvisibleTypeAnnotation;
+&nbsp;    private ByteVector defaultValue;
+&nbsp;    private int parametersCount;
+&nbsp;    private ByteVector parameters;
+&nbsp;    private Attribute firstAttribute;
+&nbsp;    private final int compute;
+&nbsp;    private Label firstBasicBlock;
+&nbsp;    private Label lastBasicBlock;
+&nbsp;    private Label currentBasicBlock;
+&nbsp;    private int relativeStackSize;
+&nbsp;    private int maxRelativeStackSize;
+&nbsp;    private int currentLocals;
+&nbsp;    private int previousFrameOffset;
+&nbsp;    private int[] previousFrame;
+&nbsp;    private int[] currentFrame;
+&nbsp;    private boolean hasSubroutines;
+&nbsp;    private boolean hasAsmInstructions;
+&nbsp;    private int lastBytecodeOffset;
+&nbsp;    private int sourceOffset;
+&nbsp;    private int sourceLength;
+&nbsp;
+&nbsp;    MethodWriter(SymbolTable symbolTable, int access, String name, String descriptor, String signature, String[] exceptions, int compute) {
+&nbsp;        super(589824);
+&nbsp;        this.symbolTable = symbolTable;
+&nbsp;        this.accessFlags = &quot;&lt;init&gt;&quot;.equals(name) ? access | 262144 : access;
+&nbsp;        this.nameIndex = symbolTable.addConstantUtf8(name);
+&nbsp;        this.name = name;
+&nbsp;        this.descriptorIndex = symbolTable.addConstantUtf8(descriptor);
+&nbsp;        this.descriptor = descriptor;
+&nbsp;        this.signatureIndex = signature == null ? 0 : symbolTable.addConstantUtf8(signature);
+&nbsp;        int argumentsSize;
+&nbsp;        if (exceptions != null &amp;&amp; exceptions.length &gt; 0) {
+<b class="fc">&nbsp;            this.numberOfExceptions = exceptions.length;</b>
+&nbsp;            this.exceptionIndexTable = new int[this.numberOfExceptions];
+&nbsp;
+&nbsp;            for(argumentsSize = 0; argumentsSize &lt; this.numberOfExceptions; ++argumentsSize) {
+&nbsp;                this.exceptionIndexTable[argumentsSize] = symbolTable.addConstantClass(exceptions[argumentsSize]).index;
+&nbsp;            }
+&nbsp;        } else {
+&nbsp;            this.numberOfExceptions = 0;
+&nbsp;            this.exceptionIndexTable = null;
+&nbsp;        }
+&nbsp;
+&nbsp;        this.compute = compute;
+&nbsp;        if (compute != 0) {
+&nbsp;            argumentsSize = Type.getArgumentsAndReturnSizes(descriptor) &gt;&gt; 2;
+&nbsp;            if ((access &amp; 8) != 0) {
+&nbsp;                --argumentsSize;
+&nbsp;            }
+&nbsp;
+&nbsp;            this.maxLocals = argumentsSize;
+&nbsp;            this.currentLocals = argumentsSize;
+&nbsp;            this.firstBasicBlock = new Label();
+&nbsp;            this.visitLabel(this.firstBasicBlock);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    boolean hasFrames() {
+&nbsp;        return this.stackMapTableNumberOfEntries &gt; 0;
+&nbsp;    }
+&nbsp;
+&nbsp;    boolean hasAsmInstructions() {
+&nbsp;        return this.hasAsmInstructions;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitParameter(String name, int access) {
+&nbsp;        if (this.parameters == null) {
+&nbsp;            this.parameters = new ByteVector();
+&nbsp;        }
+&nbsp;
+&nbsp;        ++this.parametersCount;
+&nbsp;        this.parameters.putShort(name == null ? 0 : this.symbolTable.addConstantUtf8(name)).putShort(access);
+&nbsp;    }
+&nbsp;
+&nbsp;    public AnnotationVisitor visitAnnotationDefault() {
+&nbsp;        this.defaultValue = new ByteVector();
+&nbsp;        return new AnnotationWriter(this.symbolTable, false, this.defaultValue, (AnnotationWriter)null);
+&nbsp;    }
+&nbsp;
+&nbsp;    public AnnotationVisitor visitAnnotation(String descriptor, boolean visible) {
+&nbsp;        return visible ? (this.lastRuntimeVisibleAnnotation = AnnotationWriter.create(this.symbolTable, descriptor, this.lastRuntimeVisibleAnnotation)) : (this.lastRuntimeInvisibleAnnotation = AnnotationWriter.create(this.symbolTable, descriptor, this.lastRuntimeInvisibleAnnotation));
+&nbsp;    }
+&nbsp;
+&nbsp;    public AnnotationVisitor visitTypeAnnotation(int typeRef, TypePath typePath, String descriptor, boolean visible) {
+&nbsp;        return visible ? (this.lastRuntimeVisibleTypeAnnotation = AnnotationWriter.create(this.symbolTable, typeRef, typePath, descriptor, this.lastRuntimeVisibleTypeAnnotation)) : (this.lastRuntimeInvisibleTypeAnnotation = AnnotationWriter.create(this.symbolTable, typeRef, typePath, descriptor, this.lastRuntimeInvisibleTypeAnnotation));
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitAnnotableParameterCount(int parameterCount, boolean visible) {
+&nbsp;        if (visible) {
+&nbsp;            this.visibleAnnotableParameterCount = parameterCount;
+&nbsp;        } else {
+&nbsp;            this.invisibleAnnotableParameterCount = parameterCount;
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public AnnotationVisitor visitParameterAnnotation(int parameter, String annotationDescriptor, boolean visible) {
+&nbsp;        if (visible) {
+&nbsp;            if (this.lastRuntimeVisibleParameterAnnotations == null) {
+&nbsp;                this.lastRuntimeVisibleParameterAnnotations = new AnnotationWriter[Type.getArgumentTypes(this.descriptor).length];
+&nbsp;            }
+&nbsp;
+&nbsp;            return this.lastRuntimeVisibleParameterAnnotations[parameter] = AnnotationWriter.create(this.symbolTable, annotationDescriptor, this.lastRuntimeVisibleParameterAnnotations[parameter]);
+&nbsp;        } else {
+&nbsp;            if (this.lastRuntimeInvisibleParameterAnnotations == null) {
+&nbsp;                this.lastRuntimeInvisibleParameterAnnotations = new AnnotationWriter[Type.getArgumentTypes(this.descriptor).length];
+&nbsp;            }
+&nbsp;
+&nbsp;            return this.lastRuntimeInvisibleParameterAnnotations[parameter] = AnnotationWriter.create(this.symbolTable, annotationDescriptor, this.lastRuntimeInvisibleParameterAnnotations[parameter]);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitAttribute(Attribute attribute) {
+&nbsp;        if (attribute.isCodeAttribute()) {
+&nbsp;            attribute.nextAttribute = this.firstCodeAttribute;
+&nbsp;            this.firstCodeAttribute = attribute;
+&nbsp;        } else {
+&nbsp;            attribute.nextAttribute = this.firstAttribute;
+&nbsp;            this.firstAttribute = attribute;
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitCode() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitFrame(int type, int numLocal, Object[] local, int numStack, Object[] stack) {
+&nbsp;        if (this.compute != 4) {
+&nbsp;            int offsetDelta;
+&nbsp;            if (this.compute == 3) {
+&nbsp;                if (this.currentBasicBlock.frame == null) {
+&nbsp;                    this.currentBasicBlock.frame = new CurrentFrame(this.currentBasicBlock);
+&nbsp;                    this.currentBasicBlock.frame.setInputFrameFromDescriptor(this.symbolTable, this.accessFlags, this.descriptor, numLocal);
+&nbsp;                    this.currentBasicBlock.frame.accept(this);
+&nbsp;                } else {
+&nbsp;                    if (type == -1) {
+&nbsp;                        this.currentBasicBlock.frame.setInputFrameFromApiFormat(this.symbolTable, numLocal, local, numStack, stack);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    this.currentBasicBlock.frame.accept(this);
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                int i;
+&nbsp;                if (type == -1) {
+&nbsp;                    if (this.previousFrame == null) {
+&nbsp;                        offsetDelta = Type.getArgumentsAndReturnSizes(this.descriptor) &gt;&gt; 2;
+&nbsp;                        Frame implicitFirstFrame = new Frame(new Label());
+&nbsp;                        implicitFirstFrame.setInputFrameFromDescriptor(this.symbolTable, this.accessFlags, this.descriptor, offsetDelta);
+&nbsp;                        implicitFirstFrame.accept(this);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    this.currentLocals = numLocal;
+&nbsp;                    offsetDelta = this.visitFrameStart(this.code.length, numLocal, numStack);
+&nbsp;
+&nbsp;                    for(i = 0; i &lt; numLocal; ++i) {
+&nbsp;                        this.currentFrame[offsetDelta++] = Frame.getAbstractTypeFromApiFormat(this.symbolTable, local[i]);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    for(i = 0; i &lt; numStack; ++i) {
+&nbsp;                        this.currentFrame[offsetDelta++] = Frame.getAbstractTypeFromApiFormat(this.symbolTable, stack[i]);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    this.visitFrameEnd();
+&nbsp;                } else {
+&nbsp;                    if (this.symbolTable.getMajorVersion() &lt; 50) {
+&nbsp;                        throw new IllegalArgumentException(&quot;Class versions V1_5 or less must use F_NEW frames.&quot;);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (this.stackMapTableEntries == null) {
+&nbsp;                        this.stackMapTableEntries = new ByteVector();
+&nbsp;                        offsetDelta = this.code.length;
+&nbsp;                    } else {
+&nbsp;                        offsetDelta = this.code.length - this.previousFrameOffset - 1;
+&nbsp;                        if (offsetDelta &lt; 0) {
+&nbsp;                            if (type == 3) {
+&nbsp;                                return;
+&nbsp;                            }
+&nbsp;
+&nbsp;                            throw new IllegalStateException();
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    label124:
+&nbsp;                    switch (type) {
+&nbsp;                        case 0:
+&nbsp;                            this.currentLocals = numLocal;
+&nbsp;                            this.stackMapTableEntries.putByte(255).putShort(offsetDelta).putShort(numLocal);
+&nbsp;
+&nbsp;                            for(i = 0; i &lt; numLocal; ++i) {
+&nbsp;                                this.putFrameType(local[i]);
+&nbsp;                            }
+&nbsp;
+&nbsp;                            this.stackMapTableEntries.putShort(numStack);
+&nbsp;                            i = 0;
+&nbsp;
+&nbsp;                            while(true) {
+&nbsp;                                if (i &gt;= numStack) {
+&nbsp;                                    break label124;
+&nbsp;                                }
+&nbsp;
+&nbsp;                                this.putFrameType(stack[i]);
+&nbsp;                                ++i;
+&nbsp;                            }
+&nbsp;                        case 1:
+&nbsp;                            this.currentLocals += numLocal;
+&nbsp;                            this.stackMapTableEntries.putByte(251 + numLocal).putShort(offsetDelta);
+&nbsp;                            i = 0;
+&nbsp;
+&nbsp;                            while(true) {
+&nbsp;                                if (i &gt;= numLocal) {
+&nbsp;                                    break label124;
+&nbsp;                                }
+&nbsp;
+&nbsp;                                this.putFrameType(local[i]);
+&nbsp;                                ++i;
+&nbsp;                            }
+&nbsp;                        case 2:
+&nbsp;                            this.currentLocals -= numLocal;
+&nbsp;                            this.stackMapTableEntries.putByte(251 - numLocal).putShort(offsetDelta);
+&nbsp;                            break;
+&nbsp;                        case 3:
+&nbsp;                            if (offsetDelta &lt; 64) {
+&nbsp;                                this.stackMapTableEntries.putByte(offsetDelta);
+&nbsp;                            } else {
+&nbsp;                                this.stackMapTableEntries.putByte(251).putShort(offsetDelta);
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        case 4:
+&nbsp;                            if (offsetDelta &lt; 64) {
+&nbsp;                                this.stackMapTableEntries.putByte(64 + offsetDelta);
+&nbsp;                            } else {
+&nbsp;                                this.stackMapTableEntries.putByte(247).putShort(offsetDelta);
+&nbsp;                            }
+&nbsp;
+&nbsp;                            this.putFrameType(stack[0]);
+&nbsp;                            break;
+&nbsp;                        default:
+&nbsp;                            throw new IllegalArgumentException();
+&nbsp;                    }
+&nbsp;
+&nbsp;                    this.previousFrameOffset = this.code.length;
+&nbsp;                    ++this.stackMapTableNumberOfEntries;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.compute == 2) {
+&nbsp;                this.relativeStackSize = numStack;
+&nbsp;
+&nbsp;                for(offsetDelta = 0; offsetDelta &lt; numStack; ++offsetDelta) {
+&nbsp;                    if (stack[offsetDelta] == Opcodes.LONG || stack[offsetDelta] == Opcodes.DOUBLE) {
+&nbsp;                        ++this.relativeStackSize;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.relativeStackSize &gt; this.maxRelativeStackSize) {
+&nbsp;                    this.maxRelativeStackSize = this.relativeStackSize;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            this.maxStack = Math.max(this.maxStack, numStack);
+&nbsp;            this.maxLocals = Math.max(this.maxLocals, this.currentLocals);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitInsn(int opcode) {
+&nbsp;        this.lastBytecodeOffset = this.code.length;
+&nbsp;        this.code.putByte(opcode);
+&nbsp;        if (this.currentBasicBlock != null) {
+&nbsp;            if (this.compute != 4 &amp;&amp; this.compute != 3) {
+&nbsp;                int size = this.relativeStackSize + STACK_SIZE_DELTA[opcode];
+<b class="fc">&nbsp;                if (size &gt; this.maxRelativeStackSize) {</b>
+&nbsp;                    this.maxRelativeStackSize = size;
+&nbsp;                }
+&nbsp;
+&nbsp;                this.relativeStackSize = size;
+&nbsp;            } else {
+&nbsp;                this.currentBasicBlock.frame.execute(opcode, 0, (Symbol)null, (SymbolTable)null);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (opcode &gt;= 172 &amp;&amp; opcode &lt;= 177 || opcode == 191) {
+&nbsp;                this.endCurrentBasicBlockWithNoSuccessor();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitIntInsn(int opcode, int operand) {
+&nbsp;        this.lastBytecodeOffset = this.code.length;
+&nbsp;        if (opcode == 17) {
+&nbsp;            this.code.put12(opcode, operand);
+&nbsp;        } else {
+&nbsp;            this.code.put11(opcode, operand);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.currentBasicBlock != null) {
+&nbsp;            if (this.compute != 4 &amp;&amp; this.compute != 3) {
+&nbsp;                if (opcode != 188) {
+&nbsp;                    int size = this.relativeStackSize + 1;
+&nbsp;                    if (size &gt; this.maxRelativeStackSize) {
+&nbsp;                        this.maxRelativeStackSize = size;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    this.relativeStackSize = size;
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                this.currentBasicBlock.frame.execute(opcode, operand, (Symbol)null, (SymbolTable)null);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitVarInsn(int opcode, int var) {
+&nbsp;        this.lastBytecodeOffset = this.code.length;
+&nbsp;        int currentMaxLocals;
+&nbsp;        if (var &lt; 4 &amp;&amp; opcode != 169) {
+&nbsp;            if (opcode &lt; 54) {
+&nbsp;                currentMaxLocals = 26 + (opcode - 21 &lt;&lt; 2) + var;
+&nbsp;            } else {
+&nbsp;                currentMaxLocals = 59 + (opcode - 54 &lt;&lt; 2) + var;
+&nbsp;            }
+&nbsp;
+&nbsp;            this.code.putByte(currentMaxLocals);
+&nbsp;        } else if (var &gt;= 256) {
+&nbsp;            this.code.putByte(196).put12(opcode, var);
+&nbsp;        } else {
+&nbsp;            this.code.put11(opcode, var);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.currentBasicBlock != null) {
+&nbsp;            if (this.compute != 4 &amp;&amp; this.compute != 3) {
+&nbsp;                if (opcode == 169) {
+&nbsp;                    Label var10000 = this.currentBasicBlock;
+&nbsp;                    var10000.flags = (short)(var10000.flags | 64);
+&nbsp;                    this.currentBasicBlock.outputStackSize = (short)this.relativeStackSize;
+&nbsp;                    this.endCurrentBasicBlockWithNoSuccessor();
+&nbsp;                } else {
+&nbsp;                    currentMaxLocals = this.relativeStackSize + STACK_SIZE_DELTA[opcode];
+&nbsp;                    if (currentMaxLocals &gt; this.maxRelativeStackSize) {
+&nbsp;                        this.maxRelativeStackSize = currentMaxLocals;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    this.relativeStackSize = currentMaxLocals;
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                this.currentBasicBlock.frame.execute(opcode, var, (Symbol)null, (SymbolTable)null);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.compute != 0) {
+&nbsp;            if (opcode != 22 &amp;&amp; opcode != 24 &amp;&amp; opcode != 55 &amp;&amp; opcode != 57) {
+&nbsp;                currentMaxLocals = var + 1;
+&nbsp;            } else {
+&nbsp;                currentMaxLocals = var + 2;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (currentMaxLocals &gt; this.maxLocals) {
+&nbsp;                this.maxLocals = currentMaxLocals;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        if (opcode &gt;= 54 &amp;&amp; this.compute == 4 &amp;&amp; this.firstHandler != null) {
+&nbsp;            this.visitLabel(new Label());
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitTypeInsn(int opcode, String type) {
+&nbsp;        this.lastBytecodeOffset = this.code.length;
+&nbsp;        Symbol typeSymbol = this.symbolTable.addConstantClass(type);
+&nbsp;        this.code.put12(opcode, typeSymbol.index);
+&nbsp;        if (this.currentBasicBlock != null) {
+&nbsp;            if (this.compute != 4 &amp;&amp; this.compute != 3) {
+&nbsp;                if (opcode == 187) {
+&nbsp;                    int size = this.relativeStackSize + 1;
+&nbsp;                    if (size &gt; this.maxRelativeStackSize) {
+&nbsp;                        this.maxRelativeStackSize = size;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    this.relativeStackSize = size;
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                this.currentBasicBlock.frame.execute(opcode, this.lastBytecodeOffset, typeSymbol, this.symbolTable);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitFieldInsn(int opcode, String owner, String name, String descriptor) {
+&nbsp;        this.lastBytecodeOffset = this.code.length;
+&nbsp;        Symbol fieldrefSymbol = this.symbolTable.addConstantFieldref(owner, name, descriptor);
+&nbsp;        this.code.put12(opcode, fieldrefSymbol.index);
+&nbsp;        if (this.currentBasicBlock != null) {
+&nbsp;            if (this.compute != 4 &amp;&amp; this.compute != 3) {
+&nbsp;                int size;
+&nbsp;                label77: {
+&nbsp;                    char firstDescChar = descriptor.charAt(0);
+&nbsp;                    switch (opcode) {
+&nbsp;                        case 178:
+&nbsp;                            size = this.relativeStackSize + (firstDescChar != &#39;D&#39; &amp;&amp; firstDescChar != &#39;J&#39; ? 1 : 2);
+&nbsp;                            break label77;
+&nbsp;                        case 179:
+&nbsp;                            size = this.relativeStackSize + (firstDescChar != &#39;D&#39; &amp;&amp; firstDescChar != &#39;J&#39; ? -1 : -2);
+&nbsp;                            break label77;
+&nbsp;                        case 180:
+&nbsp;                            size = this.relativeStackSize + (firstDescChar != &#39;D&#39; &amp;&amp; firstDescChar != &#39;J&#39; ? 0 : 1);
+&nbsp;                            break label77;
+&nbsp;                        case 181:
+&nbsp;                    }
+&nbsp;
+&nbsp;                    size = this.relativeStackSize + (firstDescChar != &#39;D&#39; &amp;&amp; firstDescChar != &#39;J&#39; ? -2 : -3);
+&nbsp;                }
+&nbsp;
+&nbsp;                if (size &gt; this.maxRelativeStackSize) {
+&nbsp;                    this.maxRelativeStackSize = size;
+&nbsp;                }
+&nbsp;
+&nbsp;                this.relativeStackSize = size;
+&nbsp;            } else {
+&nbsp;                this.currentBasicBlock.frame.execute(opcode, 0, fieldrefSymbol, this.symbolTable);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitMethodInsn(int opcode, String owner, String name, String descriptor, boolean isInterface) {
+&nbsp;        this.lastBytecodeOffset = this.code.length;
+&nbsp;        Symbol methodrefSymbol = this.symbolTable.addConstantMethodref(owner, name, descriptor, isInterface);
+&nbsp;        if (opcode == 185) {
+&nbsp;            this.code.put12(185, methodrefSymbol.index).put11(methodrefSymbol.getArgumentsAndReturnSizes() &gt;&gt; 2, 0);
+&nbsp;        } else {
+&nbsp;            this.code.put12(opcode, methodrefSymbol.index);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.currentBasicBlock != null) {
+&nbsp;            if (this.compute != 4 &amp;&amp; this.compute != 3) {
+&nbsp;                int argumentsAndReturnSize = methodrefSymbol.getArgumentsAndReturnSizes();
+&nbsp;                int stackSizeDelta = (argumentsAndReturnSize &amp; 3) - (argumentsAndReturnSize &gt;&gt; 2);
+&nbsp;                int size;
+&nbsp;                if (opcode == 184) {
+&nbsp;                    size = this.relativeStackSize + stackSizeDelta + 1;
+&nbsp;                } else {
+&nbsp;                    size = this.relativeStackSize + stackSizeDelta;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (size &gt; this.maxRelativeStackSize) {
+&nbsp;                    this.maxRelativeStackSize = size;
+&nbsp;                }
+&nbsp;
+&nbsp;                this.relativeStackSize = size;
+&nbsp;            } else {
+&nbsp;                this.currentBasicBlock.frame.execute(opcode, 0, methodrefSymbol, this.symbolTable);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitInvokeDynamicInsn(String name, String descriptor, Handle bootstrapMethodHandle, Object... bootstrapMethodArguments) {
+&nbsp;        this.lastBytecodeOffset = this.code.length;
+&nbsp;        Symbol invokeDynamicSymbol = this.symbolTable.addConstantInvokeDynamic(name, descriptor, bootstrapMethodHandle, bootstrapMethodArguments);
+&nbsp;        this.code.put12(186, invokeDynamicSymbol.index);
+&nbsp;        this.code.putShort(0);
+&nbsp;        if (this.currentBasicBlock != null) {
+&nbsp;            if (this.compute != 4 &amp;&amp; this.compute != 3) {
+&nbsp;                int argumentsAndReturnSize = invokeDynamicSymbol.getArgumentsAndReturnSizes();
+&nbsp;                int stackSizeDelta = (argumentsAndReturnSize &amp; 3) - (argumentsAndReturnSize &gt;&gt; 2) + 1;
+&nbsp;                int size = this.relativeStackSize + stackSizeDelta;
+&nbsp;                if (size &gt; this.maxRelativeStackSize) {
+&nbsp;                    this.maxRelativeStackSize = size;
+&nbsp;                }
+&nbsp;
+&nbsp;                this.relativeStackSize = size;
+&nbsp;            } else {
+&nbsp;                this.currentBasicBlock.frame.execute(186, 0, invokeDynamicSymbol, this.symbolTable);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitJumpInsn(int opcode, Label label) {
+&nbsp;        this.lastBytecodeOffset = this.code.length;
+&nbsp;        int baseOpcode = opcode &gt;= 200 ? opcode - 33 : opcode;
+&nbsp;        boolean nextInsnIsJumpTarget = false;
+&nbsp;        if ((label.flags &amp; 4) != 0 &amp;&amp; label.bytecodeOffset - this.code.length &lt; -32768) {
+&nbsp;            if (baseOpcode == 167) {
+&nbsp;                this.code.putByte(200);
+&nbsp;            } else if (baseOpcode == 168) {
+&nbsp;                this.code.putByte(201);
+&nbsp;            } else {
+&nbsp;                this.code.putByte(baseOpcode &gt;= 198 ? baseOpcode ^ 1 : (baseOpcode + 1 ^ 1) - 1);
+&nbsp;                this.code.putShort(8);
+&nbsp;                this.code.putByte(220);
+&nbsp;                this.hasAsmInstructions = true;
+&nbsp;                nextInsnIsJumpTarget = true;
+&nbsp;            }
+&nbsp;
+&nbsp;            label.put(this.code, this.code.length - 1, true);
+&nbsp;        } else if (baseOpcode != opcode) {
+&nbsp;            this.code.putByte(opcode);
+&nbsp;            label.put(this.code, this.code.length - 1, true);
+&nbsp;        } else {
+&nbsp;            this.code.putByte(baseOpcode);
+&nbsp;            label.put(this.code, this.code.length - 1, false);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.currentBasicBlock != null) {
+&nbsp;            Label nextBasicBlock = null;
+&nbsp;            Label var10000;
+&nbsp;            if (this.compute == 4) {
+&nbsp;                this.currentBasicBlock.frame.execute(baseOpcode, 0, (Symbol)null, (SymbolTable)null);
+&nbsp;                var10000 = label.getCanonicalInstance();
+&nbsp;                var10000.flags = (short)(var10000.flags | 2);
+&nbsp;                this.addSuccessorToCurrentBasicBlock(0, label);
+&nbsp;                if (baseOpcode != 167) {
+&nbsp;                    nextBasicBlock = new Label();
+&nbsp;                }
+&nbsp;            } else if (this.compute == 3) {
+&nbsp;                this.currentBasicBlock.frame.execute(baseOpcode, 0, (Symbol)null, (SymbolTable)null);
+&nbsp;            } else if (this.compute == 2) {
+&nbsp;                this.relativeStackSize += STACK_SIZE_DELTA[baseOpcode];
+&nbsp;            } else if (baseOpcode == 168) {
+&nbsp;                if ((label.flags &amp; 32) == 0) {
+&nbsp;                    label.flags = (short)(label.flags | 32);
+&nbsp;                    this.hasSubroutines = true;
+&nbsp;                }
+&nbsp;
+&nbsp;                var10000 = this.currentBasicBlock;
+&nbsp;                var10000.flags = (short)(var10000.flags | 16);
+&nbsp;                this.addSuccessorToCurrentBasicBlock(this.relativeStackSize + 1, label);
+&nbsp;                nextBasicBlock = new Label();
+&nbsp;            } else {
+&nbsp;                this.relativeStackSize += STACK_SIZE_DELTA[baseOpcode];
+&nbsp;                this.addSuccessorToCurrentBasicBlock(this.relativeStackSize, label);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (nextBasicBlock != null) {
+&nbsp;                if (nextInsnIsJumpTarget) {
+&nbsp;                    nextBasicBlock.flags = (short)(nextBasicBlock.flags | 2);
+&nbsp;                }
+&nbsp;
+&nbsp;                this.visitLabel(nextBasicBlock);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (baseOpcode == 167) {
+&nbsp;                this.endCurrentBasicBlockWithNoSuccessor();
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public void visitLabel(Label label) {</b>
+<b class="fc">&nbsp;        this.hasAsmInstructions |= label.resolve(this.code.data, this.code.length);</b>
+<b class="fc">&nbsp;        if ((label.flags &amp; 1) == 0) {</b>
+<b class="fc">&nbsp;            if (this.compute == 4) {</b>
+<b class="fc">&nbsp;                Label var10000;</b>
+<b class="fc">&nbsp;                if (this.currentBasicBlock != null) {</b>
+<b class="fc">&nbsp;                    if (label.bytecodeOffset == this.currentBasicBlock.bytecodeOffset) {</b>
+<b class="fc">&nbsp;                        var10000 = this.currentBasicBlock;</b>
+<b class="fc">&nbsp;                        var10000.flags = (short)(var10000.flags | label.flags &amp; 2);</b>
+&nbsp;                        label.frame = this.currentBasicBlock.frame;
+&nbsp;                        return;
+<b class="fc">&nbsp;                    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;                    this.addSuccessorToCurrentBasicBlock(0, label);
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;                if (this.lastBasicBlock != null) {
+&nbsp;                    if (label.bytecodeOffset == this.lastBasicBlock.bytecodeOffset) {
+&nbsp;                        var10000 = this.lastBasicBlock;
+&nbsp;                        var10000.flags = (short)(var10000.flags | label.flags &amp; 2);
+&nbsp;                        label.frame = this.lastBasicBlock.frame;
+&nbsp;                        this.currentBasicBlock = this.lastBasicBlock;
+&nbsp;                        return;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    this.lastBasicBlock.nextBasicBlock = label;
+&nbsp;                }
+&nbsp;
+&nbsp;                this.lastBasicBlock = label;
+&nbsp;                this.currentBasicBlock = label;
+<b class="fc">&nbsp;                label.frame = new Frame(label);</b>
+&nbsp;            } else if (this.compute == 3) {
+&nbsp;                if (this.currentBasicBlock == null) {
+&nbsp;                    this.currentBasicBlock = label;
+<b class="fc">&nbsp;                } else {</b>
+&nbsp;                    this.currentBasicBlock.frame.owner = label;
+&nbsp;                }
+&nbsp;            } else if (this.compute == 1) {
+&nbsp;                if (this.currentBasicBlock != null) {
+&nbsp;                    this.currentBasicBlock.outputStackMax = (short)this.maxRelativeStackSize;
+&nbsp;                    this.addSuccessorToCurrentBasicBlock(this.relativeStackSize, label);
+&nbsp;                }
+&nbsp;
+&nbsp;                this.currentBasicBlock = label;
+&nbsp;                this.relativeStackSize = 0;
+&nbsp;                this.maxRelativeStackSize = 0;
+&nbsp;                if (this.lastBasicBlock != null) {
+&nbsp;                    this.lastBasicBlock.nextBasicBlock = label;
+&nbsp;                }
+&nbsp;
+&nbsp;                this.lastBasicBlock = label;
+&nbsp;            } else if (this.compute == 2 &amp;&amp; this.currentBasicBlock == null) {
+&nbsp;                this.currentBasicBlock = label;
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitLdcInsn(Object value) {
+&nbsp;        this.lastBytecodeOffset = this.code.length;
+&nbsp;        Symbol constantSymbol = this.symbolTable.addConstant(value);
+&nbsp;        int constantIndex = constantSymbol.index;
+&nbsp;        char firstDescriptorChar;
+&nbsp;        boolean isLongOrDouble = constantSymbol.tag == 5 || constantSymbol.tag == 6 || constantSymbol.tag == 17 &amp;&amp; ((firstDescriptorChar = constantSymbol.value.charAt(0)) == &#39;J&#39; || firstDescriptorChar == &#39;D&#39;);
+&nbsp;        if (isLongOrDouble) {
+&nbsp;            this.code.put12(20, constantIndex);
+&nbsp;        } else if (constantIndex &gt;= 256) {
+&nbsp;            this.code.put12(19, constantIndex);
+&nbsp;        } else {
+&nbsp;            this.code.put11(18, constantIndex);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.currentBasicBlock != null) {
+&nbsp;            if (this.compute != 4 &amp;&amp; this.compute != 3) {
+&nbsp;                int size = this.relativeStackSize + (isLongOrDouble ? 2 : 1);
+&nbsp;                if (size &gt; this.maxRelativeStackSize) {
+&nbsp;                    this.maxRelativeStackSize = size;
+&nbsp;                }
+&nbsp;
+&nbsp;                this.relativeStackSize = size;
+&nbsp;            } else {
+&nbsp;                this.currentBasicBlock.frame.execute(18, 0, constantSymbol, this.symbolTable);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitIincInsn(int var, int increment) {
+&nbsp;        this.lastBytecodeOffset = this.code.length;
+&nbsp;        if (var &lt;= 255 &amp;&amp; increment &lt;= 127 &amp;&amp; increment &gt;= -128) {
+&nbsp;            this.code.putByte(132).put11(var, increment);
+&nbsp;        } else {
+&nbsp;            this.code.putByte(196).put12(132, var).putShort(increment);
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        if (this.currentBasicBlock != null &amp;&amp; (this.compute == 4 || this.compute == 3)) {</b>
+<b class="fc">&nbsp;            this.currentBasicBlock.frame.execute(132, var, (Symbol)null, (SymbolTable)null);</b>
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        if (this.compute != 0) {</b>
+&nbsp;            int currentMaxLocals = var + 1;
+&nbsp;            if (currentMaxLocals &gt; this.maxLocals) {
+&nbsp;                this.maxLocals = currentMaxLocals;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitTableSwitchInsn(int min, int max, Label dflt, Label... labels) {
+&nbsp;        this.lastBytecodeOffset = this.code.length;
+&nbsp;        this.code.putByte(170).putByteArray((byte[])null, 0, (4 - this.code.length % 4) % 4);
+&nbsp;        dflt.put(this.code, this.lastBytecodeOffset, true);
+&nbsp;        this.code.putInt(min).putInt(max);
+&nbsp;        Label[] var5 = labels;
+&nbsp;        int var6 = labels.length;
+&nbsp;
+&nbsp;        for(int var7 = 0; var7 &lt; var6; ++var7) {
+&nbsp;            Label label = var5[var7];
+&nbsp;            label.put(this.code, this.lastBytecodeOffset, true);
+&nbsp;        }
+&nbsp;
+&nbsp;        this.visitSwitchInsn(dflt, labels);
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitLookupSwitchInsn(Label dflt, int[] keys, Label[] labels) {
+&nbsp;        this.lastBytecodeOffset = this.code.length;
+&nbsp;        this.code.putByte(171).putByteArray((byte[])null, 0, (4 - this.code.length % 4) % 4);
+&nbsp;        dflt.put(this.code, this.lastBytecodeOffset, true);
+&nbsp;        this.code.putInt(labels.length);
+<b class="fc">&nbsp;</b>
+&nbsp;        for(int i = 0; i &lt; labels.length; ++i) {
+&nbsp;            this.code.putInt(keys[i]);
+&nbsp;            labels[i].put(this.code, this.lastBytecodeOffset, true);
+&nbsp;        }
+&nbsp;
+&nbsp;        this.visitSwitchInsn(dflt, labels);
+&nbsp;    }
+&nbsp;
+&nbsp;    private void visitSwitchInsn(Label dflt, Label[] labels) {
+&nbsp;        if (this.currentBasicBlock != null) {
+&nbsp;            Label[] var3;
+&nbsp;            int var4;
+&nbsp;            int var5;
+&nbsp;            Label label;
+&nbsp;            if (this.compute == 4) {
+&nbsp;                this.currentBasicBlock.frame.execute(171, 0, (Symbol)null, (SymbolTable)null);
+&nbsp;                this.addSuccessorToCurrentBasicBlock(0, dflt);
+&nbsp;                Label var10000 = dflt.getCanonicalInstance();
+&nbsp;                var10000.flags = (short)(var10000.flags | 2);
+&nbsp;                var3 = labels;
+&nbsp;                var4 = labels.length;
+&nbsp;
+&nbsp;                for(var5 = 0; var5 &lt; var4; ++var5) {
+&nbsp;                    label = var3[var5];
+&nbsp;                    this.addSuccessorToCurrentBasicBlock(0, label);
+&nbsp;                    var10000 = label.getCanonicalInstance();
+&nbsp;                    var10000.flags = (short)(var10000.flags | 2);
+&nbsp;                }
+&nbsp;            } else if (this.compute == 1) {
+&nbsp;                --this.relativeStackSize;
+&nbsp;                this.addSuccessorToCurrentBasicBlock(this.relativeStackSize, dflt);
+&nbsp;                var3 = labels;
+&nbsp;                var4 = labels.length;
+&nbsp;
+&nbsp;                for(var5 = 0; var5 &lt; var4; ++var5) {
+&nbsp;                    label = var3[var5];
+&nbsp;                    this.addSuccessorToCurrentBasicBlock(this.relativeStackSize, label);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            this.endCurrentBasicBlockWithNoSuccessor();
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitMultiANewArrayInsn(String descriptor, int numDimensions) {
+&nbsp;        this.lastBytecodeOffset = this.code.length;
+&nbsp;        Symbol descSymbol = this.symbolTable.addConstantClass(descriptor);
+&nbsp;        this.code.put12(197, descSymbol.index).putByte(numDimensions);
+&nbsp;        if (this.currentBasicBlock != null) {
+&nbsp;            if (this.compute != 4 &amp;&amp; this.compute != 3) {
+&nbsp;                this.relativeStackSize += 1 - numDimensions;
+&nbsp;            } else {
+&nbsp;                this.currentBasicBlock.frame.execute(197, numDimensions, descSymbol, this.symbolTable);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public AnnotationVisitor visitInsnAnnotation(int typeRef, TypePath typePath, String descriptor, boolean visible) {
+&nbsp;        return visible ? (this.lastCodeRuntimeVisibleTypeAnnotation = AnnotationWriter.create(this.symbolTable, typeRef &amp; -16776961 | this.lastBytecodeOffset &lt;&lt; 8, typePath, descriptor, this.lastCodeRuntimeVisibleTypeAnnotation)) : (this.lastCodeRuntimeInvisibleTypeAnnotation = AnnotationWriter.create(this.symbolTable, typeRef &amp; -16776961 | this.lastBytecodeOffset &lt;&lt; 8, typePath, descriptor, this.lastCodeRuntimeInvisibleTypeAnnotation));
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitTryCatchBlock(Label start, Label end, Label handler, String type) {
+&nbsp;        Handler newHandler = new Handler(start, end, handler, type != null ? this.symbolTable.addConstantClass(type).index : 0, type);
+&nbsp;        if (this.firstHandler == null) {
+&nbsp;            this.firstHandler = newHandler;
+&nbsp;        } else {
+&nbsp;            this.lastHandler.nextHandler = newHandler;
+&nbsp;        }
+&nbsp;
+&nbsp;        this.lastHandler = newHandler;
+&nbsp;    }
+&nbsp;
+&nbsp;    public AnnotationVisitor visitTryCatchAnnotation(int typeRef, TypePath typePath, String descriptor, boolean visible) {
+&nbsp;        return visible ? (this.lastCodeRuntimeVisibleTypeAnnotation = AnnotationWriter.create(this.symbolTable, typeRef, typePath, descriptor, this.lastCodeRuntimeVisibleTypeAnnotation)) : (this.lastCodeRuntimeInvisibleTypeAnnotation = AnnotationWriter.create(this.symbolTable, typeRef, typePath, descriptor, this.lastCodeRuntimeInvisibleTypeAnnotation));
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitLocalVariable(String name, String descriptor, String signature, Label start, Label end, int index) {
+&nbsp;        if (signature != null) {
+&nbsp;            if (this.localVariableTypeTable == null) {
+&nbsp;                this.localVariableTypeTable = new ByteVector();
+&nbsp;            }
+&nbsp;
+&nbsp;            ++this.localVariableTypeTableLength;
+&nbsp;            this.localVariableTypeTable.putShort(start.bytecodeOffset).putShort(end.bytecodeOffset - start.bytecodeOffset).putShort(this.symbolTable.addConstantUtf8(name)).putShort(this.symbolTable.addConstantUtf8(signature)).putShort(index);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.localVariableTable == null) {
+&nbsp;            this.localVariableTable = new ByteVector();
+&nbsp;        }
+&nbsp;
+&nbsp;        ++this.localVariableTableLength;
+&nbsp;        this.localVariableTable.putShort(start.bytecodeOffset).putShort(end.bytecodeOffset - start.bytecodeOffset).putShort(this.symbolTable.addConstantUtf8(name)).putShort(this.symbolTable.addConstantUtf8(descriptor)).putShort(index);
+&nbsp;        if (this.compute != 0) {
+&nbsp;            char firstDescChar = descriptor.charAt(0);
+&nbsp;            int currentMaxLocals = index + (firstDescChar != &#39;J&#39; &amp;&amp; firstDescChar != &#39;D&#39; ? 1 : 2);
+&nbsp;            if (currentMaxLocals &gt; this.maxLocals) {
+&nbsp;                this.maxLocals = currentMaxLocals;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public AnnotationVisitor visitLocalVariableAnnotation(int typeRef, TypePath typePath, Label[] start, Label[] end, int[] index, String descriptor, boolean visible) {
+&nbsp;        ByteVector typeAnnotation = new ByteVector();
+&nbsp;        typeAnnotation.putByte(typeRef &gt;&gt;&gt; 24).putShort(start.length);
+&nbsp;
+&nbsp;        for(int i = 0; i &lt; start.length; ++i) {
+&nbsp;            typeAnnotation.putShort(start[i].bytecodeOffset).putShort(end[i].bytecodeOffset - start[i].bytecodeOffset).putShort(index[i]);
+&nbsp;        }
+&nbsp;
+&nbsp;        TypePath.put(typePath, typeAnnotation);
+&nbsp;        typeAnnotation.putShort(this.symbolTable.addConstantUtf8(descriptor)).putShort(0);
+&nbsp;        return visible ? (this.lastCodeRuntimeVisibleTypeAnnotation = new AnnotationWriter(this.symbolTable, true, typeAnnotation, this.lastCodeRuntimeVisibleTypeAnnotation)) : (this.lastCodeRuntimeInvisibleTypeAnnotation = new AnnotationWriter(this.symbolTable, true, typeAnnotation, this.lastCodeRuntimeInvisibleTypeAnnotation));
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitLineNumber(int line, Label start) {
+&nbsp;        if (this.lineNumberTable == null) {
+&nbsp;            this.lineNumberTable = new ByteVector();
+&nbsp;        }
+&nbsp;
+&nbsp;        ++this.lineNumberTableLength;
+&nbsp;        this.lineNumberTable.putShort(start.bytecodeOffset);
+&nbsp;        this.lineNumberTable.putShort(line);
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitMaxs(int maxStack, int maxLocals) {
+&nbsp;        if (this.compute == 4) {
+&nbsp;            this.computeAllFrames();
+&nbsp;        } else if (this.compute == 1) {
+&nbsp;            this.computeMaxStackAndLocal();
+&nbsp;        } else if (this.compute == 2) {
+<b class="fc">&nbsp;            this.maxStack = this.maxRelativeStackSize;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            this.maxStack = maxStack;</b>
+&nbsp;            this.maxLocals = maxLocals;
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void computeAllFrames() {
+&nbsp;        Label basicBlock;
+&nbsp;        Label nextBasicBlock;
+&nbsp;        for(Handler handler = this.firstHandler; handler != null; handler = handler.nextHandler) {
+&nbsp;            String catchTypeDescriptor = handler.catchTypeDescriptor == null ? &quot;java/lang/Throwable&quot; : handler.catchTypeDescriptor;
+&nbsp;            int catchType = Frame.getAbstractTypeFromInternalName(this.symbolTable, catchTypeDescriptor);
+&nbsp;            Label handlerBlock = handler.handlerPc.getCanonicalInstance();
+&nbsp;            handlerBlock.flags = (short)(handlerBlock.flags | 2);
+&nbsp;            basicBlock = handler.startPc.getCanonicalInstance();
+&nbsp;
+&nbsp;            for(nextBasicBlock = handler.endPc.getCanonicalInstance(); basicBlock != nextBasicBlock; basicBlock = basicBlock.nextBasicBlock) {
+&nbsp;                basicBlock.outgoingEdges = new Edge(catchType, handlerBlock, basicBlock.outgoingEdges);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        Frame firstFrame = this.firstBasicBlock.frame;
+&nbsp;        firstFrame.setInputFrameFromDescriptor(this.symbolTable, this.accessFlags, this.descriptor, this.maxLocals);
+&nbsp;        firstFrame.accept(this);
+&nbsp;        Label listOfBlocksToProcess = this.firstBasicBlock;
+&nbsp;        listOfBlocksToProcess.nextListElement = Label.EMPTY_LIST;
+&nbsp;        int maxStackSize = 0;
+&nbsp;
+&nbsp;        while(listOfBlocksToProcess != Label.EMPTY_LIST) {
+&nbsp;            basicBlock = listOfBlocksToProcess;
+&nbsp;            listOfBlocksToProcess = listOfBlocksToProcess.nextListElement;
+&nbsp;            basicBlock.nextListElement = null;
+&nbsp;            basicBlock.flags = (short)(basicBlock.flags | 8);
+&nbsp;            int maxBlockStackSize = basicBlock.frame.getInputStackSize() + basicBlock.outputStackMax;
+&nbsp;            if (maxBlockStackSize &gt; maxStackSize) {
+&nbsp;                maxStackSize = maxBlockStackSize;
+&nbsp;            }
+&nbsp;
+&nbsp;            for(Edge outgoingEdge = basicBlock.outgoingEdges; outgoingEdge != null; outgoingEdge = outgoingEdge.nextEdge) {
+&nbsp;                Label successorBlock = outgoingEdge.successor.getCanonicalInstance();
+&nbsp;                boolean successorBlockChanged = basicBlock.frame.merge(this.symbolTable, successorBlock.frame, outgoingEdge.info);
+&nbsp;                if (successorBlockChanged &amp;&amp; successorBlock.nextListElement == null) {
+&nbsp;                    successorBlock.nextListElement = listOfBlocksToProcess;
+&nbsp;                    listOfBlocksToProcess = successorBlock;
+<b class="fc">&nbsp;                }</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        for(basicBlock = this.firstBasicBlock; basicBlock != null; basicBlock = basicBlock.nextBasicBlock) {</b>
+<b class="fc">&nbsp;            if ((basicBlock.flags &amp; 10) == 10) {</b>
+&nbsp;                basicBlock.frame.accept(this);
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if ((basicBlock.flags &amp; 8) == 0) {</b>
+<b class="fc">&nbsp;                nextBasicBlock = basicBlock.nextBasicBlock;</b>
+&nbsp;                int startOffset = basicBlock.bytecodeOffset;
+&nbsp;                int endOffset = (nextBasicBlock == null ? this.code.length : nextBasicBlock.bytecodeOffset) - 1;
+&nbsp;                if (endOffset &gt;= startOffset) {
+&nbsp;                    int frameIndex;
+&nbsp;                    for(frameIndex = startOffset; frameIndex &lt; endOffset; ++frameIndex) {
+<b class="fc">&nbsp;                        this.code.data[frameIndex] = 0;</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    this.code.data[endOffset] = -65;
+&nbsp;                    frameIndex = this.visitFrameStart(startOffset, 0, 1);
+&nbsp;                    this.currentFrame[frameIndex] = Frame.getAbstractTypeFromInternalName(this.symbolTable, &quot;java/lang/Throwable&quot;);
+&nbsp;                    this.visitFrameEnd();
+&nbsp;                    this.firstHandler = Handler.removeRange(this.firstHandler, basicBlock, nextBasicBlock);
+&nbsp;                    maxStackSize = Math.max(maxStackSize, 1);
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        this.maxStack = maxStackSize;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void computeMaxStackAndLocal() {
+&nbsp;        Label listOfBlocksToProcess;
+<b class="fc">&nbsp;        Label basicBlock;</b>
+&nbsp;        Label subroutine;
+&nbsp;        for(Handler handler = this.firstHandler; handler != null; handler = handler.nextHandler) {
+&nbsp;            listOfBlocksToProcess = handler.handlerPc;
+&nbsp;            basicBlock = handler.startPc;
+&nbsp;
+&nbsp;            for(subroutine = handler.endPc; basicBlock != subroutine; basicBlock = basicBlock.nextBasicBlock) {
+&nbsp;                if ((basicBlock.flags &amp; 16) == 0) {
+&nbsp;                    basicBlock.outgoingEdges = new Edge(Integer.MAX_VALUE, listOfBlocksToProcess, basicBlock.outgoingEdges);
+&nbsp;                } else {
+&nbsp;                    basicBlock.outgoingEdges.nextEdge.nextEdge = new Edge(Integer.MAX_VALUE, listOfBlocksToProcess, basicBlock.outgoingEdges.nextEdge.nextEdge);
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        int currentSubroutine;
+&nbsp;        if (this.hasSubroutines) {
+&nbsp;            short numSubroutines = 1;
+&nbsp;            this.firstBasicBlock.markSubroutine(numSubroutines);
+&nbsp;
+&nbsp;            for(currentSubroutine = 1; currentSubroutine &lt;= numSubroutines; currentSubroutine = (short)(currentSubroutine + 1)) {
+&nbsp;                for(subroutine = this.firstBasicBlock; subroutine != null; subroutine = subroutine.nextBasicBlock) {
+&nbsp;                    if ((subroutine.flags &amp; 16) != 0 &amp;&amp; subroutine.subroutineId == currentSubroutine) {
+&nbsp;                        Label jsrTarget = subroutine.outgoingEdges.nextEdge.successor;
+&nbsp;                        if (jsrTarget.subroutineId == 0) {
+&nbsp;                            ++numSubroutines;
+&nbsp;                            jsrTarget.markSubroutine(numSubroutines);
+&nbsp;                        }
+<b class="fc">&nbsp;                    }</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;            for(basicBlock = this.firstBasicBlock; basicBlock != null; basicBlock = basicBlock.nextBasicBlock) {
+<b class="fc">&nbsp;                if ((basicBlock.flags &amp; 16) != 0) {</b>
+&nbsp;                    subroutine = basicBlock.outgoingEdges.nextEdge.successor;
+&nbsp;                    subroutine.addSubroutineRetSuccessors(basicBlock);
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        listOfBlocksToProcess = this.firstBasicBlock;
+&nbsp;        listOfBlocksToProcess.nextListElement = Label.EMPTY_LIST;
+&nbsp;        currentSubroutine = this.maxStack;
+&nbsp;
+&nbsp;        while(listOfBlocksToProcess != Label.EMPTY_LIST) {
+&nbsp;            subroutine = listOfBlocksToProcess;
+&nbsp;            listOfBlocksToProcess = listOfBlocksToProcess.nextListElement;
+&nbsp;            int inputStackTop = subroutine.inputStackSize;
+&nbsp;            int maxBlockStackSize = inputStackTop + subroutine.outputStackMax;
+&nbsp;            if (maxBlockStackSize &gt; currentSubroutine) {
+<b class="fc">&nbsp;                currentSubroutine = maxBlockStackSize;</b>
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            Edge outgoingEdge = subroutine.outgoingEdges;</b>
+&nbsp;            if ((subroutine.flags &amp; 16) != 0) {
+<b class="fc">&nbsp;                outgoingEdge = outgoingEdge.nextEdge;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            for(; outgoingEdge != null; outgoingEdge = outgoingEdge.nextEdge) {
+&nbsp;                Label successorBlock = outgoingEdge.successor;
+&nbsp;                if (successorBlock.nextListElement == null) {
+&nbsp;                    successorBlock.inputStackSize = (short)(outgoingEdge.info == Integer.MAX_VALUE ? 1 : inputStackTop + outgoingEdge.info);
+&nbsp;                    successorBlock.nextListElement = listOfBlocksToProcess;
+&nbsp;                    listOfBlocksToProcess = successorBlock;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        this.maxStack = currentSubroutine;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitEnd() {
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addSuccessorToCurrentBasicBlock(int info, Label successor) {
+&nbsp;        this.currentBasicBlock.outgoingEdges = new Edge(info, successor, this.currentBasicBlock.outgoingEdges);
+&nbsp;    }
+&nbsp;
+&nbsp;    private void endCurrentBasicBlockWithNoSuccessor() {
+&nbsp;        if (this.compute == 4) {
+&nbsp;            Label nextBasicBlock = new Label();
+&nbsp;            nextBasicBlock.frame = new Frame(nextBasicBlock);
+&nbsp;            nextBasicBlock.resolve(this.code.data, this.code.length);
+&nbsp;            this.lastBasicBlock.nextBasicBlock = nextBasicBlock;
+&nbsp;            this.lastBasicBlock = nextBasicBlock;
+&nbsp;            this.currentBasicBlock = null;
+&nbsp;        } else if (this.compute == 1) {
+&nbsp;            this.currentBasicBlock.outputStackMax = (short)this.maxRelativeStackSize;
+&nbsp;            this.currentBasicBlock = null;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    int visitFrameStart(int offset, int numLocal, int numStack) {</b>
+<b class="fc">&nbsp;        int frameLength = 3 + numLocal + numStack;</b>
+&nbsp;        if (this.currentFrame == null || this.currentFrame.length &lt; frameLength) {
+&nbsp;            this.currentFrame = new int[frameLength];
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        this.currentFrame[0] = offset;
+&nbsp;        this.currentFrame[1] = numLocal;
+<b class="fc">&nbsp;        this.currentFrame[2] = numStack;</b>
+&nbsp;        return 3;
+&nbsp;    }
+&nbsp;
+&nbsp;    void visitAbstractType(int frameIndex, int abstractType) {
+&nbsp;        this.currentFrame[frameIndex] = abstractType;
+&nbsp;    }
+&nbsp;
+&nbsp;    void visitFrameEnd() {
+&nbsp;        if (this.previousFrame != null) {
+&nbsp;            if (this.stackMapTableEntries == null) {
+&nbsp;                this.stackMapTableEntries = new ByteVector();
+&nbsp;            }
+&nbsp;
+&nbsp;            this.putFrame();
+&nbsp;            ++this.stackMapTableNumberOfEntries;
+&nbsp;        }
+&nbsp;
+&nbsp;        this.previousFrame = this.currentFrame;
+&nbsp;        this.currentFrame = null;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void putFrame() {
+&nbsp;        int numLocal = this.currentFrame[1];
+&nbsp;        int numStack = this.currentFrame[2];
+&nbsp;        if (this.symbolTable.getMajorVersion() &lt; 50) {
+&nbsp;            this.stackMapTableEntries.putShort(this.currentFrame[0]).putShort(numLocal);
+&nbsp;            this.putAbstractTypes(3, 3 + numLocal);
+&nbsp;            this.stackMapTableEntries.putShort(numStack);
+&nbsp;            this.putAbstractTypes(3 + numLocal, 3 + numLocal + numStack);
+&nbsp;        } else {
+&nbsp;            int offsetDelta = this.stackMapTableNumberOfEntries == 0 ? this.currentFrame[0] : this.currentFrame[0] - this.previousFrame[0] - 1;
+&nbsp;            int previousNumlocal = this.previousFrame[1];
+&nbsp;            int numLocalDelta = numLocal - previousNumlocal;
+&nbsp;            int type = 255;
+&nbsp;            if (numStack == 0) {
+&nbsp;                switch (numLocalDelta) {
+&nbsp;                    case -3:
+&nbsp;                    case -2:
+&nbsp;                    case -1:
+&nbsp;                        type = 248;
+&nbsp;                        break;
+&nbsp;                    case 0:
+&nbsp;                        type = offsetDelta &lt; 64 ? 0 : 251;
+&nbsp;                        break;
+&nbsp;                    case 1:
+&nbsp;                    case 2:
+&nbsp;                    case 3:
+&nbsp;                        type = 252;
+&nbsp;                }
+&nbsp;            } else if (numLocalDelta == 0 &amp;&amp; numStack == 1) {
+&nbsp;                type = offsetDelta &lt; 63 ? 64 : 247;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (type != 255) {
+&nbsp;                int frameIndex = 3;
+&nbsp;
+&nbsp;                for(int i = 0; i &lt; previousNumlocal &amp;&amp; i &lt; numLocal; ++i) {
+&nbsp;                    if (this.currentFrame[frameIndex] != this.previousFrame[frameIndex]) {
+&nbsp;                        type = 255;
+&nbsp;                        break;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    ++frameIndex;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            switch (type) {
+&nbsp;                case 0:
+&nbsp;                    this.stackMapTableEntries.putByte(offsetDelta);
+&nbsp;                    break;
+&nbsp;                case 64:
+&nbsp;                    this.stackMapTableEntries.putByte(64 + offsetDelta);
+&nbsp;                    this.putAbstractTypes(3 + numLocal, 4 + numLocal);
+&nbsp;                    break;
+&nbsp;                case 247:
+&nbsp;                    this.stackMapTableEntries.putByte(247).putShort(offsetDelta);
+&nbsp;                    this.putAbstractTypes(3 + numLocal, 4 + numLocal);
+&nbsp;                    break;
+&nbsp;                case 248:
+&nbsp;                    this.stackMapTableEntries.putByte(251 + numLocalDelta).putShort(offsetDelta);
+&nbsp;                    break;
+&nbsp;                case 251:
+&nbsp;                    this.stackMapTableEntries.putByte(251).putShort(offsetDelta);
+&nbsp;                    break;
+&nbsp;                case 252:
+&nbsp;                    this.stackMapTableEntries.putByte(251 + numLocalDelta).putShort(offsetDelta);
+&nbsp;                    this.putAbstractTypes(3 + previousNumlocal, 3 + numLocal);
+&nbsp;                    break;
+&nbsp;                case 255:
+&nbsp;                default:
+&nbsp;                    this.stackMapTableEntries.putByte(255).putShort(offsetDelta).putShort(numLocal);
+&nbsp;                    this.putAbstractTypes(3, 3 + numLocal);
+&nbsp;                    this.stackMapTableEntries.putShort(numStack);
+&nbsp;                    this.putAbstractTypes(3 + numLocal, 3 + numLocal + numStack);
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void putAbstractTypes(int start, int end) {
+&nbsp;        for(int i = start; i &lt; end; ++i) {
+&nbsp;            Frame.putAbstractType(this.symbolTable, this.currentFrame[i], this.stackMapTableEntries);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void putFrameType(Object type) {
+&nbsp;        if (type instanceof Integer) {
+&nbsp;            this.stackMapTableEntries.putByte((Integer)type);
+&nbsp;        } else if (type instanceof String) {
+&nbsp;            this.stackMapTableEntries.putByte(7).putShort(this.symbolTable.addConstantClass((String)type).index);
+&nbsp;        } else {
+&nbsp;            this.stackMapTableEntries.putByte(8).putShort(((Label)type).bytecodeOffset);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    boolean canCopyMethodAttributes(ClassReader source, boolean hasSyntheticAttribute, boolean hasDeprecatedAttribute, int descriptorIndex, int signatureIndex, int exceptionsOffset) {
+&nbsp;        if (source == this.symbolTable.getSource() &amp;&amp; descriptorIndex == this.descriptorIndex &amp;&amp; signatureIndex == this.signatureIndex &amp;&amp; hasDeprecatedAttribute == ((this.accessFlags &amp; 131072) != 0)) {
+&nbsp;            boolean needSyntheticAttribute = this.symbolTable.getMajorVersion() &lt; 49 &amp;&amp; (this.accessFlags &amp; 4096) != 0;
+&nbsp;            if (hasSyntheticAttribute != needSyntheticAttribute) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                if (exceptionsOffset == 0) {
+&nbsp;                    if (this.numberOfExceptions != 0) {
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;                } else if (source.readUnsignedShort(exceptionsOffset) == this.numberOfExceptions) {
+&nbsp;                    int currentExceptionOffset = exceptionsOffset + 2;
+&nbsp;
+&nbsp;                    for(int i = 0; i &lt; this.numberOfExceptions; ++i) {
+&nbsp;                        if (source.readUnsignedShort(currentExceptionOffset) != this.exceptionIndexTable[i]) {
+&nbsp;                            return false;
+&nbsp;                        }
+&nbsp;
+&nbsp;                        currentExceptionOffset += 2;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                return true;
+&nbsp;            }
+&nbsp;        } else {
+&nbsp;            return false;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    void setMethodAttributesSource(int methodInfoOffset, int methodInfoLength) {
+&nbsp;        this.sourceOffset = methodInfoOffset + 6;
+&nbsp;        this.sourceLength = methodInfoLength - 6;
+&nbsp;    }
+&nbsp;
+&nbsp;    int computeMethodInfoSize() {
+&nbsp;        if (this.sourceOffset != 0) {
+&nbsp;            return 6 + this.sourceLength;
+&nbsp;        } else {
+&nbsp;            int size = 8;
+&nbsp;            if (this.code.length &gt; 0) {
+&nbsp;                if (this.code.length &gt; 65535) {
+&nbsp;                    throw new MethodTooLargeException(this.symbolTable.getClassName(), this.name, this.descriptor, this.code.length);
+&nbsp;                }
+&nbsp;
+&nbsp;                this.symbolTable.addConstantUtf8(&quot;Code&quot;);
+&nbsp;                size += 16 + this.code.length + Handler.getExceptionTableSize(this.firstHandler);
+&nbsp;                if (this.stackMapTableEntries != null) {
+&nbsp;                    boolean useStackMapTable = this.symbolTable.getMajorVersion() &gt;= 50;
+&nbsp;                    this.symbolTable.addConstantUtf8(useStackMapTable ? &quot;StackMapTable&quot; : &quot;StackMap&quot;);
+&nbsp;                    size += 8 + this.stackMapTableEntries.length;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.lineNumberTable != null) {
+&nbsp;                    this.symbolTable.addConstantUtf8(&quot;LineNumberTable&quot;);
+&nbsp;                    size += 8 + this.lineNumberTable.length;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.localVariableTable != null) {
+&nbsp;                    this.symbolTable.addConstantUtf8(&quot;LocalVariableTable&quot;);
+&nbsp;                    size += 8 + this.localVariableTable.length;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.localVariableTypeTable != null) {
+&nbsp;                    this.symbolTable.addConstantUtf8(&quot;LocalVariableTypeTable&quot;);
+&nbsp;                    size += 8 + this.localVariableTypeTable.length;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.lastCodeRuntimeVisibleTypeAnnotation != null) {
+&nbsp;                    size += this.lastCodeRuntimeVisibleTypeAnnotation.computeAnnotationsSize(&quot;RuntimeVisibleTypeAnnotations&quot;);
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.lastCodeRuntimeInvisibleTypeAnnotation != null) {
+&nbsp;                    size += this.lastCodeRuntimeInvisibleTypeAnnotation.computeAnnotationsSize(&quot;RuntimeInvisibleTypeAnnotations&quot;);
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.firstCodeAttribute != null) {
+&nbsp;                    size += this.firstCodeAttribute.computeAttributesSize(this.symbolTable, this.code.data, this.code.length, this.maxStack, this.maxLocals);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.numberOfExceptions &gt; 0) {
+&nbsp;                this.symbolTable.addConstantUtf8(&quot;Exceptions&quot;);
+&nbsp;                size += 8 + 2 * this.numberOfExceptions;
+&nbsp;            }
+&nbsp;
+&nbsp;            size += Attribute.computeAttributesSize(this.symbolTable, this.accessFlags, this.signatureIndex);
+&nbsp;            size += AnnotationWriter.computeAnnotationsSize(this.lastRuntimeVisibleAnnotation, this.lastRuntimeInvisibleAnnotation, this.lastRuntimeVisibleTypeAnnotation, this.lastRuntimeInvisibleTypeAnnotation);
+&nbsp;            if (this.lastRuntimeVisibleParameterAnnotations != null) {
+&nbsp;                size += AnnotationWriter.computeParameterAnnotationsSize(&quot;RuntimeVisibleParameterAnnotations&quot;, this.lastRuntimeVisibleParameterAnnotations, this.visibleAnnotableParameterCount == 0 ? this.lastRuntimeVisibleParameterAnnotations.length : this.visibleAnnotableParameterCount);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.lastRuntimeInvisibleParameterAnnotations != null) {
+&nbsp;                size += AnnotationWriter.computeParameterAnnotationsSize(&quot;RuntimeInvisibleParameterAnnotations&quot;, this.lastRuntimeInvisibleParameterAnnotations, this.invisibleAnnotableParameterCount == 0 ? this.lastRuntimeInvisibleParameterAnnotations.length : this.invisibleAnnotableParameterCount);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.defaultValue != null) {
+&nbsp;                this.symbolTable.addConstantUtf8(&quot;AnnotationDefault&quot;);
+&nbsp;                size += 6 + this.defaultValue.length;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.parameters != null) {
+&nbsp;                this.symbolTable.addConstantUtf8(&quot;MethodParameters&quot;);
+&nbsp;                size += 7 + this.parameters.length;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.firstAttribute != null) {
+&nbsp;                size += this.firstAttribute.computeAttributesSize(this.symbolTable);
+&nbsp;            }
+&nbsp;
+&nbsp;            return size;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    void putMethodInfo(ByteVector output) {
+&nbsp;        boolean useSyntheticAttribute = this.symbolTable.getMajorVersion() &lt; 49;
+&nbsp;        int mask = useSyntheticAttribute ? 4096 : 0;
+<b class="fc">&nbsp;        output.putShort(this.accessFlags &amp; ~mask).putShort(this.nameIndex).putShort(this.descriptorIndex);</b>
+&nbsp;        if (this.sourceOffset != 0) {
+<b class="fc">&nbsp;            output.putByteArray(this.symbolTable.getSource().classFileBuffer, this.sourceOffset, this.sourceLength);</b>
+<b class="fc">&nbsp;        } else {</b>
+&nbsp;            int attributeCount = 0;
+<b class="fc">&nbsp;            if (this.code.length &gt; 0) {</b>
+&nbsp;                ++attributeCount;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.numberOfExceptions &gt; 0) {
+&nbsp;                ++attributeCount;
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+<b class="fc">&nbsp;            if ((this.accessFlags &amp; 4096) != 0 &amp;&amp; useSyntheticAttribute) {</b>
+&nbsp;                ++attributeCount;
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+&nbsp;            if (this.signatureIndex != 0) {
+&nbsp;                ++attributeCount;
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            if ((this.accessFlags &amp; 131072) != 0) {
+&nbsp;                ++attributeCount;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.lastRuntimeVisibleAnnotation != null) {
+&nbsp;                ++attributeCount;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.lastRuntimeInvisibleAnnotation != null) {
+&nbsp;                ++attributeCount;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.lastRuntimeVisibleParameterAnnotations != null) {
+&nbsp;                ++attributeCount;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.lastRuntimeInvisibleParameterAnnotations != null) {
+&nbsp;                ++attributeCount;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.lastRuntimeVisibleTypeAnnotation != null) {
+&nbsp;                ++attributeCount;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.lastRuntimeInvisibleTypeAnnotation != null) {
+&nbsp;                ++attributeCount;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.defaultValue != null) {
+&nbsp;                ++attributeCount;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.parameters != null) {
+&nbsp;                ++attributeCount;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.firstAttribute != null) {
+&nbsp;                attributeCount += this.firstAttribute.getAttributeCount();
+&nbsp;            }
+&nbsp;
+&nbsp;            output.putShort(attributeCount);
+&nbsp;            int codeAttributeCount;
+&nbsp;            if (this.code.length &gt; 0) {
+&nbsp;                int size = 10 + this.code.length + Handler.getExceptionTableSize(this.firstHandler);
+&nbsp;                codeAttributeCount = 0;
+&nbsp;                if (this.stackMapTableEntries != null) {
+&nbsp;                    size += 8 + this.stackMapTableEntries.length;
+&nbsp;                    ++codeAttributeCount;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.lineNumberTable != null) {
+&nbsp;                    size += 8 + this.lineNumberTable.length;
+&nbsp;                    ++codeAttributeCount;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.localVariableTable != null) {
+&nbsp;                    size += 8 + this.localVariableTable.length;
+&nbsp;                    ++codeAttributeCount;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.localVariableTypeTable != null) {
+&nbsp;                    size += 8 + this.localVariableTypeTable.length;
+&nbsp;                    ++codeAttributeCount;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.lastCodeRuntimeVisibleTypeAnnotation != null) {
+&nbsp;                    size += this.lastCodeRuntimeVisibleTypeAnnotation.computeAnnotationsSize(&quot;RuntimeVisibleTypeAnnotations&quot;);
+&nbsp;                    ++codeAttributeCount;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.lastCodeRuntimeInvisibleTypeAnnotation != null) {
+&nbsp;                    size += this.lastCodeRuntimeInvisibleTypeAnnotation.computeAnnotationsSize(&quot;RuntimeInvisibleTypeAnnotations&quot;);
+&nbsp;                    ++codeAttributeCount;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.firstCodeAttribute != null) {
+&nbsp;                    size += this.firstCodeAttribute.computeAttributesSize(this.symbolTable, this.code.data, this.code.length, this.maxStack, this.maxLocals);
+&nbsp;                    codeAttributeCount += this.firstCodeAttribute.getAttributeCount();
+&nbsp;                }
+&nbsp;
+&nbsp;                output.putShort(this.symbolTable.addConstantUtf8(&quot;Code&quot;)).putInt(size).putShort(this.maxStack).putShort(this.maxLocals).putInt(this.code.length).putByteArray(this.code.data, 0, this.code.length);
+&nbsp;                Handler.putExceptionTable(this.firstHandler, output);
+&nbsp;                output.putShort(codeAttributeCount);
+&nbsp;                if (this.stackMapTableEntries != null) {
+&nbsp;                    boolean useStackMapTable = this.symbolTable.getMajorVersion() &gt;= 50;
+&nbsp;                    output.putShort(this.symbolTable.addConstantUtf8(useStackMapTable ? &quot;StackMapTable&quot; : &quot;StackMap&quot;)).putInt(2 + this.stackMapTableEntries.length).putShort(this.stackMapTableNumberOfEntries).putByteArray(this.stackMapTableEntries.data, 0, this.stackMapTableEntries.length);
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.lineNumberTable != null) {
+&nbsp;                    output.putShort(this.symbolTable.addConstantUtf8(&quot;LineNumberTable&quot;)).putInt(2 + this.lineNumberTable.length).putShort(this.lineNumberTableLength).putByteArray(this.lineNumberTable.data, 0, this.lineNumberTable.length);
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.localVariableTable != null) {
+&nbsp;                    output.putShort(this.symbolTable.addConstantUtf8(&quot;LocalVariableTable&quot;)).putInt(2 + this.localVariableTable.length).putShort(this.localVariableTableLength).putByteArray(this.localVariableTable.data, 0, this.localVariableTable.length);
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.localVariableTypeTable != null) {
+&nbsp;                    output.putShort(this.symbolTable.addConstantUtf8(&quot;LocalVariableTypeTable&quot;)).putInt(2 + this.localVariableTypeTable.length).putShort(this.localVariableTypeTableLength).putByteArray(this.localVariableTypeTable.data, 0, this.localVariableTypeTable.length);
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.lastCodeRuntimeVisibleTypeAnnotation != null) {
+&nbsp;                    this.lastCodeRuntimeVisibleTypeAnnotation.putAnnotations(this.symbolTable.addConstantUtf8(&quot;RuntimeVisibleTypeAnnotations&quot;), output);
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.lastCodeRuntimeInvisibleTypeAnnotation != null) {
+&nbsp;                    this.lastCodeRuntimeInvisibleTypeAnnotation.putAnnotations(this.symbolTable.addConstantUtf8(&quot;RuntimeInvisibleTypeAnnotations&quot;), output);
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.firstCodeAttribute != null) {
+&nbsp;                    this.firstCodeAttribute.putAttributes(this.symbolTable, this.code.data, this.code.length, this.maxStack, this.maxLocals, output);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.numberOfExceptions &gt; 0) {
+&nbsp;                output.putShort(this.symbolTable.addConstantUtf8(&quot;Exceptions&quot;)).putInt(2 + 2 * this.numberOfExceptions).putShort(this.numberOfExceptions);
+&nbsp;                int[] var10 = this.exceptionIndexTable;
+&nbsp;                codeAttributeCount = var10.length;
+&nbsp;
+&nbsp;                for(int var9 = 0; var9 &lt; codeAttributeCount; ++var9) {
+&nbsp;                    int exceptionIndex = var10[var9];
+&nbsp;                    output.putShort(exceptionIndex);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            Attribute.putAttributes(this.symbolTable, this.accessFlags, this.signatureIndex, output);
+&nbsp;            AnnotationWriter.putAnnotations(this.symbolTable, this.lastRuntimeVisibleAnnotation, this.lastRuntimeInvisibleAnnotation, this.lastRuntimeVisibleTypeAnnotation, this.lastRuntimeInvisibleTypeAnnotation, output);
+&nbsp;            if (this.lastRuntimeVisibleParameterAnnotations != null) {
+&nbsp;                AnnotationWriter.putParameterAnnotations(this.symbolTable.addConstantUtf8(&quot;RuntimeVisibleParameterAnnotations&quot;), this.lastRuntimeVisibleParameterAnnotations, this.visibleAnnotableParameterCount == 0 ? this.lastRuntimeVisibleParameterAnnotations.length : this.visibleAnnotableParameterCount, output);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.lastRuntimeInvisibleParameterAnnotations != null) {
+&nbsp;                AnnotationWriter.putParameterAnnotations(this.symbolTable.addConstantUtf8(&quot;RuntimeInvisibleParameterAnnotations&quot;), this.lastRuntimeInvisibleParameterAnnotations, this.invisibleAnnotableParameterCount == 0 ? this.lastRuntimeInvisibleParameterAnnotations.length : this.invisibleAnnotableParameterCount, output);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.defaultValue != null) {
+&nbsp;                output.putShort(this.symbolTable.addConstantUtf8(&quot;AnnotationDefault&quot;)).putInt(this.defaultValue.length).putByteArray(this.defaultValue.data, 0, this.defaultValue.length);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.parameters != null) {
+&nbsp;                output.putShort(this.symbolTable.addConstantUtf8(&quot;MethodParameters&quot;)).putInt(1 + this.parameters.length).putByte(this.parametersCount).putByteArray(this.parameters.data, 0, this.parameters.length);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.firstAttribute != null) {
+&nbsp;                this.firstAttribute.putAttributes(this.symbolTable, output);
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    final void collectAttributePrototypes(Attribute.Set attributePrototypes) {
+&nbsp;        attributePrototypes.addAttributes(this.firstAttribute);
+&nbsp;        attributePrototypes.addAttributes(this.firstCodeAttribute);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

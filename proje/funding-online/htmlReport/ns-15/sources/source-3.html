@@ -1,0 +1,168 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > RoleServiceImplTest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.atguigu.crowd.service.impl.test</a>
+</div>
+
+<h1>Coverage Summary for Class: RoleServiceImplTest (com.atguigu.crowd.service.impl.test)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RoleServiceImplTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.atguigu.crowd.service.impl.test;
+&nbsp;
+&nbsp;import com.atguigu.crowd.mapper.RoleMapper;
+&nbsp;import com.atguigu.crowd.service.impl.RoleServiceImpl;
+&nbsp;import com.github.pagehelper.PageHelper;
+&nbsp;import com.github.pagehelper.PageInfo;
+&nbsp;import org.junit.jupiter.api.BeforeEach;
+&nbsp;import org.junit.jupiter.api.Test;
+&nbsp;import org.mockito.InjectMocks;
+&nbsp;import org.mockito.Mock;
+&nbsp;import org.mockito.MockitoAnnotations;
+&nbsp;import com.atguigu.crowd.entity.Role;
+&nbsp;import java.util.Collections;
+&nbsp;
+&nbsp;import static org.junit.jupiter.api.Assertions.*;
+&nbsp;import static org.mockito.ArgumentMatchers.any;
+&nbsp;import static org.mockito.Mockito.when;
+&nbsp;
+&nbsp;/**
+&nbsp; * Created with IntelliJ IDEA 2023.2.2
+&nbsp; *
+&nbsp; * @author Li Yijia
+&nbsp; * @date 2024/3/22
+&nbsp; */
+&nbsp;class RoleServiceImplTest {
+&nbsp;    @Mock
+&nbsp;    private RoleMapper roleMapper;
+&nbsp;
+&nbsp;    @InjectMocks
+&nbsp;    private RoleServiceImpl roleService;
+&nbsp;
+&nbsp;    @BeforeEach
+<b class="fc">&nbsp;    public void setup() {</b>
+&nbsp;        MockitoAnnotations.openMocks(this);
+&nbsp;    }
+&nbsp;
+&nbsp;    // ------
+&nbsp;    @Test
+<b class="fc">&nbsp;    public void saveRole_SuccessWithCorrectData() {</b>
+<b class="fc">&nbsp;        Role role = new Role(null, &quot;newRole&quot;);</b>
+&nbsp;        assertDoesNotThrow(() -&gt; roleService.saveRole(role));
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+<b class="fc">&nbsp;    public void saveRole_FailsWithIncorrectData() {</b>
+&nbsp;        assertDoesNotThrow(() -&gt; roleService.saveRole(null)); // Допуская, что обработка исключений происходит на уровне
+&nbsp;                                                              // mapper
+&nbsp;    }
+&nbsp;
+&nbsp;    // ------
+&nbsp;    @Test
+<b class="fc">&nbsp;    public void updateRole_Success() {</b>
+<b class="fc">&nbsp;        Role role = new Role(1, &quot;updatedRole&quot;);</b>
+&nbsp;        assertDoesNotThrow(() -&gt; roleService.updateRole(role));
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+<b class="fc">&nbsp;    public void updateRole_FailsWithIncorrectData() {</b>
+<b class="fc">&nbsp;        Role role = new Role(null, null); // Предполагая некорректность данных</b>
+&nbsp;        assertDoesNotThrow(() -&gt; roleService.updateRole(role)); // Обработка ошибок не описана, предполагаем стандартное
+&nbsp;                                                                // поведение
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

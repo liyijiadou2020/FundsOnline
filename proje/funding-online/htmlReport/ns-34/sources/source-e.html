@@ -1,0 +1,657 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > Type</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.jar.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: Type (net.bytebuddy.jar.asm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Type</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (104/104)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.jar.asm;
+&nbsp;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;
+&nbsp;public final class Type {
+&nbsp;    public static final int VOID = 0;
+&nbsp;    public static final int BOOLEAN = 1;
+&nbsp;    public static final int CHAR = 2;
+&nbsp;    public static final int BYTE = 3;
+&nbsp;    public static final int SHORT = 4;
+&nbsp;    public static final int INT = 5;
+&nbsp;    public static final int FLOAT = 6;
+&nbsp;    public static final int LONG = 7;
+&nbsp;    public static final int DOUBLE = 8;
+&nbsp;    public static final int ARRAY = 9;
+&nbsp;    public static final int OBJECT = 10;
+&nbsp;    public static final int METHOD = 11;
+&nbsp;    private static final int INTERNAL = 12;
+&nbsp;    private static final String PRIMITIVE_DESCRIPTORS = &quot;VZCBSIFJD&quot;;
+&nbsp;    public static final Type VOID_TYPE = new Type(0, &quot;VZCBSIFJD&quot;, 0, 1);
+&nbsp;    public static final Type BOOLEAN_TYPE = new Type(1, &quot;VZCBSIFJD&quot;, 1, 2);
+&nbsp;    public static final Type CHAR_TYPE = new Type(2, &quot;VZCBSIFJD&quot;, 2, 3);
+&nbsp;    public static final Type BYTE_TYPE = new Type(3, &quot;VZCBSIFJD&quot;, 3, 4);
+&nbsp;    public static final Type SHORT_TYPE = new Type(4, &quot;VZCBSIFJD&quot;, 4, 5);
+&nbsp;    public static final Type INT_TYPE = new Type(5, &quot;VZCBSIFJD&quot;, 5, 6);
+&nbsp;    public static final Type FLOAT_TYPE = new Type(6, &quot;VZCBSIFJD&quot;, 6, 7);
+&nbsp;    public static final Type LONG_TYPE = new Type(7, &quot;VZCBSIFJD&quot;, 7, 8);
+&nbsp;    public static final Type DOUBLE_TYPE = new Type(8, &quot;VZCBSIFJD&quot;, 8, 9);
+&nbsp;    private final int sort;
+&nbsp;    private final String valueBuffer;
+&nbsp;    private final int valueBegin;
+&nbsp;    private final int valueEnd;
+&nbsp;
+&nbsp;    private Type(int sort, String valueBuffer, int valueBegin, int valueEnd) {
+&nbsp;        this.sort = sort;
+&nbsp;        this.valueBuffer = valueBuffer;
+&nbsp;        this.valueBegin = valueBegin;
+&nbsp;        this.valueEnd = valueEnd;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Type getType(String typeDescriptor) {
+&nbsp;        return getTypeInternal(typeDescriptor, 0, typeDescriptor.length());
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Type getType(Class&lt;?&gt; clazz) {
+&nbsp;        if (clazz.isPrimitive()) {
+&nbsp;            if (clazz == Integer.TYPE) {
+&nbsp;                return INT_TYPE;
+&nbsp;            } else if (clazz == Void.TYPE) {
+&nbsp;                return VOID_TYPE;
+&nbsp;            } else if (clazz == Boolean.TYPE) {
+&nbsp;                return BOOLEAN_TYPE;
+&nbsp;            } else if (clazz == Byte.TYPE) {
+&nbsp;                return BYTE_TYPE;
+&nbsp;            } else if (clazz == Character.TYPE) {
+&nbsp;                return CHAR_TYPE;
+&nbsp;            } else if (clazz == Short.TYPE) {
+&nbsp;                return SHORT_TYPE;
+&nbsp;            } else if (clazz == Double.TYPE) {
+&nbsp;                return DOUBLE_TYPE;
+&nbsp;            } else if (clazz == Float.TYPE) {
+&nbsp;                return FLOAT_TYPE;
+&nbsp;            } else if (clazz == Long.TYPE) {
+&nbsp;                return LONG_TYPE;
+&nbsp;            } else {
+&nbsp;                throw new AssertionError();
+&nbsp;            }
+&nbsp;        } else {
+&nbsp;            return getType(getDescriptor(clazz));
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Type getType(Constructor&lt;?&gt; constructor) {
+&nbsp;        return getType(getConstructorDescriptor(constructor));
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Type getType(Method method) {
+<b class="fc">&nbsp;        return getType(getMethodDescriptor(method));</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public Type getElementType() {</b>
+&nbsp;        int numDimensions = this.getDimensions();
+&nbsp;        return getTypeInternal(this.valueBuffer, this.valueBegin + numDimensions, this.valueEnd);
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public static Type getObjectType(String internalName) {
+&nbsp;        return new Type(internalName.charAt(0) == &#39;[&#39; ? 9 : 12, internalName, 0, internalName.length());
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static Type getMethodType(String methodDescriptor) {
+<b class="fc">&nbsp;        return new Type(11, methodDescriptor, 0, methodDescriptor.length());</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public static Type getMethodType(Type returnType, Type... argumentTypes) {</b>
+&nbsp;        return getType(getMethodDescriptor(returnType, argumentTypes));
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public Type[] getArgumentTypes() {
+&nbsp;        return getArgumentTypes(this.getDescriptor());
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static Type[] getArgumentTypes(String methodDescriptor) {
+<b class="fc">&nbsp;        int numArgumentTypes = 0;</b>
+&nbsp;
+&nbsp;        int currentOffset;
+&nbsp;        for(currentOffset = 1; methodDescriptor.charAt(currentOffset) != &#39;)&#39;; ++numArgumentTypes) {
+&nbsp;            while(methodDescriptor.charAt(currentOffset) == &#39;[&#39;) {
+&nbsp;                ++currentOffset;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (methodDescriptor.charAt(currentOffset++) == &#39;L&#39;) {
+&nbsp;                int semiColumnOffset = methodDescriptor.indexOf(59, currentOffset);
+&nbsp;                currentOffset = Math.max(currentOffset, semiColumnOffset + 1);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        Type[] argumentTypes = new Type[numArgumentTypes];
+&nbsp;        currentOffset = 1;
+&nbsp;
+&nbsp;        int currentArgumentTypeOffset;
+&nbsp;        for(int currentArgumentTypeIndex = 0; methodDescriptor.charAt(currentOffset) != &#39;)&#39;; argumentTypes[currentArgumentTypeIndex++] = getTypeInternal(methodDescriptor, currentArgumentTypeOffset, currentOffset)) {
+&nbsp;            for(currentArgumentTypeOffset = currentOffset; methodDescriptor.charAt(currentOffset) == &#39;[&#39;; ++currentOffset) {
+&nbsp;            }
+&nbsp;
+&nbsp;            if (methodDescriptor.charAt(currentOffset++) == &#39;L&#39;) {
+&nbsp;                int semiColumnOffset = methodDescriptor.indexOf(59, currentOffset);
+&nbsp;                currentOffset = Math.max(currentOffset, semiColumnOffset + 1);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return argumentTypes;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Type[] getArgumentTypes(Method method) {
+&nbsp;        Class&lt;?&gt;[] classes = method.getParameterTypes();
+&nbsp;        Type[] types = new Type[classes.length];
+&nbsp;
+&nbsp;        for(int i = classes.length - 1; i &gt;= 0; --i) {
+&nbsp;            types[i] = getType(classes[i]);
+&nbsp;        }
+&nbsp;
+&nbsp;        return types;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Type getReturnType() {
+&nbsp;        return getReturnType(this.getDescriptor());
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Type getReturnType(String methodDescriptor) {
+&nbsp;        return getTypeInternal(methodDescriptor, getReturnTypeOffset(methodDescriptor), methodDescriptor.length());
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public static Type getReturnType(Method method) {</b>
+<b class="fc">&nbsp;        return getType(method.getReturnType());</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    static int getReturnTypeOffset(String methodDescriptor) {
+&nbsp;        int currentOffset = 1;
+&nbsp;
+&nbsp;        while(methodDescriptor.charAt(currentOffset) != &#39;)&#39;) {
+&nbsp;            while(methodDescriptor.charAt(currentOffset) == &#39;[&#39;) {
+&nbsp;                ++currentOffset;
+&nbsp;            }
+&nbsp;
+&nbsp;            if (methodDescriptor.charAt(currentOffset++) == &#39;L&#39;) {
+&nbsp;                int semiColumnOffset = methodDescriptor.indexOf(59, currentOffset);
+&nbsp;                currentOffset = Math.max(currentOffset, semiColumnOffset + 1);
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        return currentOffset + 1;
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Type getTypeInternal(String descriptorBuffer, int descriptorBegin, int descriptorEnd) {
+&nbsp;        switch (descriptorBuffer.charAt(descriptorBegin)) {
+&nbsp;            case &#39;(&#39;:
+&nbsp;                return new Type(11, descriptorBuffer, descriptorBegin, descriptorEnd);
+&nbsp;            case &#39;B&#39;:
+&nbsp;                return BYTE_TYPE;
+<b class="fc">&nbsp;            case &#39;C&#39;:</b>
+&nbsp;                return CHAR_TYPE;
+&nbsp;            case &#39;D&#39;:
+&nbsp;                return DOUBLE_TYPE;
+&nbsp;            case &#39;F&#39;:
+&nbsp;                return FLOAT_TYPE;
+&nbsp;            case &#39;I&#39;:
+&nbsp;                return INT_TYPE;
+&nbsp;            case &#39;J&#39;:
+&nbsp;                return LONG_TYPE;
+&nbsp;            case &#39;L&#39;:
+&nbsp;                return new Type(10, descriptorBuffer, descriptorBegin + 1, descriptorEnd - 1);
+&nbsp;            case &#39;S&#39;:
+&nbsp;                return SHORT_TYPE;
+&nbsp;            case &#39;V&#39;:
+&nbsp;                return VOID_TYPE;
+&nbsp;            case &#39;Z&#39;:
+&nbsp;                return BOOLEAN_TYPE;
+&nbsp;            case &#39;[&#39;:
+&nbsp;                return new Type(9, descriptorBuffer, descriptorBegin, descriptorEnd);
+&nbsp;            default:
+&nbsp;                throw new IllegalArgumentException();
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public String getClassName() {
+&nbsp;        switch (this.sort) {
+&nbsp;            case 0:
+&nbsp;                return &quot;void&quot;;
+&nbsp;            case 1:
+&nbsp;                return &quot;boolean&quot;;
+&nbsp;            case 2:
+&nbsp;                return &quot;char&quot;;
+&nbsp;            case 3:
+&nbsp;                return &quot;byte&quot;;
+&nbsp;            case 4:
+&nbsp;                return &quot;short&quot;;
+&nbsp;            case 5:
+&nbsp;                return &quot;int&quot;;
+&nbsp;            case 6:
+&nbsp;                return &quot;float&quot;;
+&nbsp;            case 7:
+&nbsp;                return &quot;long&quot;;
+&nbsp;            case 8:
+&nbsp;                return &quot;double&quot;;
+&nbsp;            case 9:
+&nbsp;                StringBuilder stringBuilder = new StringBuilder(this.getElementType().getClassName());
+&nbsp;
+&nbsp;                for(int i = this.getDimensions(); i &gt; 0; --i) {
+&nbsp;                    stringBuilder.append(&quot;[]&quot;);
+&nbsp;                }
+&nbsp;
+&nbsp;                return stringBuilder.toString();
+&nbsp;            case 10:
+&nbsp;            case 12:
+&nbsp;                return this.valueBuffer.substring(this.valueBegin, this.valueEnd).replace(&#39;/&#39;, &#39;.&#39;);
+&nbsp;            case 11:
+&nbsp;            default:
+&nbsp;                throw new AssertionError();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getInternalName() {
+&nbsp;        return this.valueBuffer.substring(this.valueBegin, this.valueEnd);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String getInternalName(Class&lt;?&gt; clazz) {
+&nbsp;        return clazz.getName().replace(&#39;.&#39;, &#39;/&#39;);
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getDescriptor() {
+&nbsp;        if (this.sort == 10) {
+&nbsp;            return this.valueBuffer.substring(this.valueBegin - 1, this.valueEnd + 1);
+&nbsp;        } else {
+&nbsp;            return this.sort == 12 ? &#39;L&#39; + this.valueBuffer.substring(this.valueBegin, this.valueEnd) + &#39;;&#39; : this.valueBuffer.substring(this.valueBegin, this.valueEnd);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String getDescriptor(Class&lt;?&gt; clazz) {
+&nbsp;        StringBuilder stringBuilder = new StringBuilder();
+&nbsp;        appendDescriptor(clazz, stringBuilder);
+&nbsp;        return stringBuilder.toString();
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String getConstructorDescriptor(Constructor&lt;?&gt; constructor) {
+&nbsp;        StringBuilder stringBuilder = new StringBuilder();
+&nbsp;        stringBuilder.append(&#39;(&#39;);
+&nbsp;        Class&lt;?&gt;[] parameters = constructor.getParameterTypes();
+&nbsp;        Class[] var3 = parameters;
+&nbsp;        int var4 = parameters.length;
+&nbsp;
+&nbsp;        for(int var5 = 0; var5 &lt; var4; ++var5) {
+&nbsp;            Class&lt;?&gt; parameter = var3[var5];
+&nbsp;            appendDescriptor(parameter, stringBuilder);
+&nbsp;        }
+&nbsp;
+&nbsp;        return stringBuilder.append(&quot;)V&quot;).toString();
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String getMethodDescriptor(Type returnType, Type... argumentTypes) {
+&nbsp;        StringBuilder stringBuilder = new StringBuilder();
+&nbsp;        stringBuilder.append(&#39;(&#39;);
+&nbsp;        Type[] var3 = argumentTypes;
+&nbsp;        int var4 = argumentTypes.length;
+&nbsp;
+&nbsp;        for(int var5 = 0; var5 &lt; var4; ++var5) {
+&nbsp;            Type argumentType = var3[var5];
+&nbsp;            argumentType.appendDescriptor(stringBuilder);
+&nbsp;        }
+&nbsp;
+&nbsp;        stringBuilder.append(&#39;)&#39;);
+<b class="fc">&nbsp;        returnType.appendDescriptor(stringBuilder);</b>
+&nbsp;        return stringBuilder.toString();
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    public static String getMethodDescriptor(Method method) {</b>
+<b class="fc">&nbsp;        StringBuilder stringBuilder = new StringBuilder();</b>
+&nbsp;        stringBuilder.append(&#39;(&#39;);
+&nbsp;        Class&lt;?&gt;[] parameters = method.getParameterTypes();
+<b class="fc">&nbsp;        Class[] var3 = parameters;</b>
+&nbsp;        int var4 = parameters.length;
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        for(int var5 = 0; var5 &lt; var4; ++var5) {</b>
+&nbsp;            Class&lt;?&gt; parameter = var3[var5];
+<b class="fc">&nbsp;            appendDescriptor(parameter, stringBuilder);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        stringBuilder.append(&#39;)&#39;);
+<b class="fc">&nbsp;        appendDescriptor(method.getReturnType(), stringBuilder);</b>
+&nbsp;        return stringBuilder.toString();
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    private void appendDescriptor(StringBuilder stringBuilder) {</b>
+<b class="fc">&nbsp;        if (this.sort == 10) {</b>
+<b class="fc">&nbsp;            stringBuilder.append(this.valueBuffer, this.valueBegin - 1, this.valueEnd + 1);</b>
+<b class="fc">&nbsp;        } else if (this.sort == 12) {</b>
+&nbsp;            stringBuilder.append(&#39;L&#39;).append(this.valueBuffer, this.valueBegin, this.valueEnd).append(&#39;;&#39;);
+&nbsp;        } else {
+<b class="fc">&nbsp;            stringBuilder.append(this.valueBuffer, this.valueBegin, this.valueEnd);</b>
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    private static void appendDescriptor(Class&lt;?&gt; clazz, StringBuilder stringBuilder) {</b>
+<b class="fc">&nbsp;        Class currentClass;</b>
+<b class="fc">&nbsp;        for(currentClass = clazz; currentClass.isArray(); currentClass = currentClass.getComponentType()) {</b>
+<b class="fc">&nbsp;            stringBuilder.append(&#39;[&#39;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        if (currentClass.isPrimitive()) {
+&nbsp;            char descriptor;
+&nbsp;            if (currentClass == Integer.TYPE) {
+&nbsp;                descriptor = &#39;I&#39;;
+&nbsp;            } else if (currentClass == Void.TYPE) {
+&nbsp;                descriptor = &#39;V&#39;;
+&nbsp;            } else if (currentClass == Boolean.TYPE) {
+&nbsp;                descriptor = &#39;Z&#39;;
+&nbsp;            } else if (currentClass == Byte.TYPE) {
+&nbsp;                descriptor = &#39;B&#39;;
+&nbsp;            } else if (currentClass == Character.TYPE) {
+&nbsp;                descriptor = &#39;C&#39;;
+&nbsp;            } else if (currentClass == Short.TYPE) {
+&nbsp;                descriptor = &#39;S&#39;;
+&nbsp;            } else if (currentClass == Double.TYPE) {
+&nbsp;                descriptor = &#39;D&#39;;
+&nbsp;            } else if (currentClass == Float.TYPE) {
+&nbsp;                descriptor = &#39;F&#39;;
+&nbsp;            } else {
+&nbsp;                if (currentClass != Long.TYPE) {
+&nbsp;                    throw new AssertionError();
+&nbsp;                }
+&nbsp;
+&nbsp;                descriptor = &#39;J&#39;;
+&nbsp;            }
+&nbsp;
+&nbsp;            stringBuilder.append(descriptor);
+&nbsp;        } else {
+&nbsp;            stringBuilder.append(&#39;L&#39;).append(getInternalName(currentClass)).append(&#39;;&#39;);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getSort() {
+&nbsp;        return this.sort == 12 ? 10 : this.sort;
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getDimensions() {
+&nbsp;        int numDimensions;
+&nbsp;        for(numDimensions = 1; this.valueBuffer.charAt(this.valueBegin + numDimensions) == &#39;[&#39;; ++numDimensions) {
+&nbsp;        }
+&nbsp;
+&nbsp;        return numDimensions;
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public int getSize() {
+&nbsp;        switch (this.sort) {
+&nbsp;            case 0:
+&nbsp;                return 0;
+&nbsp;            case 1:
+&nbsp;            case 2:
+&nbsp;            case 3:
+&nbsp;            case 4:
+&nbsp;            case 5:
+&nbsp;            case 6:
+&nbsp;            case 9:
+&nbsp;            case 10:
+&nbsp;            case 12:
+&nbsp;                return 1;
+&nbsp;            case 7:
+&nbsp;            case 8:
+&nbsp;                return 2;
+&nbsp;            case 11:
+&nbsp;            default:
+&nbsp;                throw new AssertionError();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getArgumentsAndReturnSizes() {
+&nbsp;        return getArgumentsAndReturnSizes(this.getDescriptor());
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int getArgumentsAndReturnSizes(String methodDescriptor) {
+&nbsp;        int argumentsSize = 1;
+&nbsp;        int currentOffset = 1;
+&nbsp;
+&nbsp;        char currentChar;
+&nbsp;        int semiColumnOffset;
+&nbsp;        for(currentChar = methodDescriptor.charAt(currentOffset); currentChar != &#39;)&#39;; currentChar = methodDescriptor.charAt(currentOffset)) {
+&nbsp;            if (currentChar != &#39;J&#39; &amp;&amp; currentChar != &#39;D&#39;) {
+&nbsp;                while(methodDescriptor.charAt(currentOffset) == &#39;[&#39;) {
+<b class="fc">&nbsp;                    ++currentOffset;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                if (methodDescriptor.charAt(currentOffset++) == &#39;L&#39;) {
+&nbsp;                    semiColumnOffset = methodDescriptor.indexOf(59, currentOffset);
+&nbsp;                    currentOffset = Math.max(currentOffset, semiColumnOffset + 1);
+&nbsp;                }
+&nbsp;
+&nbsp;                ++argumentsSize;
+&nbsp;            } else {
+&nbsp;                ++currentOffset;
+&nbsp;                argumentsSize += 2;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        currentChar = methodDescriptor.charAt(currentOffset + 1);
+&nbsp;        if (currentChar == &#39;V&#39;) {
+&nbsp;            return argumentsSize &lt;&lt; 2;
+&nbsp;        } else {
+&nbsp;            semiColumnOffset = currentChar != &#39;J&#39; &amp;&amp; currentChar != &#39;D&#39; ? 1 : 2;
+<b class="fc">&nbsp;            return argumentsSize &lt;&lt; 2 | semiColumnOffset;</b>
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public int getOpcode(int opcode) {
+&nbsp;        if (opcode != 46 &amp;&amp; opcode != 79) {
+&nbsp;            switch (this.sort) {
+&nbsp;                case 0:
+&nbsp;                    if (opcode != 172) {
+&nbsp;                        throw new UnsupportedOperationException();
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return 177;
+&nbsp;                case 1:
+&nbsp;                case 2:
+&nbsp;                case 3:
+&nbsp;                case 4:
+&nbsp;                case 5:
+&nbsp;                    return opcode;
+&nbsp;                case 6:
+&nbsp;                    return opcode + 2;
+&nbsp;                case 7:
+&nbsp;                    return opcode + 1;
+&nbsp;                case 8:
+&nbsp;                    return opcode + 3;
+&nbsp;                case 9:
+&nbsp;                case 10:
+&nbsp;                case 12:
+&nbsp;                    if (opcode != 21 &amp;&amp; opcode != 54 &amp;&amp; opcode != 172) {
+&nbsp;                        throw new UnsupportedOperationException();
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return opcode + 4;
+&nbsp;                case 11:
+&nbsp;                    throw new UnsupportedOperationException();
+&nbsp;                default:
+&nbsp;                    throw new AssertionError();
+&nbsp;            }
+&nbsp;        } else {
+&nbsp;            switch (this.sort) {
+&nbsp;                case 0:
+&nbsp;                case 11:
+&nbsp;                    throw new UnsupportedOperationException();
+&nbsp;                case 1:
+&nbsp;                case 3:
+&nbsp;                    return opcode + 5;
+&nbsp;                case 2:
+&nbsp;                    return opcode + 6;
+&nbsp;                case 4:
+&nbsp;                    return opcode + 7;
+&nbsp;                case 5:
+&nbsp;                    return opcode;
+&nbsp;                case 6:
+&nbsp;                    return opcode + 2;
+&nbsp;                case 7:
+&nbsp;                    return opcode + 1;
+&nbsp;                case 8:
+&nbsp;                    return opcode + 3;
+&nbsp;                case 9:
+&nbsp;                case 10:
+&nbsp;                case 12:
+&nbsp;                    return opcode + 4;
+<b class="fc">&nbsp;                default:</b>
+&nbsp;                    throw new AssertionError();
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean equals(Object object) {
+&nbsp;        if (this == object) {
+&nbsp;            return true;
+&nbsp;        } else if (!(object instanceof Type)) {
+&nbsp;            return false;
+<b class="fc">&nbsp;        } else {</b>
+&nbsp;            Type other = (Type)object;
+&nbsp;            if ((this.sort == 12 ? 10 : this.sort) != (other.sort == 12 ? 10 : other.sort)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                int begin = this.valueBegin;
+&nbsp;                int end = this.valueEnd;
+&nbsp;                int otherBegin = other.valueBegin;
+&nbsp;                int otherEnd = other.valueEnd;
+&nbsp;                if (end - begin != otherEnd - otherBegin) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    int i = begin;
+&nbsp;
+&nbsp;                    for(int j = otherBegin; i &lt; end; ++j) {
+&nbsp;                        if (this.valueBuffer.charAt(i) != other.valueBuffer.charAt(j)) {
+&nbsp;                            return false;
+&nbsp;                        }
+&nbsp;
+&nbsp;                        ++i;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return true;
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public int hashCode() {
+&nbsp;        int hashCode = 13 * (this.sort == 12 ? 10 : this.sort);
+&nbsp;        if (this.sort &gt;= 9) {
+&nbsp;            int i = this.valueBegin;
+&nbsp;
+&nbsp;            for(int end = this.valueEnd; i &lt; end; ++i) {
+&nbsp;                hashCode = 17 * (hashCode + this.valueBuffer.charAt(i));
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        return hashCode;</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public String toString() {
+&nbsp;        return this.getDescriptor();
+<b class="fc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

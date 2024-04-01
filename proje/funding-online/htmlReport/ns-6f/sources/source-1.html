@@ -1,0 +1,181 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > StaticLoggerBinder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.slf4j.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: StaticLoggerBinder (org.slf4j.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StaticLoggerBinder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (20/20)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.slf4j.impl;
+&nbsp;
+&nbsp;import ch.qos.logback.classic.LoggerContext;
+&nbsp;import ch.qos.logback.classic.util.ContextInitializer;
+&nbsp;import ch.qos.logback.classic.util.ContextSelectorStaticBinder;
+&nbsp;import ch.qos.logback.core.joran.spi.JoranException;
+&nbsp;import ch.qos.logback.core.status.StatusUtil;
+&nbsp;import ch.qos.logback.core.util.StatusPrinter;
+&nbsp;import org.slf4j.ILoggerFactory;
+&nbsp;import org.slf4j.helpers.Util;
+&nbsp;import org.slf4j.spi.LoggerFactoryBinder;
+&nbsp;
+&nbsp;public class StaticLoggerBinder implements LoggerFactoryBinder {
+&nbsp;    public static String REQUESTED_API_VERSION = &quot;1.7.16&quot;;
+&nbsp;    static final String NULL_CS_URL = &quot;http://logback.qos.ch/codes.html#null_CS&quot;;
+&nbsp;    private static StaticLoggerBinder SINGLETON = new StaticLoggerBinder();
+&nbsp;    private static Object KEY = new Object();
+&nbsp;    private boolean initialized = false;
+&nbsp;    private LoggerContext defaultLoggerContext = new LoggerContext();
+&nbsp;    private final ContextSelectorStaticBinder contextSelectorBinder = ContextSelectorStaticBinder.getSingleton();
+&nbsp;
+&nbsp;    private StaticLoggerBinder() {
+&nbsp;        this.defaultLoggerContext.setName(&quot;default&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static StaticLoggerBinder getSingleton() {
+&nbsp;        return SINGLETON;
+&nbsp;    }
+&nbsp;
+&nbsp;    static void reset() {
+&nbsp;        SINGLETON = new StaticLoggerBinder();
+&nbsp;        SINGLETON.init();
+&nbsp;    }
+&nbsp;
+&nbsp;    void init() {
+&nbsp;        try {
+<b class="fc">&nbsp;            try {</b>
+&nbsp;                (new ContextInitializer(this.defaultLoggerContext)).autoConfig();
+&nbsp;            } catch (JoranException var2) {
+&nbsp;                Util.report(&quot;Failed to auto configure default logger context&quot;, var2);
+&nbsp;            }
+&nbsp;
+&nbsp;            if (!StatusUtil.contextHasStatusListener(this.defaultLoggerContext)) {
+<b class="fc">&nbsp;                StatusPrinter.printInCaseOfErrorsOrWarnings(this.defaultLoggerContext);</b>
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+&nbsp;            this.contextSelectorBinder.init(this.defaultLoggerContext, KEY);
+&nbsp;            this.initialized = true;
+<b class="fc">&nbsp;        } catch (Exception var3) {</b>
+&nbsp;            Util.report(&quot;Failed to instantiate [&quot; + LoggerContext.class.getName() + &quot;]&quot;, var3);
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public ILoggerFactory getLoggerFactory() {
+<b class="fc">&nbsp;        if (!this.initialized) {</b>
+<b class="fc">&nbsp;            return this.defaultLoggerContext;</b>
+&nbsp;        } else if (this.contextSelectorBinder.getContextSelector() == null) {
+&nbsp;            throw new IllegalStateException(&quot;contextSelector cannot be null. See also http://logback.qos.ch/codes.html#null_CS&quot;);
+&nbsp;        } else {
+<b class="fc">&nbsp;            return this.contextSelectorBinder.getContextSelector().getLoggerContext();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getLoggerFactoryClassStr() {
+&nbsp;        return this.contextSelectorBinder.getClass().getName();
+&nbsp;    }
+&nbsp;
+&nbsp;    static {
+&nbsp;        SINGLETON.init();
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,171 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > KotlinInlineClassUtil</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.util</a>
+</div>
+
+<h1>Coverage Summary for Class: KotlinInlineClassUtil (org.mockito.internal.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">KotlinInlineClassUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.util;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.InvocationTargetException;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import org.mockito.internal.exceptions.Reporter;
+&nbsp;import org.mockito.internal.stubbing.answers.InvocationInfo;
+&nbsp;import org.mockito.invocation.InvocationOnMock;
+&nbsp;
+&nbsp;public class KotlinInlineClassUtil {
+&nbsp;    private static Class&lt;Annotation&gt; jvmInlineAnnotation;
+&nbsp;
+&nbsp;    public KotlinInlineClassUtil() {
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public static boolean isInlineClassWithAssignableUnderlyingType(Class&lt;?&gt; inlineClass, Class&lt;?&gt; underlyingType) {
+&nbsp;        try {
+&nbsp;            if (jvmInlineAnnotation != null &amp;&amp; inlineClass.isAnnotationPresent(jvmInlineAnnotation)) {
+&nbsp;                inlineClass.getDeclaredMethod(&quot;box-impl&quot;, underlyingType);
+&nbsp;                return true;
+&nbsp;            } else {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;        } catch (NoSuchMethodException var3) {
+&nbsp;            return false;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Object unboxInlineClassIfPossible(Object boxedValue) {
+&nbsp;        Class&lt;?&gt; inlineClass = boxedValue.getClass();
+&nbsp;
+&nbsp;        try {
+&nbsp;            Method unboxImpl = inlineClass.getDeclaredMethod(&quot;unbox-impl&quot;);
+&nbsp;            return unboxImpl.invoke(boxedValue);
+&nbsp;        } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException var3) {
+&nbsp;            throw Reporter.inlineClassWithoutUnboxImpl(inlineClass, var3);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Object unboxUnderlyingValueIfNeeded(InvocationOnMock invocation, Object value) {
+&nbsp;        if (value != null &amp;&amp; jvmInlineAnnotation != null) {
+&nbsp;            Class&lt;?&gt; valueType = value.getClass();
+&nbsp;            InvocationInfo invocationInfo = new InvocationInfo(invocation);
+&nbsp;            Class&lt;?&gt; returnType = invocationInfo.getMethod().getReturnType();
+&nbsp;            if (valueType.isAssignableFrom(returnType)) {
+&nbsp;                return value;
+&nbsp;            } else {
+&nbsp;                return isInlineClassWithAssignableUnderlyingType(valueType, returnType) ? unboxInlineClassIfPossible(value) : value;
+&nbsp;            }
+&nbsp;        } else {
+&nbsp;            return value;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static {
+<b class="fc">&nbsp;        try {</b>
+<b class="fc">&nbsp;            jvmInlineAnnotation = Class.forName(&quot;kotlin.jvm.JvmInline&quot;);</b>
+&nbsp;        } catch (ClassNotFoundException var1) {
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

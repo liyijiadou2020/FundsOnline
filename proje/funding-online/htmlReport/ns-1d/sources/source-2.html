@@ -1,0 +1,414 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ModifierReviewable</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.description</a>
+</div>
+
+<h1>Coverage Summary for Class: ModifierReviewable (net.bytebuddy.description)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">ModifierReviewable$AbstractBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/15)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/15)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.description;
+&nbsp;
+&nbsp;import net.bytebuddy.description.modifier.EnumerationState;
+&nbsp;import net.bytebuddy.description.modifier.FieldManifestation;
+&nbsp;import net.bytebuddy.description.modifier.FieldPersistence;
+&nbsp;import net.bytebuddy.description.modifier.MethodManifestation;
+&nbsp;import net.bytebuddy.description.modifier.MethodStrictness;
+&nbsp;import net.bytebuddy.description.modifier.Ownership;
+&nbsp;import net.bytebuddy.description.modifier.ParameterManifestation;
+&nbsp;import net.bytebuddy.description.modifier.ProvisioningState;
+&nbsp;import net.bytebuddy.description.modifier.SynchronizationState;
+&nbsp;import net.bytebuddy.description.modifier.SyntheticState;
+&nbsp;import net.bytebuddy.description.modifier.TypeManifestation;
+&nbsp;import net.bytebuddy.description.modifier.Visibility;
+&nbsp;
+&nbsp;public interface ModifierReviewable {
+&nbsp;    int EMPTY_MASK = 0;
+&nbsp;
+&nbsp;    int getModifiers();
+&nbsp;
+&nbsp;    boolean isFinal();
+&nbsp;
+&nbsp;    boolean isSynthetic();
+&nbsp;
+&nbsp;    SyntheticState getSyntheticState();
+&nbsp;
+&nbsp;    public abstract static class AbstractBase implements ForTypeDefinition, ForFieldDescription, ForMethodDescription, ForParameterDescription {
+&nbsp;        public AbstractBase() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isAbstract() {
+&nbsp;            return this.matchesMask(1024);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isFinal() {
+&nbsp;            return this.matchesMask(16);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isStatic() {
+&nbsp;            return this.matchesMask(8);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isPublic() {
+&nbsp;            return this.matchesMask(1);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isProtected() {
+&nbsp;            return this.matchesMask(4);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isPackagePrivate() {
+&nbsp;            return !this.isPublic() &amp;&amp; !this.isProtected() &amp;&amp; !this.isPrivate();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isPrivate() {
+&nbsp;            return this.matchesMask(2);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isNative() {
+&nbsp;            return this.matchesMask(256);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isSynchronized() {
+&nbsp;            return this.matchesMask(32);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isStrict() {
+&nbsp;            return this.matchesMask(2048);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isMandated() {
+&nbsp;            return this.matchesMask(32768);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isSynthetic() {
+&nbsp;            return this.matchesMask(4096);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isBridge() {
+&nbsp;            return this.matchesMask(64);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isDeprecated() {
+&nbsp;            return this.matchesMask(131072);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isAnnotation() {
+&nbsp;            return this.matchesMask(8192);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isEnum() {
+&nbsp;            return this.matchesMask(16384);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isInterface() {
+&nbsp;            return this.matchesMask(512);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isTransient() {
+&nbsp;            return this.matchesMask(128);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isVolatile() {
+&nbsp;            return this.matchesMask(64);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isVarArgs() {
+&nbsp;            return this.matchesMask(128);
+&nbsp;        }
+&nbsp;
+&nbsp;        public SyntheticState getSyntheticState() {
+&nbsp;            return this.isSynthetic() ? SyntheticState.SYNTHETIC : SyntheticState.PLAIN;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Visibility getVisibility() {
+&nbsp;            int modifiers = this.getModifiers();
+&nbsp;            switch (modifiers &amp; 7) {
+&nbsp;                case 0:
+&nbsp;                    return Visibility.PACKAGE_PRIVATE;
+&nbsp;                case 1:
+&nbsp;                    return Visibility.PUBLIC;
+&nbsp;                case 2:
+&nbsp;                    return Visibility.PRIVATE;
+&nbsp;                case 3:
+&nbsp;                default:
+&nbsp;                    throw new IllegalStateException(&quot;Unexpected modifiers: &quot; + modifiers);
+&nbsp;                case 4:
+&nbsp;                    return Visibility.PROTECTED;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public Ownership getOwnership() {
+&nbsp;            return this.isStatic() ? Ownership.STATIC : Ownership.MEMBER;
+&nbsp;        }
+&nbsp;
+&nbsp;        public EnumerationState getEnumerationState() {
+&nbsp;            return this.isEnum() ? EnumerationState.ENUMERATION : EnumerationState.PLAIN;
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeManifestation getTypeManifestation() {
+&nbsp;            int modifiers = this.getModifiers();
+&nbsp;            switch (modifiers &amp; 9744) {
+&nbsp;                case 0:
+&nbsp;                    return TypeManifestation.PLAIN;
+&nbsp;                case 16:
+&nbsp;                    return TypeManifestation.FINAL;
+&nbsp;                case 1024:
+&nbsp;                    return TypeManifestation.ABSTRACT;
+&nbsp;                case 1536:
+&nbsp;                    return TypeManifestation.INTERFACE;
+&nbsp;                case 9728:
+&nbsp;                    return TypeManifestation.ANNOTATION;
+&nbsp;                default:
+&nbsp;                    throw new IllegalStateException(&quot;Unexpected modifiers: &quot; + modifiers);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public FieldManifestation getFieldManifestation() {
+&nbsp;            int modifiers = this.getModifiers();
+&nbsp;            switch (modifiers &amp; 80) {
+&nbsp;                case 0:
+&nbsp;                    return FieldManifestation.PLAIN;
+&nbsp;                case 16:
+&nbsp;                    return FieldManifestation.FINAL;
+&nbsp;                case 64:
+&nbsp;                    return FieldManifestation.VOLATILE;
+&nbsp;                default:
+&nbsp;                    throw new IllegalStateException(&quot;Unexpected modifiers: &quot; + modifiers);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public FieldPersistence getFieldPersistence() {
+&nbsp;            int modifiers = this.getModifiers();
+&nbsp;            switch (modifiers &amp; 128) {
+&nbsp;                case 0:
+&nbsp;                    return FieldPersistence.PLAIN;
+&nbsp;                case 128:
+&nbsp;                    return FieldPersistence.TRANSIENT;
+&nbsp;                default:
+&nbsp;                    throw new IllegalStateException(&quot;Unexpected modifiers: &quot; + modifiers);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public SynchronizationState getSynchronizationState() {
+&nbsp;            return this.isSynchronized() ? SynchronizationState.SYNCHRONIZED : SynchronizationState.PLAIN;
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodManifestation getMethodManifestation() {
+&nbsp;            int modifiers = this.getModifiers();
+&nbsp;            switch (modifiers &amp; 1360) {
+&nbsp;                case 0:
+&nbsp;                    return MethodManifestation.PLAIN;
+&nbsp;                case 16:
+&nbsp;                    return MethodManifestation.FINAL;
+&nbsp;                case 64:
+&nbsp;                    return MethodManifestation.BRIDGE;
+&nbsp;                case 80:
+&nbsp;                    return MethodManifestation.FINAL_BRIDGE;
+&nbsp;                case 256:
+&nbsp;                    return MethodManifestation.NATIVE;
+&nbsp;                case 272:
+&nbsp;                    return MethodManifestation.FINAL_NATIVE;
+&nbsp;                case 1024:
+&nbsp;                    return MethodManifestation.ABSTRACT;
+&nbsp;                default:
+&nbsp;                    throw new IllegalStateException(&quot;Unexpected modifiers: &quot; + modifiers);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodStrictness getMethodStrictness() {
+&nbsp;            return this.isStrict() ? MethodStrictness.STRICT : MethodStrictness.PLAIN;
+&nbsp;        }
+&nbsp;
+&nbsp;        public ParameterManifestation getParameterManifestation() {
+&nbsp;            return this.isFinal() ? ParameterManifestation.FINAL : ParameterManifestation.PLAIN;
+&nbsp;        }
+&nbsp;
+&nbsp;        public ProvisioningState getProvisioningState() {
+&nbsp;            return this.isMandated() ? ProvisioningState.MANDATED : ProvisioningState.PLAIN;
+&nbsp;        }
+&nbsp;
+&nbsp;        private boolean matchesMask(int mask) {
+&nbsp;            return (this.getModifiers() &amp; mask) == mask;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface ForParameterDescription extends ModifierReviewable {
+&nbsp;        boolean isMandated();
+&nbsp;
+&nbsp;        ParameterManifestation getParameterManifestation();
+&nbsp;
+&nbsp;        ProvisioningState getProvisioningState();
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface ForMethodDescription extends OfAbstraction {
+&nbsp;        boolean isSynchronized();
+&nbsp;
+&nbsp;        boolean isVarArgs();
+&nbsp;
+&nbsp;        boolean isNative();
+&nbsp;
+&nbsp;        boolean isBridge();
+&nbsp;
+&nbsp;        boolean isStrict();
+&nbsp;
+&nbsp;        SynchronizationState getSynchronizationState();
+&nbsp;
+&nbsp;        MethodStrictness getMethodStrictness();
+&nbsp;
+&nbsp;        MethodManifestation getMethodManifestation();
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface ForFieldDescription extends OfEnumeration {
+&nbsp;        boolean isVolatile();
+&nbsp;
+&nbsp;        boolean isTransient();
+&nbsp;
+&nbsp;        FieldManifestation getFieldManifestation();
+&nbsp;
+&nbsp;        FieldPersistence getFieldPersistence();
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface ForTypeDefinition extends OfAbstraction, OfEnumeration {
+&nbsp;        boolean isInterface();
+&nbsp;
+&nbsp;        boolean isAnnotation();
+&nbsp;
+&nbsp;        TypeManifestation getTypeManifestation();
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface OfEnumeration extends OfByteCodeElement {
+&nbsp;        boolean isEnum();
+&nbsp;
+&nbsp;        EnumerationState getEnumerationState();
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface OfAbstraction extends OfByteCodeElement {
+&nbsp;        boolean isAbstract();
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface OfByteCodeElement extends ModifierReviewable {
+&nbsp;        boolean isPublic();
+&nbsp;
+&nbsp;        boolean isProtected();
+&nbsp;
+&nbsp;        boolean isPackagePrivate();
+&nbsp;
+&nbsp;        boolean isPrivate();
+&nbsp;
+&nbsp;        boolean isStatic();
+&nbsp;
+&nbsp;        boolean isDeprecated();
+&nbsp;
+&nbsp;        Ownership getOwnership();
+&nbsp;
+&nbsp;        Visibility getVisibility();
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:49</div>
+</div>
+</body>
+</html>

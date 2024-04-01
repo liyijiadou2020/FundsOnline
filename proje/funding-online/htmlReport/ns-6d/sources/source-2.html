@@ -1,0 +1,202 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > MDC</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.slf4j</a>
+</div>
+
+<h1>Coverage Summary for Class: MDC (org.slf4j)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MDC</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.slf4j;
+&nbsp;
+&nbsp;import java.util.Map;
+&nbsp;import org.slf4j.helpers.NOPMDCAdapter;
+&nbsp;import org.slf4j.helpers.Util;
+&nbsp;import org.slf4j.impl.StaticMDCBinder;
+&nbsp;import org.slf4j.spi.MDCAdapter;
+&nbsp;
+&nbsp;public class MDC {
+&nbsp;    static final String NULL_MDCA_URL = &quot;http://www.slf4j.org/codes.html#null_MDCA&quot;;
+&nbsp;    static final String NO_STATIC_MDC_BINDER_URL = &quot;http://www.slf4j.org/codes.html#no_static_mdc_binder&quot;;
+&nbsp;    static MDCAdapter mdcAdapter;
+&nbsp;
+&nbsp;    private MDC() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void put(String key, String val) throws IllegalArgumentException {
+&nbsp;        if (key == null) {
+&nbsp;            throw new IllegalArgumentException(&quot;key parameter cannot be null&quot;);
+&nbsp;        } else if (mdcAdapter == null) {
+&nbsp;            throw new IllegalStateException(&quot;MDCAdapter cannot be null. See also http://www.slf4j.org/codes.html#null_MDCA&quot;);
+&nbsp;        } else {
+&nbsp;            mdcAdapter.put(key, val);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String get(String key) throws IllegalArgumentException {
+&nbsp;        if (key == null) {
+&nbsp;            throw new IllegalArgumentException(&quot;key parameter cannot be null&quot;);
+&nbsp;        } else if (mdcAdapter == null) {
+&nbsp;            throw new IllegalStateException(&quot;MDCAdapter cannot be null. See also http://www.slf4j.org/codes.html#null_MDCA&quot;);
+&nbsp;        } else {
+&nbsp;            return mdcAdapter.get(key);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void remove(String key) throws IllegalArgumentException {
+&nbsp;        if (key == null) {
+&nbsp;            throw new IllegalArgumentException(&quot;key parameter cannot be null&quot;);
+&nbsp;        } else if (mdcAdapter == null) {
+&nbsp;            throw new IllegalStateException(&quot;MDCAdapter cannot be null. See also http://www.slf4j.org/codes.html#null_MDCA&quot;);
+&nbsp;        } else {
+&nbsp;            mdcAdapter.remove(key);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void clear() {
+&nbsp;        if (mdcAdapter == null) {
+&nbsp;            throw new IllegalStateException(&quot;MDCAdapter cannot be null. See also http://www.slf4j.org/codes.html#null_MDCA&quot;);
+&nbsp;        } else {
+&nbsp;            mdcAdapter.clear();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Map&lt;String, String&gt; getCopyOfContextMap() {
+&nbsp;        if (mdcAdapter == null) {
+&nbsp;            throw new IllegalStateException(&quot;MDCAdapter cannot be null. See also http://www.slf4j.org/codes.html#null_MDCA&quot;);
+&nbsp;        } else {
+&nbsp;            return mdcAdapter.getCopyOfContextMap();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setContextMap(Map&lt;String, String&gt; contextMap) {
+&nbsp;        if (mdcAdapter == null) {
+&nbsp;            throw new IllegalStateException(&quot;MDCAdapter cannot be null. See also http://www.slf4j.org/codes.html#null_MDCA&quot;);
+&nbsp;        } else {
+&nbsp;            mdcAdapter.setContextMap(contextMap);
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MDCAdapter getMDCAdapter() {
+&nbsp;        return mdcAdapter;
+&nbsp;    }
+&nbsp;
+&nbsp;    static {
+&nbsp;        try {
+&nbsp;            mdcAdapter = StaticMDCBinder.SINGLETON.getMDCA();
+&nbsp;        } catch (NoClassDefFoundError var2) {
+&nbsp;            mdcAdapter = new NOPMDCAdapter();
+&nbsp;            String msg = var2.getMessage();
+&nbsp;            if (msg == null || msg.indexOf(&quot;StaticMDCBinder&quot;) == -1) {
+&nbsp;                throw var2;
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            Util.report(&quot;Failed to load class \&quot;org.slf4j.impl.StaticMDCBinder\&quot;.&quot;);
+&nbsp;            Util.report(&quot;Defaulting to no-operation MDCAdapter implementation.&quot;);
+&nbsp;            Util.report(&quot;See http://www.slf4j.org/codes.html#no_static_mdc_binder for further details.&quot;);
+&nbsp;        } catch (Exception var3) {
+&nbsp;            Util.report(&quot;MDC binding unsuccessful.&quot;, var3);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

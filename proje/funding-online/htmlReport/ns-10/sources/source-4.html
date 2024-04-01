@@ -1,0 +1,125 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > LoginFailedException</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.atguigu.crowd.exception</a>
+</div>
+
+<h1>Coverage Summary for Class: LoginFailedException (com.atguigu.crowd.exception)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoginFailedException</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.atguigu.crowd.exception;
+&nbsp;
+&nbsp;/**
+&nbsp; * 登录失败后抛出的异常
+&nbsp; *
+&nbsp; * @author Lenovo
+&nbsp; */
+&nbsp;public class LoginFailedException extends RuntimeException {
+&nbsp;
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;
+&nbsp;    public LoginFailedException() {
+&nbsp;        super();
+&nbsp;    }
+&nbsp;
+&nbsp;    public LoginFailedException(String message, Throwable cause, boolean enableSuppression,
+&nbsp;        boolean writableStackTrace) {
+&nbsp;        super(message, cause, enableSuppression, writableStackTrace);
+&nbsp;    }
+&nbsp;
+&nbsp;    public LoginFailedException(String message, Throwable cause) {
+&nbsp;        super(message, cause);
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public LoginFailedException(String message) {</b>
+&nbsp;        super(message);
+&nbsp;    }
+&nbsp;
+&nbsp;    public LoginFailedException(Throwable cause) {
+&nbsp;        super(cause);
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

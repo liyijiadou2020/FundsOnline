@@ -1,0 +1,363 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > FieldInitializer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.util.reflection</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldInitializer (org.mockito.internal.util.reflection)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FieldInitializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (23/23)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">FieldInitializer$NoArgConstructorInstantiator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldInitializer$ParameterizedConstructorInstantiator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/16)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldInitializer$ParameterizedConstructorInstantiator$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (49/49)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.util.reflection;
+&nbsp;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.InvocationTargetException;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Comparator;
+&nbsp;import java.util.List;
+&nbsp;import org.mockito.exceptions.base.MockitoException;
+&nbsp;import org.mockito.internal.configuration.plugins.Plugins;
+&nbsp;import org.mockito.internal.util.MockUtil;
+&nbsp;import org.mockito.plugins.MemberAccessor;
+&nbsp;
+&nbsp;public class FieldInitializer {
+&nbsp;    private final Object fieldOwner;
+&nbsp;    private final Field field;
+&nbsp;    private final ConstructorInstantiator instantiator;
+&nbsp;
+&nbsp;    public FieldInitializer(Object fieldOwner, Field field) {
+&nbsp;        this(fieldOwner, field, (ConstructorInstantiator)(new NoArgConstructorInstantiator(fieldOwner, field)));
+&nbsp;    }
+&nbsp;
+&nbsp;    public FieldInitializer(Object fieldOwner, Field field, ConstructorArgumentResolver argResolver) {
+&nbsp;        this(fieldOwner, field, (ConstructorInstantiator)(new ParameterizedConstructorInstantiator(fieldOwner, field, argResolver)));
+&nbsp;    }
+&nbsp;
+&nbsp;    private FieldInitializer(Object fieldOwner, Field field, ConstructorInstantiator instantiator) {
+&nbsp;        if ((new FieldReader(fieldOwner, field)).isNull()) {
+&nbsp;            this.checkNotLocal(field);
+&nbsp;            this.checkNotInner(field);
+&nbsp;            this.checkNotInterface(field);
+&nbsp;            this.checkNotEnum(field);
+&nbsp;            this.checkNotAbstract(field);
+&nbsp;        }
+&nbsp;
+&nbsp;        this.fieldOwner = fieldOwner;
+&nbsp;        this.field = field;
+&nbsp;        this.instantiator = instantiator;
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public FieldInitializationReport initialize() {</b>
+&nbsp;        try {
+&nbsp;            return this.acquireFieldInstance();
+&nbsp;        } catch (IllegalAccessException var2) {
+&nbsp;            throw new MockitoException(&quot;Problems initializing field &#39;&quot; + this.field.getName() + &quot;&#39; of type &#39;&quot; + this.field.getType().getSimpleName() + &quot;&#39;&quot;, var2);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void checkNotLocal(Field field) {
+&nbsp;        if (field.getType().isLocalClass()) {
+&nbsp;            throw new MockitoException(&quot;the type &#39;&quot; + field.getType().getSimpleName() + &quot;&#39; is a local class.&quot;);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void checkNotInner(Field field) {
+&nbsp;        Class&lt;?&gt; type = field.getType();
+<b class="fc">&nbsp;        if (type.isMemberClass() &amp;&amp; !Modifier.isStatic(type.getModifiers())) {</b>
+&nbsp;            throw new MockitoException(&quot;the type &#39;&quot; + type.getSimpleName() + &quot;&#39; is an inner non static class.&quot;);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void checkNotInterface(Field field) {
+<b class="fc">&nbsp;        if (field.getType().isInterface()) {</b>
+<b class="fc">&nbsp;            throw new MockitoException(&quot;the type &#39;&quot; + field.getType().getSimpleName() + &quot;&#39; is an interface.&quot;);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    private void checkNotAbstract(Field field) {</b>
+<b class="fc">&nbsp;        if (Modifier.isAbstract(field.getType().getModifiers())) {</b>
+&nbsp;            throw new MockitoException(&quot;the type &#39;&quot; + field.getType().getSimpleName() + &quot;&#39; is an abstract class.&quot;);
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    private void checkNotEnum(Field field) {
+&nbsp;        if (field.getType().isEnum()) {
+&nbsp;            throw new MockitoException(&quot;the type &#39;&quot; + field.getType().getSimpleName() + &quot;&#39; is an enum.&quot;);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private FieldInitializationReport acquireFieldInstance() throws IllegalAccessException {
+&nbsp;        MemberAccessor accessor = Plugins.getMemberAccessor();
+&nbsp;        Object fieldInstance = accessor.get(this.field, this.fieldOwner);
+<b class="fc">&nbsp;        return fieldInstance != null ? new FieldInitializationReport(fieldInstance, false, false) : this.instantiator.instantiate();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static class ParameterizedConstructorInstantiator implements ConstructorInstantiator {
+&nbsp;        private final Object testClass;
+&nbsp;        private final Field field;
+&nbsp;        private final ConstructorArgumentResolver argResolver;
+&nbsp;        private final Comparator&lt;Constructor&lt;?&gt;&gt; byParameterNumber = new Comparator&lt;Constructor&lt;?&gt;&gt;() {
+&nbsp;            public int compare(Constructor&lt;?&gt; constructorA, Constructor&lt;?&gt; constructorB) {
+&nbsp;                int argLengths = constructorB.getParameterTypes().length - constructorA.getParameterTypes().length;
+&nbsp;                if (argLengths == 0) {
+&nbsp;                    int constructorAMockableParamsSize = this.countMockableParams(constructorA);
+&nbsp;                    int constructorBMockableParamsSize = this.countMockableParams(constructorB);
+<b class="fc">&nbsp;                    return constructorBMockableParamsSize - constructorAMockableParamsSize;</b>
+&nbsp;                } else {
+&nbsp;                    return argLengths;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            private int countMockableParams(Constructor&lt;?&gt; constructor) {
+<b class="fc">&nbsp;                int constructorMockableParamsSize = 0;</b>
+<b class="fc">&nbsp;                Class[] var3 = constructor.getParameterTypes();</b>
+&nbsp;                int var4 = var3.length;
+&nbsp;
+&nbsp;                for(int var5 = 0; var5 &lt; var4; ++var5) {
+&nbsp;                    Class&lt;?&gt; aClass = var3[var5];
+&nbsp;                    if (MockUtil.typeMockabilityOf(aClass).mockable()) {
+&nbsp;                        ++constructorMockableParamsSize;
+<b class="fc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                return constructorMockableParamsSize;
+&nbsp;            }
+&nbsp;        };
+&nbsp;
+<b class="fc">&nbsp;        ParameterizedConstructorInstantiator(Object testClass, Field field, ConstructorArgumentResolver argumentResolver) {</b>
+&nbsp;            this.testClass = testClass;
+&nbsp;            this.field = field;
+&nbsp;            this.argResolver = argumentResolver;
+&nbsp;        }
+&nbsp;
+&nbsp;        public FieldInitializationReport instantiate() {
+<b class="fc">&nbsp;            MemberAccessor accessor = Plugins.getMemberAccessor();</b>
+&nbsp;            Constructor&lt;?&gt; constructor = this.biggestConstructor(this.field.getType());
+&nbsp;            Object[] args = this.argResolver.resolveTypeInstances(constructor.getParameterTypes());
+&nbsp;
+&nbsp;            try {
+&nbsp;                Object newFieldInstance = accessor.newInstance(constructor, args);
+&nbsp;                accessor.set(this.field, this.testClass, newFieldInstance);
+<b class="fc">&nbsp;                return new FieldInitializationReport(accessor.get(this.field, this.testClass), false, true);</b>
+<b class="fc">&nbsp;            } catch (IllegalArgumentException var5) {</b>
+<b class="fc">&nbsp;                throw new MockitoException(&quot;internal error : argResolver provided incorrect types for constructor &quot; + constructor + &quot; of type &quot; + this.field.getType().getSimpleName(), var5);</b>
+&nbsp;            } catch (InvocationTargetException var6) {
+&nbsp;                throw new MockitoException(&quot;the constructor of type &#39;&quot; + this.field.getType().getSimpleName() + &quot;&#39; has raised an exception (see the stack trace for cause): &quot; + var6.getTargetException(), var6);
+&nbsp;            } catch (InstantiationException var7) {
+<b class="fc">&nbsp;                throw new MockitoException(&quot;InstantiationException (see the stack trace for cause): &quot; + var7, var7);</b>
+&nbsp;            } catch (IllegalAccessException var8) {
+&nbsp;                throw new MockitoException(&quot;IllegalAccessException (see the stack trace for cause): &quot; + var8, var8);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        private void checkParameterized(Constructor&lt;?&gt; constructor, Field field) {
+&nbsp;            if (constructor.getParameterTypes().length == 0) {
+&nbsp;                throw new MockitoException(&quot;the field &quot; + field.getName() + &quot; of type &quot; + field.getType() + &quot; has no parameterized constructor&quot;);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        private Constructor&lt;?&gt; biggestConstructor(Class&lt;?&gt; clazz) {
+&nbsp;            List&lt;? extends Constructor&lt;?&gt;&gt; constructors = Arrays.asList(clazz.getDeclaredConstructors());
+&nbsp;            Collections.sort(constructors, this.byParameterNumber);
+&nbsp;            Constructor&lt;?&gt; constructor = (Constructor)constructors.get(0);
+&nbsp;            this.checkParameterized(constructor, this.field);
+&nbsp;            return constructor;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static class NoArgConstructorInstantiator implements ConstructorInstantiator {
+&nbsp;        private final Object testClass;
+&nbsp;        private final Field field;
+&nbsp;
+&nbsp;        NoArgConstructorInstantiator(Object testClass, Field field) {
+&nbsp;            this.testClass = testClass;
+&nbsp;            this.field = field;
+&nbsp;        }
+&nbsp;
+&nbsp;        public FieldInitializationReport instantiate() {
+&nbsp;            MemberAccessor invoker = Plugins.getMemberAccessor();
+&nbsp;
+&nbsp;            try {
+&nbsp;                Constructor&lt;?&gt; constructor = this.field.getType().getDeclaredConstructor();
+&nbsp;                Object[] noArg = new Object[0];
+&nbsp;                Object newFieldInstance = invoker.newInstance(constructor, noArg);
+&nbsp;                invoker.set(this.field, this.testClass, newFieldInstance);
+&nbsp;                return new FieldInitializationReport(invoker.get(this.field, this.testClass), true, false);
+&nbsp;            } catch (NoSuchMethodException var5) {
+&nbsp;                throw new MockitoException(&quot;the type &#39;&quot; + this.field.getType().getSimpleName() + &quot;&#39; has no default constructor&quot;, var5);
+&nbsp;            } catch (InvocationTargetException var6) {
+&nbsp;                throw new MockitoException(&quot;the default constructor of type &#39;&quot; + this.field.getType().getSimpleName() + &quot;&#39; has raised an exception (see the stack trace for cause): &quot; + var6.getTargetException(), var6);
+&nbsp;            } catch (InstantiationException var7) {
+&nbsp;                throw new MockitoException(&quot;InstantiationException (see the stack trace for cause): &quot; + var7, var7);
+<b class="fc">&nbsp;            } catch (IllegalAccessException var8) {</b>
+<b class="fc">&nbsp;                throw new MockitoException(&quot;IllegalAccessException (see the stack trace for cause): &quot; + var8, var8);</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private interface ConstructorInstantiator {
+<b class="fc">&nbsp;        FieldInitializationReport instantiate();</b>
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public interface ConstructorArgumentResolver {
+<b class="fc">&nbsp;        Object[] resolveTypeInstances(Class&lt;?&gt;... var1);</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

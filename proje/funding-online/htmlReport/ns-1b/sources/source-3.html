@@ -1,0 +1,534 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > NamingStrategy</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy</a>
+</div>
+
+<h1>Coverage Summary for Class: NamingStrategy (net.bytebuddy)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">NamingStrategy$AbstractBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NamingStrategy$Suffixing</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NamingStrategy$Suffixing$BaseNameResolver$ForUnnamedType</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">NamingStrategy$SuffixingRandom</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (19/19)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy;
+&nbsp;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.ValueHandling;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.ValueHandling.Sort;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.utility.RandomString;
+&nbsp;
+&nbsp;public interface NamingStrategy {
+&nbsp;    String BYTE_BUDDY_RENAME_PACKAGE = &quot;net.bytebuddy.renamed&quot;;
+&nbsp;    String NO_PREFIX = &quot;&quot;;
+&nbsp;
+&nbsp;    String subclass(TypeDescription.Generic var1);
+&nbsp;
+&nbsp;    String redefine(TypeDescription var1);
+&nbsp;
+&nbsp;    String rebase(TypeDescription var1);
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class PrefixingRandom extends AbstractBase {
+&nbsp;        private final String prefix;
+&nbsp;        @ValueHandling(Sort.IGNORE)
+&nbsp;        private final RandomString randomString;
+&nbsp;
+&nbsp;        public PrefixingRandom(String prefix) {
+&nbsp;            this.prefix = prefix;
+&nbsp;            this.randomString = new RandomString();
+&nbsp;        }
+&nbsp;
+&nbsp;        protected String name(TypeDescription superClass) {
+&nbsp;            return this.prefix + &quot;.&quot; + superClass.getName() + &quot;$&quot; + this.randomString.nextString();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.prefix.equals(((PrefixingRandom)var1).prefix);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.prefix.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class SuffixingRandom extends Suffixing {
+&nbsp;        @ValueHandling(Sort.IGNORE)
+&nbsp;        private final RandomString randomString;
+&nbsp;
+&nbsp;        public SuffixingRandom(String suffix) {
+&nbsp;            this(suffix, (Suffixing.BaseNameResolver)NamingStrategy.Suffixing.BaseNameResolver.ForUnnamedType.INSTANCE);
+&nbsp;        }
+&nbsp;
+&nbsp;        public SuffixingRandom(String suffix, String javaLangPackagePrefix) {
+&nbsp;            this(suffix, (Suffixing.BaseNameResolver)NamingStrategy.Suffixing.BaseNameResolver.ForUnnamedType.INSTANCE, javaLangPackagePrefix);
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        /** @deprecated */</b>
+&nbsp;        @Deprecated
+&nbsp;        public SuffixingRandom(String suffix, BaseNameResolver baseNameResolver) {
+&nbsp;            this(suffix, (Suffixing.BaseNameResolver)baseNameResolver);
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public SuffixingRandom(String suffix, Suffixing.BaseNameResolver baseNameResolver) {</b>
+&nbsp;            this(suffix, baseNameResolver, &quot;net.bytebuddy.renamed&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        /** @deprecated */
+&nbsp;        @Deprecated
+&nbsp;        public SuffixingRandom(String suffix, BaseNameResolver baseNameResolver, String javaLangPackagePrefix) {
+&nbsp;            this(suffix, (Suffixing.BaseNameResolver)baseNameResolver, javaLangPackagePrefix);
+&nbsp;        }
+&nbsp;
+&nbsp;        public SuffixingRandom(String suffix, Suffixing.BaseNameResolver baseNameResolver, String javaLangPackagePrefix) {
+&nbsp;            this(suffix, baseNameResolver, javaLangPackagePrefix, new RandomString());
+&nbsp;        }
+&nbsp;
+&nbsp;        /** @deprecated */
+&nbsp;        @Deprecated
+&nbsp;        public SuffixingRandom(String suffix, BaseNameResolver baseNameResolver, String javaLangPackagePrefix, RandomString randomString) {
+&nbsp;            this(suffix, (Suffixing.BaseNameResolver)baseNameResolver, javaLangPackagePrefix, randomString);
+&nbsp;        }
+&nbsp;
+&nbsp;        public SuffixingRandom(String suffix, Suffixing.BaseNameResolver baseNameResolver, String javaLangPackagePrefix, RandomString randomString) {
+&nbsp;            super(suffix, baseNameResolver, javaLangPackagePrefix);
+&nbsp;            this.randomString = randomString;
+&nbsp;        }
+&nbsp;
+&nbsp;        protected String name(TypeDescription superClass) {
+&nbsp;            return super.name(superClass) + &quot;$&quot; + this.randomString.nextString();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (!super.equals(var1)) {
+&nbsp;                return false;
+&nbsp;            } else if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.getClass() == var1.getClass();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return super.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        /** @deprecated */
+&nbsp;        @Deprecated
+&nbsp;        public interface BaseNameResolver extends Suffixing.BaseNameResolver {
+&nbsp;            /** @deprecated */
+&nbsp;            @Deprecated
+&nbsp;            @Enhance
+&nbsp;            public static class ForFixedValue extends Suffixing.ForFixedValue implements BaseNameResolver {
+&nbsp;                public ForFixedValue(String name) {
+&nbsp;                    super(name);
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (!super.equals(var1)) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.getClass() == var1.getClass();
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return super.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            /** @deprecated */
+&nbsp;            @Deprecated
+&nbsp;            @Enhance
+&nbsp;            public static class ForGivenType extends Suffixing.ForGivenType implements BaseNameResolver {
+&nbsp;                public ForGivenType(TypeDescription typeDescription) {
+&nbsp;                    super(typeDescription);
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (!super.equals(var1)) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.getClass() == var1.getClass();
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return super.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            /** @deprecated */</b>
+<b class="fc">&nbsp;            @Deprecated</b>
+<b class="fc">&nbsp;            public static enum ForUnnamedType implements BaseNameResolver {</b>
+<b class="fc">&nbsp;                INSTANCE;</b>
+&nbsp;
+&nbsp;                private ForUnnamedType() {
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                public String resolve(TypeDescription typeDescription) {</b>
+<b class="fc">&nbsp;                    return typeDescription.getName();</b>
+<b class="fc">&nbsp;                }</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class Suffixing extends AbstractBase {
+&nbsp;        private static final String JAVA_PACKAGE = &quot;java.&quot;;
+&nbsp;        private final String suffix;
+&nbsp;        private final String javaLangPackagePrefix;
+&nbsp;        private final BaseNameResolver baseNameResolver;
+&nbsp;
+&nbsp;        public Suffixing(String suffix) {
+&nbsp;            this(suffix, (BaseNameResolver)NamingStrategy.Suffixing.BaseNameResolver.ForUnnamedType.INSTANCE);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Suffixing(String suffix, String javaLangPackagePrefix) {
+&nbsp;            this(suffix, NamingStrategy.Suffixing.BaseNameResolver.ForUnnamedType.INSTANCE, javaLangPackagePrefix);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Suffixing(String suffix, BaseNameResolver baseNameResolver) {
+<b class="fc">&nbsp;            this(suffix, baseNameResolver, &quot;net.bytebuddy.renamed&quot;);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Suffixing(String suffix, BaseNameResolver baseNameResolver, String javaLangPackagePrefix) {
+&nbsp;            this.suffix = suffix;
+<b class="fc">&nbsp;            this.baseNameResolver = baseNameResolver;</b>
+&nbsp;            this.javaLangPackagePrefix = javaLangPackagePrefix;
+&nbsp;        }
+&nbsp;
+&nbsp;        protected String name(TypeDescription superClass) {
+&nbsp;            String baseName = this.baseNameResolver.resolve(superClass);
+<b class="fc">&nbsp;            if (baseName.startsWith(&quot;java.&quot;) &amp;&amp; !this.javaLangPackagePrefix.equals(&quot;&quot;)) {</b>
+&nbsp;                baseName = this.javaLangPackagePrefix + &quot;.&quot; + baseName;
+&nbsp;            }
+&nbsp;
+&nbsp;            return baseName + &quot;$&quot; + this.suffix;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.suffix.equals(((Suffixing)var1).suffix)) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.javaLangPackagePrefix.equals(((Suffixing)var1).javaLangPackagePrefix)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.baseNameResolver.equals(((Suffixing)var1).baseNameResolver);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return ((this.getClass().hashCode() * 31 + this.suffix.hashCode()) * 31 + this.javaLangPackagePrefix.hashCode()) * 31 + this.baseNameResolver.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        public interface BaseNameResolver {
+&nbsp;            String resolve(TypeDescription var1);
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public static class WithCallerSuffix implements BaseNameResolver {
+&nbsp;                private final BaseNameResolver delegate;
+&nbsp;
+&nbsp;                public WithCallerSuffix(BaseNameResolver delegate) {
+&nbsp;                    this.delegate = delegate;
+&nbsp;                }
+&nbsp;
+&nbsp;                public String resolve(TypeDescription typeDescription) {
+&nbsp;                    boolean matched = false;
+&nbsp;                    String caller = null;
+&nbsp;                    StackTraceElement[] var4 = (new Throwable()).getStackTrace();
+&nbsp;                    int var5 = var4.length;
+&nbsp;
+&nbsp;                    for(int var6 = 0; var6 &lt; var5; ++var6) {
+&nbsp;                        StackTraceElement stackTraceElement = var4[var6];
+&nbsp;                        if (stackTraceElement.getClassName().equals(ByteBuddy.class.getName())) {
+&nbsp;                            matched = true;
+&nbsp;                        } else if (matched) {
+&nbsp;                            caller = stackTraceElement.getClassName() + &quot;.&quot; + stackTraceElement.getMethodName();
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (caller == null) {
+&nbsp;                        throw new IllegalStateException(&quot;Base name resolver not invoked via &quot; + ByteBuddy.class);
+&nbsp;                    } else {
+&nbsp;                        return this.delegate.resolve(typeDescription) + &quot;$&quot; + caller.replace(&#39;.&#39;, &#39;$&#39;);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.delegate.equals(((WithCallerSuffix)var1).delegate);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return this.getClass().hashCode() * 31 + this.delegate.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public static class ForFixedValue implements BaseNameResolver {
+&nbsp;                private final String name;
+&nbsp;
+&nbsp;                public ForFixedValue(String name) {
+&nbsp;                    this.name = name;
+&nbsp;                }
+&nbsp;
+&nbsp;                public String resolve(TypeDescription typeDescription) {
+&nbsp;                    return this.name;
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.name.equals(((ForFixedValue)var1).name);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return this.getClass().hashCode() * 31 + this.name.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public static class ForGivenType implements BaseNameResolver {
+&nbsp;                private final TypeDescription typeDescription;
+&nbsp;
+&nbsp;                public ForGivenType(TypeDescription typeDescription) {
+&nbsp;                    this.typeDescription = typeDescription;
+&nbsp;                }
+&nbsp;
+&nbsp;                public String resolve(TypeDescription typeDescription) {
+&nbsp;                    return this.typeDescription.getName();
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.typeDescription.equals(((ForGivenType)var1).typeDescription);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return this.getClass().hashCode() * 31 + this.typeDescription.hashCode();
+<b class="fc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            public static enum ForUnnamedType implements BaseNameResolver {
+&nbsp;                INSTANCE;
+&nbsp;
+&nbsp;                private ForUnnamedType() {
+&nbsp;                }
+&nbsp;
+&nbsp;                public String resolve(TypeDescription typeDescription) {
+&nbsp;                    return typeDescription.getName();
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract static class AbstractBase implements NamingStrategy {
+&nbsp;        public AbstractBase() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public String subclass(TypeDescription.Generic superClass) {
+&nbsp;            return this.name(superClass.asErasure());
+&nbsp;        }
+&nbsp;
+&nbsp;        protected abstract String name(TypeDescription var1);
+&nbsp;
+&nbsp;        public String redefine(TypeDescription typeDescription) {
+&nbsp;            return typeDescription.getName();
+&nbsp;        }
+&nbsp;
+&nbsp;        public String rebase(TypeDescription typeDescription) {
+&nbsp;            return typeDescription.getName();
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,467 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > MethodConstant</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.bytecode.constant</a>
+</div>
+
+<h1>Coverage Summary for Class: MethodConstant (net.bytebuddy.implementation.bytecode.constant)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MethodConstant</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (24/24)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MethodConstant$CachedMethod</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodConstant$ForMethod</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (38/38)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.bytecode.constant;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.security.PrivilegedExceptionAction;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import javax.annotation.CheckForNull;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.method.MethodList;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.ForLoadedType;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.Generic.OfNonGenericType;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.implementation.auxiliary.PrivilegedMemberLookupAction;
+&nbsp;import net.bytebuddy.implementation.bytecode.Duplication;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation;
+&nbsp;import net.bytebuddy.implementation.bytecode.TypeCreation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation.Illegal;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation.Trivial;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.TypeCasting;
+&nbsp;import net.bytebuddy.implementation.bytecode.collection.ArrayFactory;
+&nbsp;import net.bytebuddy.implementation.bytecode.member.FieldAccess;
+&nbsp;import net.bytebuddy.implementation.bytecode.member.MethodInvocation;
+&nbsp;import net.bytebuddy.jar.asm.MethodVisitor;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;
+&nbsp;public abstract class MethodConstant extends StackManipulation.AbstractBase {
+&nbsp;    @Nonnull(
+&nbsp;        when = When.MAYBE
+&nbsp;    )
+&nbsp;    protected static final MethodDescription.InDefinedShape DO_PRIVILEGED = doPrivileged();
+&nbsp;    protected final MethodDescription.InDefinedShape methodDescription;
+&nbsp;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.MAYBE
+&nbsp;    )
+&nbsp;    @SuppressFBWarnings(
+&nbsp;        value = {&quot;REC_CATCH_EXCEPTION&quot;},
+&nbsp;        justification = &quot;Exception should not be rethrown but trigger a fallback.&quot;
+&nbsp;    )
+&nbsp;    private static MethodDescription.InDefinedShape doPrivileged() {
+&nbsp;        MethodDescription.ForLoadedMethod doPrivileged;
+<b class="fc">&nbsp;        try {</b>
+&nbsp;            doPrivileged = new MethodDescription.ForLoadedMethod(Class.forName(&quot;java.security.AccessController&quot;).getMethod(&quot;doPrivileged&quot;, PrivilegedExceptionAction.class));
+&nbsp;
+&nbsp;            try {
+&nbsp;                if (!Boolean.parseBoolean(System.getProperty(&quot;net.bytebuddy.securitymanager&quot;, &quot;true&quot;))) {
+&nbsp;                    doPrivileged = null;
+&nbsp;                }
+&nbsp;            } catch (SecurityException var2) {
+&nbsp;            }
+&nbsp;        } catch (Exception var3) {
+&nbsp;            doPrivileged = null;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return doPrivileged;</b>
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    protected MethodConstant(MethodDescription.InDefinedShape methodDescription) {
+&nbsp;        this.methodDescription = methodDescription;
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public static CanCache of(MethodDescription.InDefinedShape methodDescription) {</b>
+&nbsp;        if (methodDescription.isTypeInitializer()) {
+&nbsp;            return MethodConstant.CanCacheIllegal.INSTANCE;
+<b class="fc">&nbsp;        } else {</b>
+<b class="fc">&nbsp;            return (CanCache)(methodDescription.isConstructor() ? new ForConstructor(methodDescription) : new ForMethod(methodDescription));</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static CanCache ofPrivileged(MethodDescription.InDefinedShape methodDescription) {
+&nbsp;        if (DO_PRIVILEGED == null) {
+&nbsp;            return of(methodDescription);
+&nbsp;        } else if (methodDescription.isTypeInitializer()) {
+&nbsp;            return MethodConstant.CanCacheIllegal.INSTANCE;
+&nbsp;        } else {
+&nbsp;            return methodDescription.isConstructor() ? (new ForConstructor(methodDescription)).withPrivilegedLookup() : (new ForMethod(methodDescription)).withPrivilegedLookup();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    protected static List&lt;StackManipulation&gt; typeConstantsFor(List&lt;TypeDescription&gt; parameterTypes) {</b>
+<b class="fc">&nbsp;        List&lt;StackManipulation&gt; typeConstants = new ArrayList(parameterTypes.size());</b>
+&nbsp;        Iterator var2 = parameterTypes.iterator();
+&nbsp;
+&nbsp;        while(var2.hasNext()) {
+&nbsp;            TypeDescription parameterType = (TypeDescription)var2.next();
+&nbsp;            typeConstants.add(ClassConstant.of(parameterType));
+&nbsp;        }
+&nbsp;
+&nbsp;        return typeConstants;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+<b class="fc">&nbsp;        return (new StackManipulation.Compound(new StackManipulation[]{ClassConstant.of(this.methodDescription.getDeclaringType()), this.methodName(), ArrayFactory.forType(OfNonGenericType.CLASS).withValues(typeConstantsFor(this.methodDescription.getParameters().asTypeList().asErasures())), MethodInvocation.invoke(this.accessorMethod())})).apply(methodVisitor, implementationContext);</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    protected CanCache withPrivilegedLookup() {</b>
+&nbsp;        return new PrivilegedLookup(this.methodDescription, this.methodName());
+&nbsp;    }
+&nbsp;
+&nbsp;    protected abstract StackManipulation methodName();
+&nbsp;
+&nbsp;    protected abstract MethodDescription.InDefinedShape accessorMethod();
+&nbsp;
+&nbsp;    public int hashCode() {
+&nbsp;        return this.methodDescription.hashCode();
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean equals(@CheckForNull Object other) {
+&nbsp;        if (this == other) {
+&nbsp;            return true;
+&nbsp;        } else if (other != null &amp;&amp; this.getClass() == other.getClass()) {
+&nbsp;            MethodConstant methodConstant = (MethodConstant)other;
+&nbsp;            return this.methodDescription.equals(methodConstant.methodDescription);
+&nbsp;        } else {
+&nbsp;            return false;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static class CachedConstructor implements StackManipulation {
+&nbsp;        private static final TypeDescription CONSTRUCTOR_TYPE = ForLoadedType.of(Constructor.class);
+&nbsp;        private final StackManipulation constructorConstant;
+&nbsp;
+&nbsp;        protected CachedConstructor(StackManipulation constructorConstant) {
+&nbsp;            this.constructorConstant = constructorConstant;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isValid() {
+&nbsp;            return this.constructorConstant.isValid();
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {</b>
+<b class="fc">&nbsp;            return FieldAccess.forField(implementationContext.cache(this.constructorConstant, CONSTRUCTOR_TYPE)).read().apply(methodVisitor, implementationContext);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.constructorConstant.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(@CheckForNull Object other) {
+<b class="fc">&nbsp;            if (this == other) {</b>
+<b class="fc">&nbsp;                return true;</b>
+<b class="fc">&nbsp;            } else if (other != null &amp;&amp; this.getClass() == other.getClass()) {</b>
+<b class="fc">&nbsp;                CachedConstructor cachedConstructor = (CachedConstructor)other;</b>
+<b class="fc">&nbsp;                return this.constructorConstant.equals(cachedConstructor.constructorConstant);</b>
+<b class="fc">&nbsp;            } else {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static class CachedMethod implements StackManipulation {
+&nbsp;        private static final TypeDescription METHOD_TYPE = ForLoadedType.of(Method.class);
+&nbsp;        private final StackManipulation methodConstant;
+&nbsp;
+&nbsp;        protected CachedMethod(StackManipulation methodConstant) {
+&nbsp;            this.methodConstant = methodConstant;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isValid() {
+&nbsp;            return this.methodConstant.isValid();
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;            return FieldAccess.forField(implementationContext.cache(this.methodConstant, METHOD_TYPE)).read().apply(methodVisitor, implementationContext);
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.methodConstant.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(@CheckForNull Object other) {
+&nbsp;            if (this == other) {
+&nbsp;                return true;
+<b class="fc">&nbsp;            } else if (other != null &amp;&amp; this.getClass() == other.getClass()) {</b>
+&nbsp;                CachedMethod cachedMethod = (CachedMethod)other;
+&nbsp;                return this.methodConstant.equals(cachedMethod.methodConstant);
+&nbsp;            } else {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static class PrivilegedLookup implements StackManipulation, CanCache {
+&nbsp;        private final MethodDescription.InDefinedShape methodDescription;
+&nbsp;        private final StackManipulation methodName;
+&nbsp;
+&nbsp;        protected PrivilegedLookup(MethodDescription.InDefinedShape methodDescription, StackManipulation methodName) {
+&nbsp;            this.methodDescription = methodDescription;
+&nbsp;            this.methodName = methodName;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isValid() {
+&nbsp;            return this.methodName.isValid();
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;            if (MethodConstant.DO_PRIVILEGED == null) {
+&nbsp;                throw new IllegalStateException(&quot;Privileged method invocation is not supported on the current VM&quot;);
+&nbsp;            } else {
+&nbsp;                TypeDescription auxiliaryType = implementationContext.register(PrivilegedMemberLookupAction.of(this.methodDescription));
+&nbsp;                return (new StackManipulation.Compound(new StackManipulation[]{TypeCreation.of(auxiliaryType), Duplication.SINGLE, ClassConstant.of(this.methodDescription.getDeclaringType()), this.methodName, ArrayFactory.forType(OfNonGenericType.CLASS).withValues(MethodConstant.typeConstantsFor(this.methodDescription.getParameters().asTypeList().asErasures())), MethodInvocation.invoke((MethodDescription.InDefinedShape)((MethodList)auxiliaryType.getDeclaredMethods().filter(ElementMatchers.isConstructor())).getOnly()), MethodInvocation.invoke(MethodConstant.DO_PRIVILEGED), TypeCasting.to(ForLoadedType.of(this.methodDescription.isConstructor() ? Constructor.class : Method.class))})).apply(methodVisitor, implementationContext);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation cached() {
+&nbsp;            return (StackManipulation)(this.methodDescription.isConstructor() ? new CachedConstructor(this) : new CachedMethod(this));
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.methodDescription.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(@CheckForNull Object other) {
+&nbsp;            if (this == other) {
+&nbsp;                return true;
+&nbsp;            } else if (other != null &amp;&amp; this.getClass() == other.getClass()) {
+&nbsp;                PrivilegedLookup privilegedLookup = (PrivilegedLookup)other;
+&nbsp;                return this.methodDescription.equals(privilegedLookup.methodDescription);
+&nbsp;            } else {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static class ForConstructor extends MethodConstant implements CanCache {
+&nbsp;        private static final MethodDescription.InDefinedShape GET_CONSTRUCTOR;
+&nbsp;        private static final MethodDescription.InDefinedShape GET_DECLARED_CONSTRUCTOR;
+&nbsp;
+&nbsp;        protected ForConstructor(MethodDescription.InDefinedShape methodDescription) {
+&nbsp;            super(methodDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        protected StackManipulation methodName() {
+&nbsp;            return Trivial.INSTANCE;
+&nbsp;        }
+&nbsp;
+&nbsp;        protected MethodDescription.InDefinedShape accessorMethod() {
+&nbsp;            return this.methodDescription.isPublic() ? GET_CONSTRUCTOR : GET_DECLARED_CONSTRUCTOR;
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation cached() {
+&nbsp;            return new CachedConstructor(this);
+&nbsp;        }
+&nbsp;
+&nbsp;        static {
+&nbsp;            try {
+&nbsp;                GET_CONSTRUCTOR = new MethodDescription.ForLoadedMethod(Class.class.getMethod(&quot;getConstructor&quot;, Class[].class));
+&nbsp;                GET_DECLARED_CONSTRUCTOR = new MethodDescription.ForLoadedMethod(Class.class.getMethod(&quot;getDeclaredConstructor&quot;, Class[].class));
+&nbsp;            } catch (NoSuchMethodException var1) {
+&nbsp;                throw new IllegalStateException(&quot;Could not locate Class::getDeclaredConstructor&quot;, var1);
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static class ForMethod extends MethodConstant implements CanCache {
+&nbsp;        private static final MethodDescription.InDefinedShape GET_METHOD;
+&nbsp;        private static final MethodDescription.InDefinedShape GET_DECLARED_METHOD;
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        protected ForMethod(MethodDescription.InDefinedShape methodDescription) {</b>
+&nbsp;            super(methodDescription);
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        protected StackManipulation methodName() {
+&nbsp;            return new TextConstant(this.methodDescription.getInternalName());
+&nbsp;        }
+&nbsp;
+&nbsp;        protected MethodDescription.InDefinedShape accessorMethod() {
+&nbsp;            return this.methodDescription.isPublic() ? GET_METHOD : GET_DECLARED_METHOD;
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation cached() {
+<b class="fc">&nbsp;            return new CachedMethod(this);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        static {
+&nbsp;            try {
+<b class="fc">&nbsp;                GET_METHOD = new MethodDescription.ForLoadedMethod(Class.class.getMethod(&quot;getMethod&quot;, String.class, Class[].class));</b>
+&nbsp;                GET_DECLARED_METHOD = new MethodDescription.ForLoadedMethod(Class.class.getMethod(&quot;getDeclaredMethod&quot;, String.class, Class[].class));
+&nbsp;            } catch (NoSuchMethodException var1) {
+&nbsp;                throw new IllegalStateException(&quot;Could not locate method lookup&quot;, var1);
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface CanCache extends StackManipulation {
+&nbsp;        StackManipulation cached();
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static enum CanCacheIllegal implements CanCache {
+&nbsp;        INSTANCE;
+<b class="fc">&nbsp;</b>
+&nbsp;        private CanCacheIllegal() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation cached() {
+&nbsp;            return Illegal.INSTANCE;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isValid() {
+&nbsp;            return false;
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;            return Illegal.INSTANCE.apply(methodVisitor, implementationContext);
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

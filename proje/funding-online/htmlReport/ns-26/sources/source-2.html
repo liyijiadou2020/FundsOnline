@@ -1,0 +1,440 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > FieldLocator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.dynamic.scaffold</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldLocator (net.bytebuddy.dynamic.scaffold)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">FieldLocator$AbstractBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldLocator$ForClassHierarchy</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldLocator$ForClassHierarchy$Factory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldLocator$Resolution$Simple</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (19/19)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.dynamic.scaffold;
+&nbsp;
+&nbsp;import java.util.Iterator;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.field.FieldDescription;
+&nbsp;import net.bytebuddy.description.field.FieldList;
+&nbsp;import net.bytebuddy.description.type.TypeDefinition;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.matcher.ElementMatcher;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;
+&nbsp;public interface FieldLocator {
+&nbsp;    Resolution locate(String var1);
+&nbsp;
+&nbsp;    Resolution locate(String var1, TypeDescription var2);
+&nbsp;
+&nbsp;    public static class ForTopLevelType extends AbstractBase {
+&nbsp;        protected ForTopLevelType(TypeDescription typeDescription) {
+&nbsp;            super(typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        protected FieldList&lt;?&gt; locate(ElementMatcher&lt;? super FieldDescription&gt; matcher) {
+&nbsp;            return (FieldList)this.accessingType.getDeclaredFields().filter(matcher);
+&nbsp;        }
+&nbsp;
+&nbsp;        public static enum Factory implements Factory {
+&nbsp;            INSTANCE;
+&nbsp;
+&nbsp;            private Factory() {
+&nbsp;            }
+&nbsp;
+&nbsp;            public FieldLocator make(TypeDescription typeDescription) {
+&nbsp;                return new ForTopLevelType(typeDescription);
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class ForClassHierarchy extends AbstractBase {
+&nbsp;        private final TypeDescription typeDescription;
+&nbsp;
+&nbsp;        public ForClassHierarchy(TypeDescription typeDescription) {
+&nbsp;            this(typeDescription, typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForClassHierarchy(TypeDescription typeDescription, TypeDescription accessingType) {
+&nbsp;            super(accessingType);
+&nbsp;            this.typeDescription = typeDescription;
+&nbsp;        }
+&nbsp;
+&nbsp;        protected FieldList&lt;?&gt; locate(ElementMatcher&lt;? super FieldDescription&gt; matcher) {
+&nbsp;            Iterator var2 = this.typeDescription.iterator();
+&nbsp;
+&nbsp;            FieldList candidates;
+&nbsp;            do {
+&nbsp;                if (!var2.hasNext()) {
+&nbsp;                    return new FieldList.Empty();
+&nbsp;                }
+&nbsp;
+&nbsp;                TypeDefinition typeDefinition = (TypeDefinition)var2.next();
+&nbsp;                candidates = (FieldList)typeDefinition.getDeclaredFields().filter(matcher);
+&nbsp;            } while(candidates.isEmpty());
+&nbsp;
+&nbsp;            return candidates;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (!super.equals(var1)) {
+&nbsp;                return false;
+&nbsp;            } else if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.typeDescription.equals(((ForClassHierarchy)var1).typeDescription);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return super.hashCode() * 31 + this.typeDescription.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        public static enum Factory implements Factory {
+&nbsp;            INSTANCE;
+&nbsp;
+&nbsp;            private Factory() {
+&nbsp;            }
+&nbsp;
+&nbsp;            public FieldLocator make(TypeDescription typeDescription) {
+&nbsp;                return new ForClassHierarchy(typeDescription);
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class ForExactType extends AbstractBase {
+&nbsp;        private final TypeDescription typeDescription;
+&nbsp;
+&nbsp;        public ForExactType(TypeDescription typeDescription) {
+&nbsp;            this(typeDescription, typeDescription);
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public ForExactType(TypeDescription typeDescription, TypeDescription accessingType) {</b>
+&nbsp;            super(accessingType);
+&nbsp;            this.typeDescription = typeDescription;
+&nbsp;        }
+&nbsp;
+&nbsp;        protected FieldList&lt;?&gt; locate(ElementMatcher&lt;? super FieldDescription&gt; matcher) {
+&nbsp;            return (FieldList)this.typeDescription.getDeclaredFields().filter(matcher);
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (!super.equals(var1)) {
+&nbsp;                return false;
+&nbsp;            } else if (this == var1) {
+&nbsp;                return true;
+<b class="fc">&nbsp;            } else if (var1 == null) {</b>
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.typeDescription.equals(((ForExactType)var1).typeDescription);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return super.hashCode() * 31 + this.typeDescription.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class Factory implements Factory {
+&nbsp;            private final TypeDescription typeDescription;
+&nbsp;
+&nbsp;            public Factory(TypeDescription typeDescription) {
+&nbsp;                this.typeDescription = typeDescription;
+&nbsp;            }
+&nbsp;
+&nbsp;            public FieldLocator make(TypeDescription typeDescription) {
+&nbsp;                return new ForExactType(this.typeDescription, typeDescription);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.typeDescription.equals(((Factory)var1).typeDescription);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.typeDescription.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public abstract static class AbstractBase implements FieldLocator {
+&nbsp;        protected final TypeDescription accessingType;
+&nbsp;
+&nbsp;        protected AbstractBase(TypeDescription accessingType) {
+&nbsp;            this.accessingType = accessingType;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Resolution locate(String name) {
+&nbsp;            FieldList&lt;?&gt; candidates = this.locate((ElementMatcher)ElementMatchers.named(name).and(ElementMatchers.isVisibleTo(this.accessingType)));
+&nbsp;            return (Resolution)(candidates.size() == 1 ? new Resolution.Simple((FieldDescription)candidates.getOnly()) : FieldLocator.Resolution.Illegal.INSTANCE);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Resolution locate(String name, TypeDescription type) {
+&nbsp;            FieldList&lt;?&gt; candidates = this.locate((ElementMatcher)ElementMatchers.named(name).and(ElementMatchers.fieldType(type)).and(ElementMatchers.isVisibleTo(this.accessingType)));
+&nbsp;            return (Resolution)(candidates.size() == 1 ? new Resolution.Simple((FieldDescription)candidates.getOnly()) : FieldLocator.Resolution.Illegal.INSTANCE);
+&nbsp;        }
+&nbsp;
+&nbsp;        protected abstract FieldList&lt;?&gt; locate(ElementMatcher&lt;? super FieldDescription&gt; var1);
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+<b class="fc">&nbsp;                return false;</b>
+<b class="fc">&nbsp;            } else if (this.getClass() != var1.getClass()) {</b>
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.accessingType.equals(((AbstractBase)var1).accessingType);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public int hashCode() {</b>
+<b class="fc">&nbsp;            return this.getClass().hashCode() * 31 + this.accessingType.hashCode();</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum NoOp implements FieldLocator, Factory {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private NoOp() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public FieldLocator make(TypeDescription typeDescription) {
+&nbsp;            return this;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Resolution locate(String name) {
+&nbsp;            return FieldLocator.Resolution.Illegal.INSTANCE;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Resolution locate(String name, TypeDescription type) {
+&nbsp;            return FieldLocator.Resolution.Illegal.INSTANCE;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface Factory {
+&nbsp;        FieldLocator make(TypeDescription var1);
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface Resolution {
+&nbsp;        boolean isResolved();
+&nbsp;
+&nbsp;        FieldDescription getField();
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class Simple implements Resolution {
+&nbsp;            private final FieldDescription fieldDescription;
+&nbsp;
+&nbsp;            protected Simple(FieldDescription fieldDescription) {
+&nbsp;                this.fieldDescription = fieldDescription;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean isResolved() {
+&nbsp;                return true;
+&nbsp;            }
+&nbsp;
+&nbsp;            public FieldDescription getField() {
+&nbsp;                return this.fieldDescription;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.fieldDescription.equals(((Simple)var1).fieldDescription);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.fieldDescription.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public static enum Illegal implements Resolution {
+&nbsp;            INSTANCE;
+&nbsp;
+&nbsp;            private Illegal() {
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean isResolved() {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;
+&nbsp;            public FieldDescription getField() {
+&nbsp;                throw new IllegalStateException(&quot;Could not locate field&quot;);
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

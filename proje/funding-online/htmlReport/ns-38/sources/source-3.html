@@ -1,0 +1,277 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > JavaModule</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.utility</a>
+</div>
+
+<h1>Coverage Summary for Class: JavaModule (net.bytebuddy.utility)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">JavaModule</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.utility;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.lang.reflect.AnnotatedElement;
+&nbsp;import java.security.AccessController;
+&nbsp;import java.security.PrivilegedAction;
+&nbsp;import javax.annotation.CheckForNull;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.ClassFileVersion;
+&nbsp;import net.bytebuddy.build.AccessControllerPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.NamedElement;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationList;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationSource;
+&nbsp;import net.bytebuddy.description.type.PackageDescription;
+&nbsp;import net.bytebuddy.utility.dispatcher.JavaDispatcher;
+&nbsp;import net.bytebuddy.utility.dispatcher.JavaDispatcher.Defaults;
+&nbsp;import net.bytebuddy.utility.dispatcher.JavaDispatcher.Instance;
+&nbsp;import net.bytebuddy.utility.dispatcher.JavaDispatcher.Proxied;
+&nbsp;
+&nbsp;public class JavaModule implements NamedElement.WithOptionalName, AnnotationSource {
+&nbsp;    @Nonnull(
+&nbsp;        when = When.NEVER
+&nbsp;    )
+&nbsp;    public static final JavaModule UNSUPPORTED;
+&nbsp;    protected static final Resolver RESOLVER;
+&nbsp;    protected static final Module MODULE;
+&nbsp;    private final AnnotatedElement module;
+&nbsp;    private static final boolean ACCESS_CONTROLLER;
+&nbsp;
+&nbsp;    protected JavaModule(AnnotatedElement module) {
+&nbsp;        this.module = module;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+<b class="fc">&nbsp;    private static &lt;T&gt; T doPrivileged(PrivilegedAction&lt;T&gt; action) {</b>
+&nbsp;        return ACCESS_CONTROLLER ? AccessController.doPrivileged(action) : action.run();
+&nbsp;    }
+&nbsp;
+&nbsp;    @Nonnull(
+<b class="fc">&nbsp;        when = When.MAYBE</b>
+&nbsp;    )
+&nbsp;    public static JavaModule ofType(Class&lt;?&gt; type) {
+&nbsp;        Object module = RESOLVER.getModule(type);
+&nbsp;        return module == null ? UNSUPPORTED : new JavaModule((AnnotatedElement)module);
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static JavaModule of(Object module) {
+&nbsp;        if (!MODULE.isInstance(module)) {
+&nbsp;            throw new IllegalArgumentException(&quot;Not a Java module: &quot; + module);
+&nbsp;        } else {
+&nbsp;            return new JavaModule((AnnotatedElement)module);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isSupported() {
+&nbsp;        return ClassFileVersion.ofThisVm(ClassFileVersion.JAVA_V5).isAtLeast(ClassFileVersion.JAVA_V9);
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isNamed() {
+&nbsp;        return MODULE.isNamed(this.module);
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getActualName() {
+&nbsp;        return MODULE.getName(this.module);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.MAYBE
+&nbsp;    )
+&nbsp;    public InputStream getResourceAsStream(String name) throws IOException {
+&nbsp;        return MODULE.getResourceAsStream(this.module, name);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.MAYBE
+&nbsp;    )
+&nbsp;    public ClassLoader getClassLoader() {
+&nbsp;        return MODULE.getClassLoader(this.module);
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object unwrap() {
+&nbsp;        return this.module;
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean canRead(JavaModule module) {
+&nbsp;        return MODULE.canRead(this.module, module.unwrap());
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isExported(@Nonnull(when = When.MAYBE) PackageDescription packageDescription, JavaModule module) {
+&nbsp;        return packageDescription == null || MODULE.isExported(this.module, packageDescription.getName(), module.unwrap());
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isOpened(@Nonnull(when = When.MAYBE) PackageDescription packageDescription, JavaModule module) {
+&nbsp;        return packageDescription == null || MODULE.isOpen(this.module, packageDescription.getName(), module.unwrap());
+&nbsp;    }
+&nbsp;
+&nbsp;    public AnnotationList getDeclaredAnnotations() {
+&nbsp;        return new AnnotationList.ForLoadedAnnotations(this.module.getDeclaredAnnotations());
+&nbsp;    }
+&nbsp;
+&nbsp;    public int hashCode() {
+&nbsp;        return this.module.hashCode();
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean equals(@CheckForNull Object other) {
+&nbsp;        if (this == other) {
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        } else if (!(other instanceof JavaModule)) {
+&nbsp;            return false;
+&nbsp;        } else {
+&nbsp;            JavaModule javaModule = (JavaModule)other;
+&nbsp;            return this.module.equals(javaModule.module);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public String toString() {
+&nbsp;        return this.module.toString();
+&nbsp;    }
+&nbsp;
+&nbsp;    static {
+&nbsp;        try {
+&nbsp;            Class.forName(&quot;java.security.AccessController&quot;, false, (ClassLoader)null);
+&nbsp;            ACCESS_CONTROLLER = Boolean.parseBoolean(System.getProperty(&quot;net.bytebuddy.securitymanager&quot;, &quot;true&quot;));
+&nbsp;        } catch (ClassNotFoundException var0) {
+&nbsp;            ACCESS_CONTROLLER = false;
+&nbsp;        } catch (SecurityException var1) {
+&nbsp;            ACCESS_CONTROLLER = true;
+&nbsp;        }
+&nbsp;
+&nbsp;        UNSUPPORTED = null;
+&nbsp;        RESOLVER = (Resolver)doPrivileged(JavaDispatcher.of(Resolver.class));
+&nbsp;        MODULE = (Module)doPrivileged(JavaDispatcher.of(Module.class));
+&nbsp;    }
+&nbsp;
+&nbsp;    @Proxied(&quot;java.lang.Module&quot;)
+&nbsp;    protected interface Module {
+&nbsp;        @Instance
+&nbsp;        @Proxied(&quot;isInstance&quot;)
+&nbsp;        boolean isInstance(Object var1);
+&nbsp;
+&nbsp;        @Proxied(&quot;isNamed&quot;)
+&nbsp;        boolean isNamed(Object var1);
+&nbsp;
+&nbsp;        @Proxied(&quot;getName&quot;)
+&nbsp;        String getName(Object var1);
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        @Proxied(&quot;getClassLoader&quot;)
+&nbsp;        ClassLoader getClassLoader(Object var1);
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        @Proxied(&quot;getResourceAsStream&quot;)
+&nbsp;        InputStream getResourceAsStream(Object var1, String var2) throws IOException;
+&nbsp;
+&nbsp;        @Proxied(&quot;isExported&quot;)
+&nbsp;        boolean isExported(Object var1, String var2, @Proxied(&quot;java.lang.Module&quot;) Object var3);
+&nbsp;
+&nbsp;        @Proxied(&quot;isOpen&quot;)
+&nbsp;        boolean isOpen(Object var1, String var2, @Proxied(&quot;java.lang.Module&quot;) Object var3);
+&nbsp;
+&nbsp;        @Proxied(&quot;canRead&quot;)
+&nbsp;        boolean canRead(Object var1, @Proxied(&quot;java.lang.Module&quot;) Object var2);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Proxied(&quot;java.lang.Class&quot;)
+&nbsp;    protected interface Resolver {
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        @Defaults
+&nbsp;        @Proxied(&quot;getModule&quot;)
+&nbsp;        Object getModule(Class&lt;?&gt; var1);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

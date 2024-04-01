@@ -1,0 +1,153 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > Equality</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.matchers</a>
+</div>
+
+<h1>Coverage Summary for Class: Equality (org.mockito.internal.matchers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Equality</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.matchers;
+&nbsp;
+&nbsp;import java.lang.reflect.Array;
+&nbsp;
+&nbsp;public final class Equality {
+&nbsp;    public static boolean areEqual(Object o1, Object o2) {
+<b class="fc">&nbsp;        if (o1 == o2) {</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        } else if (o1 != null &amp;&amp; o2 != null) {
+&nbsp;            if (!isArray(o1)) {
+&nbsp;                return o1.equals(o2);
+&nbsp;            } else {
+&nbsp;                return isArray(o2) &amp;&amp; areArraysEqual(o1, o2);
+&nbsp;            }
+&nbsp;        } else {
+&nbsp;            return false;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static boolean areArraysEqual(Object o1, Object o2) {
+&nbsp;        return areArrayLengthsEqual(o1, o2) &amp;&amp; areArrayElementsEqual(o1, o2);
+&nbsp;    }
+&nbsp;
+&nbsp;    static boolean areArrayLengthsEqual(Object o1, Object o2) {
+&nbsp;        return Array.getLength(o1) == Array.getLength(o2);
+&nbsp;    }
+&nbsp;
+&nbsp;    static boolean areArrayElementsEqual(Object o1, Object o2) {
+&nbsp;        for(int i = 0; i &lt; Array.getLength(o1); ++i) {
+&nbsp;            if (!areEqual(Array.get(o1, i), Array.get(o2, i))) {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return true;
+&nbsp;    }
+&nbsp;
+&nbsp;    static boolean isArray(Object o) {
+&nbsp;        return o.getClass().isArray();
+&nbsp;    }
+&nbsp;
+&nbsp;    private Equality() {
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

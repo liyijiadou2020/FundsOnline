@@ -1,0 +1,284 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > InterceptedInvocation</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.invocation</a>
+</div>
+
+<h1>Coverage Summary for Class: InterceptedInvocation (org.mockito.internal.invocation)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">InterceptedInvocation</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/16)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">InterceptedInvocation$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/17)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.invocation;
+&nbsp;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.List;
+&nbsp;import org.mockito.ArgumentMatcher;
+&nbsp;import org.mockito.internal.exceptions.Reporter;
+&nbsp;import org.mockito.internal.exceptions.VerificationAwareInvocation;
+&nbsp;import org.mockito.internal.invocation.mockref.MockReference;
+&nbsp;import org.mockito.internal.reporting.PrintSettings;
+&nbsp;import org.mockito.invocation.Invocation;
+&nbsp;import org.mockito.invocation.Location;
+&nbsp;import org.mockito.invocation.StubInfo;
+&nbsp;
+&nbsp;public class InterceptedInvocation implements Invocation, VerificationAwareInvocation {
+&nbsp;    private static final long serialVersionUID = 475027563923510472L;
+&nbsp;    private final MockReference&lt;Object&gt; mockRef;
+&nbsp;    private final MockitoMethod mockitoMethod;
+&nbsp;    private final Object[] arguments;
+&nbsp;    private final Object[] rawArguments;
+&nbsp;    private final RealMethod realMethod;
+&nbsp;    private final int sequenceNumber;
+&nbsp;    private final Location location;
+&nbsp;    private boolean verified;
+&nbsp;    private boolean isIgnoredForVerification;
+&nbsp;    private StubInfo stubInfo;
+&nbsp;    public static final RealMethod NO_OP = new RealMethod() {
+&nbsp;        public boolean isInvokable() {
+&nbsp;            return false;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Object invoke() throws Throwable {
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;    };
+&nbsp;
+&nbsp;    public InterceptedInvocation(MockReference&lt;Object&gt; mockRef, MockitoMethod mockitoMethod, Object[] arguments, RealMethod realMethod, Location location, int sequenceNumber) {
+&nbsp;        this.mockRef = mockRef;
+&nbsp;        this.mockitoMethod = mockitoMethod;
+<b class="fc">&nbsp;        this.arguments = ArgumentsProcessor.expandArgs(mockitoMethod, arguments);</b>
+<b class="fc">&nbsp;        this.rawArguments = arguments;</b>
+<b class="fc">&nbsp;        this.realMethod = realMethod;</b>
+<b class="fc">&nbsp;        this.location = location;</b>
+<b class="fc">&nbsp;        this.sequenceNumber = sequenceNumber;</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public boolean isVerified() {</b>
+&nbsp;        return this.verified || this.isIgnoredForVerification;
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getSequenceNumber() {
+&nbsp;        return this.sequenceNumber;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Location getLocation() {
+&nbsp;        return this.location;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object[] getRawArguments() {
+&nbsp;        return this.rawArguments;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Class&lt;?&gt; getRawReturnType() {
+&nbsp;        return this.mockitoMethod.getReturnType();
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public void markVerified() {</b>
+&nbsp;        this.verified = true;
+&nbsp;    }
+&nbsp;
+&nbsp;    public StubInfo stubInfo() {
+&nbsp;        return this.stubInfo;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void markStubbed(StubInfo stubInfo) {
+&nbsp;        this.stubInfo = stubInfo;
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public boolean isIgnoredForVerification() {
+&nbsp;        return this.isIgnoredForVerification;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void ignoreForVerification() {
+&nbsp;        this.isIgnoredForVerification = true;
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public Object getMock() {</b>
+&nbsp;        return this.mockRef.get();
+&nbsp;    }
+&nbsp;
+&nbsp;    public Method getMethod() {
+&nbsp;        return this.mockitoMethod.getJavaMethod();
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object[] getArguments() {
+&nbsp;        return this.arguments;
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T getArgument(int index) {
+&nbsp;        return this.arguments[index];
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public &lt;T&gt; T getArgument(int index, Class&lt;T&gt; clazz) {
+&nbsp;        return clazz.cast(this.arguments[index]);
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public List&lt;ArgumentMatcher&gt; getArgumentsAsMatchers() {</b>
+&nbsp;        return ArgumentsProcessor.argumentsToMatchers(this.getArguments());
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object callRealMethod() throws Throwable {
+<b class="fc">&nbsp;        if (!this.realMethod.isInvokable()) {</b>
+&nbsp;            throw Reporter.cannotCallAbstractRealMethod();
+&nbsp;        } else {
+&nbsp;            return this.realMethod.invoke();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /** @deprecated */
+&nbsp;    @Deprecated
+&nbsp;    public MockReference&lt;Object&gt; getMockRef() {
+&nbsp;        return this.mockRef;
+&nbsp;    }
+&nbsp;
+&nbsp;    /** @deprecated */
+&nbsp;    @Deprecated
+&nbsp;    public MockitoMethod getMockitoMethod() {
+<b class="fc">&nbsp;        return this.mockitoMethod;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /** @deprecated */
+&nbsp;    @Deprecated
+&nbsp;    public RealMethod getRealMethod() {
+&nbsp;        return this.realMethod;
+&nbsp;    }
+&nbsp;
+&nbsp;    public int hashCode() {
+&nbsp;        return 1;
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean equals(Object o) {
+&nbsp;        if (!(o instanceof InterceptedInvocation)) {
+&nbsp;            return false;
+&nbsp;        } else {
+&nbsp;            InterceptedInvocation other = (InterceptedInvocation)o;
+&nbsp;            return this.mockRef.get().equals(other.mockRef.get()) &amp;&amp; this.mockitoMethod.equals(other.mockitoMethod) &amp;&amp; this.equalArguments(other.arguments);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean equalArguments(Object[] arguments) {
+&nbsp;        return Arrays.equals(arguments, this.arguments);
+&nbsp;    }
+&nbsp;
+&nbsp;    public String toString() {
+&nbsp;        return (new PrintSettings()).print(this.getArgumentsAsMatchers(), this);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

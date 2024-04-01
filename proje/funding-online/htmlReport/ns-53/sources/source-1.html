@@ -1,0 +1,171 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > DefaultMockitoPlugins</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.configuration.plugins</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultMockitoPlugins (org.mockito.internal.configuration.plugins)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultMockitoPlugins</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (24/24)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.configuration.plugins;
+&nbsp;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;import org.mockito.plugins.AnnotationEngine;
+&nbsp;import org.mockito.plugins.DoNotMockEnforcer;
+&nbsp;import org.mockito.plugins.InstantiatorProvider2;
+&nbsp;import org.mockito.plugins.MemberAccessor;
+&nbsp;import org.mockito.plugins.MockMaker;
+&nbsp;import org.mockito.plugins.MockitoLogger;
+&nbsp;import org.mockito.plugins.MockitoPlugins;
+&nbsp;import org.mockito.plugins.PluginSwitch;
+<b class="fc">&nbsp;import org.mockito.plugins.StackTraceCleanerProvider;</b>
+&nbsp;
+<b class="fc">&nbsp;class DefaultMockitoPlugins implements MockitoPlugins {</b>
+&nbsp;    private static final Map&lt;String, String&gt; DEFAULT_PLUGINS = new HashMap();
+&nbsp;    static final String INLINE_ALIAS = &quot;mock-maker-inline&quot;;
+&nbsp;    static final String PROXY_ALIAS = &quot;mock-maker-proxy&quot;;
+&nbsp;    static final String MODULE_ALIAS = &quot;member-accessor-module&quot;;
+&nbsp;
+&nbsp;    DefaultMockitoPlugins() {
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public &lt;T&gt; T getDefaultPlugin(Class&lt;T&gt; pluginType) {</b>
+&nbsp;        String className = (String)DEFAULT_PLUGINS.get(pluginType.getName());
+<b class="fc">&nbsp;        return this.create(pluginType, className);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    String getDefaultPluginClass(String classOrAlias) {</b>
+<b class="fc">&nbsp;        return (String)DEFAULT_PLUGINS.get(classOrAlias);</b>
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    private &lt;T&gt; T create(Class&lt;T&gt; pluginType, String className) {</b>
+&nbsp;        if (className == null) {
+<b class="fc">&nbsp;            throw new IllegalStateException(&quot;No default implementation for requested Mockito plugin type: &quot; + pluginType.getName() + &quot;\nIs this a valid Mockito plugin type? If yes, please report this problem to Mockito team.\nOtherwise, please check if you are passing valid plugin type.\nExamples of valid plugin types: MockMaker, StackTraceCleanerProvider.&quot;);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            try {</b>
+<b class="fc">&nbsp;                return pluginType.cast(Class.forName(className).getDeclaredConstructor().newInstance());</b>
+<b class="fc">&nbsp;            } catch (Exception var4) {</b>
+<b class="fc">&nbsp;                throw new IllegalStateException(&quot;Internal problem occurred, please report it. Mockito is unable to load the default implementation of class that is a part of Mockito distribution. Failed to load &quot; + pluginType, var4);</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    public MockMaker getInlineMockMaker() {</b>
+<b class="fc">&nbsp;        return (MockMaker)this.create(MockMaker.class, (String)DEFAULT_PLUGINS.get(&quot;mock-maker-inline&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static {
+&nbsp;        DEFAULT_PLUGINS.put(PluginSwitch.class.getName(), DefaultPluginSwitch.class.getName());
+&nbsp;        DEFAULT_PLUGINS.put(MockMaker.class.getName(), &quot;org.mockito.internal.creation.bytebuddy.ByteBuddyMockMaker&quot;);
+<b class="fc">&nbsp;        DEFAULT_PLUGINS.put(StackTraceCleanerProvider.class.getName(), &quot;org.mockito.internal.exceptions.stacktrace.DefaultStackTraceCleanerProvider&quot;);</b>
+<b class="fc">&nbsp;        DEFAULT_PLUGINS.put(InstantiatorProvider2.class.getName(), &quot;org.mockito.internal.creation.instance.DefaultInstantiatorProvider&quot;);</b>
+&nbsp;        DEFAULT_PLUGINS.put(AnnotationEngine.class.getName(), &quot;org.mockito.internal.configuration.InjectingAnnotationEngine&quot;);
+&nbsp;        DEFAULT_PLUGINS.put(&quot;mock-maker-inline&quot;, &quot;org.mockito.internal.creation.bytebuddy.InlineByteBuddyMockMaker&quot;);
+&nbsp;        DEFAULT_PLUGINS.put(&quot;mock-maker-proxy&quot;, &quot;org.mockito.internal.creation.proxy.ProxyMockMaker&quot;);
+&nbsp;        DEFAULT_PLUGINS.put(MockitoLogger.class.getName(), &quot;org.mockito.internal.util.ConsoleMockitoLogger&quot;);
+&nbsp;        DEFAULT_PLUGINS.put(MemberAccessor.class.getName(), &quot;org.mockito.internal.util.reflection.ReflectionMemberAccessor&quot;);
+&nbsp;        DEFAULT_PLUGINS.put(&quot;member-accessor-module&quot;, &quot;org.mockito.internal.util.reflection.ModuleMemberAccessor&quot;);
+&nbsp;        DEFAULT_PLUGINS.put(DoNotMockEnforcer.class.getName(), &quot;org.mockito.internal.configuration.DefaultDoNotMockEnforcer&quot;);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

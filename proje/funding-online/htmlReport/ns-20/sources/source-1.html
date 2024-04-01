@@ -1,0 +1,624 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > FieldDescription</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.description.field</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldDescription (net.bytebuddy.description.field)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FieldDescription</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">FieldDescription$AbstractBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldDescription$InDefinedShape$AbstractBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldDescription$Latent</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/16)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldDescription$SignatureToken</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldDescription$Token</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (51/51)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.description.field;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.GenericSignatureFormatError;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.List;
+&nbsp;import javax.annotation.CheckForNull;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.build.CachedReturnPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.ByteCodeElement;
+&nbsp;import net.bytebuddy.description.DeclaredByType;
+&nbsp;import net.bytebuddy.description.ModifierReviewable;
+&nbsp;import net.bytebuddy.description.NamedElement;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationDescription;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationList;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeVariableToken;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.Generic.OfNonGenericType.ForLoadedType;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.Generic.Visitor.Substitutor.ForAttachment;
+&nbsp;import net.bytebuddy.jar.asm.signature.SignatureVisitor;
+&nbsp;import net.bytebuddy.jar.asm.signature.SignatureWriter;
+&nbsp;import net.bytebuddy.matcher.ElementMatcher;
+&nbsp;
+&nbsp;public interface FieldDescription extends ByteCodeElement, DeclaredByType.WithMandatoryDeclaration, ModifierReviewable.ForFieldDescription, NamedElement.WithGenericName, ByteCodeElement.TypeDependant&lt;InDefinedShape, Token&gt; {
+&nbsp;    @Nonnull(
+&nbsp;        when = When.NEVER
+&nbsp;    )
+&nbsp;    Object NO_DEFAULT_VALUE = null;
+&nbsp;
+&nbsp;    TypeDescription.Generic getType();
+&nbsp;
+&nbsp;    int getActualModifiers();
+&nbsp;
+&nbsp;    SignatureToken asSignatureToken();
+&nbsp;
+&nbsp;    public static class SignatureToken {
+&nbsp;        private final String name;
+&nbsp;        private final TypeDescription type;
+&nbsp;
+&nbsp;        public SignatureToken(String name, TypeDescription type) {
+&nbsp;            this.name = name;
+&nbsp;            this.type = type;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public String getName() {</b>
+&nbsp;            return this.name;
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeDescription getType() {
+&nbsp;            return this.type;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance(&quot;hashCode&quot;)
+&nbsp;        public int hashCode() {
+&nbsp;            int var1 = this.hashCode;
+&nbsp;            int var10000;
+&nbsp;            if (var1 != 0) {
+&nbsp;                var10000 = 0;
+&nbsp;            } else {
+&nbsp;                int result = this.name.hashCode();
+&nbsp;                result = 31 * result + this.type.hashCode();
+&nbsp;                var10000 = result;
+&nbsp;            }
+&nbsp;
+&nbsp;            int var2 = var10000;
+&nbsp;            if (var2 == 0) {
+&nbsp;                var2 = this.hashCode;
+&nbsp;            } else {
+&nbsp;                this.hashCode = var2;
+&nbsp;            }
+&nbsp;
+&nbsp;            return var2;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(@CheckForNull Object other) {
+&nbsp;            if (this == other) {
+&nbsp;                return true;
+&nbsp;            } else if (!(other instanceof SignatureToken)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                SignatureToken signatureToken = (SignatureToken)other;
+&nbsp;                return this.name.equals(signatureToken.name) &amp;&amp; this.type.equals(signatureToken.type);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public String toString() {
+&nbsp;            return this.type + &quot; &quot; + this.name;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class Token implements ByteCodeElement.Token&lt;Token&gt; {
+&nbsp;        private final String name;
+&nbsp;        private final int modifiers;
+&nbsp;        private final TypeDescription.Generic type;
+<b class="fc">&nbsp;        private final List&lt;? extends AnnotationDescription&gt; annotations;</b>
+&nbsp;
+&nbsp;        public Token(String name, int modifiers, TypeDescription.Generic type) {
+&nbsp;            this(name, modifiers, type, Collections.emptyList());
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public Token(String name, int modifiers, TypeDescription.Generic type, List&lt;? extends AnnotationDescription&gt; annotations) {</b>
+&nbsp;            this.name = name;
+&nbsp;            this.modifiers = modifiers;
+&nbsp;            this.type = type;
+&nbsp;            this.annotations = annotations;
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getName() {
+<b class="fc">&nbsp;            return this.name;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeDescription.Generic getType() {
+&nbsp;            return this.type;
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        public int getModifiers() {
+&nbsp;            return this.modifiers;
+&nbsp;        }
+&nbsp;
+&nbsp;        public AnnotationList getAnnotations() {
+&nbsp;            return new AnnotationList.Explicit(this.annotations);
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public Token accept(TypeDescription.Generic.Visitor&lt;? extends TypeDescription.Generic&gt; visitor) {
+&nbsp;            return new Token(this.name, this.modifiers, (TypeDescription.Generic)this.type.accept(visitor), this.annotations);
+&nbsp;        }
+&nbsp;
+&nbsp;        public SignatureToken asSignatureToken(TypeDescription declaringType) {
+<b class="fc">&nbsp;            return new SignatureToken(this.name, (TypeDescription)this.type.accept(new TypeDescription.Generic.Visitor.Reducing(declaringType, new TypeVariableToken[0])));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance(&quot;hashCode&quot;)
+&nbsp;        public int hashCode() {
+&nbsp;            int var1 = this.hashCode;
+&nbsp;            int var10000;
+&nbsp;            if (var1 != 0) {
+<b class="fc">&nbsp;                var10000 = 0;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                int result = this.name.hashCode();</b>
+&nbsp;                result = 31 * result + this.modifiers;
+&nbsp;                result = 31 * result + this.type.hashCode();
+&nbsp;                result = 31 * result + this.annotations.hashCode();
+&nbsp;                var10000 = result;
+&nbsp;            }
+&nbsp;
+&nbsp;            int var2 = var10000;
+&nbsp;            if (var2 == 0) {
+&nbsp;                var2 = this.hashCode;
+&nbsp;            } else {
+&nbsp;                this.hashCode = var2;
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            return var2;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public boolean equals(@CheckForNull Object other) {
+&nbsp;            if (this == other) {
+&nbsp;                return true;
+&nbsp;            } else if (other != null &amp;&amp; this.getClass() == other.getClass()) {
+&nbsp;                Token token = (Token)other;
+&nbsp;                return this.modifiers == token.modifiers &amp;&amp; this.name.equals(token.name) &amp;&amp; this.type.equals(token.type) &amp;&amp; this.annotations.equals(token.annotations);
+&nbsp;            } else {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class TypeSubstituting extends AbstractBase implements InGenericShape {
+&nbsp;        private final TypeDescription.Generic declaringType;
+&nbsp;        private final FieldDescription fieldDescription;
+&nbsp;        private final TypeDescription.Generic.Visitor&lt;? extends TypeDescription.Generic&gt; visitor;
+&nbsp;
+&nbsp;        public TypeSubstituting(TypeDescription.Generic declaringType, FieldDescription fieldDescription, TypeDescription.Generic.Visitor&lt;? extends TypeDescription.Generic&gt; visitor) {
+&nbsp;            this.declaringType = declaringType;
+<b class="fc">&nbsp;            this.fieldDescription = fieldDescription;</b>
+&nbsp;            this.visitor = visitor;
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeDescription.Generic getType() {
+&nbsp;            return (TypeDescription.Generic)this.fieldDescription.getType().accept(this.visitor);
+&nbsp;        }
+&nbsp;
+&nbsp;        public AnnotationList getDeclaredAnnotations() {
+&nbsp;            return this.fieldDescription.getDeclaredAnnotations();
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull
+&nbsp;        public TypeDescription.Generic getDeclaringType() {
+&nbsp;            return this.declaringType;
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getModifiers() {
+&nbsp;            return this.fieldDescription.getModifiers();
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public String getName() {
+&nbsp;            return this.fieldDescription.getName();
+&nbsp;        }
+&nbsp;
+&nbsp;        public InDefinedShape asDefined() {
+<b class="fc">&nbsp;            return (InDefinedShape)this.fieldDescription.asDefined();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class Latent extends InDefinedShape.AbstractBase {
+&nbsp;        private final TypeDescription declaringType;
+&nbsp;        private final String name;
+&nbsp;        private final int modifiers;
+&nbsp;        private final TypeDescription.Generic fieldType;
+&nbsp;        private final List&lt;? extends AnnotationDescription&gt; declaredAnnotations;
+&nbsp;
+&nbsp;        public Latent(TypeDescription declaringType, Token token) {
+&nbsp;            this(declaringType, token.getName(), token.getModifiers(), token.getType(), token.getAnnotations());
+&nbsp;        }
+&nbsp;
+&nbsp;        public Latent(TypeDescription declaringType, String name, int modifiers, TypeDescription.Generic fieldType, List&lt;? extends AnnotationDescription&gt; declaredAnnotations) {
+&nbsp;            this.declaringType = declaringType;
+&nbsp;            this.name = name;
+&nbsp;            this.modifiers = modifiers;
+&nbsp;            this.fieldType = fieldType;
+&nbsp;            this.declaredAnnotations = declaredAnnotations;
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeDescription.Generic getType() {
+&nbsp;            return (TypeDescription.Generic)this.fieldType.accept(ForAttachment.of(this));
+&nbsp;        }
+&nbsp;
+&nbsp;        public AnnotationList getDeclaredAnnotations() {
+&nbsp;            return new AnnotationList.Explicit(this.declaredAnnotations);
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getName() {
+&nbsp;            return this.name;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull
+&nbsp;        public TypeDescription getDeclaringType() {
+&nbsp;            return this.declaringType;
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getModifiers() {
+&nbsp;            return this.modifiers;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class ForLoadedField extends InDefinedShape.AbstractBase {
+&nbsp;        private final Field field;
+&nbsp;
+&nbsp;        public ForLoadedField(Field field) {
+&nbsp;            this.field = field;
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeDescription.Generic getType() {
+&nbsp;            return (TypeDescription.Generic)(net.bytebuddy.description.type.TypeDescription.AbstractBase.RAW_TYPES ? ForLoadedType.of(this.field.getType()) : new TypeDescription.Generic.LazyProjection.ForLoadedFieldType(this.field));
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance(&quot;declaredAnnotations&quot;)
+&nbsp;        public AnnotationList getDeclaredAnnotations() {
+&nbsp;            AnnotationList var1 = this.declaredAnnotations;
+&nbsp;            Object var2 = var1 != null ? null : new AnnotationList.ForLoadedAnnotations(this.field.getDeclaredAnnotations());
+&nbsp;            if (var2 == null) {
+&nbsp;                var2 = (AnnotationList)this.declaredAnnotations;
+&nbsp;            } else {
+&nbsp;                this.declaredAnnotations = (AnnotationList)var2;
+&nbsp;            }
+&nbsp;
+&nbsp;            return (AnnotationList)var2;
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getName() {
+&nbsp;            return this.field.getName();
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull
+&nbsp;        public TypeDescription getDeclaringType() {
+&nbsp;            return net.bytebuddy.description.type.TypeDescription.ForLoadedType.of(this.field.getDeclaringClass());
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getModifiers() {
+&nbsp;            return this.field.getModifiers();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isSynthetic() {
+&nbsp;            return this.field.isSynthetic();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract static class AbstractBase extends ModifierReviewable.AbstractBase implements FieldDescription {
+&nbsp;        public AbstractBase() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getInternalName() {
+&nbsp;            return this.getName();
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getActualName() {
+&nbsp;            return this.getName();
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getDescriptor() {
+&nbsp;            return this.getType().asErasure().getDescriptor();
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        public String getGenericSignature() {
+&nbsp;            TypeDescription.Generic fieldType = this.getType();
+&nbsp;
+&nbsp;            try {
+&nbsp;                return fieldType.getSort().isNonGeneric() ? NON_GENERIC_SIGNATURE : ((SignatureVisitor)fieldType.accept(new TypeDescription.Generic.Visitor.ForSignatureVisitor(new SignatureWriter()))).toString();
+&nbsp;            } catch (GenericSignatureFormatError var3) {
+&nbsp;                return NON_GENERIC_SIGNATURE;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressFBWarnings(
+&nbsp;            value = {&quot;NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE&quot;},
+&nbsp;            justification = &quot;Assuming declaring type for type member.&quot;
+&nbsp;        )
+&nbsp;        public boolean isVisibleTo(TypeDescription typeDescription) {
+&nbsp;            return this.getDeclaringType().asErasure().isVisibleTo(typeDescription) &amp;&amp; (this.isPublic() || typeDescription.equals(this.getDeclaringType().asErasure()) || this.isProtected() &amp;&amp; this.getDeclaringType().asErasure().isAssignableFrom(typeDescription) || !this.isPrivate() &amp;&amp; typeDescription.isSamePackage(this.getDeclaringType().asErasure()) || this.isPrivate() &amp;&amp; typeDescription.isNestMateOf(this.getDeclaringType().asErasure()));
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressFBWarnings(
+&nbsp;            value = {&quot;NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE&quot;},
+&nbsp;            justification = &quot;Assuming declaring type for type member.&quot;
+&nbsp;        )
+&nbsp;        public boolean isAccessibleTo(TypeDescription typeDescription) {
+&nbsp;            return this.isPublic() || typeDescription.equals(this.getDeclaringType().asErasure()) || !this.isPrivate() &amp;&amp; typeDescription.isSamePackage(this.getDeclaringType().asErasure()) || this.isPrivate() &amp;&amp; typeDescription.isNestMateOf(this.getDeclaringType().asErasure());
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getActualModifiers() {
+&nbsp;            return this.getModifiers() | (this.getDeclaredAnnotations().isAnnotationPresent(Deprecated.class) ? 131072 : 0);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Token asToken(ElementMatcher&lt;? super TypeDescription&gt; matcher) {
+&nbsp;            return new Token(this.getName(), this.getModifiers(), (TypeDescription.Generic)this.getType().accept(new TypeDescription.Generic.Visitor.Substitutor.ForDetachment(matcher)), this.getDeclaredAnnotations());
+&nbsp;        }
+&nbsp;
+&nbsp;        public SignatureToken asSignatureToken() {
+&nbsp;            return new SignatureToken(this.getInternalName(), this.getType().asErasure());
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance(&quot;hashCode&quot;)
+&nbsp;        @SuppressFBWarnings(
+&nbsp;            value = {&quot;NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE&quot;},
+<b class="fc">&nbsp;            justification = &quot;Assuming declaring type for type member.&quot;</b>
+<b class="fc">&nbsp;        )</b>
+<b class="fc">&nbsp;        public int hashCode() {</b>
+<b class="fc">&nbsp;            int var1 = this.hashCode;</b>
+<b class="fc">&nbsp;            int var2 = var1 != 0 ? 0 : this.getDeclaringType().hashCode() + 31 * (17 + this.getName().hashCode());</b>
+&nbsp;            if (var2 == 0) {
+&nbsp;                var2 = this.hashCode;
+&nbsp;            } else {
+&nbsp;                this.hashCode = var2;
+&nbsp;            }
+&nbsp;
+&nbsp;            return var2;
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressFBWarnings(
+&nbsp;            value = {&quot;NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE&quot;},
+&nbsp;            justification = &quot;Assuming declaring type for type member.&quot;
+&nbsp;        )
+&nbsp;        public boolean equals(@CheckForNull Object other) {
+&nbsp;            if (this == other) {
+<b class="fc">&nbsp;                return true;</b>
+<b class="fc">&nbsp;            } else if (!(other instanceof FieldDescription)) {</b>
+<b class="fc">&nbsp;                return false;</b>
+<b class="fc">&nbsp;            } else {</b>
+<b class="fc">&nbsp;                FieldDescription fieldDescription = (FieldDescription)other;</b>
+<b class="fc">&nbsp;                return this.getName().equals(fieldDescription.getName()) &amp;&amp; this.getDeclaringType().equals(fieldDescription.getDeclaringType());</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressFBWarnings(
+&nbsp;            value = {&quot;NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE&quot;},
+&nbsp;            justification = &quot;Assuming declaring type for type member.&quot;
+<b class="fc">&nbsp;        )</b>
+&nbsp;        public String toGenericString() {
+&nbsp;            StringBuilder stringBuilder = new StringBuilder();
+&nbsp;            if (this.getModifiers() != 0) {
+&nbsp;                stringBuilder.append(Modifier.toString(this.getModifiers())).append(&#39; &#39;);
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            stringBuilder.append(this.getType().getActualName()).append(&#39; &#39;);</b>
+&nbsp;            stringBuilder.append(this.getDeclaringType().asErasure().getActualName()).append(&#39;.&#39;);
+&nbsp;            return stringBuilder.append(this.getName()).toString();
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressFBWarnings(
+&nbsp;            value = {&quot;NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE&quot;},
+<b class="fc">&nbsp;            justification = &quot;Assuming declaring type for type member.&quot;</b>
+&nbsp;        )
+&nbsp;        public String toString() {
+&nbsp;            StringBuilder stringBuilder = new StringBuilder();
+&nbsp;            if (this.getModifiers() != 0) {
+&nbsp;                stringBuilder.append(Modifier.toString(this.getModifiers())).append(&#39; &#39;);
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            stringBuilder.append(this.getType().asErasure().getActualName()).append(&#39; &#39;);</b>
+&nbsp;            stringBuilder.append(this.getDeclaringType().asErasure().getActualName()).append(&#39;.&#39;);
+&nbsp;            return stringBuilder.append(this.getName()).toString();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface InDefinedShape extends FieldDescription {
+<b class="fc">&nbsp;        @Nonnull</b>
+&nbsp;        TypeDescription getDeclaringType();
+&nbsp;
+&nbsp;        public abstract static class AbstractBase extends AbstractBase implements InDefinedShape {
+&nbsp;            public AbstractBase() {
+&nbsp;            }
+&nbsp;
+&nbsp;            public InDefinedShape asDefined() {
+&nbsp;                return this;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface InGenericShape extends FieldDescription {
+&nbsp;        @Nonnull
+&nbsp;        TypeDescription.Generic getDeclaringType();
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,230 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > FieldWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.jar.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldWriter (net.bytebuddy.jar.asm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FieldWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (41/41)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.jar.asm;
+&nbsp;
+&nbsp;final class FieldWriter extends FieldVisitor {
+&nbsp;    private final SymbolTable symbolTable;
+&nbsp;    private final int accessFlags;
+&nbsp;    private final int nameIndex;
+&nbsp;    private final int descriptorIndex;
+&nbsp;    private int signatureIndex;
+&nbsp;    private int constantValueIndex;
+&nbsp;    private AnnotationWriter lastRuntimeVisibleAnnotation;
+&nbsp;    private AnnotationWriter lastRuntimeInvisibleAnnotation;
+&nbsp;    private AnnotationWriter lastRuntimeVisibleTypeAnnotation;
+&nbsp;    private AnnotationWriter lastRuntimeInvisibleTypeAnnotation;
+&nbsp;    private Attribute firstAttribute;
+&nbsp;
+&nbsp;    FieldWriter(SymbolTable symbolTable, int access, String name, String descriptor, String signature, Object constantValue) {
+&nbsp;        super(589824);
+&nbsp;        this.symbolTable = symbolTable;
+&nbsp;        this.accessFlags = access;
+&nbsp;        this.nameIndex = symbolTable.addConstantUtf8(name);
+&nbsp;        this.descriptorIndex = symbolTable.addConstantUtf8(descriptor);
+&nbsp;        if (signature != null) {
+&nbsp;            this.signatureIndex = symbolTable.addConstantUtf8(signature);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (constantValue != null) {
+&nbsp;            this.constantValueIndex = symbolTable.addConstant(constantValue).index;
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public AnnotationVisitor visitAnnotation(String descriptor, boolean visible) {
+&nbsp;        return visible ? (this.lastRuntimeVisibleAnnotation = AnnotationWriter.create(this.symbolTable, descriptor, this.lastRuntimeVisibleAnnotation)) : (this.lastRuntimeInvisibleAnnotation = AnnotationWriter.create(this.symbolTable, descriptor, this.lastRuntimeInvisibleAnnotation));
+&nbsp;    }
+&nbsp;
+&nbsp;    public AnnotationVisitor visitTypeAnnotation(int typeRef, TypePath typePath, String descriptor, boolean visible) {
+&nbsp;        return visible ? (this.lastRuntimeVisibleTypeAnnotation = AnnotationWriter.create(this.symbolTable, typeRef, typePath, descriptor, this.lastRuntimeVisibleTypeAnnotation)) : (this.lastRuntimeInvisibleTypeAnnotation = AnnotationWriter.create(this.symbolTable, typeRef, typePath, descriptor, this.lastRuntimeInvisibleTypeAnnotation));
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitAttribute(Attribute attribute) {
+&nbsp;        attribute.nextAttribute = this.firstAttribute;
+&nbsp;        this.firstAttribute = attribute;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitEnd() {
+&nbsp;    }
+&nbsp;
+&nbsp;    int computeFieldInfoSize() {
+&nbsp;        int size = 8;
+&nbsp;        if (this.constantValueIndex != 0) {
+&nbsp;            this.symbolTable.addConstantUtf8(&quot;ConstantValue&quot;);
+&nbsp;            size += 8;
+&nbsp;        }
+&nbsp;
+&nbsp;        size += Attribute.computeAttributesSize(this.symbolTable, this.accessFlags, this.signatureIndex);
+&nbsp;        size += AnnotationWriter.computeAnnotationsSize(this.lastRuntimeVisibleAnnotation, this.lastRuntimeInvisibleAnnotation, this.lastRuntimeVisibleTypeAnnotation, this.lastRuntimeInvisibleTypeAnnotation);
+&nbsp;        if (this.firstAttribute != null) {
+&nbsp;            size += this.firstAttribute.computeAttributesSize(this.symbolTable);
+&nbsp;        }
+&nbsp;
+&nbsp;        return size;
+&nbsp;    }
+&nbsp;
+&nbsp;    void putFieldInfo(ByteVector output) {
+&nbsp;        boolean useSyntheticAttribute = this.symbolTable.getMajorVersion() &lt; 49;
+&nbsp;        int mask = useSyntheticAttribute ? 4096 : 0;
+&nbsp;        output.putShort(this.accessFlags &amp; ~mask).putShort(this.nameIndex).putShort(this.descriptorIndex);
+&nbsp;        int attributesCount = 0;
+&nbsp;        if (this.constantValueIndex != 0) {
+&nbsp;            ++attributesCount;
+&nbsp;        }
+&nbsp;
+&nbsp;        if ((this.accessFlags &amp; 4096) != 0 &amp;&amp; useSyntheticAttribute) {
+&nbsp;            ++attributesCount;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.signatureIndex != 0) {
+&nbsp;            ++attributesCount;
+&nbsp;        }
+&nbsp;
+&nbsp;        if ((this.accessFlags &amp; 131072) != 0) {
+&nbsp;            ++attributesCount;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.lastRuntimeVisibleAnnotation != null) {
+&nbsp;            ++attributesCount;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.lastRuntimeInvisibleAnnotation != null) {
+&nbsp;            ++attributesCount;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.lastRuntimeVisibleTypeAnnotation != null) {
+&nbsp;            ++attributesCount;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.lastRuntimeInvisibleTypeAnnotation != null) {
+&nbsp;            ++attributesCount;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.firstAttribute != null) {
+&nbsp;            attributesCount += this.firstAttribute.getAttributeCount();
+&nbsp;        }
+&nbsp;
+&nbsp;        output.putShort(attributesCount);
+&nbsp;        if (this.constantValueIndex != 0) {
+&nbsp;            output.putShort(this.symbolTable.addConstantUtf8(&quot;ConstantValue&quot;)).putInt(2).putShort(this.constantValueIndex);
+&nbsp;        }
+&nbsp;
+&nbsp;        Attribute.putAttributes(this.symbolTable, this.accessFlags, this.signatureIndex, output);
+&nbsp;        AnnotationWriter.putAnnotations(this.symbolTable, this.lastRuntimeVisibleAnnotation, this.lastRuntimeInvisibleAnnotation, this.lastRuntimeVisibleTypeAnnotation, this.lastRuntimeInvisibleTypeAnnotation, output);
+&nbsp;        if (this.firstAttribute != null) {
+&nbsp;            this.firstAttribute.putAttributes(this.symbolTable, output);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    final void collectAttributePrototypes(Attribute.Set attributePrototypes) {
+&nbsp;        attributePrototypes.addAttributes(this.firstAttribute);
+&nbsp;    }
+<b class="fc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

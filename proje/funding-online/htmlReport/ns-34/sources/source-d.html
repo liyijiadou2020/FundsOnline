@@ -1,0 +1,780 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > SymbolTable</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.jar.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: SymbolTable (net.bytebuddy.jar.asm)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SymbolTable</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (108/108)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SymbolTable$Entry</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (116/116)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.jar.asm;
+&nbsp;
+&nbsp;final class SymbolTable {
+&nbsp;    final ClassWriter classWriter;
+&nbsp;    private final ClassReader sourceClassReader;
+&nbsp;    private int majorVersion;
+&nbsp;    private String className;
+&nbsp;    private int entryCount;
+&nbsp;    private Entry[] entries;
+&nbsp;    private int constantPoolCount;
+&nbsp;    private ByteVector constantPool;
+&nbsp;    private int bootstrapMethodCount;
+&nbsp;    private ByteVector bootstrapMethods;
+&nbsp;    private int typeCount;
+&nbsp;    private Entry[] typeTable;
+&nbsp;
+&nbsp;    SymbolTable(ClassWriter classWriter) {
+&nbsp;        this.classWriter = classWriter;
+&nbsp;        this.sourceClassReader = null;
+&nbsp;        this.entries = new Entry[256];
+&nbsp;        this.constantPoolCount = 1;
+&nbsp;        this.constantPool = new ByteVector();
+&nbsp;    }
+&nbsp;
+&nbsp;    SymbolTable(ClassWriter classWriter, ClassReader classReader) {
+&nbsp;        this.classWriter = classWriter;
+&nbsp;        this.sourceClassReader = classReader;
+&nbsp;        byte[] inputBytes = classReader.classFileBuffer;
+&nbsp;        int constantPoolOffset = classReader.getItem(1) - 1;
+&nbsp;        int constantPoolLength = classReader.header - constantPoolOffset;
+&nbsp;        this.constantPoolCount = classReader.getItemCount();
+&nbsp;        this.constantPool = new ByteVector(constantPoolLength);
+&nbsp;        this.constantPool.putByteArray(inputBytes, constantPoolOffset, constantPoolLength);
+&nbsp;        this.entries = new Entry[this.constantPoolCount * 2];
+&nbsp;        char[] charBuffer = new char[classReader.getMaxStringLength()];
+&nbsp;        boolean hasBootstrapMethods = false;
+&nbsp;
+&nbsp;        byte itemTag;
+&nbsp;        for(int itemIndex = 1; itemIndex &lt; this.constantPoolCount; itemIndex += itemTag != 5 &amp;&amp; itemTag != 6 ? 1 : 2) {
+&nbsp;            int itemOffset = classReader.getItem(itemIndex);
+&nbsp;            itemTag = inputBytes[itemOffset - 1];
+&nbsp;            int nameAndTypeItemOffset;
+&nbsp;            switch (itemTag) {
+&nbsp;                case 1:
+&nbsp;                    this.addConstantUtf8(itemIndex, classReader.readUtf(itemIndex, charBuffer));
+&nbsp;                    break;
+&nbsp;                case 2:
+&nbsp;                case 13:
+&nbsp;                case 14:
+&nbsp;                default:
+&nbsp;                    throw new IllegalArgumentException();
+&nbsp;                case 3:
+&nbsp;                case 4:
+&nbsp;                    this.addConstantIntegerOrFloat(itemIndex, itemTag, classReader.readInt(itemOffset));
+&nbsp;                    break;
+&nbsp;                case 5:
+&nbsp;                case 6:
+&nbsp;                    this.addConstantLongOrDouble(itemIndex, itemTag, classReader.readLong(itemOffset));
+&nbsp;                    break;
+&nbsp;                case 7:
+&nbsp;                case 8:
+&nbsp;                case 16:
+&nbsp;                case 19:
+&nbsp;                case 20:
+&nbsp;                    this.addConstantUtf8Reference(itemIndex, itemTag, classReader.readUTF8(itemOffset, charBuffer));
+&nbsp;                    break;
+&nbsp;                case 9:
+&nbsp;                case 10:
+&nbsp;                case 11:
+&nbsp;                    nameAndTypeItemOffset = classReader.getItem(classReader.readUnsignedShort(itemOffset + 2));
+&nbsp;                    this.addConstantMemberReference(itemIndex, itemTag, classReader.readClass(itemOffset, charBuffer), classReader.readUTF8(nameAndTypeItemOffset, charBuffer), classReader.readUTF8(nameAndTypeItemOffset + 2, charBuffer));
+&nbsp;                    break;
+&nbsp;                case 12:
+&nbsp;                    this.addConstantNameAndType(itemIndex, classReader.readUTF8(itemOffset, charBuffer), classReader.readUTF8(itemOffset + 2, charBuffer));
+&nbsp;                    break;
+&nbsp;                case 15:
+&nbsp;                    int memberRefItemOffset = classReader.getItem(classReader.readUnsignedShort(itemOffset + 1));
+&nbsp;                    nameAndTypeItemOffset = classReader.getItem(classReader.readUnsignedShort(memberRefItemOffset + 2));
+&nbsp;                    this.addConstantMethodHandle(itemIndex, classReader.readByte(itemOffset), classReader.readClass(memberRefItemOffset, charBuffer), classReader.readUTF8(nameAndTypeItemOffset, charBuffer), classReader.readUTF8(nameAndTypeItemOffset + 2, charBuffer));
+&nbsp;                    break;
+&nbsp;                case 17:
+&nbsp;                case 18:
+&nbsp;                    hasBootstrapMethods = true;
+&nbsp;                    nameAndTypeItemOffset = classReader.getItem(classReader.readUnsignedShort(itemOffset + 2));
+&nbsp;                    this.addConstantDynamicOrInvokeDynamicReference(itemTag, itemIndex, classReader.readUTF8(nameAndTypeItemOffset, charBuffer), classReader.readUTF8(nameAndTypeItemOffset + 2, charBuffer), classReader.readUnsignedShort(itemOffset));
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        if (hasBootstrapMethods) {
+&nbsp;            this.copyBootstrapMethods(classReader, charBuffer);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void copyBootstrapMethods(ClassReader classReader, char[] charBuffer) {
+&nbsp;        byte[] inputBytes = classReader.classFileBuffer;
+&nbsp;        int currentAttributeOffset = classReader.getFirstAttributeOffset();
+&nbsp;
+&nbsp;        int bootstrapMethodsOffset;
+&nbsp;        for(bootstrapMethodsOffset = classReader.readUnsignedShort(currentAttributeOffset - 2); bootstrapMethodsOffset &gt; 0; --bootstrapMethodsOffset) {
+&nbsp;            String attributeName = classReader.readUTF8(currentAttributeOffset, charBuffer);
+&nbsp;            if (&quot;BootstrapMethods&quot;.equals(attributeName)) {
+&nbsp;                this.bootstrapMethodCount = classReader.readUnsignedShort(currentAttributeOffset + 6);
+&nbsp;                break;
+&nbsp;            }
+&nbsp;
+&nbsp;            currentAttributeOffset += 6 + classReader.readInt(currentAttributeOffset + 2);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.bootstrapMethodCount &gt; 0) {
+&nbsp;            bootstrapMethodsOffset = currentAttributeOffset + 8;
+&nbsp;            int bootstrapMethodsLength = classReader.readInt(currentAttributeOffset + 2) - 2;
+&nbsp;            this.bootstrapMethods = new ByteVector(bootstrapMethodsLength);
+&nbsp;            this.bootstrapMethods.putByteArray(inputBytes, bootstrapMethodsOffset, bootstrapMethodsLength);
+<b class="fc">&nbsp;            int currentOffset = bootstrapMethodsOffset;</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            for(int i = 0; i &lt; this.bootstrapMethodCount; ++i) {</b>
+<b class="fc">&nbsp;                int offset = currentOffset - bootstrapMethodsOffset;</b>
+<b class="fc">&nbsp;                int bootstrapMethodRef = classReader.readUnsignedShort(currentOffset);</b>
+<b class="fc">&nbsp;                currentOffset += 2;</b>
+&nbsp;                int numBootstrapArguments = classReader.readUnsignedShort(currentOffset);
+&nbsp;                currentOffset += 2;
+&nbsp;
+&nbsp;                int hashCode;
+&nbsp;                int bootstrapArgument;
+&nbsp;                for(hashCode = classReader.readConst(bootstrapMethodRef, charBuffer).hashCode(); numBootstrapArguments-- &gt; 0; hashCode ^= classReader.readConst(bootstrapArgument, charBuffer).hashCode()) {
+&nbsp;                    bootstrapArgument = classReader.readUnsignedShort(currentOffset);
+&nbsp;                    currentOffset += 2;
+&nbsp;                }
+&nbsp;
+&nbsp;                this.add(new Entry(i, 64, (long)offset, hashCode &amp; Integer.MAX_VALUE));
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    ClassReader getSource() {
+&nbsp;        return this.sourceClassReader;
+&nbsp;    }
+&nbsp;
+&nbsp;    int getMajorVersion() {
+&nbsp;        return this.majorVersion;
+&nbsp;    }
+&nbsp;
+&nbsp;    String getClassName() {
+&nbsp;        return this.className;
+&nbsp;    }
+&nbsp;
+&nbsp;    int setMajorVersionAndClassName(int majorVersion, String className) {
+&nbsp;        this.majorVersion = majorVersion;
+&nbsp;        this.className = className;
+&nbsp;        return this.addConstantClass(className).index;
+&nbsp;    }
+&nbsp;
+&nbsp;    int getConstantPoolCount() {
+&nbsp;        return this.constantPoolCount;
+&nbsp;    }
+&nbsp;
+&nbsp;    int getConstantPoolLength() {
+&nbsp;        return this.constantPool.length;
+&nbsp;    }
+&nbsp;
+&nbsp;    void putConstantPool(ByteVector output) {
+&nbsp;        output.putShort(this.constantPoolCount).putByteArray(this.constantPool.data, 0, this.constantPool.length);
+&nbsp;    }
+&nbsp;
+&nbsp;    int computeBootstrapMethodsSize() {
+&nbsp;        if (this.bootstrapMethods != null) {
+&nbsp;            this.addConstantUtf8(&quot;BootstrapMethods&quot;);
+&nbsp;            return 8 + this.bootstrapMethods.length;
+&nbsp;        } else {
+&nbsp;            return 0;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    void putBootstrapMethods(ByteVector output) {
+&nbsp;        if (this.bootstrapMethods != null) {
+&nbsp;            output.putShort(this.addConstantUtf8(&quot;BootstrapMethods&quot;)).putInt(this.bootstrapMethods.length + 2).putShort(this.bootstrapMethodCount).putByteArray(this.bootstrapMethods.data, 0, this.bootstrapMethods.length);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private Entry get(int hashCode) {
+&nbsp;        return this.entries[hashCode % this.entries.length];
+&nbsp;    }
+&nbsp;
+&nbsp;    private Entry put(Entry entry) {
+&nbsp;        int currentCapacity;
+&nbsp;        if (this.entryCount &gt; this.entries.length * 3 / 4) {
+&nbsp;            currentCapacity = this.entries.length;
+&nbsp;            int newCapacity = currentCapacity * 2 + 1;
+&nbsp;            Entry[] newEntries = new Entry[newCapacity];
+&nbsp;
+&nbsp;            Entry nextEntry;
+&nbsp;            for(int i = currentCapacity - 1; i &gt;= 0; --i) {
+&nbsp;                for(Entry currentEntry = this.entries[i]; currentEntry != null; currentEntry = nextEntry) {
+&nbsp;                    int newCurrentEntryIndex = currentEntry.hashCode % newCapacity;
+&nbsp;                    nextEntry = currentEntry.next;
+&nbsp;                    currentEntry.next = newEntries[newCurrentEntryIndex];
+&nbsp;                    newEntries[newCurrentEntryIndex] = currentEntry;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            this.entries = newEntries;
+&nbsp;        }
+&nbsp;
+&nbsp;        ++this.entryCount;
+&nbsp;        currentCapacity = entry.hashCode % this.entries.length;
+&nbsp;        entry.next = this.entries[currentCapacity];
+&nbsp;        return this.entries[currentCapacity] = entry;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void add(Entry entry) {
+&nbsp;        ++this.entryCount;
+&nbsp;        int index = entry.hashCode % this.entries.length;
+&nbsp;        entry.next = this.entries[index];
+&nbsp;        this.entries[index] = entry;
+&nbsp;    }
+&nbsp;
+&nbsp;    Symbol addConstant(Object value) {
+&nbsp;        if (value instanceof Integer) {
+&nbsp;            return this.addConstantInteger((Integer)value);
+&nbsp;        } else if (value instanceof Byte) {
+&nbsp;            return this.addConstantInteger(((Byte)value).intValue());
+&nbsp;        } else if (value instanceof Character) {
+&nbsp;            return this.addConstantInteger((Character)value);
+&nbsp;        } else if (value instanceof Short) {
+&nbsp;            return this.addConstantInteger(((Short)value).intValue());
+&nbsp;        } else if (value instanceof Boolean) {
+&nbsp;            return this.addConstantInteger((Boolean)value ? 1 : 0);
+&nbsp;        } else if (value instanceof Float) {
+&nbsp;            return this.addConstantFloat((Float)value);
+&nbsp;        } else if (value instanceof Long) {
+&nbsp;            return this.addConstantLong((Long)value);
+&nbsp;        } else if (value instanceof Double) {
+&nbsp;            return this.addConstantDouble((Double)value);
+&nbsp;        } else if (value instanceof String) {
+&nbsp;            return this.addConstantString((String)value);
+&nbsp;        } else if (value instanceof Type) {
+&nbsp;            Type type = (Type)value;
+&nbsp;            int typeSort = type.getSort();
+&nbsp;            if (typeSort == 10) {
+&nbsp;                return this.addConstantClass(type.getInternalName());
+&nbsp;            } else {
+&nbsp;                return typeSort == 11 ? this.addConstantMethodType(type.getDescriptor()) : this.addConstantClass(type.getDescriptor());
+&nbsp;            }
+&nbsp;        } else if (value instanceof Handle) {
+&nbsp;            Handle handle = (Handle)value;
+&nbsp;            return this.addConstantMethodHandle(handle.getTag(), handle.getOwner(), handle.getName(), handle.getDesc(), handle.isInterface());
+&nbsp;        } else if (value instanceof ConstantDynamic) {
+&nbsp;            ConstantDynamic constantDynamic = (ConstantDynamic)value;
+&nbsp;            return this.addConstantDynamic(constantDynamic.getName(), constantDynamic.getDescriptor(), constantDynamic.getBootstrapMethod(), constantDynamic.getBootstrapMethodArgumentsUnsafe());
+&nbsp;        } else {
+&nbsp;            throw new IllegalArgumentException(&quot;value &quot; + value);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    Symbol addConstantClass(String value) {
+&nbsp;        return this.addConstantUtf8Reference(7, value);
+&nbsp;    }
+&nbsp;
+&nbsp;    Symbol addConstantFieldref(String owner, String name, String descriptor) {
+&nbsp;        return this.addConstantMemberReference(9, owner, name, descriptor);
+&nbsp;    }
+&nbsp;
+&nbsp;    Symbol addConstantMethodref(String owner, String name, String descriptor, boolean isInterface) {
+&nbsp;        int tag = isInterface ? 11 : 10;
+&nbsp;        return this.addConstantMemberReference(tag, owner, name, descriptor);
+&nbsp;    }
+&nbsp;
+&nbsp;    private Entry addConstantMemberReference(int tag, String owner, String name, String descriptor) {
+&nbsp;        int hashCode = hash(tag, owner, name, descriptor);
+&nbsp;
+&nbsp;        for(Entry entry = this.get(hashCode); entry != null; entry = entry.next) {
+&nbsp;            if (entry.tag == tag &amp;&amp; entry.hashCode == hashCode &amp;&amp; entry.owner.equals(owner) &amp;&amp; entry.name.equals(name) &amp;&amp; entry.value.equals(descriptor)) {
+&nbsp;                return entry;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        this.constantPool.put122(tag, this.addConstantClass(owner).index, this.addConstantNameAndType(name, descriptor));
+&nbsp;        return this.put(new Entry(this.constantPoolCount++, tag, owner, name, descriptor, 0L, hashCode));
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addConstantMemberReference(int index, int tag, String owner, String name, String descriptor) {
+&nbsp;        this.add(new Entry(index, tag, owner, name, descriptor, 0L, hash(tag, owner, name, descriptor)));
+&nbsp;    }
+&nbsp;
+&nbsp;    Symbol addConstantString(String value) {
+&nbsp;        return this.addConstantUtf8Reference(8, value);
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    Symbol addConstantInteger(int value) {
+&nbsp;        return this.addConstantIntegerOrFloat(3, value);
+&nbsp;    }
+&nbsp;
+&nbsp;    Symbol addConstantFloat(float value) {
+&nbsp;        return this.addConstantIntegerOrFloat(4, Float.floatToRawIntBits(value));
+&nbsp;    }
+&nbsp;
+&nbsp;    private Symbol addConstantIntegerOrFloat(int tag, int value) {
+&nbsp;        int hashCode = hash(tag, value);
+&nbsp;
+&nbsp;        for(Entry entry = this.get(hashCode); entry != null; entry = entry.next) {
+&nbsp;            if (entry.tag == tag &amp;&amp; entry.hashCode == hashCode &amp;&amp; entry.data == (long)value) {
+&nbsp;                return entry;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        this.constantPool.putByte(tag).putInt(value);
+&nbsp;        return this.put(new Entry(this.constantPoolCount++, tag, (long)value, hashCode));
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    private void addConstantIntegerOrFloat(int index, int tag, int value) {</b>
+<b class="fc">&nbsp;        this.add(new Entry(index, tag, (long)value, hash(tag, value)));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    Symbol addConstantLong(long value) {
+&nbsp;        return this.addConstantLongOrDouble(5, value);
+&nbsp;    }
+&nbsp;
+&nbsp;    Symbol addConstantDouble(double value) {
+&nbsp;        return this.addConstantLongOrDouble(6, Double.doubleToRawLongBits(value));
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private Symbol addConstantLongOrDouble(int tag, long value) {
+&nbsp;        int hashCode = hash(tag, value);
+&nbsp;
+&nbsp;        for(Entry entry = this.get(hashCode); entry != null; entry = entry.next) {
+&nbsp;            if (entry.tag == tag &amp;&amp; entry.hashCode == hashCode &amp;&amp; entry.data == value) {
+&nbsp;                return entry;
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        int index = this.constantPoolCount;
+&nbsp;        this.constantPool.putByte(tag).putLong(value);
+&nbsp;        this.constantPoolCount += 2;
+&nbsp;        return this.put(new Entry(index, tag, value, hashCode));
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addConstantLongOrDouble(int index, int tag, long value) {
+&nbsp;        this.add(new Entry(index, tag, value, hash(tag, value)));
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    int addConstantNameAndType(String name, String descriptor) {
+&nbsp;        int tag = true;
+&nbsp;        int hashCode = hash(12, name, descriptor);
+&nbsp;
+&nbsp;        for(Entry entry = this.get(hashCode); entry != null; entry = entry.next) {
+&nbsp;            if (entry.tag == 12 &amp;&amp; entry.hashCode == hashCode &amp;&amp; entry.name.equals(name) &amp;&amp; entry.value.equals(descriptor)) {
+&nbsp;                return entry.index;
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        this.constantPool.put122(12, this.addConstantUtf8(name), this.addConstantUtf8(descriptor));
+&nbsp;        return this.put(new Entry(this.constantPoolCount++, 12, name, descriptor, hashCode)).index;
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private void addConstantNameAndType(int index, String name, String descriptor) {
+&nbsp;        int tag = true;
+&nbsp;        this.add(new Entry(index, 12, name, descriptor, hash(12, name, descriptor)));
+&nbsp;    }
+&nbsp;
+&nbsp;    int addConstantUtf8(String value) {
+&nbsp;        int hashCode = hash(1, value);
+&nbsp;
+&nbsp;        for(Entry entry = this.get(hashCode); entry != null; entry = entry.next) {
+<b class="fc">&nbsp;            if (entry.tag == 1 &amp;&amp; entry.hashCode == hashCode &amp;&amp; entry.value.equals(value)) {</b>
+&nbsp;                return entry.index;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        this.constantPool.putByte(1).putUTF8(value);
+&nbsp;        return this.put(new Entry(this.constantPoolCount++, 1, value, hashCode)).index;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addConstantUtf8(int index, String value) {
+&nbsp;        this.add(new Entry(index, 1, value, hash(1, value)));
+&nbsp;    }
+&nbsp;
+&nbsp;    Symbol addConstantMethodHandle(int referenceKind, String owner, String name, String descriptor, boolean isInterface) {
+&nbsp;        int tag = true;
+&nbsp;        int hashCode = hash(15, owner, name, descriptor, referenceKind);
+&nbsp;
+&nbsp;        for(Entry entry = this.get(hashCode); entry != null; entry = entry.next) {
+&nbsp;            if (entry.tag == 15 &amp;&amp; entry.hashCode == hashCode &amp;&amp; entry.data == (long)referenceKind &amp;&amp; entry.owner.equals(owner) &amp;&amp; entry.name.equals(name) &amp;&amp; entry.value.equals(descriptor)) {
+&nbsp;                return entry;
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        if (referenceKind &lt;= 4) {
+&nbsp;            this.constantPool.put112(15, referenceKind, this.addConstantFieldref(owner, name, descriptor).index);
+&nbsp;        } else {
+&nbsp;            this.constantPool.put112(15, referenceKind, this.addConstantMethodref(owner, name, descriptor, isInterface).index);
+&nbsp;        }
+&nbsp;
+&nbsp;        return this.put(new Entry(this.constantPoolCount++, 15, owner, name, descriptor, (long)referenceKind, hashCode));
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addConstantMethodHandle(int index, int referenceKind, String owner, String name, String descriptor) {
+&nbsp;        int tag = true;
+<b class="fc">&nbsp;        int hashCode = hash(15, owner, name, descriptor, referenceKind);</b>
+<b class="fc">&nbsp;        this.add(new Entry(index, 15, owner, name, descriptor, (long)referenceKind, hashCode));</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    Symbol addConstantMethodType(String methodDescriptor) {</b>
+<b class="fc">&nbsp;        return this.addConstantUtf8Reference(16, methodDescriptor);</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    Symbol addConstantDynamic(String name, String descriptor, Handle bootstrapMethodHandle, Object... bootstrapMethodArguments) {</b>
+<b class="fc">&nbsp;        Symbol bootstrapMethod = this.addBootstrapMethod(bootstrapMethodHandle, bootstrapMethodArguments);</b>
+<b class="fc">&nbsp;        return this.addConstantDynamicOrInvokeDynamicReference(17, name, descriptor, bootstrapMethod.index);</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    Symbol addConstantInvokeDynamic(String name, String descriptor, Handle bootstrapMethodHandle, Object... bootstrapMethodArguments) {
+<b class="fc">&nbsp;        Symbol bootstrapMethod = this.addBootstrapMethod(bootstrapMethodHandle, bootstrapMethodArguments);</b>
+&nbsp;        return this.addConstantDynamicOrInvokeDynamicReference(18, name, descriptor, bootstrapMethod.index);
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    private Symbol addConstantDynamicOrInvokeDynamicReference(int tag, String name, String descriptor, int bootstrapMethodIndex) {</b>
+<b class="fc">&nbsp;        int hashCode = hash(tag, name, descriptor, bootstrapMethodIndex);</b>
+&nbsp;
+&nbsp;        for(Entry entry = this.get(hashCode); entry != null; entry = entry.next) {
+&nbsp;            if (entry.tag == tag &amp;&amp; entry.hashCode == hashCode &amp;&amp; entry.data == (long)bootstrapMethodIndex &amp;&amp; entry.name.equals(name) &amp;&amp; entry.value.equals(descriptor)) {
+&nbsp;                return entry;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        this.constantPool.put122(tag, bootstrapMethodIndex, this.addConstantNameAndType(name, descriptor));
+&nbsp;        return this.put(new Entry(this.constantPoolCount++, tag, (String)null, name, descriptor, (long)bootstrapMethodIndex, hashCode));
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addConstantDynamicOrInvokeDynamicReference(int tag, int index, String name, String descriptor, int bootstrapMethodIndex) {
+&nbsp;        int hashCode = hash(tag, name, descriptor, bootstrapMethodIndex);
+&nbsp;        this.add(new Entry(index, tag, (String)null, name, descriptor, (long)bootstrapMethodIndex, hashCode));
+&nbsp;    }
+&nbsp;
+&nbsp;    Symbol addConstantModule(String moduleName) {
+&nbsp;        return this.addConstantUtf8Reference(19, moduleName);
+&nbsp;    }
+&nbsp;
+&nbsp;    Symbol addConstantPackage(String packageName) {
+&nbsp;        return this.addConstantUtf8Reference(20, packageName);
+&nbsp;    }
+&nbsp;
+&nbsp;    private Symbol addConstantUtf8Reference(int tag, String value) {
+&nbsp;        int hashCode = hash(tag, value);
+&nbsp;
+&nbsp;        for(Entry entry = this.get(hashCode); entry != null; entry = entry.next) {
+&nbsp;            if (entry.tag == tag &amp;&amp; entry.hashCode == hashCode &amp;&amp; entry.value.equals(value)) {
+&nbsp;                return entry;
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        this.constantPool.put12(tag, this.addConstantUtf8(value));
+<b class="fc">&nbsp;        return this.put(new Entry(this.constantPoolCount++, tag, value, hashCode));</b>
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    private void addConstantUtf8Reference(int index, int tag, String value) {
+<b class="fc">&nbsp;        this.add(new Entry(index, tag, value, hash(tag, value)));</b>
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    Symbol addBootstrapMethod(Handle bootstrapMethodHandle, Object... bootstrapMethodArguments) {
+<b class="fc">&nbsp;        ByteVector bootstrapMethodsAttribute = this.bootstrapMethods;</b>
+<b class="fc">&nbsp;        if (bootstrapMethodsAttribute == null) {</b>
+<b class="fc">&nbsp;            bootstrapMethodsAttribute = this.bootstrapMethods = new ByteVector();</b>
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        int numBootstrapArguments = bootstrapMethodArguments.length;</b>
+<b class="fc">&nbsp;        int[] bootstrapMethodArgumentIndexes = new int[numBootstrapArguments];</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        int bootstrapMethodOffset;</b>
+<b class="fc">&nbsp;        for(bootstrapMethodOffset = 0; bootstrapMethodOffset &lt; numBootstrapArguments; ++bootstrapMethodOffset) {</b>
+<b class="fc">&nbsp;            bootstrapMethodArgumentIndexes[bootstrapMethodOffset] = this.addConstant(bootstrapMethodArguments[bootstrapMethodOffset]).index;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        bootstrapMethodOffset = bootstrapMethodsAttribute.length;
+&nbsp;        bootstrapMethodsAttribute.putShort(this.addConstantMethodHandle(bootstrapMethodHandle.getTag(), bootstrapMethodHandle.getOwner(), bootstrapMethodHandle.getName(), bootstrapMethodHandle.getDesc(), bootstrapMethodHandle.isInterface()).index);
+&nbsp;        bootstrapMethodsAttribute.putShort(numBootstrapArguments);
+&nbsp;
+&nbsp;        int bootstrapMethodlength;
+&nbsp;        for(bootstrapMethodlength = 0; bootstrapMethodlength &lt; numBootstrapArguments; ++bootstrapMethodlength) {
+&nbsp;            bootstrapMethodsAttribute.putShort(bootstrapMethodArgumentIndexes[bootstrapMethodlength]);
+&nbsp;        }
+&nbsp;
+&nbsp;        bootstrapMethodlength = bootstrapMethodsAttribute.length - bootstrapMethodOffset;
+&nbsp;        int hashCode = bootstrapMethodHandle.hashCode();
+&nbsp;        Object[] var9 = bootstrapMethodArguments;
+&nbsp;        int var10 = bootstrapMethodArguments.length;
+&nbsp;
+&nbsp;        for(int var11 = 0; var11 &lt; var10; ++var11) {
+&nbsp;            Object bootstrapMethodArgument = var9[var11];
+&nbsp;            hashCode ^= bootstrapMethodArgument.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        hashCode &amp;= Integer.MAX_VALUE;
+&nbsp;        return this.addBootstrapMethod(bootstrapMethodOffset, bootstrapMethodlength, hashCode);
+&nbsp;    }
+&nbsp;
+&nbsp;    private Symbol addBootstrapMethod(int offset, int length, int hashCode) {
+&nbsp;        byte[] bootstrapMethodsData = this.bootstrapMethods.data;
+&nbsp;
+&nbsp;        for(Entry entry = this.get(hashCode); entry != null; entry = entry.next) {
+&nbsp;            if (entry.tag == 64 &amp;&amp; entry.hashCode == hashCode) {
+&nbsp;                int otherOffset = (int)entry.data;
+&nbsp;                boolean isSameBootstrapMethod = true;
+&nbsp;
+<b class="fc">&nbsp;                for(int i = 0; i &lt; length; ++i) {</b>
+&nbsp;                    if (bootstrapMethodsData[offset + i] != bootstrapMethodsData[otherOffset + i]) {
+&nbsp;                        isSameBootstrapMethod = false;
+&nbsp;                        break;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                if (isSameBootstrapMethod) {
+&nbsp;                    this.bootstrapMethods.length = offset;
+&nbsp;                    return entry;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        return this.put(new Entry(this.bootstrapMethodCount++, 64, (long)offset, hashCode));
+&nbsp;    }
+&nbsp;
+&nbsp;    Symbol getType(int typeIndex) {
+&nbsp;        return this.typeTable[typeIndex];
+&nbsp;    }
+&nbsp;
+&nbsp;    int addType(String value) {
+&nbsp;        int hashCode = hash(128, value);
+&nbsp;
+&nbsp;        for(Entry entry = this.get(hashCode); entry != null; entry = entry.next) {
+&nbsp;            if (entry.tag == 128 &amp;&amp; entry.hashCode == hashCode &amp;&amp; entry.value.equals(value)) {
+&nbsp;                return entry.index;
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        return this.addTypeInternal(new Entry(this.typeCount, 128, value, hashCode));
+&nbsp;    }
+&nbsp;
+&nbsp;    int addUninitializedType(String value, int bytecodeOffset) {
+&nbsp;        int hashCode = hash(129, value, bytecodeOffset);
+&nbsp;
+&nbsp;        for(Entry entry = this.get(hashCode); entry != null; entry = entry.next) {
+&nbsp;            if (entry.tag == 129 &amp;&amp; entry.hashCode == hashCode &amp;&amp; entry.data == (long)bytecodeOffset &amp;&amp; entry.value.equals(value)) {
+&nbsp;                return entry.index;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return this.addTypeInternal(new Entry(this.typeCount, 129, value, (long)bytecodeOffset, hashCode));
+&nbsp;    }
+&nbsp;
+&nbsp;    int addMergedType(int typeTableIndex1, int typeTableIndex2) {
+<b class="fc">&nbsp;        long data = typeTableIndex1 &lt; typeTableIndex2 ? (long)typeTableIndex1 | (long)typeTableIndex2 &lt;&lt; 32 : (long)typeTableIndex2 | (long)typeTableIndex1 &lt;&lt; 32;</b>
+<b class="fc">&nbsp;        int hashCode = hash(130, typeTableIndex1 + typeTableIndex2);</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        for(Entry entry = this.get(hashCode); entry != null; entry = entry.next) {</b>
+&nbsp;            if (entry.tag == 130 &amp;&amp; entry.hashCode == hashCode &amp;&amp; entry.data == data) {
+<b class="fc">&nbsp;                return entry.info;</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        String type1 = this.typeTable[typeTableIndex1].value;
+<b class="fc">&nbsp;        String type2 = this.typeTable[typeTableIndex2].value;</b>
+&nbsp;        int commonSuperTypeIndex = this.addType(this.classWriter.getCommonSuperClass(type1, type2));
+<b class="fc">&nbsp;        this.put(new Entry(this.typeCount, 130, data, hashCode)).info = commonSuperTypeIndex;</b>
+<b class="fc">&nbsp;        return commonSuperTypeIndex;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private int addTypeInternal(Entry entry) {
+&nbsp;        if (this.typeTable == null) {
+&nbsp;            this.typeTable = new Entry[16];
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.typeCount == this.typeTable.length) {
+&nbsp;            Entry[] newTypeTable = new Entry[2 * this.typeTable.length];
+&nbsp;            System.arraycopy(this.typeTable, 0, newTypeTable, 0, this.typeTable.length);
+&nbsp;            this.typeTable = newTypeTable;
+&nbsp;        }
+&nbsp;
+&nbsp;        this.typeTable[this.typeCount++] = entry;
+&nbsp;        return this.put(entry).index;
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int hash(int tag, int value) {
+&nbsp;        return Integer.MAX_VALUE &amp; tag + value;
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int hash(int tag, long value) {
+&nbsp;        return Integer.MAX_VALUE &amp; tag + (int)value + (int)(value &gt;&gt;&gt; 32);
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int hash(int tag, String value) {
+&nbsp;        return Integer.MAX_VALUE &amp; tag + value.hashCode();
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int hash(int tag, String value1, int value2) {
+&nbsp;        return Integer.MAX_VALUE &amp; tag + value1.hashCode() + value2;
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private static int hash(int tag, String value1, String value2) {
+&nbsp;        return Integer.MAX_VALUE &amp; tag + value1.hashCode() * value2.hashCode();
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int hash(int tag, String value1, String value2, int value3) {
+&nbsp;        return Integer.MAX_VALUE &amp; tag + value1.hashCode() * value2.hashCode() * (value3 + 1);
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int hash(int tag, String value1, String value2, String value3) {
+&nbsp;        return Integer.MAX_VALUE &amp; tag + value1.hashCode() * value2.hashCode() * value3.hashCode();
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int hash(int tag, String value1, String value2, String value3, int value4) {
+&nbsp;        return Integer.MAX_VALUE &amp; tag + value1.hashCode() * value2.hashCode() * value3.hashCode() * value4;
+&nbsp;    }
+&nbsp;
+&nbsp;    private static class Entry extends Symbol {
+&nbsp;        final int hashCode;
+&nbsp;        Entry next;
+&nbsp;
+&nbsp;        Entry(int index, int tag, String owner, String name, String value, long data, int hashCode) {
+&nbsp;            super(index, tag, owner, name, value, data);
+&nbsp;            this.hashCode = hashCode;
+&nbsp;        }
+&nbsp;
+&nbsp;        Entry(int index, int tag, String value, int hashCode) {
+&nbsp;            super(index, tag, (String)null, (String)null, value, 0L);
+&nbsp;            this.hashCode = hashCode;
+&nbsp;        }
+&nbsp;
+&nbsp;        Entry(int index, int tag, String value, long data, int hashCode) {
+&nbsp;            super(index, tag, (String)null, (String)null, value, data);
+&nbsp;            this.hashCode = hashCode;
+&nbsp;        }
+&nbsp;
+&nbsp;        Entry(int index, int tag, String name, String value, int hashCode) {
+&nbsp;            super(index, tag, (String)null, name, value, 0L);
+&nbsp;            this.hashCode = hashCode;
+&nbsp;        }
+&nbsp;
+&nbsp;        Entry(int index, int tag, long data, int hashCode) {
+&nbsp;            super(index, tag, (String)null, (String)null, (String)null, data);
+&nbsp;            this.hashCode = hashCode;
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

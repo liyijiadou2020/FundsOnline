@@ -1,0 +1,221 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > PropertyAndSetterInjection</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.configuration.injection</a>
+</div>
+
+<h1>Coverage Summary for Class: PropertyAndSetterInjection (org.mockito.internal.configuration.injection)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PropertyAndSetterInjection</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (36/36)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PropertyAndSetterInjection$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (39/39)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.configuration.injection;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.InvocationTargetException;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;import org.mockito.exceptions.base.MockitoException;
+&nbsp;import org.mockito.internal.configuration.injection.filter.MockCandidateFilter;
+&nbsp;import org.mockito.internal.configuration.injection.filter.NameBasedCandidateFilter;
+&nbsp;import org.mockito.internal.configuration.injection.filter.TerminalMockCandidateFilter;
+&nbsp;import org.mockito.internal.configuration.injection.filter.TypeBasedCandidateFilter;
+&nbsp;import org.mockito.internal.exceptions.Reporter;
+&nbsp;import org.mockito.internal.util.collections.ListUtil;
+&nbsp;import org.mockito.internal.util.collections.Sets;
+&nbsp;import org.mockito.internal.util.reflection.FieldInitializationReport;
+&nbsp;import org.mockito.internal.util.reflection.FieldInitializer;
+&nbsp;import org.mockito.internal.util.reflection.SuperTypesLastSorter;
+&nbsp;
+&nbsp;public class PropertyAndSetterInjection extends MockInjectionStrategy {
+&nbsp;    private final MockCandidateFilter mockCandidateFilter = new TypeBasedCandidateFilter(new NameBasedCandidateFilter(new TerminalMockCandidateFilter()));
+&nbsp;    private final ListUtil.Filter&lt;Field&gt; notFinalOrStatic = new ListUtil.Filter&lt;Field&gt;() {
+&nbsp;        public boolean isOut(Field object) {
+&nbsp;            return Modifier.isFinal(object.getModifiers()) || Modifier.isStatic(object.getModifiers());
+&nbsp;        }
+&nbsp;    };
+&nbsp;
+&nbsp;    public PropertyAndSetterInjection() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean processInjection(Field injectMocksField, Object injectMocksFieldOwner, Set&lt;Object&gt; mockCandidates) {
+&nbsp;        FieldInitializationReport report = this.initializeInjectMocksField(injectMocksField, injectMocksFieldOwner);
+&nbsp;        boolean injectionOccurred = false;
+&nbsp;        Class&lt;?&gt; fieldClass = report.fieldClass();
+&nbsp;
+&nbsp;        for(Object fieldInstanceNeedingInjection = report.fieldInstance(); fieldClass != Object.class; fieldClass = fieldClass.getSuperclass()) {
+&nbsp;            injectionOccurred |= this.injectMockCandidates(fieldClass, fieldInstanceNeedingInjection, Sets.newMockSafeHashSet(mockCandidates));
+&nbsp;        }
+&nbsp;
+&nbsp;        return injectionOccurred;
+&nbsp;    }
+&nbsp;
+&nbsp;    private FieldInitializationReport initializeInjectMocksField(Field field, Object fieldOwner) {
+&nbsp;        try {
+&nbsp;            return (new FieldInitializer(fieldOwner, field)).initialize();
+&nbsp;        } catch (MockitoException var5) {
+&nbsp;            if (var5.getCause() instanceof InvocationTargetException) {
+&nbsp;                Throwable realCause = var5.getCause().getCause();
+&nbsp;                throw Reporter.fieldInitialisationThrewException(field, realCause);
+&nbsp;            } else {
+&nbsp;                throw Reporter.cannotInitializeForInjectMocksAnnotation(field.getName(), var5.getMessage());
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    private boolean injectMockCandidates(Class&lt;?&gt; awaitingInjectionClazz, Object injectee, Set&lt;Object&gt; mocks) {
+<b class="fc">&nbsp;        List&lt;Field&gt; orderedCandidateInjecteeFields = this.orderedInstanceFieldsFrom(awaitingInjectionClazz);</b>
+&nbsp;        boolean injectionOccurred = this.injectMockCandidatesOnFields(mocks, injectee, false, orderedCandidateInjecteeFields);
+&nbsp;        injectionOccurred |= this.injectMockCandidatesOnFields(mocks, injectee, injectionOccurred, orderedCandidateInjecteeFields);
+&nbsp;        return injectionOccurred;
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    private boolean injectMockCandidatesOnFields(Set&lt;Object&gt; mocks, Object injectee, boolean injectionOccurred, List&lt;Field&gt; orderedCandidateInjecteeFields) {
+&nbsp;        Iterator&lt;Field&gt; it = orderedCandidateInjecteeFields.iterator();
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        while(it.hasNext()) {</b>
+&nbsp;            Field candidateField = (Field)it.next();
+&nbsp;            Object injected = this.mockCandidateFilter.filterCandidate(mocks, candidateField, orderedCandidateInjecteeFields, injectee).thenInject();
+&nbsp;            if (injected != null) {
+&nbsp;                injectionOccurred |= true;
+&nbsp;                mocks.remove(injected);
+&nbsp;                it.remove();
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        return injectionOccurred;
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    private List&lt;Field&gt; orderedInstanceFieldsFrom(Class&lt;?&gt; awaitingInjectionClazz) {</b>
+<b class="fc">&nbsp;        List&lt;Field&gt; declaredFields = Arrays.asList(awaitingInjectionClazz.getDeclaredFields());</b>
+<b class="fc">&nbsp;        List&lt;Field&gt; declaredFields = ListUtil.filter(declaredFields, this.notFinalOrStatic);</b>
+<b class="fc">&nbsp;        return SuperTypesLastSorter.sortSuperTypesLast(declaredFields);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

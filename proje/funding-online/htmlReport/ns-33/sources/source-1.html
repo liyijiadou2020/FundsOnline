@@ -1,0 +1,392 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > FieldAccess</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.bytecode.member</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldAccess (net.bytebuddy.implementation.bytecode.member)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FieldAccess</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">FieldAccess$AccessDispatcher</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldAccess$AccessDispatcher$AbstractFieldInstruction</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldAccess$AccessDispatcher$FieldGetInstruction</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldAccess$AccessDispatcher$FieldPutInstruction</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (29/29)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.bytecode.member;
+&nbsp;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.enumeration.EnumerationDescription;
+&nbsp;import net.bytebuddy.description.field.FieldDescription;
+&nbsp;import net.bytebuddy.description.field.FieldList;
+&nbsp;import net.bytebuddy.description.type.TypeDefinition;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackSize;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation.Illegal;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.TypeCasting;
+&nbsp;import net.bytebuddy.jar.asm.MethodVisitor;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;
+&nbsp;public enum FieldAccess {
+&nbsp;    STATIC(179, 178, StackSize.ZERO),
+&nbsp;    INSTANCE(181, 180, StackSize.SINGLE);
+&nbsp;
+&nbsp;    private final int putterOpcode;
+&nbsp;    private final int getterOpcode;
+&nbsp;    private final int targetSizeChange;
+&nbsp;
+&nbsp;    private FieldAccess(int putterOpcode, int getterOpcode, StackSize targetSizeChange) {
+&nbsp;        this.putterOpcode = putterOpcode;
+&nbsp;        this.getterOpcode = getterOpcode;
+&nbsp;        this.targetSizeChange = targetSizeChange.getSize();
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public static StackManipulation forEnumeration(EnumerationDescription enumerationDescription) {
+&nbsp;        FieldList&lt;FieldDescription.InDefinedShape&gt; fieldList = (FieldList)enumerationDescription.getEnumerationType().getDeclaredFields().filter(ElementMatchers.named(enumerationDescription.getValue()));
+&nbsp;        return (StackManipulation)(fieldList.size() == 1 &amp;&amp; ((FieldDescription.InDefinedShape)fieldList.getOnly()).isStatic() &amp;&amp; ((FieldDescription.InDefinedShape)fieldList.getOnly()).isPublic() &amp;&amp; ((FieldDescription.InDefinedShape)fieldList.getOnly()).isEnum() ? (STATIC.new AccessDispatcher((FieldDescription.InDefinedShape)fieldList.getOnly())).read() : Illegal.INSTANCE);
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public static Defined forField(FieldDescription.InDefinedShape fieldDescription) {
+&nbsp;        return fieldDescription.isStatic() ? STATIC.new AccessDispatcher(fieldDescription) : INSTANCE.new AccessDispatcher(fieldDescription);
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public static Defined forField(FieldDescription fieldDescription) {</b>
+&nbsp;        FieldDescription.InDefinedShape declaredField = (FieldDescription.InDefinedShape)fieldDescription.asDefined();
+&nbsp;        return fieldDescription.getType().asErasure().equals(declaredField.getType().asErasure()) ? forField(declaredField) : FieldAccess.OfGenericField.of(fieldDescription, forField(declaredField));
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance(
+&nbsp;        includeSyntheticFields = true
+&nbsp;    )
+&nbsp;    protected class AccessDispatcher implements Defined {
+&nbsp;        private final FieldDescription.InDefinedShape fieldDescription;
+&nbsp;
+&nbsp;        protected AccessDispatcher(FieldDescription.InDefinedShape fieldDescription) {
+&nbsp;            this.fieldDescription = fieldDescription;
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation read() {
+&nbsp;            return new FieldGetInstruction();
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation write() {
+&nbsp;            return new FieldPutInstruction();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+<b class="fc">&nbsp;            } else if (var1 == null) {</b>
+<b class="fc">&nbsp;                return false;</b>
+<b class="fc">&nbsp;            } else if (this.getClass() != var1.getClass()) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            } else if (!FieldAccess.this.equals(FieldAccess.this)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.fieldDescription.equals(((AccessDispatcher)var1).fieldDescription);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return (this.getClass().hashCode() * 31 + this.fieldDescription.hashCode()) * 31 + FieldAccess.this.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance(
+&nbsp;            includeSyntheticFields = true
+&nbsp;        )
+&nbsp;        protected class FieldPutInstruction extends AbstractFieldInstruction {
+&nbsp;            protected FieldPutInstruction() {
+&nbsp;                super(null);
+&nbsp;            }
+&nbsp;
+&nbsp;            protected int getOpcode() {
+&nbsp;                return FieldAccess.this.putterOpcode;
+&nbsp;            }
+&nbsp;
+&nbsp;            protected StackManipulation.Size resolveSize(StackSize fieldSize) {
+<b class="fc">&nbsp;                return new StackManipulation.Size(-1 * (fieldSize.getSize() + FieldAccess.this.targetSizeChange), 0);</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return AccessDispatcher.this.equals(AccessDispatcher.this);
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            public int hashCode() {</b>
+&nbsp;                return this.getClass().hashCode() * 31 + AccessDispatcher.this.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance(
+&nbsp;            includeSyntheticFields = true
+&nbsp;        )
+&nbsp;        protected class FieldGetInstruction extends AbstractFieldInstruction {
+&nbsp;            protected FieldGetInstruction() {
+&nbsp;                super(null);
+&nbsp;            }
+&nbsp;
+&nbsp;            protected int getOpcode() {
+&nbsp;                return FieldAccess.this.getterOpcode;
+&nbsp;            }
+&nbsp;
+&nbsp;            protected StackManipulation.Size resolveSize(StackSize fieldSize) {
+&nbsp;                int sizeChange = fieldSize.getSize() - FieldAccess.this.targetSizeChange;
+&nbsp;                return new StackManipulation.Size(sizeChange, sizeChange);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return AccessDispatcher.this.equals(AccessDispatcher.this);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + AccessDispatcher.this.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        private abstract class AbstractFieldInstruction extends StackManipulation.AbstractBase {
+&nbsp;            private AbstractFieldInstruction() {
+&nbsp;            }
+&nbsp;
+&nbsp;            public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;                methodVisitor.visitFieldInsn(this.getOpcode(), AccessDispatcher.this.fieldDescription.getDeclaringType().getInternalName(), AccessDispatcher.this.fieldDescription.getInternalName(), AccessDispatcher.this.fieldDescription.getDescriptor());
+&nbsp;                return this.resolveSize(AccessDispatcher.this.fieldDescription.getType().getStackSize());
+&nbsp;            }
+&nbsp;
+&nbsp;            protected abstract int getOpcode();
+&nbsp;
+&nbsp;            protected abstract StackManipulation.Size resolveSize(StackSize var1);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    protected static class OfGenericField implements Defined {
+&nbsp;        private final TypeDefinition targetType;
+&nbsp;        private final Defined defined;
+&nbsp;
+&nbsp;        protected OfGenericField(TypeDefinition targetType, Defined defined) {
+&nbsp;            this.targetType = targetType;
+&nbsp;            this.defined = defined;
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static Defined of(FieldDescription fieldDescription, Defined fieldAccess) {
+&nbsp;            return new OfGenericField(fieldDescription.getType(), fieldAccess);
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation read() {
+&nbsp;            return new StackManipulation.Compound(new StackManipulation[]{this.defined.read(), TypeCasting.to(this.targetType)});
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation write() {
+&nbsp;            return this.defined.write();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+<b class="fc">&nbsp;            } else if (this.getClass() != var1.getClass()) {</b>
+&nbsp;                return false;
+&nbsp;            } else if (!this.targetType.equals(((OfGenericField)var1).targetType)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.defined.equals(((OfGenericField)var1).defined);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return (this.getClass().hashCode() * 31 + this.targetType.hashCode()) * 31 + this.defined.hashCode();
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public interface Defined {
+&nbsp;        StackManipulation read();
+&nbsp;
+&nbsp;        StackManipulation write();
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

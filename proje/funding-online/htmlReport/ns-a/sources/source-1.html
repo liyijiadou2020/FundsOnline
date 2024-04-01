@@ -1,0 +1,116 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > AuthMapper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.atguigu.crowd.mapper</a>
+</div>
+
+<h1>Coverage Summary for Class: AuthMapper (com.atguigu.crowd.mapper)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+</tr>
+  <tr>
+    <td class="name">AuthMapper$MockitoMock$1941319743</td>
+  </tr>
+  <tr>
+    <td class="name">AuthMapper$MockitoMock$1941319743$auxiliary$ssmDcfGn</td>
+  </tr>
+  <tr>
+    <td class="name">AuthMapper$MockitoMock$1941319743$auxiliary$SX9lc2xq</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.atguigu.crowd.mapper;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import org.apache.ibatis.annotations.Param;
+&nbsp;
+&nbsp;import com.atguigu.crowd.entity.Auth;
+&nbsp;import com.atguigu.crowd.entity.AuthExample;
+&nbsp;
+&nbsp;public interface AuthMapper {
+&nbsp;
+&nbsp;    int countByExample(AuthExample example);
+&nbsp;
+&nbsp;    int deleteByExample(AuthExample example);
+&nbsp;
+&nbsp;    int deleteByPrimaryKey(Integer id);
+&nbsp;
+&nbsp;    int insert(Auth record);
+&nbsp;
+&nbsp;    int insertSelective(Auth record);
+&nbsp;
+&nbsp;    List&lt;Auth&gt; selectByExample(AuthExample example);
+&nbsp;
+&nbsp;    Auth selectByPrimaryKey(Integer id);
+&nbsp;
+&nbsp;    int updateByExampleSelective(@Param(&quot;record&quot;) Auth record, @Param(&quot;example&quot;) AuthExample example);
+&nbsp;
+&nbsp;    int updateByExample(@Param(&quot;record&quot;) Auth record, @Param(&quot;example&quot;) AuthExample example);
+&nbsp;
+&nbsp;    int updateByPrimaryKeySelective(Auth record);
+&nbsp;
+&nbsp;    int updateByPrimaryKey(Auth record);
+&nbsp;
+&nbsp;    List&lt;Integer&gt; selectAssignedAuthIdByRoleId(Integer roleId);
+&nbsp;
+&nbsp;    void deleteOldRelationship(Integer roleId);
+&nbsp;
+&nbsp;    void insertNewRelationship(@Param(&quot;roleId&quot;) Integer roleId, @Param(&quot;authIdList&quot;) List&lt;Integer&gt; authIdList);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 15:05</div>
+</div>
+</body>
+</html>

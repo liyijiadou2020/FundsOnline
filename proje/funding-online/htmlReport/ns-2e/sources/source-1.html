@@ -1,0 +1,195 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > Assigner</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.bytecode.assign</a>
+</div>
+
+<h1>Coverage Summary for Class: Assigner (net.bytebuddy.implementation.bytecode.assign)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Assigner</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Assigner$Typing</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.bytecode.assign;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation.Illegal;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation.Trivial;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.primitive.PrimitiveTypeAwareAssigner;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.primitive.VoidAwareAssigner;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.reference.GenericTypeAwareAssigner;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.reference.ReferenceTypeAwareAssigner;
+&nbsp;
+&nbsp;@SuppressFBWarnings(
+&nbsp;    value = {&quot;IC_SUPERCLASS_USES_SUBCLASS_DURING_INITIALIZATION&quot;},
+&nbsp;    justification = &quot;Safe initialization is implied.&quot;
+&nbsp;)
+&nbsp;public interface Assigner {
+&nbsp;    Assigner DEFAULT = new VoidAwareAssigner(new PrimitiveTypeAwareAssigner(ReferenceTypeAwareAssigner.INSTANCE));
+&nbsp;    Assigner GENERICS_AWARE = new VoidAwareAssigner(new PrimitiveTypeAwareAssigner(GenericTypeAwareAssigner.INSTANCE));
+&nbsp;
+&nbsp;    StackManipulation assign(TypeDescription.Generic var1, TypeDescription.Generic var2, Typing var3);
+&nbsp;
+&nbsp;    public static enum Refusing implements Assigner {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private Refusing() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation assign(TypeDescription.Generic source, TypeDescription.Generic target, Typing typing) {
+&nbsp;            return Illegal.INSTANCE;
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static enum EqualTypesOnly implements Assigner {
+&nbsp;        GENERIC {
+&nbsp;            public StackManipulation assign(TypeDescription.Generic source, TypeDescription.Generic target, Typing typing) {
+<b class="fc">&nbsp;                return (StackManipulation)(source.equals(target) ? Trivial.INSTANCE : Illegal.INSTANCE);</b>
+&nbsp;            }
+&nbsp;        },
+&nbsp;        ERASURE {
+&nbsp;            public StackManipulation assign(TypeDescription.Generic source, TypeDescription.Generic target, Typing typing) {
+&nbsp;                return (StackManipulation)(source.asErasure().equals(target.asErasure()) ? Trivial.INSTANCE : Illegal.INSTANCE);
+&nbsp;            }
+&nbsp;        };
+&nbsp;
+&nbsp;        private EqualTypesOnly() {
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum Typing {
+&nbsp;        STATIC(false),
+&nbsp;        DYNAMIC(true);
+&nbsp;
+<b class="fc">&nbsp;        private final boolean dynamic;</b>
+&nbsp;
+&nbsp;        private Typing(boolean dynamic) {
+&nbsp;            this.dynamic = dynamic;
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        public static Typing of(boolean dynamic) {
+&nbsp;            return dynamic ? DYNAMIC : STATIC;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public boolean isDynamic() {</b>
+&nbsp;            return this.dynamic;
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

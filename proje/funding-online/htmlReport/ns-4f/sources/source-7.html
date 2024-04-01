@@ -1,0 +1,204 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > InjectingAnnotationEngine</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.configuration</a>
+</div>
+
+<h1>Coverage Summary for Class: InjectingAnnotationEngine (org.mockito.internal.configuration)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">InjectingAnnotationEngine</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (32/32)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.configuration;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;import org.mockito.ScopedMock;
+&nbsp;import org.mockito.internal.configuration.injection.scanner.InjectMocksScanner;
+&nbsp;import org.mockito.internal.configuration.injection.scanner.MockScanner;
+&nbsp;import org.mockito.internal.util.collections.Sets;
+&nbsp;import org.mockito.plugins.AnnotationEngine;
+&nbsp;
+&nbsp;public class InjectingAnnotationEngine implements AnnotationEngine {
+&nbsp;    private final AnnotationEngine delegate = new IndependentAnnotationEngine();
+&nbsp;    private final AnnotationEngine spyAnnotationEngine = new SpyAnnotationEngine();
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public InjectingAnnotationEngine() {</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public AutoCloseable process(Class&lt;?&gt; clazz, Object testInstance) {
+&nbsp;        List&lt;AutoCloseable&gt; closeables = new ArrayList();
+&nbsp;        closeables.addAll(this.processIndependentAnnotations(testInstance.getClass(), testInstance));
+&nbsp;        closeables.addAll(this.processInjectMocks(testInstance.getClass(), testInstance));
+&nbsp;        return () -&gt; {
+&nbsp;            Iterator var1 = closeables.iterator();
+&nbsp;
+&nbsp;            while(var1.hasNext()) {
+&nbsp;                AutoCloseable closeable = (AutoCloseable)var1.next();
+&nbsp;                closeable.close();
+&nbsp;            }
+&nbsp;
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    private List&lt;AutoCloseable&gt; processInjectMocks(Class&lt;?&gt; clazz, Object testInstance) {
+&nbsp;        List&lt;AutoCloseable&gt; closeables = new ArrayList();
+&nbsp;
+<b class="fc">&nbsp;        for(Class&lt;?&gt; classContext = clazz; classContext != Object.class; classContext = classContext.getSuperclass()) {</b>
+<b class="fc">&nbsp;            closeables.add(this.injectCloseableMocks(testInstance));</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        return closeables;
+&nbsp;    }
+&nbsp;
+&nbsp;    private List&lt;AutoCloseable&gt; processIndependentAnnotations(Class&lt;?&gt; clazz, Object testInstance) {
+&nbsp;        List&lt;AutoCloseable&gt; closeables = new ArrayList();
+&nbsp;
+&nbsp;        for(Class&lt;?&gt; classContext = clazz; classContext != Object.class; classContext = classContext.getSuperclass()) {
+&nbsp;            closeables.add(this.delegate.process(classContext, testInstance));
+<b class="fc">&nbsp;            closeables.add(this.spyAnnotationEngine.process(classContext, testInstance));</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        return closeables;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    /** @deprecated */</b>
+&nbsp;    @Deprecated
+&nbsp;    public void injectMocks(Object testClassInstance) {
+&nbsp;        try {
+&nbsp;            this.injectCloseableMocks(testClassInstance).close();
+<b class="fc">&nbsp;        } catch (Exception var3) {</b>
+<b class="fc">&nbsp;            throw new IllegalStateException(var3);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    private AutoCloseable injectCloseableMocks(Object testClassInstance) {
+<b class="fc">&nbsp;        Class&lt;?&gt; clazz = testClassInstance.getClass();</b>
+&nbsp;        Set&lt;Field&gt; mockDependentFields = new HashSet();
+<b class="fc">&nbsp;</b>
+&nbsp;        Set mocks;
+<b class="fc">&nbsp;        for(mocks = Sets.newMockSafeHashSet(new Object[0]); clazz != Object.class; clazz = clazz.getSuperclass()) {</b>
+&nbsp;            (new InjectMocksScanner(clazz)).addTo(mockDependentFields);
+&nbsp;            (new MockScanner(testClassInstance, clazz)).addPreparedMocks(mocks);
+&nbsp;            this.onInjection(testClassInstance, clazz, mockDependentFields, mocks);
+&nbsp;        }
+&nbsp;
+&nbsp;        (new DefaultInjectionEngine()).injectMocksOnFields(mockDependentFields, mocks, testClassInstance);
+&nbsp;        return () -&gt; {
+&nbsp;            Iterator var1 = mocks.iterator();
+&nbsp;
+&nbsp;            while(var1.hasNext()) {
+&nbsp;                Object mock = var1.next();
+&nbsp;                if (mock instanceof ScopedMock) {
+&nbsp;                    ((ScopedMock)mock).closeOnDemand();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void onInjection(Object testClassInstance, Class&lt;?&gt; clazz, Set&lt;Field&gt; mockDependentFields, Set&lt;Object&gt; mocks) {
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:49</div>
+</div>
+</body>
+</html>

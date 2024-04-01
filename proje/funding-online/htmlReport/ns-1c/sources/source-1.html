@@ -1,0 +1,532 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > AsmVisitorWrapper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: AsmVisitorWrapper (net.bytebuddy.asm)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">AsmVisitorWrapper$NoOp</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.asm;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import javax.annotation.CheckForNull;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.field.FieldDescription;
+&nbsp;import net.bytebuddy.description.field.FieldList;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.method.MethodList;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.jar.asm.ClassVisitor;
+&nbsp;import net.bytebuddy.jar.asm.FieldVisitor;
+&nbsp;import net.bytebuddy.jar.asm.MethodVisitor;
+&nbsp;import net.bytebuddy.matcher.ElementMatcher;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;import net.bytebuddy.pool.TypePool;
+&nbsp;import net.bytebuddy.utility.CompoundList;
+&nbsp;import net.bytebuddy.utility.OpenedClassReader;
+&nbsp;
+&nbsp;public interface AsmVisitorWrapper {
+&nbsp;    int NO_FLAGS = 0;
+&nbsp;
+&nbsp;    int mergeWriter(int var1);
+&nbsp;
+&nbsp;    int mergeReader(int var1);
+&nbsp;
+&nbsp;    ClassVisitor wrap(TypeDescription var1, ClassVisitor var2, Implementation.Context var3, TypePool var4, FieldList&lt;FieldDescription.InDefinedShape&gt; var5, MethodList&lt;?&gt; var6, int var7, int var8);
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class Compound implements AsmVisitorWrapper {
+&nbsp;        private final List&lt;AsmVisitorWrapper&gt; asmVisitorWrappers;
+&nbsp;
+&nbsp;        public Compound(AsmVisitorWrapper... asmVisitorWrapper) {
+&nbsp;            this(Arrays.asList(asmVisitorWrapper));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Compound(List&lt;? extends AsmVisitorWrapper&gt; asmVisitorWrappers) {
+&nbsp;            this.asmVisitorWrappers = new ArrayList();
+&nbsp;            Iterator var2 = asmVisitorWrappers.iterator();
+&nbsp;
+&nbsp;            while(var2.hasNext()) {
+&nbsp;                AsmVisitorWrapper asmVisitorWrapper = (AsmVisitorWrapper)var2.next();
+&nbsp;                if (asmVisitorWrapper instanceof Compound) {
+&nbsp;                    this.asmVisitorWrappers.addAll(((Compound)asmVisitorWrapper).asmVisitorWrappers);
+&nbsp;                } else if (!(asmVisitorWrapper instanceof NoOp)) {
+&nbsp;                    this.asmVisitorWrappers.add(asmVisitorWrapper);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        public int mergeWriter(int flags) {
+&nbsp;            AsmVisitorWrapper asmVisitorWrapper;
+&nbsp;            for(Iterator var2 = this.asmVisitorWrappers.iterator(); var2.hasNext(); flags = asmVisitorWrapper.mergeWriter(flags)) {
+&nbsp;                asmVisitorWrapper = (AsmVisitorWrapper)var2.next();
+&nbsp;            }
+&nbsp;
+&nbsp;            return flags;
+&nbsp;        }
+&nbsp;
+&nbsp;        public int mergeReader(int flags) {
+&nbsp;            AsmVisitorWrapper asmVisitorWrapper;
+&nbsp;            for(Iterator var2 = this.asmVisitorWrappers.iterator(); var2.hasNext(); flags = asmVisitorWrapper.mergeReader(flags)) {
+&nbsp;                asmVisitorWrapper = (AsmVisitorWrapper)var2.next();
+&nbsp;            }
+&nbsp;
+&nbsp;            return flags;
+&nbsp;        }
+&nbsp;
+&nbsp;        public ClassVisitor wrap(TypeDescription instrumentedType, ClassVisitor classVisitor, Implementation.Context implementationContext, TypePool typePool, FieldList&lt;FieldDescription.InDefinedShape&gt; fields, MethodList&lt;?&gt; methods, int writerFlags, int readerFlags) {
+&nbsp;            AsmVisitorWrapper asmVisitorWrapper;
+&nbsp;            for(Iterator var9 = this.asmVisitorWrappers.iterator(); var9.hasNext(); classVisitor = asmVisitorWrapper.wrap(instrumentedType, classVisitor, implementationContext, typePool, fields, methods, writerFlags, readerFlags)) {
+&nbsp;                asmVisitorWrapper = (AsmVisitorWrapper)var9.next();
+&nbsp;            }
+&nbsp;
+&nbsp;            return classVisitor;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+<b class="fc">&nbsp;            } else if (this.getClass() != var1.getClass()) {</b>
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.asmVisitorWrappers.equals(((Compound)var1).asmVisitorWrappers);
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.asmVisitorWrappers.hashCode();
+&nbsp;        }
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    @Enhance
+&nbsp;    public static class ForDeclaredMethods implements AsmVisitorWrapper {
+&nbsp;        private final List&lt;Entry&gt; entries;
+&nbsp;        private final int writerFlags;
+&nbsp;        private final int readerFlags;
+&nbsp;
+<b class="fc">&nbsp;        public ForDeclaredMethods() {</b>
+&nbsp;            this(Collections.emptyList(), 0, 0);
+&nbsp;        }
+&nbsp;
+&nbsp;        protected ForDeclaredMethods(List&lt;Entry&gt; entries, int writerFlags, int readerFlags) {
+&nbsp;            this.entries = entries;
+&nbsp;            this.writerFlags = writerFlags;
+&nbsp;            this.readerFlags = readerFlags;
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForDeclaredMethods method(ElementMatcher&lt;? super MethodDescription&gt; matcher, MethodVisitorWrapper... methodVisitorWrapper) {
+&nbsp;            return this.method(matcher, Arrays.asList(methodVisitorWrapper));
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public ForDeclaredMethods method(ElementMatcher&lt;? super MethodDescription&gt; matcher, List&lt;? extends MethodVisitorWrapper&gt; methodVisitorWrappers) {</b>
+&nbsp;            return this.invokable(ElementMatchers.isMethod().and(matcher), (List)methodVisitorWrappers);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForDeclaredMethods constructor(ElementMatcher&lt;? super MethodDescription&gt; matcher, MethodVisitorWrapper... methodVisitorWrapper) {
+&nbsp;            return this.constructor(matcher, Arrays.asList(methodVisitorWrapper));
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForDeclaredMethods constructor(ElementMatcher&lt;? super MethodDescription&gt; matcher, List&lt;? extends MethodVisitorWrapper&gt; methodVisitorWrappers) {
+&nbsp;            return this.invokable(ElementMatchers.isConstructor().and(matcher), (List)methodVisitorWrappers);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForDeclaredMethods invokable(ElementMatcher&lt;? super MethodDescription&gt; matcher, MethodVisitorWrapper... methodVisitorWrapper) {
+&nbsp;            return this.invokable(matcher, Arrays.asList(methodVisitorWrapper));
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForDeclaredMethods invokable(ElementMatcher&lt;? super MethodDescription&gt; matcher, List&lt;? extends MethodVisitorWrapper&gt; methodVisitorWrappers) {
+&nbsp;            return new ForDeclaredMethods(CompoundList.of(this.entries, new Entry(matcher, methodVisitorWrappers)), this.writerFlags, this.readerFlags);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForDeclaredMethods writerFlags(int flags) {
+&nbsp;            return new ForDeclaredMethods(this.entries, this.writerFlags | flags, this.readerFlags);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForDeclaredMethods readerFlags(int flags) {
+&nbsp;            return new ForDeclaredMethods(this.entries, this.writerFlags, this.readerFlags | flags);
+&nbsp;        }
+&nbsp;
+&nbsp;        public int mergeWriter(int flags) {
+&nbsp;            return flags | this.writerFlags;
+&nbsp;        }
+&nbsp;
+&nbsp;        public int mergeReader(int flags) {
+&nbsp;            return flags | this.readerFlags;
+&nbsp;        }
+&nbsp;
+&nbsp;        public ClassVisitor wrap(TypeDescription instrumentedType, ClassVisitor classVisitor, Implementation.Context implementationContext, TypePool typePool, FieldList&lt;FieldDescription.InDefinedShape&gt; fields, MethodList&lt;?&gt; methods, int writerFlags, int readerFlags) {
+&nbsp;            Map&lt;String, MethodDescription&gt; mapped = new HashMap();
+&nbsp;            Iterator var10 = CompoundList.of(methods, new MethodDescription.Latent.TypeInitializer(instrumentedType)).iterator();
+&nbsp;
+&nbsp;            while(var10.hasNext()) {
+&nbsp;                MethodDescription methodDescription = (MethodDescription)var10.next();
+&nbsp;                mapped.put(methodDescription.getInternalName() + methodDescription.getDescriptor(), methodDescription);
+&nbsp;            }
+&nbsp;
+&nbsp;            return new DispatchingVisitor(classVisitor, instrumentedType, implementationContext, typePool, mapped, writerFlags, readerFlags);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (this.writerFlags != ((ForDeclaredMethods)var1).writerFlags) {
+&nbsp;                return false;
+&nbsp;            } else if (this.readerFlags != ((ForDeclaredMethods)var1).readerFlags) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.entries.equals(((ForDeclaredMethods)var1).entries);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return ((this.getClass().hashCode() * 31 + this.entries.hashCode()) * 31 + this.writerFlags) * 31 + this.readerFlags;
+&nbsp;        }
+&nbsp;
+&nbsp;        protected class DispatchingVisitor extends ClassVisitor {
+&nbsp;            private final TypeDescription instrumentedType;
+&nbsp;            private final Implementation.Context implementationContext;
+&nbsp;            private final TypePool typePool;
+&nbsp;            private final int writerFlags;
+&nbsp;            private final int readerFlags;
+&nbsp;            private final Map&lt;String, MethodDescription&gt; methods;
+&nbsp;
+&nbsp;            protected DispatchingVisitor(ClassVisitor classVisitor, TypeDescription instrumentedType, Implementation.Context implementationContext, TypePool typePool, Map&lt;String, MethodDescription&gt; methods, int writerFlags, int readerFlags) {
+&nbsp;                super(OpenedClassReader.ASM_API, classVisitor);
+&nbsp;                this.instrumentedType = instrumentedType;
+&nbsp;                this.implementationContext = implementationContext;
+&nbsp;                this.typePool = typePool;
+&nbsp;                this.methods = methods;
+&nbsp;                this.writerFlags = writerFlags;
+&nbsp;                this.readerFlags = readerFlags;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public MethodVisitor visitMethod(int modifiers, String internalName, String descriptor, @Nonnull(when = When.MAYBE) String signature, @Nonnull(when = When.MAYBE) String[] exceptions) {
+&nbsp;                MethodVisitor methodVisitor = super.visitMethod(modifiers, internalName, descriptor, signature, exceptions);
+&nbsp;                MethodDescription methodDescription = (MethodDescription)this.methods.get(internalName + descriptor);
+&nbsp;                if (methodVisitor != null &amp;&amp; methodDescription != null) {
+&nbsp;                    Iterator var8 = ForDeclaredMethods.this.entries.iterator();
+&nbsp;
+&nbsp;                    while(var8.hasNext()) {
+&nbsp;                        Entry entry = (Entry)var8.next();
+&nbsp;                        if (entry.matches(methodDescription)) {
+&nbsp;                            methodVisitor = entry.wrap(this.instrumentedType, methodDescription, methodVisitor, this.implementationContext, this.typePool, this.writerFlags, this.readerFlags);
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                return methodVisitor;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        protected static class Entry implements ElementMatcher&lt;MethodDescription&gt;, MethodVisitorWrapper {
+&nbsp;            private final ElementMatcher&lt;? super MethodDescription&gt; matcher;
+&nbsp;            private final List&lt;? extends MethodVisitorWrapper&gt; methodVisitorWrappers;
+&nbsp;
+&nbsp;            protected Entry(ElementMatcher&lt;? super MethodDescription&gt; matcher, List&lt;? extends MethodVisitorWrapper&gt; methodVisitorWrappers) {
+&nbsp;                this.matcher = matcher;
+&nbsp;                this.methodVisitorWrappers = methodVisitorWrappers;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean matches(@CheckForNull MethodDescription target) {
+&nbsp;                return this.matcher.matches(target);
+&nbsp;            }
+&nbsp;
+&nbsp;            public MethodVisitor wrap(TypeDescription instrumentedType, MethodDescription instrumentedMethod, MethodVisitor methodVisitor, Implementation.Context implementationContext, TypePool typePool, int writerFlags, int readerFlags) {
+&nbsp;                MethodVisitorWrapper methodVisitorWrapper;
+&nbsp;                for(Iterator var8 = this.methodVisitorWrappers.iterator(); var8.hasNext(); methodVisitor = methodVisitorWrapper.wrap(instrumentedType, instrumentedMethod, methodVisitor, implementationContext, typePool, writerFlags, readerFlags)) {
+&nbsp;                    methodVisitorWrapper = (MethodVisitorWrapper)var8.next();
+&nbsp;                }
+&nbsp;
+&nbsp;                return methodVisitor;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.matcher.equals(((Entry)var1).matcher)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.methodVisitorWrappers.equals(((Entry)var1).methodVisitorWrappers);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return (this.getClass().hashCode() * 31 + this.matcher.hashCode()) * 31 + this.methodVisitorWrappers.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public interface MethodVisitorWrapper {
+&nbsp;            MethodVisitor wrap(TypeDescription var1, MethodDescription var2, MethodVisitor var3, Implementation.Context var4, TypePool var5, int var6, int var7);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class ForDeclaredFields extends AbstractBase {
+&nbsp;        private final List&lt;Entry&gt; entries;
+&nbsp;
+&nbsp;        public ForDeclaredFields() {
+&nbsp;            this(Collections.emptyList());
+&nbsp;        }
+&nbsp;
+&nbsp;        protected ForDeclaredFields(List&lt;Entry&gt; entries) {
+&nbsp;            this.entries = entries;
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForDeclaredFields field(ElementMatcher&lt;? super FieldDescription.InDefinedShape&gt; matcher, FieldVisitorWrapper... fieldVisitorWrapper) {
+&nbsp;            return this.field(matcher, Arrays.asList(fieldVisitorWrapper));
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForDeclaredFields field(ElementMatcher&lt;? super FieldDescription.InDefinedShape&gt; matcher, List&lt;? extends FieldVisitorWrapper&gt; fieldVisitorWrappers) {
+&nbsp;            return new ForDeclaredFields(CompoundList.of(this.entries, new Entry(matcher, fieldVisitorWrappers)));
+&nbsp;        }
+&nbsp;
+&nbsp;        public ClassVisitor wrap(TypeDescription instrumentedType, ClassVisitor classVisitor, Implementation.Context implementationContext, TypePool typePool, FieldList&lt;FieldDescription.InDefinedShape&gt; fields, MethodList&lt;?&gt; methods, int writerFlags, int readerFlags) {
+&nbsp;            Map&lt;String, FieldDescription.InDefinedShape&gt; mapped = new HashMap();
+&nbsp;            Iterator var10 = fields.iterator();
+&nbsp;
+&nbsp;            while(var10.hasNext()) {
+&nbsp;                FieldDescription.InDefinedShape fieldDescription = (FieldDescription.InDefinedShape)var10.next();
+&nbsp;                mapped.put(fieldDescription.getInternalName() + fieldDescription.getDescriptor(), fieldDescription);
+&nbsp;            }
+&nbsp;
+&nbsp;            return new DispatchingVisitor(classVisitor, instrumentedType, mapped);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.entries.equals(((ForDeclaredFields)var1).entries);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.entries.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        protected class DispatchingVisitor extends ClassVisitor {
+&nbsp;            private final TypeDescription instrumentedType;
+&nbsp;            private final Map&lt;String, FieldDescription.InDefinedShape&gt; fields;
+&nbsp;
+&nbsp;            protected DispatchingVisitor(ClassVisitor classVisitor, TypeDescription instrumentedType, Map&lt;String, FieldDescription.InDefinedShape&gt; fields) {
+&nbsp;                super(OpenedClassReader.ASM_API, classVisitor);
+&nbsp;                this.instrumentedType = instrumentedType;
+&nbsp;                this.fields = fields;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public FieldVisitor visitField(int modifiers, String internalName, String descriptor, @Nonnull(when = When.MAYBE) String signature, @Nonnull(when = When.MAYBE) Object value) {
+&nbsp;                FieldVisitor fieldVisitor = super.visitField(modifiers, internalName, descriptor, signature, value);
+&nbsp;                FieldDescription.InDefinedShape fieldDescription = (FieldDescription.InDefinedShape)this.fields.get(internalName + descriptor);
+&nbsp;                if (fieldVisitor != null &amp;&amp; fieldDescription != null) {
+&nbsp;                    Iterator var8 = ForDeclaredFields.this.entries.iterator();
+&nbsp;
+&nbsp;                    while(var8.hasNext()) {
+&nbsp;                        Entry entry = (Entry)var8.next();
+&nbsp;                        if (entry.matches(fieldDescription)) {
+&nbsp;                            fieldVisitor = entry.wrap(this.instrumentedType, fieldDescription, fieldVisitor);
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                return fieldVisitor;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        protected static class Entry implements ElementMatcher&lt;FieldDescription.InDefinedShape&gt;, FieldVisitorWrapper {
+&nbsp;            private final ElementMatcher&lt;? super FieldDescription.InDefinedShape&gt; matcher;
+&nbsp;            private final List&lt;? extends FieldVisitorWrapper&gt; fieldVisitorWrappers;
+&nbsp;
+&nbsp;            protected Entry(ElementMatcher&lt;? super FieldDescription.InDefinedShape&gt; matcher, List&lt;? extends FieldVisitorWrapper&gt; fieldVisitorWrappers) {
+&nbsp;                this.matcher = matcher;
+&nbsp;                this.fieldVisitorWrappers = fieldVisitorWrappers;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean matches(@CheckForNull FieldDescription.InDefinedShape target) {
+&nbsp;                return this.matcher.matches(target);
+&nbsp;            }
+&nbsp;
+&nbsp;            public FieldVisitor wrap(TypeDescription instrumentedType, FieldDescription.InDefinedShape fieldDescription, FieldVisitor fieldVisitor) {
+&nbsp;                FieldVisitorWrapper fieldVisitorWrapper;
+&nbsp;                for(Iterator var4 = this.fieldVisitorWrappers.iterator(); var4.hasNext(); fieldVisitor = fieldVisitorWrapper.wrap(instrumentedType, fieldDescription, fieldVisitor)) {
+&nbsp;                    fieldVisitorWrapper = (FieldVisitorWrapper)var4.next();
+&nbsp;                }
+&nbsp;
+&nbsp;                return fieldVisitor;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.matcher.equals(((Entry)var1).matcher)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.fieldVisitorWrappers.equals(((Entry)var1).fieldVisitorWrappers);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return (this.getClass().hashCode() * 31 + this.matcher.hashCode()) * 31 + this.fieldVisitorWrappers.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public interface FieldVisitorWrapper {
+&nbsp;            FieldVisitor wrap(TypeDescription var1, FieldDescription.InDefinedShape var2, FieldVisitor var3);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract static class AbstractBase implements AsmVisitorWrapper {
+&nbsp;        public AbstractBase() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public int mergeWriter(int flags) {
+&nbsp;            return flags;
+&nbsp;        }
+&nbsp;
+&nbsp;        public int mergeReader(int flags) {
+&nbsp;            return flags;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum NoOp implements AsmVisitorWrapper {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private NoOp() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public int mergeWriter(int flags) {
+&nbsp;            return flags;
+&nbsp;        }
+&nbsp;
+&nbsp;        public int mergeReader(int flags) {
+&nbsp;            return flags;
+&nbsp;        }
+&nbsp;
+&nbsp;        public ClassVisitor wrap(TypeDescription instrumentedType, ClassVisitor classVisitor, Implementation.Context implementationContext, TypePool typePool, FieldList&lt;FieldDescription.InDefinedShape&gt; fields, MethodList&lt;?&gt; methods, int writerFlags, int readerFlags) {
+&nbsp;            return classVisitor;
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

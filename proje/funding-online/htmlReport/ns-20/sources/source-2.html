@@ -1,0 +1,291 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > FieldList</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.description.field</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldList (net.bytebuddy.description.field)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">FieldList$AbstractBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldList$Explicit</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldList$ForTokens</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.description.field;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import net.bytebuddy.description.ByteCodeElement;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.matcher.ElementMatcher;
+&nbsp;import net.bytebuddy.matcher.FilterableList;
+&nbsp;
+&nbsp;public interface FieldList&lt;T extends FieldDescription&gt; extends FilterableList&lt;T, FieldList&lt;T&gt;&gt; {
+&nbsp;    ByteCodeElement.Token.TokenList&lt;FieldDescription.Token&gt; asTokenList(ElementMatcher&lt;? super TypeDescription&gt; var1);
+&nbsp;
+&nbsp;    FieldList&lt;FieldDescription.InDefinedShape&gt; asDefined();
+&nbsp;
+&nbsp;    public static class Empty&lt;S extends FieldDescription&gt; extends FilterableList.Empty&lt;S, FieldList&lt;S&gt;&gt; implements FieldList&lt;S&gt; {
+&nbsp;        public Empty() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public ByteCodeElement.Token.TokenList&lt;FieldDescription.Token&gt; asTokenList(ElementMatcher&lt;? super TypeDescription&gt; matcher) {
+&nbsp;            return new ByteCodeElement.Token.TokenList(new FieldDescription.Token[0]);
+&nbsp;        }
+&nbsp;
+&nbsp;        public FieldList&lt;FieldDescription.InDefinedShape&gt; asDefined() {
+&nbsp;            return this;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class TypeSubstituting extends AbstractBase&lt;FieldDescription.InGenericShape&gt; {
+&nbsp;        private final TypeDescription.Generic declaringType;
+&nbsp;        private final List&lt;? extends FieldDescription&gt; fieldDescriptions;
+&nbsp;        private final TypeDescription.Generic.Visitor&lt;? extends TypeDescription.Generic&gt; visitor;
+&nbsp;
+&nbsp;        public TypeSubstituting(TypeDescription.Generic declaringType, List&lt;? extends FieldDescription&gt; fieldDescriptions, TypeDescription.Generic.Visitor&lt;? extends TypeDescription.Generic&gt; visitor) {
+&nbsp;            this.declaringType = declaringType;
+&nbsp;            this.fieldDescriptions = fieldDescriptions;
+&nbsp;            this.visitor = visitor;
+&nbsp;        }
+&nbsp;
+&nbsp;        public FieldDescription.InGenericShape get(int index) {
+&nbsp;            return new FieldDescription.TypeSubstituting(this.declaringType, (FieldDescription)this.fieldDescriptions.get(index), this.visitor);
+&nbsp;        }
+&nbsp;
+&nbsp;        public int size() {
+&nbsp;            return this.fieldDescriptions.size();
+&nbsp;        }
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public static class ForTokens extends AbstractBase&lt;FieldDescription.InDefinedShape&gt; {
+&nbsp;        private final TypeDescription declaringType;
+&nbsp;        private final List&lt;? extends FieldDescription.Token&gt; tokens;
+&nbsp;
+&nbsp;        public ForTokens(TypeDescription declaringType, FieldDescription.Token... token) {
+&nbsp;            this(declaringType, Arrays.asList(token));
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForTokens(TypeDescription declaringType, List&lt;? extends FieldDescription.Token&gt; tokens) {
+&nbsp;            this.declaringType = declaringType;
+&nbsp;            this.tokens = tokens;
+&nbsp;        }
+&nbsp;
+&nbsp;        public FieldDescription.InDefinedShape get(int index) {
+&nbsp;            return new FieldDescription.Latent(this.declaringType, (FieldDescription.Token)this.tokens.get(index));
+&nbsp;        }
+&nbsp;
+&nbsp;        public int size() {
+&nbsp;            return this.tokens.size();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class Explicit&lt;S extends FieldDescription&gt; extends AbstractBase&lt;S&gt; {
+&nbsp;        private final List&lt;? extends S&gt; fieldDescriptions;
+&nbsp;
+<b class="fc">&nbsp;        public Explicit(S... fieldDescription) {</b>
+&nbsp;            this(Arrays.asList(fieldDescription));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Explicit(List&lt;? extends S&gt; fieldDescriptions) {
+&nbsp;            this.fieldDescriptions = fieldDescriptions;
+&nbsp;        }
+&nbsp;
+&nbsp;        public S get(int index) {
+&nbsp;            return (FieldDescription)this.fieldDescriptions.get(index);
+&nbsp;        }
+&nbsp;
+&nbsp;        public int size() {
+&nbsp;            return this.fieldDescriptions.size();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class ForLoadedFields extends AbstractBase&lt;FieldDescription.InDefinedShape&gt; {
+&nbsp;        private final List&lt;? extends Field&gt; fields;
+&nbsp;
+&nbsp;        public ForLoadedFields(Field... field) {
+&nbsp;            this(Arrays.asList(field));
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForLoadedFields(List&lt;? extends Field&gt; fields) {
+&nbsp;            this.fields = fields;
+&nbsp;        }
+&nbsp;
+&nbsp;        public FieldDescription.InDefinedShape get(int index) {
+&nbsp;            return new FieldDescription.ForLoadedField((Field)this.fields.get(index));
+&nbsp;        }
+&nbsp;
+&nbsp;        public int size() {
+&nbsp;            return this.fields.size();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract static class AbstractBase&lt;S extends FieldDescription&gt; extends FilterableList.AbstractBase&lt;S, FieldList&lt;S&gt;&gt; implements FieldList&lt;S&gt; {
+&nbsp;        public AbstractBase() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public ByteCodeElement.Token.TokenList&lt;FieldDescription.Token&gt; asTokenList(ElementMatcher&lt;? super TypeDescription&gt; matcher) {
+&nbsp;            List&lt;FieldDescription.Token&gt; tokens = new ArrayList(this.size());
+&nbsp;            Iterator var3 = this.iterator();
+&nbsp;
+&nbsp;            while(var3.hasNext()) {
+&nbsp;                FieldDescription fieldDescription = (FieldDescription)var3.next();
+&nbsp;                tokens.add(fieldDescription.asToken(matcher));
+&nbsp;            }
+&nbsp;
+&nbsp;            return new ByteCodeElement.Token.TokenList(tokens);
+&nbsp;        }
+&nbsp;
+&nbsp;        public FieldList&lt;FieldDescription.InDefinedShape&gt; asDefined() {
+&nbsp;            List&lt;FieldDescription.InDefinedShape&gt; declaredForms = new ArrayList(this.size());
+&nbsp;            Iterator var2 = this.iterator();
+&nbsp;
+&nbsp;            while(var2.hasNext()) {
+&nbsp;                FieldDescription fieldDescription = (FieldDescription)var2.next();
+&nbsp;                declaredForms.add(fieldDescription.asDefined());
+&nbsp;            }
+&nbsp;
+&nbsp;            return new Explicit(declaredForms);
+&nbsp;        }
+&nbsp;
+&nbsp;        protected FieldList&lt;S&gt; wrap(List&lt;S&gt; values) {
+&nbsp;            return new Explicit(values);
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

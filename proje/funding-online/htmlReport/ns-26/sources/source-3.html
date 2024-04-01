@@ -1,0 +1,463 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > FieldRegistry</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.dynamic.scaffold</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldRegistry (net.bytebuddy.dynamic.scaffold)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">FieldRegistry$Default</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/17)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldRegistry$Default$Compiled</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldRegistry$Default$Compiled$Entry</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldRegistry$Default$Entry</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (40/40)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.dynamic.scaffold;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import javax.annotation.CheckForNull;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.ValueHandling;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.ValueHandling.Sort;
+&nbsp;import net.bytebuddy.description.field.FieldDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.dynamic.Transformer;
+&nbsp;import net.bytebuddy.implementation.attribute.FieldAttributeAppender;
+&nbsp;import net.bytebuddy.matcher.ElementMatcher;
+&nbsp;import net.bytebuddy.matcher.LatentMatcher;
+&nbsp;
+&nbsp;public interface FieldRegistry {
+&nbsp;    FieldRegistry prepend(LatentMatcher&lt;? super FieldDescription&gt; var1, FieldAttributeAppender.Factory var2, @Nonnull(when = When.MAYBE) Object var3, Transformer&lt;FieldDescription&gt; var4);
+&nbsp;
+&nbsp;    Compiled compile(TypeDescription var1);
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class Default implements FieldRegistry {
+&nbsp;        private final List&lt;Entry&gt; entries;
+&nbsp;
+&nbsp;        public Default() {
+&nbsp;            this(Collections.emptyList());
+&nbsp;        }
+&nbsp;
+&nbsp;        private Default(List&lt;Entry&gt; entries) {
+&nbsp;            this.entries = entries;
+&nbsp;        }
+&nbsp;
+&nbsp;        public FieldRegistry prepend(LatentMatcher&lt;? super FieldDescription&gt; matcher, FieldAttributeAppender.Factory fieldAttributeAppenderFactory, @Nonnull(when = When.MAYBE) Object defaultValue, Transformer&lt;FieldDescription&gt; transformer) {
+&nbsp;            List&lt;Entry&gt; entries = new ArrayList(this.entries.size() + 1);
+&nbsp;            entries.add(new Entry(matcher, fieldAttributeAppenderFactory, defaultValue, transformer));
+&nbsp;            entries.addAll(this.entries);
+&nbsp;            return new Default(entries);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Compiled compile(TypeDescription instrumentedType) {
+&nbsp;            List&lt;Compiled.Entry&gt; entries = new ArrayList(this.entries.size());
+&nbsp;            Map&lt;FieldAttributeAppender.Factory, FieldAttributeAppender&gt; fieldAttributeAppenders = new HashMap();
+&nbsp;
+&nbsp;            Entry entry;
+&nbsp;            FieldAttributeAppender fieldAttributeAppender;
+&nbsp;            for(Iterator var4 = this.entries.iterator(); var4.hasNext(); entries.add(new Compiled.Entry(entry.resolve(instrumentedType), fieldAttributeAppender, entry.getDefaultValue(), entry.getTransformer()))) {
+&nbsp;                entry = (Entry)var4.next();
+&nbsp;                fieldAttributeAppender = (FieldAttributeAppender)fieldAttributeAppenders.get(entry.getFieldAttributeAppenderFactory());
+&nbsp;                if (fieldAttributeAppender == null) {
+&nbsp;                    fieldAttributeAppender = entry.getFieldAttributeAppenderFactory().make(instrumentedType);
+&nbsp;                    fieldAttributeAppenders.put(entry.getFieldAttributeAppenderFactory(), fieldAttributeAppender);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            return new Compiled(instrumentedType, entries);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.entries.equals(((Default)var1).entries);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.entries.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        protected static class Compiled implements Compiled {
+&nbsp;            private final TypeDescription instrumentedType;
+&nbsp;            private final List&lt;Entry&gt; entries;
+&nbsp;
+&nbsp;            protected Compiled(TypeDescription instrumentedType, List&lt;Entry&gt; entries) {
+&nbsp;                this.instrumentedType = instrumentedType;
+&nbsp;                this.entries = entries;
+&nbsp;            }
+&nbsp;
+&nbsp;            public TypeWriter.FieldPool.Record target(FieldDescription fieldDescription) {
+&nbsp;                Iterator var2 = this.entries.iterator();
+&nbsp;
+&nbsp;                Entry entry;
+&nbsp;                do {
+&nbsp;                    if (!var2.hasNext()) {
+&nbsp;                        return new TypeWriter.FieldPool.Record.ForImplicitField(fieldDescription);
+&nbsp;                    }
+<b class="fc">&nbsp;</b>
+&nbsp;                    entry = (Entry)var2.next();
+&nbsp;                } while(!entry.matches(fieldDescription));
+&nbsp;
+&nbsp;                return entry.bind(this.instrumentedType, fieldDescription);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+<b class="fc">&nbsp;                if (this == var1) {</b>
+<b class="fc">&nbsp;                    return true;</b>
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.instrumentedType.equals(((Compiled)var1).instrumentedType)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.entries.equals(((Compiled)var1).entries);
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            public int hashCode() {</b>
+<b class="fc">&nbsp;                return (this.getClass().hashCode() * 31 + this.instrumentedType.hashCode()) * 31 + this.entries.hashCode();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            protected static class Entry implements ElementMatcher&lt;FieldDescription&gt; {
+&nbsp;                private final ElementMatcher&lt;? super FieldDescription&gt; matcher;
+&nbsp;                private final FieldAttributeAppender fieldAttributeAppender;
+<b class="fc">&nbsp;                @Nonnull(</b>
+<b class="fc">&nbsp;                    when = When.MAYBE</b>
+<b class="fc">&nbsp;                )</b>
+<b class="fc">&nbsp;                @ValueHandling(Sort.REVERSE_NULLABILITY)</b>
+<b class="fc">&nbsp;                private final Object defaultValue;</b>
+<b class="fc">&nbsp;                private final Transformer&lt;FieldDescription&gt; transformer;</b>
+<b class="fc">&nbsp;</b>
+&nbsp;                protected Entry(ElementMatcher&lt;? super FieldDescription&gt; matcher, FieldAttributeAppender fieldAttributeAppender, @Nonnull(when = When.MAYBE) Object defaultValue, Transformer&lt;FieldDescription&gt; transformer) {
+<b class="fc">&nbsp;                    this.matcher = matcher;</b>
+<b class="fc">&nbsp;                    this.fieldAttributeAppender = fieldAttributeAppender;</b>
+<b class="fc">&nbsp;                    this.defaultValue = defaultValue;</b>
+&nbsp;                    this.transformer = transformer;
+&nbsp;                }
+&nbsp;
+&nbsp;                protected TypeWriter.FieldPool.Record bind(TypeDescription instrumentedType, FieldDescription fieldDescription) {
+&nbsp;                    return new TypeWriter.FieldPool.Record.ForExplicitField(this.fieldAttributeAppender, this.defaultValue, (FieldDescription)this.transformer.transform(instrumentedType, fieldDescription));
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean matches(@CheckForNull FieldDescription target) {
+&nbsp;                    return this.matcher.matches(target);
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.matcher.equals(((Entry)var1).matcher)) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.fieldAttributeAppender.equals(((Entry)var1).fieldAttributeAppender)) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        Object var2 = ((Entry)var1).defaultValue;
+&nbsp;                        Object var3 = this.defaultValue;
+&nbsp;                        if (var2 != null) {
+&nbsp;                            if (var3 == null) {
+&nbsp;                                return false;
+&nbsp;                            }
+&nbsp;
+&nbsp;                            if (!var3.equals(var2)) {
+&nbsp;                                return false;
+&nbsp;                            }
+&nbsp;                        } else if (var3 != null) {
+&nbsp;                            return false;
+&nbsp;                        }
+&nbsp;
+&nbsp;                        if (!this.transformer.equals(((Entry)var1).transformer)) {
+&nbsp;                            return false;
+&nbsp;                        } else {
+&nbsp;                            return true;
+<b class="fc">&nbsp;                        }</b>
+<b class="fc">&nbsp;                    }</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                public int hashCode() {</b>
+&nbsp;                    int var10000 = ((this.getClass().hashCode() * 31 + this.matcher.hashCode()) * 31 + this.fieldAttributeAppender.hashCode()) * 31;
+&nbsp;                    Object var1 = this.defaultValue;
+&nbsp;                    if (var1 != null) {
+&nbsp;                        var10000 += var1.hashCode();
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return var10000 * 31 + this.transformer.hashCode();
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        protected static class Entry implements LatentMatcher&lt;FieldDescription&gt; {
+&nbsp;            private final LatentMatcher&lt;? super FieldDescription&gt; matcher;
+&nbsp;            private final FieldAttributeAppender.Factory fieldAttributeAppenderFactory;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+<b class="fc">&nbsp;            @ValueHandling(Sort.REVERSE_NULLABILITY)</b>
+&nbsp;            private final Object defaultValue;
+&nbsp;            private final Transformer&lt;FieldDescription&gt; transformer;
+&nbsp;
+&nbsp;            protected Entry(LatentMatcher&lt;? super FieldDescription&gt; matcher, FieldAttributeAppender.Factory fieldAttributeAppenderFactory, @Nonnull(when = When.MAYBE) Object defaultValue, Transformer&lt;FieldDescription&gt; transformer) {
+&nbsp;                this.matcher = matcher;
+&nbsp;                this.fieldAttributeAppenderFactory = fieldAttributeAppenderFactory;
+&nbsp;                this.defaultValue = defaultValue;
+&nbsp;                this.transformer = transformer;
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            protected FieldAttributeAppender.Factory getFieldAttributeAppenderFactory() {
+&nbsp;                return this.fieldAttributeAppenderFactory;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+<b class="fc">&nbsp;                when = When.MAYBE</b>
+&nbsp;            )
+&nbsp;            protected Object getDefaultValue() {
+&nbsp;                return this.defaultValue;
+&nbsp;            }
+&nbsp;
+&nbsp;            protected Transformer&lt;FieldDescription&gt; getTransformer() {
+&nbsp;                return this.transformer;
+&nbsp;            }
+&nbsp;
+&nbsp;            public ElementMatcher&lt;? super FieldDescription&gt; resolve(TypeDescription typeDescription) {
+&nbsp;                return this.matcher.resolve(typeDescription);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.matcher.equals(((Entry)var1).matcher)) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.fieldAttributeAppenderFactory.equals(((Entry)var1).fieldAttributeAppenderFactory)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+<b class="fc">&nbsp;                    Object var2 = ((Entry)var1).defaultValue;</b>
+<b class="fc">&nbsp;                    Object var3 = this.defaultValue;</b>
+<b class="fc">&nbsp;                    if (var2 != null) {</b>
+&nbsp;                        if (var3 == null) {
+&nbsp;                            return false;
+&nbsp;                        }
+&nbsp;
+&nbsp;                        if (!var3.equals(var2)) {
+&nbsp;                            return false;
+<b class="fc">&nbsp;                        }</b>
+<b class="fc">&nbsp;                    } else if (var3 != null) {</b>
+<b class="fc">&nbsp;                        return false;</b>
+&nbsp;                    }
+<b class="fc">&nbsp;</b>
+&nbsp;                    if (!this.transformer.equals(((Entry)var1).transformer)) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return true;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                int var10000 = ((this.getClass().hashCode() * 31 + this.matcher.hashCode()) * 31 + this.fieldAttributeAppenderFactory.hashCode()) * 31;
+&nbsp;                Object var1 = this.defaultValue;
+&nbsp;                if (var1 != null) {
+&nbsp;                    var10000 += var1.hashCode();
+&nbsp;                }
+&nbsp;
+&nbsp;                return var10000 * 31 + this.transformer.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface Compiled extends TypeWriter.FieldPool {
+&nbsp;        public static enum NoOp implements Compiled {
+&nbsp;            INSTANCE;
+&nbsp;
+&nbsp;            private NoOp() {
+&nbsp;            }
+&nbsp;
+&nbsp;            public TypeWriter.FieldPool.Record target(FieldDescription fieldDescription) {
+&nbsp;                return new TypeWriter.FieldPool.Record.ForImplicitField(fieldDescription);
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

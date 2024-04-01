@@ -11,6 +11,9 @@ import com.atguigu.crowd.entity.AuthExample;
 import com.atguigu.crowd.mapper.AuthMapper;
 import com.atguigu.crowd.service.api.AuthService;
 
+/**
+ * AuthServiceImpl 类中实现了对角色分配权限的业务逻辑
+ */
 @Service
 public class AuthServiceImpl implements AuthService {
 

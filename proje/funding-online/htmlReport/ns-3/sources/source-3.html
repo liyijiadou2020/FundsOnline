@@ -1,0 +1,341 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ThrowableProxyConverter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ch.qos.logback.classic.pattern</a>
+</div>
+
+<h1>Coverage Summary for Class: ThrowableProxyConverter (ch.qos.logback.classic.pattern)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ThrowableProxyConverter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package ch.qos.logback.classic.pattern;
+&nbsp;
+&nbsp;import ch.qos.logback.classic.spi.ILoggingEvent;
+&nbsp;import ch.qos.logback.classic.spi.IThrowableProxy;
+&nbsp;import ch.qos.logback.classic.spi.StackTraceElementProxy;
+&nbsp;import ch.qos.logback.classic.spi.ThrowableProxyUtil;
+&nbsp;import ch.qos.logback.core.Context;
+&nbsp;import ch.qos.logback.core.CoreConstants;
+&nbsp;import ch.qos.logback.core.boolex.EvaluationException;
+&nbsp;import ch.qos.logback.core.boolex.EventEvaluator;
+&nbsp;import ch.qos.logback.core.status.ErrorStatus;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;public class ThrowableProxyConverter extends ThrowableHandlingConverter {
+&nbsp;    protected static final int BUILDER_CAPACITY = 2048;
+&nbsp;    int lengthOption;
+&nbsp;    List&lt;EventEvaluator&lt;ILoggingEvent&gt;&gt; evaluatorList = null;
+&nbsp;    List&lt;String&gt; ignoredStackTraceLines = null;
+&nbsp;    int errorCount = 0;
+&nbsp;
+&nbsp;    public ThrowableProxyConverter() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public void start() {
+&nbsp;        String lengthStr = this.getFirstOption();
+<b class="fc">&nbsp;        if (lengthStr == null) {</b>
+&nbsp;            this.lengthOption = Integer.MAX_VALUE;
+&nbsp;        } else {
+&nbsp;            lengthStr = lengthStr.toLowerCase();
+&nbsp;            if (&quot;full&quot;.equals(lengthStr)) {
+<b class="fc">&nbsp;                this.lengthOption = Integer.MAX_VALUE;</b>
+<b class="fc">&nbsp;            } else if (&quot;short&quot;.equals(lengthStr)) {</b>
+&nbsp;                this.lengthOption = 1;
+<b class="fc">&nbsp;            } else {</b>
+&nbsp;                try {
+&nbsp;                    this.lengthOption = Integer.parseInt(lengthStr);
+&nbsp;                } catch (NumberFormatException var9) {
+&nbsp;                    this.addError(&quot;Could not parse [&quot; + lengthStr + &quot;] as an integer&quot;);
+<b class="fc">&nbsp;                    this.lengthOption = Integer.MAX_VALUE;</b>
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        List&lt;String&gt; optionList = this.getOptionList();
+&nbsp;        if (optionList != null &amp;&amp; optionList.size() &gt; 1) {
+&nbsp;            int optionListSize = optionList.size();
+&nbsp;
+&nbsp;            for(int i = 1; i &lt; optionListSize; ++i) {
+&nbsp;                String evaluatorOrIgnoredStackTraceLine = (String)optionList.get(i);
+&nbsp;                Context context = this.getContext();
+&nbsp;                Map&lt;String, EventEvaluator&lt;?&gt;&gt; evaluatorMap = (Map)context.getObject(&quot;EVALUATOR_MAP&quot;);
+&nbsp;                EventEvaluator&lt;ILoggingEvent&gt; ee = (EventEvaluator)evaluatorMap.get(evaluatorOrIgnoredStackTraceLine);
+&nbsp;                if (ee != null) {
+&nbsp;                    this.addEvaluator(ee);
+&nbsp;                } else {
+&nbsp;                    this.addIgnoreStackTraceLine(evaluatorOrIgnoredStackTraceLine);
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        super.start();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addEvaluator(EventEvaluator&lt;ILoggingEvent&gt; ee) {
+&nbsp;        if (this.evaluatorList == null) {
+&nbsp;            this.evaluatorList = new ArrayList();
+&nbsp;        }
+&nbsp;
+&nbsp;        this.evaluatorList.add(ee);
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addIgnoreStackTraceLine(String ignoredStackTraceLine) {
+&nbsp;        if (this.ignoredStackTraceLines == null) {
+&nbsp;            this.ignoredStackTraceLines = new ArrayList();
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        this.ignoredStackTraceLines.add(ignoredStackTraceLine);
+&nbsp;    }
+&nbsp;
+&nbsp;    public void stop() {
+&nbsp;        this.evaluatorList = null;
+&nbsp;        super.stop();
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void extraData(StringBuilder builder, StackTraceElementProxy step) {
+&nbsp;    }
+&nbsp;
+&nbsp;    public String convert(ILoggingEvent event) {
+&nbsp;        IThrowableProxy tp = event.getThrowableProxy();
+&nbsp;        if (tp == null) {
+&nbsp;            return &quot;&quot;;
+&nbsp;        } else {
+&nbsp;            if (this.evaluatorList != null) {
+&nbsp;                boolean printStack = true;
+&nbsp;
+&nbsp;                for(int i = 0; i &lt; this.evaluatorList.size(); ++i) {
+&nbsp;                    EventEvaluator&lt;ILoggingEvent&gt; ee = (EventEvaluator)this.evaluatorList.get(i);
+&nbsp;
+&nbsp;                    try {
+&nbsp;                        if (ee.evaluate(event)) {
+&nbsp;                            printStack = false;
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                    } catch (EvaluationException var8) {
+&nbsp;                        ++this.errorCount;
+&nbsp;                        if (this.errorCount &lt; 4) {
+&nbsp;                            this.addError(&quot;Exception thrown for evaluator named [&quot; + ee.getName() + &quot;]&quot;, var8);
+&nbsp;                        } else if (this.errorCount == 4) {
+&nbsp;                            ErrorStatus errorStatus = new ErrorStatus(&quot;Exception thrown for evaluator named [&quot; + ee.getName() + &quot;].&quot;, this, var8);
+&nbsp;                            errorStatus.add(new ErrorStatus(&quot;This was the last warning about this evaluator&#39;s errors.We don&#39;t want the StatusManager to get flooded.&quot;, this));
+&nbsp;                            this.addStatus(errorStatus);
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                if (!printStack) {
+&nbsp;                    return &quot;&quot;;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            return this.throwableProxyToString(tp);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected String throwableProxyToString(IThrowableProxy tp) {
+&nbsp;        StringBuilder sb = new StringBuilder(2048);
+&nbsp;        this.recursiveAppend(sb, (String)null, 1, tp);
+&nbsp;        return sb.toString();
+&nbsp;    }
+&nbsp;
+&nbsp;    private void recursiveAppend(StringBuilder sb, String prefix, int indent, IThrowableProxy tp) {
+&nbsp;        if (tp != null) {
+&nbsp;            this.subjoinFirstLine(sb, prefix, indent, tp);
+&nbsp;            sb.append(CoreConstants.LINE_SEPARATOR);
+&nbsp;            this.subjoinSTEPArray(sb, indent, tp);
+&nbsp;            IThrowableProxy[] suppressed = tp.getSuppressed();
+&nbsp;            if (suppressed != null) {
+&nbsp;                IThrowableProxy[] arr$ = suppressed;
+&nbsp;                int len$ = suppressed.length;
+&nbsp;
+&nbsp;                for(int i$ = 0; i$ &lt; len$; ++i$) {
+&nbsp;                    IThrowableProxy current = arr$[i$];
+&nbsp;                    this.recursiveAppend(sb, &quot;Suppressed: &quot;, indent + 1, current);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            this.recursiveAppend(sb, &quot;Caused by: &quot;, indent, tp.getCause());
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private void subjoinFirstLine(StringBuilder buf, String prefix, int indent, IThrowableProxy tp) {
+&nbsp;        ThrowableProxyUtil.indent(buf, indent - 1);
+&nbsp;        if (prefix != null) {
+&nbsp;            buf.append(prefix);
+&nbsp;        }
+&nbsp;
+&nbsp;        this.subjoinExceptionMessage(buf, tp);
+&nbsp;    }
+&nbsp;
+&nbsp;    private void subjoinExceptionMessage(StringBuilder buf, IThrowableProxy tp) {
+&nbsp;        buf.append(tp.getClassName()).append(&quot;: &quot;).append(tp.getMessage());
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void subjoinSTEPArray(StringBuilder buf, int indent, IThrowableProxy tp) {
+&nbsp;        StackTraceElementProxy[] stepArray = tp.getStackTraceElementProxyArray();
+&nbsp;        int commonFrames = tp.getCommonFrames();
+&nbsp;        boolean unrestrictedPrinting = this.lengthOption &gt; stepArray.length;
+&nbsp;        int maxIndex = unrestrictedPrinting ? stepArray.length : this.lengthOption;
+&nbsp;        if (commonFrames &gt; 0 &amp;&amp; unrestrictedPrinting) {
+&nbsp;            maxIndex -= commonFrames;
+&nbsp;        }
+&nbsp;
+&nbsp;        int ignoredCount = 0;
+&nbsp;
+&nbsp;        for(int i = 0; i &lt; maxIndex; ++i) {
+&nbsp;            StackTraceElementProxy element = stepArray[i];
+&nbsp;            if (!this.isIgnoredStackTraceLine(element.toString())) {
+&nbsp;                ThrowableProxyUtil.indent(buf, indent);
+&nbsp;                this.printStackLine(buf, ignoredCount, element);
+&nbsp;                ignoredCount = 0;
+&nbsp;                buf.append(CoreConstants.LINE_SEPARATOR);
+&nbsp;            } else {
+&nbsp;                ++ignoredCount;
+&nbsp;                if (maxIndex &lt; stepArray.length) {
+&nbsp;                    ++maxIndex;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        if (ignoredCount &gt; 0) {
+&nbsp;            this.printIgnoredCount(buf, ignoredCount);
+&nbsp;            buf.append(CoreConstants.LINE_SEPARATOR);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (commonFrames &gt; 0 &amp;&amp; unrestrictedPrinting) {
+&nbsp;            ThrowableProxyUtil.indent(buf, indent);
+&nbsp;            buf.append(&quot;... &quot;).append(tp.getCommonFrames()).append(&quot; common frames omitted&quot;).append(CoreConstants.LINE_SEPARATOR);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void printStackLine(StringBuilder buf, int ignoredCount, StackTraceElementProxy element) {
+&nbsp;        buf.append(element);
+&nbsp;        this.extraData(buf, element);
+&nbsp;        if (ignoredCount &gt; 0) {
+&nbsp;            this.printIgnoredCount(buf, ignoredCount);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void printIgnoredCount(StringBuilder buf, int ignoredCount) {
+&nbsp;        buf.append(&quot; [&quot;).append(ignoredCount).append(&quot; skipped]&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean isIgnoredStackTraceLine(String line) {
+&nbsp;        if (this.ignoredStackTraceLines != null) {
+&nbsp;            Iterator i$ = this.ignoredStackTraceLines.iterator();
+&nbsp;
+&nbsp;            while(i$.hasNext()) {
+&nbsp;                String ignoredStackTraceLine = (String)i$.next();
+&nbsp;                if (line.contains(ignoredStackTraceLine)) {
+&nbsp;                    return true;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return false;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

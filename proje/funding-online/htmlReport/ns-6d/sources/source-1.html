@@ -1,0 +1,333 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > LoggerFactory</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.slf4j</a>
+</div>
+
+<h1>Coverage Summary for Class: LoggerFactory (org.slf4j)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoggerFactory</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (45/45)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.slf4j;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.net.URL;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Enumeration;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.LinkedHashSet;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;import org.slf4j.helpers.NOPLoggerFactory;
+&nbsp;import org.slf4j.helpers.SubstituteLogger;
+&nbsp;import org.slf4j.helpers.SubstituteLoggerFactory;
+&nbsp;import org.slf4j.helpers.Util;
+&nbsp;import org.slf4j.impl.StaticLoggerBinder;
+&nbsp;
+&nbsp;public final class LoggerFactory {
+&nbsp;    static final String CODES_PREFIX = &quot;http://www.slf4j.org/codes.html&quot;;
+&nbsp;    static final String NO_STATICLOGGERBINDER_URL = &quot;http://www.slf4j.org/codes.html#StaticLoggerBinder&quot;;
+&nbsp;    static final String MULTIPLE_BINDINGS_URL = &quot;http://www.slf4j.org/codes.html#multiple_bindings&quot;;
+&nbsp;    static final String NULL_LF_URL = &quot;http://www.slf4j.org/codes.html#null_LF&quot;;
+&nbsp;    static final String VERSION_MISMATCH = &quot;http://www.slf4j.org/codes.html#version_mismatch&quot;;
+&nbsp;    static final String SUBSTITUTE_LOGGER_URL = &quot;http://www.slf4j.org/codes.html#substituteLogger&quot;;
+&nbsp;    static final String UNSUCCESSFUL_INIT_URL = &quot;http://www.slf4j.org/codes.html#unsuccessfulInit&quot;;
+&nbsp;    static final String UNSUCCESSFUL_INIT_MSG = &quot;org.slf4j.LoggerFactory could not be successfully initialized. See also http://www.slf4j.org/codes.html#unsuccessfulInit&quot;;
+&nbsp;    static final int UNINITIALIZED = 0;
+&nbsp;    static final int ONGOING_INITIALIZATION = 1;
+&nbsp;    static final int FAILED_INITIALIZATION = 2;
+&nbsp;    static final int SUCCESSFUL_INITIALIZATION = 3;
+&nbsp;    static final int NOP_FALLBACK_INITIALIZATION = 4;
+&nbsp;    static int INITIALIZATION_STATE = 0;
+&nbsp;    static SubstituteLoggerFactory TEMP_FACTORY = new SubstituteLoggerFactory();
+&nbsp;    static NOPLoggerFactory NOP_FALLBACK_FACTORY = new NOPLoggerFactory();
+&nbsp;    private static final String[] API_COMPATIBILITY_LIST = new String[]{&quot;1.6&quot;, &quot;1.7&quot;};
+&nbsp;    private static String STATIC_LOGGER_BINDER_PATH = &quot;org/slf4j/impl/StaticLoggerBinder.class&quot;;
+&nbsp;
+&nbsp;    private LoggerFactory() {
+&nbsp;    }
+&nbsp;
+&nbsp;    static void reset() {
+&nbsp;        INITIALIZATION_STATE = 0;
+&nbsp;        TEMP_FACTORY = new SubstituteLoggerFactory();
+&nbsp;    }
+&nbsp;
+&nbsp;    private static final void performInitialization() {
+&nbsp;        bind();
+&nbsp;        if (INITIALIZATION_STATE == 3) {
+&nbsp;            versionSanityCheck();
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean messageContainsOrgSlf4jImplStaticLoggerBinder(String msg) {
+&nbsp;        if (msg == null) {
+&nbsp;            return false;
+&nbsp;        } else if (msg.indexOf(&quot;org/slf4j/impl/StaticLoggerBinder&quot;) != -1) {
+&nbsp;            return true;
+&nbsp;        } else {
+&nbsp;            return msg.indexOf(&quot;org.slf4j.impl.StaticLoggerBinder&quot;) != -1;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static final void bind() {
+&nbsp;        String msg;
+&nbsp;        try {
+&nbsp;            Set&lt;URL&gt; staticLoggerBinderPathSet = findPossibleStaticLoggerBinderPathSet();
+&nbsp;            reportMultipleBindingAmbiguity(staticLoggerBinderPathSet);
+<b class="fc">&nbsp;            StaticLoggerBinder.getSingleton();</b>
+<b class="fc">&nbsp;            INITIALIZATION_STATE = 3;</b>
+<b class="fc">&nbsp;            reportActualBinding(staticLoggerBinderPathSet);</b>
+&nbsp;            fixSubstitutedLoggers();
+&nbsp;        } catch (NoClassDefFoundError var2) {
+&nbsp;            msg = var2.getMessage();
+&nbsp;            if (!messageContainsOrgSlf4jImplStaticLoggerBinder(msg)) {
+&nbsp;                failedBinding(var2);
+&nbsp;                throw var2;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            INITIALIZATION_STATE = 4;</b>
+&nbsp;            Util.report(&quot;Failed to load class \&quot;org.slf4j.impl.StaticLoggerBinder\&quot;.&quot;);
+&nbsp;            Util.report(&quot;Defaulting to no-operation (NOP) logger implementation&quot;);
+&nbsp;            Util.report(&quot;See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.&quot;);
+&nbsp;        } catch (NoSuchMethodError var3) {
+&nbsp;            msg = var3.getMessage();
+&nbsp;            if (msg != null &amp;&amp; msg.indexOf(&quot;org.slf4j.impl.StaticLoggerBinder.getSingleton()&quot;) != -1) {
+&nbsp;                INITIALIZATION_STATE = 2;
+&nbsp;                Util.report(&quot;slf4j-api 1.6.x (or later) is incompatible with this binding.&quot;);
+&nbsp;                Util.report(&quot;Your binding is version 1.5.5 or earlier.&quot;);
+&nbsp;                Util.report(&quot;Upgrade your binding to version 1.6.x.&quot;);
+&nbsp;            }
+&nbsp;
+&nbsp;            throw var3;
+&nbsp;        } catch (Exception var4) {
+&nbsp;            failedBinding(var4);
+&nbsp;            throw new IllegalStateException(&quot;Unexpected initialization failure&quot;, var4);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    static void failedBinding(Throwable t) {
+&nbsp;        INITIALIZATION_STATE = 2;
+<b class="fc">&nbsp;        Util.report(&quot;Failed to instantiate SLF4J LoggerFactory&quot;, t);</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    private static final void fixSubstitutedLoggers() {
+&nbsp;        List&lt;SubstituteLogger&gt; loggers = TEMP_FACTORY.getLoggers();
+&nbsp;        if (!loggers.isEmpty()) {
+&nbsp;            Util.report(&quot;The following set of substitute loggers may have been accessed&quot;);
+&nbsp;            Util.report(&quot;during the initialization phase. Logging calls during this&quot;);
+&nbsp;            Util.report(&quot;phase were not honored. However, subsequent logging calls to these&quot;);
+&nbsp;            Util.report(&quot;loggers will work as normally expected.&quot;);
+&nbsp;            Util.report(&quot;See also http://www.slf4j.org/codes.html#substituteLogger&quot;);
+&nbsp;            Iterator i$ = loggers.iterator();
+&nbsp;
+&nbsp;            while(i$.hasNext()) {
+&nbsp;                SubstituteLogger subLogger = (SubstituteLogger)i$.next();
+&nbsp;                subLogger.setDelegate(getLogger(subLogger.getName()));
+&nbsp;                Util.report(subLogger.getName());
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            TEMP_FACTORY.clear();</b>
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    private static final void versionSanityCheck() {</b>
+<b class="fc">&nbsp;        try {</b>
+&nbsp;            String requested = StaticLoggerBinder.REQUESTED_API_VERSION;
+&nbsp;            boolean match = false;
+&nbsp;
+&nbsp;            for(int i = 0; i &lt; API_COMPATIBILITY_LIST.length; ++i) {
+&nbsp;                if (requested.startsWith(API_COMPATIBILITY_LIST[i])) {
+&nbsp;                    match = true;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            if (!match) {
+&nbsp;                Util.report(&quot;The requested version &quot; + requested + &quot; by your slf4j binding is not compatible with &quot; + Arrays.asList(API_COMPATIBILITY_LIST).toString());
+&nbsp;                Util.report(&quot;See http://www.slf4j.org/codes.html#version_mismatch for further details.&quot;);
+&nbsp;            }
+&nbsp;        } catch (NoSuchFieldError var3) {
+&nbsp;        } catch (Throwable var4) {
+&nbsp;            Util.report(&quot;Unexpected problem occured during version sanity check&quot;, var4);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Set&lt;URL&gt; findPossibleStaticLoggerBinderPathSet() {
+&nbsp;        Set&lt;URL&gt; staticLoggerBinderPathSet = new LinkedHashSet();
+&nbsp;
+&nbsp;        try {
+<b class="fc">&nbsp;            ClassLoader loggerFactoryClassLoader = LoggerFactory.class.getClassLoader();</b>
+&nbsp;            Enumeration paths;
+&nbsp;            if (loggerFactoryClassLoader == null) {
+&nbsp;                paths = ClassLoader.getSystemResources(STATIC_LOGGER_BINDER_PATH);
+&nbsp;            } else {
+&nbsp;                paths = loggerFactoryClassLoader.getResources(STATIC_LOGGER_BINDER_PATH);
+&nbsp;            }
+&nbsp;
+&nbsp;            while(paths.hasMoreElements()) {
+<b class="fc">&nbsp;                URL path = (URL)paths.nextElement();</b>
+&nbsp;                staticLoggerBinderPathSet.add(path);
+<b class="fc">&nbsp;            }</b>
+&nbsp;        } catch (IOException var4) {
+&nbsp;            Util.report(&quot;Error getting resources from path&quot;, var4);
+&nbsp;        }
+&nbsp;
+&nbsp;        return staticLoggerBinderPathSet;
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean isAmbiguousStaticLoggerBinderPathSet(Set&lt;URL&gt; staticLoggerBinderPathSet) {
+&nbsp;        return staticLoggerBinderPathSet.size() &gt; 1;
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void reportMultipleBindingAmbiguity(Set&lt;URL&gt; staticLoggerBinderPathSet) {
+&nbsp;        if (isAmbiguousStaticLoggerBinderPathSet(staticLoggerBinderPathSet)) {
+&nbsp;            Util.report(&quot;Class path contains multiple SLF4J bindings.&quot;);
+&nbsp;            Iterator&lt;URL&gt; iterator = staticLoggerBinderPathSet.iterator();
+&nbsp;
+&nbsp;            while(iterator.hasNext()) {
+&nbsp;                URL path = (URL)iterator.next();
+<b class="fc">&nbsp;                Util.report(&quot;Found binding in [&quot; + path + &quot;]&quot;);</b>
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            Util.report(&quot;See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.&quot;);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private static void reportActualBinding(Set&lt;URL&gt; staticLoggerBinderPathSet) {</b>
+&nbsp;        if (isAmbiguousStaticLoggerBinderPathSet(staticLoggerBinderPathSet)) {
+&nbsp;            Util.report(&quot;Actual binding is of type [&quot; + StaticLoggerBinder.getSingleton().getLoggerFactoryClassStr() + &quot;]&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Logger getLogger(String name) {
+&nbsp;        ILoggerFactory iLoggerFactory = getILoggerFactory();
+&nbsp;        return iLoggerFactory.getLogger(name);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Logger getLogger(Class clazz) {
+&nbsp;        return getLogger(clazz.getName());
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static ILoggerFactory getILoggerFactory() {
+&nbsp;        if (INITIALIZATION_STATE == 0) {
+&nbsp;            INITIALIZATION_STATE = 1;
+<b class="fc">&nbsp;            performInitialization();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        switch (INITIALIZATION_STATE) {
+&nbsp;            case 1:
+<b class="fc">&nbsp;                return TEMP_FACTORY;</b>
+&nbsp;            case 2:
+<b class="fc">&nbsp;                throw new IllegalStateException(&quot;org.slf4j.LoggerFactory could not be successfully initialized. See also http://www.slf4j.org/codes.html#unsuccessfulInit&quot;);</b>
+&nbsp;            case 3:
+&nbsp;                return StaticLoggerBinder.getSingleton().getLoggerFactory();
+<b class="fc">&nbsp;            case 4:</b>
+&nbsp;                return NOP_FALLBACK_FACTORY;
+&nbsp;            default:
+<b class="fc">&nbsp;                throw new IllegalStateException(&quot;Unreachable code&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+<b class="fc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

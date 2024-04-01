@@ -1,0 +1,228 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > CrowdExceptionResolver</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.atguigu.crowd.mvc.config</a>
+</div>
+
+<h1>Coverage Summary for Class: CrowdExceptionResolver (com.atguigu.crowd.mvc.config)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CrowdExceptionResolver</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/20)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.atguigu.crowd.mvc.config;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;
+&nbsp;import javax.servlet.http.HttpServletRequest;
+&nbsp;import javax.servlet.http.HttpServletResponse;
+&nbsp;
+&nbsp;import org.springframework.web.bind.annotation.ControllerAdvice;
+&nbsp;import org.springframework.web.bind.annotation.ExceptionHandler;
+&nbsp;import org.springframework.web.servlet.ModelAndView;
+&nbsp;
+&nbsp;import com.atguigu.crowd.constant.CrowdConstant;
+&nbsp;import com.atguigu.crowd.exception.AccessForbiddenException;
+&nbsp;import com.atguigu.crowd.exception.LoginAcctAlreadyInUseException;
+&nbsp;import com.atguigu.crowd.exception.LoginAcctAlreadyInUseForUpdateException;
+&nbsp;import com.atguigu.crowd.exception.LoginFailedException;
+&nbsp;import com.atguigu.crowd.util.CrowdUtil;
+&nbsp;import com.atguigu.crowd.util.ResultEntity;
+&nbsp;import com.google.gson.Gson;
+&nbsp;
+&nbsp;// @ControllerAdvice表示当前类是一个基于注解的异常处理器类
+&nbsp;@ControllerAdvice
+<b class="nc">&nbsp;public class CrowdExceptionResolver {</b>
+&nbsp;
+&nbsp;    @ExceptionHandler(value = LoginAcctAlreadyInUseForUpdateException.class)
+&nbsp;    public ModelAndView resolveLoginAcctAlreadyInUseForUpdateException(
+&nbsp;        LoginAcctAlreadyInUseForUpdateException exception, HttpServletRequest request, HttpServletResponse response)
+&nbsp;        throws IOException {
+&nbsp;
+<b class="nc">&nbsp;        String viewName = &quot;system-error&quot;;</b>
+&nbsp;
+<b class="nc">&nbsp;        return commonResolve(viewName, exception, request, response);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @ExceptionHandler(value = LoginAcctAlreadyInUseException.class)
+&nbsp;    public ModelAndView resolveLoginAcctAlreadyInUseException(LoginAcctAlreadyInUseException exception,
+&nbsp;        HttpServletRequest request, HttpServletResponse response) throws IOException {
+&nbsp;
+<b class="nc">&nbsp;        String viewName = &quot;admin-add&quot;;</b>
+&nbsp;
+<b class="nc">&nbsp;        return commonResolve(viewName, exception, request, response);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @ExceptionHandler(value = LoginFailedException.class)
+&nbsp;    public ModelAndView resolveLoginFailedException(LoginFailedException exception, HttpServletRequest request,
+&nbsp;        HttpServletResponse response) throws IOException {
+&nbsp;
+<b class="nc">&nbsp;        String viewName = &quot;admin-login&quot;;</b>
+&nbsp;
+<b class="nc">&nbsp;        return commonResolve(viewName, exception, request, response);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @ExceptionHandler(value = AccessForbiddenException.class)
+&nbsp;    public ModelAndView resolveAccessForbiddenException(AccessForbiddenException exception, HttpServletRequest request,
+&nbsp;        HttpServletResponse response) throws IOException {
+&nbsp;
+<b class="nc">&nbsp;        String viewName = &quot;admin-login&quot;;</b>
+&nbsp;
+<b class="nc">&nbsp;        return commonResolve(viewName, exception, request, response);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // @ExceptionHandler将一个具体的异常类型和一个方法关联起来
+&nbsp;    private ModelAndView commonResolve(
+&nbsp;
+&nbsp;        // 异常处理完成后要去的页面
+&nbsp;        String viewName,
+&nbsp;
+&nbsp;        // 实际捕获到的异常类型
+&nbsp;        Exception exception,
+&nbsp;
+&nbsp;        // 当前请求对象
+&nbsp;        HttpServletRequest request,
+&nbsp;
+&nbsp;        // 当前响应对象
+&nbsp;        HttpServletResponse response) throws IOException {
+&nbsp;
+&nbsp;        // 1.判断当前请求类型
+<b class="nc">&nbsp;        boolean judgeResult = CrowdUtil.judgeRequestType(request);</b>
+&nbsp;
+&nbsp;        // 2.如果是Ajax请求
+<b class="nc">&nbsp;        if (judgeResult) {</b>
+&nbsp;
+&nbsp;            // 3.创建ResultEntity对象
+<b class="nc">&nbsp;            ResultEntity&lt;Object&gt; resultEntity = ResultEntity.failed(exception.getMessage());</b>
+&nbsp;
+&nbsp;            // 4.创建Gson对象
+<b class="nc">&nbsp;            Gson gson = new Gson();</b>
+&nbsp;
+&nbsp;            // 5.将ResultEntity对象转换为JSON字符串
+<b class="nc">&nbsp;            String json = gson.toJson(resultEntity);</b>
+&nbsp;
+&nbsp;            // 6.将JSON字符串作为响应体返回给浏览器
+<b class="nc">&nbsp;            response.getWriter().write(json);</b>
+&nbsp;
+&nbsp;            // 7.由于上面已经通过原生的response对象返回了响应，所以不提供ModelAndView对象
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        // 8.如果不是Ajax请求则创建ModelAndView对象
+<b class="nc">&nbsp;        ModelAndView modelAndView = new ModelAndView();</b>
+&nbsp;
+&nbsp;        // 9.将Exception对象存入模型
+<b class="nc">&nbsp;        modelAndView.addObject(CrowdConstant.ATTR_NAME_EXCEPTION, exception);</b>
+&nbsp;
+&nbsp;        // 10.设置对应的视图名称
+<b class="nc">&nbsp;        modelAndView.setViewName(viewName);</b>
+&nbsp;
+&nbsp;        // 11.返回modelAndView对象
+<b class="nc">&nbsp;        return modelAndView;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,206 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ModifierContributor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.description.modifier</a>
+</div>
+
+<h1>Coverage Summary for Class: ModifierContributor (net.bytebuddy.description.modifier)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">ModifierContributor$Resolver</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.description.modifier;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Iterator;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;
+&nbsp;public interface ModifierContributor {
+&nbsp;    int EMPTY_MASK = 0;
+&nbsp;
+&nbsp;    int getMask();
+&nbsp;
+&nbsp;    int getRange();
+&nbsp;
+&nbsp;    boolean isDefault();
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class Resolver&lt;T extends ModifierContributor&gt; {
+&nbsp;        private final Collection&lt;? extends T&gt; modifierContributors;
+&nbsp;
+&nbsp;        protected Resolver(Collection&lt;? extends T&gt; modifierContributors) {
+&nbsp;            this.modifierContributors = modifierContributors;
+&nbsp;        }
+&nbsp;
+&nbsp;        public static Resolver&lt;ForType&gt; of(ForType... modifierContributor) {
+&nbsp;            return of((Collection)Arrays.asList(modifierContributor));
+&nbsp;        }
+&nbsp;
+&nbsp;        public static Resolver&lt;ForField&gt; of(ForField... modifierContributor) {
+&nbsp;            return of((Collection)Arrays.asList(modifierContributor));
+&nbsp;        }
+&nbsp;
+&nbsp;        public static Resolver&lt;ForMethod&gt; of(ForMethod... modifierContributor) {
+&nbsp;            return of((Collection)Arrays.asList(modifierContributor));
+&nbsp;        }
+&nbsp;
+&nbsp;        public static Resolver&lt;ForParameter&gt; of(ForParameter... modifierContributor) {
+&nbsp;            return of((Collection)Arrays.asList(modifierContributor));
+&nbsp;        }
+&nbsp;
+&nbsp;        public static &lt;S extends ModifierContributor&gt; Resolver&lt;S&gt; of(Collection&lt;? extends S&gt; modifierContributors) {
+&nbsp;            return new Resolver(modifierContributors);
+&nbsp;        }
+&nbsp;
+&nbsp;        public int resolve() {
+&nbsp;            return this.resolve(0);
+&nbsp;        }
+&nbsp;
+&nbsp;        public int resolve(int modifiers) {
+&nbsp;            ModifierContributor modifierContributor;
+&nbsp;            for(Iterator var2 = this.modifierContributors.iterator(); var2.hasNext(); modifiers = modifiers &amp; ~modifierContributor.getRange() | modifierContributor.getMask()) {
+&nbsp;                modifierContributor = (ModifierContributor)var2.next();
+&nbsp;            }
+&nbsp;
+&nbsp;            return modifiers;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.modifierContributors.equals(((Resolver)var1).modifierContributors);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.modifierContributors.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface ForParameter extends ModifierContributor {
+&nbsp;        int MASK = 36880;
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface ForMethod extends ModifierContributor {
+&nbsp;        int MASK = 7679;
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface ForField extends ModifierContributor {
+&nbsp;        int MASK = 151775;
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface ForType extends ModifierContributor {
+&nbsp;        int MASK = 161311;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

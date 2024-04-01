@@ -1,0 +1,289 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > RecordComponentList</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.description.type</a>
+</div>
+
+<h1>Coverage Summary for Class: RecordComponentList (net.bytebuddy.description.type)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">RecordComponentList$AbstractBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">RecordComponentList$ForTokens</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.description.type;
+&nbsp;
+&nbsp;import java.lang.reflect.AnnotatedElement;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import net.bytebuddy.description.ByteCodeElement;
+&nbsp;import net.bytebuddy.matcher.ElementMatcher;
+&nbsp;import net.bytebuddy.matcher.FilterableList;
+&nbsp;
+&nbsp;public interface RecordComponentList&lt;T extends RecordComponentDescription&gt; extends FilterableList&lt;T, RecordComponentList&lt;T&gt;&gt; {
+&nbsp;    ByteCodeElement.Token.TokenList&lt;RecordComponentDescription.Token&gt; asTokenList(ElementMatcher&lt;? super TypeDescription&gt; var1);
+&nbsp;
+&nbsp;    TypeList.Generic asTypeList();
+&nbsp;
+&nbsp;    RecordComponentList&lt;RecordComponentDescription.InDefinedShape&gt; asDefined();
+&nbsp;
+&nbsp;    public static class Empty&lt;S extends RecordComponentDescription&gt; extends FilterableList.Empty&lt;S, RecordComponentList&lt;S&gt;&gt; implements RecordComponentList&lt;S&gt; {
+&nbsp;        public Empty() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public RecordComponentList&lt;RecordComponentDescription.InDefinedShape&gt; asDefined() {
+&nbsp;            return new Empty();
+&nbsp;        }
+&nbsp;
+&nbsp;        public ByteCodeElement.Token.TokenList&lt;RecordComponentDescription.Token&gt; asTokenList(ElementMatcher&lt;? super TypeDescription&gt; matcher) {
+&nbsp;            return new ByteCodeElement.Token.TokenList(new RecordComponentDescription.Token[0]);
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeList.Generic asTypeList() {
+&nbsp;            return new TypeList.Generic.Empty();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class TypeSubstituting extends AbstractBase&lt;RecordComponentDescription.InGenericShape&gt; {
+&nbsp;        private final TypeDescription.Generic declaringType;
+&nbsp;        private final List&lt;? extends RecordComponentDescription&gt; recordComponentDescriptions;
+&nbsp;        private final TypeDescription.Generic.Visitor&lt;? extends TypeDescription.Generic&gt; visitor;
+&nbsp;
+&nbsp;        public TypeSubstituting(TypeDescription.Generic declaringType, List&lt;? extends RecordComponentDescription&gt; recordComponentDescriptions, TypeDescription.Generic.Visitor&lt;? extends TypeDescription.Generic&gt; visitor) {
+&nbsp;            this.declaringType = declaringType;
+&nbsp;            this.recordComponentDescriptions = recordComponentDescriptions;
+&nbsp;            this.visitor = visitor;
+&nbsp;        }
+&nbsp;
+&nbsp;        public RecordComponentDescription.InGenericShape get(int index) {
+&nbsp;            return new RecordComponentDescription.TypeSubstituting(this.declaringType, (RecordComponentDescription)this.recordComponentDescriptions.get(index), this.visitor);
+&nbsp;        }
+&nbsp;
+&nbsp;        public int size() {
+&nbsp;            return this.recordComponentDescriptions.size();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public static class ForTokens extends AbstractBase&lt;RecordComponentDescription.InDefinedShape&gt; {</b>
+&nbsp;        private final TypeDescription typeDescription;
+&nbsp;        private final List&lt;? extends RecordComponentDescription.Token&gt; tokens;
+&nbsp;
+&nbsp;        public ForTokens(TypeDescription typeDescription, RecordComponentDescription.Token... token) {
+&nbsp;            this(typeDescription, Arrays.asList(token));
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForTokens(TypeDescription typeDescription, List&lt;? extends RecordComponentDescription.Token&gt; tokens) {
+&nbsp;            this.typeDescription = typeDescription;
+&nbsp;            this.tokens = tokens;
+&nbsp;        }
+&nbsp;
+&nbsp;        public RecordComponentDescription.InDefinedShape get(int index) {
+&nbsp;            return new RecordComponentDescription.Latent(this.typeDescription, (RecordComponentDescription.Token)this.tokens.get(index));
+&nbsp;        }
+&nbsp;
+&nbsp;        public int size() {
+&nbsp;            return this.tokens.size();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class Explicit&lt;S extends RecordComponentDescription&gt; extends AbstractBase&lt;S&gt; {
+&nbsp;        private final List&lt;? extends S&gt; recordComponents;
+&nbsp;
+&nbsp;        public Explicit(S... recordComponent) {
+&nbsp;            this(Arrays.asList(recordComponent));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Explicit(List&lt;? extends S&gt; recordComponents) {
+&nbsp;            this.recordComponents = recordComponents;
+&nbsp;        }
+&nbsp;
+&nbsp;        public S get(int index) {
+&nbsp;            return (RecordComponentDescription)this.recordComponents.get(index);
+&nbsp;        }
+&nbsp;
+&nbsp;        public int size() {
+&nbsp;            return this.recordComponents.size();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class ForLoadedRecordComponents extends AbstractBase&lt;RecordComponentDescription.InDefinedShape&gt; {
+&nbsp;        private final List&lt;?&gt; recordComponents;
+&nbsp;
+&nbsp;        protected ForLoadedRecordComponents(Object... recordComponent) {
+&nbsp;            this(Arrays.asList(recordComponent));
+&nbsp;        }
+&nbsp;
+&nbsp;        protected ForLoadedRecordComponents(List&lt;?&gt; recordComponents) {
+&nbsp;            this.recordComponents = recordComponents;
+&nbsp;        }
+&nbsp;
+&nbsp;        public RecordComponentDescription.InDefinedShape get(int index) {
+&nbsp;            return new RecordComponentDescription.ForLoadedRecordComponent((AnnotatedElement)this.recordComponents.get(index));
+&nbsp;        }
+&nbsp;
+&nbsp;        public int size() {
+&nbsp;            return this.recordComponents.size();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract static class AbstractBase&lt;S extends RecordComponentDescription&gt; extends FilterableList.AbstractBase&lt;S, RecordComponentList&lt;S&gt;&gt; implements RecordComponentList&lt;S&gt; {
+&nbsp;        public AbstractBase() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public ByteCodeElement.Token.TokenList&lt;RecordComponentDescription.Token&gt; asTokenList(ElementMatcher&lt;? super TypeDescription&gt; matcher) {
+&nbsp;            List&lt;RecordComponentDescription.Token&gt; tokens = new ArrayList(this.size());
+&nbsp;            Iterator var3 = this.iterator();
+&nbsp;
+&nbsp;            while(var3.hasNext()) {
+&nbsp;                RecordComponentDescription recordComponentDescription = (RecordComponentDescription)var3.next();
+&nbsp;                tokens.add(recordComponentDescription.asToken(matcher));
+&nbsp;            }
+&nbsp;
+&nbsp;            return new ByteCodeElement.Token.TokenList(tokens);
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeList.Generic asTypeList() {
+&nbsp;            List&lt;TypeDescription.Generic&gt; typeDescriptions = new ArrayList(this.size());
+&nbsp;            Iterator var2 = this.iterator();
+&nbsp;
+&nbsp;            while(var2.hasNext()) {
+&nbsp;                RecordComponentDescription recordComponentDescription = (RecordComponentDescription)var2.next();
+&nbsp;                typeDescriptions.add(recordComponentDescription.getType());
+&nbsp;            }
+&nbsp;
+&nbsp;            return new TypeList.Generic.Explicit(typeDescriptions);
+&nbsp;        }
+&nbsp;
+&nbsp;        public RecordComponentList&lt;RecordComponentDescription.InDefinedShape&gt; asDefined() {
+&nbsp;            List&lt;RecordComponentDescription.InDefinedShape&gt; recordComponents = new ArrayList(this.size());
+&nbsp;            Iterator var2 = this.iterator();
+&nbsp;
+&nbsp;            while(var2.hasNext()) {
+&nbsp;                RecordComponentDescription recordComponentDescription = (RecordComponentDescription)var2.next();
+&nbsp;                recordComponents.add(recordComponentDescription.asDefined());
+&nbsp;            }
+&nbsp;
+&nbsp;            return new Explicit(recordComponents);
+&nbsp;        }
+&nbsp;
+&nbsp;        protected RecordComponentList&lt;S&gt; wrap(List&lt;S&gt; values) {
+&nbsp;            return new Explicit(values);
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,226 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > IndependentAnnotationEngine</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.configuration</a>
+</div>
+
+<h1>Coverage Summary for Class: IndependentAnnotationEngine (org.mockito.internal.configuration)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">IndependentAnnotationEngine</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (25/25)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">IndependentAnnotationEngine$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (27/27)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.configuration;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import org.mockito.Captor;
+&nbsp;import org.mockito.Mock;
+&nbsp;import org.mockito.ScopedMock;
+&nbsp;import org.mockito.exceptions.base.MockitoException;
+&nbsp;import org.mockito.internal.configuration.plugins.Plugins;
+&nbsp;import org.mockito.internal.exceptions.Reporter;
+&nbsp;import org.mockito.plugins.AnnotationEngine;
+&nbsp;import org.mockito.plugins.MemberAccessor;
+&nbsp;
+&nbsp;public class IndependentAnnotationEngine implements AnnotationEngine {
+&nbsp;    private final Map&lt;Class&lt;? extends Annotation&gt;, FieldAnnotationProcessor&lt;?&gt;&gt; annotationProcessorMap = new HashMap();
+&nbsp;
+&nbsp;    public IndependentAnnotationEngine() {
+&nbsp;        this.registerAnnotationProcessor(Mock.class, new MockAnnotationProcessor());
+&nbsp;        this.registerAnnotationProcessor(Captor.class, new CaptorAnnotationProcessor());
+&nbsp;    }
+&nbsp;
+&nbsp;    private Object createMockFor(Annotation annotation, Field field) {
+&nbsp;        return this.forAnnotation(annotation).process(annotation, field);
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private &lt;A extends Annotation&gt; FieldAnnotationProcessor&lt;A&gt; forAnnotation(A annotation) {
+<b class="fc">&nbsp;        return this.annotationProcessorMap.containsKey(annotation.annotationType()) ? (FieldAnnotationProcessor)this.annotationProcessorMap.get(annotation.annotationType()) : new FieldAnnotationProcessor&lt;A&gt;() {</b>
+<b class="fc">&nbsp;            public Object process(A annotation, Field field) {</b>
+<b class="fc">&nbsp;                return null;</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    private &lt;A extends Annotation&gt; void registerAnnotationProcessor(Class&lt;A&gt; annotationClass, FieldAnnotationProcessor&lt;A&gt; fieldAnnotationProcessor) {
+&nbsp;        this.annotationProcessorMap.put(annotationClass, fieldAnnotationProcessor);
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public AutoCloseable process(Class&lt;?&gt; clazz, Object testInstance) {</b>
+<b class="fc">&nbsp;        List&lt;ScopedMock&gt; scopedMocks = new ArrayList();</b>
+&nbsp;        Field[] fields = clazz.getDeclaredFields();
+<b class="fc">&nbsp;        Field[] var5 = fields;</b>
+&nbsp;        int var6 = fields.length;
+&nbsp;
+<b class="fc">&nbsp;        for(int var7 = 0; var7 &lt; var6; ++var7) {</b>
+&nbsp;            Field field = var5[var7];
+&nbsp;            boolean alreadyAssigned = false;
+&nbsp;            Annotation[] var10 = field.getAnnotations();
+&nbsp;            int var11 = var10.length;
+&nbsp;
+&nbsp;            for(int var12 = 0; var12 &lt; var11; ++var12) {
+<b class="fc">&nbsp;                Annotation annotation = var10[var12];</b>
+&nbsp;                Object mock = this.createMockFor(annotation, field);
+&nbsp;                if (mock instanceof ScopedMock) {
+&nbsp;                    scopedMocks.add((ScopedMock)mock);
+&nbsp;                }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                if (mock != null) {</b>
+<b class="fc">&nbsp;                    this.throwIfAlreadyAssigned(field, alreadyAssigned);</b>
+<b class="fc">&nbsp;                    alreadyAssigned = true;</b>
+<b class="fc">&nbsp;                    MemberAccessor accessor = Plugins.getMemberAccessor();</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                    try {</b>
+&nbsp;                        accessor.set(field, testInstance, mock);
+&nbsp;                    } catch (Exception var19) {
+<b class="fc">&nbsp;                        Iterator var17 = scopedMocks.iterator();</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                        while(var17.hasNext()) {</b>
+<b class="fc">&nbsp;                            ScopedMock scopedMock = (ScopedMock)var17.next();</b>
+&nbsp;                            scopedMock.close();
+<b class="fc">&nbsp;                        }</b>
+&nbsp;
+&nbsp;                        throw new MockitoException(&quot;Problems setting field &quot; + field.getName() + &quot; annotated with &quot; + annotation, var19);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return () -&gt; {
+&nbsp;            Iterator var1 = scopedMocks.iterator();
+&nbsp;
+<b class="fc">&nbsp;            while(var1.hasNext()) {</b>
+&nbsp;                ScopedMock scopedMock = (ScopedMock)var1.next();
+&nbsp;                scopedMock.closeOnDemand();
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    void throwIfAlreadyAssigned(Field field, boolean alreadyAssigned) {
+&nbsp;        if (alreadyAssigned) {
+&nbsp;            throw Reporter.moreThanOneAnnotationNotAllowed(field.getName());
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:49</div>
+</div>
+</body>
+</html>

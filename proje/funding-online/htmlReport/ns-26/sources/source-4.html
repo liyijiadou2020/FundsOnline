@@ -1,0 +1,1342 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > InstrumentedType</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.dynamic.scaffold</a>
+</div>
+
+<h1>Coverage Summary for Class: InstrumentedType (net.bytebuddy.dynamic.scaffold)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">InstrumentedType$Default</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (57/57)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">InstrumentedType$Factory$Default</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">InstrumentedType$Factory$Default$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">InstrumentedType$Factory$Default$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (72/72)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.dynamic.scaffold;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.ClassFileVersion;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationDescription;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationList;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationValue;
+&nbsp;import net.bytebuddy.description.field.FieldDescription;
+&nbsp;import net.bytebuddy.description.field.FieldList;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.method.MethodList;
+&nbsp;import net.bytebuddy.description.method.ParameterDescription;
+&nbsp;import net.bytebuddy.description.modifier.ModifierContributor;
+&nbsp;import net.bytebuddy.description.modifier.ModifierContributor.Resolver;
+&nbsp;import net.bytebuddy.description.type.PackageDescription;
+&nbsp;import net.bytebuddy.description.type.RecordComponentDescription;
+&nbsp;import net.bytebuddy.description.type.RecordComponentList;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeList;
+&nbsp;import net.bytebuddy.description.type.TypeVariableToken;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.Generic;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.Generic.Visitor.Validator;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.Generic.Visitor.Substitutor.ForAttachment;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.Generic.Visitor.Substitutor.ForDetachment;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.Generic.Visitor.Validator.ForTypeAnnotations;
+&nbsp;import net.bytebuddy.description.type.TypeList.Generic.ForDetachedTypes;
+&nbsp;import net.bytebuddy.dynamic.TargetType;
+&nbsp;import net.bytebuddy.dynamic.Transformer;
+&nbsp;import net.bytebuddy.dynamic.scaffold.TypeInitializer.None;
+&nbsp;import net.bytebuddy.implementation.LoadedTypeInitializer;
+&nbsp;import net.bytebuddy.implementation.bytecode.ByteCodeAppender;
+&nbsp;import net.bytebuddy.matcher.ElementMatcher;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;import net.bytebuddy.utility.CompoundList;
+&nbsp;import net.bytebuddy.utility.JavaType;
+&nbsp;
+&nbsp;public interface InstrumentedType extends TypeDescription {
+&nbsp;    InstrumentedType withField(FieldDescription.Token var1);
+&nbsp;
+&nbsp;    InstrumentedType withAuxiliaryField(FieldDescription.Token var1, Object var2);
+&nbsp;
+&nbsp;    InstrumentedType withMethod(MethodDescription.Token var1);
+&nbsp;
+&nbsp;    InstrumentedType withRecordComponent(RecordComponentDescription.Token var1);
+&nbsp;
+&nbsp;    InstrumentedType withModifiers(int var1);
+&nbsp;
+&nbsp;    InstrumentedType withInterfaces(TypeList.Generic var1);
+&nbsp;
+&nbsp;    InstrumentedType withTypeVariable(TypeVariableToken var1);
+&nbsp;
+&nbsp;    InstrumentedType withAnnotations(List&lt;? extends AnnotationDescription&gt; var1);
+&nbsp;
+&nbsp;    InstrumentedType withNestHost(TypeDescription var1);
+&nbsp;
+&nbsp;    InstrumentedType withNestMembers(TypeList var1);
+&nbsp;
+&nbsp;    InstrumentedType withEnclosingType(TypeDescription var1);
+&nbsp;
+&nbsp;    InstrumentedType withEnclosingMethod(MethodDescription.InDefinedShape var1);
+&nbsp;
+&nbsp;    InstrumentedType withDeclaringType(@Nonnull(when = When.MAYBE) TypeDescription var1);
+&nbsp;
+&nbsp;    InstrumentedType withDeclaredTypes(TypeList var1);
+&nbsp;
+&nbsp;    InstrumentedType withPermittedSubclasses(@Nonnull(when = When.MAYBE) TypeList var1);
+&nbsp;
+&nbsp;    InstrumentedType withLocalClass(boolean var1);
+&nbsp;
+&nbsp;    InstrumentedType withAnonymousClass(boolean var1);
+&nbsp;
+&nbsp;    InstrumentedType withRecord(boolean var1);
+&nbsp;
+&nbsp;    InstrumentedType withInitializer(LoadedTypeInitializer var1);
+&nbsp;
+&nbsp;    InstrumentedType withInitializer(ByteCodeAppender var1);
+&nbsp;
+&nbsp;    LoadedTypeInitializer getLoadedTypeInitializer();
+&nbsp;
+&nbsp;    TypeInitializer getTypeInitializer();
+&nbsp;
+&nbsp;    TypeDescription validated();
+&nbsp;
+&nbsp;    public static class Frozen extends TypeDescription.AbstractBase.OfSimpleType implements WithFlexibleName {
+&nbsp;        private final TypeDescription typeDescription;
+&nbsp;        private final LoadedTypeInitializer loadedTypeInitializer;
+&nbsp;
+&nbsp;        protected Frozen(TypeDescription typeDescription, LoadedTypeInitializer loadedTypeInitializer) {
+&nbsp;            this.typeDescription = typeDescription;
+&nbsp;            this.loadedTypeInitializer = loadedTypeInitializer;
+&nbsp;        }
+&nbsp;
+&nbsp;        public AnnotationList getDeclaredAnnotations() {
+&nbsp;            return this.typeDescription.getDeclaredAnnotations();
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getModifiers() {
+&nbsp;            return this.typeDescription.getModifiers();
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeList.Generic getTypeVariables() {
+&nbsp;            return this.typeDescription.getTypeVariables();
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getName() {
+&nbsp;            return this.typeDescription.getName();
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        public TypeDescription.Generic getSuperClass() {
+&nbsp;            return this.typeDescription.getSuperClass();
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeList.Generic getInterfaces() {
+&nbsp;            return this.typeDescription.getInterfaces();
+&nbsp;        }
+&nbsp;
+&nbsp;        public FieldList&lt;FieldDescription.InDefinedShape&gt; getDeclaredFields() {
+&nbsp;            return this.typeDescription.getDeclaredFields();
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodList&lt;MethodDescription.InDefinedShape&gt; getDeclaredMethods() {
+&nbsp;            return this.typeDescription.getDeclaredMethods();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isAnonymousType() {
+&nbsp;            return this.typeDescription.isAnonymousType();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isLocalType() {
+&nbsp;            return this.typeDescription.isLocalType();
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        public PackageDescription getPackage() {
+&nbsp;            return this.typeDescription.getPackage();
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        public TypeDescription getEnclosingType() {
+&nbsp;            return this.typeDescription.getEnclosingType();
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        public TypeDescription getDeclaringType() {
+&nbsp;            return this.typeDescription.getDeclaringType();
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeList getDeclaredTypes() {
+&nbsp;            return this.typeDescription.getDeclaredTypes();
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        public MethodDescription.InDefinedShape getEnclosingMethod() {
+&nbsp;            return this.typeDescription.getEnclosingMethod();
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        public String getGenericSignature() {
+&nbsp;            return this.typeDescription.getGenericSignature();
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getActualModifiers(boolean superFlag) {
+&nbsp;            return this.typeDescription.getActualModifiers(superFlag);
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeDescription getNestHost() {
+&nbsp;            return this.typeDescription.getNestHost();
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeList getNestMembers() {
+&nbsp;            return this.typeDescription.getNestMembers();
+&nbsp;        }
+&nbsp;
+&nbsp;        public RecordComponentList&lt;RecordComponentDescription.InDefinedShape&gt; getRecordComponents() {
+&nbsp;            return this.typeDescription.getRecordComponents();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isRecord() {
+&nbsp;            return this.typeDescription.isRecord();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isSealed() {
+&nbsp;            return this.typeDescription.isSealed();
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeList getPermittedSubtypes() {
+&nbsp;            return this.typeDescription.getPermittedSubtypes();
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withField(FieldDescription.Token token) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot define field for frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withAuxiliaryField(FieldDescription.Token token, Object value) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot define auxiliary field for frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withMethod(MethodDescription.Token token) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot define method for frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withRecordComponent(RecordComponentDescription.Token token) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot define record component for frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withModifiers(int modifiers) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot change modifiers for frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withInterfaces(TypeList.Generic interfaceTypes) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot add interfaces for frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withTypeVariable(TypeVariableToken typeVariable) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot define type variable for frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withAnnotations(List&lt;? extends AnnotationDescription&gt; annotationDescriptions) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot add annotation to frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withNestHost(TypeDescription nestHost) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot set nest host of frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withNestMembers(TypeList nestMembers) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot add nest members to frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withEnclosingType(@Nonnull(when = When.MAYBE) TypeDescription enclosingType) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot set enclosing type of frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withEnclosingMethod(MethodDescription.InDefinedShape enclosingMethod) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot set enclosing method of frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withDeclaringType(@Nonnull(when = When.MAYBE) TypeDescription declaringType) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot add declaring type to frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withDeclaredTypes(TypeList declaredTypes) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot add declared types to frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withPermittedSubclasses(@Nonnull(when = When.MAYBE) TypeList permittedSubclasses) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot add permitted subclasses to frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withLocalClass(boolean localClass) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot define local class state for frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withAnonymousClass(boolean anonymousClass) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot define anonymous class state for frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withRecord(boolean record) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot define record state for frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withInitializer(LoadedTypeInitializer loadedTypeInitializer) {
+&nbsp;            return new Frozen(this.typeDescription, new LoadedTypeInitializer.Compound(new LoadedTypeInitializer[]{this.loadedTypeInitializer, loadedTypeInitializer}));
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withInitializer(ByteCodeAppender byteCodeAppender) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot add initializer to frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withName(String name) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot change name of frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withTypeVariables(ElementMatcher&lt;? super TypeDescription.Generic&gt; matcher, Transformer&lt;TypeVariableToken&gt; transformer) {
+&nbsp;            throw new IllegalStateException(&quot;Cannot add type variables of frozen type: &quot; + this.typeDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public LoadedTypeInitializer getLoadedTypeInitializer() {
+&nbsp;            return this.loadedTypeInitializer;
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeInitializer getTypeInitializer() {
+&nbsp;            return None.INSTANCE;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        public ClassFileVersion getClassFileVersion() {
+&nbsp;            return this.typeDescription.getClassFileVersion();
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeDescription validated() {
+&nbsp;            return this.typeDescription;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class Default extends TypeDescription.AbstractBase.OfSimpleType implements WithFlexibleName {
+&nbsp;        private static final Set&lt;String&gt; KEYWORDS = new HashSet(Arrays.asList(&quot;abstract&quot;, &quot;continue&quot;, &quot;for&quot;, &quot;new&quot;, &quot;switch&quot;, &quot;assert&quot;, &quot;default&quot;, &quot;goto&quot;, &quot;package&quot;, &quot;synchronized&quot;, &quot;boolean&quot;, &quot;do&quot;, &quot;if&quot;, &quot;private&quot;, &quot;this&quot;, &quot;break&quot;, &quot;double&quot;, &quot;implements&quot;, &quot;protected&quot;, &quot;throw&quot;, &quot;byte&quot;, &quot;else&quot;, &quot;import&quot;, &quot;public&quot;, &quot;throws&quot;, &quot;case&quot;, &quot;enum&quot;, &quot;instanceof&quot;, &quot;return&quot;, &quot;transient&quot;, &quot;catch&quot;, &quot;extends&quot;, &quot;int&quot;, &quot;short&quot;, &quot;try&quot;, &quot;char&quot;, &quot;final&quot;, &quot;interface&quot;, &quot;static&quot;, &quot;void&quot;, &quot;class&quot;, &quot;finally&quot;, &quot;long&quot;, &quot;strictfp&quot;, &quot;volatile&quot;, &quot;const&quot;, &quot;float&quot;, &quot;native&quot;, &quot;super&quot;, &quot;while&quot;));
+&nbsp;        private final String name;
+&nbsp;        private final int modifiers;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        private final TypeDescription.Generic superClass;
+&nbsp;        private final List&lt;? extends TypeVariableToken&gt; typeVariables;
+&nbsp;        private final List&lt;? extends TypeDescription.Generic&gt; interfaceTypes;
+&nbsp;        private final List&lt;? extends FieldDescription.Token&gt; fieldTokens;
+&nbsp;        private final Map&lt;String, Object&gt; auxiliaryFields;
+&nbsp;        private final List&lt;? extends MethodDescription.Token&gt; methodTokens;
+&nbsp;        private final List&lt;? extends RecordComponentDescription.Token&gt; recordComponentTokens;
+&nbsp;        private final List&lt;? extends AnnotationDescription&gt; annotationDescriptions;
+&nbsp;        private final TypeInitializer typeInitializer;
+&nbsp;        private final LoadedTypeInitializer loadedTypeInitializer;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        private final TypeDescription declaringType;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        private final MethodDescription.InDefinedShape enclosingMethod;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        private final TypeDescription enclosingType;
+&nbsp;        private final List&lt;? extends TypeDescription&gt; declaredTypes;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        private final List&lt;? extends TypeDescription&gt; permittedSubclasses;
+&nbsp;        private final boolean anonymousClass;
+&nbsp;        private final boolean localClass;
+&nbsp;        private final boolean record;
+&nbsp;        private final TypeDescription nestHost;
+&nbsp;        private final List&lt;? extends TypeDescription&gt; nestMembers;
+&nbsp;
+&nbsp;        protected Default(String name, int modifiers, @Nonnull(when = When.MAYBE) TypeDescription.Generic superClass, List&lt;? extends TypeVariableToken&gt; typeVariables, List&lt;? extends TypeDescription.Generic&gt; interfaceTypes, List&lt;? extends FieldDescription.Token&gt; fieldTokens, Map&lt;String, Object&gt; auxiliaryFieldValues, List&lt;? extends MethodDescription.Token&gt; methodTokens, List&lt;? extends RecordComponentDescription.Token&gt; recordComponentTokens, List&lt;? extends AnnotationDescription&gt; annotationDescriptions, TypeInitializer typeInitializer, LoadedTypeInitializer loadedTypeInitializer, @Nonnull(when = When.MAYBE) TypeDescription declaringType, @Nonnull(when = When.MAYBE) MethodDescription.InDefinedShape enclosingMethod, @Nonnull(when = When.MAYBE) TypeDescription enclosingType, List&lt;? extends TypeDescription&gt; declaredTypes, @Nonnull(when = When.MAYBE) List&lt;? extends TypeDescription&gt; permittedSubclasses, boolean anonymousClass, boolean localClass, boolean record, TypeDescription nestHost, List&lt;? extends TypeDescription&gt; nestMembers) {
+&nbsp;            this.name = name;
+&nbsp;            this.modifiers = modifiers;
+&nbsp;            this.typeVariables = typeVariables;
+&nbsp;            this.superClass = superClass;
+&nbsp;            this.interfaceTypes = interfaceTypes;
+&nbsp;            this.fieldTokens = fieldTokens;
+&nbsp;            this.auxiliaryFields = auxiliaryFieldValues;
+&nbsp;            this.methodTokens = methodTokens;
+&nbsp;            this.recordComponentTokens = recordComponentTokens;
+&nbsp;            this.annotationDescriptions = annotationDescriptions;
+&nbsp;            this.typeInitializer = typeInitializer;
+&nbsp;            this.loadedTypeInitializer = loadedTypeInitializer;
+&nbsp;            this.declaringType = declaringType;
+&nbsp;            this.enclosingMethod = enclosingMethod;
+&nbsp;            this.enclosingType = enclosingType;
+&nbsp;            this.declaredTypes = declaredTypes;
+&nbsp;            this.permittedSubclasses = permittedSubclasses;
+&nbsp;            this.anonymousClass = anonymousClass;
+&nbsp;            this.localClass = localClass;
+&nbsp;            this.record = record;
+&nbsp;            this.nestHost = nestHost;
+&nbsp;            this.nestMembers = nestMembers;
+&nbsp;        }
+&nbsp;
+&nbsp;        public static InstrumentedType of(String name, TypeDescription.Generic superClass, ModifierContributor.ForType... modifierContributor) {
+&nbsp;            return of(name, superClass, Resolver.of(modifierContributor).resolve());
+&nbsp;        }
+&nbsp;
+&nbsp;        public static InstrumentedType of(String name, TypeDescription.Generic superClass, int modifiers) {
+&nbsp;            return InstrumentedType.Factory.Default.MODIFIABLE.subclass(name, modifiers, superClass);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withModifiers(int modifiers) {
+&nbsp;            return new Default(this.name, modifiers, this.superClass, this.typeVariables, this.interfaceTypes, this.fieldTokens, this.auxiliaryFields, this.methodTokens, this.recordComponentTokens, this.annotationDescriptions, this.typeInitializer, this.loadedTypeInitializer, this.declaringType, this.enclosingMethod, this.enclosingType, this.declaredTypes, this.permittedSubclasses, this.anonymousClass, this.localClass, this.record, this.nestHost, this.nestMembers);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withField(FieldDescription.Token token) {
+&nbsp;            return new Default(this.name, this.modifiers, this.superClass, this.typeVariables, this.interfaceTypes, CompoundList.of(this.fieldTokens, token.accept(ForDetachment.of(this))), this.auxiliaryFields, this.methodTokens, this.recordComponentTokens, this.annotationDescriptions, this.typeInitializer, this.loadedTypeInitializer, this.declaringType, this.enclosingMethod, this.enclosingType, this.declaredTypes, this.permittedSubclasses, this.anonymousClass, this.localClass, this.record, this.nestHost, this.nestMembers);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withAuxiliaryField(FieldDescription.Token token, Object value) {
+&nbsp;            Map&lt;String, Object&gt; auxiliaryFields = new HashMap(this.auxiliaryFields);
+&nbsp;            Object previous = auxiliaryFields.put(token.getName(), value);
+&nbsp;            if (previous != null) {
+&nbsp;                if (previous == value) {
+&nbsp;                    return this;
+&nbsp;                } else {
+&nbsp;                    throw new IllegalStateException(&quot;Field &quot; + token.getName() + &quot; for &quot; + this + &quot; already mapped to &quot; + previous + &quot; and not &quot; + value);
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                return new Default(this.name, this.modifiers, this.superClass, this.typeVariables, this.interfaceTypes, CompoundList.of(this.fieldTokens, token.accept(ForDetachment.of(this))), auxiliaryFields, this.methodTokens, this.recordComponentTokens, this.annotationDescriptions, this.typeInitializer, new LoadedTypeInitializer.Compound(new LoadedTypeInitializer[]{this.loadedTypeInitializer, new LoadedTypeInitializer.ForStaticField(token.getName(), value)}), this.declaringType, this.enclosingMethod, this.enclosingType, this.declaredTypes, this.permittedSubclasses, this.anonymousClass, this.localClass, this.record, this.nestHost, this.nestMembers);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public WithFlexibleName withMethod(MethodDescription.Token token) {</b>
+&nbsp;            return new Default(this.name, this.modifiers, this.superClass, this.typeVariables, this.interfaceTypes, this.fieldTokens, this.auxiliaryFields, CompoundList.of(this.methodTokens, token.accept(ForDetachment.of(this))), this.recordComponentTokens, this.annotationDescriptions, this.typeInitializer, this.loadedTypeInitializer, this.declaringType, this.enclosingMethod, this.enclosingType, this.declaredTypes, this.permittedSubclasses, this.anonymousClass, this.localClass, this.record, this.nestHost, this.nestMembers);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withRecordComponent(RecordComponentDescription.Token token) {
+<b class="fc">&nbsp;            return new Default(this.name, this.modifiers, this.superClass, this.typeVariables, this.interfaceTypes, this.fieldTokens, this.auxiliaryFields, this.methodTokens, CompoundList.of(this.recordComponentTokens, token.accept(ForDetachment.of(this))), this.annotationDescriptions, this.typeInitializer, this.loadedTypeInitializer, this.declaringType, this.enclosingMethod, this.enclosingType, this.declaredTypes, this.permittedSubclasses, this.anonymousClass, this.localClass, true, this.nestHost, this.nestMembers);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withInterfaces(TypeList.Generic interfaceTypes) {
+&nbsp;            return new Default(this.name, this.modifiers, this.superClass, this.typeVariables, CompoundList.of(this.interfaceTypes, interfaceTypes.accept(ForDetachment.of(this))), this.fieldTokens, this.auxiliaryFields, this.methodTokens, this.recordComponentTokens, this.annotationDescriptions, this.typeInitializer, this.loadedTypeInitializer, this.declaringType, this.enclosingMethod, this.enclosingType, this.declaredTypes, this.permittedSubclasses, this.anonymousClass, this.localClass, this.record, this.nestHost, this.nestMembers);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withAnnotations(List&lt;? extends AnnotationDescription&gt; annotationDescriptions) {
+&nbsp;            return new Default(this.name, this.modifiers, this.superClass, this.typeVariables, this.interfaceTypes, this.fieldTokens, this.auxiliaryFields, this.methodTokens, this.recordComponentTokens, CompoundList.of(this.annotationDescriptions, annotationDescriptions), this.typeInitializer, this.loadedTypeInitializer, this.declaringType, this.enclosingMethod, this.enclosingType, this.declaredTypes, this.permittedSubclasses, this.anonymousClass, this.localClass, this.record, this.nestHost, this.nestMembers);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withNestHost(TypeDescription nestHost) {
+&nbsp;            return new Default(this.name, this.modifiers, this.superClass, this.typeVariables, this.interfaceTypes, this.fieldTokens, this.auxiliaryFields, this.methodTokens, this.recordComponentTokens, this.annotationDescriptions, this.typeInitializer, this.loadedTypeInitializer, this.declaringType, this.enclosingMethod, this.enclosingType, this.declaredTypes, this.permittedSubclasses, this.anonymousClass, this.localClass, this.record, nestHost.equals(this) ? TargetType.DESCRIPTION : nestHost, Collections.emptyList());
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withNestMembers(TypeList nestMembers) {
+&nbsp;            return new Default(this.name, this.modifiers, this.superClass, this.typeVariables, this.interfaceTypes, this.fieldTokens, this.auxiliaryFields, this.methodTokens, this.recordComponentTokens, this.annotationDescriptions, this.typeInitializer, this.loadedTypeInitializer, this.declaringType, this.enclosingMethod, this.enclosingType, this.declaredTypes, this.permittedSubclasses, this.anonymousClass, this.localClass, this.record, TargetType.DESCRIPTION, CompoundList.of(this.nestMembers, nestMembers));
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withEnclosingType(@Nonnull(when = When.MAYBE) TypeDescription enclosingType) {
+&nbsp;            return new Default(this.name, this.modifiers, this.superClass, this.typeVariables, this.interfaceTypes, this.fieldTokens, this.auxiliaryFields, this.methodTokens, this.recordComponentTokens, this.annotationDescriptions, this.typeInitializer, this.loadedTypeInitializer, this.declaringType, MethodDescription.UNDEFINED, enclosingType, this.declaredTypes, this.permittedSubclasses, this.anonymousClass, this.localClass, this.record, this.nestHost, this.nestMembers);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withEnclosingMethod(MethodDescription.InDefinedShape enclosingMethod) {
+&nbsp;            return new Default(this.name, this.modifiers, this.superClass, this.typeVariables, this.interfaceTypes, this.fieldTokens, this.auxiliaryFields, this.methodTokens, this.recordComponentTokens, this.annotationDescriptions, this.typeInitializer, this.loadedTypeInitializer, this.declaringType, enclosingMethod, enclosingMethod.getDeclaringType(), this.declaredTypes, this.permittedSubclasses, this.anonymousClass, this.localClass, this.record, this.nestHost, this.nestMembers);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withDeclaringType(@Nonnull(when = When.MAYBE) TypeDescription declaringType) {
+&nbsp;            return new Default(this.name, this.modifiers, this.superClass, this.typeVariables, this.interfaceTypes, this.fieldTokens, this.auxiliaryFields, this.methodTokens, this.recordComponentTokens, this.annotationDescriptions, this.typeInitializer, this.loadedTypeInitializer, declaringType, this.enclosingMethod, this.enclosingType, this.declaredTypes, this.permittedSubclasses, this.anonymousClass, this.localClass, this.record, this.nestHost, this.nestMembers);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withDeclaredTypes(TypeList declaredTypes) {
+&nbsp;            return new Default(this.name, this.modifiers, this.superClass, this.typeVariables, this.interfaceTypes, this.fieldTokens, this.auxiliaryFields, this.methodTokens, this.recordComponentTokens, this.annotationDescriptions, this.typeInitializer, this.loadedTypeInitializer, this.declaringType, this.enclosingMethod, this.enclosingType, CompoundList.of(this.declaredTypes, declaredTypes), this.permittedSubclasses, this.anonymousClass, this.localClass, this.record, this.nestHost, this.nestMembers);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withPermittedSubclasses(@Nonnull(when = When.MAYBE) TypeList permittedSubclasses) {
+&nbsp;            return new Default(this.name, this.modifiers, this.superClass, this.typeVariables, this.interfaceTypes, this.fieldTokens, this.auxiliaryFields, this.methodTokens, this.recordComponentTokens, this.annotationDescriptions, this.typeInitializer, this.loadedTypeInitializer, this.declaringType, this.enclosingMethod, this.enclosingType, this.declaredTypes, (List)(permittedSubclasses != null &amp;&amp; this.permittedSubclasses != null ? CompoundList.of(this.permittedSubclasses, permittedSubclasses) : permittedSubclasses), this.anonymousClass, this.localClass, this.record, this.nestHost, this.nestMembers);
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public WithFlexibleName withTypeVariable(TypeVariableToken typeVariable) {
+&nbsp;            return new Default(this.name, this.modifiers, this.superClass, CompoundList.of(this.typeVariables, typeVariable.accept(ForDetachment.of(this))), this.interfaceTypes, this.fieldTokens, this.auxiliaryFields, this.methodTokens, this.recordComponentTokens, this.annotationDescriptions, this.typeInitializer, this.loadedTypeInitializer, this.declaringType, this.enclosingMethod, this.enclosingType, this.declaredTypes, this.permittedSubclasses, this.anonymousClass, this.localClass, this.record, this.nestHost, this.nestMembers);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withName(String name) {
+&nbsp;            return new Default(name, this.modifiers, this.superClass, this.typeVariables, this.interfaceTypes, this.fieldTokens, this.auxiliaryFields, this.methodTokens, this.recordComponentTokens, this.annotationDescriptions, this.typeInitializer, this.loadedTypeInitializer, this.declaringType, this.enclosingMethod, this.enclosingType, this.declaredTypes, this.permittedSubclasses, this.anonymousClass, this.localClass, this.record, this.nestHost, this.nestMembers);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withTypeVariables(ElementMatcher&lt;? super TypeDescription.Generic&gt; matcher, Transformer&lt;TypeVariableToken&gt; transformer) {
+<b class="fc">&nbsp;            List&lt;TypeVariableToken&gt; typeVariables = new ArrayList(this.typeVariables.size());</b>
+&nbsp;            int index = 0;
+&nbsp;            Iterator var5 = this.typeVariables.iterator();
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            while(var5.hasNext()) {</b>
+<b class="fc">&nbsp;                TypeVariableToken typeVariableToken = (TypeVariableToken)var5.next();</b>
+<b class="fc">&nbsp;                typeVariables.add(matcher.matches(this.getTypeVariables().get(index++)) ? (TypeVariableToken)transformer.transform(this, typeVariableToken) : typeVariableToken);</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            return new Default(this.name, this.modifiers, this.superClass, typeVariables, this.interfaceTypes, this.fieldTokens, this.auxiliaryFields, this.methodTokens, this.recordComponentTokens, this.annotationDescriptions, this.typeInitializer, this.loadedTypeInitializer, this.declaringType, this.enclosingMethod, this.enclosingType, this.declaredTypes, this.permittedSubclasses, this.anonymousClass, this.localClass, this.record, this.nestHost, this.nestMembers);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withLocalClass(boolean localClass) {
+&nbsp;            return new Default(this.name, this.modifiers, this.superClass, this.typeVariables, this.interfaceTypes, this.fieldTokens, this.auxiliaryFields, this.methodTokens, this.recordComponentTokens, this.annotationDescriptions, this.typeInitializer, this.loadedTypeInitializer, this.declaringType, this.enclosingMethod, this.enclosingType, this.declaredTypes, this.permittedSubclasses, false, localClass, this.record, this.nestHost, this.nestMembers);
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        public WithFlexibleName withAnonymousClass(boolean anonymousClass) {
+&nbsp;            return new Default(this.name, this.modifiers, this.superClass, this.typeVariables, this.interfaceTypes, this.fieldTokens, this.auxiliaryFields, this.methodTokens, this.recordComponentTokens, this.annotationDescriptions, this.typeInitializer, this.loadedTypeInitializer, this.declaringType, this.enclosingMethod, this.enclosingType, this.declaredTypes, this.permittedSubclasses, anonymousClass, false, this.record, this.nestHost, this.nestMembers);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withRecord(boolean record) {
+<b class="fc">&nbsp;            return new Default(this.name, this.modifiers, this.superClass, this.typeVariables, this.interfaceTypes, this.fieldTokens, this.auxiliaryFields, this.methodTokens, record ? this.recordComponentTokens : Collections.emptyList(), this.annotationDescriptions, this.typeInitializer, this.loadedTypeInitializer, this.declaringType, this.enclosingMethod, this.enclosingType, this.declaredTypes, this.permittedSubclasses, this.anonymousClass, this.localClass, record, this.nestHost, this.nestMembers);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withInitializer(LoadedTypeInitializer loadedTypeInitializer) {
+&nbsp;            return new Default(this.name, this.modifiers, this.superClass, this.typeVariables, this.interfaceTypes, this.fieldTokens, this.auxiliaryFields, this.methodTokens, this.recordComponentTokens, this.annotationDescriptions, this.typeInitializer, new LoadedTypeInitializer.Compound(new LoadedTypeInitializer[]{this.loadedTypeInitializer, loadedTypeInitializer}), this.declaringType, this.enclosingMethod, this.enclosingType, this.declaredTypes, this.permittedSubclasses, this.anonymousClass, this.localClass, this.record, this.nestHost, this.nestMembers);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithFlexibleName withInitializer(ByteCodeAppender byteCodeAppender) {
+&nbsp;            return new Default(this.name, this.modifiers, this.superClass, this.typeVariables, this.interfaceTypes, this.fieldTokens, this.auxiliaryFields, this.methodTokens, this.recordComponentTokens, this.annotationDescriptions, this.typeInitializer.expandWith(byteCodeAppender), this.loadedTypeInitializer, this.declaringType, this.enclosingMethod, this.enclosingType, this.declaredTypes, this.permittedSubclasses, this.anonymousClass, this.localClass, this.record, this.nestHost, this.nestMembers);
+&nbsp;        }
+&nbsp;
+&nbsp;        public LoadedTypeInitializer getLoadedTypeInitializer() {
+&nbsp;            return this.loadedTypeInitializer;
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public TypeInitializer getTypeInitializer() {
+&nbsp;            return this.typeInitializer;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        public MethodDescription.InDefinedShape getEnclosingMethod() {
+&nbsp;            return this.enclosingMethod;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        public TypeDescription getEnclosingType() {
+&nbsp;            return this.enclosingType;
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeList getDeclaredTypes() {
+&nbsp;            return new TypeList.Explicit(this.declaredTypes);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isAnonymousType() {
+&nbsp;            return this.anonymousClass;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isLocalType() {
+&nbsp;            return this.localClass;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        public PackageDescription getPackage() {
+&nbsp;            int packageIndex = this.name.lastIndexOf(46);
+&nbsp;            return (PackageDescription)(packageIndex == -1 ? PackageDescription.UNDEFINED : new PackageDescription.Simple(this.name.substring(0, packageIndex)));
+&nbsp;        }
+&nbsp;
+&nbsp;        public AnnotationList getDeclaredAnnotations() {
+&nbsp;            return new AnnotationList.Explicit(this.annotationDescriptions);
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        public TypeDescription getDeclaringType() {
+&nbsp;            return this.declaringType;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        public TypeDescription.Generic getSuperClass() {
+&nbsp;            return (TypeDescription.Generic)(this.superClass == null ? Generic.UNDEFINED : new TypeDescription.Generic.LazyProjection.WithResolvedErasure(this.superClass, ForAttachment.of(this)));
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeList.Generic getInterfaces() {
+&nbsp;            return new TypeList.Generic.ForDetachedTypes.WithResolvedErasure(this.interfaceTypes, ForAttachment.of(this));
+&nbsp;        }
+&nbsp;
+&nbsp;        public FieldList&lt;FieldDescription.InDefinedShape&gt; getDeclaredFields() {
+&nbsp;            return new FieldList.ForTokens(this, this.fieldTokens);
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodList&lt;MethodDescription.InDefinedShape&gt; getDeclaredMethods() {
+&nbsp;            return new MethodList.ForTokens(this, this.methodTokens);
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeList.Generic getTypeVariables() {
+&nbsp;            return ForDetachedTypes.attachVariables(this, this.typeVariables);
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getModifiers() {
+&nbsp;            return this.modifiers;
+&nbsp;        }
+&nbsp;
+&nbsp;        public String getName() {
+&nbsp;            return this.name;
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeDescription getNestHost() {
+&nbsp;            return (TypeDescription)(this.nestHost.represents(TargetType.class) ? this : this.nestHost);
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeList getNestMembers() {
+&nbsp;            return (TypeList)(this.nestHost.represents(TargetType.class) ? new TypeList.Explicit(CompoundList.of(this, this.nestMembers)) : this.nestHost.getNestMembers());
+&nbsp;        }
+&nbsp;
+&nbsp;        public RecordComponentList&lt;RecordComponentDescription.InDefinedShape&gt; getRecordComponents() {
+&nbsp;            return new RecordComponentList.ForTokens(this, this.recordComponentTokens);
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressFBWarnings(
+&nbsp;            value = {&quot;NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE&quot;},
+&nbsp;            justification = &quot;Assuming super class for given instance.&quot;
+&nbsp;        )
+&nbsp;        public boolean isRecord() {
+&nbsp;            return this.record &amp;&amp; this.superClass != null &amp;&amp; this.getSuperClass().asErasure().equals(JavaType.RECORD.getTypeStub());
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isSealed() {
+&nbsp;            return this.permittedSubclasses != null;
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeList getPermittedSubtypes() {
+&nbsp;            return (TypeList)(this.permittedSubclasses == null ? new TypeList.Empty() : new TypeList.Explicit(this.permittedSubclasses));
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeDescription validated() {
+&nbsp;            if (!isValidIdentifier(this.getName().split(&quot;\\.&quot;))) {
+&nbsp;                throw new IllegalStateException(&quot;Illegal type name: &quot; + this.getName() + &quot; for &quot; + this);
+&nbsp;            } else if ((this.getModifiers() &amp; -161312) != 0) {
+&nbsp;                throw new IllegalStateException(&quot;Illegal modifiers &quot; + this.getModifiers() + &quot; for &quot; + this);
+&nbsp;            } else if (this.isPackageType() &amp;&amp; this.getModifiers() != 5632) {
+&nbsp;                throw new IllegalStateException(&quot;Illegal modifiers &quot; + this.getModifiers() + &quot; for package &quot; + this);
+&nbsp;            } else {
+&nbsp;                TypeDescription.Generic superClass = this.getSuperClass();
+&nbsp;                if (superClass != null) {
+&nbsp;                    if (!(Boolean)superClass.accept(Validator.SUPER_CLASS)) {
+&nbsp;                        throw new IllegalStateException(&quot;Illegal super class &quot; + superClass + &quot; for &quot; + this);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (!(Boolean)superClass.accept(ForTypeAnnotations.INSTANCE)) {
+&nbsp;                        throw new IllegalStateException(&quot;Illegal type annotations on super class &quot; + superClass + &quot; for &quot; + this);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (!superClass.asErasure().isVisibleTo(this)) {
+&nbsp;                        throw new IllegalStateException(&quot;Invisible super type &quot; + superClass + &quot; for &quot; + this);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                Set&lt;TypeDescription&gt; interfaceErasures = new HashSet();
+&nbsp;                Iterator var3 = this.getInterfaces().iterator();
+&nbsp;
+&nbsp;                while(var3.hasNext()) {
+&nbsp;                    TypeDescription.Generic interfaceType = (TypeDescription.Generic)var3.next();
+&nbsp;                    if (!(Boolean)interfaceType.accept(Validator.INTERFACE)) {
+&nbsp;                        throw new IllegalStateException(&quot;Illegal interface &quot; + interfaceType + &quot; for &quot; + this);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (!(Boolean)interfaceType.accept(ForTypeAnnotations.INSTANCE)) {
+&nbsp;                        throw new IllegalStateException(&quot;Illegal type annotations on interface &quot; + interfaceType + &quot; for &quot; + this);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (!interfaceErasures.add(interfaceType.asErasure())) {
+&nbsp;                        throw new IllegalStateException(&quot;Already implemented interface &quot; + interfaceType + &quot; for &quot; + this);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (!interfaceType.asErasure().isVisibleTo(this)) {
+&nbsp;                        throw new IllegalStateException(&quot;Invisible interface type &quot; + interfaceType + &quot; for &quot; + this);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                TypeList.Generic typeVariables = this.getTypeVariables();
+&nbsp;                if (!typeVariables.isEmpty() &amp;&amp; this.isAssignableTo(Throwable.class)) {
+&nbsp;                    throw new IllegalStateException(&quot;Cannot define throwable &quot; + this + &quot; to be generic&quot;);
+&nbsp;                } else {
+&nbsp;                    Set&lt;String&gt; typeVariableNames = new HashSet();
+&nbsp;                    Iterator var5 = typeVariables.iterator();
+&nbsp;
+&nbsp;                    Iterator var10;
+&nbsp;                    while(var5.hasNext()) {
+&nbsp;                        TypeDescription.Generic typeVariable = (TypeDescription.Generic)var5.next();
+&nbsp;                        String variableSymbol = typeVariable.getSymbol();
+&nbsp;                        if (!typeVariableNames.add(variableSymbol)) {
+&nbsp;                            throw new IllegalStateException(&quot;Duplicate type variable symbol &#39;&quot; + typeVariable + &quot;&#39; for &quot; + this);
+&nbsp;                        }
+&nbsp;
+<b class="fc">&nbsp;                        if (!isValidIdentifier(variableSymbol)) {</b>
+<b class="fc">&nbsp;                            throw new IllegalStateException(&quot;Illegal type variable name &#39;&quot; + typeVariable + &quot;&#39; for &quot; + this);</b>
+<b class="fc">&nbsp;                        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                        if (!ForTypeAnnotations.ofFormalTypeVariable(typeVariable)) {</b>
+<b class="fc">&nbsp;                            throw new IllegalStateException(&quot;Illegal type annotation on &#39;&quot; + typeVariable + &quot;&#39; for &quot; + this);</b>
+<b class="fc">&nbsp;                        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                        boolean interfaceBound = false;</b>
+<b class="fc">&nbsp;                        Set&lt;TypeDescription.Generic&gt; bounds = new HashSet();</b>
+<b class="fc">&nbsp;                        var10 = typeVariable.getUpperBounds().iterator();</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                        while(true) {</b>
+<b class="fc">&nbsp;                            if (var10.hasNext()) {</b>
+<b class="fc">&nbsp;                                TypeDescription.Generic bound = (TypeDescription.Generic)var10.next();</b>
+<b class="fc">&nbsp;                                if (!(Boolean)bound.accept(Validator.TYPE_VARIABLE)) {</b>
+<b class="fc">&nbsp;                                    throw new IllegalStateException(&quot;Illegal type variable bound &quot; + bound + &quot; of &quot; + typeVariable + &quot; for &quot; + this);</b>
+<b class="fc">&nbsp;                                }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                                if (!(Boolean)bound.accept(ForTypeAnnotations.INSTANCE)) {</b>
+<b class="fc">&nbsp;                                    throw new IllegalStateException(&quot;Illegal type annotations on type variable &quot; + bound + &quot; for &quot; + this);</b>
+<b class="fc">&nbsp;                                }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;                                if (!bounds.add(bound)) {
+&nbsp;                                    throw new IllegalStateException(&quot;Duplicate bound &quot; + bound + &quot; of &quot; + typeVariable + &quot; for &quot; + this);
+&nbsp;                                }
+&nbsp;
+&nbsp;                                if (!interfaceBound || !bound.getSort().isTypeVariable() &amp;&amp; bound.isInterface()) {
+&nbsp;                                    interfaceBound = true;
+&nbsp;                                    continue;
+&nbsp;                                }
+&nbsp;
+&nbsp;                                throw new IllegalStateException(&quot;Illegal interface bound &quot; + bound + &quot; of &quot; + typeVariable + &quot; for &quot; + this);
+&nbsp;                            }
+&nbsp;
+&nbsp;                            if (!interfaceBound) {
+&nbsp;                                throw new IllegalStateException(&quot;Type variable &quot; + typeVariable + &quot; for &quot; + this + &quot; does not define at least one bound&quot;);
+&nbsp;                            }
+&nbsp;                            break;
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    TypeDescription enclosingType = this.getEnclosingType();
+&nbsp;                    if (enclosingType != null &amp;&amp; (enclosingType.isArray() || enclosingType.isPrimitive())) {
+&nbsp;                        throw new IllegalStateException(&quot;Cannot define array type or primitive type &quot; + enclosingType + &quot; + as enclosing type for &quot; + this);
+&nbsp;                    } else {
+&nbsp;                        MethodDescription.InDefinedShape enclosingMethod = this.getEnclosingMethod();
+&nbsp;                        if (enclosingMethod != null &amp;&amp; enclosingMethod.isTypeInitializer()) {
+&nbsp;                            throw new IllegalStateException(&quot;Cannot enclose type declaration in class initializer &quot; + enclosingMethod);
+&nbsp;                        } else {
+&nbsp;                            TypeDescription declaringType = this.getDeclaringType();
+&nbsp;                            if (declaringType != null) {
+&nbsp;                                if (declaringType.isPrimitive() || declaringType.isArray()) {
+<b class="fc">&nbsp;                                    throw new IllegalStateException(&quot;Cannot define array type or primitive type &quot; + declaringType + &quot; as declaring type for &quot; + this);</b>
+&nbsp;                                }
+&nbsp;                            } else if (enclosingType == null &amp;&amp; enclosingMethod == null &amp;&amp; (this.isLocalType() || this.isAnonymousType())) {
+&nbsp;                                throw new IllegalStateException(&quot;Cannot define an anonymous or local class without a declaring type for &quot; + this);
+&nbsp;                            }
+&nbsp;
+&nbsp;                            Set&lt;TypeDescription&gt; declaredTypes = new HashSet();
+&nbsp;                            Iterator var30 = this.getDeclaredTypes().iterator();
+&nbsp;
+&nbsp;                            TypeDescription declaredType;
+&nbsp;                            do {
+&nbsp;                                if (!var30.hasNext()) {
+&nbsp;                                    TypeDescription nestHost = this.getNestHost();
+&nbsp;                                    HashSet typeAnnotationTypes;
+&nbsp;                                    Iterator var34;
+&nbsp;                                    if (nestHost.equals(this)) {
+&nbsp;                                        typeAnnotationTypes = new HashSet();
+&nbsp;                                        var34 = this.getNestMembers().iterator();
+&nbsp;
+&nbsp;                                        while(var34.hasNext()) {
+&nbsp;                                            TypeDescription nestMember = (TypeDescription)var34.next();
+&nbsp;                                            if (nestMember.isArray() || nestMember.isPrimitive()) {
+&nbsp;                                                throw new IllegalStateException(&quot;Cannot define array type or primitive type &quot; + nestMember + &quot; + as nest member of &quot; + this);
+&nbsp;                                            }
+&nbsp;
+&nbsp;                                            if (!nestMember.isSamePackage(this)) {
+&nbsp;                                                throw new IllegalStateException(&quot;Cannot define nest member &quot; + nestMember + &quot; + within different package then &quot; + this);
+&nbsp;                                            }
+<b class="fc">&nbsp;</b>
+&nbsp;                                            if (!typeAnnotationTypes.add(nestMember)) {
+&nbsp;                                                throw new IllegalStateException(&quot;Duplicate definition of nest member &quot; + nestMember);
+&nbsp;                                            }
+&nbsp;                                        }
+<b class="fc">&nbsp;                                    } else {</b>
+&nbsp;                                        if (nestHost.isArray() || nestHost.isPrimitive()) {
+&nbsp;                                            throw new IllegalStateException(&quot;Cannot define array type or primitive type &quot; + nestHost + &quot; + as nest host for &quot; + this);
+&nbsp;                                        }
+&nbsp;
+&nbsp;                                        if (!nestHost.isSamePackage(this)) {
+&nbsp;                                            throw new IllegalStateException(&quot;Cannot define nest host &quot; + nestHost + &quot; + within different package then &quot; + this);
+&nbsp;                                        }
+&nbsp;                                    }
+&nbsp;
+&nbsp;                                    var10 = this.getPermittedSubtypes().iterator();
+&nbsp;
+&nbsp;                                    TypeDescription permittedSubclass;
+&nbsp;                                    do {
+&nbsp;                                        if (!var10.hasNext()) {
+&nbsp;                                            typeAnnotationTypes = new HashSet();
+&nbsp;                                            var34 = this.getDeclaredAnnotations().iterator();
+&nbsp;
+&nbsp;                                            AnnotationDescription annotationDescription;
+&nbsp;                                            do {
+&nbsp;                                                if (!var34.hasNext()) {
+&nbsp;                                                    Set&lt;FieldDescription.SignatureToken&gt; fieldSignatureTokens = new HashSet();
+&nbsp;                                                    Iterator var38 = this.getDeclaredFields().iterator();
+&nbsp;
+&nbsp;                                                    while(var38.hasNext()) {
+&nbsp;                                                        FieldDescription.InDefinedShape fieldDescription = (FieldDescription.InDefinedShape)var38.next();
+&nbsp;                                                        String fieldName = fieldDescription.getName();
+&nbsp;                                                        if (!fieldSignatureTokens.add(fieldDescription.asSignatureToken())) {
+&nbsp;                                                            throw new IllegalStateException(&quot;Duplicate field definition for &quot; + fieldDescription);
+&nbsp;                                                        }
+&nbsp;
+&nbsp;                                                        if (!isValidIdentifier(fieldName)) {
+&nbsp;                                                            throw new IllegalStateException(&quot;Illegal field name for &quot; + fieldDescription);
+&nbsp;                                                        }
+&nbsp;
+&nbsp;                                                        if ((fieldDescription.getModifiers() &amp; -151776) != 0) {
+&nbsp;                                                            throw new IllegalStateException(&quot;Illegal field modifiers &quot; + fieldDescription.getModifiers() + &quot; for &quot; + fieldDescription);
+&nbsp;                                                        }
+&nbsp;
+&nbsp;                                                        TypeDescription.Generic fieldType = fieldDescription.getType();
+&nbsp;                                                        if (!(Boolean)fieldType.accept(Validator.FIELD)) {
+&nbsp;                                                            throw new IllegalStateException(&quot;Illegal field type &quot; + fieldType + &quot; for &quot; + fieldDescription);
+&nbsp;                                                        }
+&nbsp;
+&nbsp;                                                        if (!(Boolean)fieldType.accept(ForTypeAnnotations.INSTANCE)) {
+&nbsp;                                                            throw new IllegalStateException(&quot;Illegal type annotations on &quot; + fieldType + &quot; for &quot; + this);
+&nbsp;                                                        }
+&nbsp;
+&nbsp;                                                        if (!fieldDescription.isSynthetic() &amp;&amp; !fieldType.asErasure().isVisibleTo(this)) {
+&nbsp;                                                            throw new IllegalStateException(&quot;Invisible field type &quot; + fieldDescription.getType() + &quot; for &quot; + fieldDescription);
+&nbsp;                                                        }
+&nbsp;
+&nbsp;                                                        Set&lt;TypeDescription&gt; fieldAnnotationTypes = new HashSet();
+&nbsp;                                                        Iterator var17 = fieldDescription.getDeclaredAnnotations().iterator();
+&nbsp;
+&nbsp;                                                        while(var17.hasNext()) {
+&nbsp;                                                            AnnotationDescription annotationDescription = (AnnotationDescription)var17.next();
+&nbsp;                                                            if (!annotationDescription.getElementTypes().contains(ElementType.FIELD)) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Cannot add &quot; + annotationDescription + &quot; on &quot; + fieldDescription);
+&nbsp;                                                            }
+&nbsp;
+&nbsp;                                                            if (!fieldAnnotationTypes.add(annotationDescription.getAnnotationType())) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Duplicate annotation &quot; + annotationDescription + &quot; for &quot; + fieldDescription);
+<b class="fc">&nbsp;                                                            }</b>
+&nbsp;                                                        }
+&nbsp;                                                    }
+&nbsp;
+&nbsp;                                                    Set&lt;MethodDescription.SignatureToken&gt; methodSignatureTokens = new HashSet();
+&nbsp;                                                    Iterator var40 = this.getDeclaredMethods().iterator();
+&nbsp;
+<b class="fc">&nbsp;                                                    while(var40.hasNext()) {</b>
+&nbsp;                                                        MethodDescription.InDefinedShape methodDescription = (MethodDescription.InDefinedShape)var40.next();
+&nbsp;                                                        if (!methodSignatureTokens.add(methodDescription.asSignatureToken())) {
+&nbsp;                                                            throw new IllegalStateException(&quot;Duplicate method signature for &quot; + methodDescription);
+&nbsp;                                                        }
+&nbsp;
+&nbsp;                                                        if ((methodDescription.getModifiers() &amp; -7680) != 0) {
+&nbsp;                                                            throw new IllegalStateException(&quot;Illegal modifiers &quot; + methodDescription.getModifiers() + &quot; for &quot; + methodDescription);
+&nbsp;                                                        }
+&nbsp;
+&nbsp;                                                        if (this.isInterface() &amp;&amp; !methodDescription.isPublic() &amp;&amp; !methodDescription.isPrivate()) {
+&nbsp;                                                            throw new IllegalStateException(&quot;Methods declared by an interface must be public or private &quot; + methodDescription);
+&nbsp;                                                        }
+&nbsp;
+&nbsp;                                                        Set&lt;String&gt; methodTypeVariableNames = new HashSet();
+&nbsp;                                                        Iterator var43 = methodDescription.getTypeVariables().iterator();
+&nbsp;
+&nbsp;                                                        while(var43.hasNext()) {
+&nbsp;                                                            TypeDescription.Generic typeVariable = (TypeDescription.Generic)var43.next();
+&nbsp;                                                            String variableSymbol = typeVariable.getSymbol();
+&nbsp;                                                            if (!methodTypeVariableNames.add(variableSymbol)) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Duplicate type variable symbol &#39;&quot; + typeVariable + &quot;&#39; for &quot; + methodDescription);
+&nbsp;                                                            }
+&nbsp;
+&nbsp;                                                            if (!isValidIdentifier(variableSymbol)) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Illegal type variable name &#39;&quot; + typeVariable + &quot;&#39; for &quot; + methodDescription);
+&nbsp;                                                            }
+&nbsp;
+&nbsp;                                                            if (!ForTypeAnnotations.ofFormalTypeVariable(typeVariable)) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Illegal type annotation on &#39;&quot; + typeVariable + &quot;&#39; for &quot; + methodDescription);
+&nbsp;                                                            }
+&nbsp;
+&nbsp;                                                            boolean interfaceBound = false;
+&nbsp;                                                            Set&lt;TypeDescription.Generic&gt; bounds = new HashSet();
+&nbsp;                                                            Iterator var21 = typeVariable.getUpperBounds().iterator();
+&nbsp;
+&nbsp;                                                            while(true) {
+&nbsp;                                                                if (var21.hasNext()) {
+&nbsp;                                                                    TypeDescription.Generic bound = (TypeDescription.Generic)var21.next();
+&nbsp;                                                                    if (!(Boolean)bound.accept(Validator.TYPE_VARIABLE)) {
+&nbsp;                                                                        throw new IllegalStateException(&quot;Illegal type variable bound &quot; + bound + &quot; of &quot; + typeVariable + &quot; for &quot; + methodDescription);
+&nbsp;                                                                    }
+&nbsp;
+&nbsp;                                                                    if (!(Boolean)bound.accept(ForTypeAnnotations.INSTANCE)) {
+&nbsp;                                                                        throw new IllegalStateException(&quot;Illegal type annotations on bound &quot; + bound + &quot; of &quot; + typeVariable + &quot; for &quot; + this);
+&nbsp;                                                                    }
+&nbsp;
+&nbsp;                                                                    if (!bounds.add(bound)) {
+&nbsp;                                                                        throw new IllegalStateException(&quot;Duplicate bound &quot; + bound + &quot; of &quot; + typeVariable + &quot; for &quot; + methodDescription);
+<b class="fc">&nbsp;                                                                    }</b>
+&nbsp;
+&nbsp;                                                                    if (!interfaceBound || !bound.getSort().isTypeVariable() &amp;&amp; bound.isInterface()) {
+&nbsp;                                                                        interfaceBound = true;
+<b class="fc">&nbsp;                                                                        continue;</b>
+&nbsp;                                                                    }
+&nbsp;
+&nbsp;                                                                    throw new IllegalStateException(&quot;Illegal interface bound &quot; + bound + &quot; of &quot; + typeVariable + &quot; for &quot; + methodDescription);
+&nbsp;                                                                }
+&nbsp;
+&nbsp;                                                                if (!interfaceBound) {
+&nbsp;                                                                    throw new IllegalStateException(&quot;Type variable &quot; + typeVariable + &quot; for &quot; + methodDescription + &quot; does not define at least one bound&quot;);
+&nbsp;                                                                }
+&nbsp;                                                                break;
+&nbsp;                                                            }
+&nbsp;                                                        }
+&nbsp;
+&nbsp;                                                        TypeDescription.Generic returnType = methodDescription.getReturnType();
+&nbsp;                                                        if (methodDescription.isTypeInitializer()) {
+&nbsp;                                                            throw new IllegalStateException(&quot;Illegal explicit declaration of a type initializer by &quot; + this);
+&nbsp;                                                        }
+&nbsp;
+&nbsp;                                                        if (methodDescription.isConstructor()) {
+&nbsp;                                                            if (!returnType.represents(Void.TYPE)) {
+&nbsp;                                                                throw new IllegalStateException(&quot;A constructor must return void &quot; + methodDescription);
+&nbsp;                                                            }
+&nbsp;
+&nbsp;                                                            if (!returnType.getDeclaredAnnotations().isEmpty()) {
+<b class="fc">&nbsp;                                                                throw new IllegalStateException(&quot;The void non-type must not be annotated for &quot; + methodDescription);</b>
+&nbsp;                                                            }
+&nbsp;                                                        } else {
+&nbsp;                                                            if (!isValidIdentifier(methodDescription.getInternalName())) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Illegal method name &quot; + returnType + &quot; for &quot; + methodDescription);
+&nbsp;                                                            }
+&nbsp;
+&nbsp;                                                            if (!(Boolean)returnType.accept(Validator.METHOD_RETURN)) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Illegal return type &quot; + returnType + &quot; for &quot; + methodDescription);
+<b class="fc">&nbsp;                                                            }</b>
+&nbsp;
+&nbsp;                                                            if (!(Boolean)returnType.accept(ForTypeAnnotations.INSTANCE)) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Illegal type annotations on return type &quot; + returnType + &quot; for &quot; + methodDescription);
+&nbsp;                                                            }
+&nbsp;
+&nbsp;                                                            if (!methodDescription.isSynthetic() &amp;&amp; !methodDescription.getReturnType().asErasure().isVisibleTo(this)) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Invisible return type &quot; + methodDescription.getReturnType() + &quot; for &quot; + methodDescription);
+&nbsp;                                                            }
+&nbsp;                                                        }
+&nbsp;
+&nbsp;                                                        Set&lt;String&gt; parameterNames = new HashSet();
+&nbsp;                                                        Iterator var48 = methodDescription.getParameters().iterator();
+&nbsp;
+&nbsp;                                                        TypeDescription.Generic receiverType;
+&nbsp;                                                        while(var48.hasNext()) {
+&nbsp;                                                            ParameterDescription.InDefinedShape parameterDescription = (ParameterDescription.InDefinedShape)var48.next();
+&nbsp;                                                            receiverType = parameterDescription.getType();
+&nbsp;                                                            if (!(Boolean)receiverType.accept(Validator.METHOD_PARAMETER)) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Illegal parameter type of &quot; + parameterDescription + &quot; for &quot; + methodDescription);
+&nbsp;                                                            }
+&nbsp;
+&nbsp;                                                            if (!(Boolean)receiverType.accept(ForTypeAnnotations.INSTANCE)) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Illegal type annotations on parameter &quot; + parameterDescription + &quot; for &quot; + methodDescription);
+&nbsp;                                                            }
+&nbsp;
+&nbsp;                                                            if (!methodDescription.isSynthetic() &amp;&amp; !receiverType.asErasure().isVisibleTo(this)) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Invisible parameter type of &quot; + parameterDescription + &quot; for &quot; + methodDescription);
+&nbsp;                                                            }
+&nbsp;
+&nbsp;                                                            if (parameterDescription.isNamed()) {
+&nbsp;                                                                String parameterName = parameterDescription.getName();
+&nbsp;                                                                if (!parameterNames.add(parameterName)) {
+&nbsp;                                                                    throw new IllegalStateException(&quot;Duplicate parameter name of &quot; + parameterDescription + &quot; for &quot; + methodDescription);
+&nbsp;                                                                }
+&nbsp;
+&nbsp;                                                                if (!isValidIdentifier(parameterName)) {
+&nbsp;                                                                    throw new IllegalStateException(&quot;Illegal parameter name of &quot; + parameterDescription + &quot; for &quot; + methodDescription);
+&nbsp;                                                                }
+&nbsp;                                                            }
+&nbsp;
+&nbsp;                                                            if (parameterDescription.hasModifiers() &amp;&amp; (parameterDescription.getModifiers() &amp; -36881) != 0) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Illegal modifiers of &quot; + parameterDescription + &quot; for &quot; + methodDescription);
+&nbsp;                                                            }
+&nbsp;
+&nbsp;                                                            Set&lt;TypeDescription&gt; parameterAnnotationTypes = new HashSet();
+&nbsp;                                                            Iterator var58 = parameterDescription.getDeclaredAnnotations().iterator();
+&nbsp;
+&nbsp;                                                            while(var58.hasNext()) {
+&nbsp;                                                                AnnotationDescription annotationDescription = (AnnotationDescription)var58.next();
+&nbsp;                                                                if (!annotationDescription.getElementTypes().contains(ElementType.PARAMETER)) {
+&nbsp;                                                                    throw new IllegalStateException(&quot;Cannot add &quot; + annotationDescription + &quot; on &quot; + parameterDescription);
+&nbsp;                                                                }
+&nbsp;
+&nbsp;                                                                if (!parameterAnnotationTypes.add(annotationDescription.getAnnotationType())) {
+&nbsp;                                                                    throw new IllegalStateException(&quot;Duplicate annotation &quot; + annotationDescription + &quot; of &quot; + parameterDescription + &quot; for &quot; + methodDescription);
+&nbsp;                                                                }
+&nbsp;                                                            }
+&nbsp;                                                        }
+&nbsp;
+&nbsp;                                                        var48 = methodDescription.getExceptionTypes().iterator();
+&nbsp;
+&nbsp;                                                        while(var48.hasNext()) {
+&nbsp;                                                            TypeDescription.Generic exceptionType = (TypeDescription.Generic)var48.next();
+&nbsp;                                                            if (!(Boolean)exceptionType.accept(Validator.EXCEPTION)) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Illegal exception type &quot; + exceptionType + &quot; for &quot; + methodDescription);
+&nbsp;                                                            }
+&nbsp;
+&nbsp;                                                            if (!(Boolean)exceptionType.accept(ForTypeAnnotations.INSTANCE)) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Illegal type annotations on &quot; + exceptionType + &quot; for &quot; + methodDescription);
+&nbsp;                                                            }
+&nbsp;
+&nbsp;                                                            if (!methodDescription.isSynthetic() &amp;&amp; !exceptionType.asErasure().isVisibleTo(this)) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Invisible exception type &quot; + exceptionType + &quot; for &quot; + methodDescription);
+&nbsp;                                                            }
+&nbsp;                                                        }
+&nbsp;
+&nbsp;                                                        Set&lt;TypeDescription&gt; methodAnnotationTypes = new HashSet();
+&nbsp;                                                        Iterator var53 = methodDescription.getDeclaredAnnotations().iterator();
+&nbsp;
+&nbsp;                                                        while(var53.hasNext()) {
+&nbsp;                                                            AnnotationDescription annotationDescription = (AnnotationDescription)var53.next();
+&nbsp;                                                            if (!annotationDescription.getElementTypes().contains(methodDescription.isMethod() ? ElementType.METHOD : ElementType.CONSTRUCTOR)) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Cannot add &quot; + annotationDescription + &quot; on &quot; + methodDescription);
+&nbsp;                                                            }
+&nbsp;
+&nbsp;                                                            if (!methodAnnotationTypes.add(annotationDescription.getAnnotationType())) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Duplicate annotation &quot; + annotationDescription + &quot; for &quot; + methodDescription);
+&nbsp;                                                            }
+&nbsp;                                                        }
+&nbsp;
+&nbsp;                                                        AnnotationValue&lt;?, ?&gt; defaultValue = methodDescription.getDefaultValue();
+&nbsp;                                                        if (defaultValue != null &amp;&amp; !methodDescription.isDefaultValue(defaultValue)) {
+&nbsp;                                                            throw new IllegalStateException(&quot;Illegal default value &quot; + defaultValue + &quot;for &quot; + methodDescription);
+&nbsp;                                                        }
+&nbsp;
+&nbsp;                                                        receiverType = methodDescription.getReceiverType();
+&nbsp;                                                        if (receiverType != null &amp;&amp; !(Boolean)receiverType.accept(Validator.RECEIVER)) {
+&nbsp;                                                            throw new IllegalStateException(&quot;Illegal receiver type &quot; + receiverType + &quot; for &quot; + methodDescription);
+&nbsp;                                                        }
+&nbsp;
+&nbsp;                                                        if (methodDescription.isStatic()) {
+&nbsp;                                                            if (receiverType != null) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Static method &quot; + methodDescription + &quot; defines a non-null receiver &quot; + receiverType);
+&nbsp;                                                            }
+&nbsp;                                                        } else if (methodDescription.isConstructor()) {
+&nbsp;                                                            if (receiverType == null || !receiverType.asErasure().equals(enclosingType == null ? this : enclosingType)) {
+&nbsp;                                                                throw new IllegalStateException(&quot;Constructor &quot; + methodDescription + &quot; defines an illegal receiver &quot; + receiverType);
+&nbsp;                                                            }
+&nbsp;                                                        } else if (receiverType == null || !this.equals(receiverType.asErasure())) {
+&nbsp;                                                            throw new IllegalStateException(&quot;Method &quot; + methodDescription + &quot; defines an illegal receiver &quot; + receiverType);
+&nbsp;                                                        }
+&nbsp;                                                    }
+&nbsp;
+&nbsp;                                                    return this;
+&nbsp;                                                }
+&nbsp;
+&nbsp;                                                annotationDescription = (AnnotationDescription)var34.next();
+&nbsp;                                                if (!annotationDescription.getElementTypes().contains(ElementType.TYPE) &amp;&amp; (!this.isAnnotation() || !annotationDescription.getElementTypes().contains(ElementType.ANNOTATION_TYPE)) &amp;&amp; (!this.isPackageType() || !annotationDescription.getElementTypes().contains(ElementType.PACKAGE))) {
+&nbsp;                                                    throw new IllegalStateException(&quot;Cannot add &quot; + annotationDescription + &quot; on &quot; + this);
+&nbsp;                                                }
+&nbsp;                                            } while(typeAnnotationTypes.add(annotationDescription.getAnnotationType()));
+&nbsp;
+&nbsp;                                            throw new IllegalStateException(&quot;Duplicate annotation &quot; + annotationDescription + &quot; for &quot; + this);
+&nbsp;                                        }
+&nbsp;
+&nbsp;                                        permittedSubclass = (TypeDescription)var10.next();
+&nbsp;                                    } while(permittedSubclass.isAssignableTo(this) &amp;&amp; !permittedSubclass.equals(this));
+&nbsp;
+&nbsp;                                    throw new IllegalStateException(&quot;Cannot assign permitted subclass &quot; + permittedSubclass + &quot; to &quot; + this);
+&nbsp;                                }
+&nbsp;
+&nbsp;                                declaredType = (TypeDescription)var30.next();
+&nbsp;                                if (declaredType.isArray() || declaredType.isPrimitive()) {
+&nbsp;                                    throw new IllegalStateException(&quot;Cannot define array type or primitive type &quot; + declaredType + &quot; + as declared type for &quot; + this);
+&nbsp;                                }
+&nbsp;                            } while(declaredTypes.add(declaredType));
+&nbsp;
+&nbsp;                            throw new IllegalStateException(&quot;Duplicate definition of declared type &quot; + declaredType);
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        private static boolean isValidIdentifier(String[] identifier) {
+&nbsp;            if (identifier.length == 0) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                String[] var1 = identifier;
+&nbsp;                int var2 = identifier.length;
+&nbsp;
+&nbsp;                for(int var3 = 0; var3 &lt; var2; ++var3) {
+&nbsp;                    String part = var1[var3];
+&nbsp;                    if (!isValidIdentifier(part)) {
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                return true;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        private static boolean isValidIdentifier(String identifier) {
+&nbsp;            if (!KEYWORDS.contains(identifier) &amp;&amp; identifier.length() != 0 &amp;&amp; Character.isJavaIdentifierStart(identifier.charAt(0))) {
+&nbsp;                if (identifier.equals(&quot;package-info&quot;)) {
+&nbsp;                    return true;
+&nbsp;                } else {
+&nbsp;                    for(int index = 1; index &lt; identifier.length(); ++index) {
+&nbsp;                        if (!Character.isJavaIdentifierPart(identifier.charAt(index))) {
+&nbsp;                            return false;
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return true;
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface Factory {
+&nbsp;        WithFlexibleName represent(TypeDescription var1);
+&nbsp;
+&nbsp;        WithFlexibleName subclass(String var1, int var2, TypeDescription.Generic var3);
+&nbsp;
+&nbsp;        public static enum Default implements Factory {
+&nbsp;            MODIFIABLE {
+&nbsp;                public WithFlexibleName represent(TypeDescription typeDescription) {
+&nbsp;                    return new Default(typeDescription.getName(), typeDescription.getModifiers(), typeDescription.getSuperClass(), typeDescription.getTypeVariables().asTokenList(ElementMatchers.is(typeDescription)), typeDescription.getInterfaces().accept(ForDetachment.of(typeDescription)), typeDescription.getDeclaredFields().asTokenList(ElementMatchers.is(typeDescription)), Collections.emptyMap(), typeDescription.getDeclaredMethods().asTokenList(ElementMatchers.is(typeDescription)), typeDescription.getRecordComponents().asTokenList(ElementMatchers.is(typeDescription)), typeDescription.getDeclaredAnnotations(), None.INSTANCE, net.bytebuddy.implementation.LoadedTypeInitializer.NoOp.INSTANCE, typeDescription.getDeclaringType(), typeDescription.getEnclosingMethod(), typeDescription.getEnclosingType(), typeDescription.getDeclaredTypes(), typeDescription.isSealed() ? typeDescription.getPermittedSubtypes() : TypeList.UNDEFINED, typeDescription.isAnonymousType(), typeDescription.isLocalType(), typeDescription.isRecord(), typeDescription.isNestHost() ? TargetType.DESCRIPTION : typeDescription.getNestHost(), (List)(typeDescription.isNestHost() ? typeDescription.getNestMembers().filter(ElementMatchers.not(ElementMatchers.is(typeDescription))) : Collections.emptyList()));
+&nbsp;                }
+&nbsp;            },
+&nbsp;            FROZEN {
+&nbsp;                public WithFlexibleName represent(TypeDescription typeDescription) {
+&nbsp;                    return new Frozen(typeDescription, net.bytebuddy.implementation.LoadedTypeInitializer.NoOp.INSTANCE);
+&nbsp;                }
+&nbsp;            };
+&nbsp;
+&nbsp;            private Default() {
+&nbsp;            }
+&nbsp;
+&nbsp;            public WithFlexibleName subclass(String name, int modifiers, TypeDescription.Generic superClass) {
+&nbsp;                return new Default(name, modifiers, superClass, Collections.emptyList(), Collections.emptyList(), Collections.emptyList(), Collections.emptyMap(), Collections.emptyList(), Collections.emptyList(), Collections.emptyList(), None.INSTANCE, net.bytebuddy.implementation.LoadedTypeInitializer.NoOp.INSTANCE, TypeDescription.UNDEFINED, MethodDescription.UNDEFINED, TypeDescription.UNDEFINED, Collections.emptyList(), TypeList.UNDEFINED, false, false, false, TargetType.DESCRIPTION, Collections.emptyList());
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface Prepareable {
+&nbsp;        InstrumentedType prepare(InstrumentedType var1);
+&nbsp;
+&nbsp;        public static enum NoOp implements Prepareable {
+&nbsp;            INSTANCE;
+&nbsp;
+&nbsp;            private NoOp() {
+&nbsp;            }
+&nbsp;
+&nbsp;            public InstrumentedType prepare(InstrumentedType instrumentedType) {
+&nbsp;                return instrumentedType;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface WithFlexibleName extends InstrumentedType {
+&nbsp;        WithFlexibleName withField(FieldDescription.Token var1);
+&nbsp;
+&nbsp;        WithFlexibleName withAuxiliaryField(FieldDescription.Token var1, Object var2);
+&nbsp;
+&nbsp;        WithFlexibleName withMethod(MethodDescription.Token var1);
+&nbsp;
+&nbsp;        WithFlexibleName withRecordComponent(RecordComponentDescription.Token var1);
+&nbsp;
+&nbsp;        WithFlexibleName withModifiers(int var1);
+&nbsp;
+&nbsp;        WithFlexibleName withInterfaces(TypeList.Generic var1);
+&nbsp;
+&nbsp;        WithFlexibleName withNestHost(TypeDescription var1);
+&nbsp;
+&nbsp;        WithFlexibleName withNestMembers(TypeList var1);
+&nbsp;
+&nbsp;        WithFlexibleName withEnclosingType(@Nonnull(when = When.MAYBE) TypeDescription var1);
+&nbsp;
+&nbsp;        WithFlexibleName withEnclosingMethod(MethodDescription.InDefinedShape var1);
+&nbsp;
+&nbsp;        WithFlexibleName withDeclaringType(@Nonnull(when = When.MAYBE) TypeDescription var1);
+&nbsp;
+&nbsp;        WithFlexibleName withDeclaredTypes(TypeList var1);
+<b class="fc">&nbsp;</b>
+&nbsp;        WithFlexibleName withPermittedSubclasses(@Nonnull(when = When.MAYBE) TypeList var1);
+&nbsp;
+&nbsp;        WithFlexibleName withLocalClass(boolean var1);
+&nbsp;
+&nbsp;        WithFlexibleName withAnonymousClass(boolean var1);
+&nbsp;
+&nbsp;        WithFlexibleName withRecord(boolean var1);
+&nbsp;
+&nbsp;        WithFlexibleName withTypeVariable(TypeVariableToken var1);
+&nbsp;
+&nbsp;        WithFlexibleName withAnnotations(List&lt;? extends AnnotationDescription&gt; var1);
+&nbsp;
+&nbsp;        WithFlexibleName withInitializer(LoadedTypeInitializer var1);
+&nbsp;
+&nbsp;        WithFlexibleName withInitializer(ByteCodeAppender var1);
+&nbsp;
+&nbsp;        WithFlexibleName withName(String var1);
+&nbsp;
+&nbsp;        WithFlexibleName withTypeVariables(ElementMatcher&lt;? super TypeDescription.Generic&gt; var1, Transformer&lt;TypeVariableToken&gt; var2);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

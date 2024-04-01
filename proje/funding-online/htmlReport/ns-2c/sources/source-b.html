@@ -1,0 +1,121 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > RuntimeType</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.bind.annotation</a>
+</div>
+
+<h1>Coverage Summary for Class: RuntimeType (net.bytebuddy.implementation.bind.annotation)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">RuntimeType$Verifier</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.bind.annotation;
+&nbsp;
+&nbsp;import java.lang.annotation.Documented;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.lang.annotation.Retention;
+&nbsp;import java.lang.annotation.RetentionPolicy;
+&nbsp;import java.lang.annotation.Target;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationSource;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.Assigner;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.Assigner.Typing;
+&nbsp;
+&nbsp;@Documented
+&nbsp;@Retention(RetentionPolicy.RUNTIME)
+&nbsp;@Target({ElementType.PARAMETER, ElementType.METHOD})
+&nbsp;public @interface RuntimeType {
+&nbsp;    public static final class Verifier {
+&nbsp;        private Verifier() {
+&nbsp;            throw new UnsupportedOperationException();
+&nbsp;        }
+&nbsp;
+&nbsp;        public static Assigner.Typing check(AnnotationSource annotationSource) {
+&nbsp;            return Typing.of(annotationSource.getDeclaredAnnotations().isAnnotationPresent(RuntimeType.class));
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

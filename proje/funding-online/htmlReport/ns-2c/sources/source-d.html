@@ -1,0 +1,289 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > Super</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.bind.annotation</a>
+</div>
+
+<h1>Coverage Summary for Class: Super (net.bytebuddy.implementation.bind.annotation)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">Super$Binder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.bind.annotation;
+&nbsp;
+&nbsp;import java.lang.annotation.Documented;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.lang.annotation.Retention;
+&nbsp;import java.lang.annotation.RetentionPolicy;
+&nbsp;import java.lang.annotation.Target;
+&nbsp;import java.util.Arrays;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationDescription;
+&nbsp;import net.bytebuddy.description.enumeration.EnumerationDescription;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.method.MethodList;
+&nbsp;import net.bytebuddy.description.method.ParameterDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.ForLoadedType;
+&nbsp;import net.bytebuddy.dynamic.TargetType;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.implementation.auxiliary.TypeProxy;
+&nbsp;import net.bytebuddy.implementation.bind.MethodDelegationBinder;
+&nbsp;import net.bytebuddy.implementation.bind.MethodDelegationBinder.ParameterBinding.Illegal;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.Assigner;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;
+&nbsp;@Documented
+&nbsp;@Retention(RetentionPolicy.RUNTIME)
+&nbsp;@Target({ElementType.PARAMETER})
+&nbsp;public @interface Super {
+&nbsp;    Instantiation strategy() default Super.Instantiation.CONSTRUCTOR;
+&nbsp;
+&nbsp;    boolean ignoreFinalizer() default true;
+&nbsp;
+&nbsp;    boolean serializableProxy() default false;
+&nbsp;
+&nbsp;    Class&lt;?&gt;[] constructorParameters() default {};
+&nbsp;
+&nbsp;    Class&lt;?&gt; proxyType() default void.class;
+&nbsp;
+&nbsp;    public static enum Binder implements TargetMethodAnnotationDrivenBinder.ParameterBinder&lt;Super&gt; {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private static final MethodDescription.InDefinedShape STRATEGY;
+&nbsp;        private static final MethodDescription.InDefinedShape PROXY_TYPE;
+&nbsp;
+&nbsp;        private Binder() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public Class&lt;Super&gt; getHandledType() {
+&nbsp;            return Super.class;
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegationBinder.ParameterBinding&lt;?&gt; bind(AnnotationDescription.Loadable&lt;Super&gt; annotation, MethodDescription source, ParameterDescription target, Implementation.Target implementationTarget, Assigner assigner, Assigner.Typing typing) {
+&nbsp;            if (!target.getType().isPrimitive() &amp;&amp; !target.getType().isArray()) {
+&nbsp;                TypeDescription proxyType = Super.Binder.TypeLocator.ForType.of((TypeDescription)annotation.getValue(PROXY_TYPE).resolve(TypeDescription.class)).resolve(implementationTarget.getInstrumentedType(), target.getType());
+&nbsp;                if (proxyType.isFinal()) {
+&nbsp;                    throw new IllegalStateException(&quot;Cannot extend final type as @Super proxy: &quot; + proxyType);
+&nbsp;                } else {
+&nbsp;                    return (MethodDelegationBinder.ParameterBinding)(!source.isStatic() &amp;&amp; implementationTarget.getInstrumentedType().isAssignableTo(proxyType) ? new MethodDelegationBinder.ParameterBinding.Anonymous(((Instantiation)((EnumerationDescription)annotation.getValue(STRATEGY).resolve(EnumerationDescription.class)).load(Instantiation.class)).proxyFor(proxyType, implementationTarget, annotation)) : Illegal.INSTANCE);
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                throw new IllegalStateException(target + &quot; uses the @Super annotation on an invalid type&quot;);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        static {
+&nbsp;            MethodList&lt;MethodDescription.InDefinedShape&gt; annotationProperties = ForLoadedType.of(Super.class).getDeclaredMethods();
+&nbsp;            STRATEGY = (MethodDescription.InDefinedShape)((MethodList)annotationProperties.filter(ElementMatchers.named(&quot;strategy&quot;))).getOnly();
+&nbsp;            PROXY_TYPE = (MethodDescription.InDefinedShape)((MethodList)annotationProperties.filter(ElementMatchers.named(&quot;proxyType&quot;))).getOnly();
+&nbsp;        }
+&nbsp;
+&nbsp;        protected interface TypeLocator {
+&nbsp;            TypeDescription resolve(TypeDescription var1, TypeDescription.Generic var2);
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public static class ForType implements TypeLocator {
+&nbsp;                private final TypeDescription typeDescription;
+&nbsp;
+&nbsp;                protected ForType(TypeDescription typeDescription) {
+&nbsp;                    this.typeDescription = typeDescription;
+&nbsp;                }
+&nbsp;
+&nbsp;                protected static TypeLocator of(TypeDescription typeDescription) {
+&nbsp;                    if (typeDescription.represents(Void.TYPE)) {
+&nbsp;                        return Super.Binder.TypeLocator.ForParameterType.INSTANCE;
+&nbsp;                    } else if (typeDescription.represents(TargetType.class)) {
+&nbsp;                        return Super.Binder.TypeLocator.ForInstrumentedType.INSTANCE;
+&nbsp;                    } else if (!typeDescription.isPrimitive() &amp;&amp; !typeDescription.isArray()) {
+&nbsp;                        return new ForType(typeDescription);
+&nbsp;                    } else {
+&nbsp;                        throw new IllegalStateException(&quot;Cannot assign proxy to &quot; + typeDescription);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public TypeDescription resolve(TypeDescription instrumentedType, TypeDescription.Generic parameterType) {
+&nbsp;                    if (!this.typeDescription.isAssignableTo(parameterType.asErasure())) {
+&nbsp;                        throw new IllegalStateException(&quot;Impossible to assign &quot; + this.typeDescription + &quot; to parameter of type &quot; + parameterType);
+&nbsp;                    } else {
+&nbsp;                        return this.typeDescription;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.typeDescription.equals(((ForType)var1).typeDescription);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return this.getClass().hashCode() * 31 + this.typeDescription.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public static enum ForParameterType implements TypeLocator {
+&nbsp;                INSTANCE;
+&nbsp;
+&nbsp;                private ForParameterType() {
+&nbsp;                }
+&nbsp;
+&nbsp;                public TypeDescription resolve(TypeDescription instrumentedType, TypeDescription.Generic parameterType) {
+&nbsp;                    TypeDescription erasure = parameterType.asErasure();
+&nbsp;                    return erasure.equals(instrumentedType) ? instrumentedType : erasure;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public static enum ForInstrumentedType implements TypeLocator {
+&nbsp;                INSTANCE;
+&nbsp;
+&nbsp;                private ForInstrumentedType() {
+&nbsp;                }
+&nbsp;
+&nbsp;                public TypeDescription resolve(TypeDescription instrumentedType, TypeDescription.Generic parameterType) {
+&nbsp;                    return instrumentedType;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum Instantiation {
+&nbsp;        CONSTRUCTOR {
+&nbsp;            protected StackManipulation proxyFor(TypeDescription parameterType, Implementation.Target implementationTarget, AnnotationDescription.Loadable&lt;Super&gt; annotation) {
+&nbsp;                return new TypeProxy.ForSuperMethodByConstructor(parameterType, implementationTarget, Arrays.asList((Object[])annotation.getValue(Super.Instantiation.CONSTRUCTOR_PARAMETERS).resolve(TypeDescription[].class)), (Boolean)annotation.getValue(Super.Instantiation.IGNORE_FINALIZER).resolve(Boolean.class), (Boolean)annotation.getValue(Super.Instantiation.SERIALIZABLE_PROXY).resolve(Boolean.class));
+&nbsp;            }
+&nbsp;        },
+&nbsp;        UNSAFE {
+&nbsp;            protected StackManipulation proxyFor(TypeDescription parameterType, Implementation.Target implementationTarget, AnnotationDescription.Loadable&lt;Super&gt; annotation) {
+&nbsp;                return new TypeProxy.ForSuperMethodByReflectionFactory(parameterType, implementationTarget, (Boolean)annotation.getValue(Super.Instantiation.IGNORE_FINALIZER).resolve(Boolean.class), (Boolean)annotation.getValue(Super.Instantiation.SERIALIZABLE_PROXY).resolve(Boolean.class));
+&nbsp;            }
+&nbsp;        };
+&nbsp;
+&nbsp;        private static final MethodDescription.InDefinedShape IGNORE_FINALIZER;
+&nbsp;        private static final MethodDescription.InDefinedShape SERIALIZABLE_PROXY;
+&nbsp;        private static final MethodDescription.InDefinedShape CONSTRUCTOR_PARAMETERS;
+&nbsp;
+&nbsp;        private Instantiation() {
+&nbsp;        }
+&nbsp;
+&nbsp;        protected abstract StackManipulation proxyFor(TypeDescription var1, Implementation.Target var2, AnnotationDescription.Loadable&lt;Super&gt; var3);
+&nbsp;
+&nbsp;        static {
+&nbsp;            MethodList&lt;MethodDescription.InDefinedShape&gt; annotationProperties = ForLoadedType.of(Super.class).getDeclaredMethods();
+&nbsp;            IGNORE_FINALIZER = (MethodDescription.InDefinedShape)((MethodList)annotationProperties.filter(ElementMatchers.named(&quot;ignoreFinalizer&quot;))).getOnly();
+&nbsp;            SERIALIZABLE_PROXY = (MethodDescription.InDefinedShape)((MethodList)annotationProperties.filter(ElementMatchers.named(&quot;serializableProxy&quot;))).getOnly();
+&nbsp;            CONSTRUCTOR_PARAMETERS = (MethodDescription.InDefinedShape)((MethodList)annotationProperties.filter(ElementMatchers.named(&quot;constructorParameters&quot;))).getOnly();
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

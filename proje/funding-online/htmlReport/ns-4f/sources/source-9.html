@@ -1,0 +1,225 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > SpyAnnotationEngine</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.configuration</a>
+</div>
+
+<h1>Coverage Summary for Class: SpyAnnotationEngine (org.mockito.internal.configuration)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SpyAnnotationEngine</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.configuration;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.InvocationTargetException;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import org.mockito.Captor;
+&nbsp;import org.mockito.InjectMocks;
+&nbsp;import org.mockito.Mock;
+&nbsp;import org.mockito.MockSettings;
+&nbsp;import org.mockito.Mockito;
+&nbsp;import org.mockito.Spy;
+&nbsp;import org.mockito.exceptions.base.MockitoException;
+&nbsp;import org.mockito.internal.configuration.plugins.Plugins;
+&nbsp;import org.mockito.internal.exceptions.Reporter;
+&nbsp;import org.mockito.internal.util.MockUtil;
+&nbsp;import org.mockito.internal.util.StringUtil;
+&nbsp;import org.mockito.plugins.AnnotationEngine;
+&nbsp;import org.mockito.plugins.MemberAccessor;
+&nbsp;
+&nbsp;public class SpyAnnotationEngine implements AnnotationEngine {
+&nbsp;    public SpyAnnotationEngine() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public AutoCloseable process(Class&lt;?&gt; context, Object testInstance) {
+&nbsp;        Field[] fields = context.getDeclaredFields();
+&nbsp;        MemberAccessor accessor = Plugins.getMemberAccessor();
+&nbsp;        Field[] var5 = fields;
+&nbsp;        int var6 = fields.length;
+&nbsp;
+&nbsp;        for(int var7 = 0; var7 &lt; var6; ++var7) {
+&nbsp;            Field field = var5[var7];
+&nbsp;            if (field.isAnnotationPresent(Spy.class) &amp;&amp; !field.isAnnotationPresent(InjectMocks.class)) {
+&nbsp;                assertNoIncompatibleAnnotations(Spy.class, field, Mock.class, Captor.class);
+&nbsp;
+&nbsp;                try {
+&nbsp;                    Object instance = accessor.get(field, testInstance);
+&nbsp;                    if (MockUtil.isMock(instance)) {
+&nbsp;                        Mockito.reset(new Object[]{instance});
+&nbsp;                    } else if (instance != null) {
+&nbsp;                        accessor.set(field, testInstance, spyInstance(field, instance));
+<b class="fc">&nbsp;                    } else {</b>
+&nbsp;                        accessor.set(field, testInstance, spyNewInstance(testInstance, field));
+&nbsp;                    }
+&nbsp;                } catch (Exception var11) {
+<b class="fc">&nbsp;                    throw new MockitoException(&quot;Unable to initialize @Spy annotated field &#39;&quot; + field.getName() + &quot;&#39;.\n&quot; + var11.getMessage(), var11);</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        return new AnnotationEngine.NoAction();
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Object spyInstance(Field field, Object instance) {
+&nbsp;        return Mockito.mock(instance.getClass(), Mockito.withSettings().spiedInstance(instance).defaultAnswer(Mockito.CALLS_REAL_METHODS).name(field.getName()));
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Object spyNewInstance(Object testInstance, Field field) throws InstantiationException, IllegalAccessException, InvocationTargetException {
+&nbsp;        MockSettings settings = Mockito.withSettings().defaultAnswer(Mockito.CALLS_REAL_METHODS).name(field.getName());
+&nbsp;        Class&lt;?&gt; type = field.getType();
+&nbsp;        if (type.isInterface()) {
+&nbsp;            return Mockito.mock(type, settings.useConstructor(new Object[0]));
+&nbsp;        } else {
+&nbsp;            int modifiers = type.getModifiers();
+&nbsp;            if (typeIsPrivateAbstractInnerClass(type, modifiers)) {
+&nbsp;                throw new MockitoException(StringUtil.join(new Object[]{&quot;@Spy annotation can&#39;t initialize private abstract inner classes.&quot;, &quot;  inner class: &#39;&quot; + type.getSimpleName() + &quot;&#39;&quot;, &quot;  outer class: &#39;&quot; + type.getEnclosingClass().getSimpleName() + &quot;&#39;&quot;, &quot;&quot;, &quot;You should augment the visibility of this inner class&quot;}));
+&nbsp;            } else if (typeIsNonStaticInnerClass(type, modifiers)) {
+&nbsp;                Class&lt;?&gt; enclosing = type.getEnclosingClass();
+&nbsp;                if (!enclosing.isInstance(testInstance)) {
+&nbsp;                    throw new MockitoException(StringUtil.join(new Object[]{&quot;@Spy annotation can only initialize inner classes declared in the test.&quot;, &quot;  inner class: &#39;&quot; + type.getSimpleName() + &quot;&#39;&quot;, &quot;  outer class: &#39;&quot; + enclosing.getSimpleName() + &quot;&#39;&quot;, &quot;&quot;}));
+&nbsp;                } else {
+&nbsp;                    return Mockito.mock(type, settings.useConstructor(new Object[0]).outerInstance(testInstance));
+&nbsp;                }
+&nbsp;            } else {
+<b class="fc">&nbsp;                Constructor&lt;?&gt; constructor = noArgConstructorOf(type);</b>
+&nbsp;                if (Modifier.isPrivate(constructor.getModifiers())) {
+&nbsp;                    MemberAccessor accessor = Plugins.getMemberAccessor();
+&nbsp;                    return Mockito.mock(type, settings.spiedInstance(accessor.newInstance(constructor, new Object[0])));
+&nbsp;                } else {
+&nbsp;                    return Mockito.mock(type, settings.useConstructor(new Object[0]));
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Constructor&lt;?&gt; noArgConstructorOf(Class&lt;?&gt; type) {
+&nbsp;        try {
+&nbsp;            Constructor&lt;?&gt; constructor = type.getDeclaredConstructor();
+&nbsp;            return constructor;
+&nbsp;        } catch (NoSuchMethodException var3) {
+&nbsp;            throw new MockitoException(&quot;Please ensure that the type &#39;&quot; + type.getSimpleName() + &quot;&#39; has a no-arg constructor.&quot;, var3);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean typeIsNonStaticInnerClass(Class&lt;?&gt; type, int modifiers) {
+&nbsp;        return !Modifier.isStatic(modifiers) &amp;&amp; type.getEnclosingClass() != null;
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean typeIsPrivateAbstractInnerClass(Class&lt;?&gt; type, int modifiers) {
+&nbsp;        return Modifier.isPrivate(modifiers) &amp;&amp; Modifier.isAbstract(modifiers) &amp;&amp; type.getEnclosingClass() != null;
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void assertNoIncompatibleAnnotations(Class&lt;? extends Annotation&gt; annotation, Field field, Class&lt;? extends Annotation&gt;... undesiredAnnotations) {
+&nbsp;        Class[] var3 = undesiredAnnotations;
+&nbsp;        int var4 = undesiredAnnotations.length;
+&nbsp;
+&nbsp;        for(int var5 = 0; var5 &lt; var4; ++var5) {
+&nbsp;            Class&lt;? extends Annotation&gt; u = var3[var5];
+&nbsp;            if (field.isAnnotationPresent(u)) {
+&nbsp;                throw Reporter.unsupportedCombinationOfAnnotations(annotation.getSimpleName(), u.getSimpleName());
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:49</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,196 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > StackSize</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.bytecode</a>
+</div>
+
+<h1>Coverage Summary for Class: StackSize (net.bytebuddy.implementation.bytecode)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StackSize</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.bytecode;
+&nbsp;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Iterator;
+&nbsp;import net.bytebuddy.description.type.TypeDefinition;
+&nbsp;
+&nbsp;public enum StackSize {
+&nbsp;    ZERO(0),
+&nbsp;    SINGLE(1),
+&nbsp;    DOUBLE(2);
+&nbsp;
+&nbsp;    private final int size;
+&nbsp;
+&nbsp;    private StackSize(int size) {
+&nbsp;        this.size = size;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static StackSize of(Class&lt;?&gt; type) {
+<b class="fc">&nbsp;        if (type == Void.TYPE) {</b>
+&nbsp;            return ZERO;
+&nbsp;        } else {
+&nbsp;            return type != Double.TYPE &amp;&amp; type != Long.TYPE ? SINGLE : DOUBLE;
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static StackSize of(int size) {
+&nbsp;        switch (size) {
+&nbsp;            case 0:
+<b class="fc">&nbsp;                return ZERO;</b>
+&nbsp;            case 1:
+&nbsp;                return SINGLE;
+&nbsp;            case 2:
+&nbsp;                return DOUBLE;
+<b class="fc">&nbsp;            default:</b>
+&nbsp;                throw new IllegalArgumentException(&quot;Unexpected stack size value: &quot; + size);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int of(TypeDefinition... typeDefinition) {
+&nbsp;        return of((Collection)Arrays.asList(typeDefinition));
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int of(Collection&lt;? extends TypeDefinition&gt; typeDefinitions) {
+&nbsp;        int size = 0;
+&nbsp;
+<b class="fc">&nbsp;        TypeDefinition typeDefinition;</b>
+<b class="fc">&nbsp;        for(Iterator var2 = typeDefinitions.iterator(); var2.hasNext(); size += typeDefinition.getStackSize().getSize()) {</b>
+&nbsp;            typeDefinition = (TypeDefinition)var2.next();
+&nbsp;        }
+&nbsp;
+&nbsp;        return size;
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getSize() {
+&nbsp;        return this.size;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public StackManipulation.Size toIncreasingSize() {</b>
+<b class="fc">&nbsp;        return new StackManipulation.Size(this.getSize(), this.getSize());</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public StackManipulation.Size toDecreasingSize() {</b>
+&nbsp;        return new StackManipulation.Size(-1 * this.getSize(), 0);
+&nbsp;    }
+&nbsp;
+&nbsp;    public StackSize maximum(StackSize stackSize) {
+&nbsp;        switch (this) {
+&nbsp;            case DOUBLE:
+&nbsp;                return this;
+&nbsp;            case SINGLE:
+&nbsp;                switch (stackSize) {
+&nbsp;                    case DOUBLE:
+&nbsp;                        return stackSize;
+&nbsp;                    case SINGLE:
+&nbsp;                    case ZERO:
+&nbsp;                        return this;
+&nbsp;                    default:
+&nbsp;                        throw new AssertionError();
+&nbsp;                }
+&nbsp;            case ZERO:
+&nbsp;                return stackSize;
+&nbsp;            default:
+&nbsp;                throw new AssertionError();
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

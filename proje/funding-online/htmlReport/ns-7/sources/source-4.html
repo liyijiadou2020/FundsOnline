@@ -1,0 +1,198 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > CoreConstants</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ch.qos.logback.core</a>
+</div>
+
+<h1>Coverage Summary for Class: CoreConstants (ch.qos.logback.core)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CoreConstants</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package ch.qos.logback.core;
+&nbsp;
+&nbsp;public class CoreConstants {
+&nbsp;    public static final String DISABLE_SERVLET_CONTAINER_INITIALIZER_KEY = &quot;logbackDisableServletContainerInitializer&quot;;
+&nbsp;    public static final String STATUS_LISTENER_CLASS_KEY = &quot;logback.statusListenerClass&quot;;
+&nbsp;    public static final String SYSOUT = &quot;SYSOUT&quot;;
+&nbsp;    public static final int CORE_POOL_SIZE = 0;
+&nbsp;    public static final int SCHEDULED_EXECUTOR_POOL_SIZE = 8;
+&nbsp;    public static final int MAX_POOL_SIZE = 32;
+&nbsp;    public static final String LINE_SEPARATOR = System.getProperty(&quot;line.separator&quot;);
+&nbsp;    public static final int LINE_SEPARATOR_LEN;
+&nbsp;    public static final String CODES_URL = &quot;http://logback.qos.ch/codes.html&quot;;
+&nbsp;    public static final String MANUAL_URL_PREFIX = &quot;http://logback.qos.ch/manual/&quot;;
+&nbsp;    public static final String MORE_INFO_PREFIX = &quot;For more information, please visit &quot;;
+&nbsp;    public static final String DEFAULT_CONTEXT_NAME = &quot;default&quot;;
+&nbsp;    public static final String PATTERN_RULE_REGISTRY = &quot;PATTERN_RULE_REGISTRY&quot;;
+&nbsp;    public static final String ISO8601_STR = &quot;ISO8601&quot;;
+&nbsp;    public static final String ISO8601_PATTERN = &quot;yyyy-MM-dd HH:mm:ss,SSS&quot;;
+&nbsp;    public static final String DAILY_DATE_PATTERN = &quot;yyyy-MM-dd&quot;;
+&nbsp;    public static final String CLF_DATE_PATTERN = &quot;dd/MMM/yyyy:HH:mm:ss Z&quot;;
+&nbsp;    public static final String EVALUATOR_MAP = &quot;EVALUATOR_MAP&quot;;
+&nbsp;    public static final String FA_FILENAME_COLLISION_MAP = &quot;FA_FILENAME_COLLISION_MAP&quot;;
+&nbsp;    public static final String RFA_FILENAME_PATTERN_COLLISION_MAP = &quot;RFA_FILENAME_PATTERN_COLLISION_MAP&quot;;
+&nbsp;    public static final String VALUE_OF = &quot;valueOf&quot;;
+&nbsp;    public static final String EMPTY_STRING = &quot;&quot;;
+&nbsp;    public static final String[] EMPTY_STRING_ARRAY;
+&nbsp;    public static final Class&lt;?&gt;[] EMPTY_CLASS_ARRAY;
+&nbsp;    public static final String CAUSED_BY = &quot;Caused by: &quot;;
+&nbsp;    public static final String SUPPRESSED = &quot;Suppressed: &quot;;
+&nbsp;    public static final String WRAPPED_BY = &quot;Wrapped by: &quot;;
+&nbsp;    public static final char PERCENT_CHAR = &#39;%&#39;;
+&nbsp;    public static final char LEFT_PARENTHESIS_CHAR = &#39;(&#39;;
+&nbsp;    public static final char RIGHT_PARENTHESIS_CHAR = &#39;)&#39;;
+&nbsp;    public static final char ESCAPE_CHAR = &#39;\\&#39;;
+&nbsp;    public static final char CURLY_LEFT = &#39;{&#39;;
+&nbsp;    public static final char CURLY_RIGHT = &#39;}&#39;;
+&nbsp;    public static final char COMMA_CHAR = &#39;,&#39;;
+&nbsp;    public static final char DOUBLE_QUOTE_CHAR = &#39;&quot;&#39;;
+&nbsp;    public static final char SINGLE_QUOTE_CHAR = &#39;\&#39;&#39;;
+<b class="fc">&nbsp;    public static final char COLON_CHAR = &#39;:&#39;;</b>
+<b class="fc">&nbsp;    public static final char DASH_CHAR = &#39;-&#39;;</b>
+&nbsp;    public static final String DEFAULT_VALUE_SEPARATOR = &quot;:-&quot;;
+&nbsp;    public static final int TABLE_ROW_LIMIT = 10000;
+&nbsp;    public static final int OOS_RESET_FREQUENCY = 70;
+&nbsp;    public static long REFERENCE_BIPS;
+&nbsp;    public static final int MAX_ERROR_COUNT = 4;
+&nbsp;    public static final char DOT = &#39;.&#39;;
+&nbsp;    public static final char TAB = &#39;\t&#39;;
+&nbsp;    public static final char DOLLAR = &#39;$&#39;;
+&nbsp;    public static final String SEE_FNP_NOT_SET = &quot;See also http://logback.qos.ch/codes.html#tbr_fnp_not_set&quot;;
+&nbsp;    public static final String SEE_MISSING_INTEGER_TOKEN = &quot;See also http://logback.qos.ch/codes.html#sat_missing_integer_token&quot;;
+&nbsp;    public static final String CONFIGURATION_WATCH_LIST = &quot;CONFIGURATION_WATCH_LIST&quot;;
+&nbsp;    public static final String CONFIGURATION_WATCH_LIST_RESET_X = &quot;CONFIGURATION_WATCH_LIST_RESET&quot;;
+&nbsp;    public static final String SAFE_JORAN_CONFIGURATION = &quot;SAFE_JORAN_CONFIGURATION&quot;;
+&nbsp;    public static final String XML_PARSING = &quot;XML_PARSING&quot;;
+&nbsp;    public static final String SHUTDOWN_HOOK_THREAD = &quot;SHUTDOWN_HOOK&quot;;
+&nbsp;    public static final String HOSTNAME_KEY = &quot;HOSTNAME&quot;;
+&nbsp;    public static final String UNKNOWN_LOCALHOST = &quot;UNKNOWN_LOCALHOST&quot;;
+&nbsp;    public static final String CONTEXT_NAME_KEY = &quot;CONTEXT_NAME&quot;;
+&nbsp;    public static final int BYTES_PER_INT = 4;
+&nbsp;    public static final long MILLIS_IN_ONE_SECOND = 1000L;
+&nbsp;    public static final long MILLIS_IN_ONE_MINUTE = 60000L;
+&nbsp;    public static final long MILLIS_IN_ONE_HOUR = 3600000L;
+&nbsp;    public static final long MILLIS_IN_ONE_DAY = 86400000L;
+&nbsp;    public static final long MILLIS_IN_ONE_WEEK = 604800000L;
+&nbsp;    public static final int SECONDS_TO_WAIT_FOR_COMPRESSION_JOBS = 30;
+&nbsp;    public static final String CONTEXT_SCOPE_VALUE = &quot;context&quot;;
+&nbsp;    public static final String RESET_MSG_PREFIX = &quot;Will reset and reconfigure context &quot;;
+&nbsp;    public static final String JNDI_COMP_PREFIX = &quot;java:comp/env&quot;;
+&nbsp;    public static final String UNDEFINED_PROPERTY_SUFFIX = &quot;_IS_UNDEFINED&quot;;
+&nbsp;    public static final String LEFT_ACCOLADE;
+&nbsp;    public static final String RIGHT_ACCOLADE;
+&nbsp;    public static final long UNBOUNDED_TOTAL_SIZE_CAP = 0L;
+&nbsp;    public static final int UNBOUND_HISTORY = 0;
+&nbsp;    public static final String RECONFIGURE_ON_CHANGE_TASK = &quot;RECONFIGURE_ON_CHANGE_TASK&quot;;
+&nbsp;    public static final String SIZE_AND_TIME_BASED_FNATP_IS_DEPRECATED = &quot;SizeAndTimeBasedFNATP is deprecated. Use SizeAndTimeBasedRollingPolicy instead&quot;;
+&nbsp;
+&nbsp;    public CoreConstants() {
+&nbsp;    }
+&nbsp;
+&nbsp;    static {
+&nbsp;        LINE_SEPARATOR_LEN = LINE_SEPARATOR.length();
+&nbsp;        EMPTY_STRING_ARRAY = new String[0];
+&nbsp;        EMPTY_CLASS_ARRAY = new Class[0];
+&nbsp;        REFERENCE_BIPS = 9000L;
+&nbsp;        LEFT_ACCOLADE = new String(new char[]{&#39;{&#39;});
+&nbsp;        RIGHT_ACCOLADE = new String(new char[]{&#39;}&#39;});
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

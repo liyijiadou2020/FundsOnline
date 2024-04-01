@@ -1,0 +1,180 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > TypeVariableSource</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.description</a>
+</div>
+
+<h1>Coverage Summary for Class: TypeVariableSource (net.bytebuddy.description)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">TypeVariableSource$AbstractBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.description;
+&nbsp;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeList;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.Generic;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;
+&nbsp;public interface TypeVariableSource extends ModifierReviewable.OfAbstraction {
+&nbsp;    @Nonnull(
+&nbsp;        when = When.NEVER
+&nbsp;    )
+&nbsp;    TypeVariableSource UNDEFINED = null;
+&nbsp;
+&nbsp;    TypeList.Generic getTypeVariables();
+&nbsp;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.MAYBE
+&nbsp;    )
+&nbsp;    TypeVariableSource getEnclosingSource();
+&nbsp;
+&nbsp;    boolean isInferrable();
+&nbsp;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.MAYBE
+&nbsp;    )
+&nbsp;    TypeDescription.Generic findVariable(String var1);
+&nbsp;
+&nbsp;    TypeDescription.Generic findExpectedVariable(String var1);
+&nbsp;
+&nbsp;    &lt;T&gt; T accept(Visitor&lt;T&gt; var1);
+&nbsp;
+&nbsp;    boolean isGenerified();
+&nbsp;
+&nbsp;    public abstract static class AbstractBase extends ModifierReviewable.AbstractBase implements TypeVariableSource {
+&nbsp;        public AbstractBase() {
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        public TypeDescription.Generic findVariable(String symbol) {
+&nbsp;            TypeList.Generic typeVariables = (TypeList.Generic)this.getTypeVariables().filter(ElementMatchers.named(symbol));
+&nbsp;            if (typeVariables.isEmpty()) {
+&nbsp;                TypeVariableSource enclosingSource = this.getEnclosingSource();
+&nbsp;                return enclosingSource == null ? Generic.UNDEFINED : enclosingSource.findVariable(symbol);
+&nbsp;            } else {
+&nbsp;                return (TypeDescription.Generic)typeVariables.getOnly();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeDescription.Generic findExpectedVariable(String symbol) {
+&nbsp;            TypeDescription.Generic variable = this.findVariable(symbol);
+&nbsp;            if (variable == null) {
+&nbsp;                throw new IllegalArgumentException(&quot;Cannot resolve &quot; + symbol + &quot; from &quot; + this);
+&nbsp;            } else {
+&nbsp;                return variable;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface Visitor&lt;T&gt; {
+&nbsp;        T onType(TypeDescription var1);
+&nbsp;
+&nbsp;        T onMethod(MethodDescription.InDefinedShape var1);
+&nbsp;
+&nbsp;        public static enum NoOp implements Visitor&lt;TypeVariableSource&gt; {
+&nbsp;            INSTANCE;
+&nbsp;
+&nbsp;            private NoOp() {
+&nbsp;            }
+&nbsp;
+&nbsp;            public TypeVariableSource onType(TypeDescription typeDescription) {
+&nbsp;                return typeDescription;
+&nbsp;            }
+&nbsp;
+&nbsp;            public TypeVariableSource onMethod(MethodDescription.InDefinedShape methodDescription) {
+&nbsp;                return methodDescription;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:49</div>
+</div>
+</body>
+</html>

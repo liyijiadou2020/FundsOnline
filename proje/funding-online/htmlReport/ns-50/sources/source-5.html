@@ -1,0 +1,134 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > SpyOnInjectedFieldsHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.configuration.injection</a>
+</div>
+
+<h1>Coverage Summary for Class: SpyOnInjectedFieldsHandler (org.mockito.internal.configuration.injection)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SpyOnInjectedFieldsHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.configuration.injection;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.util.Set;
+&nbsp;import org.mockito.Mockito;
+&nbsp;import org.mockito.Spy;
+&nbsp;import org.mockito.exceptions.base.MockitoException;
+&nbsp;import org.mockito.internal.configuration.plugins.Plugins;
+&nbsp;import org.mockito.internal.util.MockUtil;
+&nbsp;import org.mockito.internal.util.reflection.FieldReader;
+&nbsp;import org.mockito.plugins.MemberAccessor;
+&nbsp;
+&nbsp;public class SpyOnInjectedFieldsHandler extends MockInjectionStrategy {
+&nbsp;    private final MemberAccessor accessor = Plugins.getMemberAccessor();
+&nbsp;
+&nbsp;    public SpyOnInjectedFieldsHandler() {
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean processInjection(Field field, Object fieldOwner, Set&lt;Object&gt; mockCandidates) {
+&nbsp;        FieldReader fieldReader = new FieldReader(fieldOwner, field);
+&nbsp;        if (!fieldReader.isNull() &amp;&amp; field.isAnnotationPresent(Spy.class)) {
+<b class="fc">&nbsp;            try {</b>
+&nbsp;                Object instance = fieldReader.read();
+<b class="fc">&nbsp;                if (MockUtil.isMock(instance)) {</b>
+&nbsp;                    Mockito.reset(new Object[]{instance});
+&nbsp;                } else {
+&nbsp;                    Object mock = Mockito.mock(instance.getClass(), Mockito.withSettings().spiedInstance(instance).defaultAnswer(Mockito.CALLS_REAL_METHODS).name(field.getName()));
+<b class="fc">&nbsp;                    this.accessor.set(field, fieldOwner, mock);</b>
+&nbsp;                }
+&nbsp;            } catch (Exception var7) {
+<b class="fc">&nbsp;                throw new MockitoException(&quot;Problems initiating spied field &quot; + field.getName(), var7);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return false;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

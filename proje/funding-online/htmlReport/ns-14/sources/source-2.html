@@ -1,0 +1,156 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > AuthServiceImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.atguigu.crowd.service.impl</a>
+</div>
+
+<h1>Coverage Summary for Class: AuthServiceImpl (com.atguigu.crowd.service.impl)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AuthServiceImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.atguigu.crowd.service.impl;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;
+&nbsp;import com.atguigu.crowd.entity.Auth;
+&nbsp;import com.atguigu.crowd.entity.AuthExample;
+&nbsp;import com.atguigu.crowd.mapper.AuthMapper;
+&nbsp;import com.atguigu.crowd.service.api.AuthService;
+&nbsp;
+&nbsp;/**
+&nbsp; * AuthServiceImpl 类中实现了对角色分配权限的业务逻辑
+&nbsp; */
+<b class="fc">&nbsp;@Service</b>
+&nbsp;public class AuthServiceImpl implements AuthService {
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private AuthMapper authMapper;
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public List&lt;Auth&gt; getAll() {</b>
+&nbsp;        return authMapper.selectByExample(new AuthExample());
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+<b class="fc">&nbsp;    public List&lt;Integer&gt; getAssignedAuthIdByRoleId(Integer roleId) {</b>
+&nbsp;        return authMapper.selectAssignedAuthIdByRoleId(roleId);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void saveRoleAuthRelathinship(Map&lt;String, List&lt;Integer&gt;&gt; map) {
+&nbsp;
+<b class="fc">&nbsp;        // 1.获取roleId的值</b>
+<b class="fc">&nbsp;        List&lt;Integer&gt; roleIdList = map.get(&quot;roleId&quot;);</b>
+&nbsp;        Integer roleId = roleIdList.get(0);
+&nbsp;
+<b class="fc">&nbsp;        // 2.删除旧关联关系数据</b>
+&nbsp;        authMapper.deleteOldRelationship(roleId);
+&nbsp;
+<b class="fc">&nbsp;        // 3.获取authIdList</b>
+&nbsp;        List&lt;Integer&gt; authIdList = map.get(&quot;authIdArray&quot;);
+&nbsp;
+<b class="fc">&nbsp;        // 4.判断authIdList是否有效</b>
+<b class="fc">&nbsp;        if (authIdList != null &amp;&amp; authIdList.size() &gt; 0) {</b>
+&nbsp;            authMapper.insertNewRelationship(roleId, authIdList);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

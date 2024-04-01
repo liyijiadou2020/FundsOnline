@@ -1,0 +1,622 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > GenericMetadataSupport</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.util.reflection</a>
+</div>
+
+<h1>Coverage Summary for Class: GenericMetadataSupport (org.mockito.internal.util.reflection)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GenericMetadataSupport</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (44/44)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GenericMetadataSupport$FromClassGenericMetadataSupport</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GenericMetadataSupport$NotGenericReturnTypeSupport</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">GenericMetadataSupport$ParameterizedReturnType</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (62/62)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.util.reflection;
+&nbsp;
+&nbsp;import java.lang.reflect.GenericArrayType;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.ParameterizedType;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.lang.reflect.TypeVariable;
+&nbsp;import java.lang.reflect.WildcardType;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Queue;
+&nbsp;import java.util.Set;
+&nbsp;import org.mockito.exceptions.base.MockitoException;
+&nbsp;import org.mockito.internal.util.Checks;
+&nbsp;
+&nbsp;public abstract class GenericMetadataSupport {
+&nbsp;    protected Map&lt;TypeVariable&lt;?&gt;, Type&gt; contextualActualTypeParameters = new HashMap();
+&nbsp;
+&nbsp;    public GenericMetadataSupport() {
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void registerAllTypeVariables(Type classType) {
+&nbsp;        Queue&lt;Type&gt; typesToRegister = new LinkedList();
+&nbsp;        Set&lt;Type&gt; registeredTypes = new HashSet();
+&nbsp;        typesToRegister.add(classType);
+&nbsp;
+&nbsp;        while(!typesToRegister.isEmpty()) {
+&nbsp;            Type typeToRegister = (Type)typesToRegister.poll();
+&nbsp;            if (typeToRegister != null &amp;&amp; !registeredTypes.contains(typeToRegister)) {
+&nbsp;                this.registerTypeVariablesOn(typeToRegister);
+&nbsp;                registeredTypes.add(typeToRegister);
+&nbsp;                Class&lt;?&gt; rawType = this.extractRawTypeOf(typeToRegister);
+&nbsp;                typesToRegister.add(rawType.getGenericSuperclass());
+&nbsp;                typesToRegister.addAll(Arrays.asList(rawType.getGenericInterfaces()));
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Class&lt;?&gt; extractRawTypeOf(Type type) {
+&nbsp;        if (type instanceof Class) {
+&nbsp;            return (Class)type;
+&nbsp;        } else if (type instanceof ParameterizedType) {
+&nbsp;            return (Class)((ParameterizedType)type).getRawType();
+&nbsp;        } else if (type instanceof BoundedType) {
+&nbsp;            return this.extractRawTypeOf(((BoundedType)type).firstBound());
+&nbsp;        } else if (type instanceof TypeVariable) {
+&nbsp;            return this.extractRawTypeOf((Type)this.contextualActualTypeParameters.get(type));
+&nbsp;        } else {
+&nbsp;            throw new MockitoException(&quot;Raw extraction not supported for : &#39;&quot; + type + &quot;&#39;&quot;);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    protected void registerTypeVariablesOn(Type classType) {</b>
+&nbsp;        if (classType instanceof ParameterizedType) {
+&nbsp;            ParameterizedType parameterizedType = (ParameterizedType)classType;
+&nbsp;            TypeVariable&lt;?&gt;[] typeParameters = ((Class)parameterizedType.getRawType()).getTypeParameters();
+&nbsp;            Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
+<b class="fc">&nbsp;</b>
+&nbsp;            for(int i = 0; i &lt; actualTypeArguments.length; ++i) {
+&nbsp;                TypeVariable&lt;?&gt; typeParameter = typeParameters[i];
+&nbsp;                Type actualTypeArgument = actualTypeArguments[i];
+&nbsp;                if (actualTypeArgument instanceof TypeVariable) {
+&nbsp;                    this.registerTypeVariableIfNotPresent((TypeVariable)actualTypeArgument);
+<b class="fc">&nbsp;                    if (this.contextualActualTypeParameters.containsKey(typeParameter)) {</b>
+<b class="fc">&nbsp;                        continue;</b>
+<b class="fc">&nbsp;                    }</b>
+&nbsp;                }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                if (actualTypeArgument instanceof WildcardType) {</b>
+<b class="fc">&nbsp;                    this.contextualActualTypeParameters.put(typeParameter, this.boundsOf((WildcardType)actualTypeArgument));</b>
+&nbsp;                } else if (typeParameter != actualTypeArgument) {
+&nbsp;                    this.contextualActualTypeParameters.put(typeParameter, actualTypeArgument);
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    protected void registerTypeParametersOn(TypeVariable&lt;?&gt;[] typeParameters) {</b>
+<b class="fc">&nbsp;        TypeVariable[] var2 = typeParameters;</b>
+&nbsp;        int var3 = typeParameters.length;
+&nbsp;
+&nbsp;        for(int var4 = 0; var4 &lt; var3; ++var4) {
+<b class="fc">&nbsp;            TypeVariable&lt;?&gt; type = var2[var4];</b>
+<b class="fc">&nbsp;            this.registerTypeVariableIfNotPresent(type);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void registerTypeVariableIfNotPresent(TypeVariable&lt;?&gt; typeVariable) {
+&nbsp;        if (!this.contextualActualTypeParameters.containsKey(typeVariable)) {
+&nbsp;            this.contextualActualTypeParameters.put(typeVariable, this.boundsOf(typeVariable));
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private BoundedType boundsOf(TypeVariable&lt;?&gt; typeParameter) {
+&nbsp;        return (BoundedType)(typeParameter.getBounds()[0] instanceof TypeVariable ? this.boundsOf((TypeVariable)typeParameter.getBounds()[0]) : new TypeVarBoundedType(typeParameter));
+&nbsp;    }
+&nbsp;
+&nbsp;    private BoundedType boundsOf(WildcardType wildCard) {
+&nbsp;        WildCardBoundedType wildCardBoundedType = new WildCardBoundedType(wildCard);
+&nbsp;        return (BoundedType)(wildCardBoundedType.firstBound() instanceof TypeVariable ? this.boundsOf((TypeVariable)wildCardBoundedType.firstBound()) : wildCardBoundedType);
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public abstract Class&lt;?&gt; rawType();
+&nbsp;
+<b class="fc">&nbsp;    public List&lt;Type&gt; extraInterfaces() {</b>
+<b class="fc">&nbsp;        return Collections.emptyList();</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public Class&lt;?&gt;[] rawExtraInterfaces() {</b>
+<b class="fc">&nbsp;        return new Class[0];</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    public boolean hasRawExtraInterfaces() {</b>
+&nbsp;        return this.rawExtraInterfaces().length &gt; 0;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;TypeVariable&lt;?&gt;, Type&gt; actualTypeArguments() {
+&nbsp;        TypeVariable&lt;?&gt;[] typeParameters = this.rawType().getTypeParameters();
+&nbsp;        LinkedHashMap&lt;TypeVariable&lt;?&gt;, Type&gt; actualTypeArguments = new LinkedHashMap();
+&nbsp;        TypeVariable[] var3 = typeParameters;
+&nbsp;        int var4 = typeParameters.length;
+&nbsp;
+&nbsp;        for(int var5 = 0; var5 &lt; var4; ++var5) {
+&nbsp;            TypeVariable&lt;?&gt; typeParameter = var3[var5];
+&nbsp;            Type actualType = this.getActualTypeArgumentFor(typeParameter);
+&nbsp;            actualTypeArguments.put(typeParameter, actualType);
+&nbsp;        }
+&nbsp;
+&nbsp;        return actualTypeArguments;
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    protected Type getActualTypeArgumentFor(TypeVariable&lt;?&gt; typeParameter) {</b>
+&nbsp;        Type type = (Type)this.contextualActualTypeParameters.get(typeParameter);
+&nbsp;        if (type instanceof TypeVariable) {
+<b class="fc">&nbsp;            TypeVariable&lt;?&gt; typeVariable = (TypeVariable)type;</b>
+<b class="fc">&nbsp;            return this.getActualTypeArgumentFor(typeVariable);</b>
+&nbsp;        } else {
+&nbsp;            return type;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public GenericMetadataSupport resolveGenericReturnType(Method method) {
+&nbsp;        Type genericReturnType = method.getGenericReturnType();
+&nbsp;
+<b class="fc">&nbsp;        int arity;</b>
+&nbsp;        for(arity = 0; genericReturnType instanceof GenericArrayType; genericReturnType = ((GenericArrayType)genericReturnType).getGenericComponentType()) {
+&nbsp;            ++arity;
+&nbsp;        }
+&nbsp;
+&nbsp;        GenericMetadataSupport genericMetadataSupport = this.resolveGenericType(genericReturnType, method);
+&nbsp;        return (GenericMetadataSupport)(arity == 0 ? genericMetadataSupport : new GenericArrayReturnType(genericMetadataSupport, arity));
+&nbsp;    }
+&nbsp;
+&nbsp;    private GenericMetadataSupport resolveGenericType(Type type, Method method) {
+&nbsp;        if (type instanceof Class) {
+&nbsp;            return new NotGenericReturnTypeSupport(this, type);
+&nbsp;        } else if (type instanceof ParameterizedType) {
+&nbsp;            return new ParameterizedReturnType(this, method.getTypeParameters(), (ParameterizedType)type);
+&nbsp;        } else if (type instanceof TypeVariable) {
+&nbsp;            return new TypeVariableReturnType(this, method.getTypeParameters(), (TypeVariable)type);
+&nbsp;        } else {
+&nbsp;            throw new MockitoException(&quot;Ouch, it shouldn&#39;t happen, type &#39;&quot; + type.getClass().getCanonicalName() + &quot;&#39; on method : &#39;&quot; + method.toGenericString() + &quot;&#39; is not supported : &quot; + type);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static GenericMetadataSupport inferFrom(Type type) {
+&nbsp;        Checks.checkNotNull(type, &quot;type&quot;);
+&nbsp;        if (type instanceof Class) {
+&nbsp;            return new FromClassGenericMetadataSupport((Class)type);
+&nbsp;        } else if (type instanceof ParameterizedType) {
+&nbsp;            return new FromParameterizedTypeGenericMetadataSupport((ParameterizedType)type);
+&nbsp;        } else {
+&nbsp;            throw new MockitoException(&quot;Type meta-data for this Type (&quot; + type.getClass().getCanonicalName() + &quot;) is not supported : &quot; + type);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class WildCardBoundedType implements BoundedType {
+&nbsp;        private final WildcardType wildcard;
+&nbsp;
+&nbsp;        public WildCardBoundedType(WildcardType wildcard) {
+&nbsp;            this.wildcard = wildcard;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Type firstBound() {
+&nbsp;            Type[] lowerBounds = this.wildcard.getLowerBounds();
+&nbsp;            Type[] upperBounds = this.wildcard.getUpperBounds();
+&nbsp;            return lowerBounds.length != 0 ? lowerBounds[0] : upperBounds[0];
+&nbsp;        }
+&nbsp;
+&nbsp;        public Type[] interfaceBounds() {
+&nbsp;            return new Type[0];
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object o) {
+&nbsp;            if (this == o) {
+&nbsp;                return true;
+&nbsp;            } else {
+&nbsp;                return o != null &amp;&amp; this.getClass() == o.getClass() ? this.wildcard.equals(((TypeVarBoundedType)o).typeVariable) : false;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.wildcard.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        public String toString() {
+&nbsp;            return &quot;{firstBound=&quot; + this.firstBound() + &quot;, interfaceBounds=[]}&quot;;
+&nbsp;        }
+&nbsp;
+&nbsp;        public WildcardType wildCard() {
+&nbsp;            return this.wildcard;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class TypeVarBoundedType implements BoundedType {
+&nbsp;        private final TypeVariable&lt;?&gt; typeVariable;
+&nbsp;
+&nbsp;        public TypeVarBoundedType(TypeVariable&lt;?&gt; typeVariable) {
+&nbsp;            this.typeVariable = typeVariable;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Type firstBound() {
+&nbsp;            return this.typeVariable.getBounds()[0];
+&nbsp;        }
+&nbsp;
+&nbsp;        public Type[] interfaceBounds() {
+&nbsp;            Type[] interfaceBounds = new Type[this.typeVariable.getBounds().length - 1];
+&nbsp;            System.arraycopy(this.typeVariable.getBounds(), 1, interfaceBounds, 0, this.typeVariable.getBounds().length - 1);
+&nbsp;            return interfaceBounds;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object o) {
+&nbsp;            if (this == o) {
+&nbsp;                return true;
+&nbsp;            } else {
+&nbsp;                return o != null &amp;&amp; this.getClass() == o.getClass() ? this.typeVariable.equals(((TypeVarBoundedType)o).typeVariable) : false;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.typeVariable.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        public String toString() {
+&nbsp;            return &quot;{firstBound=&quot; + this.firstBound() + &quot;, interfaceBounds=&quot; + Arrays.deepToString(this.interfaceBounds()) + &#39;}&#39;;
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeVariable&lt;?&gt; typeVariable() {
+&nbsp;            return this.typeVariable;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface BoundedType extends Type {
+&nbsp;        Type firstBound();
+&nbsp;
+&nbsp;        Type[] interfaceBounds();
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    private static class NotGenericReturnTypeSupport extends GenericMetadataSupport {
+&nbsp;        private final Class&lt;?&gt; returnType;
+&nbsp;
+&nbsp;        public NotGenericReturnTypeSupport(GenericMetadataSupport source, Type genericReturnType) {
+<b class="fc">&nbsp;            this.returnType = (Class)genericReturnType;</b>
+<b class="fc">&nbsp;            this.contextualActualTypeParameters = source.contextualActualTypeParameters;</b>
+&nbsp;            this.registerAllTypeVariables(this.returnType);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Class&lt;?&gt; rawType() {
+<b class="fc">&nbsp;            return this.returnType;</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    private static class GenericArrayReturnType extends GenericMetadataSupport {
+&nbsp;        private final GenericMetadataSupport genericArrayType;
+&nbsp;        private final int arity;
+&nbsp;
+&nbsp;        public GenericArrayReturnType(GenericMetadataSupport genericArrayType, int arity) {
+&nbsp;            this.genericArrayType = genericArrayType;
+&nbsp;            this.arity = arity;
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        public Class&lt;?&gt; rawType() {
+<b class="fc">&nbsp;            Class&lt;?&gt; rawComponentType = this.genericArrayType.rawType();</b>
+<b class="fc">&nbsp;            StringBuilder stringBuilder = new StringBuilder();</b>
+<b class="fc">&nbsp;</b>
+&nbsp;            for(int i = 0; i &lt; this.arity; ++i) {
+&nbsp;                stringBuilder.append(&quot;[&quot;);
+&nbsp;            }
+&nbsp;
+&nbsp;            try {
+&nbsp;                return Class.forName(stringBuilder.append(&quot;L&quot;).append(rawComponentType.getName()).append(&quot;;&quot;).toString(), false, rawComponentType.getClassLoader());
+&nbsp;            } catch (ClassNotFoundException var4) {
+&nbsp;                throw new IllegalStateException(&quot;This was not supposed to happen.&quot;, var4);
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static class TypeVariableReturnType extends GenericMetadataSupport {
+&nbsp;        private final TypeVariable&lt;?&gt; typeVariable;
+&nbsp;        private final TypeVariable&lt;?&gt;[] typeParameters;
+&nbsp;        private Class&lt;?&gt; rawType;
+&nbsp;        private List&lt;Type&gt; extraInterfaces;
+&nbsp;
+&nbsp;        public TypeVariableReturnType(GenericMetadataSupport source, TypeVariable&lt;?&gt;[] typeParameters, TypeVariable&lt;?&gt; typeVariable) {
+&nbsp;            this.typeParameters = typeParameters;
+&nbsp;            this.typeVariable = typeVariable;
+&nbsp;            this.contextualActualTypeParameters = source.contextualActualTypeParameters;
+&nbsp;            this.readTypeParameters();
+&nbsp;            this.readTypeVariables();
+&nbsp;        }
+&nbsp;
+&nbsp;        private void readTypeParameters() {
+&nbsp;            this.registerTypeParametersOn(this.typeParameters);
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        private void readTypeVariables() {</b>
+&nbsp;            Type[] var1 = this.typeVariable.getBounds();
+&nbsp;            int var2 = var1.length;
+&nbsp;
+&nbsp;            for(int var3 = 0; var3 &lt; var2; ++var3) {
+&nbsp;                Type type = var1[var3];
+&nbsp;                this.registerTypeVariablesOn(type);
+&nbsp;            }
+&nbsp;
+&nbsp;            this.registerTypeParametersOn(new TypeVariable[]{this.typeVariable});
+&nbsp;            this.registerTypeVariablesOn(this.getActualTypeArgumentFor(this.typeVariable));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Class&lt;?&gt; rawType() {
+&nbsp;            if (this.rawType == null) {
+&nbsp;                this.rawType = this.extractRawTypeOf(this.typeVariable);
+&nbsp;            }
+&nbsp;
+&nbsp;            return this.rawType;
+&nbsp;        }
+&nbsp;
+&nbsp;        public List&lt;Type&gt; extraInterfaces() {
+&nbsp;            if (this.extraInterfaces != null) {
+&nbsp;                return this.extraInterfaces;
+&nbsp;            } else {
+&nbsp;                Type type = this.extractActualBoundedTypeOf(this.typeVariable);
+&nbsp;                if (type instanceof BoundedType) {
+<b class="fc">&nbsp;                    return this.extraInterfaces = Arrays.asList(((BoundedType)type).interfaceBounds());</b>
+<b class="fc">&nbsp;                } else if (type instanceof ParameterizedType) {</b>
+&nbsp;                    return this.extraInterfaces = Collections.singletonList(type);
+<b class="fc">&nbsp;                } else if (type instanceof Class) {</b>
+<b class="fc">&nbsp;                    return this.extraInterfaces = Collections.emptyList();</b>
+&nbsp;                } else {
+&nbsp;                    throw new MockitoException(&quot;Cannot extract extra-interfaces from &#39;&quot; + this.typeVariable + &quot;&#39; : &#39;&quot; + type + &quot;&#39;&quot;);
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public Class&lt;?&gt;[] rawExtraInterfaces() {
+&nbsp;            List&lt;Type&gt; extraInterfaces = this.extraInterfaces();
+&nbsp;            List&lt;Class&lt;?&gt;&gt; rawExtraInterfaces = new ArrayList();
+&nbsp;            Iterator var3 = extraInterfaces.iterator();
+&nbsp;
+&nbsp;            while(var3.hasNext()) {
+&nbsp;                Type extraInterface = (Type)var3.next();
+&nbsp;                Class&lt;?&gt; rawInterface = this.extractRawTypeOf(extraInterface);
+&nbsp;                if (!this.rawType().equals(rawInterface)) {
+&nbsp;                    rawExtraInterfaces.add(rawInterface);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            return (Class[])rawExtraInterfaces.toArray(new Class[rawExtraInterfaces.size()]);
+&nbsp;        }
+&nbsp;
+&nbsp;        private Type extractActualBoundedTypeOf(Type type) {
+&nbsp;            if (type instanceof TypeVariable) {
+&nbsp;                return this.extractActualBoundedTypeOf((Type)this.contextualActualTypeParameters.get(type));
+&nbsp;            } else if (type instanceof BoundedType) {
+&nbsp;                Type actualFirstBound = this.extractActualBoundedTypeOf(((BoundedType)type).firstBound());
+&nbsp;                return !(actualFirstBound instanceof BoundedType) ? type : actualFirstBound;
+&nbsp;            } else {
+&nbsp;                return type;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static class ParameterizedReturnType extends GenericMetadataSupport {
+&nbsp;        private final ParameterizedType parameterizedType;
+&nbsp;        private final TypeVariable&lt;?&gt;[] typeParameters;
+&nbsp;
+&nbsp;        public ParameterizedReturnType(GenericMetadataSupport source, TypeVariable&lt;?&gt;[] typeParameters, ParameterizedType parameterizedType) {
+&nbsp;            this.parameterizedType = parameterizedType;
+&nbsp;            this.typeParameters = typeParameters;
+&nbsp;            this.contextualActualTypeParameters = source.contextualActualTypeParameters;
+&nbsp;            this.readTypeParameters();
+&nbsp;            this.readTypeVariables();
+&nbsp;        }
+&nbsp;
+&nbsp;        private void readTypeParameters() {
+&nbsp;            this.registerTypeParametersOn(this.typeParameters);
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        private void readTypeVariables() {</b>
+<b class="fc">&nbsp;            this.registerTypeVariablesOn(this.parameterizedType);</b>
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public Class&lt;?&gt; rawType() {</b>
+&nbsp;            return (Class)this.parameterizedType.getRawType();
+&nbsp;        }
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    private static class FromParameterizedTypeGenericMetadataSupport extends GenericMetadataSupport {
+&nbsp;        private final ParameterizedType parameterizedType;
+&nbsp;
+<b class="fc">&nbsp;        public FromParameterizedTypeGenericMetadataSupport(ParameterizedType parameterizedType) {</b>
+&nbsp;            this.parameterizedType = parameterizedType;
+&nbsp;            this.readActualTypeParameters();
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        private void readActualTypeParameters() {</b>
+&nbsp;            this.registerAllTypeVariables(this.parameterizedType);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Class&lt;?&gt; rawType() {
+&nbsp;            return (Class)this.parameterizedType.getRawType();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static class FromClassGenericMetadataSupport extends GenericMetadataSupport {
+&nbsp;        private final Class&lt;?&gt; clazz;
+&nbsp;
+&nbsp;        public FromClassGenericMetadataSupport(Class&lt;?&gt; clazz) {
+&nbsp;            this.clazz = clazz;
+&nbsp;            this.registerTypeParametersOn(clazz.getTypeParameters());
+&nbsp;            this.registerAllTypeVariables(clazz);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Class&lt;?&gt; rawType() {
+&nbsp;            return this.clazz;
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

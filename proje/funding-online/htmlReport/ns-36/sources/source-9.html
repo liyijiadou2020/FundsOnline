@@ -1,0 +1,360 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ElementMatcher</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.matcher</a>
+</div>
+
+<h1>Coverage Summary for Class: ElementMatcher (net.bytebuddy.matcher)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">ElementMatcher$Junction$AbstractBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ElementMatcher$Junction$Conjunction</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ElementMatcher$Junction$Disjunction</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ElementMatcher$Junction$ForNonNullValues</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (31/31)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.matcher;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import javax.annotation.CheckForNull;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;
+&nbsp;public interface ElementMatcher&lt;T&gt; {
+&nbsp;    boolean matches(@CheckForNull T var1);
+&nbsp;
+&nbsp;    public interface Junction&lt;S&gt; extends ElementMatcher&lt;S&gt; {
+&nbsp;        &lt;U extends S&gt; Junction&lt;U&gt; and(ElementMatcher&lt;? super U&gt; var1);
+&nbsp;
+&nbsp;        &lt;U extends S&gt; Junction&lt;U&gt; or(ElementMatcher&lt;? super U&gt; var1);
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public abstract static class ForNonNullValues&lt;W&gt; extends AbstractBase&lt;W&gt; {
+&nbsp;            public ForNonNullValues() {
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean matches(@Nonnull(when = When.MAYBE) W target) {
+&nbsp;                return target != null &amp;&amp; this.doMatch(target);
+&nbsp;            }
+&nbsp;
+&nbsp;            protected abstract boolean doMatch(W var1);
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.getClass() == var1.getClass();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class Disjunction&lt;W&gt; extends AbstractBase&lt;W&gt; {
+&nbsp;            private final List&lt;ElementMatcher&lt;? super W&gt;&gt; matchers;
+&nbsp;
+&nbsp;            public Disjunction(ElementMatcher&lt;? super W&gt;... matcher) {
+&nbsp;                this(Arrays.asList(matcher));
+&nbsp;            }
+&nbsp;
+&nbsp;            public Disjunction(List&lt;ElementMatcher&lt;? super W&gt;&gt; matchers) {
+&nbsp;                this.matchers = new ArrayList(matchers.size());
+&nbsp;                Iterator var2 = matchers.iterator();
+&nbsp;
+&nbsp;                while(var2.hasNext()) {
+&nbsp;                    ElementMatcher&lt;? super W&gt; matcher = (ElementMatcher)var2.next();
+&nbsp;                    if (matcher instanceof Disjunction) {
+&nbsp;                        this.matchers.addAll(((Disjunction)matcher).matchers);
+&nbsp;                    } else {
+&nbsp;                        this.matchers.add(matcher);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean matches(@Nonnull(when = When.MAYBE) W target) {
+&nbsp;                Iterator var2 = this.matchers.iterator();
+&nbsp;
+&nbsp;                ElementMatcher matcher;
+&nbsp;                do {
+&nbsp;                    if (!var2.hasNext()) {
+&nbsp;                        return false;
+&nbsp;                    }
+<b class="fc">&nbsp;</b>
+&nbsp;                    matcher = (ElementMatcher)var2.next();
+&nbsp;                } while(!matcher.matches(target));
+&nbsp;
+&nbsp;                return true;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            public String toString() {</b>
+&nbsp;                StringBuilder stringBuilder = new StringBuilder(&quot;(&quot;);
+&nbsp;                boolean first = true;
+&nbsp;
+&nbsp;                ElementMatcher matcher;
+&nbsp;                for(Iterator var3 = this.matchers.iterator(); var3.hasNext(); stringBuilder.append(matcher)) {
+&nbsp;                    matcher = (ElementMatcher)var3.next();
+&nbsp;                    if (first) {
+<b class="fc">&nbsp;                        first = false;</b>
+&nbsp;                    } else {
+&nbsp;                        stringBuilder.append(&quot; or &quot;);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                return stringBuilder.append(&quot;)&quot;).toString();
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.matchers.equals(((Disjunction)var1).matchers);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.matchers.hashCode();
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class Conjunction&lt;W&gt; extends AbstractBase&lt;W&gt; {
+&nbsp;            private final List&lt;ElementMatcher&lt;? super W&gt;&gt; matchers;
+&nbsp;
+&nbsp;            public Conjunction(ElementMatcher&lt;? super W&gt;... matcher) {
+&nbsp;                this(Arrays.asList(matcher));
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            public Conjunction(List&lt;ElementMatcher&lt;? super W&gt;&gt; matchers) {</b>
+<b class="fc">&nbsp;                this.matchers = new ArrayList(matchers.size());</b>
+<b class="fc">&nbsp;                Iterator var2 = matchers.iterator();</b>
+<b class="fc">&nbsp;</b>
+&nbsp;                while(var2.hasNext()) {
+<b class="fc">&nbsp;                    ElementMatcher&lt;? super W&gt; matcher = (ElementMatcher)var2.next();</b>
+&nbsp;                    if (matcher instanceof Conjunction) {
+<b class="fc">&nbsp;                        this.matchers.addAll(((Conjunction)matcher).matchers);</b>
+&nbsp;                    } else {
+&nbsp;                        this.matchers.add(matcher);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            public boolean matches(@Nonnull(when = When.MAYBE) W target) {</b>
+<b class="fc">&nbsp;                Iterator var2 = this.matchers.iterator();</b>
+&nbsp;
+<b class="fc">&nbsp;                ElementMatcher matcher;</b>
+<b class="fc">&nbsp;                do {</b>
+&nbsp;                    if (!var2.hasNext()) {
+&nbsp;                        return true;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    matcher = (ElementMatcher)var2.next();
+&nbsp;                } while(matcher.matches(target));
+&nbsp;
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;
+&nbsp;            public String toString() {
+&nbsp;                StringBuilder stringBuilder = new StringBuilder(&quot;(&quot;);
+&nbsp;                boolean first = true;
+&nbsp;
+&nbsp;                ElementMatcher matcher;
+&nbsp;                for(Iterator var3 = this.matchers.iterator(); var3.hasNext(); stringBuilder.append(matcher)) {
+&nbsp;                    matcher = (ElementMatcher)var3.next();
+&nbsp;                    if (first) {
+&nbsp;                        first = false;
+&nbsp;                    } else {
+&nbsp;                        stringBuilder.append(&quot; and &quot;);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                return stringBuilder.append(&quot;)&quot;).toString();
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.matchers.equals(((Conjunction)var1).matchers);
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.matchers.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public abstract static class AbstractBase&lt;V&gt; implements Junction&lt;V&gt; {
+&nbsp;            public AbstractBase() {
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            public &lt;U extends V&gt; Junction&lt;U&gt; and(ElementMatcher&lt;? super U&gt; other) {</b>
+<b class="fc">&nbsp;                return new Conjunction(new ElementMatcher[]{this, other});</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;            public &lt;U extends V&gt; Junction&lt;U&gt; or(ElementMatcher&lt;? super U&gt; other) {
+<b class="fc">&nbsp;                return new Disjunction(new ElementMatcher[]{this, other});</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:49</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,159 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ObjenesisBase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.objenesis</a>
+</div>
+
+<h1>Coverage Summary for Class: ObjenesisBase (org.objenesis)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ObjenesisBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.objenesis;
+&nbsp;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;import org.objenesis.instantiator.ObjectInstantiator;
+&nbsp;import org.objenesis.strategy.InstantiatorStrategy;
+&nbsp;
+&nbsp;public class ObjenesisBase implements Objenesis {
+&nbsp;    protected final InstantiatorStrategy strategy;
+&nbsp;    protected ConcurrentHashMap&lt;String, ObjectInstantiator&lt;?&gt;&gt; cache;
+&nbsp;
+&nbsp;    public ObjenesisBase(InstantiatorStrategy strategy) {
+&nbsp;        this(strategy, true);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ObjenesisBase(InstantiatorStrategy strategy, boolean useCache) {
+&nbsp;        if (strategy == null) {
+&nbsp;            throw new IllegalArgumentException(&quot;A strategy can&#39;t be null&quot;);
+&nbsp;        } else {
+&nbsp;            this.strategy = strategy;
+&nbsp;            this.cache = useCache ? new ConcurrentHashMap() : null;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public String toString() {
+&nbsp;        return this.getClass().getName() + &quot; using &quot; + this.strategy.getClass().getName() + (this.cache == null ? &quot; without&quot; : &quot; with&quot;) + &quot; caching&quot;;
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T newInstance(Class&lt;T&gt; clazz) {
+&nbsp;        return this.getInstantiatorOf(clazz).newInstance();
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; ObjectInstantiator&lt;T&gt; getInstantiatorOf(Class&lt;T&gt; clazz) {
+&nbsp;        if (clazz.isPrimitive()) {
+&nbsp;            throw new IllegalArgumentException(&quot;Primitive types can&#39;t be instantiated in Java&quot;);
+&nbsp;        } else if (this.cache == null) {
+&nbsp;            return this.strategy.newInstantiatorOf(clazz);
+&nbsp;        } else {
+&nbsp;            ObjectInstantiator&lt;?&gt; instantiator = (ObjectInstantiator)this.cache.get(clazz.getName());
+&nbsp;            if (instantiator == null) {
+&nbsp;                ObjectInstantiator&lt;?&gt; newInstantiator = this.strategy.newInstantiatorOf(clazz);
+&nbsp;                instantiator = (ObjectInstantiator)this.cache.putIfAbsent(clazz.getName(), newInstantiator);
+&nbsp;                if (instantiator == null) {
+&nbsp;                    instantiator = newInstantiator;
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            return instantiator;</b>
+&nbsp;        }
+&nbsp;    }
+<b class="fc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

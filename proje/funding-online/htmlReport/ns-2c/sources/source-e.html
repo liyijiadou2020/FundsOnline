@@ -1,0 +1,194 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > SuperCall</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.bind.annotation</a>
+</div>
+
+<h1>Coverage Summary for Class: SuperCall (net.bytebuddy.implementation.bind.annotation)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">SuperCall$Binder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/17)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/17)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.bind.annotation;
+&nbsp;
+&nbsp;import java.lang.annotation.Documented;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.lang.annotation.Retention;
+&nbsp;import java.lang.annotation.RetentionPolicy;
+&nbsp;import java.lang.annotation.Target;
+&nbsp;import java.util.concurrent.Callable;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationDescription;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.method.MethodList;
+&nbsp;import net.bytebuddy.description.method.ParameterDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.ForLoadedType;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.implementation.auxiliary.MethodCallProxy;
+&nbsp;import net.bytebuddy.implementation.bind.MethodDelegationBinder;
+&nbsp;import net.bytebuddy.implementation.bind.MethodDelegationBinder.ParameterBinding.Illegal;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.Assigner;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.NullConstant;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;
+&nbsp;@Documented
+&nbsp;@Retention(RetentionPolicy.RUNTIME)
+&nbsp;@Target({ElementType.PARAMETER})
+&nbsp;public @interface SuperCall {
+&nbsp;    boolean serializableProxy() default false;
+&nbsp;
+&nbsp;    boolean fallbackToDefault() default true;
+&nbsp;
+&nbsp;    boolean nullIfImpossible() default false;
+&nbsp;
+&nbsp;    public static enum Binder implements TargetMethodAnnotationDrivenBinder.ParameterBinder&lt;SuperCall&gt; {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private static final MethodDescription.InDefinedShape SERIALIZABLE_PROXY;
+&nbsp;        private static final MethodDescription.InDefinedShape FALLBACK_TO_DEFAULT;
+&nbsp;        private static final MethodDescription.InDefinedShape NULL_IF_IMPOSSIBLE;
+&nbsp;
+&nbsp;        private Binder() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public Class&lt;SuperCall&gt; getHandledType() {
+&nbsp;            return SuperCall.class;
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegationBinder.ParameterBinding&lt;?&gt; bind(AnnotationDescription.Loadable&lt;SuperCall&gt; annotation, MethodDescription source, ParameterDescription target, Implementation.Target implementationTarget, Assigner assigner, Assigner.Typing typing) {
+&nbsp;            TypeDescription targetType = target.getType().asErasure();
+&nbsp;            if (!targetType.represents(Runnable.class) &amp;&amp; !targetType.represents(Callable.class) &amp;&amp; !targetType.represents(Object.class)) {
+&nbsp;                throw new IllegalStateException(&quot;A super method call proxy can only be assigned to Runnable or Callable types: &quot; + target);
+&nbsp;            } else if (source.isConstructor()) {
+&nbsp;                return (MethodDelegationBinder.ParameterBinding)((Boolean)annotation.getValue(NULL_IF_IMPOSSIBLE).resolve(Boolean.class) ? new MethodDelegationBinder.ParameterBinding.Anonymous(NullConstant.INSTANCE) : Illegal.INSTANCE);
+&nbsp;            } else {
+&nbsp;                Implementation.SpecialMethodInvocation specialMethodInvocation = ((Boolean)annotation.getValue(FALLBACK_TO_DEFAULT).resolve(Boolean.class) ? implementationTarget.invokeDominant(source.asSignatureToken()) : implementationTarget.invokeSuper(source.asSignatureToken())).withCheckedCompatibilityTo(source.asTypeToken());
+&nbsp;                Object stackManipulation;
+&nbsp;                if (specialMethodInvocation.isValid()) {
+&nbsp;                    stackManipulation = new MethodCallProxy.AssignableSignatureCall(specialMethodInvocation, (Boolean)annotation.getValue(SERIALIZABLE_PROXY).resolve(Boolean.class));
+&nbsp;                } else {
+&nbsp;                    if (!(Boolean)annotation.getValue(NULL_IF_IMPOSSIBLE).resolve(Boolean.class)) {
+&nbsp;                        return Illegal.INSTANCE;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    stackManipulation = NullConstant.INSTANCE;
+&nbsp;                }
+&nbsp;
+&nbsp;                return new MethodDelegationBinder.ParameterBinding.Anonymous((StackManipulation)stackManipulation);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        static {
+&nbsp;            MethodList&lt;MethodDescription.InDefinedShape&gt; methods = ForLoadedType.of(SuperCall.class).getDeclaredMethods();
+&nbsp;            SERIALIZABLE_PROXY = (MethodDescription.InDefinedShape)((MethodList)methods.filter(ElementMatchers.named(&quot;serializableProxy&quot;))).getOnly();
+&nbsp;            FALLBACK_TO_DEFAULT = (MethodDescription.InDefinedShape)((MethodList)methods.filter(ElementMatchers.named(&quot;fallbackToDefault&quot;))).getOnly();
+<b class="fc">&nbsp;            NULL_IF_IMPOSSIBLE = (MethodDescription.InDefinedShape)((MethodList)methods.filter(ElementMatchers.named(&quot;nullIfImpossible&quot;))).getOnly();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,157 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > VisibilityBridgeStrategy</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.dynamic</a>
+</div>
+
+<h1>Coverage Summary for Class: VisibilityBridgeStrategy (net.bytebuddy.dynamic)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">VisibilityBridgeStrategy$Default</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">VisibilityBridgeStrategy$Default$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">VisibilityBridgeStrategy$Default$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">VisibilityBridgeStrategy$Default$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.dynamic;
+&nbsp;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;
+&nbsp;public interface VisibilityBridgeStrategy {
+&nbsp;    boolean generateVisibilityBridge(MethodDescription var1);
+&nbsp;
+&nbsp;    public static enum Default implements VisibilityBridgeStrategy {
+&nbsp;        ALWAYS {
+&nbsp;            public boolean generateVisibilityBridge(MethodDescription methodDescription) {
+&nbsp;                return true;
+&nbsp;            }
+&nbsp;        },
+&nbsp;        ON_NON_GENERIC_METHOD {
+&nbsp;            public boolean generateVisibilityBridge(MethodDescription methodDescription) {
+&nbsp;                return !methodDescription.isGenerified();
+&nbsp;            }
+&nbsp;        },
+&nbsp;        NEVER {
+&nbsp;            public boolean generateVisibilityBridge(MethodDescription methodDescription) {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;        };
+&nbsp;
+&nbsp;        private Default() {
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,290 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > HashCodeAndEqualsSafeSet</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.util.collections</a>
+</div>
+
+<h1>Coverage Summary for Class: HashCodeAndEqualsSafeSet (org.mockito.internal.util.collections)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">HashCodeAndEqualsSafeSet</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (20/20)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">HashCodeAndEqualsSafeSet$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (25/25)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.util.collections;
+&nbsp;
+&nbsp;import java.lang.reflect.Array;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.Set;
+&nbsp;import org.mockito.internal.util.Checks;
+&nbsp;
+&nbsp;public class HashCodeAndEqualsSafeSet implements Set&lt;Object&gt; {
+&nbsp;    private final HashSet&lt;HashCodeAndEqualsMockWrapper&gt; backingHashSet = new HashSet();
+&nbsp;
+&nbsp;    public HashCodeAndEqualsSafeSet() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public Iterator&lt;Object&gt; iterator() {
+&nbsp;        return new Iterator&lt;Object&gt;() {
+&nbsp;            private final Iterator&lt;HashCodeAndEqualsMockWrapper&gt; iterator;
+&nbsp;
+&nbsp;            {
+&nbsp;                this.iterator = HashCodeAndEqualsSafeSet.this.backingHashSet.iterator();
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean hasNext() {
+<b class="fc">&nbsp;                return this.iterator.hasNext();</b>
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+&nbsp;            public Object next() {
+&nbsp;                return ((HashCodeAndEqualsMockWrapper)this.iterator.next()).get();
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            public void remove() {</b>
+<b class="fc">&nbsp;                this.iterator.remove();</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public int size() {
+&nbsp;        return this.backingHashSet.size();
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public boolean isEmpty() {
+&nbsp;        return this.backingHashSet.isEmpty();
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean contains(Object mock) {
+&nbsp;        return this.backingHashSet.contains(HashCodeAndEqualsMockWrapper.of(mock));
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean add(Object mock) {
+&nbsp;        return this.backingHashSet.add(HashCodeAndEqualsMockWrapper.of(mock));
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean remove(Object mock) {
+&nbsp;        return this.backingHashSet.remove(HashCodeAndEqualsMockWrapper.of(mock));
+&nbsp;    }
+&nbsp;
+&nbsp;    public void clear() {
+&nbsp;        this.backingHashSet.clear();
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object clone() throws CloneNotSupportedException {
+&nbsp;        throw new CloneNotSupportedException();
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean equals(Object o) {
+<b class="fc">&nbsp;        if (!(o instanceof HashCodeAndEqualsSafeSet)) {</b>
+&nbsp;            return false;
+&nbsp;        } else {
+&nbsp;            HashCodeAndEqualsSafeSet that = (HashCodeAndEqualsSafeSet)o;
+&nbsp;            return this.backingHashSet.equals(that.backingHashSet);
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int hashCode() {
+&nbsp;        return this.backingHashSet.hashCode();
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object[] toArray() {
+&nbsp;        return this.unwrapTo(new Object[this.size()]);
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T[] toArray(T[] typedArray) {
+&nbsp;        T[] array = typedArray.length &gt;= this.size() ? typedArray : (Object[])Array.newInstance(typedArray.getClass().getComponentType(), this.size());
+&nbsp;        return this.unwrapTo(array);
+&nbsp;    }
+&nbsp;
+&nbsp;    private &lt;T&gt; T[] unwrapTo(T[] array) {
+&nbsp;        Iterator&lt;Object&gt; iterator = this.iterator();
+&nbsp;        int i = 0;
+&nbsp;
+&nbsp;        for(int objectsLength = array.length; i &lt; objectsLength; ++i) {
+&nbsp;            if (iterator.hasNext()) {
+&nbsp;                array[i] = iterator.next();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return array;
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean removeAll(Collection&lt;?&gt; mocks) {
+&nbsp;        return this.backingHashSet.removeAll(this.asWrappedMocks(mocks));
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean containsAll(Collection&lt;?&gt; mocks) {
+&nbsp;        return this.backingHashSet.containsAll(this.asWrappedMocks(mocks));
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean addAll(Collection&lt;?&gt; mocks) {
+&nbsp;        return this.backingHashSet.addAll(this.asWrappedMocks(mocks));
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean retainAll(Collection&lt;?&gt; mocks) {
+&nbsp;        return this.backingHashSet.retainAll(this.asWrappedMocks(mocks));
+&nbsp;    }
+&nbsp;
+&nbsp;    private HashSet&lt;HashCodeAndEqualsMockWrapper&gt; asWrappedMocks(Collection&lt;?&gt; mocks) {
+&nbsp;        Checks.checkNotNull(mocks, &quot;Passed collection should notify() be null&quot;);
+&nbsp;        HashSet&lt;HashCodeAndEqualsMockWrapper&gt; hashSet = new HashSet();
+&nbsp;        Iterator var3 = mocks.iterator();
+&nbsp;
+&nbsp;        while(var3.hasNext()) {
+&nbsp;            Object mock = var3.next();
+&nbsp;
+&nbsp;            assert !(mock instanceof HashCodeAndEqualsMockWrapper) : &quot;WRONG&quot;;
+&nbsp;
+&nbsp;            hashSet.add(HashCodeAndEqualsMockWrapper.of(mock));
+&nbsp;        }
+&nbsp;
+&nbsp;        return hashSet;
+&nbsp;    }
+&nbsp;
+&nbsp;    public String toString() {
+<b class="fc">&nbsp;        return this.backingHashSet.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static HashCodeAndEqualsSafeSet of(Object... mocks) {
+&nbsp;        return of((Iterable)Arrays.asList(mocks));
+&nbsp;    }
+&nbsp;
+&nbsp;    public static HashCodeAndEqualsSafeSet of(Iterable&lt;Object&gt; objects) {
+&nbsp;        HashCodeAndEqualsSafeSet hashCodeAndEqualsSafeSet = new HashCodeAndEqualsSafeSet();
+<b class="fc">&nbsp;        if (objects != null) {</b>
+<b class="fc">&nbsp;            Iterator var2 = objects.iterator();</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            while(var2.hasNext()) {</b>
+<b class="fc">&nbsp;                Object mock = var2.next();</b>
+<b class="fc">&nbsp;                hashCodeAndEqualsSafeSet.add(mock);</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        return hashCodeAndEqualsSafeSet;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

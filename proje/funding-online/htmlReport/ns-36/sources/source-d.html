@@ -1,0 +1,207 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > FilterableList</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.matcher</a>
+</div>
+
+<h1>Coverage Summary for Class: FilterableList (net.bytebuddy.matcher)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">FilterableList$AbstractBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FilterableList$Empty</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.matcher;
+&nbsp;
+&nbsp;import java.util.AbstractList;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public interface FilterableList&lt;T, S extends FilterableList&lt;T, S&gt;&gt; extends List&lt;T&gt; {
+&nbsp;    S filter(ElementMatcher&lt;? super T&gt; var1);
+&nbsp;
+&nbsp;    T getOnly();
+&nbsp;
+&nbsp;    S subList(int var1, int var2);
+&nbsp;
+&nbsp;    public abstract static class AbstractBase&lt;T, S extends FilterableList&lt;T, S&gt;&gt; extends AbstractList&lt;T&gt; implements FilterableList&lt;T, S&gt; {
+&nbsp;        private static final int ONLY = 0;
+&nbsp;
+&nbsp;        public AbstractBase() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public S filter(ElementMatcher&lt;? super T&gt; elementMatcher) {
+&nbsp;            List&lt;T&gt; filteredElements = new ArrayList(this.size());
+&nbsp;            Iterator var3 = this.iterator();
+&nbsp;
+&nbsp;            while(var3.hasNext()) {
+&nbsp;                T value = var3.next();
+&nbsp;                if (elementMatcher.matches(value)) {
+&nbsp;                    filteredElements.add(value);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            return (FilterableList)(filteredElements.size() == this.size() ? this : this.wrap(filteredElements));
+&nbsp;        }
+&nbsp;
+&nbsp;        public T getOnly() {
+&nbsp;            if (this.size() != 1) {
+&nbsp;                throw new IllegalStateException(&quot;size = &quot; + this.size());
+&nbsp;            } else {
+&nbsp;                return this.get(0);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public S subList(int fromIndex, int toIndex) {
+&nbsp;            return this.wrap(super.subList(fromIndex, toIndex));
+&nbsp;        }
+&nbsp;
+&nbsp;        protected abstract S wrap(List&lt;T&gt; var1);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class Empty&lt;T, S extends FilterableList&lt;T, S&gt;&gt; extends AbstractList&lt;T&gt; implements FilterableList&lt;T, S&gt; {
+&nbsp;        public Empty() {
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        public T get(int index) {
+&nbsp;            throw new IndexOutOfBoundsException(&quot;index = &quot; + index);
+&nbsp;        }
+&nbsp;
+&nbsp;        public int size() {
+&nbsp;            return 0;
+&nbsp;        }
+&nbsp;
+&nbsp;        public T getOnly() {
+&nbsp;            throw new IllegalStateException(&quot;size = 0&quot;);
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public S filter(ElementMatcher&lt;? super T&gt; elementMatcher) {</b>
+&nbsp;            return this;
+&nbsp;        }
+&nbsp;
+&nbsp;        public S subList(int fromIndex, int toIndex) {
+&nbsp;            if (fromIndex == toIndex &amp;&amp; toIndex == 0) {
+&nbsp;                return this;
+&nbsp;            } else if (fromIndex &gt; toIndex) {
+&nbsp;                throw new IllegalArgumentException(&quot;fromIndex(&quot; + fromIndex + &quot;) &gt; toIndex(&quot; + toIndex + &quot;)&quot;);
+&nbsp;            } else {
+&nbsp;                throw new IndexOutOfBoundsException(&quot;fromIndex = &quot; + fromIndex);
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

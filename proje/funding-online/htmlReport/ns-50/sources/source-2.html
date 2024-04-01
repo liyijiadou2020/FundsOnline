@@ -1,0 +1,202 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > MockInjection</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.configuration.injection</a>
+</div>
+
+<h1>Coverage Summary for Class: MockInjection (org.mockito.internal.configuration.injection)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MockInjection</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MockInjection$OngoingMockInjection</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (20/20)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (21/21)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.configuration.injection;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.Set;
+&nbsp;import org.mockito.internal.util.Checks;
+&nbsp;import org.mockito.internal.util.collections.Sets;
+&nbsp;
+&nbsp;public final class MockInjection {
+&nbsp;    public static OngoingMockInjection onField(Field field, Object ofInstance) {
+&nbsp;        return new OngoingMockInjection(field, ofInstance);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static OngoingMockInjection onFields(Set&lt;Field&gt; fields, Object ofInstance) {
+&nbsp;        return new OngoingMockInjection(fields, ofInstance);
+&nbsp;    }
+&nbsp;
+&nbsp;    private MockInjection() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class OngoingMockInjection {
+&nbsp;        private final Set&lt;Field&gt; fields;
+&nbsp;        private final Set&lt;Object&gt; mocks;
+&nbsp;        private final Object fieldOwner;
+&nbsp;        private final MockInjectionStrategy injectionStrategies;
+&nbsp;        private final MockInjectionStrategy postInjectionStrategies;
+&nbsp;
+&nbsp;        private OngoingMockInjection(Field field, Object fieldOwner) {
+&nbsp;            this(Collections.singleton(field), fieldOwner);
+&nbsp;        }
+&nbsp;
+&nbsp;        private OngoingMockInjection(Set&lt;Field&gt; fields, Object fieldOwner) {
+&nbsp;            this.fields = new HashSet();
+&nbsp;            this.mocks = Sets.newMockSafeHashSet(new Object[0]);
+<b class="fc">&nbsp;            this.injectionStrategies = MockInjectionStrategy.nop();</b>
+&nbsp;            this.postInjectionStrategies = MockInjectionStrategy.nop();
+&nbsp;            this.fieldOwner = Checks.checkNotNull(fieldOwner, &quot;fieldOwner&quot;);
+&nbsp;            this.fields.addAll((Collection)Checks.checkItemsNotNull(fields, &quot;fields&quot;));
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public OngoingMockInjection withMocks(Set&lt;Object&gt; mocks) {</b>
+<b class="fc">&nbsp;            this.mocks.addAll((Collection)Checks.checkNotNull(mocks, &quot;mocks&quot;));</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public OngoingMockInjection tryConstructorInjection() {</b>
+&nbsp;            this.injectionStrategies.thenTry(new ConstructorInjection());
+&nbsp;            return this;
+&nbsp;        }
+&nbsp;
+&nbsp;        public OngoingMockInjection tryPropertyOrFieldInjection() {
+<b class="fc">&nbsp;            this.injectionStrategies.thenTry(new PropertyAndSetterInjection());</b>
+<b class="fc">&nbsp;            return this;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public OngoingMockInjection handleSpyAnnotation() {
+&nbsp;            this.postInjectionStrategies.thenTry(new SpyOnInjectedFieldsHandler());
+<b class="fc">&nbsp;            return this;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public void apply() {
+&nbsp;            Iterator var1 = this.fields.iterator();
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            while(var1.hasNext()) {</b>
+&nbsp;                Field field = (Field)var1.next();
+&nbsp;                this.injectionStrategies.process(field, this.fieldOwner, this.mocks);
+&nbsp;                this.postInjectionStrategies.process(field, this.fieldOwner, this.mocks);
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

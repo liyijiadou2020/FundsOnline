@@ -1,0 +1,147 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > MissingInvocationChecker</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.verification.checkers</a>
+</div>
+
+<h1>Coverage Summary for Class: MissingInvocationChecker (org.mockito.internal.verification.checkers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MissingInvocationChecker</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.verification.checkers;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;import org.mockito.internal.exceptions.Reporter;
+&nbsp;import org.mockito.internal.invocation.InvocationsFinder;
+&nbsp;import org.mockito.internal.reporting.SmartPrinter;
+&nbsp;import org.mockito.internal.util.collections.ListUtil;
+&nbsp;import org.mockito.internal.verification.api.InOrderContext;
+&nbsp;import org.mockito.internal.verification.argumentmatching.ArgumentMatchingTool;
+&nbsp;import org.mockito.invocation.Invocation;
+&nbsp;import org.mockito.invocation.Location;
+&nbsp;import org.mockito.invocation.MatchableInvocation;
+&nbsp;
+&nbsp;public class MissingInvocationChecker {
+&nbsp;    private MissingInvocationChecker() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void checkMissingInvocation(List&lt;Invocation&gt; invocations, MatchableInvocation wanted) {
+&nbsp;        List&lt;Invocation&gt; actualInvocations = InvocationsFinder.findInvocations(invocations, wanted);
+&nbsp;        if (actualInvocations.isEmpty()) {
+&nbsp;            Invocation similar = InvocationsFinder.findSimilarInvocation(invocations, wanted);
+&nbsp;            if (similar == null) {
+&nbsp;                throw Reporter.wantedButNotInvoked(wanted, invocations);
+&nbsp;            } else {
+&nbsp;                Integer[] indexesOfSuspiciousArgs = ArgumentMatchingTool.getSuspiciouslyNotMatchingArgsIndexes(wanted.getMatchers(), similar.getArguments());
+<b class="fc">&nbsp;                Set&lt;String&gt; classesWithSameSimpleName = ArgumentMatchingTool.getNotMatchingArgsWithSameName(wanted.getMatchers(), similar.getArguments());</b>
+&nbsp;                SmartPrinter smartPrinter = new SmartPrinter(wanted, invocations, indexesOfSuspiciousArgs, classesWithSameSimpleName);
+<b class="fc">&nbsp;                List&lt;Location&gt; actualLocations = ListUtil.convert(invocations, new ListUtil.Converter&lt;Invocation, Location&gt;() {</b>
+&nbsp;                    public Location convert(Invocation invocation) {
+&nbsp;                        return invocation.getLocation();
+&nbsp;                    }
+&nbsp;                });
+&nbsp;                throw Reporter.argumentsAreDifferent(smartPrinter.getWanted(), smartPrinter.getActuals(), actualLocations);
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void checkMissingInvocation(List&lt;Invocation&gt; invocations, MatchableInvocation wanted, InOrderContext context) {
+&nbsp;        List&lt;Invocation&gt; chunk = InvocationsFinder.findAllMatchingUnverifiedChunks(invocations, wanted, context);
+&nbsp;        if (chunk.isEmpty()) {
+&nbsp;            Invocation previousInOrder = InvocationsFinder.findPreviousVerifiedInOrder(invocations, context);
+&nbsp;            if (previousInOrder != null) {
+&nbsp;                throw Reporter.wantedButNotInvokedInOrder(wanted, previousInOrder);
+&nbsp;            } else {
+&nbsp;                checkMissingInvocation(invocations, wanted);
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

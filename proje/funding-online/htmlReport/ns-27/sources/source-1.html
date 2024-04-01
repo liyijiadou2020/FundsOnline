@@ -1,0 +1,419 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ConstructorStrategy</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.dynamic.scaffold.subclass</a>
+</div>
+
+<h1>Coverage Summary for Class: ConstructorStrategy (net.bytebuddy.dynamic.scaffold.subclass)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">ConstructorStrategy$Default</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (19/19)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ConstructorStrategy$Default$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ConstructorStrategy$Default$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ConstructorStrategy$Default$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ConstructorStrategy$Default$4</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ConstructorStrategy$Default$5</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (32/32)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.dynamic.scaffold.subclass;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.method.MethodList;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.Generic;
+&nbsp;import net.bytebuddy.dynamic.scaffold.MethodRegistry;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.implementation.MethodCall;
+&nbsp;import net.bytebuddy.implementation.SuperMethodCall;
+&nbsp;import net.bytebuddy.implementation.attribute.MethodAttributeAppender;
+&nbsp;import net.bytebuddy.implementation.attribute.MethodAttributeAppender.ForInstrumentedMethod;
+&nbsp;import net.bytebuddy.implementation.attribute.MethodAttributeAppender.NoOp;
+&nbsp;import net.bytebuddy.matcher.ElementMatcher;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;import net.bytebuddy.matcher.LatentMatcher;
+&nbsp;
+&nbsp;public interface ConstructorStrategy {
+&nbsp;    List&lt;MethodDescription.Token&gt; extractConstructors(TypeDescription var1);
+&nbsp;
+&nbsp;    MethodRegistry inject(TypeDescription var1, MethodRegistry var2);
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class ForDefaultConstructor implements ConstructorStrategy {
+&nbsp;        private final ElementMatcher&lt;? super MethodDescription&gt; elementMatcher;
+&nbsp;        private final MethodAttributeAppender.Factory methodAttributeAppenderFactory;
+&nbsp;
+&nbsp;        public ForDefaultConstructor() {
+&nbsp;            this((ElementMatcher)ElementMatchers.any());
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForDefaultConstructor(ElementMatcher&lt;? super MethodDescription&gt; elementMatcher) {
+&nbsp;            this(elementMatcher, NoOp.INSTANCE);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForDefaultConstructor(MethodAttributeAppender.Factory methodAttributeAppenderFactory) {
+&nbsp;            this(ElementMatchers.any(), methodAttributeAppenderFactory);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForDefaultConstructor(ElementMatcher&lt;? super MethodDescription&gt; elementMatcher, MethodAttributeAppender.Factory methodAttributeAppenderFactory) {
+&nbsp;            this.elementMatcher = elementMatcher;
+&nbsp;            this.methodAttributeAppenderFactory = methodAttributeAppenderFactory;
+&nbsp;        }
+&nbsp;
+&nbsp;        public List&lt;MethodDescription.Token&gt; extractConstructors(TypeDescription instrumentedType) {
+&nbsp;            TypeDescription.Generic superClass = instrumentedType.getSuperClass();
+&nbsp;            if (superClass == null) {
+&nbsp;                throw new IllegalArgumentException(&quot;Cannot extract constructors for &quot; + instrumentedType);
+&nbsp;            } else if (((MethodList)superClass.getDeclaredMethods().filter(ElementMatchers.isConstructor())).isEmpty()) {
+&nbsp;                throw new IllegalStateException(&quot;Cannot define default constructor for class without super class constructor&quot;);
+&nbsp;            } else {
+&nbsp;                return Collections.singletonList(new MethodDescription.Token(1));
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodRegistry inject(TypeDescription instrumentedType, MethodRegistry methodRegistry) {
+&nbsp;            TypeDescription.Generic superClass = instrumentedType.getSuperClass();
+<b class="fc">&nbsp;            if (superClass == null) {</b>
+&nbsp;                throw new IllegalArgumentException(&quot;Cannot inject constructors for &quot; + instrumentedType);
+&nbsp;            } else {
+&nbsp;                MethodList&lt;?&gt; candidates = (MethodList)superClass.getDeclaredMethods().filter(ElementMatchers.isConstructor().and(this.elementMatcher));
+&nbsp;                if (candidates.isEmpty()) {
+&nbsp;                    throw new IllegalStateException(&quot;No possible candidate for super constructor invocation in &quot; + superClass);
+&nbsp;                } else {
+<b class="fc">&nbsp;                    if (!((MethodList)candidates.filter(ElementMatchers.takesArguments(0))).isEmpty()) {</b>
+&nbsp;                        candidates = (MethodList)candidates.filter(ElementMatchers.takesArguments(0));
+&nbsp;                    } else if (candidates.size() &gt; 1) {
+<b class="fc">&nbsp;                        throw new IllegalStateException(&quot;More than one possible super constructor for constructor delegation: &quot; + candidates);</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    MethodCall methodCall = MethodCall.invoke((MethodDescription)candidates.getOnly());
+&nbsp;
+<b class="fc">&nbsp;                    TypeDescription typeDescription;</b>
+&nbsp;                    for(Iterator var6 = ((MethodDescription)candidates.getOnly()).getParameters().asTypeList().asErasures().iterator(); var6.hasNext(); methodCall = ((MethodCall)methodCall).with(new Object[]{typeDescription.getDefaultValue()})) {
+&nbsp;                        typeDescription = (TypeDescription)var6.next();
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return methodRegistry.append(new LatentMatcher.Resolved(ElementMatchers.isConstructor().and(ElementMatchers.takesArguments(0))), new MethodRegistry.Handler.ForImplementation((Implementation)methodCall), this.methodAttributeAppenderFactory, net.bytebuddy.dynamic.Transformer.NoOp.make());
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public boolean equals(Object var1) {</b>
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.elementMatcher.equals(((ForDefaultConstructor)var1).elementMatcher)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.methodAttributeAppenderFactory.equals(((ForDefaultConstructor)var1).methodAttributeAppenderFactory);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return (this.getClass().hashCode() * 31 + this.elementMatcher.hashCode()) * 31 + this.methodAttributeAppenderFactory.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum Default implements ConstructorStrategy {
+&nbsp;        NO_CONSTRUCTORS {
+&nbsp;            protected List&lt;MethodDescription.Token&gt; doExtractConstructors(TypeDescription superClass) {
+&nbsp;                return Collections.emptyList();
+&nbsp;            }
+&nbsp;
+&nbsp;            protected MethodRegistry doInject(MethodRegistry methodRegistry, MethodAttributeAppender.Factory methodAttributeAppenderFactory) {
+&nbsp;                return methodRegistry;
+&nbsp;            }
+&nbsp;        },
+<b class="fc">&nbsp;        DEFAULT_CONSTRUCTOR {</b>
+&nbsp;            protected List&lt;MethodDescription.Token&gt; doExtractConstructors(TypeDescription instrumentedType) {
+&nbsp;                TypeDescription.Generic superClass = instrumentedType.getSuperClass();
+&nbsp;                MethodList&lt;?&gt; defaultConstructors = superClass == null ? new MethodList.Empty() : (MethodList)superClass.getDeclaredMethods().filter(ElementMatchers.isConstructor().and(ElementMatchers.takesArguments(0)).and(ElementMatchers.isVisibleTo(instrumentedType)));
+&nbsp;                if (((MethodList)defaultConstructors).size() == 1) {
+&nbsp;                    return Collections.singletonList(new MethodDescription.Token(1));
+&nbsp;                } else {
+&nbsp;                    throw new IllegalArgumentException(instrumentedType.getSuperClass() + &quot; declares no constructor that is visible to &quot; + instrumentedType);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            protected MethodRegistry doInject(MethodRegistry methodRegistry, MethodAttributeAppender.Factory methodAttributeAppenderFactory) {
+&nbsp;                return methodRegistry.append(new LatentMatcher.Resolved(ElementMatchers.isConstructor()), new MethodRegistry.Handler.ForImplementation(SuperMethodCall.INSTANCE), methodAttributeAppenderFactory, net.bytebuddy.dynamic.Transformer.NoOp.make());
+&nbsp;            }
+&nbsp;        },
+&nbsp;        IMITATE_SUPER_CLASS {
+&nbsp;            protected List&lt;MethodDescription.Token&gt; doExtractConstructors(TypeDescription instrumentedType) {
+&nbsp;                TypeDescription.Generic superClass = instrumentedType.getSuperClass();
+&nbsp;                return ((MethodList)(superClass == null ? new MethodList.Empty() : (MethodList)superClass.getDeclaredMethods().filter(ElementMatchers.isConstructor().and(ElementMatchers.isVisibleTo(instrumentedType))))).asTokenList(ElementMatchers.is(instrumentedType));
+&nbsp;            }
+&nbsp;
+&nbsp;            public MethodRegistry doInject(MethodRegistry methodRegistry, MethodAttributeAppender.Factory methodAttributeAppenderFactory) {
+&nbsp;                return methodRegistry.append(new LatentMatcher.Resolved(ElementMatchers.isConstructor()), new MethodRegistry.Handler.ForImplementation(SuperMethodCall.INSTANCE), methodAttributeAppenderFactory, net.bytebuddy.dynamic.Transformer.NoOp.make());
+<b class="fc">&nbsp;            }</b>
+&nbsp;        },
+&nbsp;        IMITATE_SUPER_CLASS_PUBLIC {
+&nbsp;            protected List&lt;MethodDescription.Token&gt; doExtractConstructors(TypeDescription instrumentedType) {
+&nbsp;                TypeDescription.Generic superClass = instrumentedType.getSuperClass();
+&nbsp;                return ((MethodList)(superClass == null ? new MethodList.Empty() : (MethodList)superClass.getDeclaredMethods().filter(ElementMatchers.isPublic().and(ElementMatchers.isConstructor())))).asTokenList(ElementMatchers.is(instrumentedType));
+&nbsp;            }
+&nbsp;
+&nbsp;            public MethodRegistry doInject(MethodRegistry methodRegistry, MethodAttributeAppender.Factory methodAttributeAppenderFactory) {
+&nbsp;                return methodRegistry.append(new LatentMatcher.Resolved(ElementMatchers.isConstructor()), new MethodRegistry.Handler.ForImplementation(SuperMethodCall.INSTANCE), methodAttributeAppenderFactory, net.bytebuddy.dynamic.Transformer.NoOp.make());
+&nbsp;            }
+&nbsp;        },
+&nbsp;        IMITATE_SUPER_CLASS_OPENING {
+&nbsp;            protected List&lt;MethodDescription.Token&gt; doExtractConstructors(TypeDescription instrumentedType) {
+&nbsp;                TypeDescription.Generic superClass = instrumentedType.getSuperClass();
+&nbsp;                return ((MethodList)(superClass == null ? new MethodList.Empty() : (MethodList)superClass.getDeclaredMethods().filter(ElementMatchers.isConstructor().and(ElementMatchers.isVisibleTo(instrumentedType))))).asTokenList(ElementMatchers.is(instrumentedType));
+&nbsp;            }
+&nbsp;
+&nbsp;            public MethodRegistry doInject(MethodRegistry methodRegistry, MethodAttributeAppender.Factory methodAttributeAppenderFactory) {
+&nbsp;                return methodRegistry.append(new LatentMatcher.Resolved(ElementMatchers.isConstructor()), new MethodRegistry.Handler.ForImplementation(SuperMethodCall.INSTANCE), methodAttributeAppenderFactory, net.bytebuddy.dynamic.Transformer.NoOp.make());
+&nbsp;            }
+&nbsp;
+&nbsp;            protected int resolveModifier(int modifiers) {
+<b class="fc">&nbsp;                return 1;</b>
+&nbsp;            }
+&nbsp;        };
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        private Default() {</b>
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        public List&lt;MethodDescription.Token&gt; extractConstructors(TypeDescription instrumentedType) {
+&nbsp;            List&lt;MethodDescription.Token&gt; tokens = this.doExtractConstructors(instrumentedType);
+&nbsp;            List&lt;MethodDescription.Token&gt; stripped = new ArrayList(tokens.size());
+&nbsp;            Iterator var4 = tokens.iterator();
+<b class="fc">&nbsp;</b>
+&nbsp;            while(var4.hasNext()) {
+&nbsp;                MethodDescription.Token token = (MethodDescription.Token)var4.next();
+<b class="fc">&nbsp;                stripped.add(new MethodDescription.Token(token.getName(), this.resolveModifier(token.getModifiers()), token.getTypeVariableTokens(), token.getReturnType(), token.getParameterTokens(), token.getExceptionTypes(), token.getAnnotations(), token.getDefaultValue(), Generic.UNDEFINED));</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            return stripped;
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        protected int resolveModifier(int modifiers) {
+&nbsp;            return modifiers;
+&nbsp;        }
+&nbsp;
+&nbsp;        protected abstract List&lt;MethodDescription.Token&gt; doExtractConstructors(TypeDescription var1);
+&nbsp;
+&nbsp;        public MethodRegistry inject(TypeDescription instrumentedType, MethodRegistry methodRegistry) {
+<b class="fc">&nbsp;            return this.doInject(methodRegistry, NoOp.INSTANCE);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        protected abstract MethodRegistry doInject(MethodRegistry var1, MethodAttributeAppender.Factory var2);</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public ConstructorStrategy with(MethodAttributeAppender.Factory methodAttributeAppenderFactory) {</b>
+<b class="fc">&nbsp;            return new WithMethodAttributeAppenderFactory(this, methodAttributeAppenderFactory);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public ConstructorStrategy withInheritedAnnotations() {</b>
+&nbsp;            return new WithMethodAttributeAppenderFactory(this, ForInstrumentedMethod.EXCLUDING_RECEIVER);
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        @Enhance
+&nbsp;        protected static class WithMethodAttributeAppenderFactory implements ConstructorStrategy {
+&nbsp;            private final Default delegate;
+&nbsp;            private final MethodAttributeAppender.Factory methodAttributeAppenderFactory;
+&nbsp;
+&nbsp;            protected WithMethodAttributeAppenderFactory(Default delegate, MethodAttributeAppender.Factory methodAttributeAppenderFactory) {
+&nbsp;                this.delegate = delegate;
+&nbsp;                this.methodAttributeAppenderFactory = methodAttributeAppenderFactory;
+&nbsp;            }
+&nbsp;
+&nbsp;            public List&lt;MethodDescription.Token&gt; extractConstructors(TypeDescription instrumentedType) {
+&nbsp;                return this.delegate.extractConstructors(instrumentedType);
+&nbsp;            }
+&nbsp;
+&nbsp;            public MethodRegistry inject(TypeDescription instrumentedType, MethodRegistry methodRegistry) {
+&nbsp;                return this.delegate.doInject(methodRegistry, this.methodAttributeAppenderFactory);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+<b class="fc">&nbsp;                    return false;</b>
+&nbsp;                } else if (!this.delegate.equals(((WithMethodAttributeAppenderFactory)var1).delegate)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.methodAttributeAppenderFactory.equals(((WithMethodAttributeAppenderFactory)var1).methodAttributeAppenderFactory);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return (this.getClass().hashCode() * 31 + this.delegate.hashCode()) * 31 + this.methodAttributeAppenderFactory.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

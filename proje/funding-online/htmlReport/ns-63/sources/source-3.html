@@ -1,0 +1,179 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > DefaultMockingDetails</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.util</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultMockingDetails (org.mockito.internal.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultMockingDetails</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.util;
+&nbsp;
+&nbsp;import java.util.Collection;
+&nbsp;import org.mockito.MockingDetails;
+&nbsp;import org.mockito.exceptions.misusing.NotAMockException;
+&nbsp;import org.mockito.internal.debugging.InvocationsPrinter;
+&nbsp;import org.mockito.internal.stubbing.InvocationContainerImpl;
+&nbsp;import org.mockito.invocation.Invocation;
+&nbsp;import org.mockito.invocation.MockHandler;
+&nbsp;import org.mockito.mock.MockCreationSettings;
+&nbsp;import org.mockito.stubbing.Stubbing;
+&nbsp;
+&nbsp;public class DefaultMockingDetails implements MockingDetails {
+&nbsp;    private final Object toInspect;
+&nbsp;
+&nbsp;    public DefaultMockingDetails(Object toInspect) {
+&nbsp;        this.toInspect = toInspect;
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public boolean isMock() {</b>
+<b class="fc">&nbsp;        return MockUtil.isMock(this.toInspect);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isSpy() {
+&nbsp;        return MockUtil.isSpy(this.toInspect);
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Collection&lt;Invocation&gt; getInvocations() {
+&nbsp;        return this.getInvocationContainer().getInvocations();
+&nbsp;    }
+&nbsp;
+&nbsp;    private InvocationContainerImpl getInvocationContainer() {
+&nbsp;        this.assertGoodMock();
+&nbsp;        return MockUtil.getInvocationContainer(this.toInspect);
+&nbsp;    }
+&nbsp;
+&nbsp;    public MockCreationSettings&lt;?&gt; getMockCreationSettings() {
+&nbsp;        return this.mockHandler().getMockSettings();
+&nbsp;    }
+&nbsp;
+&nbsp;    public Collection&lt;Stubbing&gt; getStubbings() {
+&nbsp;        return this.getInvocationContainer().getStubbingsAscending();
+&nbsp;    }
+&nbsp;
+&nbsp;    public String printInvocations() {
+&nbsp;        this.assertGoodMock();
+&nbsp;        return (new InvocationsPrinter()).printInvocations(this.toInspect);
+&nbsp;    }
+&nbsp;
+&nbsp;    public MockHandler getMockHandler() {
+&nbsp;        return this.mockHandler();
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object getMock() {
+&nbsp;        return this.toInspect;
+&nbsp;    }
+&nbsp;
+&nbsp;    private MockHandler&lt;?&gt; mockHandler() {
+&nbsp;        this.assertGoodMock();
+&nbsp;        return MockUtil.getMockHandler(this.toInspect);
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    private void assertGoodMock() {
+&nbsp;        if (this.toInspect == null) {
+&nbsp;            throw new NotAMockException(&quot;Argument passed to Mockito.mockingDetails() should be a mock, but is null!&quot;);
+&nbsp;        } else if (!this.isMock()) {
+<b class="fc">&nbsp;            throw new NotAMockException(&quot;Argument passed to Mockito.mockingDetails() should be a mock, but is an instance of &quot; + this.toInspect.getClass() + &quot;!&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

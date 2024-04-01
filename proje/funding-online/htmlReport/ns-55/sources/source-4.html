@@ -1,0 +1,238 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > MockMethodInterceptor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.creation.bytebuddy</a>
+</div>
+
+<h1>Coverage Summary for Class: MockMethodInterceptor (org.mockito.internal.creation.bytebuddy)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MockMethodInterceptor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MockMethodInterceptor$DispatcherDefaultingToRealMethod</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.creation.bytebuddy;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.ObjectInputStream;
+&nbsp;import java.io.ObjectStreamException;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.util.concurrent.Callable;
+&nbsp;import net.bytebuddy.implementation.bind.annotation.AllArguments;
+&nbsp;import net.bytebuddy.implementation.bind.annotation.Argument;
+&nbsp;import net.bytebuddy.implementation.bind.annotation.BindingPriority;
+&nbsp;import net.bytebuddy.implementation.bind.annotation.FieldValue;
+&nbsp;import net.bytebuddy.implementation.bind.annotation.Origin;
+&nbsp;import net.bytebuddy.implementation.bind.annotation.RuntimeType;
+&nbsp;import net.bytebuddy.implementation.bind.annotation.StubValue;
+&nbsp;import net.bytebuddy.implementation.bind.annotation.SuperCall;
+&nbsp;import net.bytebuddy.implementation.bind.annotation.This;
+&nbsp;import org.mockito.internal.debugging.LocationImpl;
+&nbsp;import org.mockito.internal.invocation.DefaultInvocationFactory;
+&nbsp;import org.mockito.internal.invocation.RealMethod;
+&nbsp;import org.mockito.internal.invocation.RealMethod.IsIllegal;
+&nbsp;import org.mockito.invocation.Location;
+&nbsp;import org.mockito.invocation.MockHandler;
+&nbsp;import org.mockito.mock.MockCreationSettings;
+&nbsp;
+&nbsp;public class MockMethodInterceptor implements Serializable {
+&nbsp;    private static final long serialVersionUID = 7152947254057253027L;
+&nbsp;    final MockHandler handler;
+&nbsp;    private final MockCreationSettings mockCreationSettings;
+&nbsp;    private final ByteBuddyCrossClassLoaderSerializationSupport serializationSupport;
+&nbsp;    private transient ThreadLocal&lt;Object&gt; weakReferenceHatch = new ThreadLocal();
+&nbsp;
+&nbsp;    public MockMethodInterceptor(MockHandler handler, MockCreationSettings mockCreationSettings) {
+&nbsp;        this.handler = handler;
+<b class="fc">&nbsp;        this.mockCreationSettings = mockCreationSettings;</b>
+&nbsp;        this.serializationSupport = new ByteBuddyCrossClassLoaderSerializationSupport();
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    private void readObject(ObjectInputStream stream) throws IOException, ClassNotFoundException {</b>
+<b class="fc">&nbsp;        stream.defaultReadObject();</b>
+&nbsp;        this.weakReferenceHatch = new ThreadLocal();
+&nbsp;    }
+&nbsp;
+&nbsp;    Object doIntercept(Object mock, Method invokedMethod, Object[] arguments, RealMethod realMethod) throws Throwable {
+&nbsp;        return this.doIntercept(mock, invokedMethod, arguments, realMethod, new LocationImpl());
+&nbsp;    }
+&nbsp;
+&nbsp;    Object doIntercept(Object mock, Method invokedMethod, Object[] arguments, RealMethod realMethod, Location location) throws Throwable {
+&nbsp;        this.weakReferenceHatch.set(mock);
+<b class="fc">&nbsp;</b>
+&nbsp;        Object var6;
+&nbsp;        try {
+&nbsp;            var6 = this.handler.handle(DefaultInvocationFactory.createInvocation(mock, invokedMethod, arguments, realMethod, this.mockCreationSettings, location));
+&nbsp;        } finally {
+&nbsp;            this.weakReferenceHatch.remove();
+&nbsp;        }
+&nbsp;
+&nbsp;        return var6;
+&nbsp;    }
+&nbsp;
+&nbsp;    public MockHandler getMockHandler() {
+&nbsp;        return this.handler;
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteBuddyCrossClassLoaderSerializationSupport getSerializationSupport() {
+&nbsp;        return this.serializationSupport;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class DispatcherDefaultingToRealMethod {
+&nbsp;        public DispatcherDefaultingToRealMethod() {
+&nbsp;        }
+&nbsp;
+&nbsp;        @RuntimeType
+<b class="fc">&nbsp;        @BindingPriority(2)</b>
+&nbsp;        public static Object interceptSuperCallable(@This Object mock, @FieldValue(&quot;mockitoInterceptor&quot;) MockMethodInterceptor interceptor, @Origin Method invokedMethod, @AllArguments Object[] arguments, @SuperCall(serializableProxy = true) Callable&lt;?&gt; superCall) throws Throwable {
+<b class="fc">&nbsp;            return interceptor == null ? superCall.call() : interceptor.doIntercept(mock, invokedMethod, arguments, new RealMethod.FromCallable(superCall));</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @RuntimeType
+&nbsp;        public static Object interceptAbstract(@This Object mock, @FieldValue(&quot;mockitoInterceptor&quot;) MockMethodInterceptor interceptor, @StubValue Object stubValue, @Origin Method invokedMethod, @AllArguments Object[] arguments) throws Throwable {
+&nbsp;            return interceptor == null ? stubValue : interceptor.doIntercept(mock, invokedMethod, arguments, IsIllegal.INSTANCE);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public static final class ForWriteReplace {</b>
+&nbsp;        public static Object doWriteReplace(@This MockAccess thiz) throws ObjectStreamException {
+&nbsp;            return thiz.getMockitoInterceptor().getSerializationSupport().writeReplace(thiz);
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        private ForWriteReplace() {</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class ForEquals {
+&nbsp;        public ForEquals() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public static boolean doIdentityEquals(@This Object thiz, @Argument(0) Object other) {
+&nbsp;            return thiz == other;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static final class ForHashCode {
+&nbsp;        public static int doIdentityHashCode(@This Object thiz) {
+&nbsp;            return System.identityHashCode(thiz);
+&nbsp;        }
+&nbsp;
+&nbsp;        private ForHashCode() {
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

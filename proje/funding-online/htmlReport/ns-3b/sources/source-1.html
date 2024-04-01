@@ -1,0 +1,173 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > AssertDoesNotThrow</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.junit.jupiter.api</a>
+</div>
+
+<h1>Coverage Summary for Class: AssertDoesNotThrow (org.junit.jupiter.api)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AssertDoesNotThrow</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.junit.jupiter.api;
+&nbsp;
+&nbsp;import java.util.function.Supplier;
+&nbsp;import org.junit.jupiter.api.function.Executable;
+&nbsp;import org.junit.jupiter.api.function.ThrowingSupplier;
+&nbsp;import org.junit.platform.commons.util.StringUtils;
+&nbsp;import org.junit.platform.commons.util.UnrecoverableExceptions;
+&nbsp;import org.opentest4j.AssertionFailedError;
+&nbsp;
+&nbsp;class AssertDoesNotThrow {
+&nbsp;    private AssertDoesNotThrow() {
+&nbsp;    }
+&nbsp;
+&nbsp;    static void assertDoesNotThrow(Executable executable) {
+&nbsp;        assertDoesNotThrow((Executable)executable, (Object)null);
+&nbsp;    }
+&nbsp;
+&nbsp;    static void assertDoesNotThrow(Executable executable, String message) {
+&nbsp;        assertDoesNotThrow((Executable)executable, (Object)message);
+&nbsp;    }
+&nbsp;
+&nbsp;    static void assertDoesNotThrow(Executable executable, Supplier&lt;String&gt; messageSupplier) {
+&nbsp;        assertDoesNotThrow((Executable)executable, (Object)messageSupplier);
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void assertDoesNotThrow(Executable executable, Object messageOrSupplier) {
+&nbsp;        try {
+&nbsp;            executable.execute();
+&nbsp;        } catch (Throwable var3) {
+&nbsp;            UnrecoverableExceptions.rethrowIfUnrecoverable(var3);
+<b class="fc">&nbsp;            throw createAssertionFailedError(messageOrSupplier, var3);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static &lt;T&gt; T assertDoesNotThrow(ThrowingSupplier&lt;T&gt; supplier) {
+&nbsp;        return assertDoesNotThrow((ThrowingSupplier)supplier, (Object)null);
+&nbsp;    }
+&nbsp;
+&nbsp;    static &lt;T&gt; T assertDoesNotThrow(ThrowingSupplier&lt;T&gt; supplier, String message) {
+&nbsp;        return assertDoesNotThrow((ThrowingSupplier)supplier, (Object)message);
+&nbsp;    }
+&nbsp;
+&nbsp;    static &lt;T&gt; T assertDoesNotThrow(ThrowingSupplier&lt;T&gt; supplier, Supplier&lt;String&gt; messageSupplier) {
+<b class="fc">&nbsp;        return assertDoesNotThrow((ThrowingSupplier)supplier, (Object)messageSupplier);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static &lt;T&gt; T assertDoesNotThrow(ThrowingSupplier&lt;T&gt; supplier, Object messageOrSupplier) {
+&nbsp;        try {
+<b class="fc">&nbsp;            return supplier.get();</b>
+&nbsp;        } catch (Throwable var3) {
+&nbsp;            UnrecoverableExceptions.rethrowIfUnrecoverable(var3);
+&nbsp;            throw createAssertionFailedError(messageOrSupplier, var3);
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static AssertionFailedError createAssertionFailedError(Object messageOrSupplier, Throwable t) {
+&nbsp;        String message = AssertionUtils.buildPrefix(AssertionUtils.nullSafeGet(messageOrSupplier)) + &quot;Unexpected exception thrown: &quot; + t.getClass().getName() + buildSuffix(t.getMessage());
+&nbsp;        return new AssertionFailedError(message, t);
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String buildSuffix(String message) {
+&nbsp;        return StringUtils.isNotBlank(message) ? &quot;: &quot; + message : &quot;&quot;;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

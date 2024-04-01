@@ -1,0 +1,645 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > Transformer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.dynamic</a>
+</div>
+
+<h1>Coverage Summary for Class: Transformer (net.bytebuddy.dynamic)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">Transformer$Compound</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Transformer$ForMethod</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Transformer$ForMethod$MethodModifierTransformer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Transformer$ForMethod$TransformedMethod</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/17)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Transformer$ForMethod$TransformedMethod$AttachmentVisitor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Transformer$ForMethod$TransformedMethod$TransformedParameter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Transformer$ForMethod$TransformedMethod$TransformedParameterList</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">Transformer$NoOp</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (63/63)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.dynamic;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationList;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationValue;
+&nbsp;import net.bytebuddy.description.field.FieldDescription;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.method.ParameterDescription;
+&nbsp;import net.bytebuddy.description.method.ParameterList;
+&nbsp;import net.bytebuddy.description.modifier.ModifierContributor;
+&nbsp;import net.bytebuddy.description.modifier.ModifierContributor.Resolver;
+&nbsp;import net.bytebuddy.description.type.TypeDefinition;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeList;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.Generic;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.Generic.Visitor.Substitutor.ForAttachment;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;
+&nbsp;public interface Transformer&lt;T&gt; {
+&nbsp;    T transform(TypeDescription var1, T var2);
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class Compound&lt;S&gt; implements Transformer&lt;S&gt; {
+&nbsp;        private final List&lt;Transformer&lt;S&gt;&gt; transformers;
+&nbsp;
+&nbsp;        public Compound(Transformer&lt;S&gt;... transformer) {
+&nbsp;            this(Arrays.asList(transformer));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Compound(List&lt;? extends Transformer&lt;S&gt;&gt; transformers) {
+&nbsp;            this.transformers = new ArrayList();
+&nbsp;            Iterator var2 = transformers.iterator();
+&nbsp;
+&nbsp;            while(var2.hasNext()) {
+&nbsp;                Transformer&lt;S&gt; transformer = (Transformer)var2.next();
+&nbsp;                if (transformer instanceof Compound) {
+&nbsp;                    this.transformers.addAll(((Compound)transformer).transformers);
+&nbsp;                } else if (!(transformer instanceof NoOp)) {
+&nbsp;                    this.transformers.add(transformer);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        public S transform(TypeDescription instrumentedType, S target) {
+<b class="fc">&nbsp;            Transformer transformer;</b>
+&nbsp;            for(Iterator var3 = this.transformers.iterator(); var3.hasNext(); target = transformer.transform(instrumentedType, target)) {
+&nbsp;                transformer = (Transformer)var3.next();
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return target;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+<b class="fc">&nbsp;            } else {</b>
+&nbsp;                return this.transformers.equals(((Compound)var1).transformers);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.transformers.hashCode();
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class ForMethod implements Transformer&lt;MethodDescription&gt; {
+&nbsp;        private final Transformer&lt;MethodDescription.Token&gt; transformer;
+&nbsp;
+&nbsp;        public ForMethod(Transformer&lt;MethodDescription.Token&gt; transformer) {
+&nbsp;            this.transformer = transformer;
+&nbsp;        }
+&nbsp;
+&nbsp;        public static Transformer&lt;MethodDescription&gt; withModifiers(ModifierContributor.ForMethod... modifierContributor) {
+&nbsp;            return withModifiers(Arrays.asList(modifierContributor));
+&nbsp;        }
+&nbsp;
+&nbsp;        public static Transformer&lt;MethodDescription&gt; withModifiers(List&lt;? extends ModifierContributor.ForMethod&gt; modifierContributors) {
+&nbsp;            return new ForMethod(new MethodModifierTransformer(Resolver.of(modifierContributors)));
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDescription transform(TypeDescription instrumentedType, MethodDescription methodDescription) {
+&nbsp;            return new TransformedMethod(instrumentedType, methodDescription.getDeclaringType(), (MethodDescription.Token)this.transformer.transform(instrumentedType, methodDescription.asToken(ElementMatchers.none())), (MethodDescription.InDefinedShape)methodDescription.asDefined());
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.transformer.equals(((ForMethod)var1).transformer);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.transformer.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static class TransformedMethod extends MethodDescription.AbstractBase {
+&nbsp;            private final TypeDescription instrumentedType;
+&nbsp;            private final TypeDefinition declaringType;
+&nbsp;            private final MethodDescription.Token token;
+&nbsp;            private final MethodDescription.InDefinedShape methodDescription;
+&nbsp;
+&nbsp;            protected TransformedMethod(TypeDescription instrumentedType, TypeDefinition declaringType, MethodDescription.Token token, MethodDescription.InDefinedShape methodDescription) {
+&nbsp;                this.instrumentedType = instrumentedType;
+&nbsp;                this.declaringType = declaringType;
+&nbsp;                this.token = token;
+&nbsp;                this.methodDescription = methodDescription;
+&nbsp;            }
+&nbsp;
+&nbsp;            public TypeList.Generic getTypeVariables() {
+&nbsp;                return new TypeList.Generic.ForDetachedTypes.OfTypeVariables(this, this.token.getTypeVariableTokens(), new AttachmentVisitor());
+&nbsp;            }
+&nbsp;
+&nbsp;            public TypeDescription.Generic getReturnType() {
+&nbsp;                return (TypeDescription.Generic)this.token.getReturnType().accept(new AttachmentVisitor());
+&nbsp;            }
+&nbsp;
+&nbsp;            public ParameterList&lt;?&gt; getParameters() {
+&nbsp;                return new TransformedParameterList();
+&nbsp;            }
+&nbsp;
+&nbsp;            public TypeList.Generic getExceptionTypes() {
+&nbsp;                return new TypeList.Generic.ForDetachedTypes(this.token.getExceptionTypes(), new AttachmentVisitor());
+&nbsp;            }
+&nbsp;
+&nbsp;            public AnnotationList getDeclaredAnnotations() {
+&nbsp;                return this.token.getAnnotations();
+&nbsp;            }
+&nbsp;
+&nbsp;            public String getInternalName() {
+&nbsp;                return this.token.getName();
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull
+&nbsp;            public TypeDefinition getDeclaringType() {
+&nbsp;                return this.declaringType;
+&nbsp;            }
+&nbsp;
+&nbsp;            public int getModifiers() {
+&nbsp;                return this.token.getModifiers();
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public AnnotationValue&lt;?, ?&gt; getDefaultValue() {
+&nbsp;                return this.token.getDefaultValue();
+&nbsp;            }
+&nbsp;
+&nbsp;            public MethodDescription.InDefinedShape asDefined() {
+&nbsp;                return this.methodDescription;
+&nbsp;            }
+&nbsp;
+&nbsp;            public TypeDescription.Generic getReceiverType() {
+&nbsp;                TypeDescription.Generic receiverType = this.token.getReceiverType();
+&nbsp;                return receiverType == null ? Generic.UNDEFINED : (TypeDescription.Generic)receiverType.accept(new AttachmentVisitor());
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance(
+&nbsp;                includeSyntheticFields = true
+&nbsp;            )
+&nbsp;            protected class AttachmentVisitor extends TypeDescription.Generic.Visitor.Substitutor.WithoutTypeSubstitution {
+&nbsp;                protected AttachmentVisitor() {
+&nbsp;                }
+&nbsp;
+&nbsp;                public TypeDescription.Generic onTypeVariable(TypeDescription.Generic typeVariable) {
+&nbsp;                    TypeList.Generic candidates = (TypeList.Generic)TransformedMethod.this.getTypeVariables().filter(ElementMatchers.named(typeVariable.getSymbol()));
+&nbsp;                    return new TypeDescription.Generic.OfTypeVariable.WithAnnotationOverlay(candidates.isEmpty() ? TransformedMethod.this.instrumentedType.findExpectedVariable(typeVariable.getSymbol()) : (TypeDescription.Generic)candidates.getOnly(), typeVariable);
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return TransformedMethod.this.equals(TransformedMethod.this);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return this.getClass().hashCode() * 31 + TransformedMethod.this.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            protected class TransformedParameter extends ParameterDescription.AbstractBase {
+&nbsp;                private final int index;
+&nbsp;                private final ParameterDescription.Token parameterToken;
+&nbsp;
+&nbsp;                protected TransformedParameter(int index, ParameterDescription.Token parameterToken) {
+&nbsp;                    this.index = index;
+&nbsp;                    this.parameterToken = parameterToken;
+&nbsp;                }
+&nbsp;
+&nbsp;                public TypeDescription.Generic getType() {
+&nbsp;                    return (TypeDescription.Generic)this.parameterToken.getType().accept(TransformedMethod.this.new AttachmentVisitor());
+&nbsp;                }
+&nbsp;
+&nbsp;                public MethodDescription getDeclaringMethod() {
+&nbsp;                    return TransformedMethod.this;
+&nbsp;                }
+&nbsp;
+&nbsp;                public int getIndex() {
+&nbsp;                    return this.index;
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean isNamed() {
+&nbsp;                    return this.parameterToken.getName() != null;
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean hasModifiers() {
+&nbsp;                    return this.parameterToken.getModifiers() != null;
+&nbsp;                }
+&nbsp;
+&nbsp;                public String getName() {
+&nbsp;                    String name = this.parameterToken.getName();
+&nbsp;                    return name == null ? super.getName() : name;
+&nbsp;                }
+&nbsp;
+&nbsp;                public int getModifiers() {
+&nbsp;                    Integer modifiers = this.parameterToken.getModifiers();
+&nbsp;                    return modifiers == null ? super.getModifiers() : modifiers;
+&nbsp;                }
+&nbsp;
+&nbsp;                public AnnotationList getDeclaredAnnotations() {
+&nbsp;                    return this.parameterToken.getAnnotations();
+&nbsp;                }
+&nbsp;
+&nbsp;                public ParameterDescription.InDefinedShape asDefined() {
+&nbsp;                    return (ParameterDescription.InDefinedShape)TransformedMethod.this.methodDescription.getParameters().get(this.index);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            protected class TransformedParameterList extends ParameterList.AbstractBase&lt;ParameterDescription&gt; {
+&nbsp;                protected TransformedParameterList() {
+&nbsp;                }
+&nbsp;
+&nbsp;                public ParameterDescription get(int index) {
+&nbsp;                    return TransformedMethod.this.new TransformedParameter(index, (ParameterDescription.Token)TransformedMethod.this.token.getParameterTokens().get(index));
+&nbsp;                }
+&nbsp;
+&nbsp;                public int size() {
+&nbsp;                    return TransformedMethod.this.token.getParameterTokens().size();
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        @Enhance
+&nbsp;        protected static class MethodModifierTransformer implements Transformer&lt;MethodDescription.Token&gt; {
+&nbsp;            private final ModifierContributor.Resolver&lt;ModifierContributor.ForMethod&gt; resolver;
+&nbsp;
+&nbsp;            protected MethodModifierTransformer(ModifierContributor.Resolver&lt;ModifierContributor.ForMethod&gt; resolver) {
+&nbsp;                this.resolver = resolver;
+&nbsp;            }
+&nbsp;
+&nbsp;            public MethodDescription.Token transform(TypeDescription instrumentedType, MethodDescription.Token target) {
+&nbsp;                return new MethodDescription.Token(target.getName(), this.resolver.resolve(target.getModifiers()), target.getTypeVariableTokens(), target.getReturnType(), target.getParameterTokens(), target.getExceptionTypes(), target.getAnnotations(), target.getDefaultValue(), target.getReceiverType());
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.resolver.equals(((MethodModifierTransformer)var1).resolver);
+<b class="fc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.resolver.hashCode();
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    @Enhance</b>
+<b class="fc">&nbsp;    public static class ForField implements Transformer&lt;FieldDescription&gt; {</b>
+&nbsp;        private final Transformer&lt;FieldDescription.Token&gt; transformer;
+&nbsp;
+&nbsp;        public ForField(Transformer&lt;FieldDescription.Token&gt; transformer) {
+&nbsp;            this.transformer = transformer;
+&nbsp;        }
+&nbsp;
+&nbsp;        public static Transformer&lt;FieldDescription&gt; withModifiers(ModifierContributor.ForField... modifierContributor) {
+&nbsp;            return withModifiers(Arrays.asList(modifierContributor));
+&nbsp;        }
+&nbsp;
+&nbsp;        public static Transformer&lt;FieldDescription&gt; withModifiers(List&lt;? extends ModifierContributor.ForField&gt; modifierContributors) {
+&nbsp;            return new ForField(new FieldModifierTransformer(Resolver.of(modifierContributors)));
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressFBWarnings(
+&nbsp;            value = {&quot;NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE&quot;},
+&nbsp;            justification = &quot;Assuming declaring type for type member.&quot;
+&nbsp;        )
+<b class="fc">&nbsp;        public FieldDescription transform(TypeDescription instrumentedType, FieldDescription fieldDescription) {</b>
+<b class="fc">&nbsp;            return new TransformedField(instrumentedType, fieldDescription.getDeclaringType(), (FieldDescription.Token)this.transformer.transform(instrumentedType, fieldDescription.asToken(ElementMatchers.none())), (FieldDescription.InDefinedShape)fieldDescription.asDefined());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+<b class="fc">&nbsp;                return false;</b>
+<b class="fc">&nbsp;            } else if (this.getClass() != var1.getClass()) {</b>
+<b class="fc">&nbsp;                return false;</b>
+<b class="fc">&nbsp;            } else {</b>
+<b class="fc">&nbsp;                return this.transformer.equals(((ForField)var1).transformer);</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public int hashCode() {</b>
+&nbsp;            return this.getClass().hashCode() * 31 + this.transformer.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static class TransformedField extends FieldDescription.AbstractBase {
+&nbsp;            private final TypeDescription instrumentedType;
+&nbsp;            private final TypeDefinition declaringType;
+<b class="fc">&nbsp;            private final FieldDescription.Token token;</b>
+&nbsp;            private final FieldDescription.InDefinedShape fieldDescription;
+&nbsp;
+&nbsp;            protected TransformedField(TypeDescription instrumentedType, TypeDefinition declaringType, FieldDescription.Token token, FieldDescription.InDefinedShape fieldDescription) {
+&nbsp;                this.instrumentedType = instrumentedType;
+&nbsp;                this.declaringType = declaringType;
+&nbsp;                this.token = token;
+&nbsp;                this.fieldDescription = fieldDescription;
+&nbsp;            }
+&nbsp;
+&nbsp;            public TypeDescription.Generic getType() {
+&nbsp;                return (TypeDescription.Generic)this.token.getType().accept(ForAttachment.of(this.instrumentedType));
+&nbsp;            }
+&nbsp;
+&nbsp;            public AnnotationList getDeclaredAnnotations() {
+&nbsp;                return this.token.getAnnotations();
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull
+&nbsp;            public TypeDefinition getDeclaringType() {
+&nbsp;                return this.declaringType;
+&nbsp;            }
+&nbsp;
+&nbsp;            public int getModifiers() {
+&nbsp;                return this.token.getModifiers();
+&nbsp;            }
+&nbsp;
+&nbsp;            public FieldDescription.InDefinedShape asDefined() {
+&nbsp;                return this.fieldDescription;
+&nbsp;            }
+&nbsp;
+&nbsp;            public String getName() {
+&nbsp;                return this.token.getName();
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        @Enhance</b>
+<b class="fc">&nbsp;        protected static class FieldModifierTransformer implements Transformer&lt;FieldDescription.Token&gt; {</b>
+&nbsp;            private final ModifierContributor.Resolver&lt;ModifierContributor.ForField&gt; resolver;
+&nbsp;
+&nbsp;            protected FieldModifierTransformer(ModifierContributor.Resolver&lt;ModifierContributor.ForField&gt; resolver) {
+&nbsp;                this.resolver = resolver;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            public FieldDescription.Token transform(TypeDescription instrumentedType, FieldDescription.Token target) {</b>
+&nbsp;                return new FieldDescription.Token(target.getName(), this.resolver.resolve(target.getModifiers()), target.getType(), target.getAnnotations());
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+<b class="fc">&nbsp;                } else if (var1 == null) {</b>
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.resolver.equals(((FieldModifierTransformer)var1).resolver);
+&nbsp;                }
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.resolver.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public static enum NoOp implements Transformer&lt;Object&gt; {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private NoOp() {
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public static &lt;T&gt; Transformer&lt;T&gt; make() {</b>
+&nbsp;            return INSTANCE;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Object transform(TypeDescription instrumentedType, Object target) {
+&nbsp;            return target;
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

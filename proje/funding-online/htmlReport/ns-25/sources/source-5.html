@@ -1,0 +1,725 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > PackageDefinitionStrategy</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.dynamic.loading</a>
+</div>
+
+<h1>Coverage Summary for Class: PackageDefinitionStrategy (net.bytebuddy.dynamic.loading)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">PackageDefinitionStrategy$Definition$Undefined</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PackageDefinitionStrategy$NoOp</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">PackageDefinitionStrategy$Trivial</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.dynamic.loading;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.net.MalformedURLException;
+&nbsp;import java.net.URL;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.jar.Attributes;
+&nbsp;import java.util.jar.Manifest;
+&nbsp;import java.util.jar.Attributes.Name;
+&nbsp;import javax.annotation.CheckForNull;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.ValueHandling;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.ValueHandling.Sort;
+&nbsp;
+&nbsp;public interface PackageDefinitionStrategy {
+&nbsp;    Definition define(ClassLoader var1, String var2, String var3);
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class ManifestReading implements PackageDefinitionStrategy {
+&nbsp;        @Nonnull(
+&nbsp;            when = When.NEVER
+&nbsp;        )
+&nbsp;        private static final URL NOT_SEALED = null;
+&nbsp;        private static final Attributes.Name[] ATTRIBUTE_NAMES;
+&nbsp;        private final SealBaseLocator sealBaseLocator;
+&nbsp;
+&nbsp;        public ManifestReading() {
+&nbsp;            this(new SealBaseLocator.ForTypeResourceUrl());
+&nbsp;        }
+&nbsp;
+&nbsp;        public ManifestReading(SealBaseLocator sealBaseLocator) {
+&nbsp;            this.sealBaseLocator = sealBaseLocator;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Definition define(ClassLoader classLoader, String packageName, String typeName) {
+&nbsp;            InputStream inputStream = classLoader.getResourceAsStream(&quot;META-INF/MANIFEST.MF&quot;);
+&nbsp;            if (inputStream == null) {
+&nbsp;                return PackageDefinitionStrategy.Definition.Trivial.INSTANCE;
+&nbsp;            } else {
+&nbsp;                try {
+&nbsp;                    Definition.Simple var21;
+<b class="fc">&nbsp;                    try {</b>
+&nbsp;                        Manifest manifest = new Manifest(inputStream);
+&nbsp;                        Map&lt;Attributes.Name, String&gt; values = new HashMap();
+&nbsp;                        Attributes mainAttributes = manifest.getMainAttributes();
+&nbsp;                        int var10;
+<b class="fc">&nbsp;                        if (mainAttributes != null) {</b>
+&nbsp;                            Attributes.Name[] var8 = ATTRIBUTE_NAMES;
+&nbsp;                            int var9 = var8.length;
+&nbsp;
+&nbsp;                            for(var10 = 0; var10 &lt; var9; ++var10) {
+&nbsp;                                Attributes.Name attributeName = var8[var10];
+<b class="fc">&nbsp;                                values.put(attributeName, mainAttributes.getValue(attributeName));</b>
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;
+&nbsp;                        Attributes attributes = manifest.getAttributes(packageName.replace(&#39;.&#39;, &#39;/&#39;).concat(&quot;/&quot;));
+&nbsp;                        if (attributes != null) {
+&nbsp;                            Attributes.Name[] var20 = ATTRIBUTE_NAMES;
+<b class="fc">&nbsp;                            var10 = var20.length;</b>
+&nbsp;
+&nbsp;                            for(int var22 = 0; var22 &lt; var10; ++var22) {
+&nbsp;                                Attributes.Name attributeName = var20[var22];
+&nbsp;                                String value = attributes.getValue(attributeName);
+<b class="fc">&nbsp;                                if (value != null) {</b>
+&nbsp;                                    values.put(attributeName, value);
+&nbsp;                                }
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;
+&nbsp;                        var21 = new Definition.Simple((String)values.get(Name.SPECIFICATION_TITLE), (String)values.get(Name.SPECIFICATION_VERSION), (String)values.get(Name.SPECIFICATION_VENDOR), (String)values.get(Name.IMPLEMENTATION_TITLE), (String)values.get(Name.IMPLEMENTATION_VERSION), (String)values.get(Name.IMPLEMENTATION_VENDOR), Boolean.parseBoolean((String)values.get(Name.SEALED)) ? this.sealBaseLocator.findSealBase(classLoader, typeName) : NOT_SEALED);
+&nbsp;                    } finally {
+&nbsp;                        inputStream.close();
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return var21;
+&nbsp;                } catch (IOException var18) {
+&nbsp;                    throw new IllegalStateException(&quot;Error while reading manifest file&quot;, var18);
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        static {
+&nbsp;            ATTRIBUTE_NAMES = new Attributes.Name[]{Name.SPECIFICATION_TITLE, Name.SPECIFICATION_VERSION, Name.SPECIFICATION_VENDOR, Name.IMPLEMENTATION_TITLE, Name.IMPLEMENTATION_VERSION, Name.IMPLEMENTATION_VENDOR, Name.SEALED};
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.sealBaseLocator.equals(((ManifestReading)var1).sealBaseLocator);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.sealBaseLocator.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        public interface SealBaseLocator {
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            URL findSealBase(ClassLoader var1, String var2);
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public static class ForTypeResourceUrl implements SealBaseLocator {
+&nbsp;                private static final int EXCLUDE_INITIAL_SLASH = 1;
+&nbsp;                private static final String CLASS_FILE_EXTENSION = &quot;.class&quot;;
+&nbsp;                private static final String JAR_FILE = &quot;jar&quot;;
+&nbsp;                private static final String FILE_SYSTEM = &quot;file&quot;;
+&nbsp;                private static final String RUNTIME_IMAGE = &quot;jrt&quot;;
+&nbsp;                private final SealBaseLocator fallback;
+&nbsp;
+&nbsp;                public ForTypeResourceUrl() {
+&nbsp;                    this(PackageDefinitionStrategy.ManifestReading.SealBaseLocator.NonSealing.INSTANCE);
+&nbsp;                }
+&nbsp;
+&nbsp;                public ForTypeResourceUrl(SealBaseLocator fallback) {
+&nbsp;                    this.fallback = fallback;
+&nbsp;                }
+&nbsp;
+&nbsp;                @Nonnull(
+&nbsp;                    when = When.MAYBE
+&nbsp;                )
+&nbsp;                public URL findSealBase(ClassLoader classLoader, String typeName) {
+&nbsp;                    URL url = classLoader.getResource(typeName.replace(&#39;.&#39;, &#39;/&#39;) + &quot;.class&quot;);
+&nbsp;                    if (url != null) {
+&nbsp;                        try {
+&nbsp;                            if (url.getProtocol().equals(&quot;jar&quot;)) {
+&nbsp;                                return new URL(url.getPath().substring(0, url.getPath().indexOf(33)));
+&nbsp;                            }
+&nbsp;
+&nbsp;                            if (url.getProtocol().equals(&quot;file&quot;)) {
+&nbsp;                                return url;
+&nbsp;                            }
+&nbsp;
+&nbsp;                            if (url.getProtocol().equals(&quot;jrt&quot;)) {
+&nbsp;                                String path = url.getPath();
+&nbsp;                                int modulePathIndex = path.indexOf(47, 1);
+&nbsp;                                return modulePathIndex == -1 ? url : new URL(&quot;jrt:&quot; + path.substring(0, modulePathIndex));
+&nbsp;                            }
+&nbsp;                        } catch (MalformedURLException var6) {
+&nbsp;                            throw new IllegalStateException(&quot;Unexpected URL: &quot; + url, var6);
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return this.fallback.findSealBase(classLoader, typeName);
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+<b class="fc">&nbsp;                    } else {</b>
+&nbsp;                        return this.fallback.equals(((ForTypeResourceUrl)var1).fallback);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                public int hashCode() {</b>
+&nbsp;                    return this.getClass().hashCode() * 31 + this.fallback.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance
+<b class="fc">&nbsp;            public static class ForFixedValue implements SealBaseLocator {</b>
+&nbsp;                @Nonnull(
+&nbsp;                    when = When.MAYBE
+&nbsp;                )
+&nbsp;                @ValueHandling(Sort.REVERSE_NULLABILITY)
+&nbsp;                private final URL sealBase;
+&nbsp;
+&nbsp;                public ForFixedValue(@Nonnull(when = When.MAYBE) URL sealBase) {
+&nbsp;                    this.sealBase = sealBase;
+&nbsp;                }
+&nbsp;
+&nbsp;                @Nonnull(
+&nbsp;                    when = When.MAYBE
+&nbsp;                )
+&nbsp;                public URL findSealBase(ClassLoader classLoader, String typeName) {
+&nbsp;                    return this.sealBase;
+&nbsp;                }
+&nbsp;
+&nbsp;                @SuppressFBWarnings(
+&nbsp;                    value = {&quot;DMI_BLOCKING_METHODS_ON_URL&quot;},
+&nbsp;                    justification = &quot;Package sealing relies on URL equality.&quot;
+&nbsp;                )
+&nbsp;                public int hashCode() {
+&nbsp;                    return this.sealBase == null ? 17 : this.sealBase.hashCode();
+&nbsp;                }
+&nbsp;
+&nbsp;                @SuppressFBWarnings(
+&nbsp;                    value = {&quot;DMI_BLOCKING_METHODS_ON_URL&quot;},
+&nbsp;                    justification = &quot;Package sealing relies on URL equality.&quot;
+&nbsp;                )
+&nbsp;                public boolean equals(@CheckForNull Object other) {
+&nbsp;                    if (this == other) {
+&nbsp;                        return true;
+&nbsp;                    } else if (other != null &amp;&amp; this.getClass() == other.getClass()) {
+&nbsp;                        ForFixedValue forFixedValue = (ForFixedValue)other;
+&nbsp;                        return this.sealBase == null ? forFixedValue.sealBase == null : this.sealBase.equals(forFixedValue.sealBase);
+&nbsp;                    } else {
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public static enum NonSealing implements SealBaseLocator {
+&nbsp;                INSTANCE;
+&nbsp;
+&nbsp;                private NonSealing() {
+&nbsp;                }
+&nbsp;
+&nbsp;                @Nonnull(
+&nbsp;                    when = When.MAYBE
+&nbsp;                )
+&nbsp;                public URL findSealBase(ClassLoader classLoader, String typeName) {
+&nbsp;                    return PackageDefinitionStrategy.ManifestReading.NOT_SEALED;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface Definition {
+&nbsp;        boolean isDefined();
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        String getSpecificationTitle();
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        String getSpecificationVersion();
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        String getSpecificationVendor();
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        String getImplementationTitle();
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        String getImplementationVersion();
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        String getImplementationVendor();
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        URL getSealBase();
+&nbsp;
+&nbsp;        boolean isCompatibleTo(Package var1);
+&nbsp;
+&nbsp;        public static class Simple implements Definition {
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            protected final URL sealBase;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            private final String specificationTitle;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            private final String specificationVersion;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            private final String specificationVendor;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            private final String implementationTitle;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            private final String implementationVersion;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            private final String implementationVendor;
+&nbsp;
+&nbsp;            public Simple(@Nonnull(when = When.MAYBE) String specificationTitle, @Nonnull(when = When.MAYBE) String specificationVersion, @Nonnull(when = When.MAYBE) String specificationVendor, @Nonnull(when = When.MAYBE) String implementationTitle, @Nonnull(when = When.MAYBE) String implementationVersion, @Nonnull(when = When.MAYBE) String implementationVendor, @Nonnull(when = When.MAYBE) URL sealBase) {
+&nbsp;                this.specificationTitle = specificationTitle;
+&nbsp;                this.specificationVersion = specificationVersion;
+&nbsp;                this.specificationVendor = specificationVendor;
+&nbsp;                this.implementationTitle = implementationTitle;
+&nbsp;                this.implementationVersion = implementationVersion;
+&nbsp;                this.implementationVendor = implementationVendor;
+&nbsp;                this.sealBase = sealBase;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean isDefined() {
+&nbsp;                return true;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public String getSpecificationTitle() {
+&nbsp;                return this.specificationTitle;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public String getSpecificationVersion() {
+&nbsp;                return this.specificationVersion;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public String getSpecificationVendor() {
+&nbsp;                return this.specificationVendor;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public String getImplementationTitle() {
+&nbsp;                return this.implementationTitle;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public String getImplementationVersion() {
+&nbsp;                return this.implementationVersion;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public String getImplementationVendor() {
+&nbsp;                return this.implementationVendor;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public URL getSealBase() {
+&nbsp;                return this.sealBase;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean isCompatibleTo(Package definedPackage) {
+&nbsp;                if (this.sealBase == null) {
+&nbsp;                    return !definedPackage.isSealed();
+&nbsp;                } else {
+&nbsp;                    return definedPackage.isSealed(this.sealBase);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            @SuppressFBWarnings(
+&nbsp;                value = {&quot;DMI_BLOCKING_METHODS_ON_URL&quot;},
+&nbsp;                justification = &quot;Package sealing relies on URL equality.&quot;
+&nbsp;            )
+&nbsp;            public int hashCode() {
+&nbsp;                int result = this.specificationTitle != null ? this.specificationTitle.hashCode() : 0;
+&nbsp;                result = 31 * result + (this.specificationVersion != null ? this.specificationVersion.hashCode() : 0);
+&nbsp;                result = 31 * result + (this.specificationVendor != null ? this.specificationVendor.hashCode() : 0);
+&nbsp;                result = 31 * result + (this.implementationTitle != null ? this.implementationTitle.hashCode() : 0);
+&nbsp;                result = 31 * result + (this.implementationVersion != null ? this.implementationVersion.hashCode() : 0);
+&nbsp;                result = 31 * result + (this.implementationVendor != null ? this.implementationVendor.hashCode() : 0);
+&nbsp;                result = 31 * result + (this.sealBase != null ? this.sealBase.hashCode() : 0);
+&nbsp;                return result;
+&nbsp;            }
+&nbsp;
+&nbsp;            @SuppressFBWarnings(
+&nbsp;                value = {&quot;DMI_BLOCKING_METHODS_ON_URL&quot;},
+&nbsp;                justification = &quot;Package sealing relies on URL equality.&quot;
+&nbsp;            )
+&nbsp;            public boolean equals(@CheckForNull Object other) {
+&nbsp;                if (this == other) {
+&nbsp;                    return true;
+&nbsp;                } else if (other != null &amp;&amp; this.getClass() == other.getClass()) {
+&nbsp;                    boolean var10000;
+&nbsp;                    label85: {
+&nbsp;                        label79: {
+&nbsp;                            Simple simple = (Simple)other;
+&nbsp;                            if (this.specificationTitle != null) {
+&nbsp;                                if (!this.specificationTitle.equals(simple.specificationTitle)) {
+&nbsp;                                    break label79;
+&nbsp;                                }
+&nbsp;                            } else if (simple.specificationTitle != null) {
+&nbsp;                                break label79;
+&nbsp;                            }
+&nbsp;
+&nbsp;                            if (this.specificationVersion != null) {
+&nbsp;                                if (!this.specificationVersion.equals(simple.specificationVersion)) {
+&nbsp;                                    break label79;
+&nbsp;                                }
+&nbsp;                            } else if (simple.specificationVersion != null) {
+&nbsp;                                break label79;
+&nbsp;                            }
+&nbsp;
+&nbsp;                            if (this.specificationVendor != null) {
+&nbsp;                                if (!this.specificationVendor.equals(simple.specificationVendor)) {
+&nbsp;                                    break label79;
+&nbsp;                                }
+&nbsp;                            } else if (simple.specificationVendor != null) {
+&nbsp;                                break label79;
+&nbsp;                            }
+&nbsp;
+&nbsp;                            if (this.implementationTitle != null) {
+&nbsp;                                if (!this.implementationTitle.equals(simple.implementationTitle)) {
+&nbsp;                                    break label79;
+&nbsp;                                }
+&nbsp;                            } else if (simple.implementationTitle != null) {
+&nbsp;                                break label79;
+&nbsp;                            }
+&nbsp;
+&nbsp;                            if (this.implementationVersion != null) {
+&nbsp;                                if (!this.implementationVersion.equals(simple.implementationVersion)) {
+&nbsp;                                    break label79;
+&nbsp;                                }
+&nbsp;                            } else if (simple.implementationVersion != null) {
+&nbsp;                                break label79;
+&nbsp;                            }
+&nbsp;
+&nbsp;                            if (this.implementationVendor != null) {
+&nbsp;                                if (!this.implementationVendor.equals(simple.implementationVendor)) {
+&nbsp;                                    break label79;
+&nbsp;                                }
+&nbsp;                            } else if (simple.implementationVendor != null) {
+&nbsp;                                break label79;
+&nbsp;                            }
+&nbsp;
+&nbsp;                            if (this.sealBase != null) {
+&nbsp;                                if (this.sealBase.equals(simple.sealBase)) {
+&nbsp;                                    break label85;
+&nbsp;                                }
+&nbsp;                            } else if (simple.sealBase == null) {
+&nbsp;                                break label85;
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;
+&nbsp;                        var10000 = false;
+&nbsp;                        return var10000;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    var10000 = true;
+&nbsp;                    return var10000;
+&nbsp;                } else {
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public static enum Trivial implements Definition {
+&nbsp;            INSTANCE;
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.NEVER
+&nbsp;            )
+&nbsp;            private static final String NO_VALUE = null;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.NEVER
+&nbsp;            )
+&nbsp;            private static final URL NOT_SEALED = null;
+&nbsp;
+&nbsp;            private Trivial() {
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean isDefined() {
+&nbsp;                return true;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public String getSpecificationTitle() {
+&nbsp;                return NO_VALUE;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public String getSpecificationVersion() {
+&nbsp;                return NO_VALUE;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public String getSpecificationVendor() {
+&nbsp;                return NO_VALUE;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public String getImplementationTitle() {
+&nbsp;                return NO_VALUE;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public String getImplementationVersion() {
+&nbsp;                return NO_VALUE;
+&nbsp;            }
+&nbsp;
+&nbsp;            public String getImplementationVendor() {
+&nbsp;                return NO_VALUE;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public URL getSealBase() {
+&nbsp;                return NOT_SEALED;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean isCompatibleTo(Package definedPackage) {
+&nbsp;                return true;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public static enum Undefined implements Definition {
+&nbsp;            INSTANCE;
+&nbsp;
+&nbsp;            private Undefined() {
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean isDefined() {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;
+&nbsp;            public String getSpecificationTitle() {
+&nbsp;                throw new IllegalStateException(&quot;Cannot read property of undefined package&quot;);
+&nbsp;            }
+&nbsp;
+&nbsp;            public String getSpecificationVersion() {
+&nbsp;                throw new IllegalStateException(&quot;Cannot read property of undefined package&quot;);
+&nbsp;            }
+&nbsp;
+&nbsp;            public String getSpecificationVendor() {
+&nbsp;                throw new IllegalStateException(&quot;Cannot read property of undefined package&quot;);
+&nbsp;            }
+&nbsp;
+&nbsp;            public String getImplementationTitle() {
+&nbsp;                throw new IllegalStateException(&quot;Cannot read property of undefined package&quot;);
+&nbsp;            }
+&nbsp;
+&nbsp;            public String getImplementationVersion() {
+&nbsp;                throw new IllegalStateException(&quot;Cannot read property of undefined package&quot;);
+&nbsp;            }
+&nbsp;
+&nbsp;            public String getImplementationVendor() {
+&nbsp;                throw new IllegalStateException(&quot;Cannot read property of undefined package&quot;);
+&nbsp;            }
+&nbsp;
+&nbsp;            public URL getSealBase() {
+&nbsp;                throw new IllegalStateException(&quot;Cannot read property of undefined package&quot;);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean isCompatibleTo(Package definedPackage) {
+&nbsp;                throw new IllegalStateException(&quot;Cannot check compatibility to undefined package&quot;);
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum Trivial implements PackageDefinitionStrategy {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private Trivial() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public Definition define(ClassLoader classLoader, String packageName, String typeName) {
+&nbsp;            return PackageDefinitionStrategy.Definition.Trivial.INSTANCE;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum NoOp implements PackageDefinitionStrategy {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private NoOp() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public Definition define(ClassLoader classLoader, String packageName, String typeName) {
+&nbsp;            return PackageDefinitionStrategy.Definition.Undefined.INSTANCE;
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

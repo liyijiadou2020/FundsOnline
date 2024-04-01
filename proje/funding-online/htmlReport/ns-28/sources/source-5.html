@@ -1,0 +1,1091 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > MethodDelegation</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation</a>
+</div>
+
+<h1>Coverage Summary for Class: MethodDelegation (net.bytebuddy.implementation)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MethodDelegation</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MethodDelegation$Appender</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodDelegation$ImplementationDelegate$Compiled$ForStaticCall</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodDelegation$ImplementationDelegate$ForStaticMethod</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodDelegation$WithCustomProperties</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (50/50)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation;
+&nbsp;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.field.FieldDescription;
+&nbsp;import net.bytebuddy.description.field.FieldList;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.method.MethodList;
+&nbsp;import net.bytebuddy.description.type.TypeDefinition;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDefinition.Sort;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.ForLoadedType;
+&nbsp;import net.bytebuddy.dynamic.scaffold.FieldLocator;
+&nbsp;import net.bytebuddy.dynamic.scaffold.InstrumentedType;
+&nbsp;import net.bytebuddy.dynamic.scaffold.MethodGraph;
+&nbsp;import net.bytebuddy.dynamic.scaffold.FieldLocator.ForClassHierarchy.Factory;
+&nbsp;import net.bytebuddy.dynamic.scaffold.MethodGraph.Compiler;
+&nbsp;import net.bytebuddy.implementation.bind.MethodDelegationBinder;
+&nbsp;import net.bytebuddy.implementation.bind.MethodDelegationBinder.AmbiguityResolver;
+&nbsp;import net.bytebuddy.implementation.bind.MethodDelegationBinder.AmbiguityResolver.NoOp;
+&nbsp;import net.bytebuddy.implementation.bind.MethodDelegationBinder.MethodInvoker.Simple;
+&nbsp;import net.bytebuddy.implementation.bind.MethodDelegationBinder.TerminationHandler.Default;
+&nbsp;import net.bytebuddy.implementation.bind.annotation.TargetMethodAnnotationDrivenBinder;
+&nbsp;import net.bytebuddy.implementation.bind.annotation.TargetMethodAnnotationDrivenBinder.ParameterBinder;
+&nbsp;import net.bytebuddy.implementation.bytecode.ByteCodeAppender;
+&nbsp;import net.bytebuddy.implementation.bytecode.Duplication;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation;
+&nbsp;import net.bytebuddy.implementation.bytecode.TypeCreation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation.Trivial;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.Assigner;
+&nbsp;import net.bytebuddy.implementation.bytecode.member.FieldAccess;
+&nbsp;import net.bytebuddy.implementation.bytecode.member.MethodInvocation;
+&nbsp;import net.bytebuddy.implementation.bytecode.member.MethodVariableAccess;
+&nbsp;import net.bytebuddy.jar.asm.MethodVisitor;
+&nbsp;import net.bytebuddy.matcher.ElementMatcher;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;import net.bytebuddy.utility.CompoundList;
+&nbsp;import net.bytebuddy.utility.RandomString;
+&nbsp;
+&nbsp;@Enhance
+&nbsp;public class MethodDelegation implements Implementation.Composable {
+&nbsp;    private final ImplementationDelegate implementationDelegate;
+&nbsp;    private final List&lt;TargetMethodAnnotationDrivenBinder.ParameterBinder&lt;?&gt;&gt; parameterBinders;
+&nbsp;    private final MethodDelegationBinder.AmbiguityResolver ambiguityResolver;
+&nbsp;    private final MethodDelegationBinder.TerminationHandler terminationHandler;
+&nbsp;    private final MethodDelegationBinder.BindingResolver bindingResolver;
+&nbsp;    private final Assigner assigner;
+&nbsp;
+&nbsp;    protected MethodDelegation(ImplementationDelegate implementationDelegate, List&lt;TargetMethodAnnotationDrivenBinder.ParameterBinder&lt;?&gt;&gt; parameterBinders, MethodDelegationBinder.AmbiguityResolver ambiguityResolver, MethodDelegationBinder.BindingResolver bindingResolver) {
+&nbsp;        this(implementationDelegate, parameterBinders, ambiguityResolver, Default.RETURNING, bindingResolver, Assigner.DEFAULT);
+&nbsp;    }
+&nbsp;
+&nbsp;    private MethodDelegation(ImplementationDelegate implementationDelegate, List&lt;TargetMethodAnnotationDrivenBinder.ParameterBinder&lt;?&gt;&gt; parameterBinders, MethodDelegationBinder.AmbiguityResolver ambiguityResolver, MethodDelegationBinder.TerminationHandler terminationHandler, MethodDelegationBinder.BindingResolver bindingResolver, Assigner assigner) {
+&nbsp;        this.implementationDelegate = implementationDelegate;
+&nbsp;        this.parameterBinders = parameterBinders;
+&nbsp;        this.terminationHandler = terminationHandler;
+&nbsp;        this.ambiguityResolver = ambiguityResolver;
+&nbsp;        this.bindingResolver = bindingResolver;
+&nbsp;        this.assigner = assigner;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation to(Class&lt;?&gt; type) {
+&nbsp;        return withDefaultConfiguration().to(type);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation to(TypeDescription typeDescription) {
+&nbsp;        return withDefaultConfiguration().to(typeDescription);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation to(Object target) {
+&nbsp;        return withDefaultConfiguration().to(target);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation to(Object target, MethodGraph.Compiler methodGraphCompiler) {
+&nbsp;        return withDefaultConfiguration().to(target, methodGraphCompiler);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation to(Object target, String fieldName) {
+&nbsp;        return withDefaultConfiguration().to(target, fieldName);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation to(Object target, String fieldName, MethodGraph.Compiler methodGraphCompiler) {
+&nbsp;        return withDefaultConfiguration().to(target, fieldName, methodGraphCompiler);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation to(Object target, Type type) {
+&nbsp;        return withDefaultConfiguration().to(target, type);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation to(Object target, Type type, MethodGraph.Compiler methodGraphCompiler) {
+&nbsp;        return withDefaultConfiguration().to(target, type, methodGraphCompiler);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation to(Object target, Type type, String fieldName) {
+&nbsp;        return withDefaultConfiguration().to(target, type, fieldName);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation to(Object target, Type type, String fieldName, MethodGraph.Compiler methodGraphCompiler) {
+&nbsp;        return withDefaultConfiguration().to(target, type, fieldName, methodGraphCompiler);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation to(Object target, TypeDefinition typeDefinition) {
+&nbsp;        return withDefaultConfiguration().to(target, typeDefinition);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation to(Object target, TypeDefinition typeDefinition, MethodGraph.Compiler methodGraphCompiler) {
+&nbsp;        return withDefaultConfiguration().to(target, typeDefinition, methodGraphCompiler);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation to(Object target, TypeDefinition typeDefinition, String fieldName) {
+&nbsp;        return withDefaultConfiguration().to(target, typeDefinition, fieldName);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation to(Object target, TypeDefinition typeDefinition, String fieldName, MethodGraph.Compiler methodGraphCompiler) {
+&nbsp;        return withDefaultConfiguration().to(target, typeDefinition, fieldName, methodGraphCompiler);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation toConstructor(Class&lt;?&gt; type) {
+&nbsp;        return withDefaultConfiguration().toConstructor(type);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation toConstructor(TypeDescription typeDescription) {
+&nbsp;        return withDefaultConfiguration().toConstructor(typeDescription);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation toField(String name) {
+&nbsp;        return withDefaultConfiguration().toField(name);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation toField(String name, FieldLocator.Factory fieldLocatorFactory) {
+&nbsp;        return withDefaultConfiguration().toField(name, fieldLocatorFactory);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation toField(String name, MethodGraph.Compiler methodGraphCompiler) {
+&nbsp;        return withDefaultConfiguration().toField(name, methodGraphCompiler);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation toField(String name, FieldLocator.Factory fieldLocatorFactory, MethodGraph.Compiler methodGraphCompiler) {
+&nbsp;        return withDefaultConfiguration().toField(name, fieldLocatorFactory, methodGraphCompiler);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation toMethodReturnOf(String name) {
+&nbsp;        return withDefaultConfiguration().toMethodReturnOf(name);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodDelegation toMethodReturnOf(String name, MethodGraph.Compiler methodGraphCompiler) {
+&nbsp;        return withDefaultConfiguration().toMethodReturnOf(name, methodGraphCompiler);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static WithCustomProperties withDefaultConfiguration() {
+&nbsp;        return new WithCustomProperties(AmbiguityResolver.DEFAULT, ParameterBinder.DEFAULTS);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static WithCustomProperties withEmptyConfiguration() {
+&nbsp;        return new WithCustomProperties(NoOp.INSTANCE, Collections.emptyList());
+&nbsp;    }
+&nbsp;
+&nbsp;    public Implementation.Composable withAssigner(Assigner assigner) {
+&nbsp;        return new MethodDelegation(this.implementationDelegate, this.parameterBinders, this.ambiguityResolver, this.terminationHandler, this.bindingResolver, assigner);
+&nbsp;    }
+&nbsp;
+&nbsp;    public Implementation andThen(Implementation implementation) {
+&nbsp;        return new Implementation.Compound(new Implementation[]{new MethodDelegation(this.implementationDelegate, this.parameterBinders, this.ambiguityResolver, Default.DROPPING, this.bindingResolver, this.assigner), implementation});
+&nbsp;    }
+&nbsp;
+&nbsp;    public Implementation.Composable andThen(Implementation.Composable implementation) {
+&nbsp;        return new Implementation.Compound.Composable(new MethodDelegation(this.implementationDelegate, this.parameterBinders, this.ambiguityResolver, Default.DROPPING, this.bindingResolver, this.assigner), implementation);
+&nbsp;    }
+&nbsp;
+&nbsp;    public InstrumentedType prepare(InstrumentedType instrumentedType) {
+&nbsp;        return this.implementationDelegate.prepare(instrumentedType);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteCodeAppender appender(Implementation.Target implementationTarget) {
+&nbsp;        ImplementationDelegate.Compiled compiled = this.implementationDelegate.compile(implementationTarget.getInstrumentedType());
+&nbsp;        return new Appender(implementationTarget, new MethodDelegationBinder.Processor(compiled.getRecords(), this.ambiguityResolver, this.bindingResolver), this.terminationHandler, this.assigner, compiled);
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean equals(Object var1) {
+&nbsp;        if (this == var1) {
+&nbsp;            return true;
+&nbsp;        } else if (var1 == null) {
+&nbsp;            return false;
+&nbsp;        } else if (this.getClass() != var1.getClass()) {
+&nbsp;            return false;
+&nbsp;        } else if (!this.implementationDelegate.equals(((MethodDelegation)var1).implementationDelegate)) {
+&nbsp;            return false;
+&nbsp;        } else if (!this.parameterBinders.equals(((MethodDelegation)var1).parameterBinders)) {
+&nbsp;            return false;
+&nbsp;        } else if (!this.ambiguityResolver.equals(((MethodDelegation)var1).ambiguityResolver)) {
+&nbsp;            return false;
+&nbsp;        } else if (!this.terminationHandler.equals(((MethodDelegation)var1).terminationHandler)) {
+&nbsp;            return false;
+&nbsp;        } else if (!this.bindingResolver.equals(((MethodDelegation)var1).bindingResolver)) {
+&nbsp;            return false;
+&nbsp;        } else {
+&nbsp;            return this.assigner.equals(((MethodDelegation)var1).assigner);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public int hashCode() {
+&nbsp;        return (((((this.getClass().hashCode() * 31 + this.implementationDelegate.hashCode()) * 31 + this.parameterBinders.hashCode()) * 31 + this.ambiguityResolver.hashCode()) * 31 + this.terminationHandler.hashCode()) * 31 + this.bindingResolver.hashCode()) * 31 + this.assigner.hashCode();
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class WithCustomProperties {
+&nbsp;        private final MethodDelegationBinder.AmbiguityResolver ambiguityResolver;
+&nbsp;        private final List&lt;TargetMethodAnnotationDrivenBinder.ParameterBinder&lt;?&gt;&gt; parameterBinders;
+&nbsp;        private final MethodDelegationBinder.BindingResolver bindingResolver;
+&nbsp;        private final ElementMatcher&lt;? super MethodDescription&gt; matcher;
+&nbsp;
+&nbsp;        protected WithCustomProperties(MethodDelegationBinder.AmbiguityResolver ambiguityResolver, List&lt;TargetMethodAnnotationDrivenBinder.ParameterBinder&lt;?&gt;&gt; parameterBinders) {
+&nbsp;            this(ambiguityResolver, parameterBinders, net.bytebuddy.implementation.bind.MethodDelegationBinder.BindingResolver.Default.INSTANCE, ElementMatchers.any());
+&nbsp;        }
+&nbsp;
+&nbsp;        private WithCustomProperties(MethodDelegationBinder.AmbiguityResolver ambiguityResolver, List&lt;TargetMethodAnnotationDrivenBinder.ParameterBinder&lt;?&gt;&gt; parameterBinders, MethodDelegationBinder.BindingResolver bindingResolver, ElementMatcher&lt;? super MethodDescription&gt; matcher) {
+<b class="fc">&nbsp;            this.ambiguityResolver = ambiguityResolver;</b>
+&nbsp;            this.parameterBinders = parameterBinders;
+&nbsp;            this.bindingResolver = bindingResolver;
+&nbsp;            this.matcher = matcher;
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithCustomProperties withResolvers(MethodDelegationBinder.AmbiguityResolver... ambiguityResolver) {
+&nbsp;            return this.withResolvers(Arrays.asList(ambiguityResolver));
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithCustomProperties withResolvers(List&lt;? extends MethodDelegationBinder.AmbiguityResolver&gt; ambiguityResolvers) {
+&nbsp;            return new WithCustomProperties(new MethodDelegationBinder.AmbiguityResolver.Compound(CompoundList.of(this.ambiguityResolver, ambiguityResolvers)), this.parameterBinders, this.bindingResolver, this.matcher);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithCustomProperties withBinders(TargetMethodAnnotationDrivenBinder.ParameterBinder&lt;?&gt;... parameterBinder) {
+&nbsp;            return this.withBinders(Arrays.asList(parameterBinder));
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithCustomProperties withBinders(List&lt;? extends TargetMethodAnnotationDrivenBinder.ParameterBinder&lt;?&gt;&gt; parameterBinders) {
+&nbsp;            return new WithCustomProperties(this.ambiguityResolver, CompoundList.of(this.parameterBinders, parameterBinders), this.bindingResolver, this.matcher);
+&nbsp;        }
+&nbsp;
+&nbsp;        public WithCustomProperties withBindingResolver(MethodDelegationBinder.BindingResolver bindingResolver) {
+<b class="fc">&nbsp;            return new WithCustomProperties(this.ambiguityResolver, this.parameterBinders, bindingResolver, this.matcher);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public WithCustomProperties filter(ElementMatcher&lt;? super MethodDescription&gt; matcher) {</b>
+<b class="fc">&nbsp;            return new WithCustomProperties(this.ambiguityResolver, this.parameterBinders, this.bindingResolver, new ElementMatcher.Junction.Conjunction(new ElementMatcher[]{this.matcher, matcher}));</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        public MethodDelegation to(Class&lt;?&gt; type) {
+&nbsp;            return this.to(ForLoadedType.of(type));
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation to(TypeDescription typeDescription) {
+&nbsp;            if (typeDescription.isArray()) {
+&nbsp;                throw new IllegalArgumentException(&quot;Cannot delegate to array &quot; + typeDescription);
+&nbsp;            } else if (typeDescription.isPrimitive()) {
+&nbsp;                throw new IllegalArgumentException(&quot;Cannot delegate to primitive &quot; + typeDescription);
+&nbsp;            } else {
+&nbsp;                return new MethodDelegation(MethodDelegation.ImplementationDelegate.ForStaticMethod.of((MethodList)typeDescription.getDeclaredMethods().filter(ElementMatchers.isStatic().and(this.matcher)), TargetMethodAnnotationDrivenBinder.of(this.parameterBinders)), this.parameterBinders, this.ambiguityResolver, this.bindingResolver);
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        public MethodDelegation to(Object target) {
+&nbsp;            return this.to(target, Compiler.DEFAULT);
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation to(Object target, MethodGraph.Compiler methodGraphCompiler) {
+&nbsp;            return this.to(target, (Type)target.getClass(), (MethodGraph.Compiler)methodGraphCompiler);
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation to(Object target, String fieldName) {
+&nbsp;            return this.to(target, fieldName, Compiler.DEFAULT);
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation to(Object target, String fieldName, MethodGraph.Compiler methodGraphCompiler) {
+&nbsp;            return this.to(target, (Type)target.getClass(), fieldName, methodGraphCompiler);
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation to(Object target, Type type) {
+&nbsp;            return this.to(target, type, Compiler.DEFAULT);
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation to(Object target, Type type, MethodGraph.Compiler methodGraphCompiler) {
+&nbsp;            return this.to(target, type, &quot;delegate$&quot; + RandomString.hashOf(target), methodGraphCompiler);
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation to(Object target, Type type, String fieldName) {
+&nbsp;            return this.to(target, type, fieldName, Compiler.DEFAULT);
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation to(Object target, Type type, String fieldName, MethodGraph.Compiler methodGraphCompiler) {
+&nbsp;            return this.to(target, (TypeDefinition)Sort.describe(type), fieldName, methodGraphCompiler);
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation to(Object target, TypeDefinition typeDefinition) {
+&nbsp;            return this.to(target, typeDefinition, Compiler.DEFAULT);
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation to(Object target, TypeDefinition typeDefinition, MethodGraph.Compiler methodGraphCompiler) {
+&nbsp;            return this.to(target, typeDefinition, &quot;delegate$&quot; + RandomString.hashOf(target), methodGraphCompiler);
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation to(Object target, TypeDefinition typeDefinition, String fieldName) {
+&nbsp;            return this.to(target, typeDefinition, fieldName, Compiler.DEFAULT);
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation to(Object target, TypeDefinition typeDefinition, String fieldName, MethodGraph.Compiler methodGraphCompiler) {
+&nbsp;            if (!typeDefinition.asErasure().isInstance(target)) {
+&nbsp;                throw new IllegalArgumentException(target + &quot; is not an instance of &quot; + typeDefinition);
+&nbsp;            } else {
+&nbsp;                return new MethodDelegation(new ImplementationDelegate.ForField.WithInstance(fieldName, methodGraphCompiler, this.parameterBinders, this.matcher, target, typeDefinition.asGenericType()), this.parameterBinders, this.ambiguityResolver, this.bindingResolver);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation toConstructor(Class&lt;?&gt; type) {
+&nbsp;            return this.toConstructor(ForLoadedType.of(type));
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation toConstructor(TypeDescription typeDescription) {
+&nbsp;            return new MethodDelegation(MethodDelegation.ImplementationDelegate.ForConstruction.of(typeDescription, (MethodList)typeDescription.getDeclaredMethods().filter(ElementMatchers.isConstructor().and(this.matcher)), TargetMethodAnnotationDrivenBinder.of(this.parameterBinders)), this.parameterBinders, this.ambiguityResolver, this.bindingResolver);
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation toField(String name) {
+&nbsp;            return this.toField(name, (FieldLocator.Factory)Factory.INSTANCE);
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation toField(String name, FieldLocator.Factory fieldLocatorFactory) {
+&nbsp;            return this.toField(name, fieldLocatorFactory, Compiler.DEFAULT);
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation toField(String name, MethodGraph.Compiler methodGraphCompiler) {
+&nbsp;            return this.toField(name, Factory.INSTANCE, methodGraphCompiler);
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation toField(String name, FieldLocator.Factory fieldLocatorFactory, MethodGraph.Compiler methodGraphCompiler) {
+&nbsp;            return new MethodDelegation(new ImplementationDelegate.ForField.WithLookup(name, methodGraphCompiler, this.parameterBinders, this.matcher, fieldLocatorFactory), this.parameterBinders, this.ambiguityResolver, this.bindingResolver);
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation toMethodReturnOf(String name) {
+&nbsp;            return this.toMethodReturnOf(name, Compiler.DEFAULT);
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegation toMethodReturnOf(String name, MethodGraph.Compiler methodGraphCompiler) {
+&nbsp;            return new MethodDelegation(new ImplementationDelegate.ForMethodReturn(name, methodGraphCompiler, this.parameterBinders, this.matcher), this.parameterBinders, this.ambiguityResolver, this.bindingResolver);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.ambiguityResolver.equals(((WithCustomProperties)var1).ambiguityResolver)) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.parameterBinders.equals(((WithCustomProperties)var1).parameterBinders)) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.bindingResolver.equals(((WithCustomProperties)var1).bindingResolver)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.matcher.equals(((WithCustomProperties)var1).matcher);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return (((this.getClass().hashCode() * 31 + this.ambiguityResolver.hashCode()) * 31 + this.parameterBinders.hashCode()) * 31 + this.bindingResolver.hashCode()) * 31 + this.matcher.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    protected static class Appender implements ByteCodeAppender {
+&nbsp;        private final Implementation.Target implementationTarget;
+&nbsp;        private final MethodDelegationBinder.Record processor;
+&nbsp;        private final MethodDelegationBinder.TerminationHandler terminationHandler;
+&nbsp;        private final Assigner assigner;
+&nbsp;        private final ImplementationDelegate.Compiled compiled;
+&nbsp;
+&nbsp;        protected Appender(Implementation.Target implementationTarget, MethodDelegationBinder.Record processor, MethodDelegationBinder.TerminationHandler terminationHandler, Assigner assigner, ImplementationDelegate.Compiled compiled) {
+&nbsp;            this.implementationTarget = implementationTarget;
+&nbsp;            this.processor = processor;
+&nbsp;            this.terminationHandler = terminationHandler;
+&nbsp;            this.assigner = assigner;
+&nbsp;            this.compiled = compiled;
+&nbsp;        }
+&nbsp;
+&nbsp;        public ByteCodeAppender.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext, MethodDescription instrumentedMethod) {
+&nbsp;            StackManipulation.Size stackSize = (new StackManipulation.Compound(new StackManipulation[]{this.compiled.prepare(instrumentedMethod), this.processor.bind(this.implementationTarget, instrumentedMethod, this.terminationHandler, this.compiled.invoke(), this.assigner)})).apply(methodVisitor, implementationContext);
+&nbsp;            return new ByteCodeAppender.Size(stackSize.getMaximalSize(), instrumentedMethod.getStackSize());
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.implementationTarget.equals(((Appender)var1).implementationTarget)) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.processor.equals(((Appender)var1).processor)) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.terminationHandler.equals(((Appender)var1).terminationHandler)) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.assigner.equals(((Appender)var1).assigner)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.compiled.equals(((Appender)var1).compiled);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return ((((this.getClass().hashCode() * 31 + this.implementationTarget.hashCode()) * 31 + this.processor.hashCode()) * 31 + this.terminationHandler.hashCode()) * 31 + this.assigner.hashCode()) * 31 + this.compiled.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected interface ImplementationDelegate extends InstrumentedType.Prepareable {
+&nbsp;        String FIELD_NAME_PREFIX = &quot;delegate&quot;;
+&nbsp;
+&nbsp;        Compiled compile(TypeDescription var1);
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class ForConstruction implements ImplementationDelegate {
+&nbsp;            private final TypeDescription typeDescription;
+&nbsp;            private final List&lt;MethodDelegationBinder.Record&gt; records;
+&nbsp;
+&nbsp;            protected ForConstruction(TypeDescription typeDescription, List&lt;MethodDelegationBinder.Record&gt; records) {
+&nbsp;                this.typeDescription = typeDescription;
+&nbsp;                this.records = records;
+&nbsp;            }
+&nbsp;
+&nbsp;            protected static ImplementationDelegate of(TypeDescription typeDescription, MethodList&lt;?&gt; methods, MethodDelegationBinder methodDelegationBinder) {
+&nbsp;                List&lt;MethodDelegationBinder.Record&gt; records = new ArrayList(methods.size());
+&nbsp;                Iterator var4 = methods.iterator();
+&nbsp;
+&nbsp;                while(var4.hasNext()) {
+&nbsp;                    MethodDescription methodDescription = (MethodDescription)var4.next();
+&nbsp;                    records.add(methodDelegationBinder.compile(methodDescription));
+&nbsp;                }
+&nbsp;
+&nbsp;                return new ForConstruction(typeDescription, records);
+&nbsp;            }
+&nbsp;
+&nbsp;            public InstrumentedType prepare(InstrumentedType instrumentedType) {
+&nbsp;                return instrumentedType;
+&nbsp;            }
+&nbsp;
+&nbsp;            public Compiled compile(TypeDescription instrumentedType) {
+&nbsp;                return new Compiled.ForConstruction(this.typeDescription, this.records);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.typeDescription.equals(((ForConstruction)var1).typeDescription)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.records.equals(((ForConstruction)var1).records);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return (this.getClass().hashCode() * 31 + this.typeDescription.hashCode()) * 31 + this.records.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class ForMethodReturn implements ImplementationDelegate {
+&nbsp;            private final String name;
+&nbsp;            private final MethodGraph.Compiler methodGraphCompiler;
+&nbsp;            private final List&lt;? extends TargetMethodAnnotationDrivenBinder.ParameterBinder&lt;?&gt;&gt; parameterBinders;
+&nbsp;            private final ElementMatcher&lt;? super MethodDescription&gt; matcher;
+&nbsp;
+&nbsp;            protected ForMethodReturn(String name, MethodGraph.Compiler methodGraphCompiler, List&lt;? extends TargetMethodAnnotationDrivenBinder.ParameterBinder&lt;?&gt;&gt; parameterBinders, ElementMatcher&lt;? super MethodDescription&gt; matcher) {
+&nbsp;                this.name = name;
+&nbsp;                this.methodGraphCompiler = methodGraphCompiler;
+&nbsp;                this.parameterBinders = parameterBinders;
+&nbsp;                this.matcher = matcher;
+&nbsp;            }
+&nbsp;
+&nbsp;            public Compiled compile(TypeDescription instrumentedType) {
+&nbsp;                MethodList&lt;?&gt; targets = (MethodList)(new MethodList.Explicit(CompoundList.of(instrumentedType.getDeclaredMethods().filter(ElementMatchers.isStatic().or(ElementMatchers.isPrivate())), this.methodGraphCompiler.compile(instrumentedType).listNodes().asMethodList()))).filter(ElementMatchers.named(this.name).and(ElementMatchers.takesArguments(0)).and(ElementMatchers.not(ElementMatchers.returns(ElementMatchers.isPrimitive().or(ElementMatchers.isArray())))));
+&nbsp;                if (targets.size() != 1) {
+&nbsp;                    throw new IllegalStateException(instrumentedType + &quot; does not define method without arguments with name &quot; + this.name + &quot;: &quot; + targets);
+&nbsp;                } else if (!((MethodDescription)targets.getOnly()).getReturnType().asErasure().isVisibleTo(instrumentedType)) {
+&nbsp;                    throw new IllegalStateException(targets.getOnly() + &quot; is not visible to &quot; + instrumentedType);
+&nbsp;                } else {
+&nbsp;                    MethodList&lt;?&gt; candidates = (MethodList)this.methodGraphCompiler.compile(((MethodDescription)targets.getOnly()).getReturnType(), instrumentedType).listNodes().asMethodList().filter(this.matcher);
+&nbsp;                    List&lt;MethodDelegationBinder.Record&gt; records = new ArrayList(candidates.size());
+&nbsp;                    MethodDelegationBinder methodDelegationBinder = TargetMethodAnnotationDrivenBinder.of(this.parameterBinders);
+&nbsp;                    Iterator var6 = candidates.iterator();
+&nbsp;
+&nbsp;                    while(var6.hasNext()) {
+&nbsp;                        MethodDescription candidate = (MethodDescription)var6.next();
+&nbsp;                        records.add(methodDelegationBinder.compile(candidate));
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return new Compiled.ForMethodReturn((MethodDescription)targets.get(0), records);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public InstrumentedType prepare(InstrumentedType instrumentedType) {
+&nbsp;                return instrumentedType;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.name.equals(((ForMethodReturn)var1).name)) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.methodGraphCompiler.equals(((ForMethodReturn)var1).methodGraphCompiler)) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.parameterBinders.equals(((ForMethodReturn)var1).parameterBinders)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.matcher.equals(((ForMethodReturn)var1).matcher);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return (((this.getClass().hashCode() * 31 + this.name.hashCode()) * 31 + this.methodGraphCompiler.hashCode()) * 31 + this.parameterBinders.hashCode()) * 31 + this.matcher.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public abstract static class ForField implements ImplementationDelegate {
+&nbsp;            protected final String fieldName;
+&nbsp;            protected final MethodGraph.Compiler methodGraphCompiler;
+&nbsp;            protected final List&lt;? extends TargetMethodAnnotationDrivenBinder.ParameterBinder&lt;?&gt;&gt; parameterBinders;
+&nbsp;            protected final ElementMatcher&lt;? super MethodDescription&gt; matcher;
+&nbsp;
+&nbsp;            protected ForField(String fieldName, MethodGraph.Compiler methodGraphCompiler, List&lt;? extends TargetMethodAnnotationDrivenBinder.ParameterBinder&lt;?&gt;&gt; parameterBinders, ElementMatcher&lt;? super MethodDescription&gt; matcher) {
+&nbsp;                this.fieldName = fieldName;
+&nbsp;                this.methodGraphCompiler = methodGraphCompiler;
+&nbsp;                this.parameterBinders = parameterBinders;
+&nbsp;                this.matcher = matcher;
+&nbsp;            }
+&nbsp;
+&nbsp;            public Compiled compile(TypeDescription instrumentedType) {
+&nbsp;                FieldDescription fieldDescription = this.resolve(instrumentedType);
+&nbsp;                if (!fieldDescription.getType().asErasure().isVisibleTo(instrumentedType)) {
+&nbsp;                    throw new IllegalStateException(fieldDescription + &quot; is not visible to &quot; + instrumentedType);
+&nbsp;                } else {
+&nbsp;                    MethodList&lt;?&gt; candidates = (MethodList)this.methodGraphCompiler.compile(fieldDescription.getType(), instrumentedType).listNodes().asMethodList().filter(this.matcher);
+&nbsp;                    List&lt;MethodDelegationBinder.Record&gt; records = new ArrayList(candidates.size());
+&nbsp;                    MethodDelegationBinder methodDelegationBinder = TargetMethodAnnotationDrivenBinder.of(this.parameterBinders);
+&nbsp;                    Iterator var6 = candidates.iterator();
+&nbsp;
+&nbsp;                    while(var6.hasNext()) {
+&nbsp;                        MethodDescription candidate = (MethodDescription)var6.next();
+&nbsp;                        records.add(methodDelegationBinder.compile(candidate));
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return new Compiled.ForField(fieldDescription, records);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            protected abstract FieldDescription resolve(TypeDescription var1);
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.fieldName.equals(((ForField)var1).fieldName)) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.methodGraphCompiler.equals(((ForField)var1).methodGraphCompiler)) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.parameterBinders.equals(((ForField)var1).parameterBinders)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.matcher.equals(((ForField)var1).matcher);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return (((this.getClass().hashCode() * 31 + this.fieldName.hashCode()) * 31 + this.methodGraphCompiler.hashCode()) * 31 + this.parameterBinders.hashCode()) * 31 + this.matcher.hashCode();
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            protected static class WithLookup extends ForField {
+&nbsp;                private final FieldLocator.Factory fieldLocatorFactory;
+<b class="fc">&nbsp;</b>
+&nbsp;                protected WithLookup(String fieldName, MethodGraph.Compiler methodGraphCompiler, List&lt;? extends TargetMethodAnnotationDrivenBinder.ParameterBinder&lt;?&gt;&gt; parameterBinders, ElementMatcher&lt;? super MethodDescription&gt; matcher, FieldLocator.Factory fieldLocatorFactory) {
+&nbsp;                    super(fieldName, methodGraphCompiler, parameterBinders, matcher);
+&nbsp;                    this.fieldLocatorFactory = fieldLocatorFactory;
+&nbsp;                }
+&nbsp;
+&nbsp;                public InstrumentedType prepare(InstrumentedType instrumentedType) {
+&nbsp;                    return instrumentedType;
+&nbsp;                }
+&nbsp;
+&nbsp;                protected FieldDescription resolve(TypeDescription instrumentedType) {
+&nbsp;                    FieldLocator.Resolution resolution = this.fieldLocatorFactory.make(instrumentedType).locate(this.fieldName);
+&nbsp;                    if (!resolution.isResolved()) {
+&nbsp;                        throw new IllegalStateException(&quot;Could not locate &quot; + this.fieldName + &quot; on &quot; + instrumentedType);
+&nbsp;                    } else {
+&nbsp;                        return resolution.getField();
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (!super.equals(var1)) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.fieldLocatorFactory.equals(((WithLookup)var1).fieldLocatorFactory);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return super.hashCode() * 31 + this.fieldLocatorFactory.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            protected static class WithInstance extends ForField {
+&nbsp;                private final Object target;
+&nbsp;                private final TypeDescription.Generic fieldType;
+&nbsp;
+&nbsp;                protected WithInstance(String fieldName, MethodGraph.Compiler methodGraphCompiler, List&lt;? extends TargetMethodAnnotationDrivenBinder.ParameterBinder&lt;?&gt;&gt; parameterBinders, ElementMatcher&lt;? super MethodDescription&gt; matcher, Object target, TypeDescription.Generic fieldType) {
+&nbsp;                    super(fieldName, methodGraphCompiler, parameterBinders, matcher);
+&nbsp;                    this.target = target;
+&nbsp;                    this.fieldType = fieldType;
+&nbsp;                }
+&nbsp;
+&nbsp;                public InstrumentedType prepare(InstrumentedType instrumentedType) {
+&nbsp;                    return instrumentedType.withAuxiliaryField(new FieldDescription.Token(this.fieldName, 4169, this.fieldType), this.target);
+&nbsp;                }
+&nbsp;
+&nbsp;                protected FieldDescription resolve(TypeDescription instrumentedType) {
+&nbsp;                    if (!this.fieldType.asErasure().isVisibleTo(instrumentedType)) {
+&nbsp;                        throw new IllegalStateException(this.fieldType + &quot; is not visible to &quot; + instrumentedType);
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        return (FieldDescription)((FieldList)instrumentedType.getDeclaredFields().filter(ElementMatchers.named(this.fieldName).and(ElementMatchers.fieldType(this.fieldType.asErasure())))).getOnly();</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (!super.equals(var1)) {
+&nbsp;                        return false;
+<b class="fc">&nbsp;                    } else if (this == var1) {</b>
+<b class="fc">&nbsp;                        return true;</b>
+<b class="fc">&nbsp;                    } else if (var1 == null) {</b>
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.target.equals(((WithInstance)var1).target)) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.fieldType.equals(((WithInstance)var1).fieldType);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return (super.hashCode() * 31 + this.target.hashCode()) * 31 + this.fieldType.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class ForStaticMethod implements ImplementationDelegate {
+&nbsp;            private final List&lt;MethodDelegationBinder.Record&gt; records;
+&nbsp;
+&nbsp;            protected ForStaticMethod(List&lt;MethodDelegationBinder.Record&gt; records) {
+&nbsp;                this.records = records;
+&nbsp;            }
+&nbsp;
+&nbsp;            protected static ImplementationDelegate of(MethodList&lt;?&gt; methods, MethodDelegationBinder methodDelegationBinder) {
+&nbsp;                List&lt;MethodDelegationBinder.Record&gt; records = new ArrayList(methods.size());
+&nbsp;                Iterator var3 = methods.iterator();
+&nbsp;
+&nbsp;                while(var3.hasNext()) {
+&nbsp;                    MethodDescription methodDescription = (MethodDescription)var3.next();
+&nbsp;                    records.add(methodDelegationBinder.compile(methodDescription));
+&nbsp;                }
+&nbsp;
+&nbsp;                return new ForStaticMethod(records);
+&nbsp;            }
+&nbsp;
+&nbsp;            public InstrumentedType prepare(InstrumentedType instrumentedType) {
+&nbsp;                return instrumentedType;
+&nbsp;            }
+&nbsp;
+&nbsp;            public Compiled compile(TypeDescription instrumentedType) {
+&nbsp;                return new Compiled.ForStaticCall(this.records);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.records.equals(((ForStaticMethod)var1).records);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.records.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public interface Compiled {
+&nbsp;            StackManipulation prepare(MethodDescription var1);
+&nbsp;
+&nbsp;            MethodDelegationBinder.MethodInvoker invoke();
+&nbsp;
+<b class="fc">&nbsp;            List&lt;MethodDelegationBinder.Record&gt; getRecords();</b>
+<b class="fc">&nbsp;</b>
+&nbsp;            @Enhance
+&nbsp;            public static class ForConstruction implements Compiled {
+&nbsp;                private final TypeDescription typeDescription;
+&nbsp;                private final List&lt;MethodDelegationBinder.Record&gt; records;
+&nbsp;
+&nbsp;                protected ForConstruction(TypeDescription typeDescription, List&lt;MethodDelegationBinder.Record&gt; records) {
+<b class="fc">&nbsp;                    this.typeDescription = typeDescription;</b>
+&nbsp;                    this.records = records;
+&nbsp;                }
+&nbsp;
+&nbsp;                public StackManipulation prepare(MethodDescription instrumentedMethod) {
+&nbsp;                    return new StackManipulation.Compound(new StackManipulation[]{TypeCreation.of(this.typeDescription), Duplication.SINGLE});
+&nbsp;                }
+<b class="fc">&nbsp;</b>
+&nbsp;                public MethodDelegationBinder.MethodInvoker invoke() {
+&nbsp;                    return Simple.INSTANCE;
+&nbsp;                }
+&nbsp;
+&nbsp;                public List&lt;MethodDelegationBinder.Record&gt; getRecords() {
+&nbsp;                    return this.records;
+<b class="fc">&nbsp;                }</b>
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.typeDescription.equals(((ForConstruction)var1).typeDescription)) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.records.equals(((ForConstruction)var1).records);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return (this.getClass().hashCode() * 31 + this.typeDescription.hashCode()) * 31 + this.records.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public static class ForMethodReturn implements Compiled {
+&nbsp;                private final MethodDescription methodDescription;
+&nbsp;                private final List&lt;MethodDelegationBinder.Record&gt; records;
+&nbsp;
+&nbsp;                protected ForMethodReturn(MethodDescription methodDescription, List&lt;MethodDelegationBinder.Record&gt; records) {
+&nbsp;                    this.methodDescription = methodDescription;
+&nbsp;                    this.records = records;
+&nbsp;                }
+&nbsp;
+&nbsp;                public StackManipulation prepare(MethodDescription instrumentedMethod) {
+&nbsp;                    if (instrumentedMethod.isStatic() &amp;&amp; !this.methodDescription.isStatic()) {
+&nbsp;                        throw new IllegalStateException(&quot;Cannot invoke &quot; + this.methodDescription + &quot; from &quot; + instrumentedMethod);
+&nbsp;                    } else {
+&nbsp;                        return new StackManipulation.Compound(new StackManipulation[]{(StackManipulation)(this.methodDescription.isStatic() ? Trivial.INSTANCE : MethodVariableAccess.loadThis()), MethodInvocation.invoke(this.methodDescription)});
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public MethodDelegationBinder.MethodInvoker invoke() {
+&nbsp;                    return new MethodDelegationBinder.MethodInvoker.Virtual(this.methodDescription.getReturnType().asErasure());
+&nbsp;                }
+&nbsp;
+&nbsp;                public List&lt;MethodDelegationBinder.Record&gt; getRecords() {
+&nbsp;                    return this.records;
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.methodDescription.equals(((ForMethodReturn)var1).methodDescription)) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.records.equals(((ForMethodReturn)var1).records);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return (this.getClass().hashCode() * 31 + this.methodDescription.hashCode()) * 31 + this.records.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public static class ForField implements Compiled {
+&nbsp;                private final FieldDescription fieldDescription;
+&nbsp;                private final List&lt;MethodDelegationBinder.Record&gt; records;
+&nbsp;
+&nbsp;                protected ForField(FieldDescription fieldDescription, List&lt;MethodDelegationBinder.Record&gt; records) {
+&nbsp;                    this.fieldDescription = fieldDescription;
+&nbsp;                    this.records = records;
+&nbsp;                }
+&nbsp;
+&nbsp;                public StackManipulation prepare(MethodDescription instrumentedMethod) {
+&nbsp;                    if (instrumentedMethod.isStatic() &amp;&amp; !this.fieldDescription.isStatic()) {
+&nbsp;                        throw new IllegalStateException(&quot;Cannot read &quot; + this.fieldDescription + &quot; from &quot; + instrumentedMethod);
+&nbsp;                    } else {
+&nbsp;                        return new StackManipulation.Compound(new StackManipulation[]{(StackManipulation)(this.fieldDescription.isStatic() ? Trivial.INSTANCE : MethodVariableAccess.loadThis()), FieldAccess.forField(this.fieldDescription).read()});
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public MethodDelegationBinder.MethodInvoker invoke() {
+&nbsp;                    return new MethodDelegationBinder.MethodInvoker.Virtual(this.fieldDescription.getType().asErasure());
+&nbsp;                }
+&nbsp;
+&nbsp;                public List&lt;MethodDelegationBinder.Record&gt; getRecords() {
+&nbsp;                    return this.records;
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.fieldDescription.equals(((ForField)var1).fieldDescription)) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.records.equals(((ForField)var1).records);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return (this.getClass().hashCode() * 31 + this.fieldDescription.hashCode()) * 31 + this.records.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public static class ForStaticCall implements Compiled {
+&nbsp;                private final List&lt;MethodDelegationBinder.Record&gt; records;
+&nbsp;
+&nbsp;                protected ForStaticCall(List&lt;MethodDelegationBinder.Record&gt; records) {
+&nbsp;                    this.records = records;
+&nbsp;                }
+&nbsp;
+&nbsp;                public StackManipulation prepare(MethodDescription instrumentedMethod) {
+&nbsp;                    return Trivial.INSTANCE;
+&nbsp;                }
+&nbsp;
+&nbsp;                public MethodDelegationBinder.MethodInvoker invoke() {
+&nbsp;                    return Simple.INSTANCE;
+&nbsp;                }
+&nbsp;
+&nbsp;                public List&lt;MethodDelegationBinder.Record&gt; getRecords() {
+&nbsp;                    return this.records;
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.records.equals(((ForStaticCall)var1).records);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return this.getClass().hashCode() * 31 + this.records.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

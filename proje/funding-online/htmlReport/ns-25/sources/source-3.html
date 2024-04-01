@@ -1,0 +1,647 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ClassLoadingStrategy</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.dynamic.loading</a>
+</div>
+
+<h1>Coverage Summary for Class: ClassLoadingStrategy (net.bytebuddy.dynamic.loading)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClassLoadingStrategy</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ClassLoadingStrategy$Default</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ClassLoadingStrategy$Default$InjectionDispatcher</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ClassLoadingStrategy$Default$WrappingDispatcher</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (28/28)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.dynamic.loading;
+&nbsp;
+&nbsp;import java.io.File;
+&nbsp;import java.lang.instrument.Instrumentation;
+&nbsp;import java.security.ProtectionDomain;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.concurrent.Callable;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.ValueHandling;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.ValueHandling.Sort;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.dynamic.loading.ByteArrayClassLoader.ChildFirst;
+&nbsp;import net.bytebuddy.dynamic.loading.ByteArrayClassLoader.PersistenceHandler;
+&nbsp;import net.bytebuddy.dynamic.loading.ClassInjector.UsingInstrumentation;
+&nbsp;import net.bytebuddy.dynamic.loading.ClassInjector.UsingUnsafe;
+&nbsp;import net.bytebuddy.dynamic.loading.ClassInjector.UsingInstrumentation.Target;
+&nbsp;import net.bytebuddy.dynamic.loading.PackageDefinitionStrategy.NoOp;
+&nbsp;import net.bytebuddy.dynamic.loading.PackageDefinitionStrategy.Trivial;
+&nbsp;import net.bytebuddy.utility.GraalImageCode;
+&nbsp;
+&nbsp;public interface ClassLoadingStrategy&lt;T extends ClassLoader&gt; {
+&nbsp;    @Nonnull(
+&nbsp;        when = When.NEVER
+&nbsp;    )
+&nbsp;    ClassLoader BOOTSTRAP_LOADER = null;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.NEVER
+&nbsp;    )
+&nbsp;    ProtectionDomain NO_PROTECTION_DOMAIN = null;
+&nbsp;
+&nbsp;    Map&lt;TypeDescription, Class&lt;?&gt;&gt; load(@Nonnull(when = When.MAYBE) T var1, Map&lt;TypeDescription, byte[]&gt; var2);
+<b class="fc">&nbsp;</b>
+&nbsp;    public static enum ForPreloadedTypes implements ClassLoadingStrategy&lt;ClassLoader&gt; {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private ForPreloadedTypes() {
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        public Map&lt;TypeDescription, Class&lt;?&gt;&gt; load(@Nonnull(when = When.MAYBE) ClassLoader classLoader, Map&lt;TypeDescription, byte[]&gt; types) {
+&nbsp;            Map&lt;TypeDescription, Class&lt;?&gt;&gt; result = new LinkedHashMap();
+&nbsp;            Iterator var4 = types.keySet().iterator();
+&nbsp;
+&nbsp;            while(var4.hasNext()) {
+&nbsp;                TypeDescription typeDescription = (TypeDescription)var4.next();
+&nbsp;
+&nbsp;                try {
+&nbsp;                    result.put(typeDescription, Class.forName(typeDescription.getName(), false, classLoader));
+&nbsp;                } catch (ClassNotFoundException var7) {
+&nbsp;                    throw new IllegalStateException(&quot;Cannot find preexisting class &quot; + typeDescription, var7);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            return result;
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class ForJnaInjection implements ClassLoadingStrategy&lt;ClassLoader&gt; {
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        @ValueHandling(Sort.REVERSE_NULLABILITY)
+&nbsp;        private final ProtectionDomain protectionDomain;
+&nbsp;
+<b class="fc">&nbsp;        public ForJnaInjection() {</b>
+&nbsp;            this(NO_PROTECTION_DOMAIN);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForJnaInjection(@Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain) {
+&nbsp;            this.protectionDomain = protectionDomain;
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        public Map&lt;TypeDescription, Class&lt;?&gt;&gt; load(@Nonnull(when = When.MAYBE) ClassLoader classLoader, Map&lt;TypeDescription, byte[]&gt; types) {
+&nbsp;            return (new ClassInjector.UsingUnsafe(classLoader, this.protectionDomain)).inject(types);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+<b class="fc">&nbsp;                ProtectionDomain var2 = ((ForJnaInjection)var1).protectionDomain;</b>
+&nbsp;                ProtectionDomain var3 = this.protectionDomain;
+&nbsp;                if (var2 != null) {
+&nbsp;                    if (var3 == null) {
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    if (!var3.equals(var2)) {</b>
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;                } else if (var3 != null) {
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;
+&nbsp;                return true;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            int var10000 = this.getClass().hashCode() * 31;
+&nbsp;            ProtectionDomain var1 = this.protectionDomain;
+&nbsp;            if (var1 != null) {
+&nbsp;                var10000 += var1.hashCode();
+&nbsp;            }
+&nbsp;
+&nbsp;            return var10000;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+<b class="fc">&nbsp;    public static class ForUnsafeInjection implements ClassLoadingStrategy&lt;ClassLoader&gt; {</b>
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        @ValueHandling(Sort.REVERSE_NULLABILITY)
+&nbsp;        private final ProtectionDomain protectionDomain;
+&nbsp;
+&nbsp;        public ForUnsafeInjection() {
+&nbsp;            this(NO_PROTECTION_DOMAIN);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForUnsafeInjection(@Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain) {
+&nbsp;            this.protectionDomain = protectionDomain;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Map&lt;TypeDescription, Class&lt;?&gt;&gt; load(@Nonnull(when = When.MAYBE) ClassLoader classLoader, Map&lt;TypeDescription, byte[]&gt; types) {
+&nbsp;            return (new ClassInjector.UsingUnsafe(classLoader, this.protectionDomain)).inject(types);
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                ProtectionDomain var2 = ((ForUnsafeInjection)var1).protectionDomain;
+&nbsp;                ProtectionDomain var3 = this.protectionDomain;
+&nbsp;                if (var2 != null) {
+&nbsp;                    if (var3 == null) {
+&nbsp;                        return false;
+<b class="fc">&nbsp;                    }</b>
+&nbsp;
+&nbsp;                    if (!var3.equals(var2)) {
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;                } else if (var3 != null) {
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;
+&nbsp;                return true;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            int var10000 = this.getClass().hashCode() * 31;
+&nbsp;            ProtectionDomain var1 = this.protectionDomain;
+&nbsp;            if (var1 != null) {
+&nbsp;                var10000 += var1.hashCode();
+&nbsp;            }
+&nbsp;
+&nbsp;            return var10000;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class ForBootstrapInjection implements ClassLoadingStrategy&lt;ClassLoader&gt; {
+&nbsp;        private final Instrumentation instrumentation;
+&nbsp;        private final File folder;
+&nbsp;
+&nbsp;        public ForBootstrapInjection(Instrumentation instrumentation, File folder) {
+&nbsp;            this.instrumentation = instrumentation;
+&nbsp;            this.folder = folder;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Map&lt;TypeDescription, Class&lt;?&gt;&gt; load(@Nonnull(when = When.MAYBE) ClassLoader classLoader, Map&lt;TypeDescription, byte[]&gt; types) {
+&nbsp;            ClassInjector classInjector = classLoader == null ? UsingInstrumentation.of(this.folder, Target.BOOTSTRAP, this.instrumentation) : new ClassInjector.UsingReflection(classLoader);
+&nbsp;            return ((ClassInjector)classInjector).inject(types);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.instrumentation.equals(((ForBootstrapInjection)var1).instrumentation)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.folder.equals(((ForBootstrapInjection)var1).folder);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return (this.getClass().hashCode() * 31 + this.instrumentation.hashCode()) * 31 + this.folder.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    @Enhance</b>
+&nbsp;    public static class UsingLookup implements ClassLoadingStrategy&lt;ClassLoader&gt; {
+&nbsp;        private final ClassInjector classInjector;
+&nbsp;
+&nbsp;        protected UsingLookup(ClassInjector classInjector) {
+&nbsp;            this.classInjector = classInjector;
+&nbsp;        }
+&nbsp;
+&nbsp;        public static ClassLoadingStrategy&lt;ClassLoader&gt; of(Object lookup) {
+&nbsp;            return new UsingLookup(net.bytebuddy.dynamic.loading.ClassInjector.UsingLookup.of(lookup));
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public static ClassLoadingStrategy&lt;ClassLoader&gt; withFallback(Callable&lt;?&gt; lookup) {</b>
+<b class="fc">&nbsp;            if (GraalImageCode.getCurrent().isNativeImageExecution()) {</b>
+<b class="fc">&nbsp;                return ClassLoadingStrategy.ForPreloadedTypes.INSTANCE;</b>
+<b class="fc">&nbsp;            } else if (net.bytebuddy.dynamic.loading.ClassInjector.UsingLookup.isAvailable()) {</b>
+&nbsp;                try {
+&nbsp;                    return of(lookup.call());
+&nbsp;                } catch (Exception var2) {
+&nbsp;                    throw new IllegalStateException(var2);
+&nbsp;                }
+&nbsp;            } else if (UsingUnsafe.isAvailable()) {
+<b class="fc">&nbsp;                return new ForUnsafeInjection();</b>
+&nbsp;            } else {
+&nbsp;                throw new IllegalStateException(&quot;Neither lookup or unsafe class injection is available&quot;);
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public Map&lt;TypeDescription, Class&lt;?&gt;&gt; load(@Nonnull(when = When.MAYBE) ClassLoader classLoader, Map&lt;TypeDescription, byte[]&gt; types) {</b>
+&nbsp;            return this.classInjector.inject(types);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+<b class="fc">&nbsp;            } else if (var1 == null) {</b>
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.classInjector.equals(((UsingLookup)var1).classInjector);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.classInjector.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface Configurable&lt;S extends ClassLoader&gt; extends ClassLoadingStrategy&lt;S&gt; {
+&nbsp;        Configurable&lt;S&gt; with(ProtectionDomain var1);
+&nbsp;
+&nbsp;        Configurable&lt;S&gt; with(PackageDefinitionStrategy var1);
+&nbsp;
+&nbsp;        Configurable&lt;S&gt; allowExistingTypes();
+&nbsp;
+&nbsp;        Configurable&lt;S&gt; opened();
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum Default implements Configurable&lt;ClassLoader&gt; {
+&nbsp;        WRAPPER(new WrappingDispatcher(PersistenceHandler.LATENT, false)),
+&nbsp;        WRAPPER_PERSISTENT(new WrappingDispatcher(PersistenceHandler.MANIFEST, false)),
+&nbsp;        CHILD_FIRST(new WrappingDispatcher(PersistenceHandler.LATENT, true)),
+&nbsp;        CHILD_FIRST_PERSISTENT(new WrappingDispatcher(PersistenceHandler.MANIFEST, true)),
+&nbsp;        INJECTION(new InjectionDispatcher());
+&nbsp;
+&nbsp;        private static final boolean DEFAULT_FORBID_EXISTING = true;
+&nbsp;        private final Configurable&lt;ClassLoader&gt; dispatcher;
+&nbsp;
+&nbsp;        private Default(Configurable dispatcher) {
+&nbsp;            this.dispatcher = dispatcher;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Map&lt;TypeDescription, Class&lt;?&gt;&gt; load(@Nonnull(when = When.MAYBE) ClassLoader classLoader, Map&lt;TypeDescription, byte[]&gt; types) {
+&nbsp;            return this.dispatcher.load(classLoader, types);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Configurable&lt;ClassLoader&gt; with(ProtectionDomain protectionDomain) {
+&nbsp;            return this.dispatcher.with(protectionDomain);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Configurable&lt;ClassLoader&gt; with(PackageDefinitionStrategy packageDefinitionStrategy) {
+&nbsp;            return this.dispatcher.with(packageDefinitionStrategy);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Configurable&lt;ClassLoader&gt; allowExistingTypes() {
+&nbsp;            return this.dispatcher.allowExistingTypes();
+&nbsp;        }
+&nbsp;
+&nbsp;        public Configurable&lt;ClassLoader&gt; opened() {
+&nbsp;            return this.dispatcher.opened();
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        protected static class WrappingDispatcher implements Configurable&lt;ClassLoader&gt; {
+&nbsp;            private static final boolean CHILD_FIRST = true;
+&nbsp;            private static final boolean PARENT_FIRST = false;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            @ValueHandling(Sort.REVERSE_NULLABILITY)
+&nbsp;            private final ProtectionDomain protectionDomain;
+&nbsp;            private final ByteArrayClassLoader.PersistenceHandler persistenceHandler;
+&nbsp;            private final PackageDefinitionStrategy packageDefinitionStrategy;
+&nbsp;            private final boolean childFirst;
+&nbsp;            private final boolean forbidExisting;
+&nbsp;            private final boolean sealed;
+&nbsp;
+&nbsp;            protected WrappingDispatcher(ByteArrayClassLoader.PersistenceHandler persistenceHandler, boolean childFirst) {
+&nbsp;                this(NO_PROTECTION_DOMAIN, Trivial.INSTANCE, persistenceHandler, childFirst, true, true);
+&nbsp;            }
+&nbsp;
+&nbsp;            private WrappingDispatcher(@Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain, PackageDefinitionStrategy packageDefinitionStrategy, ByteArrayClassLoader.PersistenceHandler persistenceHandler, boolean childFirst, boolean forbidExisting, boolean sealed) {
+&nbsp;                this.protectionDomain = protectionDomain;
+&nbsp;                this.packageDefinitionStrategy = packageDefinitionStrategy;
+&nbsp;                this.persistenceHandler = persistenceHandler;
+<b class="fc">&nbsp;                this.childFirst = childFirst;</b>
+&nbsp;                this.forbidExisting = forbidExisting;
+&nbsp;                this.sealed = sealed;
+&nbsp;            }
+&nbsp;
+&nbsp;            public Map&lt;TypeDescription, Class&lt;?&gt;&gt; load(@Nonnull(when = When.MAYBE) ClassLoader classLoader, Map&lt;TypeDescription, byte[]&gt; types) {
+&nbsp;                return this.childFirst ? ChildFirst.load(classLoader, types, this.protectionDomain, this.persistenceHandler, this.packageDefinitionStrategy, this.forbidExisting, this.sealed) : ByteArrayClassLoader.load(classLoader, types, this.protectionDomain, this.persistenceHandler, this.packageDefinitionStrategy, this.forbidExisting, this.sealed);
+&nbsp;            }
+&nbsp;
+&nbsp;            public Configurable&lt;ClassLoader&gt; with(ProtectionDomain protectionDomain) {
+&nbsp;                return new WrappingDispatcher(protectionDomain, this.packageDefinitionStrategy, this.persistenceHandler, this.childFirst, this.forbidExisting, this.sealed);
+&nbsp;            }
+&nbsp;
+&nbsp;            public Configurable&lt;ClassLoader&gt; with(PackageDefinitionStrategy packageDefinitionStrategy) {
+&nbsp;                return new WrappingDispatcher(this.protectionDomain, packageDefinitionStrategy, this.persistenceHandler, this.childFirst, this.forbidExisting, this.sealed);
+&nbsp;            }
+&nbsp;
+&nbsp;            public Configurable&lt;ClassLoader&gt; allowExistingTypes() {
+&nbsp;                return new WrappingDispatcher(this.protectionDomain, this.packageDefinitionStrategy, this.persistenceHandler, this.childFirst, false, this.sealed);
+&nbsp;            }
+&nbsp;
+&nbsp;            public Configurable&lt;ClassLoader&gt; opened() {
+&nbsp;                return new WrappingDispatcher(this.protectionDomain, this.packageDefinitionStrategy, this.persistenceHandler, this.childFirst, this.forbidExisting, false);
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            public boolean equals(Object var1) {</b>
+<b class="fc">&nbsp;                if (this == var1) {</b>
+<b class="fc">&nbsp;                    return true;</b>
+<b class="fc">&nbsp;                } else if (var1 == null) {</b>
+<b class="fc">&nbsp;                    return false;</b>
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.childFirst != ((WrappingDispatcher)var1).childFirst) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.forbidExisting != ((WrappingDispatcher)var1).forbidExisting) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.sealed != ((WrappingDispatcher)var1).sealed) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.persistenceHandler.equals(((WrappingDispatcher)var1).persistenceHandler)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    ProtectionDomain var2 = ((WrappingDispatcher)var1).protectionDomain;
+&nbsp;                    ProtectionDomain var3 = this.protectionDomain;
+&nbsp;                    if (var2 != null) {
+&nbsp;                        if (var3 == null) {
+&nbsp;                            return false;
+&nbsp;                        }
+&nbsp;
+&nbsp;                        if (!var3.equals(var2)) {
+&nbsp;                            return false;
+&nbsp;                        }
+&nbsp;                    } else if (var3 != null) {
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (!this.packageDefinitionStrategy.equals(((WrappingDispatcher)var1).packageDefinitionStrategy)) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return true;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                int var10000 = this.getClass().hashCode() * 31;
+&nbsp;                ProtectionDomain var1 = this.protectionDomain;
+&nbsp;                if (var1 != null) {
+&nbsp;                    var10000 += var1.hashCode();
+&nbsp;                }
+&nbsp;
+&nbsp;                return ((((var10000 * 31 + this.persistenceHandler.hashCode()) * 31 + this.packageDefinitionStrategy.hashCode()) * 31 + this.childFirst) * 31 + this.forbidExisting) * 31 + this.sealed;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        protected static class InjectionDispatcher implements Configurable&lt;ClassLoader&gt; {
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            @ValueHandling(Sort.REVERSE_NULLABILITY)
+&nbsp;            private final ProtectionDomain protectionDomain;
+&nbsp;            private final PackageDefinitionStrategy packageDefinitionStrategy;
+&nbsp;            private final boolean forbidExisting;
+&nbsp;
+&nbsp;            protected InjectionDispatcher() {
+&nbsp;                this(NO_PROTECTION_DOMAIN, NoOp.INSTANCE, true);
+&nbsp;            }
+&nbsp;
+&nbsp;            private InjectionDispatcher(@Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain, PackageDefinitionStrategy packageDefinitionStrategy, boolean forbidExisting) {
+&nbsp;                this.protectionDomain = protectionDomain;
+&nbsp;                this.packageDefinitionStrategy = packageDefinitionStrategy;
+&nbsp;                this.forbidExisting = forbidExisting;
+&nbsp;            }
+&nbsp;
+&nbsp;            public Map&lt;TypeDescription, Class&lt;?&gt;&gt; load(@Nonnull(when = When.MAYBE) ClassLoader classLoader, Map&lt;TypeDescription, byte[]&gt; types) {
+&nbsp;                if (classLoader == null) {
+&nbsp;                    throw new IllegalArgumentException(&quot;Cannot inject classes into the bootstrap class loader&quot;);
+&nbsp;                } else {
+&nbsp;                    return (new ClassInjector.UsingReflection(classLoader, this.protectionDomain, this.packageDefinitionStrategy, this.forbidExisting)).inject(types);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public Configurable&lt;ClassLoader&gt; with(ProtectionDomain protectionDomain) {
+&nbsp;                return new InjectionDispatcher(protectionDomain, this.packageDefinitionStrategy, this.forbidExisting);
+&nbsp;            }
+&nbsp;
+&nbsp;            public Configurable&lt;ClassLoader&gt; with(PackageDefinitionStrategy packageDefinitionStrategy) {
+&nbsp;                return new InjectionDispatcher(this.protectionDomain, packageDefinitionStrategy, this.forbidExisting);
+&nbsp;            }
+&nbsp;
+&nbsp;            public Configurable&lt;ClassLoader&gt; allowExistingTypes() {
+&nbsp;                return new InjectionDispatcher(this.protectionDomain, this.packageDefinitionStrategy, false);
+&nbsp;            }
+&nbsp;
+&nbsp;            public Configurable&lt;ClassLoader&gt; opened() {
+&nbsp;                return this;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.forbidExisting != ((InjectionDispatcher)var1).forbidExisting) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    ProtectionDomain var2 = ((InjectionDispatcher)var1).protectionDomain;
+&nbsp;                    ProtectionDomain var3 = this.protectionDomain;
+&nbsp;                    if (var2 != null) {
+&nbsp;                        if (var3 != null) {
+&nbsp;                            if (!var3.equals(var2)) {
+&nbsp;                                return false;
+&nbsp;                            }
+&nbsp;
+&nbsp;                            return this.packageDefinitionStrategy.equals(((InjectionDispatcher)var1).packageDefinitionStrategy);
+&nbsp;                        }
+&nbsp;                    } else if (var3 == null) {
+&nbsp;                        return this.packageDefinitionStrategy.equals(((InjectionDispatcher)var1).packageDefinitionStrategy);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                int var10000 = this.getClass().hashCode() * 31;
+&nbsp;                ProtectionDomain var1 = this.protectionDomain;
+&nbsp;                if (var1 != null) {
+&nbsp;                    var10000 += var1.hashCode();
+&nbsp;                }
+&nbsp;
+&nbsp;                return (var10000 * 31 + this.packageDefinitionStrategy.hashCode()) * 31 + this.forbidExisting;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

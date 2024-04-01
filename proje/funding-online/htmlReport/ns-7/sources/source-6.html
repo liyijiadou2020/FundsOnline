@@ -1,0 +1,289 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > OutputStreamAppender</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ch.qos.logback.core</a>
+</div>
+
+<h1>Coverage Summary for Class: OutputStreamAppender (ch.qos.logback.core)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OutputStreamAppender</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (36/36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package ch.qos.logback.core;
+&nbsp;
+&nbsp;import ch.qos.logback.core.encoder.Encoder;
+&nbsp;import ch.qos.logback.core.encoder.LayoutWrappingEncoder;
+&nbsp;import ch.qos.logback.core.spi.DeferredProcessingAware;
+&nbsp;import ch.qos.logback.core.status.ErrorStatus;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.OutputStream;
+&nbsp;import java.util.concurrent.locks.ReentrantLock;
+&nbsp;
+&nbsp;public class OutputStreamAppender&lt;E&gt; extends UnsynchronizedAppenderBase&lt;E&gt; {
+&nbsp;    protected Encoder&lt;E&gt; encoder;
+&nbsp;    protected final ReentrantLock lock = new ReentrantLock(false);
+&nbsp;    private OutputStream outputStream;
+&nbsp;    boolean immediateFlush = true;
+&nbsp;
+&nbsp;    public OutputStreamAppender() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public OutputStream getOutputStream() {
+&nbsp;        return this.outputStream;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void start() {
+&nbsp;        int errors = 0;
+&nbsp;        if (this.encoder == null) {
+&nbsp;            this.addStatus(new ErrorStatus(&quot;No encoder set for the appender named \&quot;&quot; + this.name + &quot;\&quot;.&quot;, this));
+&nbsp;            ++errors;
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        if (this.outputStream == null) {
+&nbsp;            this.addStatus(new ErrorStatus(&quot;No output stream set for the appender named \&quot;&quot; + this.name + &quot;\&quot;.&quot;, this));
+&nbsp;            ++errors;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (errors == 0) {
+&nbsp;            super.start();
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public void setLayout(Layout&lt;E&gt; layout) {
+&nbsp;        this.addWarn(&quot;This appender no longer admits a layout as a sub-component, set an encoder instead.&quot;);
+&nbsp;        this.addWarn(&quot;To ensure compatibility, wrapping your layout in LayoutWrappingEncoder.&quot;);
+&nbsp;        this.addWarn(&quot;See also http://logback.qos.ch/codes.html#layoutInsteadOfEncoder for details&quot;);
+&nbsp;        LayoutWrappingEncoder&lt;E&gt; lwe = new LayoutWrappingEncoder();
+&nbsp;        lwe.setLayout(layout);
+<b class="fc">&nbsp;        lwe.setContext(this.context);</b>
+&nbsp;        this.encoder = lwe;
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void append(E eventObject) {
+&nbsp;        if (this.isStarted()) {
+&nbsp;            this.subAppend(eventObject);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void stop() {
+&nbsp;        this.lock.lock();
+&nbsp;
+&nbsp;        try {
+&nbsp;            this.closeOutputStream();
+&nbsp;            super.stop();
+<b class="fc">&nbsp;        } finally {</b>
+<b class="fc">&nbsp;            this.lock.unlock();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    protected void closeOutputStream() {</b>
+&nbsp;        if (this.outputStream != null) {
+&nbsp;            try {
+&nbsp;                this.encoderClose();
+&nbsp;                this.outputStream.close();
+<b class="fc">&nbsp;                this.outputStream = null;</b>
+<b class="fc">&nbsp;            } catch (IOException var2) {</b>
+&nbsp;                this.addStatus(new ErrorStatus(&quot;Could not close output stream for OutputStreamAppender.&quot;, this, var2));
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    void encoderClose() {
+&nbsp;        if (this.encoder != null &amp;&amp; this.outputStream != null) {
+&nbsp;            try {
+&nbsp;                byte[] footer = this.encoder.footerBytes();
+&nbsp;                this.writeBytes(footer);
+&nbsp;            } catch (IOException var2) {
+&nbsp;                this.started = false;
+&nbsp;                this.addStatus(new ErrorStatus(&quot;Failed to write footer for appender named [&quot; + this.name + &quot;].&quot;, this, var2));
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public void setOutputStream(OutputStream outputStream) {</b>
+&nbsp;        this.lock.lock();
+&nbsp;
+&nbsp;        try {
+&nbsp;            this.closeOutputStream();
+&nbsp;            this.outputStream = outputStream;
+&nbsp;            if (this.encoder == null) {
+&nbsp;                this.addWarn(&quot;Encoder has not been set. Cannot invoke its init method.&quot;);
+&nbsp;                return;
+&nbsp;            }
+&nbsp;
+&nbsp;            this.encoderInit();
+&nbsp;        } finally {
+&nbsp;            this.lock.unlock();
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    void encoderInit() {
+&nbsp;        if (this.encoder != null &amp;&amp; this.outputStream != null) {
+&nbsp;            try {
+&nbsp;                byte[] header = this.encoder.headerBytes();
+&nbsp;                this.writeBytes(header);
+&nbsp;            } catch (IOException var2) {
+<b class="fc">&nbsp;                this.started = false;</b>
+&nbsp;                this.addStatus(new ErrorStatus(&quot;Failed to initialize encoder for appender named [&quot; + this.name + &quot;].&quot;, this, var2));
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void writeOut(E event) throws IOException {
+&nbsp;        byte[] byteArray = this.encoder.encode(event);
+&nbsp;        this.writeBytes(byteArray);
+&nbsp;    }
+&nbsp;
+&nbsp;    private void writeBytes(byte[] byteArray) throws IOException {
+&nbsp;        if (byteArray != null &amp;&amp; byteArray.length != 0) {
+&nbsp;            this.lock.lock();
+&nbsp;
+&nbsp;            try {
+&nbsp;                this.outputStream.write(byteArray);
+&nbsp;                if (this.immediateFlush) {
+&nbsp;                    this.outputStream.flush();
+&nbsp;                }
+&nbsp;            } finally {
+&nbsp;                this.lock.unlock();
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected void subAppend(E event) {
+&nbsp;        if (this.isStarted()) {
+&nbsp;            try {
+&nbsp;                if (event instanceof DeferredProcessingAware) {
+&nbsp;                    ((DeferredProcessingAware)event).prepareForDeferredProcessing();
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                byte[] byteArray = this.encoder.encode(event);</b>
+&nbsp;                this.writeBytes(byteArray);
+&nbsp;            } catch (IOException var3) {
+<b class="fc">&nbsp;                this.started = false;</b>
+<b class="fc">&nbsp;                this.addStatus(new ErrorStatus(&quot;IO failure in appender&quot;, this, var3));</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public Encoder&lt;E&gt; getEncoder() {</b>
+&nbsp;        return this.encoder;
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public void setEncoder(Encoder&lt;E&gt; encoder) {
+&nbsp;        this.encoder = encoder;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public boolean isImmediateFlush() {
+<b class="fc">&nbsp;        return this.immediateFlush;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void setImmediateFlush(boolean immediateFlush) {
+&nbsp;        this.immediateFlush = immediateFlush;
+<b class="fc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

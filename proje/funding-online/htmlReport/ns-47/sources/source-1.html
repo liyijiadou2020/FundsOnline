@@ -1,0 +1,254 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > Node</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.junit.platform.engine.support.hierarchical</a>
+</div>
+
+<h1>Coverage Summary for Class: Node (org.junit.platform.engine.support.hierarchical)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Node</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Node$SkipResult</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.junit.platform.engine.support.hierarchical;
+&nbsp;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Optional;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.concurrent.Future;
+&nbsp;import org.apiguardian.api.API;
+&nbsp;import org.apiguardian.api.API.Status;
+&nbsp;import org.junit.platform.commons.util.ToStringBuilder;
+&nbsp;import org.junit.platform.engine.EngineExecutionListener;
+&nbsp;import org.junit.platform.engine.TestDescriptor;
+&nbsp;import org.junit.platform.engine.TestExecutionResult;
+&nbsp;
+&nbsp;@API(
+&nbsp;    status = Status.MAINTAINED,
+&nbsp;    since = &quot;1.0&quot;,
+&nbsp;    consumers = {&quot;org.junit.platform.engine.support.hierarchical&quot;}
+&nbsp;)
+&nbsp;public interface Node&lt;C extends EngineExecutionContext&gt; {
+&nbsp;    default C prepare(C context) throws Exception {
+&nbsp;        return context;
+&nbsp;    }
+&nbsp;
+&nbsp;    default void cleanUp(C context) throws Exception {
+&nbsp;    }
+&nbsp;
+&nbsp;    default SkipResult shouldBeSkipped(C context) throws Exception {
+&nbsp;        return Node.SkipResult.doNotSkip();
+&nbsp;    }
+&nbsp;
+&nbsp;    default C before(C context) throws Exception {
+&nbsp;        return context;
+&nbsp;    }
+&nbsp;
+&nbsp;    default C execute(C context, DynamicTestExecutor dynamicTestExecutor) throws Exception {
+&nbsp;        return context;
+&nbsp;    }
+&nbsp;
+&nbsp;    default void after(C context) throws Exception {
+&nbsp;    }
+&nbsp;
+&nbsp;    @API(
+&nbsp;        status = Status.EXPERIMENTAL,
+&nbsp;        since = &quot;1.4&quot;
+&nbsp;    )
+&nbsp;    default void around(C context, Invocation&lt;C&gt; invocation) throws Exception {
+&nbsp;        invocation.invoke(context);
+&nbsp;    }
+&nbsp;
+&nbsp;    @API(
+&nbsp;        status = Status.EXPERIMENTAL,
+&nbsp;        since = &quot;1.4&quot;,
+&nbsp;        consumers = {&quot;org.junit.platform.engine.support.hierarchical&quot;}
+&nbsp;    )
+&nbsp;    default void nodeSkipped(C context, TestDescriptor testDescriptor, SkipResult result) {
+&nbsp;    }
+&nbsp;
+&nbsp;    @API(
+&nbsp;        status = Status.EXPERIMENTAL,
+&nbsp;        since = &quot;1.4&quot;,
+&nbsp;        consumers = {&quot;org.junit.platform.engine.support.hierarchical&quot;}
+&nbsp;    )
+&nbsp;    default void nodeFinished(C context, TestDescriptor testDescriptor, TestExecutionResult result) {
+&nbsp;    }
+&nbsp;
+&nbsp;    @API(
+&nbsp;        status = Status.EXPERIMENTAL,
+&nbsp;        since = &quot;1.3&quot;,
+&nbsp;        consumers = {&quot;org.junit.platform.engine.support.hierarchical&quot;}
+&nbsp;    )
+&nbsp;    default Set&lt;ExclusiveResource&gt; getExclusiveResources() {
+&nbsp;        return Collections.emptySet();
+&nbsp;    }
+&nbsp;
+&nbsp;    @API(
+&nbsp;        status = Status.EXPERIMENTAL,
+&nbsp;        since = &quot;1.3&quot;,
+&nbsp;        consumers = {&quot;org.junit.platform.engine.support.hierarchical&quot;}
+&nbsp;    )
+<b class="fc">&nbsp;    default ExecutionMode getExecutionMode() {</b>
+&nbsp;        return Node.ExecutionMode.CONCURRENT;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class SkipResult {
+&nbsp;        private static final SkipResult alwaysExecuteSkipResult = new SkipResult(false, (String)null);
+&nbsp;        private final boolean skipped;
+&nbsp;        private final Optional&lt;String&gt; reason;
+&nbsp;
+&nbsp;        public static SkipResult skip(String reason) {
+&nbsp;            return new SkipResult(true, reason);
+&nbsp;        }
+&nbsp;
+&nbsp;        public static SkipResult doNotSkip() {
+&nbsp;            return alwaysExecuteSkipResult;
+&nbsp;        }
+&nbsp;
+&nbsp;        private SkipResult(boolean skipped, String reason) {
+&nbsp;            this.skipped = skipped;
+&nbsp;            this.reason = Optional.ofNullable(reason);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isSkipped() {
+&nbsp;            return this.skipped;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Optional&lt;String&gt; getReason() {
+&nbsp;            return this.reason;
+&nbsp;        }
+&nbsp;
+&nbsp;        public String toString() {
+&nbsp;            return (new ToStringBuilder(this)).append(&quot;skipped&quot;, this.skipped).append(&quot;reason&quot;, this.reason.orElse(&quot;&lt;unknown&gt;&quot;)).toString();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @API(
+&nbsp;        status = Status.EXPERIMENTAL,
+&nbsp;        since = &quot;1.4&quot;
+<b class="fc">&nbsp;    )</b>
+&nbsp;    public interface Invocation&lt;C extends EngineExecutionContext&gt; {
+&nbsp;        void invoke(C var1) throws Exception;
+&nbsp;    }
+&nbsp;
+&nbsp;    @API(
+&nbsp;        status = Status.EXPERIMENTAL,
+&nbsp;        since = &quot;1.3&quot;,
+&nbsp;        consumers = {&quot;org.junit.platform.engine.support.hierarchical&quot;}
+&nbsp;    )
+&nbsp;    public static enum ExecutionMode {
+&nbsp;        SAME_THREAD,
+&nbsp;        CONCURRENT;
+<b class="fc">&nbsp;</b>
+&nbsp;        private ExecutionMode() {
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface DynamicTestExecutor {
+&nbsp;        void execute(TestDescriptor var1);
+&nbsp;
+&nbsp;        @API(
+&nbsp;            status = Status.EXPERIMENTAL,
+&nbsp;            since = &quot;5.7&quot;
+&nbsp;        )
+&nbsp;        Future&lt;?&gt; execute(TestDescriptor var1, EngineExecutionListener var2);
+&nbsp;
+&nbsp;        void awaitFinished() throws InterruptedException;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

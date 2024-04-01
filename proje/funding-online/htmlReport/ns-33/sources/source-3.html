@@ -1,0 +1,158 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > MethodReturn</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.bytecode.member</a>
+</div>
+
+<h1>Coverage Summary for Class: MethodReturn (net.bytebuddy.implementation.bytecode.member)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MethodReturn</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (21/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.bytecode.member;
+&nbsp;
+&nbsp;import net.bytebuddy.description.type.TypeDefinition;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackSize;
+&nbsp;import net.bytebuddy.jar.asm.MethodVisitor;
+&nbsp;
+&nbsp;public enum MethodReturn implements StackManipulation {
+&nbsp;    INTEGER(172, StackSize.SINGLE),
+&nbsp;    DOUBLE(175, StackSize.DOUBLE),
+&nbsp;    FLOAT(174, StackSize.SINGLE),
+&nbsp;    LONG(173, StackSize.DOUBLE),
+&nbsp;    VOID(177, StackSize.ZERO),
+&nbsp;    REFERENCE(176, StackSize.SINGLE);
+&nbsp;
+&nbsp;    private final int returnOpcode;
+&nbsp;    private final StackManipulation.Size size;
+&nbsp;
+&nbsp;    private MethodReturn(int returnOpcode, StackSize stackSize) {
+&nbsp;        this.returnOpcode = returnOpcode;
+<b class="fc">&nbsp;        this.size = stackSize.toDecreasingSize();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static StackManipulation of(TypeDefinition typeDefinition) {
+&nbsp;        if (typeDefinition.isPrimitive()) {
+<b class="fc">&nbsp;            if (typeDefinition.represents(Long.TYPE)) {</b>
+&nbsp;                return LONG;
+&nbsp;            } else if (typeDefinition.represents(Double.TYPE)) {
+&nbsp;                return DOUBLE;
+&nbsp;            } else if (typeDefinition.represents(Float.TYPE)) {
+<b class="fc">&nbsp;                return FLOAT;</b>
+&nbsp;            } else {
+&nbsp;                return typeDefinition.represents(Void.TYPE) ? VOID : INTEGER;
+&nbsp;            }
+&nbsp;        } else {
+<b class="fc">&nbsp;            return REFERENCE;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isValid() {
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;        methodVisitor.visitInsn(this.returnOpcode);
+<b class="fc">&nbsp;        return this.size;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

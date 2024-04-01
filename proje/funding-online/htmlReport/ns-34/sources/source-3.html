@@ -1,0 +1,271 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > Attribute</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.jar.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: Attribute (net.bytebuddy.jar.asm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Attribute</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.jar.asm;
+&nbsp;
+&nbsp;public class Attribute {
+&nbsp;    public final String type;
+&nbsp;    private byte[] content;
+&nbsp;    Attribute nextAttribute;
+&nbsp;
+&nbsp;    protected Attribute(String type) {
+&nbsp;        this.type = type;
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isUnknown() {
+&nbsp;        return true;
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isCodeAttribute() {
+&nbsp;        return false;
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Label[] getLabels() {
+&nbsp;        return new Label[0];
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Attribute read(ClassReader classReader, int offset, int length, char[] charBuffer, int codeAttributeOffset, Label[] labels) {
+&nbsp;        Attribute attribute = new Attribute(this.type);
+&nbsp;        attribute.content = new byte[length];
+&nbsp;        System.arraycopy(classReader.classFileBuffer, offset, attribute.content, 0, length);
+&nbsp;        return attribute;
+&nbsp;    }
+&nbsp;
+&nbsp;    protected ByteVector write(ClassWriter classWriter, byte[] code, int codeLength, int maxStack, int maxLocals) {
+&nbsp;        return new ByteVector(this.content);
+&nbsp;    }
+&nbsp;
+&nbsp;    final int getAttributeCount() {
+&nbsp;        int count = 0;
+&nbsp;
+&nbsp;        for(Attribute attribute = this; attribute != null; attribute = attribute.nextAttribute) {
+&nbsp;            ++count;
+&nbsp;        }
+&nbsp;
+&nbsp;        return count;
+&nbsp;    }
+&nbsp;
+&nbsp;    final int computeAttributesSize(SymbolTable symbolTable) {
+&nbsp;        byte[] code = null;
+&nbsp;        int codeLength = false;
+&nbsp;        int maxStack = true;
+&nbsp;        int maxLocals = true;
+&nbsp;        return this.computeAttributesSize(symbolTable, (byte[])code, 0, -1, -1);
+&nbsp;    }
+&nbsp;
+&nbsp;    final int computeAttributesSize(SymbolTable symbolTable, byte[] code, int codeLength, int maxStack, int maxLocals) {
+&nbsp;        ClassWriter classWriter = symbolTable.classWriter;
+&nbsp;        int size = 0;
+&nbsp;
+&nbsp;        for(Attribute attribute = this; attribute != null; attribute = attribute.nextAttribute) {
+&nbsp;            symbolTable.addConstantUtf8(attribute.type);
+&nbsp;            size += 6 + attribute.write(classWriter, code, codeLength, maxStack, maxLocals).length;
+&nbsp;        }
+&nbsp;
+&nbsp;        return size;
+&nbsp;    }
+&nbsp;
+&nbsp;    static int computeAttributesSize(SymbolTable symbolTable, int accessFlags, int signatureIndex) {
+&nbsp;        int size = 0;
+&nbsp;        if ((accessFlags &amp; 4096) != 0 &amp;&amp; symbolTable.getMajorVersion() &lt; 49) {
+&nbsp;            symbolTable.addConstantUtf8(&quot;Synthetic&quot;);
+&nbsp;            size += 6;
+&nbsp;        }
+&nbsp;
+&nbsp;        if (signatureIndex != 0) {
+&nbsp;            symbolTable.addConstantUtf8(&quot;Signature&quot;);
+&nbsp;            size += 8;
+&nbsp;        }
+&nbsp;
+&nbsp;        if ((accessFlags &amp; 131072) != 0) {
+&nbsp;            symbolTable.addConstantUtf8(&quot;Deprecated&quot;);
+&nbsp;            size += 6;
+&nbsp;        }
+&nbsp;
+&nbsp;        return size;
+&nbsp;    }
+&nbsp;
+&nbsp;    final void putAttributes(SymbolTable symbolTable, ByteVector output) {
+&nbsp;        byte[] code = null;
+&nbsp;        int codeLength = false;
+&nbsp;        int maxStack = true;
+&nbsp;        int maxLocals = true;
+&nbsp;        this.putAttributes(symbolTable, (byte[])code, 0, -1, -1, output);
+&nbsp;    }
+&nbsp;
+&nbsp;    final void putAttributes(SymbolTable symbolTable, byte[] code, int codeLength, int maxStack, int maxLocals, ByteVector output) {
+&nbsp;        ClassWriter classWriter = symbolTable.classWriter;
+&nbsp;
+&nbsp;        for(Attribute attribute = this; attribute != null; attribute = attribute.nextAttribute) {
+&nbsp;            ByteVector attributeContent = attribute.write(classWriter, code, codeLength, maxStack, maxLocals);
+&nbsp;            output.putShort(symbolTable.addConstantUtf8(attribute.type)).putInt(attributeContent.length);
+&nbsp;            output.putByteArray(attributeContent.data, 0, attributeContent.length);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    static void putAttributes(SymbolTable symbolTable, int accessFlags, int signatureIndex, ByteVector output) {
+&nbsp;        if ((accessFlags &amp; 4096) != 0 &amp;&amp; symbolTable.getMajorVersion() &lt; 49) {
+&nbsp;            output.putShort(symbolTable.addConstantUtf8(&quot;Synthetic&quot;)).putInt(0);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (signatureIndex != 0) {
+&nbsp;            output.putShort(symbolTable.addConstantUtf8(&quot;Signature&quot;)).putInt(2).putShort(signatureIndex);
+&nbsp;        }
+&nbsp;
+&nbsp;        if ((accessFlags &amp; 131072) != 0) {
+&nbsp;            output.putShort(symbolTable.addConstantUtf8(&quot;Deprecated&quot;)).putInt(0);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    static final class Set {
+&nbsp;        private static final int SIZE_INCREMENT = 6;
+&nbsp;        private int size;
+&nbsp;        private Attribute[] data = new Attribute[6];
+&nbsp;
+&nbsp;        Set() {
+&nbsp;        }
+&nbsp;
+&nbsp;        void addAttributes(Attribute attributeList) {
+&nbsp;            for(Attribute attribute = attributeList; attribute != null; attribute = attribute.nextAttribute) {
+&nbsp;                if (!this.contains(attribute)) {
+&nbsp;                    this.add(attribute);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        Attribute[] toArray() {
+&nbsp;            Attribute[] result = new Attribute[this.size];
+&nbsp;            System.arraycopy(this.data, 0, result, 0, this.size);
+&nbsp;            return result;
+&nbsp;        }
+&nbsp;
+&nbsp;        private boolean contains(Attribute attribute) {
+&nbsp;            for(int i = 0; i &lt; this.size; ++i) {
+&nbsp;                if (this.data[i].type.equals(attribute.type)) {
+&nbsp;                    return true;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            return false;
+&nbsp;        }
+&nbsp;
+&nbsp;        private void add(Attribute attribute) {
+&nbsp;            if (this.size &gt;= this.data.length) {
+&nbsp;                Attribute[] newData = new Attribute[this.data.length + 6];
+&nbsp;                System.arraycopy(this.data, 0, newData, 0, this.size);
+&nbsp;                this.data = newData;
+&nbsp;            }
+&nbsp;
+&nbsp;            this.data[this.size++] = attribute;
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

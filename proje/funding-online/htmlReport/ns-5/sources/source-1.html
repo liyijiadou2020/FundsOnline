@@ -1,0 +1,153 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > LoginInterceptor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.atguigu.crowd.mvc.interceptor</a>
+</div>
+
+<h1>Coverage Summary for Class: LoginInterceptor (com.atguigu.crowd.mvc.interceptor)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoginInterceptor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/6)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.atguigu.crowd.mvc.interceptor;
+&nbsp;
+&nbsp;import javax.servlet.http.HttpServletRequest;
+&nbsp;import javax.servlet.http.HttpServletResponse;
+&nbsp;import javax.servlet.http.HttpSession;
+&nbsp;
+&nbsp;import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+&nbsp;
+&nbsp;import com.atguigu.crowd.constant.CrowdConstant;
+&nbsp;import com.atguigu.crowd.entity.Admin;
+&nbsp;import com.atguigu.crowd.exception.AccessForbiddenException;
+&nbsp;
+<b class="nc">&nbsp;public class LoginInterceptor extends HandlerInterceptorAdapter {</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+&nbsp;        throws Exception {
+&nbsp;
+&nbsp;        // 1.通过request对象获取Session对象
+<b class="nc">&nbsp;        HttpSession session = request.getSession();</b>
+&nbsp;
+&nbsp;        // 2.尝试从Session域中获取Admin对象
+<b class="nc">&nbsp;        Admin admin = (Admin)session.getAttribute(CrowdConstant.ATTR_NAME_LOGIN_ADMIN);</b>
+&nbsp;
+&nbsp;        // 3.判断admin对象是否为空
+<b class="nc">&nbsp;        if (admin == null) {</b>
+&nbsp;
+&nbsp;            // 4.抛出异常
+<b class="nc">&nbsp;            throw new AccessForbiddenException(CrowdConstant.MESSAGE_ACCESS_FORBIDEN);</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        // 5.如果Admin对象不为null，则返回true放行
+<b class="nc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 15:05</div>
+</div>
+</body>
+</html>

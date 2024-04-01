@@ -1,0 +1,182 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > InvocationInfo</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.stubbing.answers</a>
+</div>
+
+<h1>Coverage Summary for Class: InvocationInfo (org.mockito.internal.stubbing.answers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">InvocationInfo</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.stubbing.answers;
+&nbsp;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import org.mockito.internal.invocation.AbstractAwareMethod;
+&nbsp;import org.mockito.internal.util.MockUtil;
+&nbsp;import org.mockito.internal.util.Primitives;
+&nbsp;import org.mockito.internal.util.reflection.GenericMetadataSupport;
+&nbsp;import org.mockito.invocation.InvocationOnMock;
+&nbsp;import org.mockito.mock.MockCreationSettings;
+&nbsp;
+&nbsp;public class InvocationInfo implements AbstractAwareMethod {
+&nbsp;    private final Method method;
+&nbsp;    private final InvocationOnMock invocation;
+&nbsp;
+&nbsp;    public InvocationInfo(InvocationOnMock theInvocation) {
+<b class="fc">&nbsp;        this.method = theInvocation.getMethod();</b>
+<b class="fc">&nbsp;        this.invocation = theInvocation;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public boolean isValidException(Throwable throwable) {
+&nbsp;        Class&lt;?&gt;[] exceptions = this.method.getExceptionTypes();
+&nbsp;        Class&lt;?&gt; throwableClass = throwable.getClass();
+&nbsp;        Class[] var4 = exceptions;
+&nbsp;        int var5 = exceptions.length;
+&nbsp;
+&nbsp;        for(int var6 = 0; var6 &lt; var5; ++var6) {
+&nbsp;            Class&lt;?&gt; exception = var4[var6];
+&nbsp;            if (exception.isAssignableFrom(throwableClass)) {
+&nbsp;                return true;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return false;
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public boolean isValidReturnType(Class&lt;?&gt; clazz) {</b>
+&nbsp;        if (!this.method.getReturnType().isPrimitive() &amp;&amp; !clazz.isPrimitive()) {
+<b class="fc">&nbsp;            return this.method.getReturnType().isAssignableFrom(clazz);</b>
+&nbsp;        } else {
+&nbsp;            return Primitives.primitiveTypeOf(clazz) == Primitives.primitiveTypeOf(this.method.getReturnType());
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isVoid() {
+&nbsp;        MockCreationSettings mockSettings = MockUtil.getMockHandler(this.invocation.getMock()).getMockSettings();
+&nbsp;        Class&lt;?&gt; returnType = GenericMetadataSupport.inferFrom(mockSettings.getTypeToMock()).resolveGenericReturnType(this.method).rawType();
+<b class="fc">&nbsp;        return returnType == Void.TYPE || returnType == Void.class;</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public String printMethodReturnType() {</b>
+<b class="fc">&nbsp;        return this.method.getReturnType().getSimpleName();</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public String getMethodName() {
+&nbsp;        return this.method.getName();
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean returnsPrimitive() {
+&nbsp;        return this.method.getReturnType().isPrimitive();
+&nbsp;    }
+&nbsp;
+&nbsp;    public Method getMethod() {
+&nbsp;        return this.method;
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isDeclaredOnInterface() {
+&nbsp;        return this.method.getDeclaringClass().isInterface();
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isAbstract() {
+&nbsp;        return (this.method.getModifiers() &amp; 1024) != 0;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

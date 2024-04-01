@@ -1,0 +1,209 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ReturnsEmptyValues</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.stubbing.defaultanswers</a>
+</div>
+
+<h1>Coverage Summary for Class: ReturnsEmptyValues (org.mockito.internal.stubbing.defaultanswers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReturnsEmptyValues</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.stubbing.defaultanswers;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.LinkedHashSet;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.SortedMap;
+&nbsp;import java.util.SortedSet;
+&nbsp;import java.util.TreeMap;
+&nbsp;import java.util.TreeSet;
+&nbsp;import org.mockito.internal.util.JavaEightUtil;
+&nbsp;import org.mockito.internal.util.MockUtil;
+&nbsp;import org.mockito.internal.util.ObjectMethodsGuru;
+&nbsp;import org.mockito.internal.util.Primitives;
+&nbsp;import org.mockito.invocation.InvocationOnMock;
+&nbsp;import org.mockito.mock.MockName;
+&nbsp;import org.mockito.stubbing.Answer;
+&nbsp;
+&nbsp;public class ReturnsEmptyValues implements Answer&lt;Object&gt;, Serializable {
+&nbsp;    private static final long serialVersionUID = 1998191268711234347L;
+&nbsp;
+&nbsp;    public ReturnsEmptyValues() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object answer(InvocationOnMock invocation) {
+&nbsp;        if (ObjectMethodsGuru.isToStringMethod(invocation.getMethod())) {
+&nbsp;            Object mock = invocation.getMock();
+&nbsp;            MockName name = MockUtil.getMockName(mock);
+&nbsp;            return name.isDefault() ? &quot;Mock for &quot; + MockUtil.getMockSettings(mock).getTypeToMock().getSimpleName() + &quot;, hashCode: &quot; + mock.hashCode() : name.toString();
+&nbsp;        } else if (ObjectMethodsGuru.isCompareToMethod(invocation.getMethod())) {
+&nbsp;            return invocation.getMock() == invocation.getArgument(0) ? 0 : 1;
+&nbsp;        } else {
+&nbsp;            Class&lt;?&gt; returnType = invocation.getMethod().getReturnType();
+&nbsp;            return this.returnValueFor(returnType);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    Object returnValueFor(Class&lt;?&gt; type) {
+&nbsp;        if (Primitives.isPrimitiveOrWrapper(type)) {
+&nbsp;            return Primitives.defaultValue(type);
+&nbsp;        } else if (type == Iterable.class) {
+&nbsp;            return new ArrayList(0);
+&nbsp;        } else if (type == Collection.class) {
+&nbsp;            return new LinkedList();
+&nbsp;        } else if (type == Set.class) {
+&nbsp;            return new HashSet();
+&nbsp;        } else if (type == HashSet.class) {
+&nbsp;            return new HashSet();
+&nbsp;        } else if (type == SortedSet.class) {
+&nbsp;            return new TreeSet();
+<b class="fc">&nbsp;        } else if (type == TreeSet.class) {</b>
+&nbsp;            return new TreeSet();
+&nbsp;        } else if (type == LinkedHashSet.class) {
+&nbsp;            return new LinkedHashSet();
+&nbsp;        } else if (type == List.class) {
+&nbsp;            return new LinkedList();
+&nbsp;        } else if (type == LinkedList.class) {
+&nbsp;            return new LinkedList();
+&nbsp;        } else if (type == ArrayList.class) {
+<b class="fc">&nbsp;            return new ArrayList();</b>
+&nbsp;        } else if (type == Map.class) {
+&nbsp;            return new HashMap();
+&nbsp;        } else if (type == HashMap.class) {
+&nbsp;            return new HashMap();
+&nbsp;        } else if (type == SortedMap.class) {
+&nbsp;            return new TreeMap();
+&nbsp;        } else if (type == TreeMap.class) {
+&nbsp;            return new TreeMap();
+&nbsp;        } else if (type == LinkedHashMap.class) {
+&nbsp;            return new LinkedHashMap();
+<b class="fc">&nbsp;        } else if (&quot;java.util.Optional&quot;.equals(type.getName())) {</b>
+&nbsp;            return JavaEightUtil.emptyOptional();
+&nbsp;        } else if (&quot;java.util.OptionalDouble&quot;.equals(type.getName())) {
+&nbsp;            return JavaEightUtil.emptyOptionalDouble();
+&nbsp;        } else if (&quot;java.util.OptionalInt&quot;.equals(type.getName())) {
+&nbsp;            return JavaEightUtil.emptyOptionalInt();
+&nbsp;        } else if (&quot;java.util.OptionalLong&quot;.equals(type.getName())) {
+&nbsp;            return JavaEightUtil.emptyOptionalLong();
+<b class="fc">&nbsp;        } else if (&quot;java.util.stream.Stream&quot;.equals(type.getName())) {</b>
+<b class="fc">&nbsp;            return JavaEightUtil.emptyStream();</b>
+&nbsp;        } else if (&quot;java.util.stream.DoubleStream&quot;.equals(type.getName())) {
+&nbsp;            return JavaEightUtil.emptyDoubleStream();
+&nbsp;        } else if (&quot;java.util.stream.IntStream&quot;.equals(type.getName())) {
+<b class="fc">&nbsp;            return JavaEightUtil.emptyIntStream();</b>
+<b class="fc">&nbsp;        } else if (&quot;java.util.stream.LongStream&quot;.equals(type.getName())) {</b>
+&nbsp;            return JavaEightUtil.emptyLongStream();
+&nbsp;        } else if (&quot;java.time.Duration&quot;.equals(type.getName())) {
+&nbsp;            return JavaEightUtil.emptyDuration();
+<b class="fc">&nbsp;        } else {</b>
+&nbsp;            return &quot;java.time.Period&quot;.equals(type.getName()) ? JavaEightUtil.emptyPeriod() : null;
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+<b class="fc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

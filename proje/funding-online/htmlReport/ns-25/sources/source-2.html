@@ -1,0 +1,2243 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ClassInjector</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.dynamic.loading</a>
+</div>
+
+<h1>Coverage Summary for Class: ClassInjector (net.bytebuddy.dynamic.loading)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">ClassInjector$AbstractBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ClassInjector$UsingReflection</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (28/28)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ClassInjector$UsingReflection$Dispatcher$CreationAction</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ClassInjector$UsingReflection$Dispatcher$Direct</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (25/25)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ClassInjector$UsingReflection$Dispatcher$Direct$ForJava7CapableVm</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (71/71)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.dynamic.loading;
+&nbsp;
+&nbsp;import com.sun.jna.FunctionMapper;
+&nbsp;import com.sun.jna.JNIEnv;
+&nbsp;import com.sun.jna.LastErrorException;
+&nbsp;import com.sun.jna.Library;
+&nbsp;import com.sun.jna.Native;
+&nbsp;import com.sun.jna.NativeLibrary;
+&nbsp;import com.sun.jna.Platform;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;import java.io.File;
+&nbsp;import java.io.FileOutputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.instrument.Instrumentation;
+&nbsp;import java.lang.reflect.AccessibleObject;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.InvocationTargetException;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.ReflectPermission;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.net.URL;
+&nbsp;import java.security.AccessController;
+&nbsp;import java.security.Permission;
+&nbsp;import java.security.PrivilegedAction;
+&nbsp;import java.security.ProtectionDomain;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Locale;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.jar.JarEntry;
+&nbsp;import java.util.jar.JarFile;
+&nbsp;import java.util.jar.JarOutputStream;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.ByteBuddy;
+&nbsp;import net.bytebuddy.ClassFileVersion;
+&nbsp;import net.bytebuddy.asm.MemberRemoval;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.ValueHandling;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.ValueHandling.Sort;
+&nbsp;import net.bytebuddy.description.modifier.ModifierContributor;
+&nbsp;import net.bytebuddy.description.modifier.Visibility;
+&nbsp;import net.bytebuddy.description.type.PackageDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.ForLoadedType;
+&nbsp;import net.bytebuddy.dynamic.DynamicType;
+&nbsp;import net.bytebuddy.dynamic.loading.PackageDefinitionStrategy.Trivial;
+&nbsp;import net.bytebuddy.dynamic.scaffold.TypeValidation;
+&nbsp;import net.bytebuddy.implementation.FixedValue;
+&nbsp;import net.bytebuddy.implementation.MethodCall;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;import net.bytebuddy.utility.JavaModule;
+&nbsp;import net.bytebuddy.utility.JavaType;
+&nbsp;import net.bytebuddy.utility.RandomString;
+&nbsp;import net.bytebuddy.utility.dispatcher.JavaDispatcher;
+&nbsp;import net.bytebuddy.utility.dispatcher.JavaDispatcher.Defaults;
+&nbsp;import net.bytebuddy.utility.dispatcher.JavaDispatcher.IsStatic;
+&nbsp;import net.bytebuddy.utility.dispatcher.JavaDispatcher.Proxied;
+&nbsp;import net.bytebuddy.utility.privilege.GetMethodAction;
+&nbsp;
+&nbsp;public interface ClassInjector {
+&nbsp;    Permission SUPPRESS_ACCESS_CHECKS = new ReflectPermission(&quot;suppressAccessChecks&quot;);
+&nbsp;    boolean ALLOW_EXISTING_TYPES = false;
+&nbsp;
+&nbsp;    boolean isAlive();
+&nbsp;
+&nbsp;    Map&lt;TypeDescription, Class&lt;?&gt;&gt; inject(Map&lt;? extends TypeDescription, byte[]&gt; var1);
+&nbsp;
+&nbsp;    Map&lt;String, Class&lt;?&gt;&gt; injectRaw(Map&lt;? extends String, byte[]&gt; var1);
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class UsingJna extends AbstractBase {
+&nbsp;        private static final Dispatcher DISPATCHER;
+&nbsp;        private static final Object BOOTSTRAP_LOADER_LOCK;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        @ValueHandling(Sort.REVERSE_NULLABILITY)
+&nbsp;        private final ClassLoader classLoader;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        @ValueHandling(Sort.REVERSE_NULLABILITY)
+&nbsp;        private final ProtectionDomain protectionDomain;
+&nbsp;        private static final boolean ACCESS_CONTROLLER;
+&nbsp;
+&nbsp;        public UsingJna(@Nonnull(when = When.MAYBE) ClassLoader classLoader) {
+&nbsp;            this(classLoader, ClassLoadingStrategy.NO_PROTECTION_DOMAIN);
+&nbsp;        }
+&nbsp;
+&nbsp;        public UsingJna(@Nonnull(when = When.MAYBE) ClassLoader classLoader, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain) {
+&nbsp;            this.classLoader = classLoader;
+&nbsp;            this.protectionDomain = protectionDomain;
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        @net.bytebuddy.build.AccessControllerPlugin.Enhance
+&nbsp;        private static &lt;T&gt; T doPrivileged(PrivilegedAction&lt;T&gt; action) {
+&nbsp;            return ACCESS_CONTROLLER ? AccessController.doPrivileged(action) : action.run();
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public static boolean isAvailable() {</b>
+<b class="fc">&nbsp;            return DISPATCHER.isAvailable();</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public static ClassInjector ofSystemLoader() {</b>
+<b class="fc">&nbsp;            return new UsingJna(ClassLoader.getSystemClassLoader());</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public static ClassInjector ofPlatformLoader() {</b>
+<b class="fc">&nbsp;            return new UsingJna(ClassLoader.getSystemClassLoader().getParent());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public static ClassInjector ofBootLoader() {
+&nbsp;            return new UsingJna(ClassLoadingStrategy.BOOTSTRAP_LOADER);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isAlive() {
+<b class="fc">&nbsp;            return DISPATCHER.isAvailable();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Map&lt;String, Class&lt;?&gt;&gt; injectRaw(Map&lt;? extends String, byte[]&gt; types) {
+&nbsp;            Map&lt;String, Class&lt;?&gt;&gt; result = new HashMap();
+<b class="fc">&nbsp;            synchronized(this.classLoader == null ? BOOTSTRAP_LOADER_LOCK : this.classLoader) {</b>
+&nbsp;                Iterator var4 = types.entrySet().iterator();
+&nbsp;
+&nbsp;                while(var4.hasNext()) {
+&nbsp;                    Map.Entry&lt;? extends String, byte[]&gt; entry = (Map.Entry)var4.next();
+<b class="fc">&nbsp;</b>
+&nbsp;                    try {
+&nbsp;                        result.put(entry.getKey(), Class.forName((String)entry.getKey(), false, this.classLoader));
+&nbsp;                    } catch (ClassNotFoundException var8) {
+&nbsp;                        result.put(entry.getKey(), DISPATCHER.defineClass(this.classLoader, (String)entry.getKey(), (byte[])entry.getValue(), this.protectionDomain));
+<b class="fc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                return result;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        static {
+&nbsp;            try {
+&nbsp;                Class.forName(&quot;java.security.AccessController&quot;, false, (ClassLoader)null);
+&nbsp;                ACCESS_CONTROLLER = Boolean.parseBoolean(java.lang.System.getProperty(&quot;net.bytebuddy.securitymanager&quot;, &quot;true&quot;));
+&nbsp;            } catch (ClassNotFoundException var0) {
+&nbsp;                ACCESS_CONTROLLER = false;
+&nbsp;            } catch (SecurityException var1) {
+&nbsp;                ACCESS_CONTROLLER = true;
+&nbsp;            }
+&nbsp;
+&nbsp;            DISPATCHER = (Dispatcher)doPrivileged(ClassInjector.UsingJna.Dispatcher.CreationAction.INSTANCE);
+&nbsp;            BOOTSTRAP_LOADER_LOCK = new Object();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                label42: {
+&nbsp;                    ClassLoader var2 = ((UsingJna)var1).classLoader;
+&nbsp;                    ClassLoader var3 = this.classLoader;
+&nbsp;                    if (var2 != null) {
+&nbsp;                        if (var3 != null) {
+&nbsp;                            if (!var3.equals(var2)) {
+&nbsp;                                return false;
+&nbsp;                            }
+&nbsp;                            break label42;
+&nbsp;                        }
+&nbsp;                    } else if (var3 == null) {
+&nbsp;                        break label42;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;
+&nbsp;                ProtectionDomain var4 = ((UsingJna)var1).protectionDomain;
+&nbsp;                ProtectionDomain var5 = this.protectionDomain;
+&nbsp;                if (var4 != null) {
+&nbsp;                    if (var5 == null) {
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (!var5.equals(var4)) {
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;                } else if (var5 != null) {
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;
+&nbsp;                return true;
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public int hashCode() {
+<b class="fc">&nbsp;            int var10000 = this.getClass().hashCode() * 31;</b>
+<b class="fc">&nbsp;            ClassLoader var1 = this.classLoader;</b>
+<b class="fc">&nbsp;            if (var1 != null) {</b>
+<b class="fc">&nbsp;                var10000 += var1.hashCode();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            var10000 *= 31;
+&nbsp;            ProtectionDomain var2 = this.protectionDomain;
+&nbsp;            if (var2 != null) {
+&nbsp;                var10000 += var2.hashCode();
+&nbsp;            }
+&nbsp;
+&nbsp;            return var10000;
+&nbsp;        }
+&nbsp;
+&nbsp;        protected interface Dispatcher {
+&nbsp;            boolean isAvailable();
+&nbsp;
+&nbsp;            Class&lt;?&gt; defineClass(@Nonnull(when = When.MAYBE) ClassLoader var1, String var2, byte[] var3, @Nonnull(when = When.MAYBE) ProtectionDomain var4);
+&nbsp;
+&nbsp;            public interface Jvm extends Library {
+&nbsp;                Class&lt;?&gt; JVM_DefineClass(JNIEnv var1, String var2, @Nonnull(when = When.MAYBE) ClassLoader var3, byte[] var4, int var5, @Nonnull(when = When.MAYBE) ProtectionDomain var6) throws LastErrorException;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public static class Unavailable implements Dispatcher {
+&nbsp;                private final String error;
+&nbsp;
+&nbsp;                protected Unavailable(String error) {
+<b class="fc">&nbsp;                    this.error = error;</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                public boolean isAvailable() {</b>
+<b class="fc">&nbsp;                    return false;</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                public Class&lt;?&gt; defineClass(@Nonnull(when = When.MAYBE) ClassLoader classLoader, String name, byte[] binaryRepresentation, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain) {</b>
+<b class="fc">&nbsp;                    throw new UnsupportedOperationException(&quot;JNA is not available and JNA-based injection cannot be used: &quot; + this.error);</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.error.equals(((Unavailable)var1).error);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return this.getClass().hashCode() * 31 + this.error.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public static class Enabled implements Dispatcher {
+&nbsp;                private final Jvm jvm;
+&nbsp;
+&nbsp;                protected Enabled(Jvm jvm) {
+&nbsp;                    this.jvm = jvm;
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean isAvailable() {
+&nbsp;                    return true;
+&nbsp;                }
+&nbsp;
+&nbsp;                public Class&lt;?&gt; defineClass(@Nonnull(when = When.MAYBE) ClassLoader classLoader, String name, byte[] binaryRepresentation, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain) {
+&nbsp;                    return this.jvm.JVM_DefineClass(JNIEnv.CURRENT, name.replace(&#39;.&#39;, &#39;/&#39;), classLoader, binaryRepresentation, binaryRepresentation.length, protectionDomain);
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                public boolean equals(Object var1) {</b>
+<b class="fc">&nbsp;                    if (this == var1) {</b>
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+<b class="fc">&nbsp;                        return false;</b>
+<b class="fc">&nbsp;                    } else if (this.getClass() != var1.getClass()) {</b>
+<b class="fc">&nbsp;                        return false;</b>
+<b class="fc">&nbsp;                    } else {</b>
+&nbsp;                        return this.jvm.equals(((Enabled)var1).jvm);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return this.getClass().hashCode() * 31 + this.jvm.hashCode();
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+&nbsp;            public static enum Windows32BitFunctionMapper implements FunctionMapper {
+&nbsp;                INSTANCE;
+&nbsp;
+&nbsp;                private Windows32BitFunctionMapper() {
+&nbsp;                }
+&nbsp;
+&nbsp;                public String getFunctionName(NativeLibrary library, Method method) {
+&nbsp;                    return method.getName().equals(&quot;JVM_DefineClass&quot;) ? &quot;_JVM_DefineClass@24&quot; : method.getName();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public static enum CreationAction implements PrivilegedAction&lt;Dispatcher&gt; {
+&nbsp;                INSTANCE;
+&nbsp;
+&nbsp;                private CreationAction() {
+&nbsp;                }
+&nbsp;
+&nbsp;                public Dispatcher run() {
+&nbsp;                    if (java.lang.System.getProperty(&quot;java.vm.name&quot;, &quot;&quot;).toUpperCase(Locale.US).contains(&quot;J9&quot;)) {
+&nbsp;                        return new Unavailable(&quot;J9 does not support JNA-based class definition&quot;);
+&nbsp;                    } else {
+&nbsp;                        try {
+&nbsp;                            Map&lt;String, Object&gt; options = new HashMap();
+&nbsp;                            options.put(&quot;allow-objects&quot;, Boolean.TRUE);
+&nbsp;                            if (Platform.isWindows() &amp;&amp; !Platform.is64Bit()) {
+&nbsp;                                options.put(&quot;function-mapper&quot;, ClassInjector.UsingJna.Dispatcher.Windows32BitFunctionMapper.INSTANCE);
+&nbsp;                            }
+&nbsp;
+&nbsp;                            return new Enabled((Jvm)Native.loadLibrary(&quot;jvm&quot;, Jvm.class, options));
+&nbsp;                        } catch (Throwable var2) {
+&nbsp;                            return new Unavailable(var2.getMessage());
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class UsingInstrumentation extends AbstractBase {
+&nbsp;        private static final String JAR = &quot;jar&quot;;
+&nbsp;        private static final String CLASS_FILE_EXTENSION = &quot;.class&quot;;
+&nbsp;        private static final Dispatcher DISPATCHER;
+&nbsp;        private final Instrumentation instrumentation;
+&nbsp;        private final Target target;
+&nbsp;        private final File folder;
+&nbsp;        private final RandomString randomString;
+&nbsp;        private static final boolean ACCESS_CONTROLLER;
+&nbsp;
+&nbsp;        protected UsingInstrumentation(File folder, Target target, Instrumentation instrumentation, RandomString randomString) {
+&nbsp;            this.folder = folder;
+&nbsp;            this.target = target;
+&nbsp;            this.instrumentation = instrumentation;
+&nbsp;            this.randomString = randomString;
+&nbsp;        }
+&nbsp;
+&nbsp;        @net.bytebuddy.build.AccessControllerPlugin.Enhance
+&nbsp;        private static &lt;T&gt; T doPrivileged(PrivilegedAction&lt;T&gt; action) {
+&nbsp;            return ACCESS_CONTROLLER ? AccessController.doPrivileged(action) : action.run();
+&nbsp;        }
+&nbsp;
+&nbsp;        public static void redefineModule(Instrumentation instrumentation, JavaModule target, Set&lt;JavaModule&gt; reads, Map&lt;String, Set&lt;JavaModule&gt;&gt; exports, Map&lt;String, Set&lt;JavaModule&gt;&gt; opens, Set&lt;Class&lt;?&gt;&gt; uses, Map&lt;Class&lt;?&gt;, List&lt;Class&lt;?&gt;&gt;&gt; provides) {
+&nbsp;            if (!DISPATCHER.isModifiableModule(instrumentation, target.unwrap())) {
+&nbsp;                throw new IllegalArgumentException(&quot;Cannot modify module: &quot; + target);
+&nbsp;            } else {
+&nbsp;                Set&lt;Object&gt; unwrappedReads = new HashSet();
+&nbsp;                Iterator var8 = reads.iterator();
+&nbsp;
+&nbsp;                while(var8.hasNext()) {
+&nbsp;                    JavaModule read = (JavaModule)var8.next();
+&nbsp;                    unwrappedReads.add(read.unwrap());
+&nbsp;                }
+&nbsp;
+&nbsp;                Map&lt;String, Set&lt;?&gt;&gt; unwrappedExports = new HashMap();
+&nbsp;                Iterator var16 = exports.entrySet().iterator();
+&nbsp;
+&nbsp;                while(var16.hasNext()) {
+&nbsp;                    Map.Entry&lt;String, Set&lt;JavaModule&gt;&gt; entry = (Map.Entry)var16.next();
+&nbsp;                    Set&lt;Object&gt; modules = new HashSet();
+&nbsp;                    Iterator var12 = ((Set)entry.getValue()).iterator();
+&nbsp;
+&nbsp;                    while(var12.hasNext()) {
+&nbsp;                        JavaModule module = (JavaModule)var12.next();
+&nbsp;                        modules.add(module.unwrap());
+&nbsp;                    }
+&nbsp;
+&nbsp;                    unwrappedExports.put(entry.getKey(), modules);
+&nbsp;                }
+&nbsp;
+&nbsp;                Map&lt;String, Set&lt;?&gt;&gt; unwrappedOpens = new HashMap();
+&nbsp;                Iterator var18 = opens.entrySet().iterator();
+&nbsp;
+&nbsp;                while(var18.hasNext()) {
+&nbsp;                    Map.Entry&lt;String, Set&lt;JavaModule&gt;&gt; entry = (Map.Entry)var18.next();
+&nbsp;                    Set&lt;Object&gt; modules = new HashSet();
+&nbsp;                    Iterator var21 = ((Set)entry.getValue()).iterator();
+&nbsp;
+&nbsp;                    while(var21.hasNext()) {
+&nbsp;                        JavaModule module = (JavaModule)var21.next();
+&nbsp;                        modules.add(module.unwrap());
+&nbsp;                    }
+&nbsp;
+&nbsp;                    unwrappedOpens.put(entry.getKey(), modules);
+&nbsp;                }
+&nbsp;
+&nbsp;                DISPATCHER.redefineModule(instrumentation, target.unwrap(), unwrappedReads, unwrappedExports, unwrappedOpens, uses, provides);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public static ClassInjector of(File folder, Target target, Instrumentation instrumentation) {
+&nbsp;            return new UsingInstrumentation(folder, target, instrumentation, new RandomString());
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isAlive() {
+&nbsp;            return isAvailable();
+&nbsp;        }
+&nbsp;
+&nbsp;        public Map&lt;String, Class&lt;?&gt;&gt; injectRaw(Map&lt;? extends String, byte[]&gt; types) {
+&nbsp;            File file = new File(this.folder, &quot;jar&quot; + this.randomString.nextString() + &quot;.&quot; + &quot;jar&quot;);
+&nbsp;
+&nbsp;            try {
+&nbsp;                if (!file.createNewFile()) {
+&nbsp;                    throw new IllegalStateException(&quot;Cannot create file &quot; + file);
+&nbsp;                } else {
+&nbsp;                    try {
+&nbsp;                        JarOutputStream jarOutputStream = new JarOutputStream(new FileOutputStream(file));
+&nbsp;
+&nbsp;                        try {
+&nbsp;                            Iterator var4 = types.entrySet().iterator();
+&nbsp;
+&nbsp;                            while(var4.hasNext()) {
+&nbsp;                                Map.Entry&lt;? extends String, byte[]&gt; entry = (Map.Entry)var4.next();
+&nbsp;                                jarOutputStream.putNextEntry(new JarEntry(((String)entry.getKey()).replace(&#39;.&#39;, &#39;/&#39;) + &quot;.class&quot;));
+&nbsp;                                jarOutputStream.write((byte[])entry.getValue());
+&nbsp;                            }
+&nbsp;                        } finally {
+&nbsp;                            jarOutputStream.close();
+&nbsp;                        }
+&nbsp;
+&nbsp;                        JarFile jarFile = new JarFile(file, false);
+&nbsp;
+&nbsp;                        try {
+&nbsp;                            this.target.inject(this.instrumentation, jarFile);
+&nbsp;                        } finally {
+&nbsp;                            jarFile.close();
+&nbsp;                        }
+&nbsp;
+&nbsp;                        HashMap result = new HashMap();
+&nbsp;                        Iterator var6 = types.keySet().iterator();
+&nbsp;
+&nbsp;                        while(var6.hasNext()) {
+&nbsp;                            String name = (String)var6.next();
+&nbsp;                            result.put(name, Class.forName(name, false, this.target.getClassLoader()));
+&nbsp;                        }
+&nbsp;
+&nbsp;                        HashMap var31 = result;
+&nbsp;                        return var31;
+&nbsp;                    } finally {
+&nbsp;                        if (!file.delete()) {
+&nbsp;                            file.deleteOnExit();
+&nbsp;                        }
+&nbsp;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            } catch (IOException var27) {
+&nbsp;                throw new IllegalStateException(&quot;Cannot write jar file to disk&quot;, var27);
+&nbsp;            } catch (ClassNotFoundException var28) {
+&nbsp;                throw new IllegalStateException(&quot;Cannot load injected class&quot;, var28);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public static boolean isAvailable() {
+&nbsp;            return ClassFileVersion.ofThisVm(ClassFileVersion.JAVA_V5).isAtLeast(ClassFileVersion.JAVA_V6);
+&nbsp;        }
+&nbsp;
+&nbsp;        static {
+&nbsp;            try {
+&nbsp;                Class.forName(&quot;java.security.AccessController&quot;, false, (ClassLoader)null);
+&nbsp;                ACCESS_CONTROLLER = Boolean.parseBoolean(java.lang.System.getProperty(&quot;net.bytebuddy.securitymanager&quot;, &quot;true&quot;));
+&nbsp;            } catch (ClassNotFoundException var0) {
+&nbsp;                ACCESS_CONTROLLER = false;
+&nbsp;            } catch (SecurityException var1) {
+&nbsp;                ACCESS_CONTROLLER = true;
+&nbsp;            }
+&nbsp;
+&nbsp;            DISPATCHER = (Dispatcher)doPrivileged(JavaDispatcher.of(Dispatcher.class));
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.target.equals(((UsingInstrumentation)var1).target)) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.instrumentation.equals(((UsingInstrumentation)var1).instrumentation)) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.folder.equals(((UsingInstrumentation)var1).folder)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.randomString.equals(((UsingInstrumentation)var1).randomString);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return (((this.getClass().hashCode() * 31 + this.instrumentation.hashCode()) * 31 + this.target.hashCode()) * 31 + this.folder.hashCode()) * 31 + this.randomString.hashCode();
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public static enum Target {
+&nbsp;            BOOTSTRAP((ClassLoader)null) {
+&nbsp;                protected void inject(Instrumentation instrumentation, JarFile jarFile) {
+<b class="fc">&nbsp;                    ClassInjector.UsingInstrumentation.DISPATCHER.appendToBootstrapClassLoaderSearch(instrumentation, jarFile);</b>
+&nbsp;                }
+&nbsp;            },
+&nbsp;            SYSTEM(ClassLoader.getSystemClassLoader()) {
+&nbsp;                protected void inject(Instrumentation instrumentation, JarFile jarFile) {
+&nbsp;                    ClassInjector.UsingInstrumentation.DISPATCHER.appendToSystemClassLoaderSearch(instrumentation, jarFile);
+&nbsp;                }
+&nbsp;            };
+<b class="fc">&nbsp;</b>
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            private final ClassLoader classLoader;
+<b class="fc">&nbsp;</b>
+&nbsp;            private Target(@Nonnull(when = When.MAYBE) ClassLoader classLoader) {
+&nbsp;                this.classLoader = classLoader;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            protected ClassLoader getClassLoader() {
+&nbsp;                return this.classLoader;
+&nbsp;            }
+&nbsp;
+&nbsp;            protected abstract void inject(Instrumentation var1, JarFile var2);
+&nbsp;        }
+&nbsp;
+&nbsp;        @Proxied(&quot;java.lang.instrument.Instrumentation&quot;)
+&nbsp;        protected interface Dispatcher {
+&nbsp;            @Proxied(&quot;appendToBootstrapClassLoaderSearch&quot;)
+&nbsp;            void appendToBootstrapClassLoaderSearch(Instrumentation var1, JarFile var2);
+&nbsp;
+&nbsp;            @Proxied(&quot;appendToSystemClassLoaderSearch&quot;)
+&nbsp;            void appendToSystemClassLoaderSearch(Instrumentation var1, JarFile var2);
+&nbsp;
+&nbsp;            @Proxied(&quot;isModifiableModule&quot;)
+&nbsp;            boolean isModifiableModule(Instrumentation var1, @Proxied(&quot;java.lang.Module&quot;) Object var2);
+&nbsp;
+&nbsp;            @Proxied(&quot;redefineModule&quot;)
+&nbsp;            void redefineModule(Instrumentation var1, @Proxied(&quot;java.lang.Module&quot;) Object var2, Set&lt;?&gt; var3, Map&lt;String, Set&lt;?&gt;&gt; var4, Map&lt;String, Set&lt;?&gt;&gt; var5, Set&lt;Class&lt;?&gt;&gt; var6, Map&lt;Class&lt;?&gt;, List&lt;Class&lt;?&gt;&gt;&gt; var7);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class UsingUnsafe extends AbstractBase {
+&nbsp;        public static final String SAFE_PROPERTY = &quot;net.bytebuddy.safe&quot;;
+&nbsp;        private static final Dispatcher.Initializable DISPATCHER;
+&nbsp;        private static final System SYSTEM;
+&nbsp;        private static final Method CHECK_PERMISSION;
+&nbsp;        private static final Object BOOTSTRAP_LOADER_LOCK;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        @ValueHandling(Sort.REVERSE_NULLABILITY)
+&nbsp;        private final ClassLoader classLoader;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        @ValueHandling(Sort.REVERSE_NULLABILITY)
+&nbsp;        private final ProtectionDomain protectionDomain;
+&nbsp;        private final Dispatcher.Initializable dispatcher;
+&nbsp;        private static final boolean ACCESS_CONTROLLER;
+&nbsp;
+&nbsp;        public UsingUnsafe(@Nonnull(when = When.MAYBE) ClassLoader classLoader) {
+&nbsp;            this(classLoader, ClassLoadingStrategy.NO_PROTECTION_DOMAIN);
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public UsingUnsafe(@Nonnull(when = When.MAYBE) ClassLoader classLoader, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain) {</b>
+<b class="fc">&nbsp;            this(classLoader, protectionDomain, DISPATCHER);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        protected UsingUnsafe(@Nonnull(when = When.MAYBE) ClassLoader classLoader, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain, Dispatcher.Initializable dispatcher) {</b>
+<b class="fc">&nbsp;            this.classLoader = classLoader;</b>
+&nbsp;            this.protectionDomain = protectionDomain;
+&nbsp;            this.dispatcher = dispatcher;
+&nbsp;        }
+&nbsp;
+&nbsp;        @net.bytebuddy.build.AccessControllerPlugin.Enhance
+&nbsp;        private static &lt;T&gt; T doPrivileged(PrivilegedAction&lt;T&gt; action) {
+&nbsp;            return ACCESS_CONTROLLER ? AccessController.doPrivileged(action) : action.run();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isAlive() {
+&nbsp;            return this.dispatcher.isAvailable();
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public Map&lt;String, Class&lt;?&gt;&gt; injectRaw(Map&lt;? extends String, byte[]&gt; types) {
+&nbsp;            Dispatcher dispatcher = this.dispatcher.initialize();
+&nbsp;            Map&lt;String, Class&lt;?&gt;&gt; result = new HashMap();
+&nbsp;            synchronized(this.classLoader == null ? BOOTSTRAP_LOADER_LOCK : this.classLoader) {
+&nbsp;                Iterator var5 = types.entrySet().iterator();
+<b class="fc">&nbsp;</b>
+&nbsp;                while(var5.hasNext()) {
+<b class="fc">&nbsp;                    Map.Entry&lt;? extends String, byte[]&gt; entry = (Map.Entry)var5.next();</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                    try {</b>
+<b class="fc">&nbsp;                        result.put(entry.getKey(), Class.forName((String)entry.getKey(), false, this.classLoader));</b>
+<b class="fc">&nbsp;                    } catch (ClassNotFoundException var9) {</b>
+&nbsp;                        result.put(entry.getKey(), dispatcher.defineClass(this.classLoader, (String)entry.getKey(), (byte[])entry.getValue(), this.protectionDomain));
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                return result;
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public static boolean isAvailable() {
+&nbsp;            return DISPATCHER.isAvailable();
+&nbsp;        }
+&nbsp;
+&nbsp;        public static ClassInjector ofSystemLoader() {
+&nbsp;            return new UsingUnsafe(ClassLoader.getSystemClassLoader());
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        public static ClassInjector ofPlatformLoader() {
+<b class="fc">&nbsp;            return new UsingUnsafe(ClassLoader.getSystemClassLoader().getParent());</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        public static ClassInjector ofBootLoader() {
+&nbsp;            return new UsingUnsafe(ClassLoadingStrategy.BOOTSTRAP_LOADER);
+&nbsp;        }
+&nbsp;
+&nbsp;        static {
+&nbsp;            try {
+&nbsp;                Class.forName(&quot;java.security.AccessController&quot;, false, (ClassLoader)null);
+&nbsp;                ACCESS_CONTROLLER = Boolean.parseBoolean(java.lang.System.getProperty(&quot;net.bytebuddy.securitymanager&quot;, &quot;true&quot;));
+&nbsp;            } catch (ClassNotFoundException var0) {
+&nbsp;                ACCESS_CONTROLLER = false;
+&nbsp;            } catch (SecurityException var1) {
+&nbsp;                ACCESS_CONTROLLER = true;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            DISPATCHER = (Dispatcher.Initializable)doPrivileged(ClassInjector.UsingUnsafe.Dispatcher.CreationAction.INSTANCE);</b>
+&nbsp;            SYSTEM = (System)doPrivileged(JavaDispatcher.of(System.class));
+&nbsp;            CHECK_PERMISSION = (Method)doPrivileged(new GetMethodAction(&quot;java.lang.SecurityManager&quot;, &quot;checkPermission&quot;, new Class[]{Permission.class}));
+&nbsp;            BOOTSTRAP_LOADER_LOCK = new Object();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+<b class="fc">&nbsp;            if (this == var1) {</b>
+<b class="fc">&nbsp;                return true;</b>
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                label46: {
+&nbsp;                    ClassLoader var2 = ((UsingUnsafe)var1).classLoader;
+&nbsp;                    ClassLoader var3 = this.classLoader;
+<b class="fc">&nbsp;                    if (var2 != null) {</b>
+&nbsp;                        if (var3 != null) {
+&nbsp;                            if (!var3.equals(var2)) {
+&nbsp;                                return false;
+&nbsp;                            }
+&nbsp;                            break label46;
+&nbsp;                        }
+&nbsp;                    } else if (var3 == null) {
+<b class="fc">&nbsp;                        break label46;</b>
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;
+&nbsp;                ProtectionDomain var4 = ((UsingUnsafe)var1).protectionDomain;
+&nbsp;                ProtectionDomain var5 = this.protectionDomain;
+&nbsp;                if (var4 != null) {
+&nbsp;                    if (var5 == null) {
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    if (!var5.equals(var4)) {</b>
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;                } else if (var5 != null) {
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (!this.dispatcher.equals(((UsingUnsafe)var1).dispatcher)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return true;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            int var10000 = this.getClass().hashCode() * 31;
+&nbsp;            ClassLoader var1 = this.classLoader;
+&nbsp;            if (var1 != null) {
+&nbsp;                var10000 += var1.hashCode();
+&nbsp;            }
+&nbsp;
+&nbsp;            var10000 *= 31;
+&nbsp;            ProtectionDomain var2 = this.protectionDomain;
+&nbsp;            if (var2 != null) {
+&nbsp;                var10000 += var2.hashCode();
+&nbsp;            }
+&nbsp;
+&nbsp;            return var10000 * 31 + this.dispatcher.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        @Proxied(&quot;java.lang.System&quot;)
+&nbsp;        protected interface System {
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            @IsStatic
+&nbsp;            @Defaults
+&nbsp;            @Proxied(&quot;getSecurityManager&quot;)
+&nbsp;            Object getSecurityManager();
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class Factory {
+&nbsp;            private final Dispatcher.Initializable dispatcher;
+&nbsp;
+&nbsp;            public Factory() {
+&nbsp;                this((AccessResolver)ClassInjector.UsingUnsafe.Factory.AccessResolver.Default.INSTANCE);
+&nbsp;            }
+&nbsp;
+&nbsp;            @SuppressFBWarnings(
+&nbsp;                value = {&quot;REC_CATCH_EXCEPTION&quot;},
+&nbsp;                justification = &quot;Exception should not be rethrown but trigger a fallback.&quot;
+&nbsp;            )
+&nbsp;            public Factory(AccessResolver accessResolver) {
+&nbsp;                Object dispatcher;
+&nbsp;                if (ClassInjector.UsingUnsafe.DISPATCHER.isAvailable()) {
+&nbsp;                    dispatcher = ClassInjector.UsingUnsafe.DISPATCHER;
+&nbsp;                } else {
+&nbsp;                    try {
+&nbsp;                        Class&lt;?&gt; unsafeType = Class.forName(&quot;jdk.internal.misc.Unsafe&quot;);
+&nbsp;                        Field theUnsafe = unsafeType.getDeclaredField(&quot;theUnsafe&quot;);
+&nbsp;                        accessResolver.apply(theUnsafe);
+&nbsp;                        Object unsafe = theUnsafe.get((Object)null);
+&nbsp;                        Method defineClass = unsafeType.getMethod(&quot;defineClass&quot;, String.class, byte[].class, Integer.TYPE, Integer.TYPE, ClassLoader.class, ProtectionDomain.class);
+&nbsp;                        accessResolver.apply(defineClass);
+&nbsp;                        dispatcher = new Dispatcher.Enabled(unsafe, defineClass);
+&nbsp;                    } catch (Exception var7) {
+&nbsp;                        dispatcher = new Dispatcher.Unavailable(var7.getMessage());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                this.dispatcher = (Dispatcher.Initializable)dispatcher;
+&nbsp;            }
+&nbsp;
+&nbsp;            protected Factory(Dispatcher.Initializable dispatcher) {
+&nbsp;                this.dispatcher = dispatcher;
+&nbsp;            }
+&nbsp;
+&nbsp;            public static Factory resolve(Instrumentation instrumentation) {
+&nbsp;                return resolve(instrumentation, false);
+&nbsp;            }
+&nbsp;
+&nbsp;            @SuppressFBWarnings(
+&nbsp;                value = {&quot;REC_CATCH_EXCEPTION&quot;, &quot;NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE&quot;},
+&nbsp;                justification = &quot;Exception intends to trigger disabled injection strategy. Modules are assumed if module system is supported.&quot;
+&nbsp;            )
+&nbsp;            public static Factory resolve(Instrumentation instrumentation, boolean local) {
+&nbsp;                if (!ClassInjector.UsingUnsafe.isAvailable() &amp;&amp; JavaModule.isSupported()) {
+&nbsp;                    try {
+&nbsp;                        Class&lt;?&gt; type = Class.forName(&quot;jdk.internal.misc.Unsafe&quot;);
+&nbsp;                        PackageDescription packageDescription = new PackageDescription.ForLoadedPackage(type.getPackage());
+&nbsp;                        JavaModule source = JavaModule.ofType(type);
+&nbsp;                        JavaModule target = JavaModule.ofType(UsingUnsafe.class);
+<b class="fc">&nbsp;                        if (source.isOpened(packageDescription, target)) {</b>
+<b class="fc">&nbsp;                            return new Factory();</b>
+&nbsp;                        } else if (local) {
+&nbsp;                            JavaModule module = JavaModule.ofType(AccessResolver.Default.class);
+&nbsp;                            ClassInjector.UsingInstrumentation.redefineModule(instrumentation, source, Collections.singleton(module), Collections.emptyMap(), Collections.singletonMap(packageDescription.getName(), Collections.singleton(module)), Collections.emptySet(), Collections.emptyMap());
+&nbsp;                            return new Factory();
+&nbsp;                        } else {
+&nbsp;                            Class&lt;? extends AccessResolver&gt; resolver = (new ByteBuddy()).subclass(AccessResolver.class).method(ElementMatchers.named(&quot;apply&quot;)).intercept(MethodCall.invoke(AccessibleObject.class.getMethod(&quot;setAccessible&quot;, Boolean.TYPE)).onArgument(0).with(new Object[]{true})).make().load(AccessResolver.class.getClassLoader(), net.bytebuddy.dynamic.loading.ClassLoadingStrategy.Default.WRAPPER.with(AccessResolver.class.getProtectionDomain())).getLoaded();
+&nbsp;                            JavaModule module = JavaModule.ofType(resolver);
+<b class="fc">&nbsp;                            ClassInjector.UsingInstrumentation.redefineModule(instrumentation, source, Collections.singleton(module), Collections.emptyMap(), Collections.singletonMap(packageDescription.getName(), Collections.singleton(module)), Collections.emptySet(), Collections.emptyMap());</b>
+&nbsp;                            return new Factory((AccessResolver)resolver.getConstructor().newInstance());
+&nbsp;                        }
+&nbsp;                    } catch (Exception var8) {
+&nbsp;                        return new Factory(new Dispatcher.Unavailable(var8.getMessage()));
+&nbsp;                    }
+&nbsp;                } else {
+&nbsp;                    return new Factory();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean isAvailable() {
+&nbsp;                return this.dispatcher.isAvailable();
+&nbsp;            }
+&nbsp;
+&nbsp;            public ClassInjector make(@Nonnull(when = When.MAYBE) ClassLoader classLoader) {
+&nbsp;                return this.make(classLoader, ClassLoadingStrategy.NO_PROTECTION_DOMAIN);
+&nbsp;            }
+&nbsp;
+&nbsp;            public ClassInjector make(@Nonnull(when = When.MAYBE) ClassLoader classLoader, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain) {
+&nbsp;                return new UsingUnsafe(classLoader, protectionDomain, this.dispatcher);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.dispatcher.equals(((Factory)var1).dispatcher);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.dispatcher.hashCode();
+&nbsp;            }
+&nbsp;
+&nbsp;            public interface AccessResolver {
+&nbsp;                void apply(AccessibleObject var1);
+&nbsp;
+&nbsp;                public static enum Default implements AccessResolver {
+&nbsp;                    INSTANCE;
+&nbsp;
+&nbsp;                    private Default() {
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public void apply(AccessibleObject accessibleObject) {
+&nbsp;                        accessibleObject.setAccessible(true);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        protected interface Dispatcher {
+&nbsp;            Class&lt;?&gt; defineClass(@Nonnull(when = When.MAYBE) ClassLoader var1, String var2, byte[] var3, @Nonnull(when = When.MAYBE) ProtectionDomain var4);
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public static class Unavailable implements Dispatcher, Initializable {
+&nbsp;                private final String message;
+&nbsp;
+&nbsp;                protected Unavailable(String message) {
+&nbsp;                    this.message = message;
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean isAvailable() {
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;
+&nbsp;                public Dispatcher initialize() {
+&nbsp;                    throw new UnsupportedOperationException(&quot;Could not access Unsafe class: &quot; + this.message);
+&nbsp;                }
+&nbsp;
+&nbsp;                public Class&lt;?&gt; defineClass(@Nonnull(when = When.MAYBE) ClassLoader classLoader, String name, byte[] binaryRepresentation, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain) {
+&nbsp;                    throw new UnsupportedOperationException(&quot;Could not access Unsafe class: &quot; + this.message);
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.message.equals(((Unavailable)var1).message);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return this.getClass().hashCode() * 31 + this.message.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public static class Enabled implements Dispatcher, Initializable {
+&nbsp;                private final Object unsafe;
+&nbsp;                private final Method defineClass;
+&nbsp;
+&nbsp;                protected Enabled(Object unsafe, Method defineClass) {
+&nbsp;                    this.unsafe = unsafe;
+&nbsp;                    this.defineClass = defineClass;
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean isAvailable() {
+&nbsp;                    return true;
+&nbsp;                }
+&nbsp;
+&nbsp;                public Dispatcher initialize() {
+&nbsp;                    Object securityManager = ClassInjector.UsingUnsafe.SYSTEM.getSecurityManager();
+&nbsp;                    if (securityManager != null) {
+&nbsp;                        try {
+&nbsp;                            ClassInjector.UsingUnsafe.CHECK_PERMISSION.invoke(securityManager, ClassInjector.SUPPRESS_ACCESS_CHECKS);
+&nbsp;                        } catch (InvocationTargetException var3) {
+&nbsp;                            return new Unavailable(var3.getTargetException().getMessage());
+&nbsp;                        } catch (Exception var4) {
+&nbsp;                            return new Unavailable(var4.getMessage());
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return this;
+&nbsp;                }
+&nbsp;
+&nbsp;                public Class&lt;?&gt; defineClass(@Nonnull(when = When.MAYBE) ClassLoader classLoader, String name, byte[] binaryRepresentation, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain) {
+&nbsp;                    try {
+&nbsp;                        return (Class)this.defineClass.invoke(this.unsafe, name, binaryRepresentation, 0, binaryRepresentation.length, classLoader, protectionDomain);
+&nbsp;                    } catch (IllegalAccessException var6) {
+&nbsp;                        throw new IllegalStateException(var6);
+&nbsp;                    } catch (InvocationTargetException var7) {
+&nbsp;                        throw new IllegalStateException(var7.getTargetException());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.unsafe.equals(((Enabled)var1).unsafe)) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.defineClass.equals(((Enabled)var1).defineClass);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return (this.getClass().hashCode() * 31 + this.unsafe.hashCode()) * 31 + this.defineClass.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public static enum CreationAction implements PrivilegedAction&lt;Initializable&gt; {
+&nbsp;                INSTANCE;
+&nbsp;
+&nbsp;                private CreationAction() {
+&nbsp;                }
+&nbsp;
+&nbsp;                @SuppressFBWarnings(
+&nbsp;                    value = {&quot;REC_CATCH_EXCEPTION&quot;},
+&nbsp;                    justification = &quot;Exception should not be rethrown but trigger a fallback.&quot;
+&nbsp;                )
+&nbsp;                public Initializable run() {
+&nbsp;                    if (Boolean.getBoolean(&quot;net.bytebuddy.safe&quot;)) {
+&nbsp;                        return new Unavailable(&quot;Use of Unsafe was disabled by system property&quot;);
+&nbsp;                    } else {
+&nbsp;                        try {
+&nbsp;                            Class&lt;?&gt; unsafeType = Class.forName(&quot;sun.misc.Unsafe&quot;);
+&nbsp;                            Field theUnsafe = unsafeType.getDeclaredField(&quot;theUnsafe&quot;);
+&nbsp;                            theUnsafe.setAccessible(true);
+&nbsp;                            Object unsafe = theUnsafe.get((Object)null);
+&nbsp;
+&nbsp;                            try {
+&nbsp;                                Method defineClass = unsafeType.getMethod(&quot;defineClass&quot;, String.class, byte[].class, Integer.TYPE, Integer.TYPE, ClassLoader.class, ProtectionDomain.class);
+&nbsp;                                defineClass.setAccessible(true);
+&nbsp;                                return new Enabled(unsafe, defineClass);
+&nbsp;                            } catch (Exception var14) {
+&nbsp;                                try {
+&nbsp;                                    Field override;
+&nbsp;                                    try {
+&nbsp;                                        override = AccessibleObject.class.getDeclaredField(&quot;override&quot;);
+&nbsp;                                    } catch (NoSuchFieldException var12) {
+&nbsp;                                        override = (new ByteBuddy()).redefine(AccessibleObject.class).name(&quot;net.bytebuddy.mirror.&quot; + AccessibleObject.class.getSimpleName()).noNestMate().visit((new MemberRemoval()).stripInvokables(ElementMatchers.any())).make().load(AccessibleObject.class.getClassLoader(), net.bytebuddy.dynamic.loading.ClassLoadingStrategy.Default.WRAPPER).getLoaded().getDeclaredField(&quot;override&quot;);
+&nbsp;                                    }
+&nbsp;
+&nbsp;                                    long offset = (Long)unsafeType.getMethod(&quot;objectFieldOffset&quot;, Field.class).invoke(unsafe, override);
+&nbsp;                                    Method putBoolean = unsafeType.getMethod(&quot;putBoolean&quot;, Object.class, Long.TYPE, Boolean.TYPE);
+&nbsp;                                    Class&lt;?&gt; internalUnsafe = Class.forName(&quot;jdk.internal.misc.Unsafe&quot;);
+&nbsp;                                    Field theUnsafeInternal = internalUnsafe.getDeclaredField(&quot;theUnsafe&quot;);
+&nbsp;                                    putBoolean.invoke(unsafe, theUnsafeInternal, offset, true);
+&nbsp;                                    Method defineClassInternal = internalUnsafe.getMethod(&quot;defineClass&quot;, String.class, byte[].class, Integer.TYPE, Integer.TYPE, ClassLoader.class, ProtectionDomain.class);
+&nbsp;                                    putBoolean.invoke(unsafe, defineClassInternal, offset, true);
+&nbsp;                                    return new Enabled(theUnsafeInternal.get((Object)null), defineClassInternal);
+&nbsp;                                } catch (Exception var13) {
+&nbsp;                                    throw var14;
+&nbsp;                                }
+&nbsp;                            }
+&nbsp;                        } catch (Exception var15) {
+&nbsp;                            return new Unavailable(var15.getMessage());
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public interface Initializable {
+&nbsp;                boolean isAvailable();
+&nbsp;
+&nbsp;                Dispatcher initialize();
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class UsingLookup extends AbstractBase {
+&nbsp;        private static final MethodHandles METHOD_HANDLES;
+&nbsp;        private static final MethodHandles.Lookup METHOD_HANDLES_LOOKUP;
+&nbsp;        private static final int PACKAGE_LOOKUP = 8;
+&nbsp;        private final Object lookup;
+&nbsp;        private static final boolean ACCESS_CONTROLLER;
+&nbsp;
+&nbsp;        protected UsingLookup(Object lookup) {
+&nbsp;            this.lookup = lookup;
+&nbsp;        }
+&nbsp;
+&nbsp;        @net.bytebuddy.build.AccessControllerPlugin.Enhance
+&nbsp;        private static &lt;T&gt; T doPrivileged(PrivilegedAction&lt;T&gt; action) {
+&nbsp;            return ACCESS_CONTROLLER ? AccessController.doPrivileged(action) : action.run();
+&nbsp;        }
+&nbsp;
+&nbsp;        public static UsingLookup of(Object lookup) {
+&nbsp;            if (!isAvailable()) {
+&nbsp;                throw new IllegalStateException(&quot;The current VM does not support class definition via method handle lookups&quot;);
+&nbsp;            } else if (!JavaType.METHOD_HANDLES_LOOKUP.isInstance(lookup)) {
+&nbsp;                throw new IllegalArgumentException(&quot;Not a method handle lookup: &quot; + lookup);
+&nbsp;            } else if ((METHOD_HANDLES_LOOKUP.lookupModes(lookup) &amp; 8) == 0) {
+&nbsp;                throw new IllegalArgumentException(&quot;Lookup does not imply package-access: &quot; + lookup);
+&nbsp;            } else {
+&nbsp;                return new UsingLookup(lookup);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public Class&lt;?&gt; lookupType() {
+&nbsp;            return METHOD_HANDLES_LOOKUP.lookupClass(this.lookup);
+&nbsp;        }
+&nbsp;
+&nbsp;        public UsingLookup in(Class&lt;?&gt; type) {
+&nbsp;            try {
+&nbsp;                return new UsingLookup(METHOD_HANDLES.privateLookupIn(type, this.lookup));
+&nbsp;            } catch (IllegalAccessException var3) {
+&nbsp;                throw new IllegalStateException(&quot;Cannot access &quot; + type.getName() + &quot; from &quot; + this.lookup, var3);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isAlive() {
+&nbsp;            return isAvailable();
+&nbsp;        }
+&nbsp;
+&nbsp;        public Map&lt;String, Class&lt;?&gt;&gt; injectRaw(Map&lt;? extends String, byte[]&gt; types) {
+&nbsp;            PackageDescription target = ForLoadedType.of(this.lookupType()).getPackage();
+&nbsp;            if (target == null) {
+&nbsp;                throw new IllegalStateException(&quot;Cannot inject into default package&quot;);
+&nbsp;            } else {
+&nbsp;                Map&lt;String, Class&lt;?&gt;&gt; result = new HashMap();
+&nbsp;                Iterator var4 = types.entrySet().iterator();
+&nbsp;
+&nbsp;                while(var4.hasNext()) {
+&nbsp;                    Map.Entry&lt;? extends String, byte[]&gt; entry = (Map.Entry)var4.next();
+&nbsp;                    int index = ((String)entry.getKey()).lastIndexOf(46);
+&nbsp;                    if (!target.getName().equals(index == -1 ? &quot;&quot; : ((String)entry.getKey()).substring(0, index))) {
+&nbsp;                        throw new IllegalArgumentException((String)entry.getKey() + &quot; must be defined in the same package as &quot; + this.lookup);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    try {
+&nbsp;                        result.put(entry.getKey(), METHOD_HANDLES_LOOKUP.defineClass(this.lookup, (byte[])entry.getValue()));
+&nbsp;                    } catch (Exception var8) {
+&nbsp;                        throw new IllegalStateException(var8);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                return result;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public static boolean isAvailable() {
+&nbsp;            return JavaType.MODULE.isAvailable();
+&nbsp;        }
+&nbsp;
+&nbsp;        static {
+&nbsp;            try {
+&nbsp;                Class.forName(&quot;java.security.AccessController&quot;, false, (ClassLoader)null);
+&nbsp;                ACCESS_CONTROLLER = Boolean.parseBoolean(java.lang.System.getProperty(&quot;net.bytebuddy.securitymanager&quot;, &quot;true&quot;));
+&nbsp;            } catch (ClassNotFoundException var0) {
+&nbsp;                ACCESS_CONTROLLER = false;
+&nbsp;            } catch (SecurityException var1) {
+&nbsp;                ACCESS_CONTROLLER = true;
+&nbsp;            }
+&nbsp;
+&nbsp;            METHOD_HANDLES = (MethodHandles)doPrivileged(JavaDispatcher.of(MethodHandles.class));
+&nbsp;            METHOD_HANDLES_LOOKUP = (MethodHandles.Lookup)doPrivileged(JavaDispatcher.of(MethodHandles.Lookup.class));
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.lookup.equals(((UsingLookup)var1).lookup);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.lookup.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        @Proxied(&quot;java.lang.invoke.MethodHandles&quot;)
+&nbsp;        protected interface MethodHandles {
+&nbsp;            @IsStatic
+&nbsp;            @Proxied(&quot;privateLookupIn&quot;)
+&nbsp;            Object privateLookupIn(Class&lt;?&gt; var1, @Proxied(&quot;java.lang.invoke.MethodHandles$Lookup&quot;) Object var2) throws IllegalAccessException;
+&nbsp;
+&nbsp;            @Proxied(&quot;java.lang.invoke.MethodHandles$Lookup&quot;)
+&nbsp;            public interface Lookup {
+&nbsp;                @Proxied(&quot;lookupClass&quot;)
+&nbsp;                Class&lt;?&gt; lookupClass(Object var1);
+&nbsp;
+&nbsp;                @Proxied(&quot;lookupModes&quot;)
+&nbsp;                int lookupModes(Object var1);
+&nbsp;
+&nbsp;                @Proxied(&quot;defineClass&quot;)
+&nbsp;                Class&lt;?&gt; defineClass(Object var1, byte[] var2) throws IllegalAccessException;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class UsingReflection extends AbstractBase {
+&nbsp;        private static final Dispatcher.Initializable DISPATCHER;
+&nbsp;        private static final System SYSTEM;
+&nbsp;        private static final Method CHECK_PERMISSION;
+&nbsp;        private final ClassLoader classLoader;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        @ValueHandling(Sort.REVERSE_NULLABILITY)
+&nbsp;        private final ProtectionDomain protectionDomain;
+&nbsp;        private final PackageDefinitionStrategy packageDefinitionStrategy;
+&nbsp;        private final boolean forbidExisting;
+&nbsp;        private static final boolean ACCESS_CONTROLLER;
+&nbsp;
+&nbsp;        public UsingReflection(ClassLoader classLoader) {
+&nbsp;            this(classLoader, ClassLoadingStrategy.NO_PROTECTION_DOMAIN);
+&nbsp;        }
+&nbsp;
+&nbsp;        public UsingReflection(ClassLoader classLoader, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain) {
+&nbsp;            this(classLoader, protectionDomain, Trivial.INSTANCE, false);
+&nbsp;        }
+&nbsp;
+&nbsp;        public UsingReflection(ClassLoader classLoader, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain, PackageDefinitionStrategy packageDefinitionStrategy, boolean forbidExisting) {
+&nbsp;            if (classLoader == null) {
+&nbsp;                throw new IllegalArgumentException(&quot;Cannot inject classes into the bootstrap class loader&quot;);
+&nbsp;            } else {
+&nbsp;                this.classLoader = classLoader;
+&nbsp;                this.protectionDomain = protectionDomain;
+&nbsp;                this.packageDefinitionStrategy = packageDefinitionStrategy;
+&nbsp;                this.forbidExisting = forbidExisting;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @net.bytebuddy.build.AccessControllerPlugin.Enhance
+&nbsp;        private static &lt;T&gt; T doPrivileged(PrivilegedAction&lt;T&gt; action) {
+&nbsp;            return ACCESS_CONTROLLER ? AccessController.doPrivileged(action) : action.run();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isAlive() {
+&nbsp;            return isAvailable();
+&nbsp;        }
+&nbsp;
+&nbsp;        public Map&lt;String, Class&lt;?&gt;&gt; injectRaw(Map&lt;? extends String, byte[]&gt; types) {
+&nbsp;            Dispatcher dispatcher = DISPATCHER.initialize();
+&nbsp;            Map&lt;String, Class&lt;?&gt;&gt; result = new HashMap();
+&nbsp;            Iterator var4 = types.entrySet().iterator();
+&nbsp;
+&nbsp;            while(var4.hasNext()) {
+&nbsp;                Map.Entry&lt;? extends String, byte[]&gt; entry = (Map.Entry)var4.next();
+&nbsp;                synchronized(dispatcher.getClassLoadingLock(this.classLoader, (String)entry.getKey())) {
+&nbsp;                    Class&lt;?&gt; type = dispatcher.findClass(this.classLoader, (String)entry.getKey());
+&nbsp;                    if (type != null) {
+&nbsp;                        if (this.forbidExisting) {
+&nbsp;                            throw new IllegalStateException(&quot;Cannot inject already loaded type: &quot; + type);
+&nbsp;                        }
+&nbsp;                    } else {
+&nbsp;                        int packageIndex = ((String)entry.getKey()).lastIndexOf(46);
+&nbsp;                        if (packageIndex != -1) {
+&nbsp;                            String packageName = ((String)entry.getKey()).substring(0, packageIndex);
+&nbsp;                            PackageDefinitionStrategy.Definition definition = this.packageDefinitionStrategy.define(this.classLoader, packageName, (String)entry.getKey());
+&nbsp;                            if (definition.isDefined()) {
+&nbsp;                                Package definedPackage = dispatcher.getDefinedPackage(this.classLoader, packageName);
+&nbsp;                                if (definedPackage == null) {
+&nbsp;                                    try {
+&nbsp;                                        dispatcher.definePackage(this.classLoader, packageName, definition.getSpecificationTitle(), definition.getSpecificationVersion(), definition.getSpecificationVendor(), definition.getImplementationTitle(), definition.getImplementationVersion(), definition.getImplementationVendor(), definition.getSealBase());
+&nbsp;                                    } catch (IllegalStateException var14) {
+&nbsp;                                        definedPackage = dispatcher.getPackage(this.classLoader, packageName);
+&nbsp;                                        if (definedPackage == null) {
+&nbsp;                                            throw var14;
+&nbsp;                                        }
+&nbsp;
+&nbsp;                                        if (!definition.isCompatibleTo(definedPackage)) {
+&nbsp;                                            throw new SecurityException(&quot;Sealing violation for package &quot; + packageName + &quot; (getPackage fallback)&quot;);
+&nbsp;                                        }
+&nbsp;                                    }
+&nbsp;                                } else if (!definition.isCompatibleTo(definedPackage)) {
+&nbsp;                                    throw new SecurityException(&quot;Sealing violation for package &quot; + packageName);
+&nbsp;                                }
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;
+&nbsp;                        type = dispatcher.defineClass(this.classLoader, (String)entry.getKey(), (byte[])entry.getValue(), this.protectionDomain);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    result.put(entry.getKey(), type);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            return result;
+&nbsp;        }
+&nbsp;
+&nbsp;        public static boolean isAvailable() {
+&nbsp;            return DISPATCHER.isAvailable();
+&nbsp;        }
+&nbsp;
+&nbsp;        public static ClassInjector ofSystemClassLoader() {
+&nbsp;            return new UsingReflection(ClassLoader.getSystemClassLoader());
+&nbsp;        }
+&nbsp;
+&nbsp;        static {
+&nbsp;            try {
+&nbsp;                Class.forName(&quot;java.security.AccessController&quot;, false, (ClassLoader)null);
+&nbsp;                ACCESS_CONTROLLER = Boolean.parseBoolean(java.lang.System.getProperty(&quot;net.bytebuddy.securitymanager&quot;, &quot;true&quot;));
+&nbsp;            } catch (ClassNotFoundException var0) {
+&nbsp;                ACCESS_CONTROLLER = false;
+&nbsp;            } catch (SecurityException var1) {
+&nbsp;                ACCESS_CONTROLLER = true;
+&nbsp;            }
+&nbsp;
+&nbsp;            DISPATCHER = (Dispatcher.Initializable)doPrivileged(ClassInjector.UsingReflection.Dispatcher.CreationAction.INSTANCE);
+&nbsp;            SYSTEM = (System)doPrivileged(JavaDispatcher.of(System.class));
+&nbsp;            CHECK_PERMISSION = (Method)doPrivileged(new GetMethodAction(&quot;java.lang.SecurityManager&quot;, &quot;checkPermission&quot;, new Class[]{Permission.class}));
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (this.forbidExisting != ((UsingReflection)var1).forbidExisting) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.classLoader.equals(((UsingReflection)var1).classLoader)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                ProtectionDomain var2 = ((UsingReflection)var1).protectionDomain;
+&nbsp;                ProtectionDomain var3 = this.protectionDomain;
+&nbsp;                if (var2 != null) {
+&nbsp;                    if (var3 == null) {
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (!var3.equals(var2)) {
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;                } else if (var3 != null) {
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (!this.packageDefinitionStrategy.equals(((UsingReflection)var1).packageDefinitionStrategy)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return true;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            int var10000 = (this.getClass().hashCode() * 31 + this.classLoader.hashCode()) * 31;
+&nbsp;            ProtectionDomain var1 = this.protectionDomain;
+&nbsp;            if (var1 != null) {
+&nbsp;                var10000 += var1.hashCode();
+&nbsp;            }
+&nbsp;
+&nbsp;            return (var10000 * 31 + this.packageDefinitionStrategy.hashCode()) * 31 + this.forbidExisting;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Proxied(&quot;java.lang.System&quot;)
+&nbsp;        protected interface System {
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            @IsStatic
+&nbsp;            @Defaults
+&nbsp;            @Proxied(&quot;getSecurityManager&quot;)
+&nbsp;            Object getSecurityManager();
+&nbsp;        }
+&nbsp;
+&nbsp;        protected interface Dispatcher {
+&nbsp;            @Nonnull(
+&nbsp;                when = When.NEVER
+&nbsp;            )
+&nbsp;            Class&lt;?&gt; UNDEFINED = null;
+&nbsp;
+&nbsp;            Object getClassLoadingLock(ClassLoader var1, String var2);
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            Class&lt;?&gt; findClass(ClassLoader var1, String var2);
+&nbsp;
+&nbsp;            Class&lt;?&gt; defineClass(ClassLoader var1, String var2, byte[] var3, @Nonnull(when = When.MAYBE) ProtectionDomain var4);
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            Package getDefinedPackage(ClassLoader var1, String var2);
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            Package getPackage(ClassLoader var1, String var2);
+&nbsp;
+&nbsp;            Package definePackage(ClassLoader var1, String var2, @Nonnull(when = When.MAYBE) String var3, @Nonnull(when = When.MAYBE) String var4, @Nonnull(when = When.MAYBE) String var5, @Nonnull(when = When.MAYBE) String var6, @Nonnull(when = When.MAYBE) String var7, @Nonnull(when = When.MAYBE) String var8, @Nonnull(when = When.MAYBE) URL var9);
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public static class Unavailable implements Dispatcher {
+&nbsp;                private final String message;
+&nbsp;
+&nbsp;                protected Unavailable(String message) {
+&nbsp;                    this.message = message;
+&nbsp;                }
+&nbsp;
+&nbsp;                public Object getClassLoadingLock(ClassLoader classLoader, String name) {
+&nbsp;                    return classLoader;
+&nbsp;                }
+&nbsp;
+&nbsp;                public Class&lt;?&gt; findClass(ClassLoader classLoader, String name) {
+&nbsp;                    try {
+&nbsp;                        return classLoader.loadClass(name);
+&nbsp;                    } catch (ClassNotFoundException var4) {
+&nbsp;                        return UNDEFINED;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public Class&lt;?&gt; defineClass(ClassLoader classLoader, String name, byte[] binaryRepresentation, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain) {
+&nbsp;                    throw new UnsupportedOperationException(&quot;Cannot define class using reflection: &quot; + this.message);
+&nbsp;                }
+&nbsp;
+&nbsp;                public Package getDefinedPackage(ClassLoader classLoader, String name) {
+&nbsp;                    throw new UnsupportedOperationException(&quot;Cannot get defined package using reflection: &quot; + this.message);
+&nbsp;                }
+&nbsp;
+&nbsp;                public Package getPackage(ClassLoader classLoader, String name) {
+&nbsp;                    throw new UnsupportedOperationException(&quot;Cannot get package using reflection: &quot; + this.message);
+&nbsp;                }
+&nbsp;
+&nbsp;                public Package definePackage(ClassLoader classLoader, String name, @Nonnull(when = When.MAYBE) String specificationTitle, @Nonnull(when = When.MAYBE) String specificationVersion, @Nonnull(when = When.MAYBE) String specificationVendor, @Nonnull(when = When.MAYBE) String implementationTitle, @Nonnull(when = When.MAYBE) String implementationVersion, @Nonnull(when = When.MAYBE) String implementationVendor, @Nonnull(when = When.MAYBE) URL sealBase) {
+&nbsp;                    throw new UnsupportedOperationException(&quot;Cannot define package using injection: &quot; + this.message);
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.message.equals(((Unavailable)var1).message);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return this.getClass().hashCode() * 31 + this.message.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public abstract static class UsingUnsafeOverride implements Dispatcher, Initializable {
+&nbsp;                protected final Method findLoadedClass;
+&nbsp;                protected final Method defineClass;
+&nbsp;                @Nonnull(
+&nbsp;                    when = When.MAYBE
+&nbsp;                )
+&nbsp;                protected final Method getDefinedPackage;
+&nbsp;                protected final Method getPackage;
+&nbsp;                protected final Method definePackage;
+&nbsp;
+&nbsp;                protected UsingUnsafeOverride(Method findLoadedClass, Method defineClass, @Nonnull(when = When.MAYBE) Method getDefinedPackage, Method getPackage, Method definePackage) {
+&nbsp;                    this.findLoadedClass = findLoadedClass;
+&nbsp;                    this.defineClass = defineClass;
+&nbsp;                    this.getDefinedPackage = getDefinedPackage;
+&nbsp;                    this.getPackage = getPackage;
+&nbsp;                    this.definePackage = definePackage;
+&nbsp;                }
+&nbsp;
+&nbsp;                @SuppressFBWarnings(
+&nbsp;                    value = {&quot;DP_DO_INSIDE_DO_PRIVILEGED&quot;},
+&nbsp;                    justification = &quot;Assuring privilege is explicit user responsibility.&quot;
+&nbsp;                )
+&nbsp;                protected static Initializable make() throws Exception {
+&nbsp;                    if (Boolean.getBoolean(&quot;net.bytebuddy.safe&quot;)) {
+&nbsp;                        return new Initializable.Unavailable(&quot;Use of Unsafe was disabled by system property&quot;);
+&nbsp;                    } else {
+&nbsp;                        Class&lt;?&gt; unsafeType = Class.forName(&quot;sun.misc.Unsafe&quot;);
+&nbsp;                        Field theUnsafe = unsafeType.getDeclaredField(&quot;theUnsafe&quot;);
+&nbsp;                        theUnsafe.setAccessible(true);
+&nbsp;                        Object unsafe = theUnsafe.get((Object)null);
+&nbsp;
+&nbsp;                        Field override;
+&nbsp;                        try {
+&nbsp;                            override = AccessibleObject.class.getDeclaredField(&quot;override&quot;);
+&nbsp;                        } catch (NoSuchFieldException var15) {
+&nbsp;                            override = (new ByteBuddy()).redefine(AccessibleObject.class).name(&quot;net.bytebuddy.mirror.&quot; + AccessibleObject.class.getSimpleName()).noNestMate().visit((new MemberRemoval()).stripInvokables(ElementMatchers.any())).make().load(AccessibleObject.class.getClassLoader(), net.bytebuddy.dynamic.loading.ClassLoadingStrategy.Default.WRAPPER).getLoaded().getDeclaredField(&quot;override&quot;);
+&nbsp;                        }
+&nbsp;
+&nbsp;                        long offset = (Long)unsafeType.getMethod(&quot;objectFieldOffset&quot;, Field.class).invoke(unsafe, override);
+&nbsp;                        Method putBoolean = unsafeType.getMethod(&quot;putBoolean&quot;, Object.class, Long.TYPE, Boolean.TYPE);
+&nbsp;                        Method getDefinedPackage;
+&nbsp;                        if (JavaModule.isSupported()) {
+&nbsp;                            try {
+&nbsp;                                getDefinedPackage = ClassLoader.class.getMethod(&quot;getDefinedPackage&quot;, String.class);
+&nbsp;                            } catch (NoSuchMethodException var14) {
+&nbsp;                                getDefinedPackage = null;
+&nbsp;                            }
+&nbsp;                        } else {
+&nbsp;                            getDefinedPackage = null;
+&nbsp;                        }
+&nbsp;
+&nbsp;                        Method getPackage = ClassLoader.class.getDeclaredMethod(&quot;getPackage&quot;, String.class);
+&nbsp;                        putBoolean.invoke(unsafe, getPackage, offset, true);
+&nbsp;                        Method findLoadedClass = ClassLoader.class.getDeclaredMethod(&quot;findLoadedClass&quot;, String.class);
+&nbsp;                        Method defineClass = ClassLoader.class.getDeclaredMethod(&quot;defineClass&quot;, String.class, byte[].class, Integer.TYPE, Integer.TYPE, ProtectionDomain.class);
+&nbsp;                        Method definePackage = ClassLoader.class.getDeclaredMethod(&quot;definePackage&quot;, String.class, String.class, String.class, String.class, String.class, String.class, String.class, URL.class);
+&nbsp;                        putBoolean.invoke(unsafe, defineClass, offset, true);
+&nbsp;                        putBoolean.invoke(unsafe, findLoadedClass, offset, true);
+&nbsp;                        putBoolean.invoke(unsafe, definePackage, offset, true);
+&nbsp;
+&nbsp;                        try {
+&nbsp;                            Method getClassLoadingLock = ClassLoader.class.getDeclaredMethod(&quot;getClassLoadingLock&quot;, String.class);
+&nbsp;                            putBoolean.invoke(unsafe, getClassLoadingLock, offset, true);
+&nbsp;                            return new ForJava7CapableVm(findLoadedClass, defineClass, getDefinedPackage, getPackage, definePackage, getClassLoadingLock);
+&nbsp;                        } catch (NoSuchMethodException var13) {
+&nbsp;                            return new ForLegacyVm(findLoadedClass, defineClass, getDefinedPackage, getPackage, definePackage);
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean isAvailable() {
+&nbsp;                    return true;
+&nbsp;                }
+&nbsp;
+&nbsp;                public Dispatcher initialize() {
+&nbsp;                    Object securityManager = ClassInjector.UsingReflection.SYSTEM.getSecurityManager();
+&nbsp;                    if (securityManager != null) {
+&nbsp;                        try {
+&nbsp;                            ClassInjector.UsingReflection.CHECK_PERMISSION.invoke(securityManager, ClassInjector.SUPPRESS_ACCESS_CHECKS);
+&nbsp;                        } catch (InvocationTargetException var3) {
+&nbsp;                            return new Unavailable(var3.getTargetException().getMessage());
+&nbsp;                        } catch (Exception var4) {
+&nbsp;                            return new Unavailable(var4.getMessage());
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return this;
+&nbsp;                }
+&nbsp;
+&nbsp;                public Class&lt;?&gt; findClass(ClassLoader classLoader, String name) {
+&nbsp;                    try {
+&nbsp;                        return (Class)this.findLoadedClass.invoke(classLoader, name);
+&nbsp;                    } catch (IllegalAccessException var4) {
+&nbsp;                        throw new IllegalStateException(var4);
+&nbsp;                    } catch (InvocationTargetException var5) {
+&nbsp;                        throw new IllegalStateException(var5.getTargetException());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public Class&lt;?&gt; defineClass(ClassLoader classLoader, String name, byte[] binaryRepresentation, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain) {
+&nbsp;                    try {
+&nbsp;                        return (Class)this.defineClass.invoke(classLoader, name, binaryRepresentation, 0, binaryRepresentation.length, protectionDomain);
+&nbsp;                    } catch (IllegalAccessException var6) {
+&nbsp;                        throw new IllegalStateException(var6);
+&nbsp;                    } catch (InvocationTargetException var7) {
+&nbsp;                        throw new IllegalStateException(var7.getTargetException());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                @Nonnull(
+&nbsp;                    when = When.MAYBE
+&nbsp;                )
+&nbsp;                public Package getDefinedPackage(ClassLoader classLoader, String name) {
+&nbsp;                    if (this.getDefinedPackage == null) {
+&nbsp;                        return this.getPackage(classLoader, name);
+&nbsp;                    } else {
+&nbsp;                        try {
+&nbsp;                            return (Package)this.getDefinedPackage.invoke(classLoader, name);
+&nbsp;                        } catch (IllegalAccessException var4) {
+&nbsp;                            throw new IllegalStateException(var4);
+&nbsp;                        } catch (InvocationTargetException var5) {
+&nbsp;                            throw new IllegalStateException(var5.getTargetException());
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public Package getPackage(ClassLoader classLoader, String name) {
+&nbsp;                    try {
+&nbsp;                        return (Package)this.getPackage.invoke(classLoader, name);
+&nbsp;                    } catch (IllegalAccessException var4) {
+&nbsp;                        throw new IllegalStateException(var4);
+&nbsp;                    } catch (InvocationTargetException var5) {
+&nbsp;                        throw new IllegalStateException(var5.getTargetException());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public Package definePackage(ClassLoader classLoader, String name, @Nonnull(when = When.MAYBE) String specificationTitle, @Nonnull(when = When.MAYBE) String specificationVersion, @Nonnull(when = When.MAYBE) String specificationVendor, @Nonnull(when = When.MAYBE) String implementationTitle, @Nonnull(when = When.MAYBE) String implementationVersion, @Nonnull(when = When.MAYBE) String implementationVendor, @Nonnull(when = When.MAYBE) URL sealBase) {
+&nbsp;                    try {
+&nbsp;                        return (Package)this.definePackage.invoke(classLoader, name, specificationTitle, specificationVersion, specificationVendor, implementationTitle, implementationVersion, implementationVendor, sealBase);
+&nbsp;                    } catch (IllegalAccessException var11) {
+&nbsp;                        throw new IllegalStateException(var11);
+&nbsp;                    } catch (InvocationTargetException var12) {
+&nbsp;                        throw new IllegalStateException(var12.getTargetException());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                protected static class ForLegacyVm extends UsingUnsafeOverride {
+&nbsp;                    protected ForLegacyVm(Method findLoadedClass, Method defineClass, @Nonnull(when = When.MAYBE) Method getDefinedPackage, Method getPackage, Method definePackage) {
+&nbsp;                        super(findLoadedClass, defineClass, getDefinedPackage, getPackage, definePackage);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public Object getClassLoadingLock(ClassLoader classLoader, String name) {
+&nbsp;                        return classLoader;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                @Enhance
+&nbsp;                protected static class ForJava7CapableVm extends UsingUnsafeOverride {
+&nbsp;                    private final Method getClassLoadingLock;
+&nbsp;
+&nbsp;                    protected ForJava7CapableVm(Method findLoadedClass, Method defineClass, @Nonnull(when = When.MAYBE) Method getDefinedPackage, Method getPackage, Method definePackage, Method getClassLoadingLock) {
+&nbsp;                        super(findLoadedClass, defineClass, getDefinedPackage, getPackage, definePackage);
+&nbsp;                        this.getClassLoadingLock = getClassLoadingLock;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public Object getClassLoadingLock(ClassLoader classLoader, String name) {
+&nbsp;                        try {
+&nbsp;                            return this.getClassLoadingLock.invoke(classLoader, name);
+&nbsp;                        } catch (IllegalAccessException var4) {
+&nbsp;                            throw new IllegalStateException(var4);
+&nbsp;                        } catch (InvocationTargetException var5) {
+&nbsp;                            throw new IllegalStateException(var5.getTargetException());
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public boolean equals(Object var1) {
+&nbsp;                        if (this == var1) {
+&nbsp;                            return true;
+&nbsp;                        } else if (var1 == null) {
+&nbsp;                            return false;
+&nbsp;                        } else if (this.getClass() != var1.getClass()) {
+&nbsp;                            return false;
+&nbsp;                        } else {
+&nbsp;                            return this.getClassLoadingLock.equals(((ForJava7CapableVm)var1).getClassLoadingLock);
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public int hashCode() {
+&nbsp;                        return this.getClass().hashCode() * 31 + this.getClassLoadingLock.hashCode();
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public static class UsingUnsafeInjection implements Dispatcher, Initializable {
+&nbsp;                private final Object accessor;
+&nbsp;                private final Method findLoadedClass;
+&nbsp;                private final Method defineClass;
+&nbsp;                @Nonnull(
+&nbsp;                    when = When.UNKNOWN
+&nbsp;                )
+&nbsp;                private final Method getDefinedPackage;
+&nbsp;                private final Method getPackage;
+&nbsp;                private final Method definePackage;
+&nbsp;                private final Method getClassLoadingLock;
+&nbsp;
+&nbsp;                protected UsingUnsafeInjection(Object accessor, Method findLoadedClass, Method defineClass, @Nonnull(when = When.MAYBE) Method getDefinedPackage, Method getPackage, Method definePackage, Method getClassLoadingLock) {
+&nbsp;                    this.accessor = accessor;
+&nbsp;                    this.findLoadedClass = findLoadedClass;
+&nbsp;                    this.defineClass = defineClass;
+&nbsp;                    this.getDefinedPackage = getDefinedPackage;
+&nbsp;                    this.getPackage = getPackage;
+&nbsp;                    this.definePackage = definePackage;
+&nbsp;                    this.getClassLoadingLock = getClassLoadingLock;
+&nbsp;                }
+&nbsp;
+&nbsp;                @SuppressFBWarnings(
+&nbsp;                    value = {&quot;DP_DO_INSIDE_DO_PRIVILEGED&quot;},
+&nbsp;                    justification = &quot;Assuring privilege is explicit user responsibility.&quot;
+&nbsp;                )
+&nbsp;                protected static Initializable make() throws Exception {
+&nbsp;                    if (Boolean.getBoolean(&quot;net.bytebuddy.safe&quot;)) {
+&nbsp;                        return new Initializable.Unavailable(&quot;Use of Unsafe was disabled by system property&quot;);
+&nbsp;                    } else {
+&nbsp;                        Class&lt;?&gt; unsafe = Class.forName(&quot;sun.misc.Unsafe&quot;);
+&nbsp;                        Field theUnsafe = unsafe.getDeclaredField(&quot;theUnsafe&quot;);
+&nbsp;                        theUnsafe.setAccessible(true);
+&nbsp;                        Object unsafeInstance = theUnsafe.get((Object)null);
+&nbsp;                        Method getDefinedPackage;
+&nbsp;                        if (JavaModule.isSupported()) {
+&nbsp;                            try {
+&nbsp;                                getDefinedPackage = ClassLoader.class.getDeclaredMethod(&quot;getDefinedPackage&quot;, String.class);
+&nbsp;                            } catch (NoSuchMethodException var7) {
+&nbsp;                                getDefinedPackage = null;
+&nbsp;                            }
+&nbsp;                        } else {
+&nbsp;                            getDefinedPackage = null;
+&nbsp;                        }
+&nbsp;
+&nbsp;                        DynamicType.Builder&lt;?&gt; builder = (new ByteBuddy()).with(TypeValidation.DISABLED).subclass(Object.class, net.bytebuddy.dynamic.scaffold.subclass.ConstructorStrategy.Default.NO_CONSTRUCTORS).name(ClassLoader.class.getName() + &quot;$ByteBuddyAccessor$&quot; + RandomString.make()).defineMethod(&quot;findLoadedClass&quot;, Class.class, new ModifierContributor.ForMethod[]{Visibility.PUBLIC}).withParameters(new Type[]{ClassLoader.class, String.class}).intercept(MethodCall.invoke(ClassLoader.class.getDeclaredMethod(&quot;findLoadedClass&quot;, String.class)).onArgument(0).withArgument(new int[]{1})).defineMethod(&quot;defineClass&quot;, Class.class, new ModifierContributor.ForMethod[]{Visibility.PUBLIC}).withParameters(new Type[]{ClassLoader.class, String.class, byte[].class, Integer.TYPE, Integer.TYPE, ProtectionDomain.class}).intercept(MethodCall.invoke(ClassLoader.class.getDeclaredMethod(&quot;defineClass&quot;, String.class, byte[].class, Integer.TYPE, Integer.TYPE, ProtectionDomain.class)).onArgument(0).withArgument(new int[]{1, 2, 3, 4, 5})).defineMethod(&quot;getPackage&quot;, Package.class, new ModifierContributor.ForMethod[]{Visibility.PUBLIC}).withParameters(new Type[]{ClassLoader.class, String.class}).intercept(MethodCall.invoke(ClassLoader.class.getDeclaredMethod(&quot;getPackage&quot;, String.class)).onArgument(0).withArgument(new int[]{1})).defineMethod(&quot;definePackage&quot;, Package.class, new ModifierContributor.ForMethod[]{Visibility.PUBLIC}).withParameters(new Type[]{ClassLoader.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, URL.class}).intercept(MethodCall.invoke(ClassLoader.class.getDeclaredMethod(&quot;definePackage&quot;, String.class, String.class, String.class, String.class, String.class, String.class, String.class, URL.class)).onArgument(0).withArgument(new int[]{1, 2, 3, 4, 5, 6, 7, 8}));
+&nbsp;                        if (getDefinedPackage != null) {
+&nbsp;                            builder = builder.defineMethod(&quot;getDefinedPackage&quot;, Package.class, new ModifierContributor.ForMethod[]{Visibility.PUBLIC}).withParameters(new Type[]{ClassLoader.class, String.class}).intercept(MethodCall.invoke(getDefinedPackage).onArgument(0).withArgument(new int[]{1}));
+&nbsp;                        }
+&nbsp;
+&nbsp;                        try {
+&nbsp;                            builder = builder.defineMethod(&quot;getClassLoadingLock&quot;, Object.class, new ModifierContributor.ForMethod[]{Visibility.PUBLIC}).withParameters(new Type[]{ClassLoader.class, String.class}).intercept(MethodCall.invoke(ClassLoader.class.getDeclaredMethod(&quot;getClassLoadingLock&quot;, String.class)).onArgument(0).withArgument(new int[]{1}));
+&nbsp;                        } catch (NoSuchMethodException var6) {
+&nbsp;                            builder = builder.defineMethod(&quot;getClassLoadingLock&quot;, Object.class, new ModifierContributor.ForMethod[]{Visibility.PUBLIC}).withParameters(new Type[]{ClassLoader.class, String.class}).intercept(FixedValue.argument(0));
+&nbsp;                        }
+&nbsp;
+&nbsp;                        Class&lt;?&gt; type = builder.make().load(ClassLoadingStrategy.BOOTSTRAP_LOADER, new ClassLoadingStrategy.ForUnsafeInjection()).getLoaded();
+&nbsp;                        return new UsingUnsafeInjection(unsafe.getMethod(&quot;allocateInstance&quot;, Class.class).invoke(unsafeInstance, type), type.getMethod(&quot;findLoadedClass&quot;, ClassLoader.class, String.class), type.getMethod(&quot;defineClass&quot;, ClassLoader.class, String.class, byte[].class, Integer.TYPE, Integer.TYPE, ProtectionDomain.class), getDefinedPackage != null ? type.getMethod(&quot;getDefinedPackage&quot;, ClassLoader.class, String.class) : null, type.getMethod(&quot;getPackage&quot;, ClassLoader.class, String.class), type.getMethod(&quot;definePackage&quot;, ClassLoader.class, String.class, String.class, String.class, String.class, String.class, String.class, String.class, URL.class), type.getMethod(&quot;getClassLoadingLock&quot;, ClassLoader.class, String.class));
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean isAvailable() {
+&nbsp;                    return true;
+&nbsp;                }
+&nbsp;
+&nbsp;                public Dispatcher initialize() {
+&nbsp;                    Object securityManager = ClassInjector.UsingReflection.SYSTEM.getSecurityManager();
+&nbsp;                    if (securityManager != null) {
+&nbsp;                        try {
+&nbsp;                            ClassInjector.UsingReflection.CHECK_PERMISSION.invoke(securityManager, ClassInjector.SUPPRESS_ACCESS_CHECKS);
+&nbsp;                        } catch (InvocationTargetException var3) {
+&nbsp;                            return new Unavailable(var3.getTargetException().getMessage());
+&nbsp;                        } catch (Exception var4) {
+&nbsp;                            return new Unavailable(var4.getMessage());
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return this;
+&nbsp;                }
+&nbsp;
+&nbsp;                public Object getClassLoadingLock(ClassLoader classLoader, String name) {
+&nbsp;                    try {
+&nbsp;                        return this.getClassLoadingLock.invoke(this.accessor, classLoader, name);
+&nbsp;                    } catch (IllegalAccessException var4) {
+&nbsp;                        throw new IllegalStateException(var4);
+&nbsp;                    } catch (InvocationTargetException var5) {
+&nbsp;                        throw new IllegalStateException(var5.getTargetException());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public Class&lt;?&gt; findClass(ClassLoader classLoader, String name) {
+&nbsp;                    try {
+&nbsp;                        return (Class)this.findLoadedClass.invoke(this.accessor, classLoader, name);
+&nbsp;                    } catch (IllegalAccessException var4) {
+&nbsp;                        throw new IllegalStateException(var4);
+&nbsp;                    } catch (InvocationTargetException var5) {
+&nbsp;                        throw new IllegalStateException(var5.getTargetException());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public Class&lt;?&gt; defineClass(ClassLoader classLoader, String name, byte[] binaryRepresentation, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain) {
+&nbsp;                    try {
+&nbsp;                        return (Class)this.defineClass.invoke(this.accessor, classLoader, name, binaryRepresentation, 0, binaryRepresentation.length, protectionDomain);
+&nbsp;                    } catch (IllegalAccessException var6) {
+&nbsp;                        throw new IllegalStateException(var6);
+&nbsp;                    } catch (InvocationTargetException var7) {
+&nbsp;                        throw new IllegalStateException(var7.getTargetException());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                @Nonnull(
+&nbsp;                    when = When.MAYBE
+&nbsp;                )
+&nbsp;                public Package getDefinedPackage(ClassLoader classLoader, String name) {
+&nbsp;                    if (this.getDefinedPackage == null) {
+&nbsp;                        return this.getPackage(classLoader, name);
+&nbsp;                    } else {
+&nbsp;                        try {
+&nbsp;                            return (Package)this.getDefinedPackage.invoke(this.accessor, classLoader, name);
+&nbsp;                        } catch (IllegalAccessException var4) {
+&nbsp;                            throw new IllegalStateException(var4);
+&nbsp;                        } catch (InvocationTargetException var5) {
+&nbsp;                            throw new IllegalStateException(var5.getTargetException());
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public Package getPackage(ClassLoader classLoader, String name) {
+&nbsp;                    try {
+&nbsp;                        return (Package)this.getPackage.invoke(this.accessor, classLoader, name);
+&nbsp;                    } catch (IllegalAccessException var4) {
+&nbsp;                        throw new IllegalStateException(var4);
+&nbsp;                    } catch (InvocationTargetException var5) {
+&nbsp;                        throw new IllegalStateException(var5.getTargetException());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public Package definePackage(ClassLoader classLoader, String name, @Nonnull(when = When.MAYBE) String specificationTitle, @Nonnull(when = When.MAYBE) String specificationVersion, @Nonnull(when = When.MAYBE) String specificationVendor, @Nonnull(when = When.MAYBE) String implementationTitle, @Nonnull(when = When.MAYBE) String implementationVersion, @Nonnull(when = When.MAYBE) String implementationVendor, @Nonnull(when = When.MAYBE) URL sealBase) {
+&nbsp;                    try {
+&nbsp;                        return (Package)this.definePackage.invoke(this.accessor, classLoader, name, specificationTitle, specificationVersion, specificationVendor, implementationTitle, implementationVersion, implementationVendor, sealBase);
+&nbsp;                    } catch (IllegalAccessException var11) {
+&nbsp;                        throw new IllegalStateException(var11);
+&nbsp;                    } catch (InvocationTargetException var12) {
+&nbsp;                        throw new IllegalStateException(var12.getTargetException());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.accessor.equals(((UsingUnsafeInjection)var1).accessor)) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.findLoadedClass.equals(((UsingUnsafeInjection)var1).findLoadedClass)) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.defineClass.equals(((UsingUnsafeInjection)var1).defineClass)) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.getDefinedPackage.equals(((UsingUnsafeInjection)var1).getDefinedPackage)) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.getPackage.equals(((UsingUnsafeInjection)var1).getPackage)) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.definePackage.equals(((UsingUnsafeInjection)var1).definePackage)) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.getClassLoadingLock.equals(((UsingUnsafeInjection)var1).getClassLoadingLock);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return ((((((this.getClass().hashCode() * 31 + this.accessor.hashCode()) * 31 + this.findLoadedClass.hashCode()) * 31 + this.defineClass.hashCode()) * 31 + this.getDefinedPackage.hashCode()) * 31 + this.getPackage.hashCode()) * 31 + this.definePackage.hashCode()) * 31 + this.getClassLoadingLock.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public abstract static class Direct implements Dispatcher, Initializable {
+&nbsp;                protected final Method findLoadedClass;
+&nbsp;                protected final Method defineClass;
+&nbsp;                @Nonnull(
+&nbsp;                    when = When.UNKNOWN
+&nbsp;                )
+&nbsp;                protected final Method getDefinedPackage;
+&nbsp;                protected final Method getPackage;
+&nbsp;                protected final Method definePackage;
+&nbsp;
+&nbsp;                protected Direct(Method findLoadedClass, Method defineClass, @Nonnull(when = When.MAYBE) Method getDefinedPackage, Method getPackage, Method definePackage) {
+&nbsp;                    this.findLoadedClass = findLoadedClass;
+&nbsp;                    this.defineClass = defineClass;
+&nbsp;                    this.getDefinedPackage = getDefinedPackage;
+&nbsp;                    this.getPackage = getPackage;
+&nbsp;                    this.definePackage = definePackage;
+&nbsp;                }
+&nbsp;
+&nbsp;                @SuppressFBWarnings(
+&nbsp;                    value = {&quot;DP_DO_INSIDE_DO_PRIVILEGED&quot;},
+&nbsp;                    justification = &quot;Assuring privilege is explicit user responsibility.&quot;
+&nbsp;                )
+&nbsp;                protected static Initializable make() throws Exception {
+&nbsp;                    Method getDefinedPackage;
+&nbsp;                    if (JavaModule.isSupported()) {
+&nbsp;                        try {
+&nbsp;                            getDefinedPackage = ClassLoader.class.getMethod(&quot;getDefinedPackage&quot;, String.class);
+&nbsp;                        } catch (NoSuchMethodException var7) {
+&nbsp;                            getDefinedPackage = null;
+&nbsp;                        }
+&nbsp;                    } else {
+&nbsp;                        getDefinedPackage = null;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    Method getPackage = ClassLoader.class.getDeclaredMethod(&quot;getPackage&quot;, String.class);
+&nbsp;                    getPackage.setAccessible(true);
+&nbsp;                    Method findLoadedClass = ClassLoader.class.getDeclaredMethod(&quot;findLoadedClass&quot;, String.class);
+&nbsp;                    findLoadedClass.setAccessible(true);
+&nbsp;                    Method defineClass = ClassLoader.class.getDeclaredMethod(&quot;defineClass&quot;, String.class, byte[].class, Integer.TYPE, Integer.TYPE, ProtectionDomain.class);
+&nbsp;                    defineClass.setAccessible(true);
+&nbsp;                    Method definePackage = ClassLoader.class.getDeclaredMethod(&quot;definePackage&quot;, String.class, String.class, String.class, String.class, String.class, String.class, String.class, URL.class);
+&nbsp;                    definePackage.setAccessible(true);
+&nbsp;
+&nbsp;                    try {
+&nbsp;                        Method getClassLoadingLock = ClassLoader.class.getDeclaredMethod(&quot;getClassLoadingLock&quot;, String.class);
+&nbsp;                        getClassLoadingLock.setAccessible(true);
+&nbsp;                        return new ForJava7CapableVm(findLoadedClass, defineClass, getDefinedPackage, getPackage, definePackage, getClassLoadingLock);
+&nbsp;                    } catch (NoSuchMethodException var6) {
+&nbsp;                        return new ForLegacyVm(findLoadedClass, defineClass, getDefinedPackage, getPackage, definePackage);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean isAvailable() {
+&nbsp;                    return true;
+&nbsp;                }
+&nbsp;
+&nbsp;                public Dispatcher initialize() {
+&nbsp;                    Object securityManager = ClassInjector.UsingReflection.SYSTEM.getSecurityManager();
+&nbsp;                    if (securityManager != null) {
+&nbsp;                        try {
+&nbsp;                            ClassInjector.UsingReflection.CHECK_PERMISSION.invoke(securityManager, ClassInjector.SUPPRESS_ACCESS_CHECKS);
+&nbsp;                        } catch (InvocationTargetException var3) {
+&nbsp;                            return new Unavailable(var3.getTargetException().getMessage());
+&nbsp;                        } catch (Exception var4) {
+&nbsp;                            return new Unavailable(var4.getMessage());
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return this;
+&nbsp;                }
+&nbsp;
+&nbsp;                public Class&lt;?&gt; findClass(ClassLoader classLoader, String name) {
+&nbsp;                    try {
+&nbsp;                        return (Class)this.findLoadedClass.invoke(classLoader, name);
+&nbsp;                    } catch (IllegalAccessException var4) {
+&nbsp;                        throw new IllegalStateException(var4);
+&nbsp;                    } catch (InvocationTargetException var5) {
+&nbsp;                        throw new IllegalStateException(var5.getTargetException());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public Class&lt;?&gt; defineClass(ClassLoader classLoader, String name, byte[] binaryRepresentation, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain) {
+&nbsp;                    try {
+&nbsp;                        return (Class)this.defineClass.invoke(classLoader, name, binaryRepresentation, 0, binaryRepresentation.length, protectionDomain);
+&nbsp;                    } catch (IllegalAccessException var6) {
+&nbsp;                        throw new IllegalStateException(var6);
+&nbsp;                    } catch (InvocationTargetException var7) {
+&nbsp;                        throw new IllegalStateException(var7.getTargetException());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                @Nonnull(
+&nbsp;                    when = When.MAYBE
+&nbsp;                )
+&nbsp;                public Package getDefinedPackage(ClassLoader classLoader, String name) {
+&nbsp;                    if (this.getDefinedPackage == null) {
+&nbsp;                        return this.getPackage(classLoader, name);
+&nbsp;                    } else {
+&nbsp;                        try {
+&nbsp;                            return (Package)this.getDefinedPackage.invoke(classLoader, name);
+&nbsp;                        } catch (IllegalAccessException var4) {
+&nbsp;                            throw new IllegalStateException(var4);
+&nbsp;                        } catch (InvocationTargetException var5) {
+&nbsp;                            throw new IllegalStateException(var5.getTargetException());
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public Package getPackage(ClassLoader classLoader, String name) {
+&nbsp;                    try {
+&nbsp;                        return (Package)this.getPackage.invoke(classLoader, name);
+&nbsp;                    } catch (IllegalAccessException var4) {
+&nbsp;                        throw new IllegalStateException(var4);
+&nbsp;                    } catch (InvocationTargetException var5) {
+&nbsp;                        throw new IllegalStateException(var5.getTargetException());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public Package definePackage(ClassLoader classLoader, String name, @Nonnull(when = When.MAYBE) String specificationTitle, @Nonnull(when = When.MAYBE) String specificationVersion, @Nonnull(when = When.MAYBE) String specificationVendor, @Nonnull(when = When.MAYBE) String implementationTitle, @Nonnull(when = When.MAYBE) String implementationVersion, @Nonnull(when = When.MAYBE) String implementationVendor, @Nonnull(when = When.MAYBE) URL sealBase) {
+&nbsp;                    try {
+&nbsp;                        return (Package)this.definePackage.invoke(classLoader, name, specificationTitle, specificationVersion, specificationVendor, implementationTitle, implementationVersion, implementationVendor, sealBase);
+&nbsp;                    } catch (IllegalAccessException var11) {
+&nbsp;                        throw new IllegalStateException(var11);
+&nbsp;                    } catch (InvocationTargetException var12) {
+&nbsp;                        throw new IllegalStateException(var12.getTargetException());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.findLoadedClass.equals(((Direct)var1).findLoadedClass)) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.defineClass.equals(((Direct)var1).defineClass)) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.getDefinedPackage.equals(((Direct)var1).getDefinedPackage)) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.getPackage.equals(((Direct)var1).getPackage)) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.definePackage.equals(((Direct)var1).definePackage);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return ((((this.getClass().hashCode() * 31 + this.findLoadedClass.hashCode()) * 31 + this.defineClass.hashCode()) * 31 + this.getDefinedPackage.hashCode()) * 31 + this.getPackage.hashCode()) * 31 + this.definePackage.hashCode();
+&nbsp;                }
+&nbsp;
+&nbsp;                protected static class ForLegacyVm extends Direct {
+&nbsp;                    protected ForLegacyVm(Method findLoadedClass, Method defineClass, @Nonnull(when = When.MAYBE) Method getDefinedPackage, Method getPackage, Method definePackage) {
+&nbsp;                        super(findLoadedClass, defineClass, getDefinedPackage, getPackage, definePackage);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public Object getClassLoadingLock(ClassLoader classLoader, String name) {
+&nbsp;                        return classLoader;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                @Enhance
+&nbsp;                protected static class ForJava7CapableVm extends Direct {
+&nbsp;                    private final Method getClassLoadingLock;
+&nbsp;
+&nbsp;                    protected ForJava7CapableVm(Method findLoadedClass, Method defineClass, @Nonnull(when = When.MAYBE) Method getDefinedPackage, Method getPackage, Method definePackage, Method getClassLoadingLock) {
+&nbsp;                        super(findLoadedClass, defineClass, getDefinedPackage, getPackage, definePackage);
+&nbsp;                        this.getClassLoadingLock = getClassLoadingLock;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public Object getClassLoadingLock(ClassLoader classLoader, String name) {
+&nbsp;                        try {
+&nbsp;                            return this.getClassLoadingLock.invoke(classLoader, name);
+&nbsp;                        } catch (IllegalAccessException var4) {
+&nbsp;                            throw new IllegalStateException(var4);
+&nbsp;                        } catch (InvocationTargetException var5) {
+&nbsp;                            throw new IllegalStateException(var5.getTargetException());
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public boolean equals(Object var1) {
+&nbsp;                        if (!super.equals(var1)) {
+&nbsp;                            return false;
+&nbsp;                        } else if (this == var1) {
+&nbsp;                            return true;
+&nbsp;                        } else if (var1 == null) {
+&nbsp;                            return false;
+&nbsp;                        } else if (this.getClass() != var1.getClass()) {
+&nbsp;                            return false;
+&nbsp;                        } else {
+&nbsp;                            return this.getClassLoadingLock.equals(((ForJava7CapableVm)var1).getClassLoadingLock);
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public int hashCode() {
+&nbsp;                        return super.hashCode() * 31 + this.getClassLoadingLock.hashCode();
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public static enum CreationAction implements PrivilegedAction&lt;Initializable&gt; {
+&nbsp;                INSTANCE;
+&nbsp;
+&nbsp;                private CreationAction() {
+&nbsp;                }
+&nbsp;
+&nbsp;                @SuppressFBWarnings(
+&nbsp;                    value = {&quot;REC_CATCH_EXCEPTION&quot;},
+&nbsp;                    justification = &quot;Exception should not be rethrown but trigger a fallback.&quot;
+&nbsp;                )
+&nbsp;                public Initializable run() {
+&nbsp;                    try {
+&nbsp;                        if (JavaModule.isSupported()) {
+&nbsp;                            return ClassInjector.UsingUnsafe.isAvailable() ? ClassInjector.UsingReflection.Dispatcher.UsingUnsafeInjection.make() : ClassInjector.UsingReflection.Dispatcher.UsingUnsafeOverride.make();
+&nbsp;                        } else {
+&nbsp;                            return ClassInjector.UsingReflection.Dispatcher.Direct.make();
+&nbsp;                        }
+&nbsp;                    } catch (InvocationTargetException var2) {
+&nbsp;                        return new Initializable.Unavailable(var2.getTargetException().getMessage());
+&nbsp;                    } catch (Exception var3) {
+&nbsp;                        return new Initializable.Unavailable(var3.getMessage());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public interface Initializable {
+&nbsp;                boolean isAvailable();
+&nbsp;
+&nbsp;                Dispatcher initialize();
+&nbsp;
+&nbsp;                @Enhance
+&nbsp;                public static class Unavailable implements Dispatcher, Initializable {
+&nbsp;                    private final String message;
+&nbsp;
+&nbsp;                    protected Unavailable(String message) {
+&nbsp;                        this.message = message;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public boolean isAvailable() {
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public Dispatcher initialize() {
+&nbsp;                        return this;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public Object getClassLoadingLock(ClassLoader classLoader, String name) {
+&nbsp;                        return classLoader;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public Class&lt;?&gt; findClass(ClassLoader classLoader, String name) {
+&nbsp;                        try {
+&nbsp;                            return classLoader.loadClass(name);
+&nbsp;                        } catch (ClassNotFoundException var4) {
+&nbsp;                            return UNDEFINED;
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public Class&lt;?&gt; defineClass(ClassLoader classLoader, String name, byte[] binaryRepresentation, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain) {
+&nbsp;                        throw new UnsupportedOperationException(&quot;Cannot define class using reflection: &quot; + this.message);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public Package getDefinedPackage(ClassLoader classLoader, String name) {
+&nbsp;                        throw new UnsupportedOperationException(&quot;Cannot get defined package using reflection: &quot; + this.message);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public Package getPackage(ClassLoader classLoader, String name) {
+&nbsp;                        throw new UnsupportedOperationException(&quot;Cannot get package using reflection: &quot; + this.message);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public Package definePackage(ClassLoader classLoader, String name, @Nonnull(when = When.MAYBE) String specificationTitle, @Nonnull(when = When.MAYBE) String specificationVersion, @Nonnull(when = When.MAYBE) String specificationVendor, @Nonnull(when = When.MAYBE) String implementationTitle, @Nonnull(when = When.MAYBE) String implementationVersion, @Nonnull(when = When.MAYBE) String implementationVendor, @Nonnull(when = When.MAYBE) URL sealBase) {
+&nbsp;                        throw new UnsupportedOperationException(&quot;Cannot define package using injection: &quot; + this.message);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public boolean equals(Object var1) {
+&nbsp;                        if (this == var1) {
+&nbsp;                            return true;
+&nbsp;                        } else if (var1 == null) {
+&nbsp;                            return false;
+&nbsp;                        } else if (this.getClass() != var1.getClass()) {
+&nbsp;                            return false;
+&nbsp;                        } else {
+&nbsp;                            return this.message.equals(((Unavailable)var1).message);
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public int hashCode() {
+&nbsp;                        return this.getClass().hashCode() * 31 + this.message.hashCode();
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract static class AbstractBase implements ClassInjector {
+&nbsp;        public AbstractBase() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public Map&lt;TypeDescription, Class&lt;?&gt;&gt; inject(Map&lt;? extends TypeDescription, byte[]&gt; types) {
+&nbsp;            Map&lt;String, byte[]&gt; binaryRepresentations = new LinkedHashMap();
+&nbsp;            Iterator var3 = types.entrySet().iterator();
+&nbsp;
+&nbsp;            while(var3.hasNext()) {
+&nbsp;                Map.Entry&lt;? extends TypeDescription, byte[]&gt; entry = (Map.Entry)var3.next();
+&nbsp;                binaryRepresentations.put(((TypeDescription)entry.getKey()).getName(), entry.getValue());
+&nbsp;            }
+&nbsp;
+&nbsp;            Map&lt;String, Class&lt;?&gt;&gt; loadedTypes = this.injectRaw(binaryRepresentations);
+&nbsp;            Map&lt;TypeDescription, Class&lt;?&gt;&gt; result = new LinkedHashMap();
+&nbsp;            Iterator var5 = types.keySet().iterator();
+&nbsp;
+&nbsp;            while(var5.hasNext()) {
+&nbsp;                TypeDescription typeDescription = (TypeDescription)var5.next();
+&nbsp;                result.put(typeDescription, loadedTypes.get(typeDescription.getName()));
+&nbsp;            }
+&nbsp;
+&nbsp;            return result;
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

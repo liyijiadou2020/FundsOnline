@@ -1,0 +1,361 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > Mockito</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito</a>
+</div>
+
+<h1>Coverage Summary for Class: Mockito (org.mockito)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Mockito</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito;
+&nbsp;
+&nbsp;import java.util.function.Function;
+&nbsp;import org.mockito.internal.MockitoCore;
+&nbsp;import org.mockito.internal.creation.MockSettingsImpl;
+&nbsp;import org.mockito.internal.framework.DefaultMockitoFramework;
+&nbsp;import org.mockito.internal.session.DefaultMockitoSessionBuilder;
+&nbsp;import org.mockito.internal.verification.VerificationModeFactory;
+&nbsp;import org.mockito.session.MockitoSessionBuilder;
+&nbsp;import org.mockito.stubbing.Answer;
+&nbsp;import org.mockito.stubbing.LenientStubber;
+&nbsp;import org.mockito.stubbing.OngoingStubbing;
+&nbsp;import org.mockito.stubbing.Stubber;
+&nbsp;import org.mockito.verification.After;
+&nbsp;import org.mockito.verification.Timeout;
+&nbsp;import org.mockito.verification.VerificationAfterDelay;
+&nbsp;import org.mockito.verification.VerificationMode;
+&nbsp;import org.mockito.verification.VerificationWithTimeout;
+&nbsp;
+&nbsp;@CheckReturnValue
+&nbsp;public class Mockito extends ArgumentMatchers {
+&nbsp;    static final MockitoCore MOCKITO_CORE = new MockitoCore();
+&nbsp;    public static final Answer&lt;Object&gt; RETURNS_DEFAULTS;
+&nbsp;    public static final Answer&lt;Object&gt; RETURNS_SMART_NULLS;
+&nbsp;    public static final Answer&lt;Object&gt; RETURNS_MOCKS;
+&nbsp;    public static final Answer&lt;Object&gt; RETURNS_DEEP_STUBS;
+&nbsp;    public static final Answer&lt;Object&gt; CALLS_REAL_METHODS;
+&nbsp;    public static final Answer&lt;Object&gt; RETURNS_SELF;
+&nbsp;
+&nbsp;    public Mockito() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T mock(Class&lt;T&gt; classToMock) {
+&nbsp;        return mock(classToMock, withSettings());
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T mock(Class&lt;T&gt; classToMock, String name) {
+&nbsp;        return mock(classToMock, withSettings().name(name).defaultAnswer(RETURNS_DEFAULTS));
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MockingDetails mockingDetails(Object toInspect) {
+&nbsp;        return MOCKITO_CORE.mockingDetails(toInspect);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T mock(Class&lt;T&gt; classToMock, Answer defaultAnswer) {
+&nbsp;        return mock(classToMock, withSettings().defaultAnswer(defaultAnswer));
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T mock(Class&lt;T&gt; classToMock, MockSettings mockSettings) {
+&nbsp;        return MOCKITO_CORE.mock(classToMock, mockSettings);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T spy(T object) {
+&nbsp;        return MOCKITO_CORE.mock(object.getClass(), withSettings().spiedInstance(object).defaultAnswer(CALLS_REAL_METHODS));
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T spy(Class&lt;T&gt; classToSpy) {
+&nbsp;        return MOCKITO_CORE.mock(classToSpy, withSettings().useConstructor(new Object[0]).defaultAnswer(CALLS_REAL_METHODS));
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; MockedStatic&lt;T&gt; mockStatic(Class&lt;T&gt; classToMock) {
+&nbsp;        return mockStatic(classToMock, withSettings());
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; MockedStatic&lt;T&gt; mockStatic(Class&lt;T&gt; classToMock, Answer defaultAnswer) {
+&nbsp;        return mockStatic(classToMock, withSettings().defaultAnswer(defaultAnswer));
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; MockedStatic&lt;T&gt; mockStatic(Class&lt;T&gt; classToMock, String name) {
+&nbsp;        return mockStatic(classToMock, withSettings().name(name));
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; MockedStatic&lt;T&gt; mockStatic(Class&lt;T&gt; classToMock, MockSettings mockSettings) {
+&nbsp;        return MOCKITO_CORE.mockStatic(classToMock, mockSettings);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; MockedConstruction&lt;T&gt; mockConstructionWithAnswer(Class&lt;T&gt; classToMock, Answer defaultAnswer, Answer... additionalAnswers) {
+&nbsp;        return mockConstruction(classToMock, (context) -&gt; {
+&nbsp;            if (context.getCount() != 1 &amp;&amp; additionalAnswers.length != 0) {
+&nbsp;                return context.getCount() &gt;= additionalAnswers.length ? withSettings().defaultAnswer(additionalAnswers[additionalAnswers.length - 1]) : withSettings().defaultAnswer(additionalAnswers[context.getCount() - 2]);
+&nbsp;            } else {
+&nbsp;                return withSettings().defaultAnswer(defaultAnswer);
+&nbsp;            }
+&nbsp;        }, (mock, context) -&gt; {
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; MockedConstruction&lt;T&gt; mockConstruction(Class&lt;T&gt; classToMock) {
+&nbsp;        return mockConstruction(classToMock, (index) -&gt; {
+&nbsp;            return withSettings();
+&nbsp;        }, (mock, context) -&gt; {
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; MockedConstruction&lt;T&gt; mockConstruction(Class&lt;T&gt; classToMock, MockedConstruction.MockInitializer&lt;T&gt; mockInitializer) {
+&nbsp;        return mockConstruction(classToMock, withSettings(), mockInitializer);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; MockedConstruction&lt;T&gt; mockConstruction(Class&lt;T&gt; classToMock, MockSettings mockSettings) {
+&nbsp;        return mockConstruction(classToMock, (context) -&gt; {
+&nbsp;            return mockSettings;
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; MockedConstruction&lt;T&gt; mockConstruction(Class&lt;T&gt; classToMock, Function&lt;MockedConstruction.Context, MockSettings&gt; mockSettingsFactory) {
+&nbsp;        return mockConstruction(classToMock, mockSettingsFactory, (mock, context) -&gt; {
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; MockedConstruction&lt;T&gt; mockConstruction(Class&lt;T&gt; classToMock, MockSettings mockSettings, MockedConstruction.MockInitializer&lt;T&gt; mockInitializer) {
+&nbsp;        return mockConstruction(classToMock, (index) -&gt; {
+&nbsp;            return mockSettings;
+&nbsp;        }, mockInitializer);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; MockedConstruction&lt;T&gt; mockConstruction(Class&lt;T&gt; classToMock, Function&lt;MockedConstruction.Context, MockSettings&gt; mockSettingsFactory, MockedConstruction.MockInitializer&lt;T&gt; mockInitializer) {
+&nbsp;        return MOCKITO_CORE.mockConstruction(classToMock, mockSettingsFactory, mockInitializer);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; OngoingStubbing&lt;T&gt; when(T methodCall) {
+&nbsp;        return MOCKITO_CORE.when(methodCall);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T verify(T mock) {
+&nbsp;        return MOCKITO_CORE.verify(mock, times(1));
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T verify(T mock, VerificationMode mode) {
+&nbsp;        return MOCKITO_CORE.verify(mock, mode);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; void reset(T... mocks) {
+&nbsp;        MOCKITO_CORE.reset(mocks);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void clearAllCaches() {
+&nbsp;        MOCKITO_CORE.clearAllCaches();
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; void clearInvocations(T... mocks) {
+&nbsp;        MOCKITO_CORE.clearInvocations(mocks);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void verifyNoMoreInteractions(Object... mocks) {
+&nbsp;        MOCKITO_CORE.verifyNoMoreInteractions(mocks);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void verifyNoInteractions(Object... mocks) {
+&nbsp;        MOCKITO_CORE.verifyNoInteractions(mocks);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Stubber doThrow(Throwable... toBeThrown) {
+&nbsp;        return MOCKITO_CORE.stubber().doThrow(toBeThrown);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Stubber doThrow(Class&lt;? extends Throwable&gt; toBeThrown) {
+&nbsp;        return MOCKITO_CORE.stubber().doThrow(toBeThrown);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Stubber doThrow(Class&lt;? extends Throwable&gt; toBeThrown, Class&lt;? extends Throwable&gt;... toBeThrownNext) {
+&nbsp;        return MOCKITO_CORE.stubber().doThrow(toBeThrown, toBeThrownNext);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Stubber doCallRealMethod() {
+&nbsp;        return MOCKITO_CORE.stubber().doCallRealMethod();
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Stubber doAnswer(Answer answer) {
+&nbsp;        return MOCKITO_CORE.stubber().doAnswer(answer);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Stubber doNothing() {
+&nbsp;        return MOCKITO_CORE.stubber().doNothing();
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Stubber doReturn(Object toBeReturned) {
+&nbsp;        return MOCKITO_CORE.stubber().doReturn(toBeReturned);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Stubber doReturn(Object toBeReturned, Object... toBeReturnedNext) {
+&nbsp;        return MOCKITO_CORE.stubber().doReturn(toBeReturned, toBeReturnedNext);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static InOrder inOrder(Object... mocks) {
+&nbsp;        return MOCKITO_CORE.inOrder(mocks);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Object[] ignoreStubs(Object... mocks) {
+&nbsp;        return MOCKITO_CORE.ignoreStubs(mocks);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static VerificationMode times(int wantedNumberOfInvocations) {
+&nbsp;        return VerificationModeFactory.times(wantedNumberOfInvocations);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static VerificationMode never() {
+&nbsp;        return times(0);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static VerificationMode atLeastOnce() {
+&nbsp;        return VerificationModeFactory.atLeastOnce();
+&nbsp;    }
+&nbsp;
+&nbsp;    public static VerificationMode atLeast(int minNumberOfInvocations) {
+&nbsp;        return VerificationModeFactory.atLeast(minNumberOfInvocations);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static VerificationMode atMostOnce() {
+&nbsp;        return VerificationModeFactory.atMostOnce();
+&nbsp;    }
+&nbsp;
+&nbsp;    public static VerificationMode atMost(int maxNumberOfInvocations) {
+&nbsp;        return VerificationModeFactory.atMost(maxNumberOfInvocations);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static VerificationMode calls(int wantedNumberOfInvocations) {
+&nbsp;        return VerificationModeFactory.calls(wantedNumberOfInvocations);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static VerificationMode only() {
+&nbsp;        return VerificationModeFactory.only();
+&nbsp;    }
+&nbsp;
+&nbsp;    public static VerificationWithTimeout timeout(long millis) {
+&nbsp;        return new Timeout(millis, VerificationModeFactory.times(1));
+&nbsp;    }
+&nbsp;
+&nbsp;    public static VerificationAfterDelay after(long millis) {
+&nbsp;        return new After(millis, VerificationModeFactory.times(1));
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void validateMockitoUsage() {
+&nbsp;        MOCKITO_CORE.validateMockitoUsage();
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MockSettings withSettings() {
+&nbsp;        return (new MockSettingsImpl()).defaultAnswer(RETURNS_DEFAULTS);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static VerificationMode description(String description) {
+&nbsp;        return times(1).description(description);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MockitoFramework framework() {
+&nbsp;        return new DefaultMockitoFramework();
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MockitoSessionBuilder mockitoSession() {
+&nbsp;        return new DefaultMockitoSessionBuilder();
+&nbsp;    }
+&nbsp;
+&nbsp;    public static LenientStubber lenient() {
+&nbsp;        return MOCKITO_CORE.lenient();
+&nbsp;    }
+&nbsp;
+&nbsp;    static {
+&nbsp;        RETURNS_DEFAULTS = Answers.RETURNS_DEFAULTS;
+&nbsp;        RETURNS_SMART_NULLS = Answers.RETURNS_SMART_NULLS;
+&nbsp;        RETURNS_MOCKS = Answers.RETURNS_MOCKS;
+&nbsp;        RETURNS_DEEP_STUBS = Answers.RETURNS_DEEP_STUBS;
+&nbsp;        CALLS_REAL_METHODS = Answers.CALLS_REAL_METHODS;
+&nbsp;        RETURNS_SELF = Answers.RETURNS_SELF;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,283 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > PrimitiveUnboxingDelegate</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.bytecode.assign.primitive</a>
+</div>
+
+<h1>Coverage Summary for Class: PrimitiveUnboxingDelegate (net.bytebuddy.implementation.bytecode.assign.primitive)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PrimitiveUnboxingDelegate</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (36/36)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">PrimitiveUnboxingDelegate$ImplicitlyTypedUnboxingResponsible</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (41/41)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.bytecode.assign.primitive;
+&nbsp;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.type.TypeDefinition;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.ForLoadedType;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackSize;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.Assigner;
+&nbsp;import net.bytebuddy.jar.asm.MethodVisitor;
+&nbsp;
+&nbsp;public enum PrimitiveUnboxingDelegate implements StackManipulation {
+&nbsp;    BOOLEAN(Boolean.class, Boolean.TYPE, StackSize.ZERO, &quot;booleanValue&quot;, &quot;()Z&quot;),
+&nbsp;    BYTE(Byte.class, Byte.TYPE, StackSize.ZERO, &quot;byteValue&quot;, &quot;()B&quot;),
+&nbsp;    SHORT(Short.class, Short.TYPE, StackSize.ZERO, &quot;shortValue&quot;, &quot;()S&quot;),
+&nbsp;    CHARACTER(Character.class, Character.TYPE, StackSize.ZERO, &quot;charValue&quot;, &quot;()C&quot;),
+&nbsp;    INTEGER(Integer.class, Integer.TYPE, StackSize.ZERO, &quot;intValue&quot;, &quot;()I&quot;),
+&nbsp;    LONG(Long.class, Long.TYPE, StackSize.SINGLE, &quot;longValue&quot;, &quot;()J&quot;),
+&nbsp;    FLOAT(Float.class, Float.TYPE, StackSize.ZERO, &quot;floatValue&quot;, &quot;()F&quot;),
+&nbsp;    DOUBLE(Double.class, Double.TYPE, StackSize.SINGLE, &quot;doubleValue&quot;, &quot;()D&quot;);
+&nbsp;
+&nbsp;    private final TypeDescription wrapperType;
+&nbsp;    private final TypeDescription primitiveType;
+<b class="fc">&nbsp;    private final StackManipulation.Size size;</b>
+&nbsp;    private final String unboxingMethodName;
+&nbsp;    private final String unboxingMethodDescriptor;
+&nbsp;
+&nbsp;    private PrimitiveUnboxingDelegate(Class wrapperType, Class primitiveType, StackSize sizeDifference, String unboxingMethodName, String unboxingMethodDescriptor) {
+<b class="fc">&nbsp;        this.size = sizeDifference.toIncreasingSize();</b>
+&nbsp;        this.wrapperType = ForLoadedType.of(wrapperType);
+&nbsp;        this.primitiveType = ForLoadedType.of(primitiveType);
+&nbsp;        this.unboxingMethodName = unboxingMethodName;
+&nbsp;        this.unboxingMethodDescriptor = unboxingMethodDescriptor;
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static PrimitiveUnboxingDelegate forPrimitive(TypeDefinition typeDefinition) {
+&nbsp;        if (typeDefinition.represents(Boolean.TYPE)) {
+&nbsp;            return BOOLEAN;
+<b class="fc">&nbsp;        } else if (typeDefinition.represents(Byte.TYPE)) {</b>
+&nbsp;            return BYTE;
+&nbsp;        } else if (typeDefinition.represents(Short.TYPE)) {
+&nbsp;            return SHORT;
+&nbsp;        } else if (typeDefinition.represents(Character.TYPE)) {
+<b class="fc">&nbsp;            return CHARACTER;</b>
+&nbsp;        } else if (typeDefinition.represents(Integer.TYPE)) {
+&nbsp;            return INTEGER;
+&nbsp;        } else if (typeDefinition.represents(Long.TYPE)) {
+&nbsp;            return LONG;
+<b class="fc">&nbsp;        } else if (typeDefinition.represents(Float.TYPE)) {</b>
+&nbsp;            return FLOAT;
+&nbsp;        } else if (typeDefinition.represents(Double.TYPE)) {
+&nbsp;            return DOUBLE;
+&nbsp;        } else {
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Expected non-void primitive type instead of &quot; + typeDefinition);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static UnboxingResponsible forReferenceType(TypeDefinition typeDefinition) {
+<b class="fc">&nbsp;        if (typeDefinition.isPrimitive()) {</b>
+&nbsp;            throw new IllegalArgumentException(&quot;Expected reference type instead of &quot; + typeDefinition);
+&nbsp;        } else if (typeDefinition.represents(Boolean.class)) {
+&nbsp;            return PrimitiveUnboxingDelegate.ExplicitlyTypedUnboxingResponsible.BOOLEAN;
+&nbsp;        } else if (typeDefinition.represents(Byte.class)) {
+<b class="fc">&nbsp;            return PrimitiveUnboxingDelegate.ExplicitlyTypedUnboxingResponsible.BYTE;</b>
+&nbsp;        } else if (typeDefinition.represents(Short.class)) {
+&nbsp;            return PrimitiveUnboxingDelegate.ExplicitlyTypedUnboxingResponsible.SHORT;
+&nbsp;        } else if (typeDefinition.represents(Character.class)) {
+&nbsp;            return PrimitiveUnboxingDelegate.ExplicitlyTypedUnboxingResponsible.CHARACTER;
+&nbsp;        } else if (typeDefinition.represents(Integer.class)) {
+&nbsp;            return PrimitiveUnboxingDelegate.ExplicitlyTypedUnboxingResponsible.INTEGER;
+&nbsp;        } else if (typeDefinition.represents(Long.class)) {
+&nbsp;            return PrimitiveUnboxingDelegate.ExplicitlyTypedUnboxingResponsible.LONG;
+&nbsp;        } else if (typeDefinition.represents(Float.class)) {
+&nbsp;            return PrimitiveUnboxingDelegate.ExplicitlyTypedUnboxingResponsible.FLOAT;
+&nbsp;        } else {
+&nbsp;            return (UnboxingResponsible)(typeDefinition.represents(Double.class) ? PrimitiveUnboxingDelegate.ExplicitlyTypedUnboxingResponsible.DOUBLE : new ImplicitlyTypedUnboxingResponsible(typeDefinition.asGenericType()));
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected TypeDescription.Generic getWrapperType() {
+&nbsp;        return this.wrapperType.asGenericType();
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isValid() {
+&nbsp;        return true;
+&nbsp;    }
+&nbsp;
+&nbsp;    public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;        methodVisitor.visitMethodInsn(182, this.wrapperType.asErasure().getInternalName(), this.unboxingMethodName, this.unboxingMethodDescriptor, false);
+&nbsp;        return this.size;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    protected static class ImplicitlyTypedUnboxingResponsible implements UnboxingResponsible {
+&nbsp;        private final TypeDescription.Generic originalType;
+&nbsp;
+&nbsp;        protected ImplicitlyTypedUnboxingResponsible(TypeDescription.Generic originalType) {
+&nbsp;            this.originalType = originalType;
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation assignUnboxedTo(TypeDescription.Generic target, Assigner assigner, Assigner.Typing typing) {
+&nbsp;            PrimitiveUnboxingDelegate primitiveUnboxingDelegate = PrimitiveUnboxingDelegate.forPrimitive(target);
+&nbsp;            return new StackManipulation.Compound(new StackManipulation[]{assigner.assign(this.originalType, primitiveUnboxingDelegate.getWrapperType(), typing), primitiveUnboxingDelegate});
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public boolean equals(Object var1) {</b>
+<b class="fc">&nbsp;            if (this == var1) {</b>
+<b class="fc">&nbsp;                return true;</b>
+<b class="fc">&nbsp;            } else if (var1 == null) {</b>
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.originalType.equals(((ImplicitlyTypedUnboxingResponsible)var1).originalType);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+<b class="fc">&nbsp;            return this.getClass().hashCode() * 31 + this.originalType.hashCode();</b>
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    public interface UnboxingResponsible {</b>
+&nbsp;        StackManipulation assignUnboxedTo(TypeDescription.Generic var1, Assigner var2, Assigner.Typing var3);
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    protected static enum ExplicitlyTypedUnboxingResponsible implements UnboxingResponsible {</b>
+<b class="fc">&nbsp;        BOOLEAN(PrimitiveUnboxingDelegate.BOOLEAN),</b>
+&nbsp;        BYTE(PrimitiveUnboxingDelegate.BYTE),
+&nbsp;        SHORT(PrimitiveUnboxingDelegate.SHORT),
+&nbsp;        CHARACTER(PrimitiveUnboxingDelegate.CHARACTER),
+&nbsp;        INTEGER(PrimitiveUnboxingDelegate.INTEGER),
+&nbsp;        LONG(PrimitiveUnboxingDelegate.LONG),
+&nbsp;        FLOAT(PrimitiveUnboxingDelegate.FLOAT),
+&nbsp;        DOUBLE(PrimitiveUnboxingDelegate.DOUBLE);
+&nbsp;
+&nbsp;        private final PrimitiveUnboxingDelegate primitiveUnboxingDelegate;
+&nbsp;
+&nbsp;        private ExplicitlyTypedUnboxingResponsible(PrimitiveUnboxingDelegate primitiveUnboxingDelegate) {
+&nbsp;            this.primitiveUnboxingDelegate = primitiveUnboxingDelegate;
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation assignUnboxedTo(TypeDescription.Generic targetType, Assigner assigner, Assigner.Typing typing) {
+&nbsp;            return new StackManipulation.Compound(new StackManipulation[]{this.primitiveUnboxingDelegate, PrimitiveWideningDelegate.forPrimitive(this.primitiveUnboxingDelegate.primitiveType).widenTo(targetType)});
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

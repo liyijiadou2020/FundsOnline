@@ -1,0 +1,313 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > FieldAttributeAppender</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.attribute</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldAttributeAppender (net.bytebuddy.implementation.attribute)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">FieldAttributeAppender$ForInstrumentedField</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.attribute;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationDescription;
+&nbsp;import net.bytebuddy.description.field.FieldDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.implementation.attribute.AnnotationAppender.ForTypeAnnotations;
+&nbsp;import net.bytebuddy.jar.asm.FieldVisitor;
+&nbsp;
+&nbsp;public interface FieldAttributeAppender {
+&nbsp;    void apply(FieldVisitor var1, FieldDescription var2, AnnotationValueFilter var3);
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class Compound implements FieldAttributeAppender {
+&nbsp;        private final List&lt;FieldAttributeAppender&gt; fieldAttributeAppenders;
+&nbsp;
+&nbsp;        public Compound(FieldAttributeAppender... fieldAttributeAppender) {
+&nbsp;            this(Arrays.asList(fieldAttributeAppender));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Compound(List&lt;? extends FieldAttributeAppender&gt; fieldAttributeAppenders) {
+&nbsp;            this.fieldAttributeAppenders = new ArrayList();
+&nbsp;            Iterator var2 = fieldAttributeAppenders.iterator();
+&nbsp;
+&nbsp;            while(var2.hasNext()) {
+&nbsp;                FieldAttributeAppender fieldAttributeAppender = (FieldAttributeAppender)var2.next();
+&nbsp;                if (fieldAttributeAppender instanceof Compound) {
+&nbsp;                    this.fieldAttributeAppenders.addAll(((Compound)fieldAttributeAppender).fieldAttributeAppenders);
+&nbsp;                } else if (!(fieldAttributeAppender instanceof NoOp)) {
+&nbsp;                    this.fieldAttributeAppenders.add(fieldAttributeAppender);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void apply(FieldVisitor fieldVisitor, FieldDescription fieldDescription, AnnotationValueFilter annotationValueFilter) {
+&nbsp;            Iterator var4 = this.fieldAttributeAppenders.iterator();
+&nbsp;
+&nbsp;            while(var4.hasNext()) {
+&nbsp;                FieldAttributeAppender fieldAttributeAppender = (FieldAttributeAppender)var4.next();
+&nbsp;                fieldAttributeAppender.apply(fieldVisitor, fieldDescription, annotationValueFilter);
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.fieldAttributeAppenders.equals(((Compound)var1).fieldAttributeAppenders);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.fieldAttributeAppenders.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class Explicit implements FieldAttributeAppender, Factory {
+&nbsp;        private final List&lt;? extends AnnotationDescription&gt; annotations;
+&nbsp;
+&nbsp;        public Explicit(List&lt;? extends AnnotationDescription&gt; annotations) {
+&nbsp;            this.annotations = annotations;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void apply(FieldVisitor fieldVisitor, FieldDescription fieldDescription, AnnotationValueFilter annotationValueFilter) {
+&nbsp;            AnnotationAppender appender = new AnnotationAppender.Default(new AnnotationAppender.Target.OnField(fieldVisitor));
+&nbsp;
+&nbsp;            AnnotationDescription annotation;
+&nbsp;            for(Iterator var5 = this.annotations.iterator(); var5.hasNext(); appender = ((AnnotationAppender)appender).append(annotation, annotationValueFilter)) {
+&nbsp;                annotation = (AnnotationDescription)var5.next();
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        public FieldAttributeAppender make(TypeDescription typeDescription) {
+&nbsp;            return this;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.annotations.equals(((Explicit)var1).annotations);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.annotations.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum ForInstrumentedField implements FieldAttributeAppender, Factory {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private ForInstrumentedField() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public void apply(FieldVisitor fieldVisitor, FieldDescription fieldDescription, AnnotationValueFilter annotationValueFilter) {
+&nbsp;            AnnotationAppender annotationAppender = new AnnotationAppender.Default(new AnnotationAppender.Target.OnField(fieldVisitor));
+&nbsp;            AnnotationAppender annotationAppender = (AnnotationAppender)fieldDescription.getType().accept(ForTypeAnnotations.ofFieldType(annotationAppender, annotationValueFilter));
+&nbsp;
+&nbsp;            AnnotationDescription annotation;
+&nbsp;            for(Iterator var5 = fieldDescription.getDeclaredAnnotations().iterator(); var5.hasNext(); annotationAppender = annotationAppender.append(annotation, annotationValueFilter)) {
+&nbsp;                annotation = (AnnotationDescription)var5.next();
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        public FieldAttributeAppender make(TypeDescription typeDescription) {
+&nbsp;            return this;
+&nbsp;        }
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public interface Factory {
+&nbsp;        FieldAttributeAppender make(TypeDescription var1);
+&nbsp;
+&nbsp;        @Enhance
+<b class="fc">&nbsp;        public static class Compound implements Factory {</b>
+&nbsp;            private final List&lt;Factory&gt; factories;
+&nbsp;
+&nbsp;            public Compound(Factory... factory) {
+&nbsp;                this(Arrays.asList(factory));
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            public Compound(List&lt;? extends Factory&gt; factories) {</b>
+<b class="fc">&nbsp;                this.factories = new ArrayList();</b>
+&nbsp;                Iterator var2 = factories.iterator();
+&nbsp;
+&nbsp;                while(var2.hasNext()) {
+&nbsp;                    Factory factory = (Factory)var2.next();
+&nbsp;                    if (factory instanceof Compound) {
+&nbsp;                        this.factories.addAll(((Compound)factory).factories);
+&nbsp;                    } else if (!(factory instanceof NoOp)) {
+&nbsp;                        this.factories.add(factory);
+<b class="fc">&nbsp;                    }</b>
+&nbsp;                }
+&nbsp;
+&nbsp;            }
+&nbsp;
+&nbsp;            public FieldAttributeAppender make(TypeDescription typeDescription) {
+&nbsp;                List&lt;FieldAttributeAppender&gt; fieldAttributeAppenders = new ArrayList(this.factories.size());
+&nbsp;                Iterator var3 = this.factories.iterator();
+&nbsp;
+&nbsp;                while(var3.hasNext()) {
+&nbsp;                    Factory factory = (Factory)var3.next();
+&nbsp;                    fieldAttributeAppenders.add(factory.make(typeDescription));
+&nbsp;                }
+&nbsp;
+&nbsp;                return new Compound(fieldAttributeAppenders);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.factories.equals(((Compound)var1).factories);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.factories.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum NoOp implements FieldAttributeAppender, Factory {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private NoOp() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public FieldAttributeAppender make(TypeDescription typeDescription) {
+&nbsp;            return this;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void apply(FieldVisitor fieldVisitor, FieldDescription fieldDescription, AnnotationValueFilter annotationValueFilter) {
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1062 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ByteArrayClassLoader</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.dynamic.loading</a>
+</div>
+
+<h1>Coverage Summary for Class: ByteArrayClassLoader (net.bytebuddy.dynamic.loading)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">ByteArrayClassLoader$PersistenceHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ByteArrayClassLoader$PersistenceHandler$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ByteArrayClassLoader$PersistenceHandler$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.dynamic.loading;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;import java.io.ByteArrayInputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.io.UnsupportedEncodingException;
+&nbsp;import java.lang.reflect.InvocationTargetException;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.net.MalformedURLException;
+&nbsp;import java.net.URL;
+&nbsp;import java.net.URLConnection;
+&nbsp;import java.net.URLEncoder;
+&nbsp;import java.net.URLStreamHandler;
+&nbsp;import java.security.AccessControlContext;
+&nbsp;import java.security.AccessController;
+&nbsp;import java.security.PrivilegedAction;
+&nbsp;import java.security.ProtectionDomain;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Enumeration;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.NoSuchElementException;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;import java.util.concurrent.ConcurrentMap;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.ClassFileVersion;
+&nbsp;import net.bytebuddy.build.AccessControllerPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.dynamic.loading.ClassFilePostProcessor.NoOp;
+&nbsp;import net.bytebuddy.dynamic.loading.PackageDefinitionStrategy.Trivial;
+&nbsp;import net.bytebuddy.utility.GraalImageCode;
+&nbsp;import net.bytebuddy.utility.JavaModule;
+&nbsp;
+&nbsp;public class ByteArrayClassLoader extends InjectionClassLoader {
+&nbsp;    public static final String URL_SCHEMA = &quot;bytebuddy&quot;;
+&nbsp;    private static final int FROM_BEGINNING = 0;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.NEVER
+&nbsp;    )
+&nbsp;    private static final URL NO_URL;
+&nbsp;    private static final PackageLookupStrategy PACKAGE_LOOKUP_STRATEGY;
+&nbsp;    protected static final SynchronizationStrategy.Initializable SYNCHRONIZATION_STRATEGY;
+&nbsp;    protected final ConcurrentMap&lt;String, byte[]&gt; typeDefinitions;
+&nbsp;    protected final PersistenceHandler persistenceHandler;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.MAYBE
+&nbsp;    )
+&nbsp;    protected final ProtectionDomain protectionDomain;
+&nbsp;    protected final PackageDefinitionStrategy packageDefinitionStrategy;
+&nbsp;    protected final ClassFilePostProcessor classFilePostProcessor;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.MAYBE
+&nbsp;    )
+&nbsp;    protected final Object accessControlContext;
+&nbsp;    private static final boolean ACCESS_CONTROLLER;
+&nbsp;
+&nbsp;    @SuppressFBWarnings(
+&nbsp;        value = {&quot;DP_DO_INSIDE_DO_PRIVILEGED&quot;},
+&nbsp;        justification = &quot;Must be invoked from targeting class loader type.&quot;
+&nbsp;    )
+&nbsp;    private static void doRegisterAsParallelCapable() {
+&nbsp;        try {
+&nbsp;            Method method = ClassLoader.class.getDeclaredMethod(&quot;registerAsParallelCapable&quot;);
+&nbsp;            method.setAccessible(true);
+&nbsp;            method.invoke((Object)null);
+&nbsp;        } catch (Throwable var1) {
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    private static &lt;T&gt; T doPrivileged(PrivilegedAction&lt;T&gt; action) {
+&nbsp;        return ACCESS_CONTROLLER ? AccessController.doPrivileged(action) : action.run();
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteArrayClassLoader(@Nonnull(when = When.MAYBE) ClassLoader parent, Map&lt;String, byte[]&gt; typeDefinitions) {
+&nbsp;        this(parent, true, typeDefinitions);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteArrayClassLoader(@Nonnull(when = When.MAYBE) ClassLoader parent, boolean sealed, Map&lt;String, byte[]&gt; typeDefinitions) {
+&nbsp;        this(parent, sealed, typeDefinitions, ByteArrayClassLoader.PersistenceHandler.LATENT);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteArrayClassLoader(@Nonnull(when = When.MAYBE) ClassLoader parent, Map&lt;String, byte[]&gt; typeDefinitions, PersistenceHandler persistenceHandler) {
+&nbsp;        this(parent, true, typeDefinitions, persistenceHandler);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteArrayClassLoader(@Nonnull(when = When.MAYBE) ClassLoader parent, boolean sealed, Map&lt;String, byte[]&gt; typeDefinitions, PersistenceHandler persistenceHandler) {
+&nbsp;        this(parent, sealed, typeDefinitions, ClassLoadingStrategy.NO_PROTECTION_DOMAIN, persistenceHandler, Trivial.INSTANCE);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteArrayClassLoader(@Nonnull(when = When.MAYBE) ClassLoader parent, Map&lt;String, byte[]&gt; typeDefinitions, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain, PersistenceHandler persistenceHandler, PackageDefinitionStrategy packageDefinitionStrategy) {
+&nbsp;        this(parent, true, typeDefinitions, protectionDomain, persistenceHandler, packageDefinitionStrategy);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteArrayClassLoader(@Nonnull(when = When.MAYBE) ClassLoader parent, boolean sealed, Map&lt;String, byte[]&gt; typeDefinitions, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain, PersistenceHandler persistenceHandler, PackageDefinitionStrategy packageDefinitionStrategy) {
+&nbsp;        this(parent, sealed, typeDefinitions, protectionDomain, persistenceHandler, packageDefinitionStrategy, NoOp.INSTANCE);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteArrayClassLoader(@Nonnull(when = When.MAYBE) ClassLoader parent, Map&lt;String, byte[]&gt; typeDefinitions, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain, PersistenceHandler persistenceHandler, PackageDefinitionStrategy packageDefinitionStrategy, ClassFilePostProcessor classFilePostProcessor) {
+&nbsp;        this(parent, true, typeDefinitions, protectionDomain, persistenceHandler, packageDefinitionStrategy, classFilePostProcessor);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteArrayClassLoader(@Nonnull(when = When.MAYBE) ClassLoader parent, boolean sealed, Map&lt;String, byte[]&gt; typeDefinitions, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain, PersistenceHandler persistenceHandler, PackageDefinitionStrategy packageDefinitionStrategy, ClassFilePostProcessor classFilePostProcessor) {
+&nbsp;        super(parent, sealed);
+&nbsp;        this.typeDefinitions = new ConcurrentHashMap(typeDefinitions);
+&nbsp;        this.protectionDomain = protectionDomain;
+&nbsp;        this.persistenceHandler = persistenceHandler;
+&nbsp;        this.packageDefinitionStrategy = packageDefinitionStrategy;
+&nbsp;        this.classFilePostProcessor = classFilePostProcessor;
+&nbsp;        this.accessControlContext = getContext();
+&nbsp;    }
+&nbsp;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.MAYBE
+&nbsp;    )
+&nbsp;    @Enhance
+&nbsp;    private static Object getContext() {
+&nbsp;        return ACCESS_CONTROLLER ? AccessController.getContext() : null;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    private static &lt;T&gt; T doPrivileged(PrivilegedAction&lt;T&gt; action, @Nonnull(when = When.MAYBE) Object var1) {
+&nbsp;        return ACCESS_CONTROLLER ? AccessController.doPrivileged(action, (AccessControlContext)var1) : action.run();
+&nbsp;    }
+&nbsp;
+&nbsp;    private static Object methodHandle() throws Exception {
+&nbsp;        return Class.forName(&quot;java.lang.invoke.MethodHandles&quot;).getMethod(&quot;lookup&quot;).invoke((Object)null);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Map&lt;TypeDescription, Class&lt;?&gt;&gt; load(@Nonnull(when = When.MAYBE) ClassLoader classLoader, Map&lt;TypeDescription, byte[]&gt; types) {
+&nbsp;        return load(classLoader, types, ClassLoadingStrategy.NO_PROTECTION_DOMAIN, ByteArrayClassLoader.PersistenceHandler.LATENT, Trivial.INSTANCE, false, true);
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressFBWarnings(
+&nbsp;        value = {&quot;DP_CREATE_CLASSLOADER_INSIDE_DO_PRIVILEGED&quot;},
+&nbsp;        justification = &quot;Assuring privilege is explicit user responsibility.&quot;
+&nbsp;    )
+&nbsp;    public static Map&lt;TypeDescription, Class&lt;?&gt;&gt; load(@Nonnull(when = When.MAYBE) ClassLoader classLoader, Map&lt;TypeDescription, byte[]&gt; types, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain, PersistenceHandler persistenceHandler, PackageDefinitionStrategy packageDefinitionStrategy, boolean forbidExisting, boolean sealed) {
+&nbsp;        Map&lt;String, byte[]&gt; typesByName = new HashMap();
+&nbsp;        Iterator var8 = types.entrySet().iterator();
+&nbsp;
+&nbsp;        while(var8.hasNext()) {
+&nbsp;            Map.Entry&lt;TypeDescription, byte[]&gt; entry = (Map.Entry)var8.next();
+&nbsp;            typesByName.put(((TypeDescription)entry.getKey()).getName(), entry.getValue());
+&nbsp;        }
+&nbsp;
+&nbsp;        ClassLoader classLoader = new ByteArrayClassLoader(classLoader, sealed, typesByName, protectionDomain, persistenceHandler, packageDefinitionStrategy, NoOp.INSTANCE);
+&nbsp;        Map&lt;TypeDescription, Class&lt;?&gt;&gt; result = new LinkedHashMap();
+&nbsp;        Iterator var15 = types.keySet().iterator();
+&nbsp;
+&nbsp;        while(var15.hasNext()) {
+&nbsp;            TypeDescription typeDescription = (TypeDescription)var15.next();
+&nbsp;
+&nbsp;            try {
+&nbsp;                Class&lt;?&gt; type = Class.forName(typeDescription.getName(), false, classLoader);
+&nbsp;                if (!GraalImageCode.getCurrent().isNativeImageExecution() &amp;&amp; forbidExisting &amp;&amp; type.getClassLoader() != classLoader) {
+&nbsp;                    throw new IllegalStateException(&quot;Class already loaded: &quot; + type);
+&nbsp;                }
+&nbsp;
+&nbsp;                result.put(typeDescription, type);
+&nbsp;            } catch (ClassNotFoundException var12) {
+&nbsp;                throw new IllegalStateException(&quot;Cannot load class &quot; + typeDescription, var12);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return result;
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Map&lt;String, Class&lt;?&gt;&gt; doDefineClasses(Map&lt;String, byte[]&gt; typeDefinitions) throws ClassNotFoundException {
+&nbsp;        Map&lt;String, byte[]&gt; previous = new HashMap();
+&nbsp;        Iterator var3 = typeDefinitions.entrySet().iterator();
+&nbsp;
+&nbsp;        while(var3.hasNext()) {
+&nbsp;            Map.Entry&lt;String, byte[]&gt; entry = (Map.Entry)var3.next();
+&nbsp;            previous.put(entry.getKey(), this.typeDefinitions.putIfAbsent(entry.getKey(), entry.getValue()));
+&nbsp;        }
+&nbsp;
+&nbsp;        boolean var13 = false;
+&nbsp;
+&nbsp;        LinkedHashMap var18;
+&nbsp;        try {
+&nbsp;            var13 = true;
+&nbsp;            Map&lt;String, Class&lt;?&gt;&gt; types = new LinkedHashMap();
+&nbsp;            Iterator var17 = typeDefinitions.keySet().iterator();
+&nbsp;
+&nbsp;            while(true) {
+&nbsp;                if (!var17.hasNext()) {
+&nbsp;                    var18 = types;
+&nbsp;                    var13 = false;
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;
+&nbsp;                String name = (String)var17.next();
+&nbsp;                synchronized(SYNCHRONIZATION_STRATEGY.initialize().getClassLoadingLock(this, name)) {
+&nbsp;                    types.put(name, this.loadClass(name));
+&nbsp;                }
+&nbsp;            }
+&nbsp;        } finally {
+&nbsp;            if (var13) {
+&nbsp;                Iterator var9 = previous.entrySet().iterator();
+&nbsp;
+&nbsp;                while(true) {
+&nbsp;                    if (!var9.hasNext()) {
+&nbsp;                        ;
+&nbsp;                    } else {
+&nbsp;                        Map.Entry&lt;String, byte[]&gt; entry = (Map.Entry)var9.next();
+&nbsp;                        if (entry.getValue() == null) {
+&nbsp;                            this.persistenceHandler.release((String)entry.getKey(), this.typeDefinitions);
+&nbsp;                        } else {
+&nbsp;                            this.typeDefinitions.put(entry.getKey(), entry.getValue());
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        Iterator var19 = previous.entrySet().iterator();
+&nbsp;
+&nbsp;        while(var19.hasNext()) {
+&nbsp;            Map.Entry&lt;String, byte[]&gt; entry = (Map.Entry)var19.next();
+&nbsp;            if (entry.getValue() == null) {
+&nbsp;                this.persistenceHandler.release((String)entry.getKey(), this.typeDefinitions);
+&nbsp;            } else {
+&nbsp;                this.typeDefinitions.put(entry.getKey(), entry.getValue());
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return var18;
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Class&lt;?&gt; findClass(String name) throws ClassNotFoundException {
+&nbsp;        byte[] binaryRepresentation = this.persistenceHandler.lookup(name, this.typeDefinitions);
+&nbsp;        if (binaryRepresentation == null) {
+&nbsp;            throw new ClassNotFoundException(name);
+&nbsp;        } else {
+&nbsp;            return (Class)doPrivileged(new ClassDefinitionAction(name, this.classFilePostProcessor.transform(this, name, this.protectionDomain, binaryRepresentation)), this.accessControlContext);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.MAYBE
+&nbsp;    )
+&nbsp;    protected URL findResource(String name) {
+&nbsp;        return this.persistenceHandler.url(name, this.typeDefinitions);
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Enumeration&lt;URL&gt; findResources(String name) {
+&nbsp;        URL url = this.persistenceHandler.url(name, this.typeDefinitions);
+&nbsp;        return (Enumeration)(url == null ? ByteArrayClassLoader.EmptyEnumeration.INSTANCE : new SingletonEnumeration(url));
+&nbsp;    }
+&nbsp;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.MAYBE
+&nbsp;    )
+&nbsp;    private Package doGetPackage(String name) {
+&nbsp;        return this.getPackage(name);
+&nbsp;    }
+&nbsp;
+&nbsp;    static {
+&nbsp;        try {
+&nbsp;            Class.forName(&quot;java.security.AccessController&quot;, false, (ClassLoader)null);
+&nbsp;            ACCESS_CONTROLLER = Boolean.parseBoolean(System.getProperty(&quot;net.bytebuddy.securitymanager&quot;, &quot;true&quot;));
+&nbsp;        } catch (ClassNotFoundException var0) {
+&nbsp;            ACCESS_CONTROLLER = false;
+&nbsp;        } catch (SecurityException var1) {
+&nbsp;            ACCESS_CONTROLLER = true;
+&nbsp;        }
+&nbsp;
+&nbsp;        NO_URL = null;
+&nbsp;        PACKAGE_LOOKUP_STRATEGY = (PackageLookupStrategy)doPrivileged(ByteArrayClassLoader.PackageLookupStrategy.CreationAction.INSTANCE);
+&nbsp;        SYNCHRONIZATION_STRATEGY = (SynchronizationStrategy.Initializable)doPrivileged(ByteArrayClassLoader.SynchronizationStrategy.CreationAction.INSTANCE);
+&nbsp;        doRegisterAsParallelCapable();
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static class SingletonEnumeration implements Enumeration&lt;URL&gt; {
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        private URL element;
+&nbsp;
+&nbsp;        protected SingletonEnumeration(URL element) {
+&nbsp;            this.element = element;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean hasMoreElements() {
+&nbsp;            return this.element != null;
+&nbsp;        }
+&nbsp;
+&nbsp;        public URL nextElement() {
+&nbsp;            if (this.element == null) {
+&nbsp;                throw new NoSuchElementException();
+&nbsp;            } else {
+&nbsp;                URL var1;
+&nbsp;                try {
+&nbsp;                    var1 = this.element;
+&nbsp;                } finally {
+&nbsp;                    this.element = null;
+&nbsp;                }
+&nbsp;
+&nbsp;                return var1;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static enum EmptyEnumeration implements Enumeration&lt;URL&gt; {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private EmptyEnumeration() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean hasMoreElements() {
+&nbsp;            return false;
+&nbsp;        }
+&nbsp;
+&nbsp;        public URL nextElement() {
+&nbsp;            throw new NoSuchElementException();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class ChildFirst extends ByteArrayClassLoader {
+&nbsp;        private static final String CLASS_FILE_SUFFIX = &quot;.class&quot;;
+&nbsp;
+&nbsp;        @SuppressFBWarnings(
+&nbsp;            value = {&quot;DP_DO_INSIDE_DO_PRIVILEGED&quot;},
+&nbsp;            justification = &quot;Must be invoked from targeting class loader type.&quot;
+&nbsp;        )
+&nbsp;        private static void doRegisterAsParallelCapable() {
+&nbsp;            try {
+&nbsp;                Method method = ClassLoader.class.getDeclaredMethod(&quot;registerAsParallelCapable&quot;);
+&nbsp;                method.setAccessible(true);
+&nbsp;                method.invoke((Object)null);
+&nbsp;            } catch (Throwable var1) {
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        public ChildFirst(@Nonnull(when = When.MAYBE) ClassLoader parent, Map&lt;String, byte[]&gt; typeDefinitions) {
+&nbsp;            super(parent, typeDefinitions);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ChildFirst(@Nonnull(when = When.MAYBE) ClassLoader parent, boolean sealed, Map&lt;String, byte[]&gt; typeDefinitions) {
+&nbsp;            super(parent, sealed, typeDefinitions);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ChildFirst(@Nonnull(when = When.MAYBE) ClassLoader parent, Map&lt;String, byte[]&gt; typeDefinitions, PersistenceHandler persistenceHandler) {
+&nbsp;            super(parent, typeDefinitions, persistenceHandler);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ChildFirst(@Nonnull(when = When.MAYBE) ClassLoader parent, boolean sealed, Map&lt;String, byte[]&gt; typeDefinitions, PersistenceHandler persistenceHandler) {
+&nbsp;            super(parent, sealed, typeDefinitions, persistenceHandler);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ChildFirst(@Nonnull(when = When.MAYBE) ClassLoader parent, Map&lt;String, byte[]&gt; typeDefinitions, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain, PersistenceHandler persistenceHandler, PackageDefinitionStrategy packageDefinitionStrategy) {
+&nbsp;            super(parent, typeDefinitions, protectionDomain, persistenceHandler, packageDefinitionStrategy);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ChildFirst(@Nonnull(when = When.MAYBE) ClassLoader parent, boolean sealed, Map&lt;String, byte[]&gt; typeDefinitions, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain, PersistenceHandler persistenceHandler, PackageDefinitionStrategy packageDefinitionStrategy) {
+&nbsp;            super(parent, sealed, typeDefinitions, protectionDomain, persistenceHandler, packageDefinitionStrategy);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ChildFirst(@Nonnull(when = When.MAYBE) ClassLoader parent, Map&lt;String, byte[]&gt; typeDefinitions, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain, PersistenceHandler persistenceHandler, PackageDefinitionStrategy packageDefinitionStrategy, ClassFilePostProcessor classFilePostProcessor) {
+&nbsp;            super(parent, typeDefinitions, protectionDomain, persistenceHandler, packageDefinitionStrategy, classFilePostProcessor);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ChildFirst(@Nonnull(when = When.MAYBE) ClassLoader parent, boolean sealed, Map&lt;String, byte[]&gt; typeDefinitions, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain, PersistenceHandler persistenceHandler, PackageDefinitionStrategy packageDefinitionStrategy, ClassFilePostProcessor classFilePostProcessor) {
+&nbsp;            super(parent, sealed, typeDefinitions, protectionDomain, persistenceHandler, packageDefinitionStrategy, classFilePostProcessor);
+&nbsp;        }
+&nbsp;
+&nbsp;        public static Map&lt;TypeDescription, Class&lt;?&gt;&gt; load(@Nonnull(when = When.MAYBE) ClassLoader classLoader, Map&lt;TypeDescription, byte[]&gt; types) {
+&nbsp;            return load(classLoader, types, ClassLoadingStrategy.NO_PROTECTION_DOMAIN, ByteArrayClassLoader.PersistenceHandler.LATENT, Trivial.INSTANCE, false, true);
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressFBWarnings(
+&nbsp;            value = {&quot;DP_CREATE_CLASSLOADER_INSIDE_DO_PRIVILEGED&quot;},
+&nbsp;            justification = &quot;Assuring privilege is explicit user responsibility.&quot;
+&nbsp;        )
+&nbsp;        public static Map&lt;TypeDescription, Class&lt;?&gt;&gt; load(@Nonnull(when = When.MAYBE) ClassLoader classLoader, Map&lt;TypeDescription, byte[]&gt; types, @Nonnull(when = When.MAYBE) ProtectionDomain protectionDomain, PersistenceHandler persistenceHandler, PackageDefinitionStrategy packageDefinitionStrategy, boolean forbidExisting, boolean sealed) {
+&nbsp;            Map&lt;String, byte[]&gt; typesByName = new HashMap();
+&nbsp;            Iterator var8 = types.entrySet().iterator();
+&nbsp;
+&nbsp;            while(var8.hasNext()) {
+&nbsp;                Map.Entry&lt;TypeDescription, byte[]&gt; entry = (Map.Entry)var8.next();
+&nbsp;                typesByName.put(((TypeDescription)entry.getKey()).getName(), entry.getValue());
+&nbsp;            }
+&nbsp;
+&nbsp;            ClassLoader classLoader = new ChildFirst(classLoader, sealed, typesByName, protectionDomain, persistenceHandler, packageDefinitionStrategy, NoOp.INSTANCE);
+&nbsp;            Map&lt;TypeDescription, Class&lt;?&gt;&gt; result = new LinkedHashMap();
+&nbsp;            Iterator var15 = types.keySet().iterator();
+&nbsp;
+&nbsp;            while(var15.hasNext()) {
+&nbsp;                TypeDescription typeDescription = (TypeDescription)var15.next();
+&nbsp;
+&nbsp;                try {
+&nbsp;                    Class&lt;?&gt; type = Class.forName(typeDescription.getName(), false, classLoader);
+&nbsp;                    if (!GraalImageCode.getCurrent().isNativeImageExecution() &amp;&amp; forbidExisting &amp;&amp; type.getClassLoader() != classLoader) {
+&nbsp;                        throw new IllegalStateException(&quot;Class already loaded: &quot; + type);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    result.put(typeDescription, type);
+&nbsp;                } catch (ClassNotFoundException var12) {
+&nbsp;                    throw new IllegalStateException(&quot;Cannot load class &quot; + typeDescription, var12);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            return result;
+&nbsp;        }
+&nbsp;
+&nbsp;        protected Class&lt;?&gt; loadClass(String name, boolean resolve) throws ClassNotFoundException {
+&nbsp;            synchronized(SYNCHRONIZATION_STRATEGY.initialize().getClassLoadingLock(this, name)) {
+&nbsp;                Class&lt;?&gt; type = this.findLoadedClass(name);
+&nbsp;                if (type != null) {
+&nbsp;                    return type;
+&nbsp;                } else {
+&nbsp;                    Class var10000;
+&nbsp;                    try {
+&nbsp;                        type = this.findClass(name);
+&nbsp;                        if (resolve) {
+&nbsp;                            this.resolveClass(type);
+&nbsp;                        }
+&nbsp;
+&nbsp;                        var10000 = type;
+&nbsp;                    } catch (ClassNotFoundException var7) {
+&nbsp;                        return super.loadClass(name, resolve);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return var10000;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public URL getResource(String name) {
+&nbsp;            URL url = this.persistenceHandler.url(name, this.typeDefinitions);
+&nbsp;            return url == null &amp;&amp; !this.isShadowed(name) ? super.getResource(name) : url;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Enumeration&lt;URL&gt; getResources(String name) throws IOException {
+&nbsp;            URL url = this.persistenceHandler.url(name, this.typeDefinitions);
+&nbsp;            return (Enumeration)(url == null ? super.getResources(name) : new PrependingEnumeration(url, super.getResources(name)));
+&nbsp;        }
+&nbsp;
+&nbsp;        private boolean isShadowed(String resourceName) {
+&nbsp;            if (!this.persistenceHandler.isManifest() &amp;&amp; resourceName.endsWith(&quot;.class&quot;)) {
+&nbsp;                synchronized(this) {
+&nbsp;                    String typeName = resourceName.replace(&#39;/&#39;, &#39;.&#39;).substring(0, resourceName.length() - &quot;.class&quot;.length());
+&nbsp;                    if (this.typeDefinitions.containsKey(typeName)) {
+&nbsp;                        return true;
+&nbsp;                    } else {
+&nbsp;                        Class&lt;?&gt; loadedClass = this.findLoadedClass(typeName);
+&nbsp;                        return loadedClass != null &amp;&amp; loadedClass.getClassLoader() == this;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        static {
+&nbsp;            doRegisterAsParallelCapable();
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static class PrependingEnumeration implements Enumeration&lt;URL&gt; {
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            private URL nextElement;
+&nbsp;            private final Enumeration&lt;URL&gt; enumeration;
+&nbsp;
+&nbsp;            protected PrependingEnumeration(URL url, Enumeration&lt;URL&gt; enumeration) {
+&nbsp;                this.nextElement = url;
+&nbsp;                this.enumeration = enumeration;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean hasMoreElements() {
+&nbsp;                return this.nextElement != null &amp;&amp; this.enumeration.hasMoreElements();
+&nbsp;            }
+&nbsp;
+&nbsp;            public URL nextElement() {
+&nbsp;                if (this.nextElement != null &amp;&amp; this.enumeration.hasMoreElements()) {
+&nbsp;                    URL var1;
+&nbsp;                    try {
+&nbsp;                        var1 = this.nextElement;
+&nbsp;                    } finally {
+&nbsp;                        this.nextElement = (URL)this.enumeration.nextElement();
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return var1;
+&nbsp;                } else {
+&nbsp;                    throw new NoSuchElementException();
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum PersistenceHandler {
+&nbsp;        MANIFEST(true) {
+&nbsp;            protected byte[] lookup(String name, ConcurrentMap&lt;String, byte[]&gt; typeDefinitions) {
+&nbsp;                return (byte[])typeDefinitions.get(name);
+&nbsp;            }
+&nbsp;
+&nbsp;            protected URL url(String resourceName, ConcurrentMap&lt;String, byte[]&gt; typeDefinitions) {
+&nbsp;                if (!resourceName.endsWith(&quot;.class&quot;)) {
+&nbsp;                    return ByteArrayClassLoader.NO_URL;
+&nbsp;                } else {
+&nbsp;                    if (resourceName.startsWith(&quot;/&quot;)) {
+&nbsp;                        resourceName = resourceName.substring(1);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    String typeName = resourceName.replace(&#39;/&#39;, &#39;.&#39;).substring(0, resourceName.length() - &quot;.class&quot;.length());
+&nbsp;                    byte[] binaryRepresentation = (byte[])typeDefinitions.get(typeName);
+&nbsp;                    return binaryRepresentation == null ? ByteArrayClassLoader.NO_URL : (URL)ByteArrayClassLoader.doPrivileged(new UrlDefinitionAction(resourceName, binaryRepresentation));
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            protected void release(String name, ConcurrentMap&lt;String, byte[]&gt; typeDefinitions) {
+&nbsp;            }
+&nbsp;        },
+&nbsp;        LATENT(false) {
+&nbsp;            protected byte[] lookup(String name, ConcurrentMap&lt;String, byte[]&gt; typeDefinitions) {
+&nbsp;                return (byte[])typeDefinitions.remove(name);
+&nbsp;            }
+&nbsp;
+&nbsp;            protected URL url(String resourceName, ConcurrentMap&lt;String, byte[]&gt; typeDefinitions) {
+&nbsp;                return ByteArrayClassLoader.NO_URL;
+&nbsp;            }
+&nbsp;
+&nbsp;            protected void release(String name, ConcurrentMap&lt;String, byte[]&gt; typeDefinitions) {
+&nbsp;                typeDefinitions.remove(name);
+&nbsp;            }
+&nbsp;        };
+&nbsp;
+&nbsp;        private static final String CLASS_FILE_SUFFIX = &quot;.class&quot;;
+&nbsp;        private final boolean manifest;
+&nbsp;
+&nbsp;        private PersistenceHandler(boolean manifest) {
+&nbsp;            this.manifest = manifest;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isManifest() {
+&nbsp;            return this.manifest;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        protected abstract byte[] lookup(String var1, ConcurrentMap&lt;String, byte[]&gt; var2);
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        protected abstract URL url(String var1, ConcurrentMap&lt;String, byte[]&gt; var2);
+&nbsp;
+&nbsp;        protected abstract void release(String var1, ConcurrentMap&lt;String, byte[]&gt; var2);
+&nbsp;
+&nbsp;        @net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance
+&nbsp;        protected static class UrlDefinitionAction implements PrivilegedAction&lt;URL&gt; {
+&nbsp;            private static final String ENCODING = &quot;UTF-8&quot;;
+&nbsp;            private static final int NO_PORT = -1;
+&nbsp;            private static final String NO_FILE = &quot;&quot;;
+&nbsp;            private final String typeName;
+&nbsp;            private final byte[] binaryRepresentation;
+&nbsp;
+&nbsp;            protected UrlDefinitionAction(String typeName, byte[] binaryRepresentation) {
+&nbsp;                this.typeName = typeName;
+&nbsp;                this.binaryRepresentation = binaryRepresentation;
+&nbsp;            }
+&nbsp;
+&nbsp;            public URL run() {
+&nbsp;                try {
+&nbsp;                    return new URL(&quot;bytebuddy&quot;, URLEncoder.encode(this.typeName.replace(&#39;.&#39;, &#39;/&#39;), &quot;UTF-8&quot;), -1, &quot;&quot;, new ByteArrayUrlStreamHandler(this.binaryRepresentation));
+&nbsp;                } catch (MalformedURLException var2) {
+&nbsp;                    throw new IllegalStateException(&quot;Cannot create URL for &quot; + this.typeName, var2);
+&nbsp;                } catch (UnsupportedEncodingException var3) {
+&nbsp;                    throw new IllegalStateException(&quot;Could not find encoding: UTF-8&quot;, var3);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.typeName.equals(((UrlDefinitionAction)var1).typeName)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return Arrays.equals(this.binaryRepresentation, ((UrlDefinitionAction)var1).binaryRepresentation);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return (this.getClass().hashCode() * 31 + this.typeName.hashCode()) * 31 + Arrays.hashCode(this.binaryRepresentation);
+&nbsp;            }
+&nbsp;
+&nbsp;            @net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance
+&nbsp;            protected static class ByteArrayUrlStreamHandler extends URLStreamHandler {
+&nbsp;                private final byte[] binaryRepresentation;
+&nbsp;
+&nbsp;                protected ByteArrayUrlStreamHandler(byte[] binaryRepresentation) {
+&nbsp;                    this.binaryRepresentation = binaryRepresentation;
+&nbsp;                }
+&nbsp;
+&nbsp;                protected URLConnection openConnection(URL url) {
+&nbsp;                    return new ByteArrayUrlConnection(url, new ByteArrayInputStream(this.binaryRepresentation));
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return Arrays.equals(this.binaryRepresentation, ((ByteArrayUrlStreamHandler)var1).binaryRepresentation);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return this.getClass().hashCode() * 31 + Arrays.hashCode(this.binaryRepresentation);
+&nbsp;                }
+&nbsp;
+&nbsp;                protected static class ByteArrayUrlConnection extends URLConnection {
+&nbsp;                    private final InputStream inputStream;
+&nbsp;
+&nbsp;                    protected ByteArrayUrlConnection(URL url, InputStream inputStream) {
+&nbsp;                        super(url);
+&nbsp;                        this.inputStream = inputStream;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public void connect() {
+&nbsp;                        this.connected = true;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public InputStream getInputStream() {
+&nbsp;                        this.connect();
+&nbsp;                        return this.inputStream;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected interface PackageLookupStrategy {
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        Package apply(ByteArrayClassLoader var1, String var2);
+&nbsp;
+&nbsp;        @net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance
+&nbsp;        public static class ForJava9CapableVm implements PackageLookupStrategy {
+&nbsp;            private final Method getDefinedPackage;
+&nbsp;
+&nbsp;            protected ForJava9CapableVm(Method getDefinedPackage) {
+&nbsp;                this.getDefinedPackage = getDefinedPackage;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public Package apply(ByteArrayClassLoader classLoader, String name) {
+&nbsp;                try {
+&nbsp;                    return (Package)this.getDefinedPackage.invoke(classLoader, name);
+&nbsp;                } catch (IllegalAccessException var4) {
+&nbsp;                    throw new IllegalStateException(var4);
+&nbsp;                } catch (InvocationTargetException var5) {
+&nbsp;                    throw new IllegalStateException(var5.getTargetException());
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.getDefinedPackage.equals(((ForJava9CapableVm)var1).getDefinedPackage);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.getDefinedPackage.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public static enum ForLegacyVm implements PackageLookupStrategy {
+&nbsp;            INSTANCE;
+&nbsp;
+&nbsp;            private ForLegacyVm() {
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public Package apply(ByteArrayClassLoader classLoader, String name) {
+&nbsp;                return classLoader.doGetPackage(name);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public static enum CreationAction implements PrivilegedAction&lt;PackageLookupStrategy&gt; {
+&nbsp;            INSTANCE;
+&nbsp;
+&nbsp;            private CreationAction() {
+&nbsp;            }
+&nbsp;
+&nbsp;            @SuppressFBWarnings(
+&nbsp;                value = {&quot;REC_CATCH_EXCEPTION&quot;},
+&nbsp;                justification = &quot;Exception should not be rethrown but trigger a fallback.&quot;
+&nbsp;            )
+&nbsp;            public PackageLookupStrategy run() {
+&nbsp;                if (JavaModule.isSupported()) {
+&nbsp;                    try {
+&nbsp;                        return new ForJava9CapableVm(ClassLoader.class.getMethod(&quot;getDefinedPackage&quot;, String.class));
+&nbsp;                    } catch (Exception var2) {
+&nbsp;                        return ByteArrayClassLoader.PackageLookupStrategy.ForLegacyVm.INSTANCE;
+&nbsp;                    }
+&nbsp;                } else {
+&nbsp;                    return ByteArrayClassLoader.PackageLookupStrategy.ForLegacyVm.INSTANCE;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance(
+&nbsp;        includeSyntheticFields = true
+&nbsp;    )
+&nbsp;    protected class ClassDefinitionAction implements PrivilegedAction&lt;Class&lt;?&gt;&gt; {
+&nbsp;        private final String name;
+&nbsp;        private final byte[] binaryRepresentation;
+&nbsp;
+&nbsp;        protected ClassDefinitionAction(String name, byte[] binaryRepresentation) {
+&nbsp;            this.name = name;
+&nbsp;            this.binaryRepresentation = binaryRepresentation;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Class&lt;?&gt; run() {
+&nbsp;            int packageIndex = this.name.lastIndexOf(46);
+&nbsp;            if (packageIndex != -1) {
+&nbsp;                String packageName = this.name.substring(0, packageIndex);
+&nbsp;                PackageDefinitionStrategy.Definition definition = ByteArrayClassLoader.this.packageDefinitionStrategy.define(ByteArrayClassLoader.this, packageName, this.name);
+&nbsp;                if (definition.isDefined()) {
+&nbsp;                    Package definedPackage = ByteArrayClassLoader.PACKAGE_LOOKUP_STRATEGY.apply(ByteArrayClassLoader.this, packageName);
+&nbsp;                    if (definedPackage == null) {
+&nbsp;                        ByteArrayClassLoader.this.definePackage(packageName, definition.getSpecificationTitle(), definition.getSpecificationVersion(), definition.getSpecificationVendor(), definition.getImplementationTitle(), definition.getImplementationVersion(), definition.getImplementationVendor(), definition.getSealBase());
+&nbsp;                    } else if (!definition.isCompatibleTo(definedPackage)) {
+&nbsp;                        throw new SecurityException(&quot;Sealing violation for package &quot; + packageName);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            return ByteArrayClassLoader.this.defineClass(this.name, this.binaryRepresentation, 0, this.binaryRepresentation.length, ByteArrayClassLoader.this.protectionDomain);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.name.equals(((ClassDefinitionAction)var1).name)) {
+&nbsp;                return false;
+&nbsp;            } else if (!Arrays.equals(this.binaryRepresentation, ((ClassDefinitionAction)var1).binaryRepresentation)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return ByteArrayClassLoader.this.equals(ByteArrayClassLoader.this);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return ((this.getClass().hashCode() * 31 + this.name.hashCode()) * 31 + Arrays.hashCode(this.binaryRepresentation)) * 31 + ByteArrayClassLoader.this.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected interface SynchronizationStrategy {
+&nbsp;        Object getClassLoadingLock(ByteArrayClassLoader var1, String var2);
+&nbsp;
+<b class="fc">&nbsp;        @net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance</b>
+&nbsp;        public static class ForJava8CapableVm implements SynchronizationStrategy, Initializable {
+&nbsp;            private final Object methodHandle;
+&nbsp;            private final Method bindTo;
+&nbsp;            private final Method invokeWithArguments;
+<b class="fc">&nbsp;</b>
+&nbsp;            protected ForJava8CapableVm(Object methodHandle, Method bindTo, Method invokeWithArguments) {
+&nbsp;                this.methodHandle = methodHandle;
+&nbsp;                this.bindTo = bindTo;
+&nbsp;                this.invokeWithArguments = invokeWithArguments;
+&nbsp;            }
+&nbsp;
+&nbsp;            public SynchronizationStrategy initialize() {
+&nbsp;                return this;
+&nbsp;            }
+&nbsp;
+&nbsp;            public Object getClassLoadingLock(ByteArrayClassLoader classLoader, String name) {
+&nbsp;                try {
+&nbsp;                    return this.invokeWithArguments.invoke(this.bindTo.invoke(this.methodHandle, classLoader), (Object)new Object[]{name});
+&nbsp;                } catch (IllegalAccessException var4) {
+&nbsp;                    throw new IllegalStateException(var4);
+&nbsp;                } catch (InvocationTargetException var5) {
+&nbsp;                    throw new IllegalStateException(var5.getTargetException());
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.methodHandle.equals(((ForJava8CapableVm)var1).methodHandle)) {
+&nbsp;                    return false;
+<b class="fc">&nbsp;                } else if (!this.bindTo.equals(((ForJava8CapableVm)var1).bindTo)) {</b>
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.invokeWithArguments.equals(((ForJava8CapableVm)var1).invokeWithArguments);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return ((this.getClass().hashCode() * 31 + this.methodHandle.hashCode()) * 31 + this.bindTo.hashCode()) * 31 + this.invokeWithArguments.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance
+&nbsp;        public static class ForJava7CapableVm implements SynchronizationStrategy, Initializable {
+&nbsp;            private final Method method;
+&nbsp;
+&nbsp;            protected ForJava7CapableVm(Method method) {
+&nbsp;                this.method = method;
+&nbsp;            }
+&nbsp;
+&nbsp;            public Object getClassLoadingLock(ByteArrayClassLoader classLoader, String name) {
+&nbsp;                try {
+&nbsp;                    return this.method.invoke(classLoader, name);
+&nbsp;                } catch (IllegalAccessException var4) {
+&nbsp;                    throw new IllegalStateException(var4);
+&nbsp;                } catch (InvocationTargetException var5) {
+&nbsp;                    throw new IllegalStateException(var5.getTargetException());
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            @SuppressFBWarnings(
+&nbsp;                value = {&quot;DP_DO_INSIDE_DO_PRIVILEGED&quot;},
+<b class="fc">&nbsp;                justification = &quot;Assuring privilege is explicit user responsibility.&quot;</b>
+<b class="fc">&nbsp;            )</b>
+&nbsp;            public SynchronizationStrategy initialize() {
+&nbsp;                try {
+&nbsp;                    this.method.setAccessible(true);
+&nbsp;                    return this;
+&nbsp;                } catch (Exception var2) {
+&nbsp;                    return ByteArrayClassLoader.SynchronizationStrategy.ForLegacyVm.INSTANCE;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.method.equals(((ForJava7CapableVm)var1).method);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.method.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public static enum ForLegacyVm implements SynchronizationStrategy, Initializable {
+&nbsp;            INSTANCE;
+&nbsp;
+&nbsp;            private ForLegacyVm() {
+&nbsp;            }
+&nbsp;
+&nbsp;            public Object getClassLoadingLock(ByteArrayClassLoader classLoader, String name) {
+&nbsp;                return classLoader;
+&nbsp;            }
+&nbsp;
+&nbsp;            public SynchronizationStrategy initialize() {
+&nbsp;                return this;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public static enum CreationAction implements PrivilegedAction&lt;Initializable&gt; {
+&nbsp;            INSTANCE;
+&nbsp;
+&nbsp;            private CreationAction() {
+&nbsp;            }
+&nbsp;
+&nbsp;            @SuppressFBWarnings(
+&nbsp;                value = {&quot;REC_CATCH_EXCEPTION&quot;},
+&nbsp;                justification = &quot;Exception should not be rethrown but trigger a fallback.&quot;
+&nbsp;            )
+&nbsp;            public Initializable run() {
+&nbsp;                try {
+&nbsp;                    try {
+&nbsp;                        Class&lt;?&gt; methodType = Class.forName(&quot;java.lang.invoke.MethodType&quot;);
+&nbsp;                        Class&lt;?&gt; methodHandle = Class.forName(&quot;java.lang.invoke.MethodHandle&quot;);
+&nbsp;                        return new ForJava8CapableVm(Class.forName(&quot;java.lang.invoke.MethodHandles$Lookup&quot;).getMethod(&quot;findVirtual&quot;, Class.class, String.class, methodType).invoke(ByteArrayClassLoader.methodHandle(), ClassLoader.class, &quot;getClassLoadingLock&quot;, methodType.getMethod(&quot;methodType&quot;, Class.class, Class[].class).invoke((Object)null, Object.class, new Class[]{String.class})), methodHandle.getMethod(&quot;bindTo&quot;, Object.class), methodHandle.getMethod(&quot;invokeWithArguments&quot;, Object[].class));
+&nbsp;                    } catch (Exception var3) {
+&nbsp;                        return (Initializable)(ClassFileVersion.ofThisVm(ClassFileVersion.JAVA_V5).isAtLeast(ClassFileVersion.JAVA_V9) &amp;&amp; ByteArrayClassLoader.class.getClassLoader() == null ? ByteArrayClassLoader.SynchronizationStrategy.ForLegacyVm.INSTANCE : new ForJava7CapableVm(ClassLoader.class.getDeclaredMethod(&quot;getClassLoadingLock&quot;, String.class)));
+&nbsp;                    }
+&nbsp;                } catch (Exception var4) {
+&nbsp;                    return ByteArrayClassLoader.SynchronizationStrategy.ForLegacyVm.INSTANCE;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public interface Initializable {
+&nbsp;            SynchronizationStrategy initialize();
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

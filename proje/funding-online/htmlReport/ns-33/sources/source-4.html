@@ -1,0 +1,461 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > MethodVariableAccess</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.bytecode.member</a>
+</div>
+
+<h1>Coverage Summary for Class: MethodVariableAccess (net.bytebuddy.implementation.bytecode.member)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MethodVariableAccess</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/16)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MethodVariableAccess$MethodLoading</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodVariableAccess$MethodLoading$TypeCastingHandler$NoOp</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodVariableAccess$OffsetLoading</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (30/30)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.bytecode.member;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import net.bytebuddy.build.CachedReturnPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.method.ParameterDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDefinition;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackSize;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation.Size;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation.Trivial;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.TypeCasting;
+&nbsp;import net.bytebuddy.jar.asm.MethodVisitor;
+&nbsp;
+&nbsp;public enum MethodVariableAccess {
+&nbsp;    INTEGER(21, 54, StackSize.SINGLE),
+&nbsp;    LONG(22, 55, StackSize.DOUBLE),
+&nbsp;    FLOAT(23, 56, StackSize.SINGLE),
+&nbsp;    DOUBLE(24, 57, StackSize.DOUBLE),
+&nbsp;    REFERENCE(25, 58, StackSize.SINGLE);
+&nbsp;
+&nbsp;    private final int loadOpcode;
+&nbsp;    private final int storeOpcode;
+&nbsp;    private final StackSize size;
+&nbsp;
+&nbsp;    private MethodVariableAccess(int loadOpcode, int storeOpcode, StackSize stackSize) {
+<b class="fc">&nbsp;        this.loadOpcode = loadOpcode;</b>
+&nbsp;        this.size = stackSize;
+&nbsp;        this.storeOpcode = storeOpcode;
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public static MethodVariableAccess of(TypeDefinition typeDefinition) {</b>
+&nbsp;        if (typeDefinition.isPrimitive()) {
+&nbsp;            if (typeDefinition.represents(Long.TYPE)) {
+&nbsp;                return LONG;
+&nbsp;            } else if (typeDefinition.represents(Double.TYPE)) {
+<b class="fc">&nbsp;                return DOUBLE;</b>
+&nbsp;            } else if (typeDefinition.represents(Float.TYPE)) {
+&nbsp;                return FLOAT;
+&nbsp;            } else if (typeDefinition.represents(Void.TYPE)) {
+&nbsp;                throw new IllegalArgumentException(&quot;Variable type cannot be void&quot;);
+<b class="fc">&nbsp;            } else {</b>
+&nbsp;                return INTEGER;
+&nbsp;            }
+&nbsp;        } else {
+&nbsp;            return REFERENCE;
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static MethodLoading allArgumentsOf(MethodDescription methodDescription) {
+&nbsp;        return new MethodLoading(methodDescription, MethodVariableAccess.MethodLoading.TypeCastingHandler.NoOp.INSTANCE);
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    @Enhance(&quot;loadThis&quot;)
+&nbsp;    public static StackManipulation loadThis() {
+&nbsp;        StackManipulation var0 = loadThis;
+&nbsp;        StackManipulation var1 = var0 != null ? null : REFERENCE.loadFrom(0);
+&nbsp;        if (var1 == null) {
+&nbsp;            var1 = (StackManipulation)loadThis;
+&nbsp;        } else {
+&nbsp;            loadThis = var1;
+&nbsp;        }
+&nbsp;
+&nbsp;        return var1;
+&nbsp;    }
+&nbsp;
+&nbsp;    public StackManipulation loadFrom(int offset) {
+&nbsp;        return new OffsetLoading(offset);
+&nbsp;    }
+&nbsp;
+&nbsp;    public StackManipulation storeAt(int offset) {
+&nbsp;        return new OffsetWriting(offset);
+&nbsp;    }
+&nbsp;
+&nbsp;    public StackManipulation increment(int offset, int value) {
+<b class="fc">&nbsp;        if (this != INTEGER) {</b>
+<b class="fc">&nbsp;            throw new IllegalStateException(&quot;Cannot increment type: &quot; + this);</b>
+<b class="fc">&nbsp;        } else {</b>
+<b class="fc">&nbsp;            return new OffsetIncrementing(offset, value);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static StackManipulation load(ParameterDescription parameterDescription) {
+&nbsp;        return of(parameterDescription.getType()).loadFrom(parameterDescription.getOffset());
+&nbsp;    }
+&nbsp;
+&nbsp;    public static StackManipulation store(ParameterDescription parameterDescription) {
+&nbsp;        return of(parameterDescription.getType()).storeAt(parameterDescription.getOffset());
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static StackManipulation increment(ParameterDescription parameterDescription, int value) {
+&nbsp;        return of(parameterDescription.getType()).increment(parameterDescription.getOffset(), value);
+&nbsp;    }
+&nbsp;
+&nbsp;    @net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance
+&nbsp;    protected static class OffsetIncrementing extends StackManipulation.AbstractBase {
+&nbsp;        private final int offset;
+&nbsp;        private final int value;
+&nbsp;
+&nbsp;        protected OffsetIncrementing(int offset, int value) {
+&nbsp;            this.offset = offset;
+<b class="fc">&nbsp;            this.value = value;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;            methodVisitor.visitIincInsn(this.offset, this.value);
+&nbsp;            return Size.ZERO;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+<b class="fc">&nbsp;            } else if (var1 == null) {</b>
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (this.offset != ((OffsetIncrementing)var1).offset) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.value == ((OffsetIncrementing)var1).value;
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        public int hashCode() {
+&nbsp;            return (this.getClass().hashCode() * 31 + this.offset) * 31 + this.value;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance(
+&nbsp;        includeSyntheticFields = true
+&nbsp;    )
+&nbsp;    protected class OffsetWriting extends StackManipulation.AbstractBase {
+<b class="fc">&nbsp;        private final int offset;</b>
+&nbsp;
+&nbsp;        protected OffsetWriting(int offset) {
+&nbsp;            this.offset = offset;
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;            methodVisitor.visitVarInsn(MethodVariableAccess.this.storeOpcode, this.offset);
+&nbsp;            return MethodVariableAccess.this.size.toDecreasingSize();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (this.offset != ((OffsetWriting)var1).offset) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return MethodVariableAccess.this.equals(MethodVariableAccess.this);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return (this.getClass().hashCode() * 31 + this.offset) * 31 + MethodVariableAccess.this.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance(
+&nbsp;        includeSyntheticFields = true
+&nbsp;    )
+&nbsp;    protected class OffsetLoading extends StackManipulation.AbstractBase {
+<b class="fc">&nbsp;        private final int offset;</b>
+&nbsp;
+&nbsp;        protected OffsetLoading(int offset) {
+&nbsp;            this.offset = offset;
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;            methodVisitor.visitVarInsn(MethodVariableAccess.this.loadOpcode, this.offset);
+&nbsp;            return MethodVariableAccess.this.size.toIncreasingSize();
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (this.offset != ((OffsetLoading)var1).offset) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return MethodVariableAccess.this.equals(MethodVariableAccess.this);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return (this.getClass().hashCode() * 31 + this.offset) * 31 + MethodVariableAccess.this.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance
+&nbsp;    public static class MethodLoading extends StackManipulation.AbstractBase {
+&nbsp;        private final MethodDescription methodDescription;
+&nbsp;        private final TypeCastingHandler typeCastingHandler;
+&nbsp;
+&nbsp;        protected MethodLoading(MethodDescription methodDescription, TypeCastingHandler typeCastingHandler) {
+&nbsp;            this.methodDescription = methodDescription;
+&nbsp;            this.typeCastingHandler = typeCastingHandler;
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;            List&lt;StackManipulation&gt; stackManipulations = new ArrayList();
+&nbsp;            Iterator var4 = this.methodDescription.getParameters().iterator();
+&nbsp;
+&nbsp;            while(var4.hasNext()) {
+&nbsp;                ParameterDescription parameterDescription = (ParameterDescription)var4.next();
+<b class="fc">&nbsp;                TypeDescription parameterType = parameterDescription.getType().asErasure();</b>
+<b class="fc">&nbsp;                stackManipulations.add(MethodVariableAccess.of(parameterType).loadFrom(parameterDescription.getOffset()));</b>
+<b class="fc">&nbsp;                stackManipulations.add(this.typeCastingHandler.ofIndex(parameterType, parameterDescription.getIndex()));</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            return (new StackManipulation.Compound(stackManipulations)).apply(methodVisitor, implementationContext);
+&nbsp;        }
+&nbsp;
+&nbsp;        public StackManipulation prependThisReference() {
+<b class="fc">&nbsp;            return (StackManipulation)(this.methodDescription.isStatic() ? this : new StackManipulation.Compound(new StackManipulation[]{MethodVariableAccess.loadThis(), this}));</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public MethodLoading asBridgeOf(MethodDescription bridgeTarget) {
+&nbsp;            return new MethodLoading(this.methodDescription, new TypeCastingHandler.ForBridgeTarget(bridgeTarget));
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.methodDescription.equals(((MethodLoading)var1).methodDescription)) {
+&nbsp;                return false;
+<b class="fc">&nbsp;            } else {</b>
+&nbsp;                return this.typeCastingHandler.equals(((MethodLoading)var1).typeCastingHandler);
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return (this.getClass().hashCode() * 31 + this.methodDescription.hashCode()) * 31 + this.typeCastingHandler.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        protected interface TypeCastingHandler {
+&nbsp;            StackManipulation ofIndex(TypeDescription var1, int var2);
+&nbsp;
+&nbsp;            @net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance
+&nbsp;            public static class ForBridgeTarget implements TypeCastingHandler {
+&nbsp;                private final MethodDescription bridgeTarget;
+&nbsp;
+&nbsp;                public ForBridgeTarget(MethodDescription bridgeTarget) {
+&nbsp;                    this.bridgeTarget = bridgeTarget;
+&nbsp;                }
+&nbsp;
+&nbsp;                public StackManipulation ofIndex(TypeDescription parameterType, int index) {
+&nbsp;                    TypeDescription targetType = ((ParameterDescription)this.bridgeTarget.getParameters().get(index)).getType().asErasure();
+&nbsp;                    return (StackManipulation)(parameterType.equals(targetType) ? Trivial.INSTANCE : TypeCasting.to(targetType));
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        return this.bridgeTarget.equals(((ForBridgeTarget)var1).bridgeTarget);</b>
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+<b class="fc">&nbsp;                    return this.getClass().hashCode() * 31 + this.bridgeTarget.hashCode();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public static enum NoOp implements TypeCastingHandler {
+&nbsp;                INSTANCE;
+&nbsp;
+&nbsp;                private NoOp() {
+&nbsp;                }
+&nbsp;
+&nbsp;                public StackManipulation ofIndex(TypeDescription parameterType, int index) {
+&nbsp;                    return Trivial.INSTANCE;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

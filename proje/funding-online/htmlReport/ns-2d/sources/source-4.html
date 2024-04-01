@@ -1,0 +1,367 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > StackManipulation</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.bytecode</a>
+</div>
+
+<h1>Coverage Summary for Class: StackManipulation (net.bytebuddy.implementation.bytecode)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">StackManipulation$AbstractBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StackManipulation$Compound</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/18)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StackManipulation$Illegal</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StackManipulation$Size</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StackManipulation$Trivial</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (34/34)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.bytecode;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.jar.asm.MethodVisitor;
+&nbsp;
+&nbsp;public interface StackManipulation {
+&nbsp;    boolean isValid();
+&nbsp;
+&nbsp;    Size apply(MethodVisitor var1, Implementation.Context var2);
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class Simple extends AbstractBase {
+&nbsp;        private final Dispatcher dispatcher;
+&nbsp;
+&nbsp;        public Simple(Dispatcher dispatcher) {
+&nbsp;            this.dispatcher = dispatcher;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;            return this.dispatcher.apply(methodVisitor, implementationContext);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.dispatcher.equals(((Simple)var1).dispatcher);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.dispatcher.hashCode();
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public interface Dispatcher {</b>
+&nbsp;            Size apply(MethodVisitor var1, Implementation.Context var2);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    @Enhance</b>
+&nbsp;    public static class Compound implements StackManipulation {
+&nbsp;        private final List&lt;StackManipulation&gt; stackManipulations;
+&nbsp;
+&nbsp;        public Compound(StackManipulation... stackManipulation) {
+&nbsp;            this(Arrays.asList(stackManipulation));
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public Compound(List&lt;? extends StackManipulation&gt; stackManipulations) {
+&nbsp;            this.stackManipulations = new ArrayList();
+&nbsp;            Iterator var2 = stackManipulations.iterator();
+&nbsp;
+&nbsp;            while(var2.hasNext()) {
+&nbsp;                StackManipulation stackManipulation = (StackManipulation)var2.next();
+&nbsp;                if (stackManipulation instanceof Compound) {
+&nbsp;                    this.stackManipulations.addAll(((Compound)stackManipulation).stackManipulations);
+&nbsp;                } else if (!(stackManipulation instanceof Trivial)) {
+&nbsp;                    this.stackManipulations.add(stackManipulation);
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isValid() {
+&nbsp;            Iterator var1 = this.stackManipulations.iterator();
+<b class="fc">&nbsp;</b>
+&nbsp;            StackManipulation stackManipulation;
+&nbsp;            do {
+&nbsp;                if (!var1.hasNext()) {
+&nbsp;                    return true;
+&nbsp;                }
+<b class="fc">&nbsp;</b>
+&nbsp;                stackManipulation = (StackManipulation)var1.next();
+&nbsp;            } while(stackManipulation.isValid());
+&nbsp;
+&nbsp;            return false;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {</b>
+&nbsp;            Size size = StackManipulation.Size.ZERO;
+&nbsp;
+&nbsp;            StackManipulation stackManipulation;
+&nbsp;            for(Iterator var4 = this.stackManipulations.iterator(); var4.hasNext(); size = size.aggregate(stackManipulation.apply(methodVisitor, implementationContext))) {
+&nbsp;                stackManipulation = (StackManipulation)var4.next();
+&nbsp;            }
+&nbsp;
+&nbsp;            return size;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+<b class="fc">&nbsp;            } else if (var1 == null) {</b>
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.stackManipulations.equals(((Compound)var1).stackManipulations);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.stackManipulations.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract static class AbstractBase implements StackManipulation {
+&nbsp;        public AbstractBase() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isValid() {
+&nbsp;            return true;
+&nbsp;        }
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    @Enhance</b>
+<b class="fc">&nbsp;    public static class Size {</b>
+&nbsp;        public static final Size ZERO = new Size(0, 0);
+&nbsp;        private final int sizeImpact;
+&nbsp;        private final int maximalSize;
+&nbsp;
+&nbsp;        public Size(int sizeImpact, int maximalSize) {
+&nbsp;            this.sizeImpact = sizeImpact;
+&nbsp;            this.maximalSize = maximalSize;
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getSizeImpact() {
+&nbsp;            return this.sizeImpact;
+&nbsp;        }
+&nbsp;
+&nbsp;        public int getMaximalSize() {
+&nbsp;            return this.maximalSize;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public Size aggregate(Size other) {</b>
+&nbsp;            return this.aggregate(other.sizeImpact, other.maximalSize);
+&nbsp;        }
+&nbsp;
+&nbsp;        private Size aggregate(int sizeChange, int interimMaximalSize) {
+&nbsp;            return new Size(this.sizeImpact + sizeChange, Math.max(this.maximalSize, this.sizeImpact + interimMaximalSize));
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+<b class="fc">&nbsp;            } else if (var1 == null) {</b>
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (this.sizeImpact != ((Size)var1).sizeImpact) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.maximalSize == ((Size)var1).maximalSize;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+<b class="fc">&nbsp;            return (this.getClass().hashCode() * 31 + this.sizeImpact) * 31 + this.maximalSize;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum Trivial implements StackManipulation {
+&nbsp;        INSTANCE;
+&nbsp;
+<b class="fc">&nbsp;        private Trivial() {</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isValid() {
+&nbsp;            return true;
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        public Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;            return StackSize.ZERO.toIncreasingSize();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum Illegal implements StackManipulation {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private Illegal() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isValid() {
+&nbsp;            return false;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;            throw new IllegalStateException(&quot;An illegal stack manipulation must not be applied&quot;);
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

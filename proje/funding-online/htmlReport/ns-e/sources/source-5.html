@@ -1,0 +1,273 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > OptionHelper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ch.qos.logback.core.util</a>
+</div>
+
+<h1>Coverage Summary for Class: OptionHelper (ch.qos.logback.core.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OptionHelper</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package ch.qos.logback.core.util;
+&nbsp;
+&nbsp;import ch.qos.logback.core.Context;
+&nbsp;import ch.qos.logback.core.spi.ContextAware;
+&nbsp;import ch.qos.logback.core.spi.PropertyContainer;
+&nbsp;import ch.qos.logback.core.spi.ScanException;
+&nbsp;import ch.qos.logback.core.subst.NodeToStringTransformer;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.Properties;
+&nbsp;
+&nbsp;public class OptionHelper {
+&nbsp;    static final String DELIM_START = &quot;${&quot;;
+&nbsp;    static final char DELIM_STOP = &#39;}&#39;;
+&nbsp;    static final String DELIM_DEFAULT = &quot;:-&quot;;
+&nbsp;    static final int DELIM_START_LEN = 2;
+&nbsp;    static final int DELIM_STOP_LEN = 1;
+&nbsp;    static final int DELIM_DEFAULT_LEN = 2;
+&nbsp;    static final String _IS_UNDEFINED = &quot;_IS_UNDEFINED&quot;;
+&nbsp;
+&nbsp;    public OptionHelper() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Object instantiateByClassName(String className, Class&lt;?&gt; superClass, Context context) throws IncompatibleClassException, DynamicClassLoadingException {
+&nbsp;        ClassLoader classLoader = Loader.getClassLoaderOfObject(context);
+&nbsp;        return instantiateByClassName(className, superClass, classLoader);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Object instantiateByClassNameAndParameter(String className, Class&lt;?&gt; superClass, Context context, Class&lt;?&gt; type, Object param) throws IncompatibleClassException, DynamicClassLoadingException {
+&nbsp;        ClassLoader classLoader = Loader.getClassLoaderOfObject(context);
+&nbsp;        return instantiateByClassNameAndParameter(className, superClass, classLoader, type, param);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Object instantiateByClassName(String className, Class&lt;?&gt; superClass, ClassLoader classLoader) throws IncompatibleClassException, DynamicClassLoadingException {
+&nbsp;        return instantiateByClassNameAndParameter(className, superClass, (ClassLoader)classLoader, (Class)null, (Object)null);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Object instantiateByClassNameAndParameter(String className, Class&lt;?&gt; superClass, ClassLoader classLoader, Class&lt;?&gt; type, Object parameter) throws IncompatibleClassException, DynamicClassLoadingException {
+&nbsp;        if (className == null) {
+&nbsp;            throw new NullPointerException();
+&nbsp;        } else {
+&nbsp;            try {
+&nbsp;                Class&lt;?&gt; classObj = null;
+&nbsp;                classObj = classLoader.loadClass(className);
+&nbsp;                if (!superClass.isAssignableFrom(classObj)) {
+&nbsp;                    throw new IncompatibleClassException(superClass, classObj);
+&nbsp;                } else if (type == null) {
+&nbsp;                    return classObj.newInstance();
+&nbsp;                } else {
+&nbsp;                    Constructor&lt;?&gt; constructor = classObj.getConstructor(type);
+&nbsp;                    return constructor.newInstance(parameter);
+&nbsp;                }
+&nbsp;            } catch (IncompatibleClassException var7) {
+&nbsp;                throw var7;
+&nbsp;            } catch (Throwable var8) {
+&nbsp;                throw new DynamicClassLoadingException(&quot;Failed to instantiate type &quot; + className, var8);
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String substVars(String val, PropertyContainer pc1) {
+&nbsp;        return substVars(val, pc1, (PropertyContainer)null);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String substVars(String input, PropertyContainer pc0, PropertyContainer pc1) {
+&nbsp;        try {
+&nbsp;            return NodeToStringTransformer.substituteVariable(input, pc0, pc1);
+&nbsp;        } catch (ScanException var4) {
+&nbsp;            throw new IllegalArgumentException(&quot;Failed to parse input [&quot; + input + &quot;]&quot;, var4);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String propertyLookup(String key, PropertyContainer pc1, PropertyContainer pc2) {
+&nbsp;        String value = null;
+&nbsp;        value = pc1.getProperty(key);
+&nbsp;        if (value == null &amp;&amp; pc2 != null) {
+&nbsp;            value = pc2.getProperty(key);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            value = getSystemProperty(key, (String)null);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value == null) {
+&nbsp;            value = getEnv(key);
+&nbsp;        }
+&nbsp;
+&nbsp;        return value;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String getSystemProperty(String key, String def) {
+&nbsp;        try {
+&nbsp;            return System.getProperty(key, def);
+&nbsp;        } catch (SecurityException var3) {
+&nbsp;            return def;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String getEnv(String key) {
+&nbsp;        try {
+&nbsp;            return System.getenv(key);
+&nbsp;        } catch (SecurityException var2) {
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String getSystemProperty(String key) {
+&nbsp;        try {
+&nbsp;            return System.getProperty(key);
+&nbsp;        } catch (SecurityException var2) {
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setSystemProperties(ContextAware contextAware, Properties props) {
+&nbsp;        Iterator i$ = props.keySet().iterator();
+&nbsp;
+&nbsp;        while(i$.hasNext()) {
+&nbsp;            Object o = i$.next();
+&nbsp;            String key = (String)o;
+&nbsp;            String value = props.getProperty(key);
+&nbsp;            setSystemProperty(contextAware, key, value);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void setSystemProperty(ContextAware contextAware, String key, String value) {
+&nbsp;        try {
+&nbsp;            System.setProperty(key, value);
+&nbsp;        } catch (SecurityException var4) {
+&nbsp;            contextAware.addError(&quot;Failed to set system property [&quot; + key + &quot;]&quot;, var4);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Properties getSystemProperties() {
+&nbsp;        try {
+&nbsp;            return System.getProperties();
+&nbsp;        } catch (SecurityException var1) {
+&nbsp;            return new Properties();
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static String[] extractDefaultReplacement(String key) {
+&nbsp;        String[] result = new String[2];
+&nbsp;        if (key == null) {
+&nbsp;            return result;
+&nbsp;        } else {
+&nbsp;            result[0] = key;
+&nbsp;            int d = key.indexOf(&quot;:-&quot;);
+&nbsp;            if (d != -1) {
+&nbsp;                result[0] = key.substring(0, d);
+&nbsp;                result[1] = key.substring(d + 2);
+&nbsp;            }
+&nbsp;
+&nbsp;            return result;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean toBoolean(String value, boolean dEfault) {
+&nbsp;        if (value == null) {
+&nbsp;            return dEfault;
+&nbsp;        } else {
+&nbsp;            String trimmedVal = value.trim();
+&nbsp;            if (&quot;true&quot;.equalsIgnoreCase(trimmedVal)) {
+&nbsp;                return true;
+&nbsp;            } else {
+&nbsp;                return &quot;false&quot;.equalsIgnoreCase(trimmedVal) ? false : dEfault;
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static boolean isEmpty(String str) {
+&nbsp;        return str == null || &quot;&quot;.equals(str);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

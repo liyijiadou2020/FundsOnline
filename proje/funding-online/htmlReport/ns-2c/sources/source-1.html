@@ -1,0 +1,244 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > AllArguments</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.bind.annotation</a>
+</div>
+
+<h1>Coverage Summary for Class: AllArguments (net.bytebuddy.implementation.bind.annotation)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">AllArguments$Assignment</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AllArguments$Binder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (24/24)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (29/29)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.bind.annotation;
+&nbsp;
+&nbsp;import java.lang.annotation.Documented;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.lang.annotation.Retention;
+&nbsp;import java.lang.annotation.RetentionPolicy;
+&nbsp;import java.lang.annotation.Target;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationDescription;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.method.MethodList;
+&nbsp;import net.bytebuddy.description.method.ParameterDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.ForLoadedType;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.Generic;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.implementation.bind.MethodDelegationBinder;
+&nbsp;import net.bytebuddy.implementation.bind.MethodDelegationBinder.ParameterBinding.Illegal;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.Assigner;
+&nbsp;import net.bytebuddy.implementation.bytecode.collection.ArrayFactory;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.NullConstant;
+&nbsp;import net.bytebuddy.implementation.bytecode.member.MethodVariableAccess;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;import net.bytebuddy.utility.CompoundList;
+&nbsp;
+&nbsp;@Documented
+&nbsp;@Retention(RetentionPolicy.RUNTIME)
+&nbsp;@Target({ElementType.PARAMETER})
+&nbsp;public @interface AllArguments {
+&nbsp;    Assignment value() default AllArguments.Assignment.STRICT;
+&nbsp;
+&nbsp;    boolean includeSelf() default false;
+&nbsp;
+&nbsp;    boolean nullIfEmpty() default false;
+&nbsp;
+&nbsp;    public static enum Binder implements TargetMethodAnnotationDrivenBinder.ParameterBinder&lt;AllArguments&gt; {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private static final MethodDescription.InDefinedShape VALUE;
+&nbsp;        private static final MethodDescription.InDefinedShape INCLUDE_SELF;
+&nbsp;        private static final MethodDescription.InDefinedShape NULL_IF_EMPTY;
+&nbsp;
+&nbsp;        private Binder() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public Class&lt;AllArguments&gt; getHandledType() {
+&nbsp;            return AllArguments.class;
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegationBinder.ParameterBinding&lt;?&gt; bind(AnnotationDescription.Loadable&lt;AllArguments&gt; annotation, MethodDescription source, ParameterDescription target, Implementation.Target implementationTarget, Assigner assigner, Assigner.Typing typing) {
+&nbsp;            TypeDescription.Generic componentType;
+&nbsp;            if (target.getType().represents(Object.class)) {
+&nbsp;                componentType = Generic.OBJECT;
+&nbsp;            } else {
+&nbsp;                if (!target.getType().isArray()) {
+&nbsp;                    throw new IllegalStateException(&quot;Expected an array type for all argument annotation on &quot; + source);
+&nbsp;                }
+&nbsp;
+&nbsp;                componentType = target.getType().getComponentType();
+&nbsp;            }
+&nbsp;
+&nbsp;            boolean includeThis = !source.isStatic() &amp;&amp; (Boolean)annotation.getValue(INCLUDE_SELF).resolve(Boolean.class);
+&nbsp;            if (!includeThis &amp;&amp; source.getParameters().isEmpty() &amp;&amp; (Boolean)annotation.getValue(NULL_IF_EMPTY).resolve(Boolean.class)) {
+&nbsp;                return new MethodDelegationBinder.ParameterBinding.Anonymous(NullConstant.INSTANCE);
+&nbsp;            } else {
+&nbsp;                List&lt;StackManipulation&gt; stackManipulations = new ArrayList(source.getParameters().size() + (includeThis ? 1 : 0));
+&nbsp;                int offset = !source.isStatic() &amp;&amp; !includeThis ? 1 : 0;
+&nbsp;
+&nbsp;                TypeDescription.Generic sourceParameter;
+&nbsp;                for(Iterator var11 = ((List)(includeThis ? CompoundList.of(implementationTarget.getInstrumentedType().asGenericType(), source.getParameters().asTypeList()) : source.getParameters().asTypeList())).iterator(); var11.hasNext(); offset += sourceParameter.getStackSize().getSize()) {
+&nbsp;                    sourceParameter = (TypeDescription.Generic)var11.next();
+&nbsp;                    StackManipulation stackManipulation = new StackManipulation.Compound(new StackManipulation[]{MethodVariableAccess.of(sourceParameter).loadFrom(offset), assigner.assign(sourceParameter, componentType, typing)});
+&nbsp;                    if (stackManipulation.isValid()) {
+&nbsp;                        stackManipulations.add(stackManipulation);
+&nbsp;                    } else if (((Assignment)annotation.getValue(VALUE).load(AllArguments.class.getClassLoader()).resolve(Assignment.class)).isStrict()) {
+&nbsp;                        return Illegal.INSTANCE;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                return new MethodDelegationBinder.ParameterBinding.Anonymous(ArrayFactory.forType(componentType).withValues(stackManipulations));
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        static {
+&nbsp;            MethodList&lt;MethodDescription.InDefinedShape&gt; methods = ForLoadedType.of(AllArguments.class).getDeclaredMethods();
+&nbsp;            VALUE = (MethodDescription.InDefinedShape)((MethodList)methods.filter(ElementMatchers.named(&quot;value&quot;))).getOnly();
+<b class="fc">&nbsp;            INCLUDE_SELF = (MethodDescription.InDefinedShape)((MethodList)methods.filter(ElementMatchers.named(&quot;includeSelf&quot;))).getOnly();</b>
+&nbsp;            NULL_IF_EMPTY = (MethodDescription.InDefinedShape)((MethodList)methods.filter(ElementMatchers.named(&quot;nullIfEmpty&quot;))).getOnly();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum Assignment {
+&nbsp;        STRICT(true),
+<b class="fc">&nbsp;        SLACK(false);</b>
+&nbsp;
+&nbsp;        private final boolean strict;
+&nbsp;
+&nbsp;        private Assignment(boolean strict) {
+&nbsp;            this.strict = strict;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        protected boolean isStrict() {</b>
+&nbsp;            return this.strict;
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

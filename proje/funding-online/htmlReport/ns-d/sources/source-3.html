@@ -1,0 +1,295 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > StatusUtil</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ch.qos.logback.core.status</a>
+</div>
+
+<h1>Coverage Summary for Class: StatusUtil (ch.qos.logback.core.status)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StatusUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (19/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package ch.qos.logback.core.status;
+&nbsp;
+&nbsp;import ch.qos.logback.core.Context;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.regex.Matcher;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;
+&nbsp;public class StatusUtil {
+&nbsp;    StatusManager sm;
+&nbsp;
+&nbsp;    public StatusUtil(StatusManager sm) {
+&nbsp;        this.sm = sm;
+&nbsp;    }
+&nbsp;
+&nbsp;    public StatusUtil(Context context) {
+&nbsp;        this.sm = context.getStatusManager();
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean contextHasStatusListener(Context context) {
+&nbsp;        StatusManager sm = context.getStatusManager();
+&nbsp;        if (sm == null) {
+&nbsp;            return false;
+&nbsp;        } else {
+&nbsp;            List&lt;StatusListener&gt; listeners = sm.getCopyOfStatusListenerList();
+<b class="fc">&nbsp;            return listeners != null &amp;&amp; listeners.size() != 0;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static List&lt;Status&gt; filterStatusListByTimeThreshold(List&lt;Status&gt; rawList, long threshold) {
+&nbsp;        List&lt;Status&gt; filteredList = new ArrayList();
+&nbsp;        Iterator i$ = rawList.iterator();
+&nbsp;
+&nbsp;        while(i$.hasNext()) {
+&nbsp;            Status s = (Status)i$.next();
+&nbsp;            if (s.getDate() &gt;= threshold) {
+&nbsp;                filteredList.add(s);
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        return filteredList;</b>
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public void addStatus(Status status) {</b>
+<b class="fc">&nbsp;        if (this.sm != null) {</b>
+&nbsp;            this.sm.add(status);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public void addInfo(Object caller, String msg) {</b>
+<b class="fc">&nbsp;        this.addStatus(new InfoStatus(msg, caller));</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public void addWarn(Object caller, String msg) {</b>
+<b class="fc">&nbsp;        this.addStatus(new WarnStatus(msg, caller));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addError(Object caller, String msg, Throwable t) {
+&nbsp;        this.addStatus(new ErrorStatus(msg, caller, t));
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasXMLParsingErrors(long threshold) {
+&nbsp;        return this.containsMatch(threshold, 2, &quot;XML_PARSING&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean noXMLParsingErrorsOccurred(long threshold) {
+&nbsp;        return !this.hasXMLParsingErrors(threshold);
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getHighestLevel(long threshold) {
+&nbsp;        List&lt;Status&gt; filteredList = filterStatusListByTimeThreshold(this.sm.getCopyOfStatusList(), threshold);
+&nbsp;        int maxLevel = 0;
+&nbsp;        Iterator i$ = filteredList.iterator();
+&nbsp;
+&nbsp;        while(i$.hasNext()) {
+&nbsp;            Status s = (Status)i$.next();
+&nbsp;            if (s.getLevel() &gt; maxLevel) {
+&nbsp;                maxLevel = s.getLevel();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return maxLevel;
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public boolean isErrorFree(long threshold) {</b>
+<b class="fc">&nbsp;        return 2 &gt; this.getHighestLevel(threshold);</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public boolean isWarningOrErrorFree(long threshold) {
+<b class="fc">&nbsp;        return 1 &gt; this.getHighestLevel(threshold);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public boolean containsMatch(long threshold, int level, String regex) {
+&nbsp;        List&lt;Status&gt; filteredList = filterStatusListByTimeThreshold(this.sm.getCopyOfStatusList(), threshold);
+&nbsp;        Pattern p = Pattern.compile(regex);
+&nbsp;        Iterator i$ = filteredList.iterator();
+&nbsp;
+&nbsp;        while(i$.hasNext()) {
+&nbsp;            Status status = (Status)i$.next();
+&nbsp;            if (level == status.getLevel()) {
+&nbsp;                String msg = status.getMessage();
+&nbsp;                Matcher matcher = p.matcher(msg);
+&nbsp;                if (matcher.lookingAt()) {
+&nbsp;                    return true;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return false;
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean containsMatch(int level, String regex) {
+&nbsp;        return this.containsMatch(0L, level, regex);
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean containsMatch(String regex) {
+&nbsp;        Pattern p = Pattern.compile(regex);
+&nbsp;        Iterator i$ = this.sm.getCopyOfStatusList().iterator();
+&nbsp;
+&nbsp;        Matcher matcher;
+&nbsp;        do {
+&nbsp;            if (!i$.hasNext()) {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;
+&nbsp;            Status status = (Status)i$.next();
+&nbsp;            String msg = status.getMessage();
+&nbsp;            matcher = p.matcher(msg);
+&nbsp;        } while(!matcher.lookingAt());
+&nbsp;
+&nbsp;        return true;
+&nbsp;    }
+&nbsp;
+&nbsp;    public int matchCount(String regex) {
+&nbsp;        int count = 0;
+&nbsp;        Pattern p = Pattern.compile(regex);
+&nbsp;        Iterator i$ = this.sm.getCopyOfStatusList().iterator();
+&nbsp;
+&nbsp;        while(i$.hasNext()) {
+&nbsp;            Status status = (Status)i$.next();
+&nbsp;            String msg = status.getMessage();
+&nbsp;            Matcher matcher = p.matcher(msg);
+&nbsp;            if (matcher.lookingAt()) {
+&nbsp;                ++count;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return count;
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean containsException(Class&lt;?&gt; exceptionType) {
+&nbsp;        Iterator&lt;Status&gt; stati = this.sm.getCopyOfStatusList().iterator();
+&nbsp;
+&nbsp;        while(stati.hasNext()) {
+&nbsp;            Status status = (Status)stati.next();
+&nbsp;
+&nbsp;            for(Throwable t = status.getThrowable(); t != null; t = t.getCause()) {
+&nbsp;                if (t.getClass().getName().equals(exceptionType.getName())) {
+&nbsp;                    return true;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return false;
+&nbsp;    }
+&nbsp;
+&nbsp;    public long timeOfLastReset() {
+&nbsp;        List&lt;Status&gt; statusList = this.sm.getCopyOfStatusList();
+&nbsp;        if (statusList == null) {
+&nbsp;            return -1L;
+&nbsp;        } else {
+&nbsp;            int len = statusList.size();
+&nbsp;
+&nbsp;            for(int i = len - 1; i &gt;= 0; --i) {
+&nbsp;                Status s = (Status)statusList.get(i);
+&nbsp;                if (&quot;Will reset and reconfigure context &quot;.equals(s.getMessage())) {
+&nbsp;                    return s.getDate();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            return -1L;
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

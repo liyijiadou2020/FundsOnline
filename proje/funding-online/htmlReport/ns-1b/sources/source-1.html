@@ -1,0 +1,800 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ByteBuddy</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy</a>
+</div>
+
+<h1>Coverage Summary for Class: ByteBuddy (net.bytebuddy)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ByteBuddy</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (37/37)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.security.AccessController;
+&nbsp;import java.security.PrivilegedAction;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Random;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.NamingStrategy.Suffixing.BaseNameResolver.ForUnnamedType;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationValue;
+&nbsp;import net.bytebuddy.description.field.FieldDescription;
+&nbsp;import net.bytebuddy.description.field.FieldList;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.method.MethodList;
+&nbsp;import net.bytebuddy.description.method.ParameterDescription;
+&nbsp;import net.bytebuddy.description.modifier.EnumerationState;
+&nbsp;import net.bytebuddy.description.modifier.ModifierContributor;
+&nbsp;import net.bytebuddy.description.modifier.Ownership;
+&nbsp;import net.bytebuddy.description.modifier.TypeManifestation;
+&nbsp;import net.bytebuddy.description.modifier.Visibility;
+&nbsp;import net.bytebuddy.description.modifier.ModifierContributor.Resolver;
+&nbsp;import net.bytebuddy.description.type.PackageDescription;
+&nbsp;import net.bytebuddy.description.type.RecordComponentDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDefinition;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeList;
+&nbsp;import net.bytebuddy.description.type.TypeDefinition.Sort;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.ArrayProjection;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.ForLoadedType;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.Generic;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.Generic.Builder;
+&nbsp;import net.bytebuddy.dynamic.ClassFileLocator;
+&nbsp;import net.bytebuddy.dynamic.DynamicType;
+&nbsp;import net.bytebuddy.dynamic.TargetType;
+&nbsp;import net.bytebuddy.dynamic.VisibilityBridgeStrategy;
+&nbsp;import net.bytebuddy.dynamic.ClassFileLocator.ForClassLoader;
+&nbsp;import net.bytebuddy.dynamic.Transformer.NoOp;
+&nbsp;import net.bytebuddy.dynamic.scaffold.ClassWriterStrategy;
+&nbsp;import net.bytebuddy.dynamic.scaffold.InstrumentedType;
+&nbsp;import net.bytebuddy.dynamic.scaffold.MethodGraph;
+&nbsp;import net.bytebuddy.dynamic.scaffold.MethodRegistry;
+&nbsp;import net.bytebuddy.dynamic.scaffold.TypeValidation;
+&nbsp;import net.bytebuddy.dynamic.scaffold.MethodGraph.Compiler;
+&nbsp;import net.bytebuddy.dynamic.scaffold.inline.DecoratingDynamicTypeBuilder;
+&nbsp;import net.bytebuddy.dynamic.scaffold.inline.MethodNameTransformer;
+&nbsp;import net.bytebuddy.dynamic.scaffold.inline.RebaseDynamicTypeBuilder;
+&nbsp;import net.bytebuddy.dynamic.scaffold.inline.RedefinitionDynamicTypeBuilder;
+&nbsp;import net.bytebuddy.dynamic.scaffold.inline.MethodNameTransformer.Suffixing;
+&nbsp;import net.bytebuddy.dynamic.scaffold.subclass.ConstructorStrategy;
+&nbsp;import net.bytebuddy.dynamic.scaffold.subclass.SubclassDynamicTypeBuilder;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.implementation.MethodCall;
+&nbsp;import net.bytebuddy.implementation.SuperMethodCall;
+&nbsp;import net.bytebuddy.implementation.Implementation.Context.Default.Factory;
+&nbsp;import net.bytebuddy.implementation.attribute.AnnotationRetention;
+&nbsp;import net.bytebuddy.implementation.attribute.AnnotationValueFilter;
+&nbsp;import net.bytebuddy.implementation.attribute.AnnotationValueFilter.Default;
+&nbsp;import net.bytebuddy.implementation.attribute.MethodAttributeAppender.ForInstrumentedMethod;
+&nbsp;import net.bytebuddy.implementation.auxiliary.AuxiliaryType;
+&nbsp;import net.bytebuddy.implementation.bytecode.ByteCodeAppender;
+&nbsp;import net.bytebuddy.implementation.bytecode.Duplication;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation;
+&nbsp;import net.bytebuddy.implementation.bytecode.TypeCreation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation.Trivial;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.Assigner;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.TypeCasting;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.Assigner.Typing;
+&nbsp;import net.bytebuddy.implementation.bytecode.collection.ArrayFactory;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.IntegerConstant;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.TextConstant;
+&nbsp;import net.bytebuddy.implementation.bytecode.member.FieldAccess;
+&nbsp;import net.bytebuddy.implementation.bytecode.member.MethodInvocation;
+&nbsp;import net.bytebuddy.implementation.bytecode.member.MethodReturn;
+&nbsp;import net.bytebuddy.implementation.bytecode.member.MethodVariableAccess;
+&nbsp;import net.bytebuddy.jar.asm.MethodVisitor;
+&nbsp;import net.bytebuddy.matcher.ElementMatcher;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;import net.bytebuddy.matcher.LatentMatcher;
+&nbsp;import net.bytebuddy.utility.CompoundList;
+&nbsp;import net.bytebuddy.utility.GraalImageCode;
+&nbsp;import net.bytebuddy.utility.JavaConstant;
+&nbsp;import net.bytebuddy.utility.JavaType;
+&nbsp;import net.bytebuddy.utility.RandomString;
+&nbsp;import net.bytebuddy.utility.JavaConstant.MethodHandle;
+&nbsp;import net.bytebuddy.utility.JavaConstant.Simple;
+&nbsp;import net.bytebuddy.utility.privilege.GetSystemPropertyAction;
+&nbsp;
+&nbsp;@Enhance
+&nbsp;public class ByteBuddy {
+&nbsp;    public static final String DEFAULT_NAMING_PROPERTY = &quot;net.bytebuddy.naming&quot;;
+&nbsp;    private static final String BYTE_BUDDY_DEFAULT_PREFIX = &quot;ByteBuddy&quot;;
+&nbsp;    private static final String BYTE_BUDDY_DEFAULT_SUFFIX = &quot;auxiliary&quot;;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.MAYBE
+&nbsp;    )
+&nbsp;    private static final NamingStrategy DEFAULT_NAMING_STRATEGY;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.MAYBE
+&nbsp;    )
+&nbsp;    private static final AuxiliaryType.NamingStrategy DEFAULT_AUXILIARY_NAMING_STRATEGY;
+&nbsp;    protected final ClassFileVersion classFileVersion;
+&nbsp;    protected final NamingStrategy namingStrategy;
+&nbsp;    protected final AuxiliaryType.NamingStrategy auxiliaryTypeNamingStrategy;
+&nbsp;    protected final AnnotationValueFilter.Factory annotationValueFilterFactory;
+&nbsp;    protected final AnnotationRetention annotationRetention;
+&nbsp;    protected final Implementation.Context.Factory implementationContextFactory;
+&nbsp;    protected final MethodGraph.Compiler methodGraphCompiler;
+&nbsp;    protected final InstrumentedType.Factory instrumentedTypeFactory;
+&nbsp;    protected final LatentMatcher&lt;? super MethodDescription&gt; ignoredMethods;
+&nbsp;    protected final TypeValidation typeValidation;
+&nbsp;    protected final VisibilityBridgeStrategy visibilityBridgeStrategy;
+&nbsp;    protected final ClassWriterStrategy classWriterStrategy;
+&nbsp;    private static final boolean ACCESS_CONTROLLER;
+&nbsp;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.MAYBE
+&nbsp;    )
+&nbsp;    @net.bytebuddy.build.AccessControllerPlugin.Enhance
+&nbsp;    private static &lt;T&gt; T doPrivileged(PrivilegedAction&lt;T&gt; action) {
+&nbsp;        return ACCESS_CONTROLLER ? AccessController.doPrivileged(action) : action.run();
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteBuddy() {
+&nbsp;        this(ClassFileVersion.ofThisVm(ClassFileVersion.JAVA_V5));
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteBuddy(ClassFileVersion classFileVersion) {
+<b class="fc">&nbsp;        this(classFileVersion, (NamingStrategy)(DEFAULT_NAMING_STRATEGY == null ? new NamingStrategy.SuffixingRandom(&quot;ByteBuddy&quot;) : DEFAULT_NAMING_STRATEGY), (AuxiliaryType.NamingStrategy)(DEFAULT_AUXILIARY_NAMING_STRATEGY == null ? new AuxiliaryType.NamingStrategy.SuffixingRandom(&quot;auxiliary&quot;) : DEFAULT_AUXILIARY_NAMING_STRATEGY), Default.APPEND_DEFAULTS, AnnotationRetention.ENABLED, Factory.INSTANCE, Compiler.DEFAULT, net.bytebuddy.dynamic.scaffold.InstrumentedType.Factory.Default.MODIFIABLE, TypeValidation.ENABLED, net.bytebuddy.dynamic.VisibilityBridgeStrategy.Default.ALWAYS, net.bytebuddy.dynamic.scaffold.ClassWriterStrategy.Default.CONSTANT_POOL_RETAINING, new LatentMatcher.Resolved(ElementMatchers.isSynthetic().or(ElementMatchers.isDefaultFinalizer())));</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    protected ByteBuddy(ClassFileVersion classFileVersion, NamingStrategy namingStrategy, AuxiliaryType.NamingStrategy auxiliaryTypeNamingStrategy, AnnotationValueFilter.Factory annotationValueFilterFactory, AnnotationRetention annotationRetention, Implementation.Context.Factory implementationContextFactory, MethodGraph.Compiler methodGraphCompiler, InstrumentedType.Factory instrumentedTypeFactory, TypeValidation typeValidation, VisibilityBridgeStrategy visibilityBridgeStrategy, ClassWriterStrategy classWriterStrategy, LatentMatcher&lt;? super MethodDescription&gt; ignoredMethods) {</b>
+<b class="fc">&nbsp;        this.classFileVersion = classFileVersion;</b>
+&nbsp;        this.namingStrategy = namingStrategy;
+&nbsp;        this.auxiliaryTypeNamingStrategy = auxiliaryTypeNamingStrategy;
+&nbsp;        this.annotationValueFilterFactory = annotationValueFilterFactory;
+&nbsp;        this.annotationRetention = annotationRetention;
+&nbsp;        this.implementationContextFactory = implementationContextFactory;
+<b class="fc">&nbsp;        this.methodGraphCompiler = methodGraphCompiler;</b>
+<b class="fc">&nbsp;        this.instrumentedTypeFactory = instrumentedTypeFactory;</b>
+&nbsp;        this.typeValidation = typeValidation;
+&nbsp;        this.visibilityBridgeStrategy = visibilityBridgeStrategy;
+&nbsp;        this.classWriterStrategy = classWriterStrategy;
+&nbsp;        this.ignoredMethods = ignoredMethods;
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; DynamicType.Builder&lt;T&gt; subclass(Class&lt;T&gt; superType) {
+&nbsp;        return this.subclass((TypeDefinition)ForLoadedType.of(superType));
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; DynamicType.Builder&lt;T&gt; subclass(Class&lt;T&gt; superType, ConstructorStrategy constructorStrategy) {
+&nbsp;        return this.subclass((TypeDefinition)ForLoadedType.of(superType), constructorStrategy);
+&nbsp;    }
+&nbsp;
+&nbsp;    public DynamicType.Builder&lt;?&gt; subclass(Type superType) {
+&nbsp;        return this.subclass((TypeDefinition)Sort.describe(superType));
+&nbsp;    }
+&nbsp;
+&nbsp;    public DynamicType.Builder&lt;?&gt; subclass(Type superType, ConstructorStrategy constructorStrategy) {
+&nbsp;        return this.subclass((TypeDefinition)Sort.describe(superType), constructorStrategy);
+&nbsp;    }
+&nbsp;
+&nbsp;    public DynamicType.Builder&lt;?&gt; subclass(TypeDefinition superType) {
+&nbsp;        return this.subclass((TypeDefinition)superType, net.bytebuddy.dynamic.scaffold.subclass.ConstructorStrategy.Default.IMITATE_SUPER_CLASS_OPENING);
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public DynamicType.Builder&lt;?&gt; subclass(TypeDefinition superType, ConstructorStrategy constructorStrategy) {
+&nbsp;        if (!superType.isPrimitive() &amp;&amp; !superType.isArray() &amp;&amp; !superType.isFinal()) {
+&nbsp;            TypeDescription.Generic actualSuperType;
+&nbsp;            Object interfaceTypes;
+&nbsp;            if (superType.isInterface()) {
+&nbsp;                actualSuperType = Generic.OBJECT;
+&nbsp;                interfaceTypes = new TypeList.Generic.Explicit(new TypeDefinition[]{superType});
+&nbsp;            } else {
+&nbsp;                actualSuperType = superType.asGenericType();
+&nbsp;                interfaceTypes = new TypeList.Generic.Empty();
+&nbsp;            }
+&nbsp;
+&nbsp;            return new SubclassDynamicTypeBuilder(this.instrumentedTypeFactory.subclass(this.namingStrategy.subclass(superType.asGenericType()), Resolver.of(new ModifierContributor.ForType[]{Visibility.PUBLIC, TypeManifestation.PLAIN}).resolve(superType.getModifiers()), actualSuperType).withInterfaces((TypeList.Generic)interfaceTypes), this.classFileVersion, this.auxiliaryTypeNamingStrategy, this.annotationValueFilterFactory, this.annotationRetention, this.implementationContextFactory, this.methodGraphCompiler, this.typeValidation, this.visibilityBridgeStrategy, this.classWriterStrategy, this.ignoredMethods, constructorStrategy);
+&nbsp;        } else {
+&nbsp;            throw new IllegalArgumentException(&quot;Cannot subclass primitive, array or final types: &quot; + superType);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public DynamicType.Builder&lt;?&gt; makeInterface() {
+&nbsp;        return this.makeInterface((Collection)Collections.emptyList());
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; DynamicType.Builder&lt;T&gt; makeInterface(Class&lt;T&gt; interfaceType) {
+&nbsp;        return this.makeInterface(Collections.singletonList(interfaceType));
+&nbsp;    }
+&nbsp;
+&nbsp;    public DynamicType.Builder&lt;?&gt; makeInterface(Type... interfaceType) {
+&nbsp;        return this.makeInterface(Arrays.asList(interfaceType));
+&nbsp;    }
+&nbsp;
+&nbsp;    public DynamicType.Builder&lt;?&gt; makeInterface(List&lt;? extends Type&gt; interfaceTypes) {
+&nbsp;        return this.makeInterface((Collection)(new TypeList.Generic.ForLoadedTypes(interfaceTypes)));
+&nbsp;    }
+&nbsp;
+&nbsp;    public DynamicType.Builder&lt;?&gt; makeInterface(TypeDefinition... interfaceType) {
+&nbsp;        return this.makeInterface((Collection)Arrays.asList(interfaceType));
+&nbsp;    }
+&nbsp;
+&nbsp;    public DynamicType.Builder&lt;?&gt; makeInterface(Collection&lt;? extends TypeDefinition&gt; interfaceTypes) {
+&nbsp;        return this.subclass((Class)Object.class, net.bytebuddy.dynamic.scaffold.subclass.ConstructorStrategy.Default.NO_CONSTRUCTORS).implement(interfaceTypes).modifiers(new ModifierContributor.ForType[]{TypeManifestation.INTERFACE, Visibility.PUBLIC});
+&nbsp;    }
+&nbsp;
+&nbsp;    public DynamicType.Builder&lt;?&gt; makePackage(String name) {
+&nbsp;        return new SubclassDynamicTypeBuilder(this.instrumentedTypeFactory.subclass(name + &quot;.&quot; + &quot;package-info&quot;, 5632, Generic.OBJECT), this.classFileVersion, this.auxiliaryTypeNamingStrategy, this.annotationValueFilterFactory, this.annotationRetention, this.implementationContextFactory, this.methodGraphCompiler, this.typeValidation, this.visibilityBridgeStrategy, this.classWriterStrategy, this.ignoredMethods, net.bytebuddy.dynamic.scaffold.subclass.ConstructorStrategy.Default.NO_CONSTRUCTORS);
+&nbsp;    }
+&nbsp;
+&nbsp;    public DynamicType.Builder&lt;?&gt; makeRecord() {
+&nbsp;        TypeDescription.Generic record = net.bytebuddy.dynamic.scaffold.InstrumentedType.Default.of(JavaType.RECORD.getTypeStub().getName(), Generic.OBJECT, new ModifierContributor.ForType[]{Visibility.PUBLIC}).withMethod(new MethodDescription.Token(4)).withMethod(new MethodDescription.Token(&quot;hashCode&quot;, 1025, ForLoadedType.of(Integer.TYPE).asGenericType())).withMethod(new MethodDescription.Token(&quot;equals&quot;, 1025, ForLoadedType.of(Boolean.TYPE).asGenericType(), Collections.singletonList(Generic.OBJECT))).withMethod(new MethodDescription.Token(&quot;toString&quot;, 1025, ForLoadedType.of(String.class).asGenericType())).asGenericType();
+&nbsp;        return (new SubclassDynamicTypeBuilder(this.instrumentedTypeFactory.subclass(this.namingStrategy.subclass(record), 17, record).withRecord(true), this.classFileVersion, this.auxiliaryTypeNamingStrategy, this.annotationValueFilterFactory, this.annotationRetention, this.implementationContextFactory, this.methodGraphCompiler, this.typeValidation, this.visibilityBridgeStrategy, this.classWriterStrategy, this.ignoredMethods, ByteBuddy.RecordConstructorStrategy.INSTANCE)).method(ElementMatchers.isHashCode()).intercept(ByteBuddy.RecordObjectMethod.HASH_CODE).method(ElementMatchers.isEquals()).intercept(ByteBuddy.RecordObjectMethod.EQUALS).method(ElementMatchers.isToString()).intercept(ByteBuddy.RecordObjectMethod.TO_STRING);
+&nbsp;    }
+&nbsp;
+&nbsp;    public DynamicType.Builder&lt;? extends Annotation&gt; makeAnnotation() {
+&nbsp;        return new SubclassDynamicTypeBuilder(this.instrumentedTypeFactory.subclass(this.namingStrategy.subclass(Generic.ANNOTATION), Resolver.of(new ModifierContributor.ForType[]{Visibility.PUBLIC, TypeManifestation.ANNOTATION}).resolve(), Generic.OBJECT).withInterfaces(new TypeList.Generic.Explicit(new TypeDefinition[]{Generic.ANNOTATION})), this.classFileVersion, this.auxiliaryTypeNamingStrategy, this.annotationValueFilterFactory, this.annotationRetention, this.implementationContextFactory, this.methodGraphCompiler, this.typeValidation, this.visibilityBridgeStrategy, this.classWriterStrategy, this.ignoredMethods, net.bytebuddy.dynamic.scaffold.subclass.ConstructorStrategy.Default.NO_CONSTRUCTORS);
+&nbsp;    }
+&nbsp;
+&nbsp;    public DynamicType.Builder&lt;? extends Enum&lt;?&gt;&gt; makeEnumeration(String... value) {
+&nbsp;        return this.makeEnumeration((Collection)Arrays.asList(value));
+&nbsp;    }
+&nbsp;
+&nbsp;    public DynamicType.Builder&lt;? extends Enum&lt;?&gt;&gt; makeEnumeration(Collection&lt;? extends String&gt; values) {
+&nbsp;        if (values.isEmpty()) {
+&nbsp;            throw new IllegalArgumentException(&quot;Require at least one enumeration constant&quot;);
+&nbsp;        } else {
+&nbsp;            TypeDescription.Generic enumType = Builder.parameterizedType(Enum.class, new Type[]{TargetType.class}).build();
+&nbsp;            return (new SubclassDynamicTypeBuilder(this.instrumentedTypeFactory.subclass(this.namingStrategy.subclass(enumType), Resolver.of(new ModifierContributor.ForType[]{Visibility.PUBLIC, TypeManifestation.FINAL, EnumerationState.ENUMERATION}).resolve(), enumType), this.classFileVersion, this.auxiliaryTypeNamingStrategy, this.annotationValueFilterFactory, this.annotationRetention, this.implementationContextFactory, this.methodGraphCompiler, this.typeValidation, this.visibilityBridgeStrategy, this.classWriterStrategy, this.ignoredMethods, net.bytebuddy.dynamic.scaffold.subclass.ConstructorStrategy.Default.NO_CONSTRUCTORS)).defineConstructor(new ModifierContributor.ForMethod[]{Visibility.PRIVATE}).withParameters(new Type[]{String.class, Integer.TYPE}).intercept(SuperMethodCall.INSTANCE).defineMethod(&quot;valueOf&quot;, TargetType.class, new ModifierContributor.ForMethod[]{Visibility.PUBLIC, Ownership.STATIC}).withParameters(new Type[]{String.class}).intercept(MethodCall.invoke((MethodDescription)((MethodList)enumType.getDeclaredMethods().filter(ElementMatchers.named(&quot;valueOf&quot;).and(ElementMatchers.takesArguments(new Class[]{Class.class, String.class})))).getOnly()).withOwnType().withArgument(new int[]{0}).withAssigner(Assigner.DEFAULT, Typing.DYNAMIC)).defineMethod(&quot;values&quot;, TargetType[].class, new ModifierContributor.ForMethod[]{Visibility.PUBLIC, Ownership.STATIC}).intercept(new EnumerationImplementation(new ArrayList(values)));
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; DynamicType.Builder&lt;T&gt; redefine(Class&lt;T&gt; type) {
+&nbsp;        return this.redefine(type, ForClassLoader.of(type.getClassLoader()));
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; DynamicType.Builder&lt;T&gt; redefine(Class&lt;T&gt; type, ClassFileLocator classFileLocator) {
+&nbsp;        return this.redefine(ForLoadedType.of(type), classFileLocator);
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; DynamicType.Builder&lt;T&gt; redefine(TypeDescription type, ClassFileLocator classFileLocator) {
+&nbsp;        if (!type.isArray() &amp;&amp; !type.isPrimitive()) {
+&nbsp;            return new RedefinitionDynamicTypeBuilder(this.instrumentedTypeFactory.represent(type), this.classFileVersion, this.auxiliaryTypeNamingStrategy, this.annotationValueFilterFactory, this.annotationRetention, this.implementationContextFactory, this.methodGraphCompiler, this.typeValidation, this.visibilityBridgeStrategy, this.classWriterStrategy, this.ignoredMethods, type, classFileLocator);
+&nbsp;        } else {
+&nbsp;            throw new IllegalArgumentException(&quot;Cannot redefine array or primitive type: &quot; + type);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; DynamicType.Builder&lt;T&gt; rebase(Class&lt;T&gt; type) {
+&nbsp;        return this.rebase(type, ForClassLoader.of(type.getClassLoader()));
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public &lt;T&gt; DynamicType.Builder&lt;T&gt; rebase(Class&lt;T&gt; type, ClassFileLocator classFileLocator) {
+&nbsp;        return this.rebase(ForLoadedType.of(type), classFileLocator);
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; DynamicType.Builder&lt;T&gt; rebase(Class&lt;T&gt; type, ClassFileLocator classFileLocator, MethodNameTransformer methodNameTransformer) {
+&nbsp;        return this.rebase(ForLoadedType.of(type), classFileLocator, methodNameTransformer);
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public &lt;T&gt; DynamicType.Builder&lt;T&gt; rebase(TypeDescription type, ClassFileLocator classFileLocator) {</b>
+&nbsp;        return this.rebase(type, classFileLocator, Suffixing.withRandomSuffix());
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; DynamicType.Builder&lt;T&gt; rebase(TypeDescription type, ClassFileLocator classFileLocator, MethodNameTransformer methodNameTransformer) {
+&nbsp;        if (!type.isArray() &amp;&amp; !type.isPrimitive()) {
+&nbsp;            return new RebaseDynamicTypeBuilder(this.instrumentedTypeFactory.represent(type), this.classFileVersion, this.auxiliaryTypeNamingStrategy, this.annotationValueFilterFactory, this.annotationRetention, this.implementationContextFactory, this.methodGraphCompiler, this.typeValidation, this.visibilityBridgeStrategy, this.classWriterStrategy, this.ignoredMethods, type, classFileLocator, methodNameTransformer);
+&nbsp;        } else {
+&nbsp;            throw new IllegalArgumentException(&quot;Cannot rebase array or primitive type: &quot; + type);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public DynamicType.Builder&lt;?&gt; rebase(Package aPackage, ClassFileLocator classFileLocator) {
+&nbsp;        return this.rebase((PackageDescription)(new PackageDescription.ForLoadedPackage(aPackage)), classFileLocator);
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public DynamicType.Builder&lt;?&gt; rebase(PackageDescription aPackage, ClassFileLocator classFileLocator) {
+&nbsp;        return this.rebase((TypeDescription)(new TypeDescription.ForPackageDescription(aPackage)), classFileLocator);
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; DynamicType.Builder&lt;T&gt; decorate(Class&lt;T&gt; type) {
+&nbsp;        return this.decorate(type, ForClassLoader.of(type.getClassLoader()));
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; DynamicType.Builder&lt;T&gt; decorate(Class&lt;T&gt; type, ClassFileLocator classFileLocator) {
+&nbsp;        return this.decorate(ForLoadedType.of(type), classFileLocator);
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; DynamicType.Builder&lt;T&gt; decorate(TypeDescription type, ClassFileLocator classFileLocator) {
+&nbsp;        if (!type.isArray() &amp;&amp; !type.isPrimitive()) {
+&nbsp;            return new DecoratingDynamicTypeBuilder(type, this.classFileVersion, this.auxiliaryTypeNamingStrategy, this.annotationValueFilterFactory, this.annotationRetention, this.implementationContextFactory, this.methodGraphCompiler, this.typeValidation, this.classWriterStrategy, this.ignoredMethods, classFileLocator);
+&nbsp;        } else {
+&nbsp;            throw new IllegalArgumentException(&quot;Cannot decorate array or primitive type: &quot; + type);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteBuddy with(ClassFileVersion classFileVersion) {
+&nbsp;        return new ByteBuddy(classFileVersion, this.namingStrategy, this.auxiliaryTypeNamingStrategy, this.annotationValueFilterFactory, this.annotationRetention, this.implementationContextFactory, this.methodGraphCompiler, this.instrumentedTypeFactory, this.typeValidation, this.visibilityBridgeStrategy, this.classWriterStrategy, this.ignoredMethods);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteBuddy with(NamingStrategy namingStrategy) {
+&nbsp;        return new ByteBuddy(this.classFileVersion, namingStrategy, this.auxiliaryTypeNamingStrategy, this.annotationValueFilterFactory, this.annotationRetention, this.implementationContextFactory, this.methodGraphCompiler, this.instrumentedTypeFactory, this.typeValidation, this.visibilityBridgeStrategy, this.classWriterStrategy, this.ignoredMethods);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteBuddy with(AuxiliaryType.NamingStrategy auxiliaryTypeNamingStrategy) {
+<b class="fc">&nbsp;        return new ByteBuddy(this.classFileVersion, this.namingStrategy, auxiliaryTypeNamingStrategy, this.annotationValueFilterFactory, this.annotationRetention, this.implementationContextFactory, this.methodGraphCompiler, this.instrumentedTypeFactory, this.typeValidation, this.visibilityBridgeStrategy, this.classWriterStrategy, this.ignoredMethods);</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public ByteBuddy with(AnnotationValueFilter.Factory annotationValueFilterFactory) {</b>
+<b class="fc">&nbsp;        return new ByteBuddy(this.classFileVersion, this.namingStrategy, this.auxiliaryTypeNamingStrategy, annotationValueFilterFactory, this.annotationRetention, this.implementationContextFactory, this.methodGraphCompiler, this.instrumentedTypeFactory, this.typeValidation, this.visibilityBridgeStrategy, this.classWriterStrategy, this.ignoredMethods);</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public ByteBuddy with(AnnotationRetention annotationRetention) {</b>
+<b class="fc">&nbsp;        return new ByteBuddy(this.classFileVersion, this.namingStrategy, this.auxiliaryTypeNamingStrategy, this.annotationValueFilterFactory, annotationRetention, this.implementationContextFactory, this.methodGraphCompiler, this.instrumentedTypeFactory, this.typeValidation, this.visibilityBridgeStrategy, this.classWriterStrategy, this.ignoredMethods);</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public ByteBuddy with(Implementation.Context.Factory implementationContextFactory) {</b>
+<b class="fc">&nbsp;        return new ByteBuddy(this.classFileVersion, this.namingStrategy, this.auxiliaryTypeNamingStrategy, this.annotationValueFilterFactory, this.annotationRetention, implementationContextFactory, this.methodGraphCompiler, this.instrumentedTypeFactory, this.typeValidation, this.visibilityBridgeStrategy, this.classWriterStrategy, this.ignoredMethods);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteBuddy with(MethodGraph.Compiler methodGraphCompiler) {
+&nbsp;        return new ByteBuddy(this.classFileVersion, this.namingStrategy, this.auxiliaryTypeNamingStrategy, this.annotationValueFilterFactory, this.annotationRetention, this.implementationContextFactory, methodGraphCompiler, this.instrumentedTypeFactory, this.typeValidation, this.visibilityBridgeStrategy, this.classWriterStrategy, this.ignoredMethods);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteBuddy with(InstrumentedType.Factory instrumentedTypeFactory) {
+&nbsp;        return new ByteBuddy(this.classFileVersion, this.namingStrategy, this.auxiliaryTypeNamingStrategy, this.annotationValueFilterFactory, this.annotationRetention, this.implementationContextFactory, this.methodGraphCompiler, instrumentedTypeFactory, this.typeValidation, this.visibilityBridgeStrategy, this.classWriterStrategy, this.ignoredMethods);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteBuddy with(TypeValidation typeValidation) {
+&nbsp;        return new ByteBuddy(this.classFileVersion, this.namingStrategy, this.auxiliaryTypeNamingStrategy, this.annotationValueFilterFactory, this.annotationRetention, this.implementationContextFactory, this.methodGraphCompiler, this.instrumentedTypeFactory, typeValidation, this.visibilityBridgeStrategy, this.classWriterStrategy, this.ignoredMethods);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteBuddy with(VisibilityBridgeStrategy visibilityBridgeStrategy) {
+&nbsp;        return new ByteBuddy(this.classFileVersion, this.namingStrategy, this.auxiliaryTypeNamingStrategy, this.annotationValueFilterFactory, this.annotationRetention, this.implementationContextFactory, this.methodGraphCompiler, this.instrumentedTypeFactory, this.typeValidation, visibilityBridgeStrategy, this.classWriterStrategy, this.ignoredMethods);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteBuddy with(ClassWriterStrategy classWriterStrategy) {
+&nbsp;        return new ByteBuddy(this.classFileVersion, this.namingStrategy, this.auxiliaryTypeNamingStrategy, this.annotationValueFilterFactory, this.annotationRetention, this.implementationContextFactory, this.methodGraphCompiler, this.instrumentedTypeFactory, this.typeValidation, this.visibilityBridgeStrategy, classWriterStrategy, this.ignoredMethods);
+&nbsp;    }
+&nbsp;
+&nbsp;    public ByteBuddy ignore(ElementMatcher&lt;? super MethodDescription&gt; ignoredMethods) {
+&nbsp;        return this.ignore((LatentMatcher)(new LatentMatcher.Resolved(ignoredMethods)));
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public ByteBuddy ignore(LatentMatcher&lt;? super MethodDescription&gt; ignoredMethods) {</b>
+&nbsp;        return new ByteBuddy(this.classFileVersion, this.namingStrategy, this.auxiliaryTypeNamingStrategy, this.annotationValueFilterFactory, this.annotationRetention, this.implementationContextFactory, this.methodGraphCompiler, this.instrumentedTypeFactory, this.typeValidation, this.visibilityBridgeStrategy, this.classWriterStrategy, ignoredMethods);
+&nbsp;    }
+&nbsp;
+&nbsp;    static {
+&nbsp;        try {
+&nbsp;            Class.forName(&quot;java.security.AccessController&quot;, false, (ClassLoader)null);
+&nbsp;            ACCESS_CONTROLLER = Boolean.parseBoolean(System.getProperty(&quot;net.bytebuddy.securitymanager&quot;, &quot;true&quot;));
+&nbsp;        } catch (ClassNotFoundException var7) {
+&nbsp;            ACCESS_CONTROLLER = false;
+&nbsp;        } catch (SecurityException var8) {
+&nbsp;            ACCESS_CONTROLLER = true;
+&nbsp;        }
+&nbsp;
+&nbsp;        String value = (String)doPrivileged(new GetSystemPropertyAction(&quot;net.bytebuddy.naming&quot;));
+&nbsp;        Object namingStrategy;
+&nbsp;        AuxiliaryType.NamingStrategy.Enumerating auxiliaryNamingStrategy;
+&nbsp;        if (value == null) {
+&nbsp;            if (GraalImageCode.getCurrent().isDefined()) {
+&nbsp;                namingStrategy = new NamingStrategy.Suffixing(&quot;ByteBuddy&quot;, new NamingStrategy.Suffixing.BaseNameResolver.WithCallerSuffix(ForUnnamedType.INSTANCE), &quot;net.bytebuddy.renamed&quot;);
+&nbsp;                auxiliaryNamingStrategy = new AuxiliaryType.NamingStrategy.Enumerating(&quot;auxiliary&quot;);
+&nbsp;            } else {
+&nbsp;                namingStrategy = null;
+<b class="fc">&nbsp;                auxiliaryNamingStrategy = null;</b>
+&nbsp;            }
+&nbsp;        } else if (value.equalsIgnoreCase(&quot;fixed&quot;)) {
+&nbsp;            namingStrategy = new NamingStrategy.Suffixing(&quot;ByteBuddy&quot;, ForUnnamedType.INSTANCE, &quot;net.bytebuddy.renamed&quot;);
+&nbsp;            auxiliaryNamingStrategy = new AuxiliaryType.NamingStrategy.Enumerating(&quot;auxiliary&quot;);
+&nbsp;        } else if (value.equalsIgnoreCase(&quot;caller&quot;)) {
+&nbsp;            namingStrategy = new NamingStrategy.Suffixing(&quot;ByteBuddy&quot;, new NamingStrategy.Suffixing.BaseNameResolver.WithCallerSuffix(ForUnnamedType.INSTANCE), &quot;net.bytebuddy.renamed&quot;);
+&nbsp;            auxiliaryNamingStrategy = new AuxiliaryType.NamingStrategy.Enumerating(&quot;auxiliary&quot;);
+&nbsp;        } else {
+&nbsp;            long seed;
+&nbsp;            try {
+&nbsp;                seed = Long.parseLong(value);
+&nbsp;            } catch (Exception var6) {
+&nbsp;                throw new IllegalStateException(&quot;&#39;net.bytebuddy.naming&#39; is set to an unknown, non-numeric value: &quot; + value);
+&nbsp;            }
+&nbsp;
+&nbsp;            namingStrategy = new NamingStrategy.SuffixingRandom(&quot;ByteBuddy&quot;, ForUnnamedType.INSTANCE, &quot;net.bytebuddy.renamed&quot;, new RandomString(8, new Random(seed)));
+&nbsp;            auxiliaryNamingStrategy = new AuxiliaryType.NamingStrategy.Enumerating(&quot;auxiliary&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        DEFAULT_NAMING_STRATEGY = (NamingStrategy)namingStrategy;
+&nbsp;        DEFAULT_AUXILIARY_NAMING_STRATEGY = auxiliaryNamingStrategy;
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean equals(Object var1) {
+&nbsp;        if (this == var1) {
+&nbsp;            return true;
+&nbsp;        } else if (var1 == null) {
+&nbsp;            return false;
+&nbsp;        } else if (this.getClass() != var1.getClass()) {
+&nbsp;            return false;
+&nbsp;        } else if (!this.annotationRetention.equals(((ByteBuddy)var1).annotationRetention)) {
+&nbsp;            return false;
+&nbsp;        } else if (!this.typeValidation.equals(((ByteBuddy)var1).typeValidation)) {
+&nbsp;            return false;
+&nbsp;        } else if (!this.classFileVersion.equals(((ByteBuddy)var1).classFileVersion)) {
+&nbsp;            return false;
+&nbsp;        } else if (!this.namingStrategy.equals(((ByteBuddy)var1).namingStrategy)) {
+&nbsp;            return false;
+&nbsp;        } else if (!this.auxiliaryTypeNamingStrategy.equals(((ByteBuddy)var1).auxiliaryTypeNamingStrategy)) {
+&nbsp;            return false;
+&nbsp;        } else if (!this.annotationValueFilterFactory.equals(((ByteBuddy)var1).annotationValueFilterFactory)) {
+&nbsp;            return false;
+&nbsp;        } else if (!this.implementationContextFactory.equals(((ByteBuddy)var1).implementationContextFactory)) {
+&nbsp;            return false;
+&nbsp;        } else if (!this.methodGraphCompiler.equals(((ByteBuddy)var1).methodGraphCompiler)) {
+&nbsp;            return false;
+&nbsp;        } else if (!this.instrumentedTypeFactory.equals(((ByteBuddy)var1).instrumentedTypeFactory)) {
+&nbsp;            return false;
+&nbsp;        } else if (!this.ignoredMethods.equals(((ByteBuddy)var1).ignoredMethods)) {
+&nbsp;            return false;
+&nbsp;        } else if (!this.visibilityBridgeStrategy.equals(((ByteBuddy)var1).visibilityBridgeStrategy)) {
+&nbsp;            return false;
+&nbsp;        } else {
+&nbsp;            return this.classWriterStrategy.equals(((ByteBuddy)var1).classWriterStrategy);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public int hashCode() {
+&nbsp;        return (((((((((((this.getClass().hashCode() * 31 + this.classFileVersion.hashCode()) * 31 + this.namingStrategy.hashCode()) * 31 + this.auxiliaryTypeNamingStrategy.hashCode()) * 31 + this.annotationValueFilterFactory.hashCode()) * 31 + this.annotationRetention.hashCode()) * 31 + this.implementationContextFactory.hashCode()) * 31 + this.methodGraphCompiler.hashCode()) * 31 + this.instrumentedTypeFactory.hashCode()) * 31 + this.ignoredMethods.hashCode()) * 31 + this.typeValidation.hashCode()) * 31 + this.visibilityBridgeStrategy.hashCode()) * 31 + this.classWriterStrategy.hashCode();
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    protected static enum RecordObjectMethod implements Implementation {
+&nbsp;        HASH_CODE(&quot;hashCode&quot;, Trivial.INSTANCE, Integer.TYPE, new Class[0]),
+&nbsp;        EQUALS(&quot;equals&quot;, MethodVariableAccess.REFERENCE.loadFrom(1), Boolean.TYPE, new Class[]{Object.class}),
+&nbsp;        TO_STRING(&quot;toString&quot;, Trivial.INSTANCE, String.class, new Class[0]);
+&nbsp;
+&nbsp;        private final String name;
+&nbsp;        private final StackManipulation stackManipulation;
+&nbsp;        private final TypeDescription returnType;
+&nbsp;        private final List&lt;? extends TypeDescription&gt; arguments;
+&nbsp;
+&nbsp;        private RecordObjectMethod(String name, StackManipulation stackManipulation, Class returnType, Class... arguments) {
+&nbsp;            this.name = name;
+&nbsp;            this.stackManipulation = stackManipulation;
+&nbsp;            this.returnType = ForLoadedType.of(returnType);
+&nbsp;            this.arguments = new TypeList.ForLoadedTypes(arguments);
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public ByteCodeAppender appender(Implementation.Target implementationTarget) {</b>
+&nbsp;            StringBuilder stringBuilder = new StringBuilder();
+&nbsp;            List&lt;JavaConstant&gt; methodHandles = new ArrayList(implementationTarget.getInstrumentedType().getRecordComponents().size());
+&nbsp;            Iterator var4 = implementationTarget.getInstrumentedType().getRecordComponents().iterator();
+&nbsp;
+&nbsp;            while(var4.hasNext()) {
+&nbsp;                RecordComponentDescription.InDefinedShape recordComponent = (RecordComponentDescription.InDefinedShape)var4.next();
+&nbsp;                if (stringBuilder.length() &gt; 0) {
+&nbsp;                    stringBuilder.append(&quot;;&quot;);
+&nbsp;                }
+&nbsp;
+&nbsp;                stringBuilder.append(recordComponent.getActualName());
+&nbsp;                methodHandles.add(MethodHandle.ofGetter((FieldDescription.InDefinedShape)((FieldList)implementationTarget.getInstrumentedType().getDeclaredFields().filter(ElementMatchers.named(recordComponent.getActualName()))).getOnly()));
+&nbsp;            }
+&nbsp;
+&nbsp;            return new ByteCodeAppender.Simple(new StackManipulation[]{MethodVariableAccess.loadThis(), this.stackManipulation, MethodInvocation.invoke(new MethodDescription.Latent(JavaType.OBJECT_METHODS.getTypeStub(), new MethodDescription.Token(&quot;bootstrap&quot;, 9, Generic.OBJECT, Arrays.asList(JavaType.METHOD_HANDLES_LOOKUP.getTypeStub().asGenericType(), TypeDescription.STRING.asGenericType(), JavaType.TYPE_DESCRIPTOR.getTypeStub().asGenericType(), TypeDescription.CLASS.asGenericType(), TypeDescription.STRING.asGenericType(), ArrayProjection.of(JavaType.METHOD_HANDLE.getTypeStub()).asGenericType())))).dynamic(this.name, this.returnType, CompoundList.of(implementationTarget.getInstrumentedType(), this.arguments), CompoundList.of(Arrays.asList(Simple.of(implementationTarget.getInstrumentedType()), Simple.ofLoaded(stringBuilder.toString())), methodHandles)), MethodReturn.of(this.returnType)});
+&nbsp;        }
+&nbsp;
+&nbsp;        public InstrumentedType prepare(InstrumentedType instrumentedType) {
+&nbsp;            return instrumentedType;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    protected static enum RecordConstructorStrategy implements ConstructorStrategy, Implementation {
+&nbsp;        INSTANCE;
+<b class="fc">&nbsp;</b>
+&nbsp;        private RecordConstructorStrategy() {
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public List&lt;MethodDescription.Token&gt; extractConstructors(TypeDescription instrumentedType) {</b>
+&nbsp;            List&lt;ParameterDescription.Token&gt; tokens = new ArrayList(instrumentedType.getRecordComponents().size());
+<b class="fc">&nbsp;            Iterator var3 = instrumentedType.getRecordComponents().iterator();</b>
+<b class="fc">&nbsp;</b>
+&nbsp;            while(var3.hasNext()) {
+<b class="fc">&nbsp;                RecordComponentDescription.InDefinedShape recordComponent = (RecordComponentDescription.InDefinedShape)var3.next();</b>
+<b class="fc">&nbsp;                tokens.add(new ParameterDescription.Token(recordComponent.getType(), recordComponent.getDeclaredAnnotations().filter(ElementMatchers.targetsElement(ElementType.CONSTRUCTOR)), recordComponent.getActualName(), 0));</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            return Collections.singletonList(new MethodDescription.Token(&quot;&lt;init&gt;&quot;, 1, Collections.emptyList(), Generic.VOID, tokens, Collections.emptyList(), Collections.emptyList(), AnnotationValue.UNDEFINED, Generic.UNDEFINED));
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodRegistry inject(TypeDescription instrumentedType, MethodRegistry methodRegistry) {
+&nbsp;            return methodRegistry.prepend(new LatentMatcher.Resolved(ElementMatchers.isConstructor().and(ElementMatchers.takesGenericArguments(instrumentedType.getRecordComponents().asTypeList()))), new MethodRegistry.Handler.ForImplementation(this), ForInstrumentedMethod.EXCLUDING_RECEIVER, NoOp.make());
+&nbsp;        }
+&nbsp;
+&nbsp;        public ByteCodeAppender appender(Implementation.Target implementationTarget) {
+&nbsp;            return new Appender(implementationTarget.getInstrumentedType());
+&nbsp;        }
+&nbsp;
+&nbsp;        public InstrumentedType prepare(InstrumentedType instrumentedType) {
+&nbsp;            RecordComponentDescription.InDefinedShape recordComponent;
+&nbsp;            for(Iterator var2 = instrumentedType.getRecordComponents().iterator(); var2.hasNext(); instrumentedType = instrumentedType.withField(new FieldDescription.Token(recordComponent.getActualName(), 18, recordComponent.getType(), recordComponent.getDeclaredAnnotations().filter(ElementMatchers.targetsElement(ElementType.FIELD)))).withMethod(new MethodDescription.Token(recordComponent.getActualName(), 1, Collections.emptyList(), recordComponent.getType(), Collections.emptyList(), Collections.emptyList(), recordComponent.getDeclaredAnnotations().filter(ElementMatchers.targetsElement(ElementType.METHOD)), AnnotationValue.UNDEFINED, Generic.UNDEFINED))) {
+&nbsp;                recordComponent = (RecordComponentDescription.InDefinedShape)var2.next();
+&nbsp;            }
+&nbsp;
+&nbsp;            return instrumentedType;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        protected static class Appender implements ByteCodeAppender {
+&nbsp;            private final TypeDescription instrumentedType;
+&nbsp;
+&nbsp;            protected Appender(TypeDescription instrumentedType) {
+&nbsp;                this.instrumentedType = instrumentedType;
+&nbsp;            }
+&nbsp;
+&nbsp;            public ByteCodeAppender.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext, MethodDescription instrumentedMethod) {
+&nbsp;                if (instrumentedMethod.isMethod()) {
+&nbsp;                    return (new ByteCodeAppender.Simple(new StackManipulation[]{MethodVariableAccess.loadThis(), FieldAccess.forField((FieldDescription.InDefinedShape)((FieldList)this.instrumentedType.getDeclaredFields().filter(ElementMatchers.named(instrumentedMethod.getName()))).getOnly()).read(), MethodReturn.of(instrumentedMethod.getReturnType())})).apply(methodVisitor, implementationContext, instrumentedMethod);
+&nbsp;                } else {
+&nbsp;                    List&lt;StackManipulation&gt; stackManipulations = new ArrayList(this.instrumentedType.getRecordComponents().size() * 3 + 2);
+&nbsp;                    stackManipulations.add(MethodVariableAccess.loadThis());
+&nbsp;                    stackManipulations.add(MethodInvocation.invoke(new MethodDescription.Latent(JavaType.RECORD.getTypeStub(), new MethodDescription.Token(1))));
+&nbsp;                    int offset = 1;
+&nbsp;
+&nbsp;                    RecordComponentDescription.InDefinedShape recordComponent;
+&nbsp;                    for(Iterator var6 = this.instrumentedType.getRecordComponents().iterator(); var6.hasNext(); offset += recordComponent.getType().getStackSize().getSize()) {
+&nbsp;                        recordComponent = (RecordComponentDescription.InDefinedShape)var6.next();
+&nbsp;                        stackManipulations.add(MethodVariableAccess.loadThis());
+&nbsp;                        stackManipulations.add(MethodVariableAccess.of(recordComponent.getType()).loadFrom(offset));
+&nbsp;                        stackManipulations.add(FieldAccess.forField((FieldDescription.InDefinedShape)((FieldList)this.instrumentedType.getDeclaredFields().filter(ElementMatchers.named(recordComponent.getActualName()))).getOnly()).write());
+&nbsp;                    }
+&nbsp;
+&nbsp;                    stackManipulations.add(MethodReturn.VOID);
+&nbsp;                    return (new ByteCodeAppender.Simple(stackManipulations)).apply(methodVisitor, implementationContext, instrumentedMethod);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.instrumentedType.equals(((Appender)var1).instrumentedType);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.instrumentedType.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    protected static class EnumerationImplementation implements Implementation {
+&nbsp;        protected static final String CLONE_METHOD_NAME = &quot;clone&quot;;
+&nbsp;        protected static final String ENUM_VALUE_OF_METHOD_NAME = &quot;valueOf&quot;;
+&nbsp;        protected static final String ENUM_VALUES_METHOD_NAME = &quot;values&quot;;
+&nbsp;        private static final int ENUM_FIELD_MODIFIERS = 25;
+&nbsp;        private static final String ENUM_VALUES = &quot;$VALUES&quot;;
+&nbsp;        private final List&lt;String&gt; values;
+&nbsp;
+&nbsp;        protected EnumerationImplementation(List&lt;String&gt; values) {
+&nbsp;            this.values = values;
+&nbsp;        }
+&nbsp;
+&nbsp;        public InstrumentedType prepare(InstrumentedType instrumentedType) {
+&nbsp;            String value;
+&nbsp;            for(Iterator var2 = this.values.iterator(); var2.hasNext(); instrumentedType = instrumentedType.withField(new FieldDescription.Token(value, 16409, TargetType.DESCRIPTION.asGenericType()))) {
+&nbsp;                value = (String)var2.next();
+&nbsp;            }
+&nbsp;
+&nbsp;            return instrumentedType.withField(new FieldDescription.Token(&quot;$VALUES&quot;, 4121, ArrayProjection.of(TargetType.DESCRIPTION).asGenericType())).withInitializer(new InitializationAppender(this.values));
+&nbsp;        }
+&nbsp;
+&nbsp;        public ByteCodeAppender appender(Implementation.Target implementationTarget) {
+&nbsp;            return new ValuesMethodAppender(implementationTarget.getInstrumentedType());
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.values.equals(((EnumerationImplementation)var1).values);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.values.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        protected static class InitializationAppender implements ByteCodeAppender {
+&nbsp;            private final List&lt;String&gt; values;
+&nbsp;
+&nbsp;            protected InitializationAppender(List&lt;String&gt; values) {
+&nbsp;                this.values = values;
+&nbsp;            }
+&nbsp;
+&nbsp;            public ByteCodeAppender.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext, MethodDescription instrumentedMethod) {
+&nbsp;                TypeDescription instrumentedType = instrumentedMethod.getDeclaringType().asErasure();
+&nbsp;                MethodDescription enumConstructor = (MethodDescription)((MethodList)instrumentedType.getDeclaredMethods().filter(ElementMatchers.isConstructor().and(ElementMatchers.takesArguments(new Class[]{String.class, Integer.TYPE})))).getOnly();
+&nbsp;                int ordinal = 0;
+&nbsp;                StackManipulation stackManipulation = Trivial.INSTANCE;
+&nbsp;                List&lt;FieldDescription&gt; enumerationFields = new ArrayList(this.values.size());
+&nbsp;                Iterator var9 = this.values.iterator();
+&nbsp;
+&nbsp;                FieldDescription fieldDescription;
+&nbsp;                while(var9.hasNext()) {
+&nbsp;                    String value = (String)var9.next();
+&nbsp;                    fieldDescription = (FieldDescription)((FieldList)instrumentedType.getDeclaredFields().filter(ElementMatchers.named(value))).getOnly();
+&nbsp;                    stackManipulation = new StackManipulation.Compound(new StackManipulation[]{(StackManipulation)stackManipulation, TypeCreation.of(instrumentedType), Duplication.SINGLE, new TextConstant(value), IntegerConstant.forValue(ordinal++), MethodInvocation.invoke(enumConstructor), FieldAccess.forField(fieldDescription).write()});
+&nbsp;                    enumerationFields.add(fieldDescription);
+&nbsp;                }
+&nbsp;
+&nbsp;                List&lt;StackManipulation&gt; fieldGetters = new ArrayList(this.values.size());
+&nbsp;                Iterator var14 = enumerationFields.iterator();
+&nbsp;
+&nbsp;                while(var14.hasNext()) {
+&nbsp;                    fieldDescription = (FieldDescription)var14.next();
+&nbsp;                    fieldGetters.add(FieldAccess.forField(fieldDescription).read());
+&nbsp;                }
+&nbsp;
+&nbsp;                StackManipulation stackManipulation = new StackManipulation.Compound(new StackManipulation[]{(StackManipulation)stackManipulation, ArrayFactory.forType(instrumentedType.asGenericType()).withValues(fieldGetters), FieldAccess.forField((FieldDescription.InDefinedShape)((FieldList)instrumentedType.getDeclaredFields().filter(ElementMatchers.named(&quot;$VALUES&quot;))).getOnly()).write()});
+&nbsp;                return new ByteCodeAppender.Size(stackManipulation.apply(methodVisitor, implementationContext).getMaximalSize(), instrumentedMethod.getStackSize());
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.values.equals(((InitializationAppender)var1).values);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.values.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        protected static class ValuesMethodAppender implements ByteCodeAppender {
+&nbsp;            private final TypeDescription instrumentedType;
+&nbsp;
+&nbsp;            protected ValuesMethodAppender(TypeDescription instrumentedType) {
+&nbsp;                this.instrumentedType = instrumentedType;
+&nbsp;            }
+&nbsp;
+&nbsp;            public ByteCodeAppender.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext, MethodDescription instrumentedMethod) {
+&nbsp;                FieldDescription valuesField = (FieldDescription)((FieldList)this.instrumentedType.getDeclaredFields().filter(ElementMatchers.named(&quot;$VALUES&quot;))).getOnly();
+&nbsp;                MethodDescription cloneMethod = (MethodDescription)((MethodList)Generic.OBJECT.getDeclaredMethods().filter(ElementMatchers.named(&quot;clone&quot;))).getOnly();
+&nbsp;                return new ByteCodeAppender.Size((new StackManipulation.Compound(new StackManipulation[]{FieldAccess.forField(valuesField).read(), MethodInvocation.invoke(cloneMethod).virtual(valuesField.getType().asErasure()), TypeCasting.to(valuesField.getType().asErasure()), MethodReturn.REFERENCE})).apply(methodVisitor, implementationContext).getMaximalSize(), instrumentedMethod.getStackSize());
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.instrumentedType.equals(((ValuesMethodAppender)var1).instrumentedType);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.instrumentedType.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

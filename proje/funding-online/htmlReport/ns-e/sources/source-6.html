@@ -1,0 +1,172 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > StatusListenerConfigHelper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ch.qos.logback.core.util</a>
+</div>
+
+<h1>Coverage Summary for Class: StatusListenerConfigHelper (ch.qos.logback.core.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StatusListenerConfigHelper</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package ch.qos.logback.core.util;
+&nbsp;
+&nbsp;import ch.qos.logback.core.Context;
+&nbsp;import ch.qos.logback.core.spi.ContextAware;
+&nbsp;import ch.qos.logback.core.spi.LifeCycle;
+&nbsp;import ch.qos.logback.core.status.OnConsoleStatusListener;
+&nbsp;import ch.qos.logback.core.status.StatusListener;
+&nbsp;
+&nbsp;public class StatusListenerConfigHelper {
+&nbsp;    public StatusListenerConfigHelper() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void installIfAsked(Context context) {
+&nbsp;        String slClass = OptionHelper.getSystemProperty(&quot;logback.statusListenerClass&quot;);
+&nbsp;        if (!OptionHelper.isEmpty(slClass)) {
+&nbsp;            addStatusListener(context, slClass);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    private static void addStatusListener(Context context, String listenerClassName) {</b>
+&nbsp;        StatusListener listener = null;
+&nbsp;        if (&quot;SYSOUT&quot;.equalsIgnoreCase(listenerClassName)) {
+&nbsp;            listener = new OnConsoleStatusListener();
+&nbsp;        } else {
+&nbsp;            listener = createListenerPerClassName(context, listenerClassName);
+&nbsp;        }
+&nbsp;
+&nbsp;        initAndAddListener(context, (StatusListener)listener);
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void initAndAddListener(Context context, StatusListener listener) {
+&nbsp;        if (listener != null) {
+&nbsp;            if (listener instanceof ContextAware) {
+&nbsp;                ((ContextAware)listener).setContext(context);
+&nbsp;            }
+&nbsp;
+&nbsp;            boolean effectivelyAdded = context.getStatusManager().add(listener);
+&nbsp;            if (effectivelyAdded &amp;&amp; listener instanceof LifeCycle) {
+&nbsp;                ((LifeCycle)listener).start();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private static StatusListener createListenerPerClassName(Context context, String listenerClass) {
+&nbsp;        try {
+&nbsp;            return (StatusListener)OptionHelper.instantiateByClassName(listenerClass, StatusListener.class, context);
+&nbsp;        } catch (Exception var3) {
+&nbsp;            var3.printStackTrace();
+&nbsp;            return null;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void addOnConsoleListenerInstance(Context context, OnConsoleStatusListener onConsoleStatusListener) {
+&nbsp;        onConsoleStatusListener.setContext(context);
+&nbsp;        boolean effectivelyAdded = context.getStatusManager().add(onConsoleStatusListener);
+&nbsp;        if (effectivelyAdded) {
+&nbsp;            onConsoleStatusListener.start();
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

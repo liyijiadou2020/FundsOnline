@@ -1,0 +1,239 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > SubclassByteBuddyMockMaker</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.creation.bytebuddy</a>
+</div>
+
+<h1>Coverage Summary for Class: SubclassByteBuddyMockMaker (org.mockito.internal.creation.bytebuddy)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SubclassByteBuddyMockMaker</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (23/23)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">SubclassByteBuddyMockMaker$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (27/27)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.creation.bytebuddy;
+&nbsp;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import org.mockito.creation.instance.InstantiationException;
+&nbsp;import org.mockito.creation.instance.Instantiator;
+&nbsp;import org.mockito.exceptions.base.MockitoException;
+&nbsp;import org.mockito.internal.configuration.plugins.Plugins;
+&nbsp;import org.mockito.internal.util.Platform;
+&nbsp;import org.mockito.internal.util.StringUtil;
+&nbsp;import org.mockito.invocation.MockHandler;
+&nbsp;import org.mockito.mock.MockCreationSettings;
+&nbsp;import org.mockito.plugins.MockMaker;
+&nbsp;
+&nbsp;public class SubclassByteBuddyMockMaker implements ClassCreatingMockMaker {
+&nbsp;    private final BytecodeGenerator cachingMockBytecodeGenerator;
+&nbsp;
+&nbsp;    public SubclassByteBuddyMockMaker() {
+&nbsp;        this(new SubclassInjectionLoader());
+&nbsp;    }
+&nbsp;
+&nbsp;    public SubclassByteBuddyMockMaker(SubclassLoader loader) {
+&nbsp;        this.cachingMockBytecodeGenerator = new TypeCachingBytecodeGenerator(new SubclassBytecodeGenerator(loader), false);
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; T createMock(MockCreationSettings&lt;T&gt; settings, MockHandler handler) {
+&nbsp;        Class&lt;? extends T&gt; mockedProxyType = this.createMockType(settings);
+<b class="fc">&nbsp;        Instantiator instantiator = Plugins.getInstantiatorProvider().getInstantiator(settings);</b>
+&nbsp;        T mockInstance = null;
+&nbsp;
+<b class="fc">&nbsp;        try {</b>
+<b class="fc">&nbsp;            mockInstance = instantiator.newInstance(mockedProxyType);</b>
+&nbsp;            MockAccess mockAccess = (MockAccess)mockInstance;
+&nbsp;            mockAccess.setMockitoInterceptor(new MockMethodInterceptor(handler, settings));
+&nbsp;            return ensureMockIsAssignableToMockedType(settings, mockInstance);
+&nbsp;        } catch (ClassCastException var7) {
+&nbsp;            throw new MockitoException(StringUtil.join(new Object[]{&quot;ClassCastException occurred while creating the mockito mock :&quot;, &quot;  class to mock : &quot; + describeClass(settings.getTypeToMock()), &quot;  created class : &quot; + describeClass(mockedProxyType), &quot;  proxy instance class : &quot; + describeClass(mockInstance), &quot;  instance creation by : &quot; + instantiator.getClass().getSimpleName(), &quot;&quot;, &quot;You might experience classloading issues, please ask the mockito mailing-list.&quot;, &quot;&quot;}), var7);
+<b class="fc">&nbsp;        } catch (InstantiationException var8) {</b>
+&nbsp;            throw new MockitoException(&quot;Unable to create mock instance of type &#39;&quot; + mockedProxyType.getSuperclass().getSimpleName() + &quot;&#39;&quot;, var8);
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    public &lt;T&gt; Class&lt;? extends T&gt; createMockType(MockCreationSettings&lt;T&gt; settings) {</b>
+<b class="fc">&nbsp;        try {</b>
+<b class="fc">&nbsp;            return this.cachingMockBytecodeGenerator.mockClass(MockFeatures.withMockFeatures(settings.getTypeToMock(), settings.getExtraInterfaces(), settings.getSerializableMode(), settings.isStripAnnotations(), settings.getDefaultAnswer()));</b>
+&nbsp;        } catch (Exception var3) {
+<b class="fc">&nbsp;            throw this.prettifyFailure(settings, var3);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static &lt;T&gt; T ensureMockIsAssignableToMockedType(MockCreationSettings&lt;T&gt; settings, T mock) {
+&nbsp;        Class&lt;T&gt; typeToMock = settings.getTypeToMock();
+&nbsp;        return typeToMock.cast(mock);
+&nbsp;    }
+&nbsp;
+&nbsp;    private &lt;T&gt; RuntimeException prettifyFailure(MockCreationSettings&lt;T&gt; mockFeatures, Exception generationFailed) {
+&nbsp;        if (mockFeatures.getTypeToMock().isArray()) {
+&nbsp;            throw new MockitoException(StringUtil.join(new Object[]{&quot;Mockito cannot mock arrays: &quot; + mockFeatures.getTypeToMock() + &quot;.&quot;, &quot;&quot;}), generationFailed);
+&nbsp;        } else if (Modifier.isPrivate(mockFeatures.getTypeToMock().getModifiers())) {
+&nbsp;            throw new MockitoException(StringUtil.join(new Object[]{&quot;Mockito cannot mock this class: &quot; + mockFeatures.getTypeToMock() + &quot;.&quot;, &quot;Most likely it is due to mocking a private class that is not visible to Mockito&quot;, &quot;&quot;}), generationFailed);
+&nbsp;        } else {
+&nbsp;            throw new MockitoException(StringUtil.join(new Object[]{&quot;Mockito cannot mock this class: &quot; + mockFeatures.getTypeToMock() + &quot;.&quot;, &quot;&quot;, &quot;Mockito can only mock non-private &amp; non-final classes.&quot;, &quot;If you&#39;re not sure why you&#39;re getting this error, please report to the mailing list.&quot;, &quot;&quot;, Platform.warnForVM(&quot;IBM J9 VM&quot;, &quot;Early IBM virtual machine are known to have issues with Mockito, please upgrade to an up-to-date version.\n&quot;, &quot;Hotspot&quot;, Platform.isJava8BelowUpdate45() ? &quot;Java 8 early builds have bugs that were addressed in Java 1.8.0_45, please update your JDK!\n&quot; : &quot;&quot;), Platform.describe(), &quot;&quot;, &quot;Underlying exception : &quot; + generationFailed}), generationFailed);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String describeClass(Class&lt;?&gt; type) {
+&nbsp;        return type == null ? &quot;null&quot; : &quot;&#39;&quot; + type.getCanonicalName() + &quot;&#39;, loaded by classloader : &#39;&quot; + type.getClassLoader() + &quot;&#39;&quot;;
+&nbsp;    }
+&nbsp;
+&nbsp;    private static String describeClass(Object instance) {
+&nbsp;        return instance == null ? &quot;null&quot; : describeClass(instance.getClass());
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public MockHandler getHandler(Object mock) {</b>
+<b class="fc">&nbsp;        return !(mock instanceof MockAccess) ? null : ((MockAccess)mock).getMockitoInterceptor().getMockHandler();</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public void resetMock(Object mock, MockHandler newHandler, MockCreationSettings settings) {</b>
+&nbsp;        ((MockAccess)mock).setMockitoInterceptor(new MockMethodInterceptor(newHandler, settings));
+&nbsp;    }
+&nbsp;
+&nbsp;    public MockMaker.TypeMockability isTypeMockable(final Class&lt;?&gt; type) {
+&nbsp;        return new MockMaker.TypeMockability() {
+&nbsp;            public boolean mockable() {
+&nbsp;                return !type.isPrimitive() &amp;&amp; !Modifier.isFinal(type.getModifiers()) &amp;&amp; !TypeSupport.INSTANCE.isSealed(type);
+&nbsp;            }
+&nbsp;
+&nbsp;            public String nonMockableReason() {
+<b class="fc">&nbsp;                if (this.mockable()) {</b>
+<b class="fc">&nbsp;                    return &quot;&quot;;</b>
+&nbsp;                } else if (type.isPrimitive()) {
+&nbsp;                    return &quot;primitive type&quot;;
+&nbsp;                } else if (Modifier.isFinal(type.getModifiers())) {
+&nbsp;                    return &quot;final class&quot;;
+&nbsp;                } else {
+&nbsp;                    return TypeSupport.INSTANCE.isSealed(type) ? &quot;sealed class&quot; : StringUtil.join(new Object[]{&quot;not handled type&quot;});
+&nbsp;                }
+&nbsp;            }
+&nbsp;        };
+&nbsp;    }
+&nbsp;
+&nbsp;    public void clearAllCaches() {
+&nbsp;        this.cachingMockBytecodeGenerator.clearAllCaches();
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

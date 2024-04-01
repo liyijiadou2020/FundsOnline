@@ -1,0 +1,148 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > FilterAttachableImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ch.qos.logback.core.spi</a>
+</div>
+
+<h1>Coverage Summary for Class: FilterAttachableImpl (ch.qos.logback.core.spi)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FilterAttachableImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package ch.qos.logback.core.spi;
+&nbsp;
+&nbsp;import ch.qos.logback.core.filter.Filter;
+&nbsp;import ch.qos.logback.core.util.COWArrayList;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public final class FilterAttachableImpl&lt;E&gt; implements FilterAttachable&lt;E&gt; {
+&nbsp;    COWArrayList&lt;Filter&lt;E&gt;&gt; filterList = new COWArrayList(new Filter[0]);
+&nbsp;
+&nbsp;    public FilterAttachableImpl() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addFilter(Filter&lt;E&gt; newFilter) {
+&nbsp;        this.filterList.add(newFilter);
+&nbsp;    }
+&nbsp;
+&nbsp;    public void clearAllFilters() {
+&nbsp;        this.filterList.clear();
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public FilterReply getFilterChainDecision(E event) {
+<b class="fc">&nbsp;        Filter&lt;E&gt;[] filterArrray = (Filter[])this.filterList.asTypedArray();</b>
+&nbsp;        int len = filterArrray.length;
+&nbsp;
+&nbsp;        for(int i = 0; i &lt; len; ++i) {
+&nbsp;            FilterReply r = filterArrray[i].decide(event);
+&nbsp;            if (r == FilterReply.DENY || r == FilterReply.ACCEPT) {
+&nbsp;                return r;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return FilterReply.NEUTRAL;
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;Filter&lt;E&gt;&gt; getCopyOfAttachedFiltersList() {
+&nbsp;        return new ArrayList(this.filterList);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

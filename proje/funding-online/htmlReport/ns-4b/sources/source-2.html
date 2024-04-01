@@ -1,0 +1,371 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ArgumentMatchers</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito</a>
+</div>
+
+<h1>Coverage Summary for Class: ArgumentMatchers (org.mockito)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ArgumentMatchers</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.regex.Pattern;
+&nbsp;import org.mockito.internal.matchers.Any;
+&nbsp;import org.mockito.internal.matchers.Contains;
+&nbsp;import org.mockito.internal.matchers.EndsWith;
+&nbsp;import org.mockito.internal.matchers.Equals;
+&nbsp;import org.mockito.internal.matchers.InstanceOf;
+&nbsp;import org.mockito.internal.matchers.Matches;
+&nbsp;import org.mockito.internal.matchers.NotNull;
+&nbsp;import org.mockito.internal.matchers.Null;
+&nbsp;import org.mockito.internal.matchers.Same;
+&nbsp;import org.mockito.internal.matchers.StartsWith;
+&nbsp;import org.mockito.internal.matchers.apachecommons.ReflectionEquals;
+&nbsp;import org.mockito.internal.progress.ThreadSafeMockingProgress;
+&nbsp;import org.mockito.internal.util.Primitives;
+&nbsp;
+&nbsp;@CheckReturnValue
+&nbsp;public class ArgumentMatchers {
+&nbsp;    public ArgumentMatchers() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T any() {
+&nbsp;        reportMatcher(Any.ANY);
+&nbsp;        return null;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T any(Class&lt;T&gt; type) {
+&nbsp;        reportMatcher(new InstanceOf.VarArgAware(type, &quot;&lt;any &quot; + type.getCanonicalName() + &quot;&gt;&quot;));
+&nbsp;        return Primitives.defaultValue(type);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T isA(Class&lt;T&gt; type) {
+&nbsp;        reportMatcher(new InstanceOf(type));
+&nbsp;        return Primitives.defaultValue(type);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean anyBoolean() {
+&nbsp;        reportMatcher(new InstanceOf(Boolean.class, &quot;&lt;any boolean&gt;&quot;));
+&nbsp;        return false;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static byte anyByte() {
+&nbsp;        reportMatcher(new InstanceOf(Byte.class, &quot;&lt;any byte&gt;&quot;));
+&nbsp;        return 0;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static char anyChar() {
+&nbsp;        reportMatcher(new InstanceOf(Character.class, &quot;&lt;any char&gt;&quot;));
+&nbsp;        return &#39;\u0000&#39;;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int anyInt() {
+&nbsp;        reportMatcher(new InstanceOf(Integer.class, &quot;&lt;any integer&gt;&quot;));
+&nbsp;        return 0;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static long anyLong() {
+&nbsp;        reportMatcher(new InstanceOf(Long.class, &quot;&lt;any long&gt;&quot;));
+&nbsp;        return 0L;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static float anyFloat() {
+&nbsp;        reportMatcher(new InstanceOf(Float.class, &quot;&lt;any float&gt;&quot;));
+&nbsp;        return 0.0F;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static double anyDouble() {
+&nbsp;        reportMatcher(new InstanceOf(Double.class, &quot;&lt;any double&gt;&quot;));
+&nbsp;        return 0.0;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static short anyShort() {
+&nbsp;        reportMatcher(new InstanceOf(Short.class, &quot;&lt;any short&gt;&quot;));
+&nbsp;        return 0;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String anyString() {
+&nbsp;        reportMatcher(new InstanceOf(String.class, &quot;&lt;any string&gt;&quot;));
+&nbsp;        return &quot;&quot;;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; List&lt;T&gt; anyList() {
+&nbsp;        reportMatcher(new InstanceOf(List.class, &quot;&lt;any List&gt;&quot;));
+&nbsp;        return new ArrayList(0);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; Set&lt;T&gt; anySet() {
+&nbsp;        reportMatcher(new InstanceOf(Set.class, &quot;&lt;any set&gt;&quot;));
+&nbsp;        return new HashSet(0);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;K, V&gt; Map&lt;K, V&gt; anyMap() {
+&nbsp;        reportMatcher(new InstanceOf(Map.class, &quot;&lt;any map&gt;&quot;));
+&nbsp;        return new HashMap(0);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; Collection&lt;T&gt; anyCollection() {
+&nbsp;        reportMatcher(new InstanceOf(Collection.class, &quot;&lt;any collection&gt;&quot;));
+&nbsp;        return new ArrayList(0);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; Iterable&lt;T&gt; anyIterable() {
+&nbsp;        reportMatcher(new InstanceOf(Iterable.class, &quot;&lt;any iterable&gt;&quot;));
+&nbsp;        return new ArrayList(0);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean eq(boolean value) {
+&nbsp;        reportMatcher(new Equals(value));
+&nbsp;        return false;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static byte eq(byte value) {
+&nbsp;        reportMatcher(new Equals(value));
+&nbsp;        return 0;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static char eq(char value) {
+&nbsp;        reportMatcher(new Equals(value));
+&nbsp;        return &#39;\u0000&#39;;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static double eq(double value) {
+&nbsp;        reportMatcher(new Equals(value));
+&nbsp;        return 0.0;
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public static float eq(float value) {
+&nbsp;        reportMatcher(new Equals(value));
+&nbsp;        return 0.0F;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int eq(int value) {
+&nbsp;        reportMatcher(new Equals(value));
+&nbsp;        return 0;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static long eq(long value) {
+&nbsp;        reportMatcher(new Equals(value));
+&nbsp;        return 0L;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static short eq(short value) {
+&nbsp;        reportMatcher(new Equals(value));
+&nbsp;        return 0;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T eq(T value) {
+&nbsp;        reportMatcher(new Equals(value));
+&nbsp;        return value == null ? null : Primitives.defaultValue(value.getClass());
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T refEq(T value, String... excludeFields) {
+&nbsp;        reportMatcher(new ReflectionEquals(value, excludeFields));
+&nbsp;        return null;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T same(T value) {
+&nbsp;        reportMatcher(new Same(value));
+&nbsp;        return value == null ? null : Primitives.defaultValue(value.getClass());
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T isNull() {
+<b class="fc">&nbsp;        reportMatcher(Null.NULL);</b>
+<b class="fc">&nbsp;        return null;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T notNull() {
+&nbsp;        reportMatcher(NotNull.NOT_NULL);
+&nbsp;        return null;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T isNotNull() {
+&nbsp;        return notNull();
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T nullable(Class&lt;T&gt; clazz) {
+&nbsp;        AdditionalMatchers.or(isNull(), isA(clazz));
+&nbsp;        return Primitives.defaultValue(clazz);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String contains(String substring) {
+&nbsp;        reportMatcher(new Contains(substring));
+&nbsp;        return &quot;&quot;;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String matches(String regex) {
+&nbsp;        reportMatcher(new Matches(regex));
+&nbsp;        return &quot;&quot;;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String matches(Pattern pattern) {
+&nbsp;        reportMatcher(new Matches(pattern));
+&nbsp;        return &quot;&quot;;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String endsWith(String suffix) {
+&nbsp;        reportMatcher(new EndsWith(suffix));
+&nbsp;        return &quot;&quot;;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static String startsWith(String prefix) {
+&nbsp;        reportMatcher(new StartsWith(prefix));
+&nbsp;        return &quot;&quot;;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T argThat(ArgumentMatcher&lt;T&gt; matcher) {
+&nbsp;        reportMatcher(matcher);
+&nbsp;        return null;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static char charThat(ArgumentMatcher&lt;Character&gt; matcher) {
+&nbsp;        reportMatcher(matcher);
+&nbsp;        return &#39;\u0000&#39;;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean booleanThat(ArgumentMatcher&lt;Boolean&gt; matcher) {
+&nbsp;        reportMatcher(matcher);
+&nbsp;        return false;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static byte byteThat(ArgumentMatcher&lt;Byte&gt; matcher) {
+&nbsp;        reportMatcher(matcher);
+&nbsp;        return 0;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static short shortThat(ArgumentMatcher&lt;Short&gt; matcher) {
+&nbsp;        reportMatcher(matcher);
+&nbsp;        return 0;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static int intThat(ArgumentMatcher&lt;Integer&gt; matcher) {
+&nbsp;        reportMatcher(matcher);
+&nbsp;        return 0;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static long longThat(ArgumentMatcher&lt;Long&gt; matcher) {
+&nbsp;        reportMatcher(matcher);
+&nbsp;        return 0L;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static float floatThat(ArgumentMatcher&lt;Float&gt; matcher) {
+&nbsp;        reportMatcher(matcher);
+&nbsp;        return 0.0F;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static double doubleThat(ArgumentMatcher&lt;Double&gt; matcher) {
+&nbsp;        reportMatcher(matcher);
+&nbsp;        return 0.0;
+&nbsp;    }
+&nbsp;
+&nbsp;    private static void reportMatcher(ArgumentMatcher&lt;?&gt; matcher) {
+&nbsp;        ThreadSafeMockingProgress.mockingProgress().getArgumentMatcherStorage().reportMatcher(matcher);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

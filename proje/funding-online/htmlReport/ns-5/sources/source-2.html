@@ -1,0 +1,187 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > LoggerContextVO</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ch.qos.logback.classic.spi</a>
+</div>
+
+<h1>Coverage Summary for Class: LoggerContextVO (ch.qos.logback.classic.spi)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoggerContextVO</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package ch.qos.logback.classic.spi;
+&nbsp;
+&nbsp;import ch.qos.logback.classic.LoggerContext;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;public class LoggerContextVO implements Serializable {
+&nbsp;    private static final long serialVersionUID = 5488023392483144387L;
+&nbsp;    final String name;
+&nbsp;    final Map&lt;String, String&gt; propertyMap;
+&nbsp;    final long birthTime;
+&nbsp;
+&nbsp;    public LoggerContextVO(LoggerContext lc) {
+&nbsp;        this.name = lc.getName();
+&nbsp;        this.propertyMap = lc.getCopyOfPropertyMap();
+&nbsp;        this.birthTime = lc.getBirthTime();
+&nbsp;    }
+&nbsp;
+&nbsp;    public LoggerContextVO(String name, Map&lt;String, String&gt; propertyMap, long birthTime) {
+&nbsp;        this.name = name;
+&nbsp;        this.propertyMap = propertyMap;
+&nbsp;        this.birthTime = birthTime;
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getName() {
+&nbsp;        return this.name;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;String, String&gt; getPropertyMap() {
+&nbsp;        return this.propertyMap;
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getBirthTime() {
+&nbsp;        return this.birthTime;
+&nbsp;    }
+&nbsp;
+&nbsp;    public String toString() {
+<b class="fc">&nbsp;        return &quot;LoggerContextVO{name=&#39;&quot; + this.name + &#39;\&#39;&#39; + &quot;, propertyMap=&quot; + this.propertyMap + &quot;, birthTime=&quot; + this.birthTime + &#39;}&#39;;</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public boolean equals(Object o) {</b>
+&nbsp;        if (this == o) {
+&nbsp;            return true;
+&nbsp;        } else if (!(o instanceof LoggerContextVO)) {
+&nbsp;            return false;
+&nbsp;        } else {
+&nbsp;            LoggerContextVO that = (LoggerContextVO)o;
+&nbsp;            if (this.birthTime != that.birthTime) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                if (this.name != null) {
+&nbsp;                    if (!this.name.equals(that.name)) {
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;                } else if (that.name != null) {
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;
+&nbsp;                if (this.propertyMap != null) {
+&nbsp;                    if (!this.propertyMap.equals(that.propertyMap)) {
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;                } else if (that.propertyMap != null) {
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;
+&nbsp;                return true;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public int hashCode() {
+&nbsp;        int result = this.name != null ? this.name.hashCode() : 0;
+&nbsp;        result = 31 * result + (this.propertyMap != null ? this.propertyMap.hashCode() : 0);
+&nbsp;        result = 31 * result + (int)(this.birthTime ^ this.birthTime &gt;&gt;&gt; 32);
+&nbsp;        return result;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

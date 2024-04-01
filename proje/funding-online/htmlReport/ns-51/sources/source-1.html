@@ -1,0 +1,163 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > NameBasedCandidateFilter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.configuration.injection.filter</a>
+</div>
+
+<h1>Coverage Summary for Class: NameBasedCandidateFilter (org.mockito.internal.configuration.injection.filter)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NameBasedCandidateFilter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.configuration.injection.filter;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import org.mockito.internal.util.MockUtil;
+&nbsp;
+&nbsp;public class NameBasedCandidateFilter implements MockCandidateFilter {
+<b class="fc">&nbsp;    private final MockCandidateFilter next;</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public NameBasedCandidateFilter(MockCandidateFilter next) {
+&nbsp;        this.next = next;
+&nbsp;    }
+&nbsp;
+&nbsp;    public OngoingInjector filterCandidate(Collection&lt;Object&gt; mocks, Field candidateFieldToBeInjected, List&lt;Field&gt; allRemainingCandidateFields, Object injectee) {
+&nbsp;        return mocks.size() == 1 &amp;&amp; this.anotherCandidateMatchesMockName(mocks, candidateFieldToBeInjected, allRemainingCandidateFields) ? OngoingInjector.nop : this.next.filterCandidate((Collection)(this.tooMany(mocks) ? this.selectMatchingName(mocks, candidateFieldToBeInjected) : mocks), candidateFieldToBeInjected, allRemainingCandidateFields, injectee);
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private boolean tooMany(Collection&lt;Object&gt; mocks) {</b>
+<b class="fc">&nbsp;        return mocks.size() &gt; 1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private List&lt;Object&gt; selectMatchingName(Collection&lt;Object&gt; mocks, Field candidateFieldToBeInjected) {
+&nbsp;        List&lt;Object&gt; mockNameMatches = new ArrayList();
+<b class="fc">&nbsp;        Iterator var4 = mocks.iterator();</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        while(var4.hasNext()) {
+&nbsp;            Object mock = var4.next();
+&nbsp;            if (candidateFieldToBeInjected.getName().equals(MockUtil.getMockName(mock).toString())) {
+&nbsp;                mockNameMatches.add(mock);
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        return mockNameMatches;
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean anotherCandidateMatchesMockName(Collection&lt;Object&gt; mocks, Field candidateFieldToBeInjected, List&lt;Field&gt; allRemainingCandidateFields) {
+&nbsp;        String mockName = MockUtil.getMockName(mocks.iterator().next()).toString();
+&nbsp;        Iterator var5 = allRemainingCandidateFields.iterator();
+&nbsp;
+&nbsp;        Field otherCandidateField;
+&nbsp;        do {
+&nbsp;            if (!var5.hasNext()) {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;
+&nbsp;            otherCandidateField = (Field)var5.next();
+&nbsp;        } while(otherCandidateField.equals(candidateFieldToBeInjected) || !otherCandidateField.getType().equals(candidateFieldToBeInjected.getType()) || !otherCandidateField.getName().equals(mockName));
+&nbsp;
+&nbsp;        return true;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

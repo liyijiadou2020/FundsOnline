@@ -1,0 +1,186 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > DynamicConverter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ch.qos.logback.core.pattern</a>
+</div>
+
+<h1>Coverage Summary for Class: DynamicConverter (ch.qos.logback.core.pattern)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DynamicConverter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package ch.qos.logback.core.pattern;
+&nbsp;
+&nbsp;import ch.qos.logback.core.Context;
+&nbsp;import ch.qos.logback.core.spi.ContextAware;
+&nbsp;import ch.qos.logback.core.spi.ContextAwareBase;
+&nbsp;import ch.qos.logback.core.spi.LifeCycle;
+&nbsp;import ch.qos.logback.core.status.Status;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public abstract class DynamicConverter&lt;E&gt; extends FormattingConverter&lt;E&gt; implements LifeCycle, ContextAware {
+&nbsp;    ContextAwareBase cab = new ContextAwareBase(this);
+&nbsp;    private List&lt;String&gt; optionList;
+&nbsp;    protected boolean started = false;
+&nbsp;
+&nbsp;    public DynamicConverter() {
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public void start() {</b>
+&nbsp;        this.started = true;
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void stop() {
+&nbsp;        this.started = false;
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isStarted() {
+&nbsp;        return this.started;
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void setOptionList(List&lt;String&gt; optionList) {
+&nbsp;        this.optionList = optionList;
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getFirstOption() {
+&nbsp;        return this.optionList != null &amp;&amp; this.optionList.size() != 0 ? (String)this.optionList.get(0) : null;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    protected List&lt;String&gt; getOptionList() {
+&nbsp;        return this.optionList;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setContext(Context context) {
+&nbsp;        this.cab.setContext(context);
+&nbsp;    }
+&nbsp;
+&nbsp;    public Context getContext() {
+&nbsp;        return this.cab.getContext();
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addStatus(Status status) {
+&nbsp;        this.cab.addStatus(status);
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addInfo(String msg) {
+&nbsp;        this.cab.addInfo(msg);
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addInfo(String msg, Throwable ex) {
+<b class="fc">&nbsp;        this.cab.addInfo(msg, ex);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void addWarn(String msg) {
+&nbsp;        this.cab.addWarn(msg);
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addWarn(String msg, Throwable ex) {
+<b class="fc">&nbsp;        this.cab.addWarn(msg, ex);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addError(String msg) {
+&nbsp;        this.cab.addError(msg);
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addError(String msg, Throwable ex) {
+&nbsp;        this.cab.addError(msg, ex);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:49</div>
+</div>
+</body>
+</html>

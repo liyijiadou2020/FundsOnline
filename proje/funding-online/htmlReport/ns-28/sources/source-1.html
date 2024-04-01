@@ -1,0 +1,1114 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > FieldAccessor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation</a>
+</div>
+
+<h1>Coverage Summary for Class: FieldAccessor (net.bytebuddy.implementation)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FieldAccessor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">FieldAccessor$FieldLocation$Relative</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldAccessor$FieldLocation$Relative$Prepared</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldAccessor$FieldNameExtractor$ForBeanProperty</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldAccessor$ForImplicitProperty</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">FieldAccessor$ForImplicitProperty$Appender</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (20/20)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (49/49)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.ValueHandling;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.ValueHandling.Sort;
+&nbsp;import net.bytebuddy.description.field.FieldDescription;
+&nbsp;import net.bytebuddy.description.field.FieldList;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.method.ParameterDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.ForLoadedType;
+&nbsp;import net.bytebuddy.dynamic.scaffold.FieldLocator;
+&nbsp;import net.bytebuddy.dynamic.scaffold.InstrumentedType;
+&nbsp;import net.bytebuddy.dynamic.scaffold.FieldLocator.ForClassHierarchy.Factory;
+&nbsp;import net.bytebuddy.implementation.bytecode.ByteCodeAppender;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation.Trivial;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.Assigner;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.Assigner.Typing;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.ClassConstant;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.DefaultValue;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.DoubleConstant;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.FloatConstant;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.IntegerConstant;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.JavaConstantValue;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.LongConstant;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.TextConstant;
+&nbsp;import net.bytebuddy.implementation.bytecode.member.FieldAccess;
+&nbsp;import net.bytebuddy.implementation.bytecode.member.MethodReturn;
+&nbsp;import net.bytebuddy.implementation.bytecode.member.MethodVariableAccess;
+&nbsp;import net.bytebuddy.jar.asm.MethodVisitor;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;import net.bytebuddy.utility.JavaConstant;
+&nbsp;import net.bytebuddy.utility.JavaType;
+&nbsp;import net.bytebuddy.utility.RandomString;
+&nbsp;import net.bytebuddy.utility.JavaConstant.MethodHandle;
+&nbsp;import net.bytebuddy.utility.JavaConstant.MethodType;
+&nbsp;
+&nbsp;@Enhance
+&nbsp;public abstract class FieldAccessor implements Implementation {
+&nbsp;    protected final FieldLocation fieldLocation;
+&nbsp;    protected final Assigner assigner;
+&nbsp;    protected final Assigner.Typing typing;
+&nbsp;
+&nbsp;    protected FieldAccessor(FieldLocation fieldLocation, Assigner assigner, Assigner.Typing typing) {
+&nbsp;        this.fieldLocation = fieldLocation;
+&nbsp;        this.assigner = assigner;
+&nbsp;        this.typing = typing;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static OwnerTypeLocatable ofField(String name) {
+&nbsp;        return of((FieldNameExtractor)(new FieldNameExtractor.ForFixedValue(name)));
+&nbsp;    }
+&nbsp;
+&nbsp;    public static OwnerTypeLocatable ofBeanProperty() {
+&nbsp;        return of((FieldNameExtractor)FieldAccessor.FieldNameExtractor.ForBeanProperty.INSTANCE);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static OwnerTypeLocatable of(FieldNameExtractor fieldNameExtractor) {
+&nbsp;        return new ForImplicitProperty(new FieldLocation.Relative(fieldNameExtractor));
+&nbsp;    }
+&nbsp;
+&nbsp;    public static AssignerConfigurable of(Field field) {
+&nbsp;        return of((FieldDescription)(new FieldDescription.ForLoadedField(field)));
+&nbsp;    }
+&nbsp;
+&nbsp;    public static AssignerConfigurable of(FieldDescription fieldDescription) {
+&nbsp;        return new ForImplicitProperty(new FieldLocation.Absolute(fieldDescription));
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean equals(Object var1) {
+&nbsp;        if (this == var1) {
+&nbsp;            return true;
+&nbsp;        } else if (var1 == null) {
+&nbsp;            return false;
+&nbsp;        } else if (this.getClass() != var1.getClass()) {
+<b class="fc">&nbsp;            return false;</b>
+<b class="fc">&nbsp;        } else if (!this.typing.equals(((FieldAccessor)var1).typing)) {</b>
+<b class="fc">&nbsp;            return false;</b>
+<b class="fc">&nbsp;        } else if (!this.fieldLocation.equals(((FieldAccessor)var1).fieldLocation)) {</b>
+&nbsp;            return false;
+&nbsp;        } else {
+&nbsp;            return this.assigner.equals(((FieldAccessor)var1).assigner);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public int hashCode() {
+&nbsp;        return ((this.getClass().hashCode() * 31 + this.fieldLocation.hashCode()) * 31 + this.assigner.hashCode()) * 31 + this.typing.hashCode();
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    protected abstract static class ForSetter&lt;T&gt; extends FieldAccessor implements Implementation.Composable {
+&nbsp;        private final TerminationHandler terminationHandler;
+&nbsp;
+&nbsp;        protected ForSetter(FieldLocation fieldLocation, Assigner assigner, Assigner.Typing typing, TerminationHandler terminationHandler) {
+&nbsp;            super(fieldLocation, assigner, typing);
+&nbsp;            this.terminationHandler = terminationHandler;
+&nbsp;        }
+&nbsp;
+&nbsp;        public ByteCodeAppender appender(Implementation.Target implementationTarget) {
+<b class="fc">&nbsp;            return new Appender(implementationTarget.getInstrumentedType(), this.initialize(implementationTarget.getInstrumentedType()), this.fieldLocation.prepare(implementationTarget.getInstrumentedType()));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        protected abstract T initialize(TypeDescription var1);
+&nbsp;
+&nbsp;        protected abstract StackManipulation resolve(@Nonnull(when = When.MAYBE) T var1, FieldDescription var2, TypeDescription var3, MethodDescription var4);
+&nbsp;
+<b class="fc">&nbsp;        public boolean equals(Object var1) {</b>
+&nbsp;            if (!super.equals(var1)) {
+&nbsp;                return false;
+&nbsp;            } else if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.terminationHandler.equals(((ForSetter)var1).terminationHandler);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return super.hashCode() * 31 + this.terminationHandler.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance(
+&nbsp;            includeSyntheticFields = true
+&nbsp;        )
+&nbsp;        protected class Appender implements ByteCodeAppender {
+&nbsp;            private final TypeDescription instrumentedType;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            @ValueHandling(Sort.REVERSE_NULLABILITY)
+&nbsp;            private final T initialized;
+&nbsp;            private final FieldLocation.Prepared fieldLocation;
+&nbsp;
+&nbsp;            protected Appender(TypeDescription instrumentedType, @Nonnull(when = When.MAYBE) T initialized, FieldLocation.Prepared fieldLocation) {
+&nbsp;                this.instrumentedType = instrumentedType;
+&nbsp;                this.initialized = initialized;
+&nbsp;                this.fieldLocation = fieldLocation;
+&nbsp;            }
+&nbsp;
+&nbsp;            public ByteCodeAppender.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext, MethodDescription instrumentedMethod) {
+&nbsp;                FieldDescription fieldDescription = this.fieldLocation.resolve(instrumentedMethod);
+&nbsp;                if (!fieldDescription.isStatic() &amp;&amp; instrumentedMethod.isStatic()) {
+&nbsp;                    throw new IllegalStateException(&quot;Cannot set instance field &quot; + fieldDescription + &quot; from &quot; + instrumentedMethod);
+&nbsp;                } else if (fieldDescription.isFinal() &amp;&amp; instrumentedMethod.isMethod()) {
+&nbsp;                    throw new IllegalStateException(&quot;Cannot set final field &quot; + fieldDescription + &quot; from &quot; + instrumentedMethod);
+&nbsp;                } else {
+&nbsp;                    StackManipulation stackManipulation = ForSetter.this.resolve(this.initialized, fieldDescription, this.instrumentedType, instrumentedMethod);
+&nbsp;                    if (!stackManipulation.isValid()) {
+&nbsp;                        throw new IllegalStateException(&quot;Set value cannot be assigned to &quot; + fieldDescription);
+&nbsp;                    } else {
+&nbsp;                        return new ByteCodeAppender.Size((new StackManipulation.Compound(new StackManipulation[]{(StackManipulation)(instrumentedMethod.isStatic() ? Trivial.INSTANCE : MethodVariableAccess.loadThis()), stackManipulation, FieldAccess.forField(fieldDescription).write(), ForSetter.this.terminationHandler.resolve(instrumentedMethod)})).apply(methodVisitor, implementationContext).getMaximalSize(), instrumentedMethod.getStackSize());
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.instrumentedType.equals(((Appender)var1).instrumentedType)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    label36: {
+&nbsp;                        Object var2 = ((Appender)var1).initialized;
+&nbsp;                        Object var3 = this.initialized;
+&nbsp;                        if (var2 != null) {
+&nbsp;                            if (var3 != null) {
+&nbsp;                                if (!var3.equals(var2)) {
+&nbsp;                                    return false;
+&nbsp;                                }
+&nbsp;                                break label36;
+&nbsp;                            }
+&nbsp;                        } else if (var3 == null) {
+&nbsp;                            break label36;
+&nbsp;                        }
+&nbsp;
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (!this.fieldLocation.equals(((Appender)var1).fieldLocation)) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return ForSetter.this.equals(ForSetter.this);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                int var10000 = (this.getClass().hashCode() * 31 + this.instrumentedType.hashCode()) * 31;
+&nbsp;                Object var1 = this.initialized;
+&nbsp;                if (var1 != null) {
+&nbsp;                    var10000 += var1.hashCode();
+&nbsp;                }
+&nbsp;
+&nbsp;                return (var10000 * 31 + this.fieldLocation.hashCode()) * 31 + ForSetter.this.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        protected static class OfFieldValue extends ForSetter&lt;FieldLocation.Prepared&gt; {
+&nbsp;            private final FieldLocation target;
+&nbsp;
+&nbsp;            protected OfFieldValue(FieldLocation fieldLocation, Assigner assigner, Assigner.Typing typing, TerminationHandler terminationHandler, FieldLocation target) {
+&nbsp;                super(fieldLocation, assigner, typing, terminationHandler);
+&nbsp;                this.target = target;
+&nbsp;            }
+&nbsp;
+&nbsp;            public InstrumentedType prepare(InstrumentedType instrumentedType) {
+&nbsp;                return instrumentedType;
+&nbsp;            }
+&nbsp;
+&nbsp;            protected FieldLocation.Prepared initialize(TypeDescription instrumentedType) {
+&nbsp;                return this.target.prepare(instrumentedType);
+&nbsp;            }
+&nbsp;
+&nbsp;            @SuppressFBWarnings(
+&nbsp;                value = {&quot;NP_PARAMETER_MUST_BE_NONNULL_BUT_MARKED_AS_NULLABLE&quot;},
+&nbsp;                justification = &quot;Expects its own initialized value as argument&quot;
+&nbsp;            )
+&nbsp;            protected StackManipulation resolve(@Nonnull(when = When.MAYBE) FieldLocation.Prepared target, FieldDescription fieldDescription, TypeDescription instrumentedType, MethodDescription instrumentedMethod) {
+&nbsp;                FieldDescription resolved = target.resolve(instrumentedMethod);
+&nbsp;                if (!resolved.isStatic() &amp;&amp; instrumentedMethod.isStatic()) {
+&nbsp;                    throw new IllegalStateException(&quot;Cannot set instance field &quot; + fieldDescription + &quot; from &quot; + instrumentedMethod);
+&nbsp;                } else {
+&nbsp;                    return new StackManipulation.Compound(new StackManipulation[]{(StackManipulation)(resolved.isStatic() ? Trivial.INSTANCE : MethodVariableAccess.loadThis()), FieldAccess.forField(resolved).read(), this.assigner.assign(resolved.getType(), fieldDescription.getType(), this.typing)});
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            public Implementation andThen(Implementation implementation) {</b>
+&nbsp;                return new Implementation.Compound(new Implementation[]{new OfFieldValue(this.fieldLocation, this.assigner, this.typing, FieldAccessor.ForSetter.TerminationHandler.NON_OPERATIONAL, this.target), implementation});
+&nbsp;            }
+&nbsp;
+&nbsp;            public Implementation.Composable andThen(Implementation.Composable implementation) {
+&nbsp;                return new Implementation.Compound.Composable(new OfFieldValue(this.fieldLocation, this.assigner, this.typing, FieldAccessor.ForSetter.TerminationHandler.NON_OPERATIONAL, this.target), implementation);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+<b class="fc">&nbsp;                if (!super.equals(var1)) {</b>
+<b class="fc">&nbsp;                    return false;</b>
+<b class="fc">&nbsp;                } else if (this == var1) {</b>
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.target.equals(((OfFieldValue)var1).target);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return super.hashCode() * 31 + this.target.hashCode();
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        protected static class OfReferenceValue extends ForSetter&lt;FieldDescription.InDefinedShape&gt; {
+&nbsp;            protected static final String PREFIX = &quot;fixedFieldValue&quot;;
+&nbsp;            private final Object value;
+&nbsp;            private final String name;
+&nbsp;
+&nbsp;            protected OfReferenceValue(FieldLocation fieldLocation, Assigner assigner, Assigner.Typing typing, TerminationHandler terminationHandler, Object value, String name) {
+&nbsp;                super(fieldLocation, assigner, typing, terminationHandler);
+&nbsp;                this.value = value;
+&nbsp;                this.name = name;
+&nbsp;            }
+&nbsp;
+&nbsp;            public InstrumentedType prepare(InstrumentedType instrumentedType) {
+&nbsp;                return instrumentedType.withAuxiliaryField(new FieldDescription.Token(this.name, 4105, ForLoadedType.of(this.value.getClass()).asGenericType()), this.value);
+&nbsp;            }
+&nbsp;
+&nbsp;            protected FieldDescription.InDefinedShape initialize(TypeDescription instrumentedType) {
+&nbsp;                return (FieldDescription.InDefinedShape)((FieldList)instrumentedType.getDeclaredFields().filter(ElementMatchers.named(this.name))).getOnly();
+&nbsp;            }
+&nbsp;
+&nbsp;            @SuppressFBWarnings(
+&nbsp;                value = {&quot;NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE&quot;},
+&nbsp;                justification = &quot;Expects its own initialized value as argument&quot;
+<b class="fc">&nbsp;            )</b>
+<b class="fc">&nbsp;            protected StackManipulation resolve(@Nonnull(when = When.MAYBE) FieldDescription.InDefinedShape target, FieldDescription fieldDescription, TypeDescription instrumentedType, MethodDescription instrumentedMethod) {</b>
+<b class="fc">&nbsp;                if (fieldDescription.isFinal() &amp;&amp; instrumentedMethod.isMethod()) {</b>
+&nbsp;                    throw new IllegalArgumentException(&quot;Cannot set final field &quot; + fieldDescription + &quot; from &quot; + instrumentedMethod);
+&nbsp;                } else {
+&nbsp;                    return new StackManipulation.Compound(new StackManipulation[]{FieldAccess.forField(target).read(), this.assigner.assign(ForLoadedType.of(this.value.getClass()).asGenericType(), fieldDescription.getType(), this.typing)});
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            public Implementation andThen(Implementation implementation) {</b>
+<b class="fc">&nbsp;                return new Implementation.Compound(new Implementation[]{new OfReferenceValue(this.fieldLocation, this.assigner, this.typing, FieldAccessor.ForSetter.TerminationHandler.NON_OPERATIONAL, this.value, this.name), implementation});</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            public Implementation.Composable andThen(Implementation.Composable implementation) {</b>
+&nbsp;                return new Implementation.Compound.Composable(new OfReferenceValue(this.fieldLocation, this.assigner, this.typing, FieldAccessor.ForSetter.TerminationHandler.NON_OPERATIONAL, this.value, this.name), implementation);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (!super.equals(var1)) {
+&nbsp;                    return false;
+&nbsp;                } else if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.name.equals(((OfReferenceValue)var1).name)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.value.equals(((OfReferenceValue)var1).value);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return (super.hashCode() * 31 + this.value.hashCode()) * 31 + this.name.hashCode();
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        @Enhance
+&nbsp;        protected static class OfConstantValue extends ForSetter&lt;Void&gt; {
+&nbsp;            private final TypeDescription.Generic typeDescription;
+&nbsp;            private final StackManipulation stackManipulation;
+<b class="fc">&nbsp;</b>
+&nbsp;            protected OfConstantValue(FieldLocation fieldLocation, Assigner assigner, Assigner.Typing typing, TerminationHandler terminationHandler, TypeDescription.Generic typeDescription, StackManipulation stackManipulation) {
+&nbsp;                super(fieldLocation, assigner, typing, terminationHandler);
+&nbsp;                this.typeDescription = typeDescription;
+&nbsp;                this.stackManipulation = stackManipulation;
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+&nbsp;            public InstrumentedType prepare(InstrumentedType instrumentedType) {
+<b class="fc">&nbsp;                return instrumentedType;</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.NEVER
+&nbsp;            )
+&nbsp;            protected Void initialize(TypeDescription instrumentedType) {
+<b class="fc">&nbsp;                return null;</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            protected StackManipulation resolve(@Nonnull(when = When.MAYBE) Void unused, FieldDescription fieldDescription, TypeDescription instrumentedType, MethodDescription instrumentedMethod) {
+<b class="fc">&nbsp;                return new StackManipulation.Compound(new StackManipulation[]{this.stackManipulation, this.assigner.assign(this.typeDescription, fieldDescription.getType(), this.typing)});</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            public Implementation andThen(Implementation implementation) {
+&nbsp;                return new Implementation.Compound(new Implementation[]{new OfConstantValue(this.fieldLocation, this.assigner, this.typing, FieldAccessor.ForSetter.TerminationHandler.NON_OPERATIONAL, this.typeDescription, this.stackManipulation), implementation});
+&nbsp;            }
+&nbsp;
+&nbsp;            public Implementation.Composable andThen(Implementation.Composable implementation) {
+&nbsp;                return new Implementation.Compound.Composable(new OfConstantValue(this.fieldLocation, this.assigner, this.typing, FieldAccessor.ForSetter.TerminationHandler.NON_OPERATIONAL, this.typeDescription, this.stackManipulation), implementation);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (!super.equals(var1)) {
+&nbsp;                    return false;
+&nbsp;                } else if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.typeDescription.equals(((OfConstantValue)var1).typeDescription)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.stackManipulation.equals(((OfConstantValue)var1).stackManipulation);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return (super.hashCode() * 31 + this.typeDescription.hashCode()) * 31 + this.stackManipulation.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static class OfDefaultValue extends ForSetter&lt;Void&gt; {
+&nbsp;            protected OfDefaultValue(FieldLocation fieldLocation, Assigner assigner, Assigner.Typing typing, TerminationHandler terminationHandler) {
+&nbsp;                super(fieldLocation, assigner, typing, terminationHandler);
+&nbsp;            }
+&nbsp;
+&nbsp;            public InstrumentedType prepare(InstrumentedType instrumentedType) {
+&nbsp;                return instrumentedType;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.NEVER
+&nbsp;            )
+&nbsp;            protected Void initialize(TypeDescription instrumentedType) {
+&nbsp;                return null;
+&nbsp;            }
+&nbsp;
+&nbsp;            protected StackManipulation resolve(@Nonnull(when = When.MAYBE) Void initialized, FieldDescription fieldDescription, TypeDescription instrumentedType, MethodDescription instrumentedMethod) {
+&nbsp;                return DefaultValue.of(fieldDescription.getType());
+&nbsp;            }
+&nbsp;
+&nbsp;            public Implementation andThen(Implementation implementation) {
+&nbsp;                return new Implementation.Compound(new Implementation[]{new OfDefaultValue(this.fieldLocation, this.assigner, this.typing, FieldAccessor.ForSetter.TerminationHandler.NON_OPERATIONAL), implementation});
+&nbsp;            }
+&nbsp;
+&nbsp;            public Implementation.Composable andThen(Implementation.Composable implementation) {
+&nbsp;                return new Implementation.Compound.Composable(new OfDefaultValue(this.fieldLocation, this.assigner, this.typing, FieldAccessor.ForSetter.TerminationHandler.NON_OPERATIONAL), implementation);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        protected static class OfParameterValue extends ForSetter&lt;Void&gt; {
+&nbsp;            private final int index;
+&nbsp;
+&nbsp;            protected OfParameterValue(FieldLocation fieldLocation, Assigner assigner, Assigner.Typing typing, TerminationHandler terminationHandler, int index) {
+&nbsp;                super(fieldLocation, assigner, typing, terminationHandler);
+&nbsp;                this.index = index;
+&nbsp;            }
+&nbsp;
+&nbsp;            public InstrumentedType prepare(InstrumentedType instrumentedType) {
+&nbsp;                return instrumentedType;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.NEVER
+&nbsp;            )
+&nbsp;            protected Void initialize(TypeDescription instrumentedType) {
+&nbsp;                return null;
+&nbsp;            }
+&nbsp;
+&nbsp;            protected StackManipulation resolve(@Nonnull(when = When.MAYBE) Void unused, FieldDescription fieldDescription, TypeDescription instrumentedType, MethodDescription instrumentedMethod) {
+&nbsp;                if (instrumentedMethod.getParameters().size() &lt;= this.index) {
+&nbsp;                    throw new IllegalStateException(instrumentedMethod + &quot; does not define a parameter with index &quot; + this.index);
+&nbsp;                } else {
+&nbsp;                    return new StackManipulation.Compound(new StackManipulation[]{MethodVariableAccess.load((ParameterDescription)instrumentedMethod.getParameters().get(this.index)), this.assigner.assign(((ParameterDescription)instrumentedMethod.getParameters().get(this.index)).getType(), fieldDescription.getType(), this.typing)});
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public Implementation andThen(Implementation implementation) {
+&nbsp;                return new Implementation.Compound(new Implementation[]{new OfParameterValue(this.fieldLocation, this.assigner, this.typing, FieldAccessor.ForSetter.TerminationHandler.NON_OPERATIONAL, this.index), implementation});
+&nbsp;            }
+&nbsp;
+&nbsp;            public Implementation.Composable andThen(Implementation.Composable implementation) {
+&nbsp;                return new Implementation.Compound.Composable(new OfParameterValue(this.fieldLocation, this.assigner, this.typing, FieldAccessor.ForSetter.TerminationHandler.NON_OPERATIONAL, this.index), implementation);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (!super.equals(var1)) {
+&nbsp;                    return false;
+&nbsp;                } else if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.index == ((OfParameterValue)var1).index;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return super.hashCode() * 31 + this.index;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static enum TerminationHandler {
+&nbsp;            RETURNING {
+&nbsp;                protected StackManipulation resolve(MethodDescription instrumentedMethod) {
+&nbsp;                    if (!instrumentedMethod.getReturnType().represents(Void.TYPE)) {
+&nbsp;                        throw new IllegalStateException(&quot;Cannot implement setter with return value for &quot; + instrumentedMethod);
+&nbsp;                    } else {
+&nbsp;                        return MethodReturn.VOID;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            },
+&nbsp;            NON_OPERATIONAL {
+&nbsp;                protected StackManipulation resolve(MethodDescription instrumentedMethod) {
+&nbsp;                    return Trivial.INSTANCE;
+&nbsp;                }
+&nbsp;            };
+&nbsp;
+&nbsp;            private TerminationHandler() {
+&nbsp;            }
+&nbsp;
+&nbsp;            protected abstract StackManipulation resolve(MethodDescription var1);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static class ForImplicitProperty extends FieldAccessor implements OwnerTypeLocatable {
+&nbsp;        protected ForImplicitProperty(FieldLocation fieldLocation) {
+&nbsp;            this(fieldLocation, Assigner.DEFAULT, Typing.STATIC);
+&nbsp;        }
+&nbsp;
+&nbsp;        private ForImplicitProperty(FieldLocation fieldLocation, Assigner assigner, Assigner.Typing typing) {
+&nbsp;            super(fieldLocation, assigner, typing);
+&nbsp;        }
+&nbsp;
+&nbsp;        public InstrumentedType prepare(InstrumentedType instrumentedType) {
+&nbsp;            return instrumentedType;
+&nbsp;        }
+&nbsp;
+&nbsp;        public ByteCodeAppender appender(Implementation.Target implementationTarget) {
+&nbsp;            return new Appender(this.fieldLocation.prepare(implementationTarget.getInstrumentedType()));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Implementation.Composable setsArgumentAt(int index) {
+&nbsp;            if (index &lt; 0) {
+&nbsp;                throw new IllegalArgumentException(&quot;A parameter index cannot be negative: &quot; + index);
+&nbsp;            } else {
+&nbsp;                return new ForSetter.OfParameterValue(this.fieldLocation, this.assigner, this.typing, FieldAccessor.ForSetter.TerminationHandler.RETURNING, index);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public Implementation.Composable setsDefaultValue() {
+&nbsp;            return new ForSetter.OfDefaultValue(this.fieldLocation, this.assigner, this.typing, FieldAccessor.ForSetter.TerminationHandler.RETURNING);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Implementation.Composable setsValue(Object value) {
+&nbsp;            if (value == null) {
+&nbsp;                return this.setsDefaultValue();
+&nbsp;            } else {
+&nbsp;                Class&lt;?&gt; type = value.getClass();
+&nbsp;                if (type == String.class) {
+&nbsp;                    return this.setsValue(new TextConstant((String)value), (Type)String.class);
+&nbsp;                } else if (type == Class.class) {
+&nbsp;                    return this.setsValue(ClassConstant.of(ForLoadedType.of((Class)value)), (Type)Class.class);
+&nbsp;                } else if (type == Boolean.class) {
+&nbsp;                    return this.setsValue(IntegerConstant.forValue((Boolean)value), (Type)Boolean.TYPE);
+&nbsp;                } else if (type == Byte.class) {
+&nbsp;                    return this.setsValue(IntegerConstant.forValue((Byte)value), (Type)Byte.TYPE);
+&nbsp;                } else if (type == Short.class) {
+&nbsp;                    return this.setsValue(IntegerConstant.forValue((Short)value), (Type)Short.TYPE);
+&nbsp;                } else if (type == Character.class) {
+&nbsp;                    return this.setsValue(IntegerConstant.forValue((Character)value), (Type)Character.TYPE);
+&nbsp;                } else if (type == Integer.class) {
+&nbsp;                    return this.setsValue(IntegerConstant.forValue((Integer)value), (Type)Integer.TYPE);
+&nbsp;                } else if (type == Long.class) {
+&nbsp;                    return this.setsValue(LongConstant.forValue((Long)value), (Type)Long.TYPE);
+&nbsp;                } else if (type == Float.class) {
+&nbsp;                    return this.setsValue(FloatConstant.forValue((Float)value), (Type)Float.TYPE);
+&nbsp;                } else if (type == Double.class) {
+&nbsp;                    return this.setsValue(DoubleConstant.forValue((Double)value), (Type)Double.TYPE);
+&nbsp;                } else if (JavaType.METHOD_HANDLE.getTypeStub().isAssignableFrom(type)) {
+&nbsp;                    return this.setsValue(new JavaConstantValue(MethodHandle.ofLoaded(value)), (Type)type);
+&nbsp;                } else {
+&nbsp;                    return JavaType.METHOD_TYPE.getTypeStub().represents(type) ? this.setsValue(new JavaConstantValue(MethodType.ofLoaded(value)), (Type)type) : this.setsReference(value);
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public Implementation.Composable setsValue(TypeDescription typeDescription) {
+&nbsp;            return this.setsValue(ClassConstant.of(typeDescription), (Type)Class.class);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Implementation.Composable setsValue(JavaConstant constant) {
+&nbsp;            return this.setsValue(new JavaConstantValue(constant), (TypeDescription.Generic)constant.getTypeDescription().asGenericType());
+&nbsp;        }
+&nbsp;
+&nbsp;        public Implementation.Composable setsValue(StackManipulation stackManipulation, Type type) {
+&nbsp;            return this.setsValue(stackManipulation, net.bytebuddy.description.type.TypeDefinition.Sort.describe(type));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Implementation.Composable setsValue(StackManipulation stackManipulation, TypeDescription.Generic typeDescription) {
+&nbsp;            return new ForSetter.OfConstantValue(this.fieldLocation, this.assigner, this.typing, FieldAccessor.ForSetter.TerminationHandler.RETURNING, typeDescription, stackManipulation);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Implementation.Composable setsReference(Object value) {
+&nbsp;            return this.setsReference(value, &quot;fixedFieldValue$&quot; + RandomString.hashOf(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Implementation.Composable setsReference(Object value, String name) {
+&nbsp;            return new ForSetter.OfReferenceValue(this.fieldLocation, this.assigner, this.typing, FieldAccessor.ForSetter.TerminationHandler.RETURNING, value, name);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Implementation.Composable setsFieldValueOf(Field field) {
+&nbsp;            return this.setsFieldValueOf((FieldDescription)(new FieldDescription.ForLoadedField(field)));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Implementation.Composable setsFieldValueOf(FieldDescription fieldDescription) {
+&nbsp;            return new ForSetter.OfFieldValue(this.fieldLocation, this.assigner, this.typing, FieldAccessor.ForSetter.TerminationHandler.RETURNING, new FieldLocation.Absolute(fieldDescription));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Implementation.Composable setsFieldValueOf(String fieldName) {
+&nbsp;            return this.setsFieldValueOf((FieldNameExtractor)(new FieldNameExtractor.ForFixedValue(fieldName)));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Implementation.Composable setsFieldValueOf(FieldNameExtractor fieldNameExtractor) {
+&nbsp;            return new ForSetter.OfFieldValue(this.fieldLocation, this.assigner, this.typing, FieldAccessor.ForSetter.TerminationHandler.RETURNING, new FieldLocation.Relative(fieldNameExtractor));
+&nbsp;        }
+&nbsp;
+&nbsp;        public PropertyConfigurable withAssigner(Assigner assigner, Assigner.Typing typing) {
+&nbsp;            return new ForImplicitProperty(this.fieldLocation, assigner, typing);
+&nbsp;        }
+&nbsp;
+&nbsp;        public AssignerConfigurable in(Class&lt;?&gt; type) {
+&nbsp;            return this.in(ForLoadedType.of(type));
+&nbsp;        }
+&nbsp;
+&nbsp;        public AssignerConfigurable in(TypeDescription typeDescription) {
+&nbsp;            return this.in((FieldLocator.Factory)(new FieldLocator.ForExactType.Factory(typeDescription)));
+&nbsp;        }
+&nbsp;
+&nbsp;        public AssignerConfigurable in(FieldLocator.Factory fieldLocatorFactory) {
+&nbsp;            return new ForImplicitProperty(this.fieldLocation.with(fieldLocatorFactory), this.assigner, this.typing);
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance(
+&nbsp;            includeSyntheticFields = true
+&nbsp;        )
+&nbsp;        protected class Appender implements ByteCodeAppender {
+&nbsp;            private final FieldLocation.Prepared fieldLocation;
+&nbsp;
+&nbsp;            protected Appender(FieldLocation.Prepared fieldLocation) {
+&nbsp;                this.fieldLocation = fieldLocation;
+&nbsp;            }
+&nbsp;
+&nbsp;            public ByteCodeAppender.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext, MethodDescription instrumentedMethod) {
+&nbsp;                if (!instrumentedMethod.isMethod()) {
+&nbsp;                    throw new IllegalArgumentException(instrumentedMethod + &quot; does not describe a field getter or setter&quot;);
+&nbsp;                } else {
+&nbsp;                    FieldDescription fieldDescription = this.fieldLocation.resolve(instrumentedMethod);
+&nbsp;                    if (!fieldDescription.isStatic() &amp;&amp; instrumentedMethod.isStatic()) {
+&nbsp;                        throw new IllegalStateException(&quot;Cannot set instance field &quot; + fieldDescription + &quot; from &quot; + instrumentedMethod);
+<b class="fc">&nbsp;                    } else {</b>
+&nbsp;                        StackManipulation initialization = fieldDescription.isStatic() ? Trivial.INSTANCE : MethodVariableAccess.loadThis();
+&nbsp;                        StackManipulation.Compound implementation;
+&nbsp;                        if (!instrumentedMethod.getReturnType().represents(Void.TYPE)) {
+&nbsp;                            implementation = new StackManipulation.Compound(new StackManipulation[]{(StackManipulation)initialization, FieldAccess.forField(fieldDescription).read(), ForImplicitProperty.this.assigner.assign(fieldDescription.getType(), instrumentedMethod.getReturnType(), ForImplicitProperty.this.typing), MethodReturn.of(instrumentedMethod.getReturnType())});
+&nbsp;                        } else {
+&nbsp;                            if (!instrumentedMethod.getReturnType().represents(Void.TYPE) || instrumentedMethod.getParameters().size() != 1) {
+&nbsp;                                throw new IllegalArgumentException(&quot;Method &quot; + instrumentedMethod + &quot; is no bean accessor&quot;);
+&nbsp;                            }
+&nbsp;
+&nbsp;                            if (fieldDescription.isFinal() &amp;&amp; instrumentedMethod.isMethod()) {
+<b class="fc">&nbsp;                                throw new IllegalStateException(&quot;Cannot set final field &quot; + fieldDescription + &quot; from &quot; + instrumentedMethod);</b>
+&nbsp;                            }
+&nbsp;
+&nbsp;                            implementation = new StackManipulation.Compound(new StackManipulation[]{(StackManipulation)initialization, MethodVariableAccess.load((ParameterDescription)instrumentedMethod.getParameters().get(0)), ForImplicitProperty.this.assigner.assign(((ParameterDescription)instrumentedMethod.getParameters().get(0)).getType(), fieldDescription.getType(), ForImplicitProperty.this.typing), FieldAccess.forField(fieldDescription).write(), MethodReturn.VOID});
+&nbsp;                        }
+&nbsp;
+&nbsp;                        if (!implementation.isValid()) {
+<b class="fc">&nbsp;                            throw new IllegalStateException(&quot;Cannot set or get value of &quot; + instrumentedMethod + &quot; using &quot; + fieldDescription);</b>
+&nbsp;                        } else {
+&nbsp;                            return new ByteCodeAppender.Size(implementation.apply(methodVisitor, implementationContext).getMaximalSize(), instrumentedMethod.getStackSize());
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.fieldLocation.equals(((Appender)var1).fieldLocation)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return ForImplicitProperty.this.equals(ForImplicitProperty.this);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return (this.getClass().hashCode() * 31 + this.fieldLocation.hashCode()) * 31 + ForImplicitProperty.this.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface OwnerTypeLocatable extends AssignerConfigurable {
+&nbsp;        AssignerConfigurable in(Class&lt;?&gt; var1);
+&nbsp;
+&nbsp;        AssignerConfigurable in(TypeDescription var1);
+&nbsp;
+&nbsp;        AssignerConfigurable in(FieldLocator.Factory var1);
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface AssignerConfigurable extends PropertyConfigurable {
+&nbsp;        PropertyConfigurable withAssigner(Assigner var1, Assigner.Typing var2);
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface PropertyConfigurable extends Implementation {
+&nbsp;        Implementation.Composable setsArgumentAt(int var1);
+&nbsp;
+&nbsp;        Implementation.Composable setsDefaultValue();
+&nbsp;
+&nbsp;        Implementation.Composable setsValue(Object var1);
+&nbsp;
+&nbsp;        Implementation.Composable setsValue(TypeDescription var1);
+&nbsp;
+&nbsp;        Implementation.Composable setsValue(JavaConstant var1);
+&nbsp;
+&nbsp;        Implementation.Composable setsValue(StackManipulation var1, Type var2);
+&nbsp;
+&nbsp;        Implementation.Composable setsValue(StackManipulation var1, TypeDescription.Generic var2);
+&nbsp;
+&nbsp;        Implementation.Composable setsReference(Object var1);
+&nbsp;
+&nbsp;        Implementation.Composable setsReference(Object var1, String var2);
+&nbsp;
+&nbsp;        Implementation.Composable setsFieldValueOf(Field var1);
+&nbsp;
+&nbsp;        Implementation.Composable setsFieldValueOf(FieldDescription var1);
+&nbsp;
+&nbsp;        Implementation.Composable setsFieldValueOf(String var1);
+&nbsp;
+&nbsp;        Implementation.Composable setsFieldValueOf(FieldNameExtractor var1);
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface FieldNameExtractor {
+&nbsp;        String resolve(MethodDescription var1);
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class ForFixedValue implements FieldNameExtractor {
+&nbsp;            private final String name;
+&nbsp;
+&nbsp;            protected ForFixedValue(String name) {
+&nbsp;                this.name = name;
+&nbsp;            }
+&nbsp;
+&nbsp;            public String resolve(MethodDescription methodDescription) {
+&nbsp;                return this.name;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.name.equals(((ForFixedValue)var1).name);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.name.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public static enum ForBeanProperty implements FieldNameExtractor {
+&nbsp;            INSTANCE;
+&nbsp;
+&nbsp;            private ForBeanProperty() {
+&nbsp;            }
+&nbsp;
+&nbsp;            public String resolve(MethodDescription methodDescription) {
+&nbsp;                String name = methodDescription.getInternalName();
+&nbsp;                byte crop;
+&nbsp;                if (!name.startsWith(&quot;get&quot;) &amp;&amp; !name.startsWith(&quot;set&quot;)) {
+&nbsp;                    if (!name.startsWith(&quot;is&quot;)) {
+&nbsp;                        throw new IllegalArgumentException(methodDescription + &quot; does not follow Java bean naming conventions&quot;);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    crop = 2;
+&nbsp;                } else {
+&nbsp;                    crop = 3;
+&nbsp;                }
+&nbsp;
+&nbsp;                name = name.substring(crop);
+&nbsp;                if (name.length() == 0) {
+&nbsp;                    throw new IllegalArgumentException(methodDescription + &quot; does not specify a bean name&quot;);
+&nbsp;                } else {
+&nbsp;                    return Character.toLowerCase(name.charAt(0)) + name.substring(1);
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected interface FieldLocation {
+&nbsp;        FieldLocation with(FieldLocator.Factory var1);
+&nbsp;
+&nbsp;        Prepared prepare(TypeDescription var1);
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class Relative implements FieldLocation {
+&nbsp;            private final FieldNameExtractor fieldNameExtractor;
+&nbsp;            private final FieldLocator.Factory fieldLocatorFactory;
+&nbsp;
+&nbsp;            protected Relative(FieldNameExtractor fieldNameExtractor) {
+&nbsp;                this(fieldNameExtractor, Factory.INSTANCE);
+&nbsp;            }
+&nbsp;
+&nbsp;            private Relative(FieldNameExtractor fieldNameExtractor, FieldLocator.Factory fieldLocatorFactory) {
+&nbsp;                this.fieldNameExtractor = fieldNameExtractor;
+&nbsp;                this.fieldLocatorFactory = fieldLocatorFactory;
+&nbsp;            }
+&nbsp;
+&nbsp;            public FieldLocation with(FieldLocator.Factory fieldLocatorFactory) {
+&nbsp;                return new Relative(this.fieldNameExtractor, fieldLocatorFactory);
+&nbsp;            }
+&nbsp;
+&nbsp;            public Prepared prepare(TypeDescription instrumentedType) {
+&nbsp;                return new Prepared(this.fieldNameExtractor, this.fieldLocatorFactory.make(instrumentedType));
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.fieldNameExtractor.equals(((Relative)var1).fieldNameExtractor)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.fieldLocatorFactory.equals(((Relative)var1).fieldLocatorFactory);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return (this.getClass().hashCode() * 31 + this.fieldNameExtractor.hashCode()) * 31 + this.fieldLocatorFactory.hashCode();
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            protected static class Prepared implements Prepared {
+&nbsp;                private final FieldNameExtractor fieldNameExtractor;
+&nbsp;                private final FieldLocator fieldLocator;
+&nbsp;
+&nbsp;                protected Prepared(FieldNameExtractor fieldNameExtractor, FieldLocator fieldLocator) {
+&nbsp;                    this.fieldNameExtractor = fieldNameExtractor;
+&nbsp;                    this.fieldLocator = fieldLocator;
+&nbsp;                }
+&nbsp;
+&nbsp;                public FieldDescription resolve(MethodDescription instrumentedMethod) {
+&nbsp;                    FieldLocator.Resolution resolution = this.fieldLocator.locate(this.fieldNameExtractor.resolve(instrumentedMethod));
+&nbsp;                    if (!resolution.isResolved()) {
+&nbsp;                        throw new IllegalStateException(&quot;Cannot resolve field for &quot; + instrumentedMethod + &quot; using &quot; + this.fieldLocator);
+&nbsp;                    } else {
+&nbsp;                        return resolution.getField();
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+<b class="fc">&nbsp;                    } else if (!this.fieldNameExtractor.equals(((Prepared)var1).fieldNameExtractor)) {</b>
+<b class="fc">&nbsp;                        return false;</b>
+&nbsp;                    } else {
+&nbsp;                        return this.fieldLocator.equals(((Prepared)var1).fieldLocator);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+<b class="fc">&nbsp;                    return (this.getClass().hashCode() * 31 + this.fieldNameExtractor.hashCode()) * 31 + this.fieldLocator.hashCode();</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        @Enhance
+&nbsp;        public static class Absolute implements FieldLocation, Prepared {
+<b class="fc">&nbsp;            private final FieldDescription fieldDescription;</b>
+&nbsp;
+<b class="fc">&nbsp;            protected Absolute(FieldDescription fieldDescription) {</b>
+<b class="fc">&nbsp;                this.fieldDescription = fieldDescription;</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+<b class="fc">&nbsp;            public FieldLocation with(FieldLocator.Factory fieldLocatorFactory) {</b>
+<b class="fc">&nbsp;                throw new IllegalStateException(&quot;Cannot specify a field locator factory for an absolute field location&quot;);</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+<b class="fc">&nbsp;            @SuppressFBWarnings(</b>
+<b class="fc">&nbsp;                value = {&quot;NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE&quot;},</b>
+&nbsp;                justification = &quot;Assuming declaring type for type member.&quot;
+&nbsp;            )
+<b class="fc">&nbsp;            public Prepared prepare(TypeDescription instrumentedType) {</b>
+&nbsp;                if (!this.fieldDescription.isStatic() &amp;&amp; !instrumentedType.isAssignableTo(this.fieldDescription.getDeclaringType().asErasure())) {
+<b class="fc">&nbsp;                    throw new IllegalStateException(this.fieldDescription + &quot; is not declared by &quot; + instrumentedType);</b>
+<b class="fc">&nbsp;                } else if (!this.fieldDescription.isAccessibleTo(instrumentedType)) {</b>
+<b class="fc">&nbsp;                    throw new IllegalStateException(&quot;Cannot access &quot; + this.fieldDescription + &quot; from &quot; + instrumentedType);</b>
+&nbsp;                } else {
+&nbsp;                    return this;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            public FieldDescription resolve(MethodDescription instrumentedMethod) {</b>
+&nbsp;                return this.fieldDescription;
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.fieldDescription.equals(((Absolute)var1).fieldDescription);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.fieldDescription.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public interface Prepared {
+&nbsp;            FieldDescription resolve(MethodDescription var1);
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

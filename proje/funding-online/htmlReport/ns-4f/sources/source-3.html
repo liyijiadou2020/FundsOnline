@@ -1,0 +1,126 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > DefaultDoNotMockEnforcer</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.configuration</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultDoNotMockEnforcer (org.mockito.internal.configuration)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultDoNotMockEnforcer</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.configuration;
+&nbsp;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import org.mockito.DoNotMock;
+&nbsp;import org.mockito.plugins.DoNotMockEnforcer;
+<b class="fc">&nbsp;</b>
+&nbsp;public class DefaultDoNotMockEnforcer implements DoNotMockEnforcer {
+&nbsp;    public DefaultDoNotMockEnforcer() {
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public String checkTypeForDoNotMockViolation(Class&lt;?&gt; type) {
+&nbsp;        Annotation[] var2 = type.getAnnotations();
+&nbsp;        int var3 = var2.length;
+&nbsp;
+&nbsp;        for(int var4 = 0; var4 &lt; var3; ++var4) {
+&nbsp;            Annotation annotation = var2[var4];
+&nbsp;            if (annotation.annotationType().getName().endsWith(&quot;org.mockito.DoNotMock&quot;)) {
+&nbsp;                String exceptionMessage = type + &quot; is annotated with @org.mockito.DoNotMock and can&#39;t be mocked.&quot;;
+&nbsp;                if (DoNotMock.class.equals(annotation.annotationType())) {
+&nbsp;                    exceptionMessage = exceptionMessage + &quot; &quot; + ((DoNotMock)type.getAnnotation(DoNotMock.class)).reason();
+&nbsp;                }
+<b class="fc">&nbsp;</b>
+&nbsp;                return exceptionMessage;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return null;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:49</div>
+</div>
+</body>
+</html>

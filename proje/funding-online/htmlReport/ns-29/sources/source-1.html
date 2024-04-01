@@ -1,0 +1,755 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > AnnotationAppender</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.attribute</a>
+</div>
+
+<h1>Coverage Summary for Class: AnnotationAppender (net.bytebuddy.implementation.attribute)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">AnnotationAppender$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AnnotationAppender$Default</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/18)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AnnotationAppender$ForTypeAnnotations</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (42/42)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AnnotationAppender$Target$OnField</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AnnotationAppender$Target$OnMethod</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AnnotationAppender$Target$OnMethodParameter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AnnotationAppender$Target$OnType</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (71/71)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.attribute;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;import java.lang.reflect.Array;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationDescription;
+&nbsp;import net.bytebuddy.description.enumeration.EnumerationDescription;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeList;
+&nbsp;import net.bytebuddy.jar.asm.AnnotationVisitor;
+&nbsp;import net.bytebuddy.jar.asm.ClassVisitor;
+&nbsp;import net.bytebuddy.jar.asm.FieldVisitor;
+&nbsp;import net.bytebuddy.jar.asm.MethodVisitor;
+&nbsp;import net.bytebuddy.jar.asm.RecordComponentVisitor;
+&nbsp;import net.bytebuddy.jar.asm.Type;
+&nbsp;import net.bytebuddy.jar.asm.TypePath;
+&nbsp;import net.bytebuddy.jar.asm.TypeReference;
+&nbsp;
+&nbsp;public interface AnnotationAppender {
+&nbsp;    @Nonnull(
+&nbsp;        when = When.NEVER
+&nbsp;    )
+&nbsp;    String NO_NAME = null;
+&nbsp;
+&nbsp;    AnnotationAppender append(AnnotationDescription var1, AnnotationValueFilter var2);
+&nbsp;
+&nbsp;    AnnotationAppender append(AnnotationDescription var1, AnnotationValueFilter var2, int var3, String var4);
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class ForTypeAnnotations implements TypeDescription.Generic.Visitor&lt;AnnotationAppender&gt; {
+&nbsp;        public static final boolean VARIABLE_ON_TYPE = true;
+&nbsp;        public static final boolean VARIABLE_ON_INVOKEABLE = false;
+&nbsp;        private static final String EMPTY_TYPE_PATH = &quot;&quot;;
+&nbsp;        private static final char COMPONENT_TYPE_PATH = &#39;[&#39;;
+&nbsp;        private static final char WILDCARD_TYPE_PATH = &#39;*&#39;;
+&nbsp;        private static final char INNER_CLASS_PATH = &#39;.&#39;;
+&nbsp;        private static final char INDEXED_TYPE_DELIMITER = &#39;;&#39;;
+&nbsp;        private static final int SUPER_CLASS_INDEX = -1;
+&nbsp;        private final AnnotationAppender annotationAppender;
+&nbsp;        private final AnnotationValueFilter annotationValueFilter;
+&nbsp;        private final int typeReference;
+&nbsp;        private final String typePath;
+&nbsp;
+&nbsp;        protected ForTypeAnnotations(AnnotationAppender annotationAppender, AnnotationValueFilter annotationValueFilter, TypeReference typeReference) {
+&nbsp;            this(annotationAppender, annotationValueFilter, typeReference.getValue(), &quot;&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        protected ForTypeAnnotations(AnnotationAppender annotationAppender, AnnotationValueFilter annotationValueFilter, int typeReference, String typePath) {
+&nbsp;            this.annotationAppender = annotationAppender;
+&nbsp;            this.annotationValueFilter = annotationValueFilter;
+&nbsp;            this.typeReference = typeReference;
+&nbsp;            this.typePath = typePath;
+&nbsp;        }
+&nbsp;
+&nbsp;        public static TypeDescription.Generic.Visitor&lt;AnnotationAppender&gt; ofSuperClass(AnnotationAppender annotationAppender, AnnotationValueFilter annotationValueFilter) {
+&nbsp;            return new ForTypeAnnotations(annotationAppender, annotationValueFilter, TypeReference.newSuperTypeReference(-1));
+&nbsp;        }
+&nbsp;
+&nbsp;        public static TypeDescription.Generic.Visitor&lt;AnnotationAppender&gt; ofInterfaceType(AnnotationAppender annotationAppender, AnnotationValueFilter annotationValueFilter, int index) {
+&nbsp;            return new ForTypeAnnotations(annotationAppender, annotationValueFilter, TypeReference.newSuperTypeReference(index));
+&nbsp;        }
+&nbsp;
+&nbsp;        public static TypeDescription.Generic.Visitor&lt;AnnotationAppender&gt; ofFieldType(AnnotationAppender annotationAppender, AnnotationValueFilter annotationValueFilter) {
+&nbsp;            return new ForTypeAnnotations(annotationAppender, annotationValueFilter, TypeReference.newTypeReference(19));
+&nbsp;        }
+&nbsp;
+&nbsp;        public static TypeDescription.Generic.Visitor&lt;AnnotationAppender&gt; ofMethodReturnType(AnnotationAppender annotationAppender, AnnotationValueFilter annotationValueFilter) {
+&nbsp;            return new ForTypeAnnotations(annotationAppender, annotationValueFilter, TypeReference.newTypeReference(20));
+&nbsp;        }
+&nbsp;
+&nbsp;        public static TypeDescription.Generic.Visitor&lt;AnnotationAppender&gt; ofMethodParameterType(AnnotationAppender annotationAppender, AnnotationValueFilter annotationValueFilter, int index) {
+&nbsp;            return new ForTypeAnnotations(annotationAppender, annotationValueFilter, TypeReference.newFormalParameterReference(index));
+&nbsp;        }
+&nbsp;
+&nbsp;        public static TypeDescription.Generic.Visitor&lt;AnnotationAppender&gt; ofExceptionType(AnnotationAppender annotationAppender, AnnotationValueFilter annotationValueFilter, int index) {
+&nbsp;            return new ForTypeAnnotations(annotationAppender, annotationValueFilter, TypeReference.newExceptionReference(index));
+&nbsp;        }
+&nbsp;
+&nbsp;        public static TypeDescription.Generic.Visitor&lt;AnnotationAppender&gt; ofReceiverType(AnnotationAppender annotationAppender, AnnotationValueFilter annotationValueFilter) {
+&nbsp;            return new ForTypeAnnotations(annotationAppender, annotationValueFilter, TypeReference.newTypeReference(21));
+&nbsp;        }
+&nbsp;
+&nbsp;        public static AnnotationAppender ofTypeVariable(AnnotationAppender annotationAppender, AnnotationValueFilter annotationValueFilter, boolean variableOnType, List&lt;? extends TypeDescription.Generic&gt; typeVariables) {
+&nbsp;            return ofTypeVariable(annotationAppender, annotationValueFilter, variableOnType, 0, typeVariables);
+&nbsp;        }
+&nbsp;
+&nbsp;        public static AnnotationAppender ofTypeVariable(AnnotationAppender annotationAppender, AnnotationValueFilter annotationValueFilter, boolean variableOnType, int subListIndex, List&lt;? extends TypeDescription.Generic&gt; typeVariables) {
+&nbsp;            int typeVariableIndex = subListIndex;
+&nbsp;            byte variableBaseReference;
+&nbsp;            byte variableBoundBaseBase;
+&nbsp;            if (variableOnType) {
+&nbsp;                variableBaseReference = 0;
+&nbsp;                variableBoundBaseBase = 17;
+&nbsp;            } else {
+<b class="fc">&nbsp;                variableBaseReference = 1;</b>
+<b class="fc">&nbsp;                variableBoundBaseBase = 18;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            for(Iterator var8 = typeVariables.subList(subListIndex, typeVariables.size()).iterator(); var8.hasNext(); ++typeVariableIndex) {
+&nbsp;                TypeDescription.Generic typeVariable = (TypeDescription.Generic)var8.next();
+&nbsp;                int typeReference = TypeReference.newTypeParameterReference(variableBaseReference, typeVariableIndex).getValue();
+&nbsp;
+&nbsp;                AnnotationDescription annotationDescription;
+&nbsp;                for(Iterator var11 = typeVariable.getDeclaredAnnotations().iterator(); var11.hasNext(); annotationAppender = annotationAppender.append(annotationDescription, annotationValueFilter, typeReference, &quot;&quot;)) {
+&nbsp;                    annotationDescription = (AnnotationDescription)var11.next();
+&nbsp;                }
+&nbsp;
+&nbsp;                int boundIndex = !((TypeDescription.Generic)typeVariable.getUpperBounds().get(0)).getSort().isTypeVariable() &amp;&amp; ((TypeDescription.Generic)typeVariable.getUpperBounds().get(0)).isInterface() ? 1 : 0;
+&nbsp;
+&nbsp;                TypeDescription.Generic typeBound;
+&nbsp;                for(Iterator var15 = typeVariable.getUpperBounds().iterator(); var15.hasNext(); annotationAppender = (AnnotationAppender)typeBound.accept(new ForTypeAnnotations(annotationAppender, annotationValueFilter, TypeReference.newTypeParameterBoundReference(variableBoundBaseBase, typeVariableIndex, boundIndex++)))) {
+&nbsp;                    typeBound = (TypeDescription.Generic)var15.next();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            return annotationAppender;
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressFBWarnings(
+&nbsp;            value = {&quot;NP_NULL_ON_SOME_PATH_FROM_RETURN_VALUE&quot;},
+&nbsp;            justification = &quot;Assuming component type for array type.&quot;
+&nbsp;        )
+&nbsp;        public AnnotationAppender onGenericArray(TypeDescription.Generic genericArray) {
+&nbsp;            return (AnnotationAppender)genericArray.getComponentType().accept(new ForTypeAnnotations(this.apply(genericArray, this.typePath), this.annotationValueFilter, this.typeReference, this.typePath + &#39;[&#39;));
+&nbsp;        }
+&nbsp;
+&nbsp;        public AnnotationAppender onWildcard(TypeDescription.Generic wildcard) {
+&nbsp;            TypeList.Generic lowerBounds = wildcard.getLowerBounds();
+&nbsp;            return (AnnotationAppender)(lowerBounds.isEmpty() ? (TypeDescription.Generic)wildcard.getUpperBounds().getOnly() : (TypeDescription.Generic)lowerBounds.getOnly()).accept(new ForTypeAnnotations(this.apply(wildcard, this.typePath), this.annotationValueFilter, this.typeReference, this.typePath + &#39;*&#39;));
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public AnnotationAppender onParameterizedType(TypeDescription.Generic parameterizedType) {</b>
+<b class="fc">&nbsp;            StringBuilder typePath = new StringBuilder(this.typePath);</b>
+&nbsp;
+&nbsp;            for(int index = 0; index &lt; parameterizedType.asErasure().getInnerClassCount(); ++index) {
+&nbsp;                typePath = typePath.append(&#39;.&#39;);
+&nbsp;            }
+&nbsp;
+&nbsp;            AnnotationAppender annotationAppender = this.apply(parameterizedType, typePath.toString());
+&nbsp;            TypeDescription.Generic ownerType = parameterizedType.getOwnerType();
+&nbsp;            if (ownerType != null) {
+&nbsp;                annotationAppender = (AnnotationAppender)ownerType.accept(new ForTypeAnnotations(annotationAppender, this.annotationValueFilter, this.typeReference, this.typePath));
+&nbsp;            }
+&nbsp;
+&nbsp;            int index = 0;
+&nbsp;
+&nbsp;            TypeDescription.Generic typeArgument;
+&nbsp;            for(Iterator var6 = parameterizedType.getTypeArguments().iterator(); var6.hasNext(); annotationAppender = (AnnotationAppender)typeArgument.accept(new ForTypeAnnotations(annotationAppender, this.annotationValueFilter, this.typeReference, typePath.toString() + index++ + &#39;;&#39;))) {
+&nbsp;                typeArgument = (TypeDescription.Generic)var6.next();
+&nbsp;            }
+&nbsp;
+&nbsp;            return annotationAppender;
+&nbsp;        }
+&nbsp;
+&nbsp;        public AnnotationAppender onTypeVariable(TypeDescription.Generic typeVariable) {
+&nbsp;            return this.apply(typeVariable, this.typePath);
+&nbsp;        }
+&nbsp;
+&nbsp;        public AnnotationAppender onNonGenericType(TypeDescription.Generic typeDescription) {
+&nbsp;            StringBuilder typePath = new StringBuilder(this.typePath);
+&nbsp;
+&nbsp;            for(int index = 0; index &lt; typeDescription.asErasure().getInnerClassCount(); ++index) {
+&nbsp;                typePath = typePath.append(&#39;.&#39;);
+&nbsp;            }
+&nbsp;
+&nbsp;            AnnotationAppender annotationAppender = this.apply(typeDescription, typePath.toString());
+&nbsp;            TypeDescription.Generic componentType = typeDescription.getComponentType();
+&nbsp;            if (componentType != null) {
+<b class="fc">&nbsp;                annotationAppender = (AnnotationAppender)componentType.accept(new ForTypeAnnotations(annotationAppender, this.annotationValueFilter, this.typeReference, this.typePath + &#39;[&#39;));</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            return annotationAppender;
+&nbsp;        }
+&nbsp;
+&nbsp;        private AnnotationAppender apply(TypeDescription.Generic typeDescription, String typePath) {
+&nbsp;            AnnotationAppender annotationAppender = this.annotationAppender;
+&nbsp;
+&nbsp;            AnnotationDescription annotationDescription;
+&nbsp;            for(Iterator var4 = typeDescription.getDeclaredAnnotations().iterator(); var4.hasNext(); annotationAppender = annotationAppender.append(annotationDescription, this.annotationValueFilter, this.typeReference, typePath)) {
+&nbsp;                annotationDescription = (AnnotationDescription)var4.next();
+&nbsp;            }
+&nbsp;
+&nbsp;            return annotationAppender;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (this.typeReference != ((ForTypeAnnotations)var1).typeReference) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.typePath.equals(((ForTypeAnnotations)var1).typePath)) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.annotationAppender.equals(((ForTypeAnnotations)var1).annotationAppender)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.annotationValueFilter.equals(((ForTypeAnnotations)var1).annotationValueFilter);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return (((this.getClass().hashCode() * 31 + this.annotationAppender.hashCode()) * 31 + this.annotationValueFilter.hashCode()) * 31 + this.typeReference) * 31 + this.typePath.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class Default implements AnnotationAppender {
+&nbsp;        private final Target target;
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public Default(Target target) {</b>
+<b class="fc">&nbsp;            this.target = target;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private static void handle(AnnotationVisitor annotationVisitor, AnnotationDescription annotation, AnnotationValueFilter annotationValueFilter) {
+&nbsp;            Iterator var3 = annotation.getAnnotationType().getDeclaredMethods().iterator();
+&nbsp;
+&nbsp;            while(var3.hasNext()) {
+&nbsp;                MethodDescription.InDefinedShape methodDescription = (MethodDescription.InDefinedShape)var3.next();
+<b class="fc">&nbsp;                if (annotationValueFilter.isRelevant(annotation, methodDescription)) {</b>
+&nbsp;                    apply(annotationVisitor, methodDescription.getReturnType().asErasure(), methodDescription.getName(), annotation.getValue(methodDescription).resolve());
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            annotationVisitor.visitEnd();
+&nbsp;        }
+&nbsp;
+&nbsp;        public static void apply(AnnotationVisitor annotationVisitor, TypeDescription valueType, @Nonnull(when = When.MAYBE) String name, Object value) {
+&nbsp;            if (valueType.isArray()) {
+&nbsp;                AnnotationVisitor arrayVisitor = annotationVisitor.visitArray(name);
+&nbsp;                int length = Array.getLength(value);
+&nbsp;                TypeDescription componentType = valueType.getComponentType();
+&nbsp;
+&nbsp;                for(int index = 0; index &lt; length; ++index) {
+&nbsp;                    apply(arrayVisitor, componentType, NO_NAME, Array.get(value, index));
+&nbsp;                }
+&nbsp;
+&nbsp;                arrayVisitor.visitEnd();
+&nbsp;            } else if (valueType.isAnnotation()) {
+&nbsp;                handle(annotationVisitor.visitAnnotation(name, valueType.getDescriptor()), (AnnotationDescription)value, net.bytebuddy.implementation.attribute.AnnotationValueFilter.Default.APPEND_DEFAULTS);
+&nbsp;            } else if (valueType.isEnum()) {
+&nbsp;                annotationVisitor.visitEnum(name, valueType.getDescriptor(), ((EnumerationDescription)value).getValue());
+&nbsp;            } else if (valueType.represents(Class.class)) {
+&nbsp;                annotationVisitor.visit(name, Type.getType(((TypeDescription)value).getDescriptor()));
+&nbsp;            } else {
+&nbsp;                annotationVisitor.visit(name, value);
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        public AnnotationAppender append(AnnotationDescription annotationDescription, AnnotationValueFilter annotationValueFilter) {
+&nbsp;            switch (annotationDescription.getRetention()) {
+&nbsp;                case RUNTIME:
+&nbsp;                    this.doAppend(annotationDescription, true, annotationValueFilter);
+&nbsp;                    break;
+&nbsp;                case CLASS:
+&nbsp;                    this.doAppend(annotationDescription, false, annotationValueFilter);
+&nbsp;                case SOURCE:
+&nbsp;                    break;
+&nbsp;                default:
+&nbsp;                    throw new IllegalStateException(&quot;Unexpected retention policy: &quot; + annotationDescription.getRetention());
+&nbsp;            }
+&nbsp;
+&nbsp;            return this;
+&nbsp;        }
+&nbsp;
+&nbsp;        private void doAppend(AnnotationDescription annotation, boolean visible, AnnotationValueFilter annotationValueFilter) {
+&nbsp;            AnnotationVisitor annotationVisitor = this.target.visit(annotation.getAnnotationType().getDescriptor(), visible);
+&nbsp;            if (annotationVisitor != null) {
+&nbsp;                handle(annotationVisitor, annotation, annotationValueFilter);
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        public AnnotationAppender append(AnnotationDescription annotationDescription, AnnotationValueFilter annotationValueFilter, int typeReference, String typePath) {
+&nbsp;            switch (annotationDescription.getRetention()) {
+&nbsp;                case RUNTIME:
+&nbsp;                    this.doAppend(annotationDescription, true, annotationValueFilter, typeReference, typePath);
+&nbsp;                    break;
+&nbsp;                case CLASS:
+&nbsp;                    this.doAppend(annotationDescription, false, annotationValueFilter, typeReference, typePath);
+&nbsp;                case SOURCE:
+&nbsp;                    break;
+&nbsp;                default:
+&nbsp;                    throw new IllegalStateException(&quot;Unexpected retention policy: &quot; + annotationDescription.getRetention());
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private void doAppend(AnnotationDescription annotation, boolean visible, AnnotationValueFilter annotationValueFilter, int typeReference, String typePath) {
+&nbsp;            AnnotationVisitor annotationVisitor = this.target.visit(annotation.getAnnotationType().getDescriptor(), visible, typeReference, typePath);
+&nbsp;            if (annotationVisitor != null) {
+&nbsp;                handle(annotationVisitor, annotation, annotationValueFilter);
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public boolean equals(Object var1) {</b>
+<b class="fc">&nbsp;            if (this == var1) {</b>
+<b class="fc">&nbsp;                return true;</b>
+&nbsp;            } else if (var1 == null) {
+<b class="fc">&nbsp;                return false;</b>
+<b class="fc">&nbsp;            } else if (this.getClass() != var1.getClass()) {</b>
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.target.equals(((Default)var1).target);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.target.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public interface Target {</b>
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        AnnotationVisitor visit(String var1, boolean var2);
+&nbsp;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        AnnotationVisitor visit(String var1, boolean var2, int var3, String var4);
+<b class="fc">&nbsp;</b>
+&nbsp;        @Enhance
+<b class="fc">&nbsp;        public static class OnRecordComponent implements Target {</b>
+&nbsp;            private final RecordComponentVisitor recordComponentVisitor;
+&nbsp;
+<b class="fc">&nbsp;            public OnRecordComponent(RecordComponentVisitor recordComponentVisitor) {</b>
+&nbsp;                this.recordComponentVisitor = recordComponentVisitor;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public AnnotationVisitor visit(String annotationTypeDescriptor, boolean visible) {
+<b class="fc">&nbsp;                return this.recordComponentVisitor.visitAnnotation(annotationTypeDescriptor, visible);</b>
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            @Nonnull(</b>
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public AnnotationVisitor visit(String annotationTypeDescriptor, boolean visible, int typeReference, String typePath) {
+&nbsp;                return this.recordComponentVisitor.visitTypeAnnotation(typeReference, TypePath.fromString(typePath), annotationTypeDescriptor, visible);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+<b class="fc">&nbsp;                    return true;</b>
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.recordComponentVisitor.equals(((OnRecordComponent)var1).recordComponentVisitor);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+<b class="fc">&nbsp;                return this.getClass().hashCode() * 31 + this.recordComponentVisitor.hashCode();</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class OnMethodParameter implements Target {
+&nbsp;            private final MethodVisitor methodVisitor;
+&nbsp;            private final int parameterIndex;
+&nbsp;
+&nbsp;            public OnMethodParameter(MethodVisitor methodVisitor, int parameterIndex) {
+&nbsp;                this.methodVisitor = methodVisitor;
+&nbsp;                this.parameterIndex = parameterIndex;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public AnnotationVisitor visit(String annotationTypeDescriptor, boolean visible) {
+&nbsp;                return this.methodVisitor.visitParameterAnnotation(this.parameterIndex, annotationTypeDescriptor, visible);
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public AnnotationVisitor visit(String annotationTypeDescriptor, boolean visible, int typeReference, String typePath) {
+&nbsp;                return this.methodVisitor.visitTypeAnnotation(typeReference, TypePath.fromString(typePath), annotationTypeDescriptor, visible);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.parameterIndex != ((OnMethodParameter)var1).parameterIndex) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.methodVisitor.equals(((OnMethodParameter)var1).methodVisitor);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return (this.getClass().hashCode() * 31 + this.methodVisitor.hashCode()) * 31 + this.parameterIndex;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class OnMethod implements Target {
+&nbsp;            private final MethodVisitor methodVisitor;
+&nbsp;
+&nbsp;            public OnMethod(MethodVisitor methodVisitor) {
+&nbsp;                this.methodVisitor = methodVisitor;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public AnnotationVisitor visit(String annotationTypeDescriptor, boolean visible) {
+&nbsp;                return this.methodVisitor.visitAnnotation(annotationTypeDescriptor, visible);
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public AnnotationVisitor visit(String annotationTypeDescriptor, boolean visible, int typeReference, String typePath) {
+&nbsp;                return this.methodVisitor.visitTypeAnnotation(typeReference, TypePath.fromString(typePath), annotationTypeDescriptor, visible);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.methodVisitor.equals(((OnMethod)var1).methodVisitor);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.methodVisitor.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class OnField implements Target {
+&nbsp;            private final FieldVisitor fieldVisitor;
+&nbsp;
+&nbsp;            public OnField(FieldVisitor fieldVisitor) {
+&nbsp;                this.fieldVisitor = fieldVisitor;
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public AnnotationVisitor visit(String annotationTypeDescriptor, boolean visible) {
+&nbsp;                return this.fieldVisitor.visitAnnotation(annotationTypeDescriptor, visible);
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public AnnotationVisitor visit(String annotationTypeDescriptor, boolean visible, int typeReference, String typePath) {
+&nbsp;                return this.fieldVisitor.visitTypeAnnotation(typeReference, TypePath.fromString(typePath), annotationTypeDescriptor, visible);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.fieldVisitor.equals(((OnField)var1).fieldVisitor);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+<b class="fc">&nbsp;                return this.getClass().hashCode() * 31 + this.fieldVisitor.hashCode();</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class OnType implements Target {
+&nbsp;            private final ClassVisitor classVisitor;
+&nbsp;
+&nbsp;            public OnType(ClassVisitor classVisitor) {
+&nbsp;                this.classVisitor = classVisitor;
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            @Nonnull(</b>
+<b class="fc">&nbsp;                when = When.MAYBE</b>
+<b class="fc">&nbsp;            )</b>
+<b class="fc">&nbsp;            public AnnotationVisitor visit(String annotationTypeDescriptor, boolean visible) {</b>
+&nbsp;                return this.classVisitor.visitAnnotation(annotationTypeDescriptor, visible);
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            public AnnotationVisitor visit(String annotationTypeDescriptor, boolean visible, int typeReference, String typePath) {
+&nbsp;                return this.classVisitor.visitTypeAnnotation(typeReference, TypePath.fromString(typePath), annotationTypeDescriptor, visible);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+<b class="fc">&nbsp;                if (this == var1) {</b>
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.classVisitor.equals(((OnType)var1).classVisitor);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.classVisitor.hashCode();
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

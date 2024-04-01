@@ -1,0 +1,1026 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > AnnotationDescription</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.description.annotation</a>
+</div>
+
+<h1>Coverage Summary for Class: AnnotationDescription (net.bytebuddy.description.annotation)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AnnotationDescription</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">AnnotationDescription$AbstractBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (21/21)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">AnnotationDescription$ForLoadedAnnotation</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (24/24)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (46/46)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.description.annotation;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.annotation.AnnotationTypeMismatchException;
+&nbsp;import java.lang.annotation.Documented;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.lang.annotation.IncompleteAnnotationException;
+&nbsp;import java.lang.annotation.Inherited;
+&nbsp;import java.lang.annotation.Retention;
+&nbsp;import java.lang.annotation.RetentionPolicy;
+&nbsp;import java.lang.annotation.Target;
+&nbsp;import java.lang.reflect.InvocationHandler;
+&nbsp;import java.lang.reflect.InvocationTargetException;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Proxy;
+&nbsp;import java.security.AccessController;
+&nbsp;import java.security.PrivilegedAction;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;import javax.annotation.CheckForNull;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.ClassFileVersion;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationValue.ForAnnotationDescription;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationValue.ForConstant;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationValue.ForDescriptionArray;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationValue.ForEnumerationDescription;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationValue.ForTypeDescription;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationValue.State;
+&nbsp;import net.bytebuddy.description.enumeration.EnumerationDescription;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.method.MethodList;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeList;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.ForLoadedType;
+&nbsp;import net.bytebuddy.dynamic.loading.ClassLoadingStrategy;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;import net.bytebuddy.utility.privilege.SetAccessibleAction;
+&nbsp;
+&nbsp;public interface AnnotationDescription {
+&nbsp;    @Nonnull(
+&nbsp;        when = When.NEVER
+&nbsp;    )
+&nbsp;    Loadable&lt;?&gt; UNDEFINED = null;
+&nbsp;
+&nbsp;    AnnotationValue&lt;?, ?&gt; getValue(String var1);
+&nbsp;
+&nbsp;    AnnotationValue&lt;?, ?&gt; getValue(MethodDescription.InDefinedShape var1);
+&nbsp;
+<b class="fc">&nbsp;    TypeDescription getAnnotationType();</b>
+&nbsp;
+&nbsp;    &lt;T extends Annotation&gt; Loadable&lt;T&gt; prepare(Class&lt;T&gt; var1);
+&nbsp;
+&nbsp;    RetentionPolicy getRetention();
+&nbsp;
+&nbsp;    Set&lt;ElementType&gt; getElementTypes();
+&nbsp;
+&nbsp;    boolean isInherited();
+&nbsp;
+&nbsp;    boolean isDocumented();
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class Builder {
+&nbsp;        private final TypeDescription annotationType;
+&nbsp;        private final Map&lt;String, AnnotationValue&lt;?, ?&gt;&gt; annotationValues;
+&nbsp;
+&nbsp;        protected Builder(TypeDescription annotationType, Map&lt;String, AnnotationValue&lt;?, ?&gt;&gt; annotationValues) {
+&nbsp;            this.annotationType = annotationType;
+&nbsp;            this.annotationValues = annotationValues;
+&nbsp;        }
+&nbsp;
+&nbsp;        public static Builder ofType(Class&lt;? extends Annotation&gt; annotationType) {
+&nbsp;            return ofType(ForLoadedType.of(annotationType));
+&nbsp;        }
+&nbsp;
+&nbsp;        public static Builder ofType(TypeDescription annotationType) {
+&nbsp;            if (!annotationType.isAnnotation()) {
+&nbsp;                throw new IllegalArgumentException(&quot;Not an annotation type: &quot; + annotationType);
+&nbsp;            } else {
+&nbsp;                return new Builder(annotationType, Collections.emptyMap());
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder define(String property, AnnotationValue&lt;?, ?&gt; value) {
+&nbsp;            MethodList&lt;MethodDescription.InDefinedShape&gt; methodDescriptions = (MethodList)this.annotationType.getDeclaredMethods().filter(ElementMatchers.named(property));
+&nbsp;            if (methodDescriptions.isEmpty()) {
+&nbsp;                throw new IllegalArgumentException(this.annotationType + &quot; does not define a property named &quot; + property);
+&nbsp;            } else {
+&nbsp;                Map&lt;String, AnnotationValue&lt;?, ?&gt;&gt; annotationValues = new HashMap(this.annotationValues);
+&nbsp;                if (annotationValues.put(((MethodDescription.InDefinedShape)methodDescriptions.getOnly()).getName(), value) != null) {
+&nbsp;                    throw new IllegalArgumentException(&quot;Property already defined: &quot; + property);
+&nbsp;                } else {
+&nbsp;                    return new Builder(this.annotationType, annotationValues);
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder define(String property, Enum&lt;?&gt; value) {
+&nbsp;            return this.define(property, (EnumerationDescription)(new EnumerationDescription.ForLoadedEnumeration(value)));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder define(String property, TypeDescription enumerationType, String value) {
+&nbsp;            return this.define(property, (EnumerationDescription)(new EnumerationDescription.Latent(enumerationType, value)));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder define(String property, EnumerationDescription value) {
+&nbsp;            return this.define(property, ForEnumerationDescription.of(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder define(String property, Annotation annotation) {
+&nbsp;            return this.define(property, (AnnotationDescription)(new ForLoadedAnnotation(annotation)));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder define(String property, AnnotationDescription annotationDescription) {
+&nbsp;            return this.define(property, (AnnotationValue)(new AnnotationValue.ForAnnotationDescription(annotationDescription)));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder define(String property, Class&lt;?&gt; type) {
+&nbsp;            return this.define(property, ForLoadedType.of(type));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder define(String property, TypeDescription typeDescription) {
+&nbsp;            return this.define(property, ForTypeDescription.of(typeDescription));
+&nbsp;        }
+&nbsp;
+&nbsp;        public &lt;T extends Enum&lt;?&gt;&gt; Builder defineEnumerationArray(String property, Class&lt;T&gt; enumerationType, T... value) {
+&nbsp;            EnumerationDescription[] enumerationDescription = new EnumerationDescription[value.length];
+&nbsp;            int index = 0;
+&nbsp;            Enum[] var6 = value;
+&nbsp;            int var7 = value.length;
+&nbsp;
+&nbsp;            for(int var8 = 0; var8 &lt; var7; ++var8) {
+&nbsp;                T aValue = var6[var8];
+&nbsp;                enumerationDescription[index++] = new EnumerationDescription.ForLoadedEnumeration(aValue);
+&nbsp;            }
+&nbsp;
+&nbsp;            return this.defineEnumerationArray(property, ForLoadedType.of(enumerationType), enumerationDescription);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder defineEnumerationArray(String property, TypeDescription enumerationType, String... value) {
+&nbsp;            if (!enumerationType.isEnum()) {
+&nbsp;                throw new IllegalArgumentException(&quot;Not an enumeration type: &quot; + enumerationType);
+&nbsp;            } else {
+&nbsp;                EnumerationDescription[] enumerationDescription = new EnumerationDescription[value.length];
+&nbsp;
+&nbsp;                for(int i = 0; i &lt; value.length; ++i) {
+&nbsp;                    enumerationDescription[i] = new EnumerationDescription.Latent(enumerationType, value[i]);
+&nbsp;                }
+&nbsp;
+&nbsp;                return this.defineEnumerationArray(property, enumerationType, enumerationDescription);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder defineEnumerationArray(String property, TypeDescription enumerationType, EnumerationDescription... value) {
+&nbsp;            return this.define(property, ForDescriptionArray.of(enumerationType, value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public &lt;T extends Annotation&gt; Builder defineAnnotationArray(String property, Class&lt;T&gt; annotationType, T... annotation) {
+&nbsp;            return this.defineAnnotationArray(property, ForLoadedType.of(annotationType), (AnnotationDescription[])(new AnnotationList.ForLoadedAnnotations(annotation)).toArray(new AnnotationDescription[0]));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder defineAnnotationArray(String property, TypeDescription annotationType, AnnotationDescription... annotationDescription) {
+&nbsp;            return this.define(property, ForDescriptionArray.of(annotationType, annotationDescription));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder defineTypeArray(String property, Class&lt;?&gt;... type) {
+&nbsp;            return this.defineTypeArray(property, (TypeDescription[])(new TypeList.ForLoadedTypes(type)).toArray(new TypeDescription[0]));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder defineTypeArray(String property, TypeDescription... typeDescription) {
+&nbsp;            return this.define(property, ForDescriptionArray.of(typeDescription));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder define(String property, boolean value) {
+&nbsp;            return this.define(property, ForConstant.of(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder define(String property, byte value) {
+&nbsp;            return this.define(property, ForConstant.of(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder define(String property, char value) {
+&nbsp;            return this.define(property, ForConstant.of(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder define(String property, short value) {
+&nbsp;            return this.define(property, ForConstant.of(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder define(String property, int value) {
+&nbsp;            return this.define(property, ForConstant.of(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder define(String property, long value) {
+&nbsp;            return this.define(property, ForConstant.of(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder define(String property, float value) {
+&nbsp;            return this.define(property, ForConstant.of(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder define(String property, double value) {
+&nbsp;            return this.define(property, ForConstant.of(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder define(String property, String value) {
+&nbsp;            return this.define(property, ForConstant.of(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder defineArray(String property, boolean... value) {
+&nbsp;            return this.define(property, ForConstant.of(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder defineArray(String property, byte... value) {
+&nbsp;            return this.define(property, ForConstant.of(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder defineArray(String property, char... value) {
+&nbsp;            return this.define(property, ForConstant.of(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder defineArray(String property, short... value) {
+&nbsp;            return this.define(property, ForConstant.of(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder defineArray(String property, int... value) {
+&nbsp;            return this.define(property, ForConstant.of(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder defineArray(String property, long... value) {
+&nbsp;            return this.define(property, ForConstant.of(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder defineArray(String property, float... value) {
+&nbsp;            return this.define(property, ForConstant.of(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder defineArray(String property, double... value) {
+&nbsp;            return this.define(property, ForConstant.of(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder defineArray(String property, String... value) {
+&nbsp;            return this.define(property, ForConstant.of(value));
+&nbsp;        }
+&nbsp;
+&nbsp;        public AnnotationDescription build() {
+&nbsp;            Iterator var1 = this.annotationType.getDeclaredMethods().iterator();
+&nbsp;
+&nbsp;            MethodDescription.InDefinedShape methodDescription;
+&nbsp;            AnnotationValue annotationValue;
+&nbsp;            do {
+&nbsp;                if (!var1.hasNext()) {
+&nbsp;                    return new Latent(this.annotationType, this.annotationValues);
+&nbsp;                }
+&nbsp;
+&nbsp;                methodDescription = (MethodDescription.InDefinedShape)var1.next();
+&nbsp;                annotationValue = (AnnotationValue)this.annotationValues.get(methodDescription.getName());
+&nbsp;                if (annotationValue == null &amp;&amp; methodDescription.getDefaultValue() == null) {
+&nbsp;                    throw new IllegalStateException(&quot;No value or default value defined for &quot; + methodDescription.getName());
+&nbsp;                }
+&nbsp;            } while(annotationValue == null || annotationValue.filter(methodDescription).getState() == State.RESOLVED);
+&nbsp;
+&nbsp;            throw new IllegalStateException(&quot;Illegal annotation value for &quot; + methodDescription + &quot;: &quot; + annotationValue);
+&nbsp;        }
+&nbsp;
+&nbsp;        public AnnotationDescription build(boolean validated) {
+&nbsp;            return (AnnotationDescription)(validated ? this.build() : new Latent(this.annotationType, this.annotationValues));
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.annotationType.equals(((Builder)var1).annotationType)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.annotationValues.equals(((Builder)var1).annotationValues);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return (this.getClass().hashCode() * 31 + this.annotationType.hashCode()) * 31 + this.annotationValues.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class Latent extends AbstractBase {
+&nbsp;        private final TypeDescription annotationType;
+&nbsp;        private final Map&lt;String, ? extends AnnotationValue&lt;?, ?&gt;&gt; annotationValues;
+&nbsp;
+&nbsp;        protected Latent(TypeDescription annotationType, Map&lt;String, ? extends AnnotationValue&lt;?, ?&gt;&gt; annotationValues) {
+&nbsp;            this.annotationType = annotationType;
+&nbsp;            this.annotationValues = annotationValues;
+&nbsp;        }
+&nbsp;
+&nbsp;        public AnnotationValue&lt;?, ?&gt; getValue(MethodDescription.InDefinedShape property) {
+&nbsp;            if (!property.getDeclaringType().equals(this.annotationType)) {
+&nbsp;                throw new IllegalArgumentException(&quot;Not a property of &quot; + this.annotationType + &quot;: &quot; + property);
+&nbsp;            } else {
+&nbsp;                AnnotationValue&lt;?, ?&gt; value = (AnnotationValue)this.annotationValues.get(property.getName());
+&nbsp;                if (value != null) {
+&nbsp;                    return value.filter(property);
+&nbsp;                } else {
+&nbsp;                    AnnotationValue&lt;?, ?&gt; defaultValue = property.getDefaultValue();
+&nbsp;                    return (AnnotationValue)(defaultValue == null ? new AnnotationValue.ForMissingValue(this.annotationType, property.getName()) : defaultValue);
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeDescription getAnnotationType() {
+&nbsp;            return this.annotationType;
+&nbsp;        }
+&nbsp;
+&nbsp;        public &lt;T extends Annotation&gt; Loadable&lt;T&gt; prepare(Class&lt;T&gt; annotationType) {
+&nbsp;            if (!this.annotationType.represents(annotationType)) {
+&nbsp;                throw new IllegalArgumentException(annotationType + &quot; does not represent &quot; + this.annotationType);
+&nbsp;            } else {
+&nbsp;                return new Loadable(annotationType);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        protected class Loadable&lt;S extends Annotation&gt; extends AbstractBase implements Loadable&lt;S&gt; {
+&nbsp;            private final Class&lt;S&gt; annotationType;
+&nbsp;
+&nbsp;            protected Loadable(Class&lt;S&gt; annotationType) {
+&nbsp;                this.annotationType = annotationType;
+&nbsp;            }
+&nbsp;
+&nbsp;            public S load() {
+&nbsp;                return AnnotationDescription.AnnotationInvocationHandler.of(this.annotationType.getClassLoader(), this.annotationType, Latent.this.annotationValues);
+&nbsp;            }
+&nbsp;
+&nbsp;            public AnnotationValue&lt;?, ?&gt; getValue(MethodDescription.InDefinedShape property) {
+&nbsp;                return Latent.this.getValue(property);
+&nbsp;            }
+&nbsp;
+&nbsp;            public TypeDescription getAnnotationType() {
+&nbsp;                return ForLoadedType.of(this.annotationType);
+&nbsp;            }
+&nbsp;
+&nbsp;            public &lt;T extends Annotation&gt; Loadable&lt;T&gt; prepare(Class&lt;T&gt; annotationType) {
+&nbsp;                return Latent.this.prepare(annotationType);
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class ForLoadedAnnotation&lt;S extends Annotation&gt; extends AbstractBase implements Loadable&lt;S&gt; {
+&nbsp;        private static final Object[] NO_ARGUMENT;
+&nbsp;        private final S annotation;
+&nbsp;        private final Class&lt;S&gt; annotationType;
+&nbsp;        private static final boolean ACCESS_CONTROLLER;
+&nbsp;
+&nbsp;        protected ForLoadedAnnotation(S annotation) {
+&nbsp;            this(annotation, annotation.annotationType());
+&nbsp;        }
+&nbsp;
+&nbsp;        private ForLoadedAnnotation(S annotation, Class&lt;S&gt; annotationType) {
+&nbsp;            this.annotation = annotation;
+&nbsp;            this.annotationType = annotationType;
+&nbsp;        }
+&nbsp;
+&nbsp;        @net.bytebuddy.build.AccessControllerPlugin.Enhance
+&nbsp;        private static &lt;T&gt; T doPrivileged(PrivilegedAction&lt;T&gt; action) {
+&nbsp;            return ACCESS_CONTROLLER ? AccessController.doPrivileged(action) : action.run();
+&nbsp;        }
+&nbsp;
+&nbsp;        public static &lt;U extends Annotation&gt; Loadable&lt;U&gt; of(U annotation) {
+&nbsp;            return new ForLoadedAnnotation(annotation);
+&nbsp;        }
+&nbsp;
+&nbsp;        public S load() {
+&nbsp;            return this.annotationType == this.annotation.annotationType() ? this.annotation : AnnotationDescription.AnnotationInvocationHandler.of(this.annotationType.getClassLoader(), this.annotationType, asValue(this.annotation));
+&nbsp;        }
+&nbsp;
+&nbsp;        private static Map&lt;String, AnnotationValue&lt;?, ?&gt;&gt; asValue(Annotation annotation) {
+&nbsp;            Map&lt;String, AnnotationValue&lt;?, ?&gt;&gt; annotationValues = new HashMap();
+&nbsp;            Method[] var2 = annotation.annotationType().getDeclaredMethods();
+&nbsp;            int var3 = var2.length;
+&nbsp;
+&nbsp;            for(int var4 = 0; var4 &lt; var3; ++var4) {
+&nbsp;                Method property = var2[var4];
+&nbsp;
+&nbsp;                try {
+&nbsp;                    annotationValues.put(property.getName(), asValue(property.invoke(annotation, NO_ARGUMENT), property.getReturnType()));
+&nbsp;                } catch (InvocationTargetException var8) {
+&nbsp;                    Throwable cause = var8.getTargetException();
+&nbsp;                    if (cause instanceof TypeNotPresentException) {
+&nbsp;                        annotationValues.put(property.getName(), new AnnotationValue.ForMissingType(((TypeNotPresentException)cause).typeName()));
+&nbsp;                    } else if (cause instanceof EnumConstantNotPresentException) {
+&nbsp;                        annotationValues.put(property.getName(), new AnnotationValue.ForEnumerationDescription.WithUnknownConstant(new TypeDescription.ForLoadedType(((EnumConstantNotPresentException)cause).enumType()), ((EnumConstantNotPresentException)cause).constantName()));
+&nbsp;                    } else if (cause instanceof AnnotationTypeMismatchException) {
+&nbsp;                        annotationValues.put(property.getName(), new AnnotationValue.ForMismatchedType(new MethodDescription.ForLoadedMethod(((AnnotationTypeMismatchException)cause).element()), ((AnnotationTypeMismatchException)cause).foundType()));
+&nbsp;                    } else if (!(cause instanceof IncompleteAnnotationException)) {
+&nbsp;                        throw new IllegalStateException(&quot;Cannot read &quot; + property, cause);
+<b class="fc">&nbsp;                    }</b>
+&nbsp;                } catch (IllegalAccessException var9) {
+&nbsp;                    throw new IllegalStateException(&quot;Cannot access &quot; + property, var9);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            return annotationValues;
+&nbsp;        }
+&nbsp;
+&nbsp;        public static AnnotationValue&lt;?, ?&gt; asValue(Object value, Class&lt;?&gt; type) {
+&nbsp;            if (Enum.class.isAssignableFrom(type)) {
+&nbsp;                return ForEnumerationDescription.of(new EnumerationDescription.ForLoadedEnumeration((Enum)value));
+&nbsp;            } else {
+&nbsp;                int index;
+&nbsp;                int var6;
+&nbsp;                int var7;
+&nbsp;                if (Enum[].class.isAssignableFrom(type)) {
+&nbsp;                    Enum&lt;?&gt;[] element = (Enum[])((Enum[])value);
+&nbsp;                    EnumerationDescription[] enumerationDescription = new EnumerationDescription[element.length];
+&nbsp;                    index = 0;
+&nbsp;                    Enum[] var14 = element;
+&nbsp;                    var6 = element.length;
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                    for(var7 = 0; var7 &lt; var6; ++var7) {</b>
+<b class="fc">&nbsp;                        Enum&lt;?&gt; anElement = var14[var7];</b>
+<b class="fc">&nbsp;                        enumerationDescription[index++] = new EnumerationDescription.ForLoadedEnumeration(anElement);</b>
+&nbsp;                    }
+&nbsp;
+<b class="fc">&nbsp;                    return ForDescriptionArray.of(ForLoadedType.of(type.getComponentType()), enumerationDescription);</b>
+<b class="fc">&nbsp;                } else if (Annotation.class.isAssignableFrom(type)) {</b>
+<b class="fc">&nbsp;                    return ForAnnotationDescription.of(ForLoadedType.of(type), asValue((Annotation)value));</b>
+<b class="fc">&nbsp;                } else if (Annotation[].class.isAssignableFrom(type)) {</b>
+<b class="fc">&nbsp;                    Annotation[] element = (Annotation[])((Annotation[])value);</b>
+<b class="fc">&nbsp;                    AnnotationDescription[] annotationDescription = new AnnotationDescription[element.length];</b>
+<b class="fc">&nbsp;                    index = 0;</b>
+<b class="fc">&nbsp;                    Annotation[] var13 = element;</b>
+&nbsp;                    var6 = element.length;
+&nbsp;
+&nbsp;                    for(var7 = 0; var7 &lt; var6; ++var7) {
+&nbsp;                        Annotation anElement = var13[var7];
+&nbsp;                        annotationDescription[index++] = new Latent(ForLoadedType.of(type.getComponentType()), asValue(anElement));
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return ForDescriptionArray.of(ForLoadedType.of(type.getComponentType()), annotationDescription);
+&nbsp;                } else if (Class.class.isAssignableFrom(type)) {
+&nbsp;                    return ForTypeDescription.of(ForLoadedType.of((Class)value));
+&nbsp;                } else if (!Class[].class.isAssignableFrom(type)) {
+&nbsp;                    return ForConstant.of(value);
+&nbsp;                } else {
+&nbsp;                    Class&lt;?&gt;[] element = (Class[])((Class[])value);
+&nbsp;                    TypeDescription[] typeDescription = new TypeDescription[element.length];
+&nbsp;                    index = 0;
+&nbsp;                    Class[] var5 = element;
+&nbsp;                    var6 = element.length;
+&nbsp;
+&nbsp;                    for(var7 = 0; var7 &lt; var6; ++var7) {
+&nbsp;                        Class&lt;?&gt; anElement = var5[var7];
+<b class="fc">&nbsp;                        typeDescription[index++] = ForLoadedType.of(anElement);</b>
+<b class="fc">&nbsp;                    }</b>
+&nbsp;
+<b class="fc">&nbsp;                    return ForDescriptionArray.of(typeDescription);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressFBWarnings(
+&nbsp;            value = {&quot;REC_CATCH_EXCEPTION&quot;},
+&nbsp;            justification = &quot;Exception should always be wrapped for clarity.&quot;
+&nbsp;        )
+&nbsp;        public AnnotationValue&lt;?, ?&gt; getValue(MethodDescription.InDefinedShape property) {
+&nbsp;            if (!property.getDeclaringType().represents(this.annotation.annotationType())) {
+&nbsp;                throw new IllegalArgumentException(property + &quot; does not represent &quot; + this.annotation.annotationType());
+&nbsp;            } else {
+&nbsp;                try {
+&nbsp;                    boolean accessible = property.getDeclaringType().isPublic();
+&nbsp;                    Method method = property instanceof MethodDescription.ForLoadedMethod ? ((MethodDescription.ForLoadedMethod)property).getLoadedMethod() : null;
+&nbsp;                    if (method == null || method.getDeclaringClass() != this.annotation.annotationType() || !accessible &amp;&amp; !method.isAccessible()) {
+&nbsp;                        method = this.annotation.annotationType().getMethod(property.getName());
+&nbsp;                        if (!accessible) {
+&nbsp;                            doPrivileged(new SetAccessibleAction(method));
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return asValue(method.invoke(this.annotation, NO_ARGUMENT), method.getReturnType()).filter(property);
+&nbsp;                } catch (InvocationTargetException var4) {
+&nbsp;                    Throwable cause = var4.getTargetException();
+&nbsp;                    if (cause instanceof TypeNotPresentException) {
+&nbsp;                        return new AnnotationValue.ForMissingType(((TypeNotPresentException)cause).typeName());
+&nbsp;                    } else if (cause instanceof EnumConstantNotPresentException) {
+&nbsp;                        return new AnnotationValue.ForEnumerationDescription.WithUnknownConstant(new TypeDescription.ForLoadedType(((EnumConstantNotPresentException)cause).enumType()), ((EnumConstantNotPresentException)cause).constantName());
+<b class="fc">&nbsp;                    } else if (cause instanceof AnnotationTypeMismatchException) {</b>
+<b class="fc">&nbsp;                        return new AnnotationValue.ForMismatchedType(new MethodDescription.ForLoadedMethod(((AnnotationTypeMismatchException)cause).element()), ((AnnotationTypeMismatchException)cause).foundType());</b>
+<b class="fc">&nbsp;                    } else if (cause instanceof IncompleteAnnotationException) {</b>
+<b class="fc">&nbsp;                        return new AnnotationValue.ForMissingValue(new TypeDescription.ForLoadedType(((IncompleteAnnotationException)cause).annotationType()), ((IncompleteAnnotationException)cause).elementName());</b>
+<b class="fc">&nbsp;                    } else {</b>
+&nbsp;                        throw new IllegalStateException(&quot;Error reading annotation property &quot; + property, cause);
+&nbsp;                    }
+&nbsp;                } catch (Exception var5) {
+&nbsp;                    throw new IllegalStateException(&quot;Cannot access annotation property &quot; + property, var5);
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public &lt;T extends Annotation&gt; Loadable&lt;T&gt; prepare(Class&lt;T&gt; annotationType) {
+&nbsp;            if (!this.annotation.annotationType().getName().equals(annotationType.getName())) {
+&nbsp;                throw new IllegalArgumentException(annotationType + &quot; does not represent &quot; + this.annotation.annotationType());
+&nbsp;            } else {
+&nbsp;                return annotationType == this.annotation.annotationType() ? this : new ForLoadedAnnotation(this.annotation, annotationType);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeDescription getAnnotationType() {
+&nbsp;            return ForLoadedType.of(this.annotation.annotationType());
+&nbsp;        }
+&nbsp;
+&nbsp;        static {
+&nbsp;            try {
+&nbsp;                Class.forName(&quot;java.security.AccessController&quot;, false, (ClassLoader)null);
+&nbsp;                ACCESS_CONTROLLER = Boolean.parseBoolean(System.getProperty(&quot;net.bytebuddy.securitymanager&quot;, &quot;true&quot;));
+&nbsp;            } catch (ClassNotFoundException var0) {
+&nbsp;                ACCESS_CONTROLLER = false;
+&nbsp;            } catch (SecurityException var1) {
+&nbsp;                ACCESS_CONTROLLER = true;
+&nbsp;            }
+&nbsp;
+&nbsp;            NO_ARGUMENT = new Object[0];
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract static class AbstractBase implements AnnotationDescription {
+&nbsp;        private static final Set&lt;ElementType&gt; DEFAULT_TARGET = new HashSet();
+&nbsp;        private static final MethodDescription.InDefinedShape RETENTION_VALUE;
+&nbsp;        private static final MethodDescription.InDefinedShape TARGET_VALUE;
+&nbsp;
+&nbsp;        public AbstractBase() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public AnnotationValue&lt;?, ?&gt; getValue(String property) {
+&nbsp;            MethodList&lt;MethodDescription.InDefinedShape&gt; candidates = (MethodList)this.getAnnotationType().getDeclaredMethods().filter(ElementMatchers.named(property).and(ElementMatchers.takesArguments(0)).and(ElementMatchers.isPublic()).and(ElementMatchers.not(ElementMatchers.isStatic())));
+&nbsp;            if (candidates.size() == 1) {
+&nbsp;                return this.getValue((MethodDescription.InDefinedShape)candidates.getOnly());
+&nbsp;            } else {
+&nbsp;                throw new IllegalArgumentException(&quot;Unknown property of &quot; + this.getAnnotationType() + &quot;: &quot; + property);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public RetentionPolicy getRetention() {
+&nbsp;            Loadable&lt;Retention&gt; retention = this.getAnnotationType().getDeclaredAnnotations().ofType(Retention.class);
+<b class="fc">&nbsp;            return retention == null ? RetentionPolicy.CLASS : (RetentionPolicy)retention.getValue(RETENTION_VALUE).load(ClassLoadingStrategy.BOOTSTRAP_LOADER).resolve(RetentionPolicy.class);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Set&lt;ElementType&gt; getElementTypes() {
+&nbsp;            Loadable&lt;Target&gt; target = this.getAnnotationType().getDeclaredAnnotations().ofType(Target.class);
+&nbsp;            return (Set)(target == null ? Collections.unmodifiableSet(DEFAULT_TARGET) : new HashSet(Arrays.asList((Object[])target.getValue(TARGET_VALUE).load(ClassLoadingStrategy.BOOTSTRAP_LOADER).resolve(ElementType[].class))));
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isInherited() {
+&nbsp;            return this.getAnnotationType().getDeclaredAnnotations().isAnnotationPresent(Inherited.class);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isDocumented() {
+&nbsp;            return this.getAnnotationType().getDeclaredAnnotations().isAnnotationPresent(Documented.class);
+&nbsp;        }
+&nbsp;
+&nbsp;        @net.bytebuddy.build.CachedReturnPlugin.Enhance(&quot;hashCode&quot;)
+&nbsp;        public int hashCode() {
+&nbsp;            int var1 = this.hashCode;
+&nbsp;            int var10000;
+<b class="fc">&nbsp;            if (var1 != 0) {</b>
+&nbsp;                var10000 = 0;
+&nbsp;            } else {
+&nbsp;                AbstractBase var2 = this;
+&nbsp;                int hashCode = 0;
+&nbsp;
+&nbsp;                MethodDescription.InDefinedShape methodDescription;
+&nbsp;                for(Iterator var4 = this.getAnnotationType().getDeclaredMethods().iterator(); var4.hasNext(); hashCode += 31 * var2.getValue(methodDescription).hashCode()) {
+&nbsp;                    methodDescription = (MethodDescription.InDefinedShape)var4.next();
+&nbsp;                }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                var10000 = hashCode;</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            int var7 = var10000;
+&nbsp;            if (var7 == 0) {
+&nbsp;                var7 = this.hashCode;
+&nbsp;            } else {
+&nbsp;                this.hashCode = var7;
+&nbsp;            }
+&nbsp;
+&nbsp;            return var7;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(@CheckForNull Object other) {
+&nbsp;            if (this == other) {
+&nbsp;                return true;
+&nbsp;            } else if (!(other instanceof AnnotationDescription)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                AnnotationDescription annotationDescription = (AnnotationDescription)other;
+&nbsp;                TypeDescription annotationType = this.getAnnotationType();
+&nbsp;                if (!annotationDescription.getAnnotationType().equals(annotationType)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+<b class="fc">&nbsp;                    Iterator var4 = annotationType.getDeclaredMethods().iterator();</b>
+&nbsp;
+&nbsp;                    MethodDescription.InDefinedShape methodDescription;
+&nbsp;                    do {
+&nbsp;                        if (!var4.hasNext()) {
+&nbsp;                            return true;
+&nbsp;                        }
+&nbsp;
+&nbsp;                        methodDescription = (MethodDescription.InDefinedShape)var4.next();
+&nbsp;                    } while(this.getValue(methodDescription).equals(annotationDescription.getValue(methodDescription)));
+&nbsp;
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public String toString() {
+&nbsp;            TypeDescription annotationType = this.getAnnotationType();
+&nbsp;            StringBuilder toString = (new StringBuilder()).append(&#39;@&#39;).append(annotationType.getName()).append(&#39;(&#39;);
+&nbsp;            boolean firstMember = true;
+&nbsp;            Iterator var4 = annotationType.getDeclaredMethods().iterator();
+&nbsp;
+&nbsp;            while(var4.hasNext()) {
+&nbsp;                MethodDescription.InDefinedShape methodDescription = (MethodDescription.InDefinedShape)var4.next();
+&nbsp;                AnnotationValue&lt;?, ?&gt; value = this.getValue(methodDescription);
+&nbsp;                if (value.getState() != State.UNDEFINED) {
+&nbsp;                    if (firstMember) {
+&nbsp;                        firstMember = false;
+&nbsp;                    } else {
+&nbsp;                        toString.append(&quot;, &quot;);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    AnnotationDescription.RenderingDispatcher.CURRENT.appendPrefix(toString, methodDescription.getName(), annotationType.getDeclaredMethods().size());
+&nbsp;                    toString.append(value);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            return toString.append(&#39;)&#39;).toString();
+&nbsp;        }
+&nbsp;
+&nbsp;        static {
+&nbsp;            ElementType[] var0 = ElementType.values();
+&nbsp;            int var1 = var0.length;
+&nbsp;
+&nbsp;            for(int var2 = 0; var2 &lt; var1; ++var2) {
+&nbsp;                ElementType elementType = var0[var2];
+&nbsp;                if (!elementType.name().equals(&quot;TYPE_PARAMETER&quot;)) {
+&nbsp;                    DEFAULT_TARGET.add(elementType);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            RETENTION_VALUE = (MethodDescription.InDefinedShape)((MethodList)ForLoadedType.of(Retention.class).getDeclaredMethods().filter(ElementMatchers.named(&quot;value&quot;))).getOnly();
+&nbsp;            TARGET_VALUE = (MethodDescription.InDefinedShape)((MethodList)ForLoadedType.of(Target.class).getDeclaredMethods().filter(ElementMatchers.named(&quot;value&quot;))).getOnly();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public static class AnnotationInvocationHandler&lt;T extends Annotation&gt; implements InvocationHandler {</b>
+<b class="fc">&nbsp;        private static final String HASH_CODE = &quot;hashCode&quot;;</b>
+<b class="fc">&nbsp;        private static final String EQUALS = &quot;equals&quot;;</b>
+&nbsp;        private static final String TO_STRING = &quot;toString&quot;;
+&nbsp;        private static final String ANNOTATION_TYPE = &quot;annotationType&quot;;
+&nbsp;        private static final Object[] NO_ARGUMENT = new Object[0];
+&nbsp;        private final Class&lt;? extends Annotation&gt; annotationType;
+&nbsp;        private final LinkedHashMap&lt;Method, AnnotationValue.Loaded&lt;?&gt;&gt; values;
+&nbsp;
+&nbsp;        protected AnnotationInvocationHandler(Class&lt;T&gt; annotationType, LinkedHashMap&lt;Method, AnnotationValue.Loaded&lt;?&gt;&gt; values) {
+<b class="fc">&nbsp;            this.annotationType = annotationType;</b>
+&nbsp;            this.values = values;
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public static &lt;S extends Annotation&gt; S of(@Nonnull(when = When.MAYBE) ClassLoader classLoader, Class&lt;S&gt; annotationType, Map&lt;String, ? extends AnnotationValue&lt;?, ?&gt;&gt; values) {
+&nbsp;            LinkedHashMap&lt;Method, AnnotationValue.Loaded&lt;?&gt;&gt; loadedValues = new LinkedHashMap();
+&nbsp;            Method[] var4 = annotationType.getDeclaredMethods();
+&nbsp;            int var5 = var4.length;
+&nbsp;
+&nbsp;            for(int var6 = 0; var6 &lt; var5; ++var6) {
+<b class="fc">&nbsp;                Method method = var4[var6];</b>
+<b class="fc">&nbsp;                AnnotationValue&lt;?, ?&gt; annotationValue = (AnnotationValue)values.get(method.getName());</b>
+<b class="fc">&nbsp;                if (annotationValue == null) {</b>
+&nbsp;                    Object defaultValue = method.getDefaultValue();
+&nbsp;                    loadedValues.put(method, ((AnnotationValue)(defaultValue == null ? new AnnotationValue.ForMissingValue(new TypeDescription.ForLoadedType(method.getDeclaringClass()), method.getName()) : AnnotationDescription.ForLoadedAnnotation.asValue(defaultValue, method.getReturnType()))).load(classLoader));
+&nbsp;                } else {
+&nbsp;                    loadedValues.put(method, annotationValue.filter(new MethodDescription.ForLoadedMethod(method)).load(classLoader));
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            return (Annotation)Proxy.newProxyInstance(classLoader, new Class[]{annotationType}, new AnnotationInvocationHandler(annotationType, loadedValues));
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public Object invoke(Object proxy, Method method, @Nonnull(when = When.MAYBE) Object[] argument) {
+&nbsp;            if (method.getDeclaringClass() != this.annotationType) {
+&nbsp;                if (method.getName().equals(&quot;hashCode&quot;)) {
+&nbsp;                    return this.hashCodeRepresentation();
+&nbsp;                } else if (method.getName().equals(&quot;equals&quot;) &amp;&amp; method.getParameterTypes().length == 1) {
+&nbsp;                    return this.equalsRepresentation(proxy, argument[0]);
+&nbsp;                } else if (method.getName().equals(&quot;toString&quot;)) {
+&nbsp;                    return this.toStringRepresentation();
+<b class="fc">&nbsp;                } else if (method.getName().equals(&quot;annotationType&quot;)) {</b>
+&nbsp;                    return this.annotationType;
+&nbsp;                } else {
+&nbsp;                    throw new IllegalStateException(&quot;Unexpected method: &quot; + method);
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;            } else {</b>
+<b class="fc">&nbsp;                return ((AnnotationValue.Loaded)this.values.get(method)).resolve();</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        protected String toStringRepresentation() {
+&nbsp;            StringBuilder toString = new StringBuilder();
+&nbsp;            toString.append(&#39;@&#39;);
+&nbsp;            toString.append(this.annotationType.getName());
+<b class="fc">&nbsp;            toString.append(&#39;(&#39;);</b>
+&nbsp;            boolean firstMember = true;
+&nbsp;            Iterator var3 = this.values.entrySet().iterator();
+&nbsp;
+&nbsp;            while(var3.hasNext()) {
+&nbsp;                Map.Entry&lt;Method, AnnotationValue.Loaded&lt;?&gt;&gt; entry = (Map.Entry)var3.next();
+&nbsp;                if (((AnnotationValue.Loaded)entry.getValue()).getState().isDefined()) {
+&nbsp;                    if (firstMember) {
+&nbsp;                        firstMember = false;
+&nbsp;                    } else {
+&nbsp;                        toString.append(&quot;, &quot;);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    AnnotationDescription.RenderingDispatcher.CURRENT.appendPrefix(toString, ((Method)entry.getKey()).getName(), this.values.entrySet().size());
+&nbsp;                    toString.append(((AnnotationValue.Loaded)entry.getValue()).toString());
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            toString.append(&#39;)&#39;);
+&nbsp;            return toString.toString();
+&nbsp;        }
+&nbsp;
+&nbsp;        private int hashCodeRepresentation() {
+&nbsp;            int hashCode = 0;
+&nbsp;            Iterator var2 = this.values.entrySet().iterator();
+&nbsp;
+&nbsp;            while(var2.hasNext()) {
+&nbsp;                Map.Entry&lt;Method, AnnotationValue.Loaded&lt;?&gt;&gt; entry = (Map.Entry)var2.next();
+&nbsp;                if (((AnnotationValue.Loaded)entry.getValue()).getState().isDefined()) {
+&nbsp;                    hashCode += 127 * ((Method)entry.getKey()).getName().hashCode() ^ ((AnnotationValue.Loaded)entry.getValue()).hashCode();
+<b class="fc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return hashCode;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        private boolean equalsRepresentation(Object self, Object other) {
+&nbsp;            if (self == other) {
+&nbsp;                return true;
+&nbsp;            } else if (!this.annotationType.isInstance(other)) {
+&nbsp;                return false;
+&nbsp;            } else {
+<b class="fc">&nbsp;                if (Proxy.isProxyClass(other.getClass())) {</b>
+&nbsp;                    InvocationHandler invocationHandler = Proxy.getInvocationHandler(other);
+&nbsp;                    if (invocationHandler instanceof AnnotationInvocationHandler) {
+&nbsp;                        return invocationHandler.equals(this);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                try {
+&nbsp;                    Iterator var9 = this.values.entrySet().iterator();
+&nbsp;
+&nbsp;                    while(var9.hasNext()) {
+&nbsp;                        Map.Entry&lt;Method, AnnotationValue.Loaded&lt;?&gt;&gt; entry = (Map.Entry)var9.next();
+&nbsp;
+&nbsp;                        try {
+&nbsp;                            if (!((AnnotationValue.Loaded)entry.getValue()).represents(((Method)entry.getKey()).invoke(other, NO_ARGUMENT))) {
+&nbsp;                                return false;
+&nbsp;                            }
+&nbsp;                        } catch (RuntimeException var6) {
+&nbsp;                            return false;
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return true;
+&nbsp;                } catch (InvocationTargetException var7) {
+&nbsp;                    return false;
+&nbsp;                } catch (IllegalAccessException var8) {
+&nbsp;                    throw new IllegalStateException(&quot;Could not access annotation property&quot;, var8);
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @net.bytebuddy.build.CachedReturnPlugin.Enhance(&quot;hashCode&quot;)
+&nbsp;        public int hashCode() {
+&nbsp;            int var1 = this.hashCode;
+&nbsp;            int var10000;
+&nbsp;            if (var1 != 0) {
+&nbsp;                var10000 = 0;
+&nbsp;            } else {
+&nbsp;                int result = this.annotationType.hashCode();
+&nbsp;                result = 31 * result + this.values.hashCode();
+&nbsp;
+&nbsp;                Map.Entry entry;
+&nbsp;                for(Iterator var4 = this.values.entrySet().iterator(); var4.hasNext(); result = 31 * result + entry.getValue().hashCode()) {
+&nbsp;                    entry = (Map.Entry)var4.next();
+&nbsp;                }
+&nbsp;
+&nbsp;                var10000 = result;
+&nbsp;            }
+&nbsp;
+&nbsp;            int var2 = var10000;
+&nbsp;            if (var2 == 0) {
+&nbsp;                var2 = this.hashCode;
+&nbsp;            } else {
+&nbsp;                this.hashCode = var2;
+&nbsp;            }
+&nbsp;
+&nbsp;            return var2;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(@CheckForNull Object other) {
+&nbsp;            if (this == other) {
+&nbsp;                return true;
+&nbsp;            } else if (!(other instanceof AnnotationInvocationHandler)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                AnnotationInvocationHandler&lt;?&gt; that = (AnnotationInvocationHandler)other;
+&nbsp;                if (!this.annotationType.equals(that.annotationType)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    Iterator var3 = this.values.entrySet().iterator();
+&nbsp;
+&nbsp;                    Map.Entry entry;
+&nbsp;                    do {
+&nbsp;                        if (!var3.hasNext()) {
+&nbsp;                            return true;
+&nbsp;                        }
+&nbsp;
+&nbsp;                        entry = (Map.Entry)var3.next();
+&nbsp;                    } while(((AnnotationValue.Loaded)entry.getValue()).equals(that.values.get(entry.getKey())));
+&nbsp;
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum RenderingDispatcher {
+&nbsp;        LEGACY_VM,
+&nbsp;        JAVA_14_CAPABLE_VM {
+&nbsp;            public void appendPrefix(StringBuilder toString, String key, int count) {
+&nbsp;                if (count &gt; 1 || !key.equals(&quot;value&quot;)) {
+&nbsp;                    super.appendPrefix(toString, key, count);
+&nbsp;                }
+&nbsp;
+&nbsp;            }
+&nbsp;        };
+&nbsp;
+&nbsp;        public static final RenderingDispatcher CURRENT;
+&nbsp;
+&nbsp;        private RenderingDispatcher() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public void appendPrefix(StringBuilder toString, String key, int count) {
+&nbsp;            toString.append(key).append(&#39;=&#39;);
+&nbsp;        }
+&nbsp;
+&nbsp;        static {
+&nbsp;            if (ClassFileVersion.ofThisVm(ClassFileVersion.JAVA_V5).isAtLeast(ClassFileVersion.JAVA_V14)) {
+&nbsp;                CURRENT = JAVA_14_CAPABLE_VM;
+&nbsp;            } else {
+&nbsp;                CURRENT = LEGACY_VM;
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface Loadable&lt;S extends Annotation&gt; extends AnnotationDescription {
+&nbsp;        S load();
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:49</div>
+</div>
+</body>
+</html>

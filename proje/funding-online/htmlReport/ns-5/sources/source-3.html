@@ -1,0 +1,357 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > LoggingEvent</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ch.qos.logback.classic.spi</a>
+</div>
+
+<h1>Coverage Summary for Class: LoggingEvent (ch.qos.logback.classic.spi)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoggingEvent</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (39/39)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package ch.qos.logback.classic.spi;
+&nbsp;
+&nbsp;import ch.qos.logback.classic.Level;
+&nbsp;import ch.qos.logback.classic.Logger;
+&nbsp;import ch.qos.logback.classic.LoggerContext;
+&nbsp;import ch.qos.logback.classic.util.LogbackMDCAdapter;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.ObjectOutputStream;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Map;
+&nbsp;import org.slf4j.MDC;
+&nbsp;import org.slf4j.Marker;
+&nbsp;import org.slf4j.helpers.MessageFormatter;
+&nbsp;import org.slf4j.spi.MDCAdapter;
+&nbsp;
+&nbsp;public class LoggingEvent implements ILoggingEvent {
+&nbsp;    transient String fqnOfLoggerClass;
+&nbsp;    private String threadName;
+&nbsp;    private String loggerName;
+&nbsp;    private LoggerContext loggerContext;
+&nbsp;    private LoggerContextVO loggerContextVO;
+&nbsp;    private transient Level level;
+&nbsp;    private String message;
+&nbsp;    transient String formattedMessage;
+&nbsp;    private transient Object[] argumentArray;
+&nbsp;    private ThrowableProxy throwableProxy;
+&nbsp;    private StackTraceElement[] callerDataArray;
+&nbsp;    private Marker marker;
+&nbsp;    private Map&lt;String, String&gt; mdcPropertyMap;
+&nbsp;    private long timeStamp;
+&nbsp;
+&nbsp;    public LoggingEvent() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public LoggingEvent(String fqcn, Logger logger, Level level, String message, Throwable throwable, Object[] argArray) {
+&nbsp;        this.fqnOfLoggerClass = fqcn;
+&nbsp;        this.loggerName = logger.getName();
+&nbsp;        this.loggerContext = logger.getLoggerContext();
+&nbsp;        this.loggerContextVO = this.loggerContext.getLoggerContextRemoteView();
+&nbsp;        this.level = level;
+&nbsp;        this.message = message;
+&nbsp;        this.argumentArray = argArray;
+&nbsp;        if (throwable == null) {
+&nbsp;            throwable = this.extractThrowableAnRearrangeArguments(argArray);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (throwable != null) {
+&nbsp;            this.throwableProxy = new ThrowableProxy(throwable);
+&nbsp;            LoggerContext lc = logger.getLoggerContext();
+&nbsp;            if (lc.isPackagingDataEnabled()) {
+&nbsp;                this.throwableProxy.calculatePackagingData();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        this.timeStamp = System.currentTimeMillis();
+&nbsp;    }
+&nbsp;
+&nbsp;    private Throwable extractThrowableAnRearrangeArguments(Object[] argArray) {
+&nbsp;        Throwable extractedThrowable = EventArgUtil.extractThrowable(argArray);
+&nbsp;        if (EventArgUtil.successfulExtraction(extractedThrowable)) {
+&nbsp;            this.argumentArray = EventArgUtil.trimmedCopy(argArray);
+&nbsp;        }
+&nbsp;
+&nbsp;        return extractedThrowable;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setArgumentArray(Object[] argArray) {
+&nbsp;        if (this.argumentArray != null) {
+&nbsp;            throw new IllegalStateException(&quot;argArray has been already set&quot;);
+&nbsp;        } else {
+&nbsp;            this.argumentArray = argArray;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object[] getArgumentArray() {
+&nbsp;        return this.argumentArray;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Level getLevel() {
+&nbsp;        return this.level;
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getLoggerName() {
+&nbsp;        return this.loggerName;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setLoggerName(String loggerName) {
+&nbsp;        this.loggerName = loggerName;
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getThreadName() {
+&nbsp;        if (this.threadName == null) {
+&nbsp;            this.threadName = Thread.currentThread().getName();
+&nbsp;        }
+&nbsp;
+&nbsp;        return this.threadName;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public void setThreadName(String threadName) throws IllegalStateException {</b>
+<b class="fc">&nbsp;        if (this.threadName != null) {</b>
+<b class="fc">&nbsp;            throw new IllegalStateException(&quot;threadName has been already set&quot;);</b>
+<b class="fc">&nbsp;        } else {</b>
+<b class="fc">&nbsp;            this.threadName = threadName;</b>
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public IThrowableProxy getThrowableProxy() {
+<b class="fc">&nbsp;        return this.throwableProxy;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void setThrowableProxy(ThrowableProxy tp) {
+<b class="fc">&nbsp;        if (this.throwableProxy != null) {</b>
+&nbsp;            throw new IllegalStateException(&quot;ThrowableProxy has been already set.&quot;);
+&nbsp;        } else {
+&nbsp;            this.throwableProxy = tp;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void prepareForDeferredProcessing() {
+<b class="fc">&nbsp;        this.getFormattedMessage();</b>
+&nbsp;        this.getThreadName();
+&nbsp;        this.getMDCPropertyMap();
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public LoggerContextVO getLoggerContextVO() {</b>
+&nbsp;        return this.loggerContextVO;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public void setLoggerContextRemoteView(LoggerContextVO loggerContextVO) {
+&nbsp;        this.loggerContextVO = loggerContextVO;
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getMessage() {
+&nbsp;        return this.message;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMessage(String message) {
+&nbsp;        if (this.message != null) {
+&nbsp;            throw new IllegalStateException(&quot;The message for this event has been set already.&quot;);
+&nbsp;        } else {
+&nbsp;            this.message = message;
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public long getTimeStamp() {
+&nbsp;        return this.timeStamp;
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void setTimeStamp(long timeStamp) {
+&nbsp;        this.timeStamp = timeStamp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setLevel(Level level) {
+&nbsp;        if (this.level != null) {
+<b class="fc">&nbsp;            throw new IllegalStateException(&quot;The level has been already set for this event.&quot;);</b>
+<b class="fc">&nbsp;        } else {</b>
+&nbsp;            this.level = level;
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public StackTraceElement[] getCallerData() {
+&nbsp;        if (this.callerDataArray == null) {
+&nbsp;            this.callerDataArray = CallerData.extract(new Throwable(), this.fqnOfLoggerClass, this.loggerContext.getMaxCallerDataDepth(), this.loggerContext.getFrameworkPackages());
+&nbsp;        }
+&nbsp;
+&nbsp;        return this.callerDataArray;
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasCallerData() {
+&nbsp;        return this.callerDataArray != null;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setCallerData(StackTraceElement[] callerDataArray) {
+&nbsp;        this.callerDataArray = callerDataArray;
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public Marker getMarker() {</b>
+&nbsp;        return this.marker;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMarker(Marker marker) {
+&nbsp;        if (this.marker != null) {
+&nbsp;            throw new IllegalStateException(&quot;The marker has been already set for this event.&quot;);
+&nbsp;        } else {
+&nbsp;            this.marker = marker;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getContextBirthTime() {
+&nbsp;        return this.loggerContextVO.getBirthTime();
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getFormattedMessage() {
+&nbsp;        if (this.formattedMessage != null) {
+&nbsp;            return this.formattedMessage;
+&nbsp;        } else {
+&nbsp;            if (this.argumentArray != null) {
+&nbsp;                this.formattedMessage = MessageFormatter.arrayFormat(this.message, this.argumentArray).getMessage();
+&nbsp;            } else {
+<b class="fc">&nbsp;                this.formattedMessage = this.message;</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+<b class="fc">&nbsp;            return this.formattedMessage;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Map&lt;String, String&gt; getMDCPropertyMap() {
+&nbsp;        if (this.mdcPropertyMap == null) {
+&nbsp;            MDCAdapter mdc = MDC.getMDCAdapter();
+&nbsp;            if (mdc instanceof LogbackMDCAdapter) {
+&nbsp;                this.mdcPropertyMap = ((LogbackMDCAdapter)mdc).getPropertyMap();
+&nbsp;            } else {
+&nbsp;                this.mdcPropertyMap = mdc.getCopyOfContextMap();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.mdcPropertyMap == null) {
+&nbsp;            this.mdcPropertyMap = Collections.emptyMap();
+&nbsp;        }
+&nbsp;
+&nbsp;        return this.mdcPropertyMap;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setMDCPropertyMap(Map&lt;String, String&gt; map) {
+&nbsp;        if (this.mdcPropertyMap != null) {
+<b class="fc">&nbsp;            throw new IllegalStateException(&quot;The MDCPropertyMap has been already set for this event.&quot;);</b>
+&nbsp;        } else {
+&nbsp;            this.mdcPropertyMap = map;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /** @deprecated */
+&nbsp;    public Map&lt;String, String&gt; getMdc() {
+&nbsp;        return this.getMDCPropertyMap();
+&nbsp;    }
+&nbsp;
+&nbsp;    public String toString() {
+&nbsp;        StringBuilder sb = new StringBuilder();
+&nbsp;        sb.append(&#39;[&#39;);
+&nbsp;        sb.append(this.level).append(&quot;] &quot;);
+&nbsp;        sb.append(this.getFormattedMessage());
+&nbsp;        return sb.toString();
+&nbsp;    }
+&nbsp;
+&nbsp;    private void writeObject(ObjectOutputStream out) throws IOException {
+&nbsp;        throw new UnsupportedOperationException(this.getClass() + &quot; does not support serialization. &quot; + &quot;Use LoggerEventVO instance instead. See also LoggerEventVO.build method.&quot;);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

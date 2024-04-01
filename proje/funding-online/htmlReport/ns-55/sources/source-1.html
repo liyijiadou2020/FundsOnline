@@ -1,0 +1,278 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ByteBuddyCrossClassLoaderSerializationSupport</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.creation.bytebuddy</a>
+</div>
+
+<h1>Coverage Summary for Class: ByteBuddyCrossClassLoaderSerializationSupport (org.mockito.internal.creation.bytebuddy)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ByteBuddyCrossClassLoaderSerializationSupport</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.creation.bytebuddy;
+&nbsp;
+&nbsp;import java.io.ByteArrayInputStream;
+&nbsp;import java.io.ByteArrayOutputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.io.ObjectInputStream;
+&nbsp;import java.io.ObjectOutputStream;
+&nbsp;import java.io.ObjectStreamClass;
+&nbsp;import java.io.ObjectStreamException;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.concurrent.locks.Lock;
+&nbsp;import java.util.concurrent.locks.ReentrantLock;
+&nbsp;import org.mockito.exceptions.base.MockitoSerializationIssue;
+&nbsp;import org.mockito.internal.configuration.plugins.Plugins;
+&nbsp;import org.mockito.internal.creation.settings.CreationSettings;
+&nbsp;import org.mockito.internal.util.MockUtil;
+&nbsp;import org.mockito.internal.util.StringUtil;
+&nbsp;import org.mockito.mock.MockCreationSettings;
+&nbsp;import org.mockito.mock.MockName;
+&nbsp;import org.mockito.mock.SerializableMode;
+&nbsp;import org.mockito.plugins.MemberAccessor;
+&nbsp;
+&nbsp;class ByteBuddyCrossClassLoaderSerializationSupport implements Serializable {
+&nbsp;    private static final long serialVersionUID = 7411152578314420778L;
+&nbsp;    private static final String MOCKITO_PROXY_MARKER = &quot;ByteBuddyMockitoProxyMarker&quot;;
+&nbsp;    private boolean instanceLocalCurrentlySerializingFlag = false;
+&nbsp;    private final Lock mutex = new ReentrantLock();
+&nbsp;
+&nbsp;    ByteBuddyCrossClassLoaderSerializationSupport() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public Object writeReplace(Object mockitoMock) throws ObjectStreamException {
+&nbsp;        this.mutex.lock();
+&nbsp;
+&nbsp;        Object var2;
+&nbsp;        try {
+&nbsp;            if (!this.mockIsCurrentlyBeingReplaced()) {
+&nbsp;                this.mockReplacementStarted();
+&nbsp;                CrossClassLoaderSerializationProxy var10 = new CrossClassLoaderSerializationProxy(mockitoMock);
+&nbsp;                return var10;
+&nbsp;            }
+&nbsp;
+&nbsp;            var2 = mockitoMock;
+&nbsp;        } catch (IOException var8) {
+&nbsp;            MockName mockName = MockUtil.getMockName(mockitoMock);
+&nbsp;            String mockedType = MockUtil.getMockSettings(mockitoMock).getTypeToMock().getCanonicalName();
+&nbsp;            throw new MockitoSerializationIssue(StringUtil.join(new Object[]{&quot;The mock &#39;&quot; + mockName + &quot;&#39; of type &#39;&quot; + mockedType + &quot;&#39;&quot;, &quot;The Java Standard Serialization reported an &#39;&quot; + var8.getClass().getSimpleName() + &quot;&#39; saying :&quot;, &quot;  &quot; + var8.getMessage()}), var8);
+&nbsp;        } finally {
+&nbsp;            this.mockReplacementCompleted();
+&nbsp;            this.mutex.unlock();
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        return var2;
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    private void mockReplacementCompleted() {
+&nbsp;        this.instanceLocalCurrentlySerializingFlag = false;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void mockReplacementStarted() {
+&nbsp;        this.instanceLocalCurrentlySerializingFlag = true;
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean mockIsCurrentlyBeingReplaced() {
+&nbsp;        return this.instanceLocalCurrentlySerializingFlag;
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface CrossClassLoaderSerializableMock {
+&nbsp;        Object writeReplace();
+&nbsp;    }
+&nbsp;
+&nbsp;    private static class MockitoMockObjectOutputStream extends ObjectOutputStream {
+&nbsp;        private static final String NOTHING = &quot;&quot;;
+&nbsp;
+&nbsp;        public MockitoMockObjectOutputStream(ByteArrayOutputStream out) throws IOException {
+&nbsp;            super(out);
+&nbsp;        }
+&nbsp;
+&nbsp;        protected void annotateClass(Class&lt;?&gt; cl) throws IOException {
+&nbsp;            this.writeObject(this.mockitoProxyClassMarker(cl));
+&nbsp;        }
+&nbsp;
+&nbsp;        private String mockitoProxyClassMarker(Class&lt;?&gt; cl) {
+&nbsp;            return CrossClassLoaderSerializableMock.class.isAssignableFrom(cl) ? &quot;ByteBuddyMockitoProxyMarker&quot; : &quot;&quot;;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class MockitoMockObjectInputStream extends ObjectInputStream {
+&nbsp;        private final Class&lt;?&gt; typeToMock;
+&nbsp;        private final Set&lt;Class&lt;?&gt;&gt; extraInterfaces;
+&nbsp;
+&nbsp;        public MockitoMockObjectInputStream(InputStream in, Class&lt;?&gt; typeToMock, Set&lt;Class&lt;?&gt;&gt; extraInterfaces) throws IOException {
+&nbsp;            super(in);
+&nbsp;            this.typeToMock = typeToMock;
+&nbsp;            this.extraInterfaces = extraInterfaces;
+&nbsp;            this.enableResolveObject(true);
+&nbsp;        }
+&nbsp;
+&nbsp;        protected Class&lt;?&gt; resolveClass(ObjectStreamClass desc) throws IOException, ClassNotFoundException {
+&nbsp;            if (this.notMarkedAsAMockitoMock(this.readObject())) {
+&nbsp;                return super.resolveClass(desc);
+&nbsp;            } else {
+&nbsp;                try {
+&nbsp;                    Class&lt;?&gt; proxyClass = ((ClassCreatingMockMaker)Plugins.getMockMaker()).createMockType((new CreationSettings()).setTypeToMock(this.typeToMock).setExtraInterfaces(this.extraInterfaces).setSerializableMode(SerializableMode.ACROSS_CLASSLOADERS));
+&nbsp;                    this.hackClassNameToMatchNewlyCreatedClass(desc, proxyClass);
+&nbsp;                    return proxyClass;
+&nbsp;                } catch (ClassCastException var3) {
+&nbsp;                    throw new MockitoSerializationIssue(StringUtil.join(new Object[]{&quot;A Byte Buddy-generated mock cannot be deserialized into a non-Byte Buddy generated mock class&quot;, &quot;&quot;, &quot;The mock maker in use was: &quot; + Plugins.getMockMaker().getClass()}), var3);
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        private void hackClassNameToMatchNewlyCreatedClass(ObjectStreamClass descInstance, Class&lt;?&gt; proxyClass) throws ObjectStreamException {
+&nbsp;            try {
+&nbsp;                MemberAccessor accessor = Plugins.getMemberAccessor();
+&nbsp;                Field classNameField = descInstance.getClass().getDeclaredField(&quot;name&quot;);
+&nbsp;
+&nbsp;                try {
+&nbsp;                    accessor.set(classNameField, descInstance, proxyClass.getCanonicalName());
+&nbsp;                } catch (IllegalAccessException var6) {
+&nbsp;                    throw new MockitoSerializationIssue(&quot;Access to &quot; + classNameField + &quot; was denied&quot;, var6);
+&nbsp;                }
+&nbsp;            } catch (NoSuchFieldException var7) {
+&nbsp;                throw new MockitoSerializationIssue(StringUtil.join(new Object[]{&quot;Wow, the class &#39;ObjectStreamClass&#39; in the JDK don&#39;t have the field &#39;name&#39;,&quot;, &quot;this is definitely a bug in our code as it means the JDK team changed a few internal things.&quot;, &quot;&quot;, &quot;Please report an issue with the JDK used, a code sample and a link to download the JDK would be welcome.&quot;}), var7);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        private boolean notMarkedAsAMockitoMock(Object marker) {
+&nbsp;            return !&quot;ByteBuddyMockitoProxyMarker&quot;.equals(marker);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class CrossClassLoaderSerializationProxy implements Serializable {
+&nbsp;        private static final long serialVersionUID = -7600267929109286514L;
+&nbsp;        private final byte[] serializedMock;
+&nbsp;        private final Class&lt;?&gt; typeToMock;
+&nbsp;        private final Set&lt;Class&lt;?&gt;&gt; extraInterfaces;
+&nbsp;
+&nbsp;        public CrossClassLoaderSerializationProxy(Object mockitoMock) throws IOException {
+&nbsp;            ByteArrayOutputStream out = new ByteArrayOutputStream();
+&nbsp;            ObjectOutputStream objectOutputStream = new MockitoMockObjectOutputStream(out);
+&nbsp;            objectOutputStream.writeObject(mockitoMock);
+&nbsp;            objectOutputStream.close();
+&nbsp;            out.close();
+&nbsp;            MockCreationSettings&lt;?&gt; mockSettings = MockUtil.getMockSettings(mockitoMock);
+&nbsp;            this.serializedMock = out.toByteArray();
+&nbsp;            this.typeToMock = mockSettings.getTypeToMock();
+&nbsp;            this.extraInterfaces = mockSettings.getExtraInterfaces();
+&nbsp;        }
+&nbsp;
+&nbsp;        private Object readResolve() throws ObjectStreamException {
+&nbsp;            try {
+&nbsp;                ByteArrayInputStream bis = new ByteArrayInputStream(this.serializedMock);
+&nbsp;                ObjectInputStream objectInputStream = new MockitoMockObjectInputStream(bis, this.typeToMock, this.extraInterfaces);
+&nbsp;                Object deserializedMock = objectInputStream.readObject();
+&nbsp;                bis.close();
+&nbsp;                objectInputStream.close();
+&nbsp;                return deserializedMock;
+&nbsp;            } catch (IOException var4) {
+&nbsp;                throw new MockitoSerializationIssue(StringUtil.join(new Object[]{&quot;Mockito mock cannot be deserialized to a mock of &#39;&quot; + this.typeToMock.getCanonicalName() + &quot;&#39;. The error was :&quot;, &quot;  &quot; + var4.getMessage(), &quot;If you are unsure what is the reason of this exception, feel free to contact us on the mailing list.&quot;}), var4);
+&nbsp;            } catch (ClassNotFoundException var5) {
+&nbsp;                throw new MockitoSerializationIssue(StringUtil.join(new Object[]{&quot;A class couldn&#39;t be found while deserializing a Mockito mock, you should check your classpath. The error was :&quot;, &quot;  &quot; + var5.getMessage(), &quot;If you are still unsure what is the reason of this exception, feel free to contact us on the mailing list.&quot;}), var5);
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

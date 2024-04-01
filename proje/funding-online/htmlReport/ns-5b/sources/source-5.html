@@ -1,0 +1,248 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > InvocationMatcher</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.invocation</a>
+</div>
+
+<h1>Coverage Summary for Class: InvocationMatcher (org.mockito.internal.invocation)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">InvocationMatcher</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (25/25)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">InvocationMatcher$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (28/28)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.invocation;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;import org.mockito.ArgumentMatcher;
+&nbsp;import org.mockito.internal.matchers.CapturesArguments;
+&nbsp;import org.mockito.internal.reporting.PrintSettings;
+&nbsp;import org.mockito.invocation.DescribedInvocation;
+&nbsp;import org.mockito.invocation.Invocation;
+&nbsp;import org.mockito.invocation.Location;
+&nbsp;import org.mockito.invocation.MatchableInvocation;
+&nbsp;
+&nbsp;public class InvocationMatcher implements MatchableInvocation, DescribedInvocation, Serializable {
+&nbsp;    private final Invocation invocation;
+&nbsp;    private final List&lt;ArgumentMatcher&lt;?&gt;&gt; matchers;
+&nbsp;
+&nbsp;    public InvocationMatcher(Invocation invocation, List&lt;ArgumentMatcher&gt; matchers) {
+&nbsp;        this.invocation = invocation;
+&nbsp;        if (matchers.isEmpty()) {
+&nbsp;            this.matchers = invocation.getArgumentsAsMatchers();
+&nbsp;        } else {
+&nbsp;            this.matchers = matchers;
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public InvocationMatcher(Invocation invocation) {</b>
+&nbsp;        this(invocation, Collections.emptyList());
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static List&lt;InvocationMatcher&gt; createFrom(List&lt;Invocation&gt; invocations) {
+&nbsp;        LinkedList&lt;InvocationMatcher&gt; out = new LinkedList();
+&nbsp;        Iterator var2 = invocations.iterator();
+&nbsp;
+&nbsp;        while(var2.hasNext()) {
+&nbsp;            Invocation i = (Invocation)var2.next();
+&nbsp;            out.add(new InvocationMatcher(i));
+&nbsp;        }
+&nbsp;
+&nbsp;        return out;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Method getMethod() {
+&nbsp;        return this.invocation.getMethod();
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public Invocation getInvocation() {</b>
+&nbsp;        return this.invocation;
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;ArgumentMatcher&gt; getMatchers() {
+<b class="fc">&nbsp;        return this.matchers;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String toString() {
+&nbsp;        return (new PrintSettings()).print(this.matchers, this.invocation);
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public boolean matches(Invocation candidate) {
+&nbsp;        return this.invocation.getMock() == candidate.getMock() &amp;&amp; this.hasSameMethod(candidate) &amp;&amp; this.argumentsMatch(candidate);
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasSimilarMethod(Invocation candidate) {
+&nbsp;        String wantedMethodName = this.getMethod().getName();
+&nbsp;        String candidateMethodName = candidate.getMethod().getName();
+&nbsp;        if (!wantedMethodName.equals(candidateMethodName)) {
+&nbsp;            return false;
+&nbsp;        } else if (candidate.isVerified()) {
+<b class="fc">&nbsp;            return false;</b>
+<b class="fc">&nbsp;        } else if (this.getInvocation().getMock() != candidate.getMock()) {</b>
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        } else if (this.hasSameMethod(candidate)) {
+&nbsp;            return true;
+&nbsp;        } else {
+&nbsp;            return !this.argumentsMatch(candidate);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean hasSameMethod(Invocation candidate) {
+&nbsp;        Method m1 = this.invocation.getMethod();
+&nbsp;        Method m2 = candidate.getMethod();
+&nbsp;        if (m1.getName() != null &amp;&amp; m1.getName().equals(m2.getName())) {
+&nbsp;            Class&lt;?&gt;[] params1 = m1.getParameterTypes();
+&nbsp;            Class&lt;?&gt;[] params2 = m2.getParameterTypes();
+&nbsp;            return Arrays.equals(params1, params2);
+&nbsp;        } else {
+&nbsp;            return false;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Location getLocation() {
+&nbsp;        return this.invocation.getLocation();
+&nbsp;    }
+&nbsp;
+&nbsp;    public void captureArgumentsFrom(Invocation invocation) {
+&nbsp;        MatcherApplicationStrategy strategy = MatcherApplicationStrategy.getMatcherApplicationStrategyFor(invocation, this.matchers);
+&nbsp;        strategy.forEachMatcherAndArgument(this.captureArgument());
+&nbsp;    }
+&nbsp;
+&nbsp;    private ArgumentMatcherAction captureArgument() {
+&nbsp;        return new ArgumentMatcherAction() {
+&nbsp;            public boolean apply(ArgumentMatcher&lt;?&gt; matcher, Object argument) {
+<b class="fc">&nbsp;                if (matcher instanceof CapturesArguments) {</b>
+<b class="fc">&nbsp;                    ((CapturesArguments)matcher).captureFrom(argument);</b>
+&nbsp;                }
+<b class="fc">&nbsp;</b>
+&nbsp;                return true;
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        };</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    private boolean argumentsMatch(Invocation actual) {</b>
+&nbsp;        List matchers = this.getMatchers();
+&nbsp;        return MatcherApplicationStrategy.getMatcherApplicationStrategyFor(actual, matchers).forEachMatcherAndArgument(TypeSafeMatching.matchesTypeSafe());
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

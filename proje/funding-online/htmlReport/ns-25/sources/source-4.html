@@ -1,0 +1,452 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > MultipleParentClassLoader</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.dynamic.loading</a>
+</div>
+
+<h1>Coverage Summary for Class: MultipleParentClassLoader (net.bytebuddy.dynamic.loading)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">MultipleParentClassLoader$Builder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (30/30)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (30/30)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.dynamic.loading;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;import java.io.IOException;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.net.URL;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Enumeration;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.NoSuchElementException;
+&nbsp;import java.util.Set;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.matcher.ElementMatcher;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;
+&nbsp;public class MultipleParentClassLoader extends InjectionClassLoader {
+&nbsp;    private final List&lt;? extends ClassLoader&gt; parents;
+&nbsp;
+&nbsp;    @SuppressFBWarnings(
+&nbsp;        value = {&quot;DP_DO_INSIDE_DO_PRIVILEGED&quot;},
+&nbsp;        justification = &quot;Must be invoked from targeting class loader type.&quot;
+&nbsp;    )
+&nbsp;    private static void doRegisterAsParallelCapable() {
+&nbsp;        try {
+&nbsp;            Method method = ClassLoader.class.getDeclaredMethod(&quot;registerAsParallelCapable&quot;);
+&nbsp;            method.setAccessible(true);
+&nbsp;            method.invoke((Object)null);
+&nbsp;        } catch (Throwable var1) {
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public MultipleParentClassLoader(List&lt;? extends ClassLoader&gt; parents) {
+&nbsp;        this(ClassLoadingStrategy.BOOTSTRAP_LOADER, parents);
+&nbsp;    }
+&nbsp;
+&nbsp;    public MultipleParentClassLoader(@Nonnull(when = When.MAYBE) ClassLoader parent, List&lt;? extends ClassLoader&gt; parents) {
+&nbsp;        this(parent, parents, true);
+&nbsp;    }
+&nbsp;
+&nbsp;    public MultipleParentClassLoader(@Nonnull(when = When.MAYBE) ClassLoader parent, List&lt;? extends ClassLoader&gt; parents, boolean sealed) {
+&nbsp;        super(parent, sealed);
+&nbsp;        this.parents = parents;
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Class&lt;?&gt; loadClass(String name, boolean resolve) throws ClassNotFoundException {
+&nbsp;        Iterator var3 = this.parents.iterator();
+&nbsp;
+&nbsp;        while(var3.hasNext()) {
+&nbsp;            ClassLoader parent = (ClassLoader)var3.next();
+&nbsp;
+&nbsp;            try {
+&nbsp;                Class&lt;?&gt; type = parent.loadClass(name);
+&nbsp;                if (resolve) {
+&nbsp;                    this.resolveClass(type);
+&nbsp;                }
+&nbsp;
+&nbsp;                return type;
+&nbsp;            } catch (ClassNotFoundException var6) {
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return super.loadClass(name, resolve);
+&nbsp;    }
+&nbsp;
+&nbsp;    public URL getResource(String name) {
+&nbsp;        Iterator var2 = this.parents.iterator();
+&nbsp;
+&nbsp;        URL url;
+&nbsp;        do {
+&nbsp;            if (!var2.hasNext()) {
+&nbsp;                return super.getResource(name);
+&nbsp;            }
+&nbsp;
+&nbsp;            ClassLoader parent = (ClassLoader)var2.next();
+&nbsp;            url = parent.getResource(name);
+&nbsp;        } while(url == null);
+&nbsp;
+&nbsp;        return url;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Enumeration&lt;URL&gt; getResources(String name) throws IOException {
+&nbsp;        List&lt;Enumeration&lt;URL&gt;&gt; enumerations = new ArrayList(this.parents.size() + 1);
+&nbsp;        Iterator var3 = this.parents.iterator();
+&nbsp;
+&nbsp;        while(var3.hasNext()) {
+&nbsp;            ClassLoader parent = (ClassLoader)var3.next();
+&nbsp;            enumerations.add(parent.getResources(name));
+&nbsp;        }
+&nbsp;
+&nbsp;        enumerations.add(super.getResources(name));
+&nbsp;        return new CompoundEnumeration(enumerations);
+&nbsp;    }
+&nbsp;
+&nbsp;    protected Map&lt;String, Class&lt;?&gt;&gt; doDefineClasses(Map&lt;String, byte[]&gt; typeDefinitions) {
+&nbsp;        Map&lt;String, Class&lt;?&gt;&gt; types = new HashMap();
+&nbsp;        Iterator var3 = typeDefinitions.entrySet().iterator();
+&nbsp;
+&nbsp;        while(var3.hasNext()) {
+&nbsp;            Map.Entry&lt;String, byte[]&gt; entry = (Map.Entry)var3.next();
+&nbsp;            types.put(entry.getKey(), this.defineClass((String)entry.getKey(), (byte[])entry.getValue(), 0, ((byte[])entry.getValue()).length));
+&nbsp;        }
+&nbsp;
+&nbsp;        return types;
+&nbsp;    }
+&nbsp;
+&nbsp;    static {
+&nbsp;        doRegisterAsParallelCapable();
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class Builder {
+&nbsp;        private static final int ONLY = 0;
+&nbsp;        private final boolean sealed;
+&nbsp;        private final List&lt;? extends ClassLoader&gt; classLoaders;
+&nbsp;
+&nbsp;        public Builder() {
+&nbsp;            this(true);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder(boolean sealed) {
+&nbsp;            this(Collections.emptyList(), sealed);
+&nbsp;        }
+&nbsp;
+&nbsp;        private Builder(List&lt;? extends ClassLoader&gt; classLoaders, boolean sealed) {
+&nbsp;            this.classLoaders = classLoaders;
+&nbsp;            this.sealed = sealed;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder append(Class&lt;?&gt;... type) {
+&nbsp;            return this.append((Collection)Arrays.asList(type));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder append(Collection&lt;? extends Class&lt;?&gt;&gt; types) {
+&nbsp;            List&lt;ClassLoader&gt; classLoaders = new ArrayList(types.size());
+&nbsp;            Iterator var3 = types.iterator();
+&nbsp;
+&nbsp;            while(var3.hasNext()) {
+&nbsp;                Class&lt;?&gt; type = (Class)var3.next();
+&nbsp;                classLoaders.add(type.getClassLoader());
+&nbsp;            }
+&nbsp;
+&nbsp;            return this.append((List)classLoaders);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder append(ClassLoader... classLoader) {
+&nbsp;            return this.append(Arrays.asList(classLoader));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder append(List&lt;? extends ClassLoader&gt; classLoaders) {
+&nbsp;            List&lt;ClassLoader&gt; filtered = new ArrayList(this.classLoaders.size() + classLoaders.size());
+&nbsp;            filtered.addAll(this.classLoaders);
+&nbsp;            Set&lt;ClassLoader&gt; registered = new HashSet(this.classLoaders);
+&nbsp;            Iterator var4 = classLoaders.iterator();
+&nbsp;
+&nbsp;            while(var4.hasNext()) {
+&nbsp;                ClassLoader classLoader = (ClassLoader)var4.next();
+&nbsp;                if (classLoader != null &amp;&amp; registered.add(classLoader)) {
+&nbsp;                    filtered.add(classLoader);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            return new Builder(filtered, this.sealed);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder appendMostSpecific(Class&lt;?&gt;... type) {
+&nbsp;            return this.appendMostSpecific((Collection)Arrays.asList(type));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder appendMostSpecific(Collection&lt;? extends Class&lt;?&gt;&gt; types) {
+&nbsp;            List&lt;ClassLoader&gt; classLoaders = new ArrayList(types.size());
+&nbsp;            Iterator var3 = types.iterator();
+&nbsp;
+&nbsp;            while(var3.hasNext()) {
+&nbsp;                Class&lt;?&gt; type = (Class)var3.next();
+&nbsp;                classLoaders.add(type.getClassLoader());
+&nbsp;            }
+&nbsp;
+&nbsp;            return this.appendMostSpecific((List)classLoaders);
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder appendMostSpecific(ClassLoader... classLoader) {
+&nbsp;            return this.appendMostSpecific(Arrays.asList(classLoader));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder appendMostSpecific(List&lt;? extends ClassLoader&gt; classLoaders) {
+&nbsp;            List&lt;ClassLoader&gt; filtered = new ArrayList(this.classLoaders.size() + classLoaders.size());
+&nbsp;            filtered.addAll(this.classLoaders);
+&nbsp;            Iterator var3 = classLoaders.iterator();
+&nbsp;
+&nbsp;            while(true) {
+&nbsp;                label53:
+&nbsp;                while(true) {
+&nbsp;                    ClassLoader classLoader;
+&nbsp;                    do {
+&nbsp;                        if (!var3.hasNext()) {
+&nbsp;                            return new Builder(filtered, this.sealed);
+&nbsp;                        }
+&nbsp;
+&nbsp;                        classLoader = (ClassLoader)var3.next();
+&nbsp;                    } while(classLoader == null);
+&nbsp;
+&nbsp;                    ClassLoader candidate = classLoader;
+&nbsp;
+&nbsp;                    Iterator iterator;
+&nbsp;                    ClassLoader previous;
+&nbsp;                    do {
+&nbsp;                        iterator = filtered.iterator();
+&nbsp;
+&nbsp;                        while(iterator.hasNext()) {
+&nbsp;                            previous = (ClassLoader)iterator.next();
+&nbsp;                            if (previous.equals(candidate)) {
+&nbsp;                                iterator.remove();
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    } while((candidate = candidate.getParent()) != null);
+&nbsp;
+&nbsp;                    iterator = filtered.iterator();
+&nbsp;
+&nbsp;                    while(iterator.hasNext()) {
+&nbsp;                        previous = (ClassLoader)iterator.next();
+&nbsp;
+&nbsp;                        while(true) {
+&nbsp;                            if (previous.equals(classLoader)) {
+&nbsp;                                continue label53;
+&nbsp;                            }
+&nbsp;
+&nbsp;                            if ((previous = previous.getParent()) == null) {
+&nbsp;                                break;
+&nbsp;                            }
+&nbsp;                        }
+&nbsp;                    }
+&nbsp;
+&nbsp;                    filtered.add(classLoader);
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public Builder filter(ElementMatcher&lt;? super ClassLoader&gt; matcher) {
+<b class="fc">&nbsp;            List&lt;ClassLoader&gt; classLoaders = new ArrayList(this.classLoaders.size());</b>
+&nbsp;            Iterator var3 = this.classLoaders.iterator();
+&nbsp;
+&nbsp;            while(var3.hasNext()) {
+&nbsp;                ClassLoader classLoader = (ClassLoader)var3.next();
+&nbsp;                if (matcher.matches(classLoader)) {
+&nbsp;                    classLoaders.add(classLoader);
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+&nbsp;            return new Builder(classLoaders, this.sealed);
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressFBWarnings(
+&nbsp;            value = {&quot;DP_CREATE_CLASSLOADER_INSIDE_DO_PRIVILEGED&quot;},
+&nbsp;            justification = &quot;Assuring privilege is explicit user responsibility.&quot;
+&nbsp;        )
+&nbsp;        public ClassLoader build() {
+<b class="fc">&nbsp;            return (ClassLoader)(this.classLoaders.size() == 1 ? (ClassLoader)this.classLoaders.get(0) : new MultipleParentClassLoader(this.classLoaders));</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        public ClassLoader build(ClassLoader parent) {
+&nbsp;            return !this.classLoaders.isEmpty() &amp;&amp; (this.classLoaders.size() != 1 || !this.classLoaders.contains(parent)) ? this.filter(ElementMatchers.not(ElementMatchers.is(parent))).doBuild(parent) : parent;
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressFBWarnings(
+&nbsp;            value = {&quot;DP_CREATE_CLASSLOADER_INSIDE_DO_PRIVILEGED&quot;},
+&nbsp;            justification = &quot;Assuring privilege is explicit user responsibility.&quot;
+&nbsp;        )
+&nbsp;        private ClassLoader doBuild(@Nonnull(when = When.MAYBE) ClassLoader parent) {
+&nbsp;            return new MultipleParentClassLoader(parent, this.classLoaders, this.sealed);
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else if (this.sealed != ((Builder)var1).sealed) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.classLoaders.equals(((Builder)var1).classLoaders);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return (this.getClass().hashCode() * 31 + this.sealed) * 31 + this.classLoaders.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static class CompoundEnumeration implements Enumeration&lt;URL&gt; {
+&nbsp;        private static final int FIRST = 0;
+&nbsp;        private final List&lt;Enumeration&lt;URL&gt;&gt; enumerations;
+&nbsp;        @Nonnull(
+&nbsp;            when = When.UNKNOWN
+&nbsp;        )
+&nbsp;        private Enumeration&lt;URL&gt; currentEnumeration;
+&nbsp;
+&nbsp;        protected CompoundEnumeration(List&lt;Enumeration&lt;URL&gt;&gt; enumerations) {
+&nbsp;            this.enumerations = enumerations;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean hasMoreElements() {
+&nbsp;            if (this.currentEnumeration != null &amp;&amp; this.currentEnumeration.hasMoreElements()) {
+&nbsp;                return true;
+&nbsp;            } else if (!this.enumerations.isEmpty()) {
+&nbsp;                this.currentEnumeration = (Enumeration)this.enumerations.remove(0);
+&nbsp;                return this.hasMoreElements();
+&nbsp;            } else {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressFBWarnings(
+&nbsp;            value = {&quot;UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR&quot;},
+&nbsp;            justification = &quot;Null reference is avoided by element check.&quot;
+&nbsp;        )
+&nbsp;        public URL nextElement() {
+&nbsp;            if (this.hasMoreElements()) {
+&nbsp;                return (URL)this.currentEnumeration.nextElement();
+&nbsp;            } else {
+&nbsp;                throw new NoSuchElementException();
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

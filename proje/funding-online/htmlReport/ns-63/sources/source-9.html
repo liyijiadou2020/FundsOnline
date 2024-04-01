@@ -1,0 +1,164 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > Primitives</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.util</a>
+</div>
+
+<h1>Coverage Summary for Class: Primitives (org.mockito.internal.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Primitives</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (35/35)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.util;
+&nbsp;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;public final class Primitives {
+<b class="fc">&nbsp;    private static final Map&lt;Class&lt;?&gt;, Class&lt;?&gt;&gt; PRIMITIVE_TYPES = new HashMap();</b>
+<b class="fc">&nbsp;    private static final Map&lt;Class&lt;?&gt;, Object&gt; PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES = new HashMap();</b>
+&nbsp;
+&nbsp;    public static &lt;T&gt; Class&lt;T&gt; primitiveTypeOf(Class&lt;T&gt; clazz) {
+&nbsp;        return clazz.isPrimitive() ? clazz : (Class)PRIMITIVE_TYPES.get(clazz);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isPrimitiveOrWrapper(Class&lt;?&gt; type) {
+&nbsp;        return PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.containsKey(type);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isAssignableFromWrapper(Class&lt;?&gt; valueClass, Class&lt;?&gt; referenceType) {
+&nbsp;        return isPrimitiveOrWrapper(valueClass) &amp;&amp; isPrimitiveOrWrapper(referenceType) ? primitiveTypeOf(valueClass).isAssignableFrom(primitiveTypeOf(referenceType)) : false;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;T&gt; T defaultValue(Class&lt;T&gt; primitiveOrWrapperType) {
+<b class="fc">&nbsp;        return PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.get(primitiveOrWrapperType);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    private Primitives() {</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    static {
+&nbsp;        PRIMITIVE_TYPES.put(Boolean.class, Boolean.TYPE);
+&nbsp;        PRIMITIVE_TYPES.put(Character.class, Character.TYPE);
+&nbsp;        PRIMITIVE_TYPES.put(Byte.class, Byte.TYPE);
+&nbsp;        PRIMITIVE_TYPES.put(Short.class, Short.TYPE);
+&nbsp;        PRIMITIVE_TYPES.put(Integer.class, Integer.TYPE);
+&nbsp;        PRIMITIVE_TYPES.put(Long.class, Long.TYPE);
+<b class="fc">&nbsp;        PRIMITIVE_TYPES.put(Float.class, Float.TYPE);</b>
+&nbsp;        PRIMITIVE_TYPES.put(Double.class, Double.TYPE);
+&nbsp;        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Boolean.class, false);
+&nbsp;        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Character.class, &#39;\u0000&#39;);
+<b class="fc">&nbsp;        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Byte.class, (byte)0);</b>
+<b class="fc">&nbsp;        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Short.class, Short.valueOf((short)0));</b>
+<b class="fc">&nbsp;        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Integer.class, 0);</b>
+&nbsp;        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Long.class, 0L);
+<b class="fc">&nbsp;        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Float.class, 0.0F);</b>
+&nbsp;        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Double.class, 0.0);
+&nbsp;        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Boolean.TYPE, false);
+&nbsp;        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Character.TYPE, &#39;\u0000&#39;);
+&nbsp;        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Byte.TYPE, (byte)0);
+&nbsp;        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Short.TYPE, Short.valueOf((short)0));
+&nbsp;        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Integer.TYPE, 0);
+&nbsp;        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Long.TYPE, 0L);
+&nbsp;        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Float.TYPE, 0.0F);
+&nbsp;        PRIMITIVE_OR_WRAPPER_DEFAULT_VALUES.put(Double.TYPE, 0.0);
+&nbsp;    }
+<b class="fc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

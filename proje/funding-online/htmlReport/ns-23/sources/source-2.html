@@ -1,0 +1,330 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > TypeDefinition</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.description.type</a>
+</div>
+
+<h1>Coverage Summary for Class: TypeDefinition (net.bytebuddy.description.type)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">TypeDefinition$Sort</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/18)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TypeDefinition$SuperClassIterator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (24/24)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.description.type;
+&nbsp;
+&nbsp;import java.lang.reflect.AnnotatedElement;
+&nbsp;import java.lang.reflect.GenericArrayType;
+&nbsp;import java.lang.reflect.ParameterizedType;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.lang.reflect.TypeVariable;
+&nbsp;import java.lang.reflect.WildcardType;
+&nbsp;import java.security.AccessController;
+&nbsp;import java.security.PrivilegedAction;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.NoSuchElementException;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.build.AccessControllerPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.ModifierReviewable;
+&nbsp;import net.bytebuddy.description.NamedElement;
+&nbsp;import net.bytebuddy.description.field.FieldList;
+&nbsp;import net.bytebuddy.description.method.MethodList;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.Generic.AnnotationReader.NoOp;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackSize;
+&nbsp;import net.bytebuddy.utility.dispatcher.JavaDispatcher;
+&nbsp;import net.bytebuddy.utility.dispatcher.JavaDispatcher.Instance;
+&nbsp;import net.bytebuddy.utility.dispatcher.JavaDispatcher.Proxied;
+&nbsp;
+&nbsp;public interface TypeDefinition extends NamedElement, ModifierReviewable.ForTypeDefinition, Iterable&lt;TypeDefinition&gt; {
+&nbsp;    String RAW_TYPES_PROPERTY = &quot;net.bytebuddy.raw&quot;;
+&nbsp;
+&nbsp;    TypeDescription.Generic asGenericType();
+&nbsp;
+&nbsp;    TypeDescription asErasure();
+&nbsp;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.MAYBE
+&nbsp;    )
+&nbsp;    TypeDescription.Generic getSuperClass();
+&nbsp;
+&nbsp;    TypeList.Generic getInterfaces();
+&nbsp;
+&nbsp;    FieldList&lt;?&gt; getDeclaredFields();
+&nbsp;
+&nbsp;    MethodList&lt;?&gt; getDeclaredMethods();
+&nbsp;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.MAYBE
+&nbsp;    )
+&nbsp;    TypeDefinition getComponentType();
+&nbsp;
+&nbsp;    RecordComponentList&lt;?&gt; getRecordComponents();
+&nbsp;
+&nbsp;    Sort getSort();
+&nbsp;
+&nbsp;    String getTypeName();
+&nbsp;
+&nbsp;    StackSize getStackSize();
+&nbsp;
+&nbsp;    boolean isArray();
+&nbsp;
+&nbsp;    boolean isRecord();
+&nbsp;
+&nbsp;    boolean isPrimitive();
+&nbsp;
+&nbsp;    boolean represents(Type var1);
+&nbsp;
+&nbsp;    public static class SuperClassIterator implements Iterator&lt;TypeDefinition&gt; {
+&nbsp;        @Nonnull(
+&nbsp;            when = When.UNKNOWN
+&nbsp;        )
+&nbsp;        private TypeDefinition nextClass;
+&nbsp;
+&nbsp;        public SuperClassIterator(TypeDefinition initialType) {
+&nbsp;            this.nextClass = initialType;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean hasNext() {
+&nbsp;            return this.nextClass != null;
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeDefinition next() {
+&nbsp;            if (!this.hasNext()) {
+&nbsp;                throw new NoSuchElementException(&quot;End of type hierarchy&quot;);
+&nbsp;            } else {
+&nbsp;                TypeDefinition var1;
+&nbsp;                try {
+&nbsp;                    var1 = this.nextClass;
+&nbsp;                } finally {
+&nbsp;                    this.nextClass = this.nextClass.getSuperClass();
+&nbsp;                }
+&nbsp;
+&nbsp;                return var1;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public void remove() {
+&nbsp;            throw new UnsupportedOperationException(&quot;remove&quot;);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum Sort {
+&nbsp;        NON_GENERIC,
+&nbsp;        GENERIC_ARRAY,
+&nbsp;        PARAMETERIZED,
+&nbsp;        WILDCARD,
+&nbsp;        VARIABLE,
+&nbsp;        VARIABLE_SYMBOLIC;
+&nbsp;
+&nbsp;        private static final AnnotatedType ANNOTATED_TYPE;
+&nbsp;        private static final boolean ACCESS_CONTROLLER;
+&nbsp;
+&nbsp;        private Sort() {
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        private static &lt;T&gt; T doPrivileged(PrivilegedAction&lt;T&gt; action) {
+&nbsp;            return ACCESS_CONTROLLER ? AccessController.doPrivileged(action) : action.run();
+&nbsp;        }
+&nbsp;
+&nbsp;        public static TypeDescription.Generic describe(Type type) {
+&nbsp;            return describe(type, NoOp.INSTANCE);
+&nbsp;        }
+&nbsp;
+&nbsp;        public static TypeDescription.Generic describeAnnotated(AnnotatedElement annotatedType) {
+&nbsp;            if (!ANNOTATED_TYPE.isInstance(annotatedType)) {
+&nbsp;                throw new IllegalArgumentException(&quot;Not an instance of AnnotatedType: &quot; + annotatedType);
+&nbsp;            } else {
+&nbsp;                return describe(ANNOTATED_TYPE.getType(annotatedType), new TypeDescription.Generic.AnnotationReader.Delegator.Simple(annotatedType));
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static TypeDescription.Generic describe(Type type, TypeDescription.Generic.AnnotationReader annotationReader) {
+&nbsp;            if (type instanceof Class) {
+&nbsp;                return new TypeDescription.Generic.OfNonGenericType.ForLoadedType((Class)type, annotationReader);
+&nbsp;            } else if (type instanceof GenericArrayType) {
+&nbsp;                return new TypeDescription.Generic.OfGenericArray.ForLoadedType((GenericArrayType)type, annotationReader);
+&nbsp;            } else if (type instanceof ParameterizedType) {
+&nbsp;                return new TypeDescription.Generic.OfParameterizedType.ForLoadedType((ParameterizedType)type, annotationReader);
+&nbsp;            } else if (type instanceof TypeVariable) {
+&nbsp;                return new TypeDescription.Generic.OfTypeVariable.ForLoadedType((TypeVariable)type, annotationReader);
+&nbsp;            } else if (type instanceof WildcardType) {
+&nbsp;                return new TypeDescription.Generic.OfWildcardType.ForLoadedType((WildcardType)type, annotationReader);
+&nbsp;            } else {
+&nbsp;                throw new IllegalArgumentException(&quot;Unknown type: &quot; + type);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isNonGeneric() {
+&nbsp;            return this == NON_GENERIC;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isParameterized() {
+&nbsp;            return this == PARAMETERIZED;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isGenericArray() {
+&nbsp;            return this == GENERIC_ARRAY;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isWildcard() {
+&nbsp;            return this == WILDCARD;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean isTypeVariable() {
+&nbsp;            return this == VARIABLE || this == VARIABLE_SYMBOLIC;
+&nbsp;        }
+&nbsp;
+&nbsp;        static {
+&nbsp;            try {
+&nbsp;                Class.forName(&quot;java.security.AccessController&quot;, false, (ClassLoader)null);
+&nbsp;                ACCESS_CONTROLLER = Boolean.parseBoolean(System.getProperty(&quot;net.bytebuddy.securitymanager&quot;, &quot;true&quot;));
+&nbsp;            } catch (ClassNotFoundException var0) {
+&nbsp;                ACCESS_CONTROLLER = false;
+&nbsp;            } catch (SecurityException var1) {
+&nbsp;                ACCESS_CONTROLLER = true;
+&nbsp;            }
+&nbsp;
+&nbsp;            NON_GENERIC = new Sort(&quot;NON_GENERIC&quot;, 0);
+&nbsp;            GENERIC_ARRAY = new Sort(&quot;GENERIC_ARRAY&quot;, 1);
+&nbsp;            PARAMETERIZED = new Sort(&quot;PARAMETERIZED&quot;, 2);
+&nbsp;            WILDCARD = new Sort(&quot;WILDCARD&quot;, 3);
+&nbsp;            VARIABLE = new Sort(&quot;VARIABLE&quot;, 4);
+<b class="fc">&nbsp;            VARIABLE_SYMBOLIC = new Sort(&quot;VARIABLE_SYMBOLIC&quot;, 5);</b>
+&nbsp;            ANNOTATED_TYPE = (AnnotatedType)doPrivileged(JavaDispatcher.of(AnnotatedType.class));
+&nbsp;        }
+&nbsp;
+&nbsp;        @Proxied(&quot;java.lang.reflect.AnnotatedType&quot;)
+<b class="fc">&nbsp;        protected interface AnnotatedType {</b>
+&nbsp;            @Instance
+&nbsp;            @Proxied(&quot;isInstance&quot;)
+&nbsp;            boolean isInstance(AnnotatedElement var1);
+&nbsp;
+<b class="fc">&nbsp;            @Proxied(&quot;getType&quot;)</b>
+&nbsp;            Type getType(AnnotatedElement var1);
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

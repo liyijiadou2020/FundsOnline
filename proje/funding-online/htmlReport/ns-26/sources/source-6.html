@@ -1,0 +1,946 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > MethodRegistry</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.dynamic.scaffold</a>
+</div>
+
+<h1>Coverage Summary for Class: MethodRegistry (net.bytebuddy.dynamic.scaffold)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">MethodRegistry$Default</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (51/51)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodRegistry$Default$Compiled</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/15)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodRegistry$Default$Compiled$Entry</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodRegistry$Default$Entry</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodRegistry$Default$Prepared</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (28/28)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodRegistry$Default$Prepared$Entry</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/15)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodRegistry$Handler$ForImplementation</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodRegistry$Handler$ForImplementation$Compiled</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (137/137)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.dynamic.scaffold;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.LinkedHashMap;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Set;
+&nbsp;import net.bytebuddy.ClassFileVersion;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationValue;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.method.MethodList;
+&nbsp;import net.bytebuddy.description.modifier.Visibility;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.dynamic.Transformer;
+&nbsp;import net.bytebuddy.dynamic.VisibilityBridgeStrategy;
+&nbsp;import net.bytebuddy.dynamic.scaffold.TypeWriter.MethodPool.Record.AccessBridgeWrapper;
+&nbsp;import net.bytebuddy.dynamic.scaffold.TypeWriter.MethodPool.Record.ForDefinedMethod.OfVisibilityBridge;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.implementation.LoadedTypeInitializer;
+&nbsp;import net.bytebuddy.implementation.attribute.MethodAttributeAppender;
+&nbsp;import net.bytebuddy.implementation.attribute.MethodAttributeAppender.Explicit;
+&nbsp;import net.bytebuddy.implementation.bytecode.ByteCodeAppender;
+&nbsp;import net.bytebuddy.matcher.ElementMatcher;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;import net.bytebuddy.matcher.LatentMatcher;
+&nbsp;import net.bytebuddy.utility.CompoundList;
+&nbsp;
+&nbsp;public interface MethodRegistry {
+&nbsp;    MethodRegistry prepend(LatentMatcher&lt;? super MethodDescription&gt; var1, Handler var2, MethodAttributeAppender.Factory var3, Transformer&lt;MethodDescription&gt; var4);
+&nbsp;
+&nbsp;    MethodRegistry append(LatentMatcher&lt;? super MethodDescription&gt; var1, Handler var2, MethodAttributeAppender.Factory var3, Transformer&lt;MethodDescription&gt; var4);
+&nbsp;
+&nbsp;    Prepared prepare(InstrumentedType var1, MethodGraph.Compiler var2, TypeValidation var3, VisibilityBridgeStrategy var4, LatentMatcher&lt;? super MethodDescription&gt; var5);
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class Default implements MethodRegistry {
+&nbsp;        private final List&lt;Entry&gt; entries;
+&nbsp;
+&nbsp;        public Default() {
+&nbsp;            this.entries = Collections.emptyList();
+&nbsp;        }
+&nbsp;
+&nbsp;        private Default(List&lt;Entry&gt; entries) {
+&nbsp;            this.entries = entries;
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodRegistry prepend(LatentMatcher&lt;? super MethodDescription&gt; matcher, Handler handler, MethodAttributeAppender.Factory attributeAppenderFactory, Transformer&lt;MethodDescription&gt; transformer) {
+&nbsp;            return new Default(CompoundList.of(new Entry(matcher, handler, attributeAppenderFactory, transformer), this.entries));
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodRegistry append(LatentMatcher&lt;? super MethodDescription&gt; matcher, Handler handler, MethodAttributeAppender.Factory attributeAppenderFactory, Transformer&lt;MethodDescription&gt; transformer) {
+&nbsp;            return new Default(CompoundList.of(this.entries, new Entry(matcher, handler, attributeAppenderFactory, transformer)));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Prepared prepare(InstrumentedType instrumentedType, MethodGraph.Compiler methodGraphCompiler, TypeValidation typeValidation, VisibilityBridgeStrategy visibilityBridgeStrategy, LatentMatcher&lt;? super MethodDescription&gt; ignoredMethods) {
+&nbsp;            LinkedHashMap&lt;MethodDescription, Prepared.Entry&gt; implementations = new LinkedHashMap();
+&nbsp;            Set&lt;Handler&gt; handlers = new HashSet();
+&nbsp;            Set&lt;MethodDescription&gt; declaredMethods = new HashSet(instrumentedType.getDeclaredMethods());
+&nbsp;            Iterator var9 = this.entries.iterator();
+&nbsp;
+&nbsp;            while(true) {
+&nbsp;                Entry entry;
+&nbsp;                InstrumentedType typeDescription;
+&nbsp;                Iterator var12;
+&nbsp;                MethodDescription methodDescription;
+&nbsp;                do {
+&nbsp;                    do {
+&nbsp;                        if (!var9.hasNext()) {
+&nbsp;                            MethodGraph.Linked methodGraph = methodGraphCompiler.compile(instrumentedType);
+&nbsp;                            ElementMatcher&lt;? super MethodDescription&gt; relevanceMatcher = ElementMatchers.not(ElementMatchers.anyOf(implementations.keySet())).and(ElementMatchers.returns(ElementMatchers.isVisibleTo(instrumentedType))).and(ElementMatchers.hasParameters(ElementMatchers.whereNone(ElementMatchers.hasType(ElementMatchers.not(ElementMatchers.isVisibleTo(instrumentedType)))))).and(ignoredMethods.resolve(instrumentedType));
+&nbsp;                            List&lt;MethodDescription&gt; methods = new ArrayList();
+&nbsp;
+&nbsp;                            MethodDescription methodDescription;
+&nbsp;                            for(var12 = methodGraph.listNodes().iterator(); var12.hasNext(); methods.add(methodDescription)) {
+&nbsp;                                MethodGraph.Node node = (MethodGraph.Node)var12.next();
+&nbsp;                                methodDescription = node.getRepresentative();
+&nbsp;                                boolean visibilityBridge = instrumentedType.isPublic() &amp;&amp; !instrumentedType.isInterface();
+&nbsp;                                if (relevanceMatcher.matches(methodDescription)) {
+&nbsp;                                    Iterator var16 = this.entries.iterator();
+&nbsp;
+&nbsp;                                    while(var16.hasNext()) {
+&nbsp;                                        Entry entry = (Entry)var16.next();
+&nbsp;                                        if (entry.resolve(instrumentedType).matches(methodDescription)) {
+&nbsp;                                            implementations.put(methodDescription, entry.asPreparedEntry(instrumentedType, methodDescription, node.getMethodTypes(), node.getVisibility()));
+&nbsp;                                            visibilityBridge = false;
+&nbsp;                                            break;
+&nbsp;                                        }
+&nbsp;                                    }
+&nbsp;                                }
+&nbsp;
+&nbsp;                                if (visibilityBridge &amp;&amp; !node.getSort().isMadeVisible() &amp;&amp; methodDescription.isPublic() &amp;&amp; !methodDescription.isAbstract() &amp;&amp; !methodDescription.isFinal() &amp;&amp; methodDescription.getDeclaringType().isPackagePrivate() &amp;&amp; visibilityBridgeStrategy.generateVisibilityBridge(methodDescription)) {
+&nbsp;                                    implementations.put(methodDescription, MethodRegistry.Default.Prepared.Entry.forVisibilityBridge(methodDescription, node.getVisibility()));
+&nbsp;                                }
+&nbsp;                            }
+&nbsp;
+&nbsp;                            for(var12 = CompoundList.of(instrumentedType.getDeclaredMethods().filter(ElementMatchers.not(ElementMatchers.isVirtual()).and(relevanceMatcher)), new MethodDescription.Latent.TypeInitializer(instrumentedType)).iterator(); var12.hasNext(); methods.add(methodDescription)) {
+&nbsp;                                methodDescription = (MethodDescription)var12.next();
+&nbsp;                                Iterator var22 = this.entries.iterator();
+&nbsp;
+&nbsp;                                while(var22.hasNext()) {
+&nbsp;                                    Entry entry = (Entry)var22.next();
+&nbsp;                                    if (entry.resolve(instrumentedType).matches(methodDescription)) {
+&nbsp;                                        implementations.put(methodDescription, entry.asPreparedEntry(instrumentedType, methodDescription, methodDescription.getVisibility()));
+&nbsp;                                        break;
+&nbsp;                                    }
+&nbsp;                                }
+&nbsp;                            }
+&nbsp;
+&nbsp;                            return new Prepared(implementations, instrumentedType.getLoadedTypeInitializer(), instrumentedType.getTypeInitializer(), (TypeDescription)(typeValidation.isEnabled() ? instrumentedType.validated() : instrumentedType), methodGraph, new MethodList.Explicit(methods));
+&nbsp;                        }
+&nbsp;
+&nbsp;                        entry = (Entry)var9.next();
+&nbsp;                    } while(!handlers.add(entry.getHandler()));
+&nbsp;
+&nbsp;                    typeDescription = entry.getHandler().prepare(instrumentedType);
+&nbsp;                } while(instrumentedType == typeDescription);
+&nbsp;
+&nbsp;                var12 = typeDescription.getDeclaredMethods().iterator();
+&nbsp;
+&nbsp;                while(var12.hasNext()) {
+&nbsp;                    methodDescription = (MethodDescription)var12.next();
+&nbsp;                    if (!declaredMethods.contains(methodDescription)) {
+&nbsp;                        implementations.put(methodDescription, entry.asSupplementaryEntry(methodDescription));
+&nbsp;                        declaredMethods.add(methodDescription);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                instrumentedType = typeDescription;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.entries.equals(((Default)var1).entries);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.entries.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        protected static class Compiled implements Compiled {
+&nbsp;            private final TypeDescription instrumentedType;
+&nbsp;            private final LoadedTypeInitializer loadedTypeInitializer;
+&nbsp;            private final TypeInitializer typeInitializer;
+&nbsp;            private final MethodList&lt;?&gt; methods;
+&nbsp;            private final LinkedHashMap&lt;MethodDescription, Entry&gt; implementations;
+&nbsp;            private final boolean supportsBridges;
+&nbsp;
+&nbsp;            protected Compiled(TypeDescription instrumentedType, LoadedTypeInitializer loadedTypeInitializer, TypeInitializer typeInitializer, MethodList&lt;?&gt; methods, LinkedHashMap&lt;MethodDescription, Entry&gt; implementations, boolean supportsBridges) {
+&nbsp;                this.instrumentedType = instrumentedType;
+&nbsp;                this.loadedTypeInitializer = loadedTypeInitializer;
+&nbsp;                this.typeInitializer = typeInitializer;
+&nbsp;                this.methods = methods;
+&nbsp;                this.implementations = implementations;
+&nbsp;                this.supportsBridges = supportsBridges;
+&nbsp;            }
+&nbsp;
+&nbsp;            public TypeDescription getInstrumentedType() {
+&nbsp;                return this.instrumentedType;
+&nbsp;            }
+&nbsp;
+&nbsp;            public LoadedTypeInitializer getLoadedTypeInitializer() {
+&nbsp;                return this.loadedTypeInitializer;
+&nbsp;            }
+&nbsp;
+&nbsp;            public TypeInitializer getTypeInitializer() {
+&nbsp;                return this.typeInitializer;
+&nbsp;            }
+&nbsp;
+&nbsp;            public MethodList&lt;?&gt; getMethods() {
+&nbsp;                return this.methods;
+&nbsp;            }
+&nbsp;
+&nbsp;            public MethodList&lt;?&gt; getInstrumentedMethods() {
+&nbsp;                return (MethodList)(new MethodList.Explicit(new ArrayList(this.implementations.keySet()))).filter(ElementMatchers.not(ElementMatchers.isTypeInitializer()));
+&nbsp;            }
+&nbsp;
+&nbsp;            public TypeWriter.MethodPool.Record target(MethodDescription methodDescription) {
+&nbsp;                Entry entry = (Entry)this.implementations.get(methodDescription);
+&nbsp;                return (TypeWriter.MethodPool.Record)(entry == null ? new TypeWriter.MethodPool.Record.ForNonImplementedMethod(methodDescription) : entry.bind(this.instrumentedType, this.supportsBridges));
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.supportsBridges != ((Compiled)var1).supportsBridges) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.instrumentedType.equals(((Compiled)var1).instrumentedType)) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.loadedTypeInitializer.equals(((Compiled)var1).loadedTypeInitializer)) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.typeInitializer.equals(((Compiled)var1).typeInitializer)) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.methods.equals(((Compiled)var1).methods)) {
+&nbsp;                    return false;
+<b class="fc">&nbsp;                } else {</b>
+<b class="fc">&nbsp;                    return this.implementations.equals(((Compiled)var1).implementations);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return (((((this.getClass().hashCode() * 31 + this.instrumentedType.hashCode()) * 31 + this.loadedTypeInitializer.hashCode()) * 31 + this.typeInitializer.hashCode()) * 31 + this.methods.hashCode()) * 31 + this.implementations.hashCode()) * 31 + this.supportsBridges;
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+&nbsp;            @Enhance
+&nbsp;            protected static class Entry {
+&nbsp;                private final Handler.Compiled handler;
+&nbsp;                private final MethodAttributeAppender attributeAppender;
+&nbsp;                private final MethodDescription methodDescription;
+&nbsp;                private final Set&lt;MethodDescription.TypeToken&gt; bridgeTypes;
+<b class="fc">&nbsp;                private final Visibility visibility;</b>
+&nbsp;                private final boolean bridgeMethod;
+&nbsp;
+&nbsp;                protected Entry(Handler.Compiled handler, MethodAttributeAppender attributeAppender, MethodDescription methodDescription, Set&lt;MethodDescription.TypeToken&gt; bridgeTypes, Visibility visibility, boolean bridgeMethod) {
+&nbsp;                    this.handler = handler;
+&nbsp;                    this.attributeAppender = attributeAppender;
+&nbsp;                    this.methodDescription = methodDescription;
+&nbsp;                    this.bridgeTypes = bridgeTypes;
+&nbsp;                    this.visibility = visibility;
+&nbsp;                    this.bridgeMethod = bridgeMethod;
+&nbsp;                }
+&nbsp;
+&nbsp;                protected TypeWriter.MethodPool.Record bind(TypeDescription instrumentedType, boolean supportsBridges) {
+&nbsp;                    if (this.bridgeMethod &amp;&amp; !supportsBridges) {
+&nbsp;                        return new TypeWriter.MethodPool.Record.ForNonImplementedMethod(this.methodDescription);
+&nbsp;                    } else {
+&nbsp;                        TypeWriter.MethodPool.Record record = this.handler.assemble(this.methodDescription, this.attributeAppender, this.visibility);
+&nbsp;                        return supportsBridges ? AccessBridgeWrapper.of(record, instrumentedType, this.methodDescription, this.bridgeTypes, this.attributeAppender) : record;
+&nbsp;                    }
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+<b class="fc">&nbsp;                        return false;</b>
+&nbsp;                    } else if (this.bridgeMethod != ((Entry)var1).bridgeMethod) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.visibility.equals(((Entry)var1).visibility)) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.handler.equals(((Entry)var1).handler)) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.attributeAppender.equals(((Entry)var1).attributeAppender)) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.methodDescription.equals(((Entry)var1).methodDescription)) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.bridgeTypes.equals(((Entry)var1).bridgeTypes);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return (((((this.getClass().hashCode() * 31 + this.handler.hashCode()) * 31 + this.attributeAppender.hashCode()) * 31 + this.methodDescription.hashCode()) * 31 + this.bridgeTypes.hashCode()) * 31 + this.visibility.hashCode()) * 31 + this.bridgeMethod;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        protected static class Prepared implements Prepared {
+&nbsp;            private final LinkedHashMap&lt;MethodDescription, Entry&gt; implementations;
+&nbsp;            private final LoadedTypeInitializer loadedTypeInitializer;
+&nbsp;            private final TypeInitializer typeInitializer;
+&nbsp;            private final TypeDescription instrumentedType;
+&nbsp;            private final MethodGraph.Linked methodGraph;
+&nbsp;            private final MethodList&lt;?&gt; methods;
+&nbsp;
+&nbsp;            protected Prepared(LinkedHashMap&lt;MethodDescription, Entry&gt; implementations, LoadedTypeInitializer loadedTypeInitializer, TypeInitializer typeInitializer, TypeDescription instrumentedType, MethodGraph.Linked methodGraph, MethodList&lt;?&gt; methods) {
+&nbsp;                this.implementations = implementations;
+&nbsp;                this.loadedTypeInitializer = loadedTypeInitializer;
+&nbsp;                this.typeInitializer = typeInitializer;
+&nbsp;                this.instrumentedType = instrumentedType;
+&nbsp;                this.methodGraph = methodGraph;
+&nbsp;                this.methods = methods;
+&nbsp;            }
+&nbsp;
+&nbsp;            public TypeDescription getInstrumentedType() {
+&nbsp;                return this.instrumentedType;
+&nbsp;            }
+&nbsp;
+&nbsp;            public LoadedTypeInitializer getLoadedTypeInitializer() {
+&nbsp;                return this.loadedTypeInitializer;
+&nbsp;            }
+&nbsp;
+&nbsp;            public TypeInitializer getTypeInitializer() {
+&nbsp;                return this.typeInitializer;
+&nbsp;            }
+&nbsp;
+&nbsp;            public MethodList&lt;?&gt; getMethods() {
+&nbsp;                return this.methods;
+&nbsp;            }
+&nbsp;
+&nbsp;            public MethodList&lt;?&gt; getInstrumentedMethods() {
+&nbsp;                return (MethodList)(new MethodList.Explicit(new ArrayList(this.implementations.keySet()))).filter(ElementMatchers.not(ElementMatchers.isTypeInitializer()));
+&nbsp;            }
+&nbsp;
+&nbsp;            public Compiled compile(Implementation.Target.Factory implementationTargetFactory, ClassFileVersion classFileVersion) {
+&nbsp;                Map&lt;Handler, Handler.Compiled&gt; compilationCache = new HashMap();
+&nbsp;                Map&lt;MethodAttributeAppender.Factory, MethodAttributeAppender&gt; attributeAppenderCache = new HashMap();
+&nbsp;                LinkedHashMap&lt;MethodDescription, Compiled.Entry&gt; entries = new LinkedHashMap();
+&nbsp;                Implementation.Target implementationTarget = implementationTargetFactory.make(this.instrumentedType, this.methodGraph, classFileVersion);
+&nbsp;
+&nbsp;                Map.Entry entry;
+&nbsp;                Handler.Compiled cachedHandler;
+&nbsp;                MethodAttributeAppender cachedAttributeAppender;
+&nbsp;                for(Iterator var7 = this.implementations.entrySet().iterator(); var7.hasNext(); entries.put(entry.getKey(), new Compiled.Entry(cachedHandler, cachedAttributeAppender, ((Entry)entry.getValue()).getMethodDescription(), ((Entry)entry.getValue()).resolveBridgeTypes(), ((Entry)entry.getValue()).getVisibility(), ((Entry)entry.getValue()).isBridgeMethod()))) {
+&nbsp;                    entry = (Map.Entry)var7.next();
+&nbsp;                    cachedHandler = (Handler.Compiled)compilationCache.get(((Entry)entry.getValue()).getHandler());
+&nbsp;                    if (cachedHandler == null) {
+&nbsp;                        cachedHandler = ((Entry)entry.getValue()).getHandler().compile(implementationTarget);
+&nbsp;                        compilationCache.put(((Entry)entry.getValue()).getHandler(), cachedHandler);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    cachedAttributeAppender = (MethodAttributeAppender)attributeAppenderCache.get(((Entry)entry.getValue()).getAppenderFactory());
+&nbsp;                    if (cachedAttributeAppender == null) {
+&nbsp;                        cachedAttributeAppender = ((Entry)entry.getValue()).getAppenderFactory().make(this.instrumentedType);
+&nbsp;                        attributeAppenderCache.put(((Entry)entry.getValue()).getAppenderFactory(), cachedAttributeAppender);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                return new Compiled(this.instrumentedType, this.loadedTypeInitializer, this.typeInitializer, this.methods, entries, classFileVersion.isAtLeast(ClassFileVersion.JAVA_V5));
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.implementations.equals(((Prepared)var1).implementations)) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.loadedTypeInitializer.equals(((Prepared)var1).loadedTypeInitializer)) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.typeInitializer.equals(((Prepared)var1).typeInitializer)) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.instrumentedType.equals(((Prepared)var1).instrumentedType)) {
+&nbsp;                    return false;
+&nbsp;                } else if (!this.methodGraph.equals(((Prepared)var1).methodGraph)) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.methods.equals(((Prepared)var1).methods);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return (((((this.getClass().hashCode() * 31 + this.implementations.hashCode()) * 31 + this.loadedTypeInitializer.hashCode()) * 31 + this.typeInitializer.hashCode()) * 31 + this.instrumentedType.hashCode()) * 31 + this.methodGraph.hashCode()) * 31 + this.methods.hashCode();
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            protected static class Entry {
+&nbsp;                private final Handler handler;
+&nbsp;                private final MethodAttributeAppender.Factory attributeAppenderFactory;
+&nbsp;                private final MethodDescription methodDescription;
+&nbsp;                private final Set&lt;MethodDescription.TypeToken&gt; typeTokens;
+&nbsp;                private final Visibility visibility;
+&nbsp;                private final boolean bridgeMethod;
+&nbsp;
+&nbsp;                protected Entry(Handler handler, MethodAttributeAppender.Factory attributeAppenderFactory, MethodDescription methodDescription, Set&lt;MethodDescription.TypeToken&gt; typeTokens, Visibility visibility, boolean bridgeMethod) {
+&nbsp;                    this.handler = handler;
+&nbsp;                    this.attributeAppenderFactory = attributeAppenderFactory;
+&nbsp;                    this.methodDescription = methodDescription;
+&nbsp;                    this.typeTokens = typeTokens;
+&nbsp;                    this.visibility = visibility;
+&nbsp;                    this.bridgeMethod = bridgeMethod;
+&nbsp;                }
+&nbsp;
+&nbsp;                protected static Entry forVisibilityBridge(MethodDescription bridgeTarget, Visibility visibility) {
+&nbsp;                    return new Entry(MethodRegistry.Handler.ForVisibilityBridge.INSTANCE, Explicit.of(bridgeTarget), bridgeTarget, Collections.emptySet(), visibility, true);
+&nbsp;                }
+&nbsp;
+&nbsp;                protected Handler getHandler() {
+&nbsp;                    return this.handler;
+&nbsp;                }
+&nbsp;
+&nbsp;                protected MethodAttributeAppender.Factory getAppenderFactory() {
+&nbsp;                    return this.attributeAppenderFactory;
+&nbsp;                }
+&nbsp;
+&nbsp;                protected MethodDescription getMethodDescription() {
+&nbsp;                    return this.methodDescription;
+&nbsp;                }
+&nbsp;
+&nbsp;                protected Set&lt;MethodDescription.TypeToken&gt; resolveBridgeTypes() {
+&nbsp;                    HashSet&lt;MethodDescription.TypeToken&gt; typeTokens = new HashSet(this.typeTokens);
+&nbsp;                    typeTokens.remove(this.methodDescription.asTypeToken());
+&nbsp;                    return typeTokens;
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                protected Visibility getVisibility() {</b>
+<b class="fc">&nbsp;                    return this.visibility;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                protected boolean isBridgeMethod() {
+&nbsp;                    return this.bridgeMethod;
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+<b class="fc">&nbsp;                    if (this == var1) {</b>
+<b class="fc">&nbsp;                        return true;</b>
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.bridgeMethod != ((Entry)var1).bridgeMethod) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.visibility.equals(((Entry)var1).visibility)) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.handler.equals(((Entry)var1).handler)) {
+<b class="fc">&nbsp;                        return false;</b>
+&nbsp;                    } else if (!this.attributeAppenderFactory.equals(((Entry)var1).attributeAppenderFactory)) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.methodDescription.equals(((Entry)var1).methodDescription)) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.typeTokens.equals(((Entry)var1).typeTokens);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+<b class="fc">&nbsp;                public int hashCode() {</b>
+&nbsp;                    return (((((this.getClass().hashCode() * 31 + this.handler.hashCode()) * 31 + this.attributeAppenderFactory.hashCode()) * 31 + this.methodDescription.hashCode()) * 31 + this.typeTokens.hashCode()) * 31 + this.visibility.hashCode()) * 31 + this.bridgeMethod;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        protected static class Entry implements LatentMatcher&lt;MethodDescription&gt; {
+&nbsp;            private final LatentMatcher&lt;? super MethodDescription&gt; matcher;
+&nbsp;            private final Handler handler;
+&nbsp;            private final MethodAttributeAppender.Factory attributeAppenderFactory;
+<b class="fc">&nbsp;            private final Transformer&lt;MethodDescription&gt; transformer;</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            protected Entry(LatentMatcher&lt;? super MethodDescription&gt; matcher, Handler handler, MethodAttributeAppender.Factory attributeAppenderFactory, Transformer&lt;MethodDescription&gt; transformer) {</b>
+<b class="fc">&nbsp;                this.matcher = matcher;</b>
+<b class="fc">&nbsp;                this.handler = handler;</b>
+<b class="fc">&nbsp;                this.attributeAppenderFactory = attributeAppenderFactory;</b>
+<b class="fc">&nbsp;                this.transformer = transformer;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            protected Prepared.Entry asPreparedEntry(TypeDescription instrumentedType, MethodDescription methodDescription, Visibility visibility) {
+&nbsp;                return this.asPreparedEntry(instrumentedType, methodDescription, Collections.emptySet(), visibility);
+&nbsp;            }
+&nbsp;
+&nbsp;            protected Prepared.Entry asPreparedEntry(TypeDescription instrumentedType, MethodDescription methodDescription, Set&lt;MethodDescription.TypeToken&gt; methodTypes, Visibility visibility) {
+&nbsp;                return new Prepared.Entry(this.handler, this.attributeAppenderFactory, (MethodDescription)this.transformer.transform(instrumentedType, methodDescription), methodTypes, visibility, false);
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            protected Prepared.Entry asSupplementaryEntry(MethodDescription methodDescription) {</b>
+&nbsp;                return new Prepared.Entry(this.handler, Explicit.of(methodDescription), methodDescription, Collections.emptySet(), methodDescription.getVisibility(), false);
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            protected Handler getHandler() {</b>
+<b class="fc">&nbsp;                return this.handler;</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            public ElementMatcher&lt;? super MethodDescription&gt; resolve(TypeDescription typeDescription) {</b>
+<b class="fc">&nbsp;                return this.matcher.resolve(typeDescription);</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            public boolean equals(Object var1) {</b>
+<b class="fc">&nbsp;                if (this == var1) {</b>
+&nbsp;                    return true;
+<b class="fc">&nbsp;                } else if (var1 == null) {</b>
+<b class="fc">&nbsp;                    return false;</b>
+<b class="fc">&nbsp;                } else if (this.getClass() != var1.getClass()) {</b>
+<b class="fc">&nbsp;                    return false;</b>
+&nbsp;                } else if (!this.matcher.equals(((Entry)var1).matcher)) {
+<b class="fc">&nbsp;                    return false;</b>
+&nbsp;                } else if (!this.handler.equals(((Entry)var1).handler)) {
+<b class="fc">&nbsp;                    return false;</b>
+<b class="fc">&nbsp;                } else if (!this.attributeAppenderFactory.equals(((Entry)var1).attributeAppenderFactory)) {</b>
+<b class="fc">&nbsp;                    return false;</b>
+<b class="fc">&nbsp;                } else {</b>
+&nbsp;                    return this.transformer.equals(((Entry)var1).transformer);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+<b class="fc">&nbsp;                return (((this.getClass().hashCode() * 31 + this.matcher.hashCode()) * 31 + this.handler.hashCode()) * 31 + this.attributeAppenderFactory.hashCode()) * 31 + this.transformer.hashCode();</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    public interface Compiled extends TypeWriter.MethodPool {</b>
+<b class="fc">&nbsp;        TypeDescription getInstrumentedType();</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        MethodList&lt;?&gt; getMethods();</b>
+&nbsp;
+<b class="fc">&nbsp;        MethodList&lt;?&gt; getInstrumentedMethods();</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        LoadedTypeInitializer getLoadedTypeInitializer();</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        TypeInitializer getTypeInitializer();</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public interface Prepared {
+&nbsp;        TypeDescription getInstrumentedType();
+&nbsp;
+&nbsp;        MethodList&lt;?&gt; getMethods();
+&nbsp;
+&nbsp;        MethodList&lt;?&gt; getInstrumentedMethods();
+&nbsp;
+&nbsp;        LoadedTypeInitializer getLoadedTypeInitializer();
+&nbsp;
+&nbsp;        TypeInitializer getTypeInitializer();
+&nbsp;
+&nbsp;        Compiled compile(Implementation.Target.Factory var1, ClassFileVersion var2);
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface Handler extends InstrumentedType.Prepareable {
+&nbsp;        Compiled compile(Implementation.Target var1);
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class ForAnnotationValue implements Handler, Compiled {
+&nbsp;            private final AnnotationValue&lt;?, ?&gt; annotationValue;
+&nbsp;
+&nbsp;            public ForAnnotationValue(AnnotationValue&lt;?, ?&gt; annotationValue) {
+&nbsp;                this.annotationValue = annotationValue;
+&nbsp;            }
+&nbsp;
+&nbsp;            public InstrumentedType prepare(InstrumentedType instrumentedType) {
+&nbsp;                return instrumentedType;
+&nbsp;            }
+&nbsp;
+&nbsp;            public Compiled compile(Implementation.Target implementationTarget) {
+&nbsp;                return this;
+&nbsp;            }
+&nbsp;
+&nbsp;            public TypeWriter.MethodPool.Record assemble(MethodDescription methodDescription, MethodAttributeAppender attributeAppender, Visibility visibility) {
+&nbsp;                return new TypeWriter.MethodPool.Record.ForDefinedMethod.WithAnnotationDefaultValue(methodDescription, this.annotationValue, attributeAppender);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+<b class="fc">&nbsp;                    return false;</b>
+<b class="fc">&nbsp;                } else {</b>
+<b class="fc">&nbsp;                    return this.annotationValue.equals(((ForAnnotationValue)var1).annotationValue);</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.annotationValue.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class ForImplementation implements Handler {
+&nbsp;            private final Implementation implementation;
+&nbsp;
+&nbsp;            public ForImplementation(Implementation implementation) {
+<b class="fc">&nbsp;                this.implementation = implementation;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            public InstrumentedType prepare(InstrumentedType instrumentedType) {
+&nbsp;                return this.implementation.prepare(instrumentedType);
+&nbsp;            }
+&nbsp;
+&nbsp;            public Compiled compile(Implementation.Target implementationTarget) {
+&nbsp;                return new Compiled(this.implementation.appender(implementationTarget));
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+<b class="fc">&nbsp;                } else if (this.getClass() != var1.getClass()) {</b>
+&nbsp;                    return false;
+<b class="fc">&nbsp;                } else {</b>
+&nbsp;                    return this.implementation.equals(((ForImplementation)var1).implementation);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.implementation.hashCode();
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            protected static class Compiled implements Compiled {
+&nbsp;                private final ByteCodeAppender byteCodeAppender;
+&nbsp;
+&nbsp;                protected Compiled(ByteCodeAppender byteCodeAppender) {
+&nbsp;                    this.byteCodeAppender = byteCodeAppender;
+&nbsp;                }
+&nbsp;
+&nbsp;                public TypeWriter.MethodPool.Record assemble(MethodDescription methodDescription, MethodAttributeAppender attributeAppender, Visibility visibility) {
+&nbsp;                    return new TypeWriter.MethodPool.Record.ForDefinedMethod.WithBody(methodDescription, this.byteCodeAppender, attributeAppender, visibility);
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+<b class="fc">&nbsp;                        return false;</b>
+&nbsp;                    } else {
+&nbsp;                        return this.byteCodeAppender.equals(((Compiled)var1).byteCodeAppender);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+<b class="fc">&nbsp;                    return this.getClass().hashCode() * 31 + this.byteCodeAppender.hashCode();</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public interface Compiled {
+&nbsp;            TypeWriter.MethodPool.Record assemble(MethodDescription var1, MethodAttributeAppender var2, Visibility var3);
+&nbsp;        }
+&nbsp;
+&nbsp;        public static enum ForVisibilityBridge implements Handler {
+&nbsp;            INSTANCE;
+&nbsp;
+&nbsp;            private ForVisibilityBridge() {
+&nbsp;            }
+&nbsp;
+&nbsp;            public InstrumentedType prepare(InstrumentedType instrumentedType) {
+&nbsp;                throw new IllegalStateException(&quot;A visibility bridge handler must not apply any preparations&quot;);
+&nbsp;            }
+&nbsp;
+&nbsp;            public Compiled compile(Implementation.Target implementationTarget) {
+&nbsp;                return new Compiled(implementationTarget.getInstrumentedType());
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            protected static class Compiled implements Compiled {
+&nbsp;                private final TypeDescription instrumentedType;
+&nbsp;
+&nbsp;                protected Compiled(TypeDescription instrumentedType) {
+&nbsp;                    this.instrumentedType = instrumentedType;
+&nbsp;                }
+&nbsp;
+&nbsp;                public TypeWriter.MethodPool.Record assemble(MethodDescription methodDescription, MethodAttributeAppender attributeAppender, Visibility visibility) {
+&nbsp;                    return OfVisibilityBridge.of(this.instrumentedType, methodDescription, attributeAppender);
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.instrumentedType.equals(((Compiled)var1).instrumentedType);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return this.getClass().hashCode() * 31 + this.instrumentedType.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public static enum ForAbstractMethod implements Handler, Compiled {
+&nbsp;            INSTANCE;
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            private ForAbstractMethod() {</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            public InstrumentedType prepare(InstrumentedType instrumentedType) {</b>
+<b class="fc">&nbsp;                return instrumentedType;</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            public Compiled compile(Implementation.Target implementationTarget) {
+&nbsp;                return this;
+&nbsp;            }
+&nbsp;
+&nbsp;            public TypeWriter.MethodPool.Record assemble(MethodDescription methodDescription, MethodAttributeAppender attributeAppender, Visibility visibility) {
+&nbsp;                return new TypeWriter.MethodPool.Record.ForDefinedMethod.WithoutBody(methodDescription, attributeAppender, visibility);
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

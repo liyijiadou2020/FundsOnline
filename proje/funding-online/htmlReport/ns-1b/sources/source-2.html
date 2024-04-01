@@ -1,0 +1,575 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ClassFileVersion</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy</a>
+</div>
+
+<h1>Coverage Summary for Class: ClassFileVersion (net.bytebuddy)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClassFileVersion</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (32/32)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ClassFileVersion$VersionLocator$Resolved</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ClassFileVersion$VersionLocator$Resolver</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (47/47)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.security.AccessController;
+&nbsp;import java.security.PrivilegedAction;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.ForLoadedType;
+&nbsp;import net.bytebuddy.dynamic.ClassFileLocator;
+&nbsp;import net.bytebuddy.dynamic.ClassFileLocator.ForClassLoader;
+&nbsp;import net.bytebuddy.utility.OpenedClassReader;
+&nbsp;
+&nbsp;@Enhance
+&nbsp;public class ClassFileVersion implements Comparable&lt;ClassFileVersion&gt;, Serializable {
+&nbsp;    private static final long serialVersionUID = 1L;
+&nbsp;    protected static final int BASE_VERSION = 44;
+&nbsp;    public static final ClassFileVersion JAVA_V1;
+&nbsp;    public static final ClassFileVersion JAVA_V2;
+&nbsp;    public static final ClassFileVersion JAVA_V3;
+&nbsp;    public static final ClassFileVersion JAVA_V4;
+&nbsp;    public static final ClassFileVersion JAVA_V5;
+&nbsp;    public static final ClassFileVersion JAVA_V6;
+&nbsp;    public static final ClassFileVersion JAVA_V7;
+&nbsp;    public static final ClassFileVersion JAVA_V8;
+&nbsp;    public static final ClassFileVersion JAVA_V9;
+&nbsp;    public static final ClassFileVersion JAVA_V10;
+&nbsp;    public static final ClassFileVersion JAVA_V11;
+&nbsp;    public static final ClassFileVersion JAVA_V12;
+&nbsp;    public static final ClassFileVersion JAVA_V13;
+&nbsp;    public static final ClassFileVersion JAVA_V14;
+&nbsp;    public static final ClassFileVersion JAVA_V15;
+&nbsp;    public static final ClassFileVersion JAVA_V16;
+&nbsp;    public static final ClassFileVersion JAVA_V17;
+&nbsp;    public static final ClassFileVersion JAVA_V18;
+&nbsp;    private static final VersionLocator VERSION_LOCATOR;
+&nbsp;    private final int versionNumber;
+&nbsp;    private static final boolean ACCESS_CONTROLLER;
+&nbsp;
+&nbsp;    protected ClassFileVersion(int versionNumber) {
+&nbsp;        this.versionNumber = versionNumber;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    @net.bytebuddy.build.AccessControllerPlugin.Enhance
+&nbsp;    private static &lt;T&gt; T doPrivileged(PrivilegedAction&lt;T&gt; action) {
+&nbsp;        return ACCESS_CONTROLLER ? AccessController.doPrivileged(action) : action.run();
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public static ClassFileVersion ofMinorMajor(int versionNumber) {
+&nbsp;        ClassFileVersion classFileVersion = new ClassFileVersion(versionNumber);
+&nbsp;        if (classFileVersion.getMajorVersion() &lt;= 44) {
+&nbsp;            throw new IllegalArgumentException(&quot;Class version &quot; + versionNumber + &quot; is not valid&quot;);
+<b class="fc">&nbsp;        } else {</b>
+&nbsp;            return classFileVersion;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public static ClassFileVersion ofJavaVersionString(String javaVersionString) {</b>
+&nbsp;        if (javaVersionString.equals(&quot;1.1&quot;)) {
+&nbsp;            return JAVA_V1;
+&nbsp;        } else if (javaVersionString.equals(&quot;1.2&quot;)) {
+&nbsp;            return JAVA_V2;
+<b class="fc">&nbsp;        } else if (javaVersionString.equals(&quot;1.3&quot;)) {</b>
+&nbsp;            return JAVA_V3;
+&nbsp;        } else if (javaVersionString.equals(&quot;1.4&quot;)) {
+&nbsp;            return JAVA_V4;
+&nbsp;        } else if (!javaVersionString.equals(&quot;1.5&quot;) &amp;&amp; !javaVersionString.equals(&quot;5&quot;)) {
+<b class="fc">&nbsp;            if (!javaVersionString.equals(&quot;1.6&quot;) &amp;&amp; !javaVersionString.equals(&quot;6&quot;)) {</b>
+&nbsp;                if (!javaVersionString.equals(&quot;1.7&quot;) &amp;&amp; !javaVersionString.equals(&quot;7&quot;)) {
+&nbsp;                    if (!javaVersionString.equals(&quot;1.8&quot;) &amp;&amp; !javaVersionString.equals(&quot;8&quot;)) {
+&nbsp;                        if (!javaVersionString.equals(&quot;1.9&quot;) &amp;&amp; !javaVersionString.equals(&quot;9&quot;)) {
+&nbsp;                            if (!javaVersionString.equals(&quot;1.10&quot;) &amp;&amp; !javaVersionString.equals(&quot;10&quot;)) {
+<b class="fc">&nbsp;                                if (!javaVersionString.equals(&quot;1.11&quot;) &amp;&amp; !javaVersionString.equals(&quot;11&quot;)) {</b>
+&nbsp;                                    if (!javaVersionString.equals(&quot;1.12&quot;) &amp;&amp; !javaVersionString.equals(&quot;12&quot;)) {
+&nbsp;                                        if (!javaVersionString.equals(&quot;1.13&quot;) &amp;&amp; !javaVersionString.equals(&quot;13&quot;)) {
+&nbsp;                                            if (!javaVersionString.equals(&quot;1.14&quot;) &amp;&amp; !javaVersionString.equals(&quot;14&quot;)) {
+&nbsp;                                                if (!javaVersionString.equals(&quot;1.15&quot;) &amp;&amp; !javaVersionString.equals(&quot;15&quot;)) {
+<b class="fc">&nbsp;                                                    if (!javaVersionString.equals(&quot;1.16&quot;) &amp;&amp; !javaVersionString.equals(&quot;16&quot;)) {</b>
+&nbsp;                                                        if (!javaVersionString.equals(&quot;1.17&quot;) &amp;&amp; !javaVersionString.equals(&quot;17&quot;)) {
+&nbsp;                                                            if (!javaVersionString.equals(&quot;1.18&quot;) &amp;&amp; !javaVersionString.equals(&quot;18&quot;)) {
+&nbsp;                                                                if (OpenedClassReader.EXPERIMENTAL) {
+&nbsp;                                                                    try {
+<b class="fc">&nbsp;                                                                        int version = Integer.parseInt(javaVersionString.startsWith(&quot;1.&quot;) ? javaVersionString.substring(2) : javaVersionString);</b>
+&nbsp;                                                                        if (version &gt; 0) {
+&nbsp;                                                                            return new ClassFileVersion(44 + version);
+&nbsp;                                                                        }
+&nbsp;                                                                    } catch (NumberFormatException var2) {
+<b class="fc">&nbsp;                                                                    }</b>
+&nbsp;                                                                }
+&nbsp;
+&nbsp;                                                                throw new IllegalArgumentException(&quot;Unknown Java version string: &quot; + javaVersionString);
+&nbsp;                                                            } else {
+<b class="fc">&nbsp;                                                                return JAVA_V18;</b>
+&nbsp;                                                            }
+&nbsp;                                                        } else {
+&nbsp;                                                            return JAVA_V17;
+&nbsp;                                                        }
+<b class="fc">&nbsp;                                                    } else {</b>
+&nbsp;                                                        return JAVA_V16;
+&nbsp;                                                    }
+&nbsp;                                                } else {
+&nbsp;                                                    return JAVA_V15;
+<b class="fc">&nbsp;                                                }</b>
+&nbsp;                                            } else {
+&nbsp;                                                return JAVA_V14;
+&nbsp;                                            }
+&nbsp;                                        } else {
+<b class="fc">&nbsp;                                            return JAVA_V13;</b>
+&nbsp;                                        }
+&nbsp;                                    } else {
+&nbsp;                                        return JAVA_V12;
+&nbsp;                                    }
+<b class="fc">&nbsp;                                } else {</b>
+&nbsp;                                    return JAVA_V11;
+&nbsp;                                }
+&nbsp;                            } else {
+&nbsp;                                return JAVA_V10;
+<b class="fc">&nbsp;                            }</b>
+&nbsp;                        } else {
+&nbsp;                            return JAVA_V9;
+&nbsp;                        }
+&nbsp;                    } else {
+<b class="fc">&nbsp;                        return JAVA_V8;</b>
+&nbsp;                    }
+&nbsp;                } else {
+&nbsp;                    return JAVA_V7;
+&nbsp;                }
+<b class="fc">&nbsp;            } else {</b>
+&nbsp;                return JAVA_V6;
+&nbsp;            }
+&nbsp;        } else {
+&nbsp;            return JAVA_V5;
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ClassFileVersion ofJavaVersion(int javaVersion) {
+&nbsp;        switch (javaVersion) {
+&nbsp;            case 1:
+&nbsp;                return JAVA_V1;
+&nbsp;            case 2:
+&nbsp;                return JAVA_V2;
+&nbsp;            case 3:
+&nbsp;                return JAVA_V3;
+&nbsp;            case 4:
+<b class="fc">&nbsp;                return JAVA_V4;</b>
+<b class="fc">&nbsp;            case 5:</b>
+&nbsp;                return JAVA_V5;
+&nbsp;            case 6:
+&nbsp;                return JAVA_V6;
+&nbsp;            case 7:
+&nbsp;                return JAVA_V7;
+&nbsp;            case 8:
+&nbsp;                return JAVA_V8;
+&nbsp;            case 9:
+&nbsp;                return JAVA_V9;
+&nbsp;            case 10:
+&nbsp;                return JAVA_V10;
+&nbsp;            case 11:
+&nbsp;                return JAVA_V11;
+&nbsp;            case 12:
+&nbsp;                return JAVA_V12;
+&nbsp;            case 13:
+&nbsp;                return JAVA_V13;
+&nbsp;            case 14:
+&nbsp;                return JAVA_V14;
+&nbsp;            case 15:
+&nbsp;                return JAVA_V15;
+&nbsp;            case 16:
+&nbsp;                return JAVA_V16;
+&nbsp;            case 17:
+&nbsp;                return JAVA_V17;
+&nbsp;            case 18:
+&nbsp;                return JAVA_V18;
+&nbsp;            default:
+&nbsp;                if (OpenedClassReader.EXPERIMENTAL &amp;&amp; javaVersion &gt; 0) {
+&nbsp;                    return new ClassFileVersion(44 + javaVersion);
+&nbsp;                } else {
+&nbsp;                    throw new IllegalArgumentException(&quot;Unknown Java version: &quot; + javaVersion);
+&nbsp;                }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ClassFileVersion latest() {
+&nbsp;        return JAVA_V18;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ClassFileVersion ofThisVm() {
+&nbsp;        return VERSION_LOCATOR.resolve();
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressFBWarnings(
+&nbsp;        value = {&quot;REC_CATCH_EXCEPTION&quot;},
+&nbsp;        justification = &quot;Exception should not be rethrown but trigger a fallback.&quot;
+&nbsp;    )
+&nbsp;    public static ClassFileVersion ofThisVm(ClassFileVersion fallback) {
+&nbsp;        try {
+&nbsp;            return ofThisVm();
+&nbsp;        } catch (Exception var2) {
+&nbsp;            return fallback;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ClassFileVersion of(Class&lt;?&gt; type) throws IOException {
+&nbsp;        return of(type, ForClassLoader.of(type.getClassLoader()));
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ClassFileVersion of(Class&lt;?&gt; type, ClassFileLocator classFileLocator) throws IOException {
+&nbsp;        return of(ForLoadedType.of(type), classFileLocator);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ClassFileVersion of(TypeDescription typeDescription, ClassFileLocator classFileLocator) throws IOException {
+&nbsp;        return ofClassFile(classFileLocator.locate(typeDescription.getName()).resolve());
+&nbsp;    }
+&nbsp;
+&nbsp;    public static ClassFileVersion ofClassFile(byte[] binaryRepresentation) {
+&nbsp;        if (binaryRepresentation.length &lt; 7) {
+&nbsp;            throw new IllegalArgumentException(&quot;Supplied byte array is too short to be a class file with &quot; + binaryRepresentation.length + &quot; byte&quot;);
+&nbsp;        } else {
+&nbsp;            return ofMinorMajor(binaryRepresentation[6] &lt;&lt; 8 | binaryRepresentation[7] &amp; 255);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getMinorMajorVersion() {
+&nbsp;        return this.versionNumber;
+&nbsp;    }
+&nbsp;
+&nbsp;    public short getMajorVersion() {
+&nbsp;        return (short)(this.versionNumber &amp; 255);
+&nbsp;    }
+&nbsp;
+&nbsp;    public short getMinorVersion() {
+&nbsp;        return (short)(this.versionNumber &gt;&gt; 16);
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getJavaVersion() {
+&nbsp;        return this.getMajorVersion() - 44;
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isAtLeast(ClassFileVersion classFileVersion) {
+&nbsp;        return this.compareTo(classFileVersion) &gt; -1;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public boolean isGreaterThan(ClassFileVersion classFileVersion) {
+&nbsp;        return this.compareTo(classFileVersion) &gt; 0;
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isAtMost(ClassFileVersion classFileVersion) {
+&nbsp;        return this.compareTo(classFileVersion) &lt; 1;
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isLessThan(ClassFileVersion classFileVersion) {
+&nbsp;        return this.compareTo(classFileVersion) &lt; 0;
+&nbsp;    }
+&nbsp;
+&nbsp;    public ClassFileVersion asPreviewVersion() {
+&nbsp;        return new ClassFileVersion(this.versionNumber | -65536);
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public boolean isPreviewVersion() {
+&nbsp;        return (this.versionNumber &amp; -65536) == -65536;
+&nbsp;    }
+&nbsp;
+&nbsp;    public int compareTo(ClassFileVersion other) {
+&nbsp;        return Integer.signum(this.getMajorVersion() == other.getMajorVersion() ? this.getMinorVersion() - other.getMinorVersion() : this.getMajorVersion() - other.getMajorVersion());
+&nbsp;    }
+&nbsp;
+&nbsp;    public String toString() {
+&nbsp;        return &quot;Java &quot; + this.getJavaVersion() + &quot; (&quot; + this.getMinorMajorVersion() + &quot;)&quot;;
+&nbsp;    }
+&nbsp;
+&nbsp;    static {
+&nbsp;        try {
+&nbsp;            Class.forName(&quot;java.security.AccessController&quot;, false, (ClassLoader)null);
+&nbsp;            ACCESS_CONTROLLER = Boolean.parseBoolean(System.getProperty(&quot;net.bytebuddy.securitymanager&quot;, &quot;true&quot;));
+&nbsp;        } catch (ClassNotFoundException var0) {
+&nbsp;            ACCESS_CONTROLLER = false;
+&nbsp;        } catch (SecurityException var1) {
+&nbsp;            ACCESS_CONTROLLER = true;
+&nbsp;        }
+&nbsp;
+&nbsp;        JAVA_V1 = new ClassFileVersion(196653);
+&nbsp;        JAVA_V2 = new ClassFileVersion(46);
+&nbsp;        JAVA_V3 = new ClassFileVersion(47);
+&nbsp;        JAVA_V4 = new ClassFileVersion(48);
+&nbsp;        JAVA_V5 = new ClassFileVersion(49);
+&nbsp;        JAVA_V6 = new ClassFileVersion(50);
+&nbsp;        JAVA_V7 = new ClassFileVersion(51);
+&nbsp;        JAVA_V8 = new ClassFileVersion(52);
+&nbsp;        JAVA_V9 = new ClassFileVersion(53);
+&nbsp;        JAVA_V10 = new ClassFileVersion(54);
+&nbsp;        JAVA_V11 = new ClassFileVersion(55);
+&nbsp;        JAVA_V12 = new ClassFileVersion(56);
+&nbsp;        JAVA_V13 = new ClassFileVersion(57);
+&nbsp;        JAVA_V14 = new ClassFileVersion(58);
+&nbsp;        JAVA_V15 = new ClassFileVersion(59);
+&nbsp;        JAVA_V16 = new ClassFileVersion(60);
+&nbsp;        JAVA_V17 = new ClassFileVersion(61);
+&nbsp;        JAVA_V18 = new ClassFileVersion(62);
+&nbsp;        VERSION_LOCATOR = (VersionLocator)doPrivileged(ClassFileVersion.VersionLocator.Resolver.INSTANCE);
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean equals(Object var1) {
+&nbsp;        if (this == var1) {
+&nbsp;            return true;
+<b class="fc">&nbsp;        } else if (var1 == null) {</b>
+&nbsp;            return false;
+&nbsp;        } else if (this.getClass() != var1.getClass()) {
+&nbsp;            return false;
+&nbsp;        } else {
+&nbsp;            return this.versionNumber == ((ClassFileVersion)var1).versionNumber;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public int hashCode() {
+&nbsp;        return this.getClass().hashCode() * 31 + this.versionNumber;
+&nbsp;    }
+&nbsp;
+&nbsp;    protected interface VersionLocator {
+<b class="fc">&nbsp;        String JAVA_VERSION = &quot;java.version&quot;;</b>
+&nbsp;
+&nbsp;        ClassFileVersion resolve();
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class Unresolved implements VersionLocator {
+&nbsp;            private final String message;
+&nbsp;
+&nbsp;            protected Unresolved(String message) {
+&nbsp;                this.message = message;
+&nbsp;            }
+&nbsp;
+&nbsp;            public ClassFileVersion resolve() {
+&nbsp;                throw new IllegalStateException(&quot;Failed to resolve the class file version of the current VM: &quot; + this.message);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.message.equals(((Unresolved)var1).message);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.message.hashCode();
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class Resolved implements VersionLocator {
+&nbsp;            private final ClassFileVersion classFileVersion;
+&nbsp;
+&nbsp;            protected Resolved(ClassFileVersion classFileVersion) {
+&nbsp;                this.classFileVersion = classFileVersion;
+&nbsp;            }
+&nbsp;
+&nbsp;            public ClassFileVersion resolve() {
+&nbsp;                return this.classFileVersion;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.classFileVersion.equals(((Resolved)var1).classFileVersion);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return this.getClass().hashCode() * 31 + this.classFileVersion.hashCode();
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public static enum Resolver implements PrivilegedAction&lt;VersionLocator&gt; {
+&nbsp;            INSTANCE;
+&nbsp;
+&nbsp;            private Resolver() {
+&nbsp;            }
+&nbsp;
+&nbsp;            @SuppressFBWarnings(
+<b class="fc">&nbsp;                value = {&quot;REC_CATCH_EXCEPTION&quot;},</b>
+&nbsp;                justification = &quot;Exception should not be rethrown but trigger a fallback.&quot;
+&nbsp;            )
+&nbsp;            public VersionLocator run() {
+&nbsp;                try {
+&nbsp;                    return new Resolved(ClassFileVersion.ofJavaVersion((Integer)Class.forName(Runtime.class.getName() + &quot;$Version&quot;).getMethod(&quot;major&quot;).invoke(Runtime.class.getMethod(&quot;version&quot;).invoke((Object)null))));
+&nbsp;                } catch (Throwable var6) {
+&nbsp;                    try {
+&nbsp;                        String versionString = System.getProperty(&quot;java.version&quot;);
+<b class="fc">&nbsp;                        if (versionString == null) {</b>
+&nbsp;                            throw new IllegalStateException(&quot;Java version property is not set&quot;);
+&nbsp;                        } else if (versionString.equals(&quot;0&quot;)) {
+&nbsp;                            return new Resolved(ClassFileVersion.JAVA_V6);
+&nbsp;                        } else {
+&nbsp;                            int[] versionIndex = new int[]{-1, 0, 0};
+&nbsp;
+&nbsp;                            for(int index = 1; index &lt; 3; ++index) {
+&nbsp;                                versionIndex[index] = versionString.indexOf(46, versionIndex[index - 1] + 1);
+&nbsp;                                if (versionIndex[index] == -1) {
+&nbsp;                                    throw new IllegalStateException(&quot;This JVM&#39;s version string does not seem to be valid: &quot; + versionString);
+&nbsp;                                }
+&nbsp;                            }
+&nbsp;
+&nbsp;                            return new Resolved(ClassFileVersion.ofJavaVersion(Integer.parseInt(versionString.substring(versionIndex[1] + 1, versionIndex[2]))));
+&nbsp;                        }
+&nbsp;                    } catch (Throwable var5) {
+&nbsp;                        return new Unresolved(var5.getMessage());
+&nbsp;                    }
+<b class="fc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

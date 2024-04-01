@@ -1,0 +1,521 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > TypeCache</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy</a>
+</div>
+
+<h1>Coverage Summary for Class: TypeCache (net.bytebuddy)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TypeCache</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (28/28)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TypeCache$LookupKey</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TypeCache$SimpleKey</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TypeCache$Sort</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TypeCache$Sort$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TypeCache$Sort$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TypeCache$StorageKey</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TypeCache$WithInlineExpunction</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (67/67)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;import java.lang.ref.Reference;
+&nbsp;import java.lang.ref.ReferenceQueue;
+&nbsp;import java.lang.ref.SoftReference;
+&nbsp;import java.lang.ref.WeakReference;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.HashSet;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.concurrent.Callable;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;import java.util.concurrent.ConcurrentMap;
+&nbsp;import javax.annotation.CheckForNull;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.build.CachedReturnPlugin.Enhance;
+&nbsp;import net.bytebuddy.utility.CompoundList;
+&nbsp;
+&nbsp;public class TypeCache&lt;T&gt; extends ReferenceQueue&lt;ClassLoader&gt; {
+&nbsp;    @Nonnull(
+&nbsp;        when = When.NEVER
+&nbsp;    )
+&nbsp;    private static final Class&lt;?&gt; NOT_FOUND = null;
+&nbsp;    protected final Sort sort;
+&nbsp;    protected final ConcurrentMap&lt;StorageKey, ConcurrentMap&lt;T, Reference&lt;Class&lt;?&gt;&gt;&gt;&gt; cache;
+&nbsp;
+&nbsp;    public TypeCache(Sort sort) {
+&nbsp;        this.sort = sort;
+&nbsp;        this.cache = new ConcurrentHashMap();
+&nbsp;    }
+&nbsp;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.MAYBE
+&nbsp;    )
+&nbsp;    @SuppressFBWarnings(
+&nbsp;        value = {&quot;GC_UNRELATED_TYPES&quot;},
+&nbsp;        justification = &quot;Cross-comparison is intended.&quot;
+&nbsp;    )
+&nbsp;    public Class&lt;?&gt; find(@Nonnull(when = When.MAYBE) ClassLoader classLoader, T key) {
+&nbsp;        ConcurrentMap&lt;T, Reference&lt;Class&lt;?&gt;&gt;&gt; storage = (ConcurrentMap)this.cache.get(new LookupKey(classLoader));
+&nbsp;        if (storage == null) {
+&nbsp;            return NOT_FOUND;
+&nbsp;        } else {
+&nbsp;            Reference&lt;Class&lt;?&gt;&gt; reference = (Reference)storage.get(key);
+&nbsp;            return reference == null ? NOT_FOUND : (Class)reference.get();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressFBWarnings(
+&nbsp;        value = {&quot;GC_UNRELATED_TYPES&quot;},
+&nbsp;        justification = &quot;Cross-comparison is intended.&quot;
+&nbsp;    )
+&nbsp;    public Class&lt;?&gt; insert(@Nonnull(when = When.MAYBE) ClassLoader classLoader, T key, Class&lt;?&gt; type) {
+<b class="fc">&nbsp;        ConcurrentMap&lt;T, Reference&lt;Class&lt;?&gt;&gt;&gt; storage = (ConcurrentMap)this.cache.get(new LookupKey(classLoader));</b>
+&nbsp;        if (storage == null) {
+&nbsp;            storage = new ConcurrentHashMap();
+&nbsp;            ConcurrentMap&lt;T, Reference&lt;Class&lt;?&gt;&gt;&gt; previous = (ConcurrentMap)this.cache.putIfAbsent(new StorageKey(classLoader, this), storage);
+&nbsp;            if (previous != null) {
+&nbsp;                storage = previous;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        Reference&lt;Class&lt;?&gt;&gt; reference = this.sort.wrap(type);
+&nbsp;        Reference&lt;Class&lt;?&gt;&gt; previous = (Reference)((ConcurrentMap)storage).putIfAbsent(key, reference);
+&nbsp;
+&nbsp;        while(previous != null) {
+&nbsp;            Class&lt;?&gt; previousType = (Class)previous.get();
+&nbsp;            if (previousType != null) {
+&nbsp;                return previousType;
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            if (((ConcurrentMap)storage).remove(key, previous)) {</b>
+<b class="fc">&nbsp;                previous = (Reference)((ConcurrentMap)storage).putIfAbsent(key, reference);</b>
+&nbsp;            } else {
+&nbsp;                previous = (Reference)((ConcurrentMap)storage).get(key);
+&nbsp;                if (previous == null) {
+&nbsp;                    previous = (Reference)((ConcurrentMap)storage).putIfAbsent(key, reference);
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        return type;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Class&lt;?&gt; findOrInsert(ClassLoader classLoader, T key, Callable&lt;Class&lt;?&gt;&gt; lazy) {
+<b class="fc">&nbsp;        Class&lt;?&gt; type = this.find(classLoader, key);</b>
+<b class="fc">&nbsp;        if (type != null) {</b>
+<b class="fc">&nbsp;            return type;</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            try {</b>
+<b class="fc">&nbsp;                return this.insert(classLoader, key, (Class)lazy.call());</b>
+<b class="fc">&nbsp;            } catch (Throwable var6) {</b>
+&nbsp;                throw new IllegalArgumentException(&quot;Could not create type&quot;, var6);
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public Class&lt;?&gt; findOrInsert(@Nonnull(when = When.MAYBE) ClassLoader classLoader, T key, Callable&lt;Class&lt;?&gt;&gt; lazy, Object monitor) {
+&nbsp;        Class&lt;?&gt; type = this.find(classLoader, key);
+&nbsp;        if (type != null) {
+&nbsp;            return type;
+&nbsp;        } else {
+&nbsp;            synchronized(monitor) {
+&nbsp;                return this.findOrInsert(classLoader, key, lazy);
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public void expungeStaleEntries() {</b>
+<b class="fc">&nbsp;        Reference reference;</b>
+<b class="fc">&nbsp;        while((reference = this.poll()) != null) {</b>
+<b class="fc">&nbsp;            this.cache.remove(reference);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public void clear() {</b>
+<b class="fc">&nbsp;        this.cache.clear();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class SimpleKey {
+&nbsp;        private final Set&lt;String&gt; types;
+&nbsp;
+&nbsp;        public SimpleKey(Class&lt;?&gt; type, Class&lt;?&gt;... additionalType) {
+&nbsp;            this(type, (Collection)Arrays.asList(additionalType));
+&nbsp;        }
+&nbsp;
+&nbsp;        public SimpleKey(Class&lt;?&gt; type, Collection&lt;? extends Class&lt;?&gt;&gt; additionalTypes) {
+&nbsp;            this(CompoundList.of(type, new ArrayList(additionalTypes)));
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        public SimpleKey(Collection&lt;? extends Class&lt;?&gt;&gt; types) {
+&nbsp;            this.types = new HashSet();
+&nbsp;            Iterator var2 = types.iterator();
+&nbsp;
+&nbsp;            while(var2.hasNext()) {
+&nbsp;                Class&lt;?&gt; type = (Class)var2.next();
+&nbsp;                this.types.add(type.getName());
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        @Enhance(&quot;hashCode&quot;)</b>
+<b class="fc">&nbsp;        public int hashCode() {</b>
+&nbsp;            int var1 = this.hashCode;
+&nbsp;            int var2 = var1 != 0 ? 0 : this.types.hashCode();
+&nbsp;            if (var2 == 0) {
+<b class="fc">&nbsp;                var2 = this.hashCode;</b>
+&nbsp;            } else {
+&nbsp;                this.hashCode = var2;
+&nbsp;            }
+&nbsp;
+&nbsp;            return var2;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(@CheckForNull Object other) {
+&nbsp;            if (this == other) {
+&nbsp;                return true;
+&nbsp;            } else if (other != null &amp;&amp; this.getClass() == other.getClass()) {
+&nbsp;                SimpleKey simpleKey = (SimpleKey)other;
+&nbsp;                return this.types.equals(simpleKey.types);
+&nbsp;            } else {
+&nbsp;                return false;
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public static class WithInlineExpunction&lt;S&gt; extends TypeCache&lt;S&gt; {
+<b class="fc">&nbsp;        public WithInlineExpunction(Sort sort) {</b>
+<b class="fc">&nbsp;            super(sort);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Class&lt;?&gt; find(@Nonnull(when = When.MAYBE) ClassLoader classLoader, S key) {
+&nbsp;            Class var3;
+&nbsp;            try {
+&nbsp;                var3 = super.find(classLoader, key);
+&nbsp;            } finally {
+&nbsp;                this.expungeStaleEntries();
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+&nbsp;            return var3;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Class&lt;?&gt; insert(@Nonnull(when = When.MAYBE) ClassLoader classLoader, S key, Class&lt;?&gt; type) {
+&nbsp;            Class var4;
+&nbsp;            try {
+&nbsp;                var4 = super.insert(classLoader, key, type);
+&nbsp;            } finally {
+&nbsp;                this.expungeStaleEntries();
+&nbsp;            }
+&nbsp;
+&nbsp;            return var4;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public Class&lt;?&gt; findOrInsert(ClassLoader classLoader, S key, Callable&lt;Class&lt;?&gt;&gt; builder) {</b>
+&nbsp;            Class var4;
+&nbsp;            try {
+&nbsp;                var4 = super.findOrInsert(classLoader, key, builder);
+&nbsp;            } finally {
+<b class="fc">&nbsp;                this.expungeStaleEntries();</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            return var4;
+&nbsp;        }
+&nbsp;
+&nbsp;        public Class&lt;?&gt; findOrInsert(@Nonnull(when = When.MAYBE) ClassLoader classLoader, S key, Callable&lt;Class&lt;?&gt;&gt; builder, Object monitor) {
+&nbsp;            Class var5;
+&nbsp;            try {
+&nbsp;                var5 = super.findOrInsert(classLoader, key, builder, monitor);
+<b class="fc">&nbsp;            } finally {</b>
+&nbsp;                this.expungeStaleEntries();
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+&nbsp;            return var5;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    protected static class StorageKey extends WeakReference&lt;ClassLoader&gt; {
+&nbsp;        private final int hashCode;
+&nbsp;
+&nbsp;        protected StorageKey(@Nonnull(when = When.MAYBE) ClassLoader classLoader, ReferenceQueue&lt;? super ClassLoader&gt; referenceQueue) {
+&nbsp;            super(classLoader, referenceQueue);
+&nbsp;            this.hashCode = System.identityHashCode(classLoader);
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.hashCode;
+&nbsp;        }
+&nbsp;
+&nbsp;        @SuppressFBWarnings(
+&nbsp;            value = {&quot;EQ_CHECK_FOR_OPERAND_NOT_COMPATIBLE_WITH_THIS&quot;},
+&nbsp;            justification = &quot;Cross-comparison is intended.&quot;
+&nbsp;        )
+&nbsp;        public boolean equals(@CheckForNull Object other) {
+&nbsp;            if (this == other) {
+&nbsp;                return true;
+&nbsp;            } else if (other instanceof LookupKey) {
+&nbsp;                LookupKey lookupKey = (LookupKey)other;
+&nbsp;                return this.hashCode == lookupKey.hashCode &amp;&amp; this.get() == lookupKey.classLoader;
+&nbsp;            } else if (!(other instanceof StorageKey)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                StorageKey storageKey = (StorageKey)other;
+&nbsp;                return this.hashCode == storageKey.hashCode &amp;&amp; this.get() == storageKey.get();
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    protected static class LookupKey {</b>
+&nbsp;        @Nonnull(
+&nbsp;            when = When.MAYBE
+&nbsp;        )
+&nbsp;        private final ClassLoader classLoader;
+<b class="fc">&nbsp;        private final int hashCode;</b>
+&nbsp;
+&nbsp;        protected LookupKey(@Nonnull(when = When.MAYBE) ClassLoader classLoader) {
+&nbsp;            this.classLoader = classLoader;
+&nbsp;            this.hashCode = System.identityHashCode(classLoader);
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        public int hashCode() {
+<b class="fc">&nbsp;            return this.hashCode;</b>
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        @SuppressFBWarnings(</b>
+<b class="fc">&nbsp;            value = {&quot;EQ_CHECK_FOR_OPERAND_NOT_COMPATIBLE_WITH_THIS&quot;},</b>
+&nbsp;            justification = &quot;Cross-comparison is intended.&quot;
+&nbsp;        )
+&nbsp;        public boolean equals(@CheckForNull Object other) {
+&nbsp;            if (this == other) {
+&nbsp;                return true;
+&nbsp;            } else if (other instanceof LookupKey) {
+&nbsp;                return this.classLoader == ((LookupKey)other).classLoader;
+&nbsp;            } else if (!(other instanceof StorageKey)) {
+&nbsp;                return false;
+<b class="fc">&nbsp;            } else {</b>
+&nbsp;                StorageKey storageKey = (StorageKey)other;
+&nbsp;                return this.hashCode == storageKey.hashCode &amp;&amp; this.classLoader == storageKey.get();
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum Sort {
+&nbsp;        WEAK {
+&nbsp;            protected Reference&lt;Class&lt;?&gt;&gt; wrap(Class&lt;?&gt; type) {
+&nbsp;                return new WeakReference(type);
+&nbsp;            }
+&nbsp;        },
+&nbsp;        SOFT {
+<b class="fc">&nbsp;            protected Reference&lt;Class&lt;?&gt;&gt; wrap(Class&lt;?&gt; type) {</b>
+<b class="fc">&nbsp;                return new SoftReference(type);</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;
+&nbsp;        private Sort() {
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        protected abstract Reference&lt;Class&lt;?&gt;&gt; wrap(Class&lt;?&gt; var1);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

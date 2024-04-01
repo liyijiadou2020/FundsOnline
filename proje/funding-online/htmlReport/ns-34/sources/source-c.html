@@ -1,0 +1,158 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > Symbol</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.jar.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: Symbol (net.bytebuddy.jar.asm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Symbol</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.jar.asm;
+&nbsp;
+&nbsp;abstract class Symbol {
+&nbsp;    static final int CONSTANT_CLASS_TAG = 7;
+&nbsp;    static final int CONSTANT_FIELDREF_TAG = 9;
+&nbsp;    static final int CONSTANT_METHODREF_TAG = 10;
+&nbsp;    static final int CONSTANT_INTERFACE_METHODREF_TAG = 11;
+&nbsp;    static final int CONSTANT_STRING_TAG = 8;
+&nbsp;    static final int CONSTANT_INTEGER_TAG = 3;
+&nbsp;    static final int CONSTANT_FLOAT_TAG = 4;
+&nbsp;    static final int CONSTANT_LONG_TAG = 5;
+&nbsp;    static final int CONSTANT_DOUBLE_TAG = 6;
+&nbsp;    static final int CONSTANT_NAME_AND_TYPE_TAG = 12;
+&nbsp;    static final int CONSTANT_UTF8_TAG = 1;
+&nbsp;    static final int CONSTANT_METHOD_HANDLE_TAG = 15;
+&nbsp;    static final int CONSTANT_METHOD_TYPE_TAG = 16;
+&nbsp;    static final int CONSTANT_DYNAMIC_TAG = 17;
+&nbsp;    static final int CONSTANT_INVOKE_DYNAMIC_TAG = 18;
+&nbsp;    static final int CONSTANT_MODULE_TAG = 19;
+&nbsp;    static final int CONSTANT_PACKAGE_TAG = 20;
+&nbsp;    static final int BOOTSTRAP_METHOD_TAG = 64;
+&nbsp;    static final int TYPE_TAG = 128;
+&nbsp;    static final int UNINITIALIZED_TYPE_TAG = 129;
+&nbsp;    static final int MERGED_TYPE_TAG = 130;
+&nbsp;    final int index;
+&nbsp;    final int tag;
+&nbsp;    final String owner;
+&nbsp;    final String name;
+&nbsp;    final String value;
+&nbsp;    final long data;
+&nbsp;    int info;
+&nbsp;
+&nbsp;    Symbol(int index, int tag, String owner, String name, String value, long data) {
+&nbsp;        this.index = index;
+&nbsp;        this.tag = tag;
+&nbsp;        this.owner = owner;
+&nbsp;        this.name = name;
+&nbsp;        this.value = value;
+&nbsp;        this.data = data;
+&nbsp;    }
+&nbsp;
+&nbsp;    int getArgumentsAndReturnSizes() {
+&nbsp;        if (this.info == 0) {
+&nbsp;            this.info = Type.getArgumentsAndReturnSizes(this.value);
+&nbsp;        }
+&nbsp;
+&nbsp;        return this.info;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,190 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > VerificationStartedNotifier</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.listeners</a>
+</div>
+
+<h1>Coverage Summary for Class: VerificationStartedNotifier (org.mockito.internal.listeners)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">VerificationStartedNotifier</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.listeners;
+&nbsp;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import org.mockito.MockingDetails;
+&nbsp;import org.mockito.Mockito;
+&nbsp;import org.mockito.internal.exceptions.Reporter;
+&nbsp;import org.mockito.internal.matchers.text.ValuePrinter;
+&nbsp;import org.mockito.listeners.VerificationStartedEvent;
+&nbsp;import org.mockito.listeners.VerificationStartedListener;
+&nbsp;import org.mockito.mock.MockCreationSettings;
+&nbsp;
+&nbsp;public final class VerificationStartedNotifier {
+&nbsp;    public static Object notifyVerificationStarted(List&lt;VerificationStartedListener&gt; listeners, MockingDetails originalMockingDetails) {
+&nbsp;        if (listeners.isEmpty()) {
+<b class="fc">&nbsp;            return originalMockingDetails.getMock();</b>
+<b class="fc">&nbsp;        } else {</b>
+&nbsp;            VerificationStartedEvent event = new Event(originalMockingDetails);
+&nbsp;            Iterator var3 = listeners.iterator();
+&nbsp;
+&nbsp;            while(var3.hasNext()) {
+&nbsp;                VerificationStartedListener listener = (VerificationStartedListener)var3.next();
+&nbsp;                listener.onVerificationStarted(event);
+&nbsp;            }
+&nbsp;
+&nbsp;            return event.getMock();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static void assertCompatibleTypes(Object mock, MockCreationSettings originalSettings) {
+&nbsp;        Class originalType = originalSettings.getTypeToMock();
+&nbsp;        if (!originalType.isInstance(mock)) {
+&nbsp;            throw Reporter.methodDoesNotAcceptParameter(&quot;VerificationStartedEvent.setMock&quot;, &quot;parameter which is not the same type as the original mock.\n  Required type: &quot; + originalType.getName() + &quot;\n  Received parameter: &quot; + ValuePrinter.print(mock) + &quot;.\n &quot;);
+&nbsp;        } else {
+&nbsp;            Iterator var3 = originalSettings.getExtraInterfaces().iterator();
+&nbsp;
+&nbsp;            Class iface;
+&nbsp;            do {
+&nbsp;                if (!var3.hasNext()) {
+&nbsp;                    return;
+&nbsp;                }
+&nbsp;
+&nbsp;                iface = (Class)var3.next();
+&nbsp;            } while(iface.isInstance(mock));
+&nbsp;
+&nbsp;            throw Reporter.methodDoesNotAcceptParameter(&quot;VerificationStartedEvent.setMock&quot;, &quot;parameter which does not implement all extra interfaces of the original mock.\n  Required type: &quot; + originalType.getName() + &quot;\n  Required extra interface: &quot; + iface.getName() + &quot;\n  Received parameter: &quot; + ValuePrinter.print(mock) + &quot;.\n &quot;);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private VerificationStartedNotifier() {
+&nbsp;    }
+&nbsp;
+&nbsp;    static class Event implements VerificationStartedEvent {
+&nbsp;        private final MockingDetails originalMockingDetails;
+&nbsp;        private Object mock;
+&nbsp;
+&nbsp;        public Event(MockingDetails originalMockingDetails) {
+&nbsp;            this.originalMockingDetails = originalMockingDetails;
+&nbsp;            this.mock = originalMockingDetails.getMock();
+&nbsp;        }
+&nbsp;
+&nbsp;        public void setMock(Object mock) {
+&nbsp;            if (mock == null) {
+&nbsp;                throw Reporter.methodDoesNotAcceptParameter(&quot;VerificationStartedEvent.setMock&quot;, &quot;null parameter.&quot;);
+&nbsp;            } else {
+&nbsp;                MockingDetails mockingDetails = Mockito.mockingDetails(mock);
+&nbsp;                if (!mockingDetails.isMock()) {
+&nbsp;                    throw Reporter.methodDoesNotAcceptParameter(&quot;VerificationStartedEvent.setMock&quot;, &quot;parameter which is not a Mockito mock.\n  Received parameter: &quot; + ValuePrinter.print(mock) + &quot;.\n &quot;);
+&nbsp;                } else {
+&nbsp;                    MockCreationSettings originalMockSettings = this.originalMockingDetails.getMockCreationSettings();
+&nbsp;                    VerificationStartedNotifier.assertCompatibleTypes(mock, originalMockSettings);
+&nbsp;                    this.mock = mock;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public Object getMock() {
+&nbsp;            return this.mock;
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:49</div>
+</div>
+</body>
+</html>

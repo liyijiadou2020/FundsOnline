@@ -1,0 +1,188 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ArgumentMatcherStorageImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.progress</a>
+</div>
+
+<h1>Coverage Summary for Class: ArgumentMatcherStorageImpl (org.mockito.internal.progress)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ArgumentMatcherStorageImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.progress;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Stack;
+&nbsp;import org.mockito.ArgumentMatcher;
+&nbsp;import org.mockito.internal.exceptions.Reporter;
+&nbsp;import org.mockito.internal.matchers.And;
+&nbsp;import org.mockito.internal.matchers.LocalizedMatcher;
+&nbsp;import org.mockito.internal.matchers.Not;
+&nbsp;import org.mockito.internal.matchers.Or;
+&nbsp;
+&nbsp;public class ArgumentMatcherStorageImpl implements ArgumentMatcherStorage {
+&nbsp;    private static final int TWO_SUB_MATCHERS = 2;
+<b class="fc">&nbsp;    private static final int ONE_SUB_MATCHER = 1;</b>
+&nbsp;    private final Stack&lt;LocalizedMatcher&gt; matcherStack = new Stack();
+&nbsp;
+&nbsp;    public ArgumentMatcherStorageImpl() {
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void reportMatcher(ArgumentMatcher&lt;?&gt; matcher) {
+&nbsp;        this.matcherStack.push(new LocalizedMatcher(matcher));
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public List&lt;LocalizedMatcher&gt; pullLocalizedMatchers() {
+&nbsp;        return this.matcherStack.isEmpty() ? Collections.emptyList() : this.resetStack();
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public void reportAnd() {</b>
+&nbsp;        this.assertStateFor(&quot;And(?)&quot;, 2);
+&nbsp;        ArgumentMatcher&lt;?&gt; m1 = this.popMatcher();
+<b class="fc">&nbsp;        ArgumentMatcher&lt;?&gt; m2 = this.popMatcher();</b>
+&nbsp;        this.reportMatcher(new And(m1, m2));
+&nbsp;    }
+&nbsp;
+&nbsp;    public void reportOr() {
+&nbsp;        this.assertStateFor(&quot;Or(?)&quot;, 2);
+&nbsp;        ArgumentMatcher&lt;?&gt; m1 = this.popMatcher();
+&nbsp;        ArgumentMatcher&lt;?&gt; m2 = this.popMatcher();
+&nbsp;        this.reportMatcher(new Or(m1, m2));
+&nbsp;    }
+&nbsp;
+&nbsp;    public void reportNot() {
+&nbsp;        this.assertStateFor(&quot;Not(?)&quot;, 1);
+&nbsp;        ArgumentMatcher&lt;?&gt; m = this.popMatcher();
+&nbsp;        this.reportMatcher(new Not(m));
+&nbsp;    }
+&nbsp;
+&nbsp;    public void validateState() {
+&nbsp;        if (!this.matcherStack.isEmpty()) {
+&nbsp;            List&lt;LocalizedMatcher&gt; lastMatchers = this.resetStack();
+&nbsp;            throw Reporter.misplacedArgumentMatcher(lastMatchers);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void reset() {
+&nbsp;        this.matcherStack.clear();
+&nbsp;    }
+&nbsp;
+&nbsp;    private void assertStateFor(String additionalMatcherName, int subMatchersCount) {
+&nbsp;        if (this.matcherStack.isEmpty()) {
+&nbsp;            throw Reporter.reportNoSubMatchersFound(additionalMatcherName);
+&nbsp;        } else if (this.matcherStack.size() &lt; subMatchersCount) {
+&nbsp;            List&lt;LocalizedMatcher&gt; lastMatchers = this.resetStack();
+<b class="fc">&nbsp;            throw Reporter.incorrectUseOfAdditionalMatchers(additionalMatcherName, subMatchersCount, lastMatchers);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private ArgumentMatcher&lt;?&gt; popMatcher() {
+&nbsp;        return ((LocalizedMatcher)this.matcherStack.pop()).getMatcher();
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    private List&lt;LocalizedMatcher&gt; resetStack() {</b>
+&nbsp;        ArrayList&lt;LocalizedMatcher&gt; lastMatchers = new ArrayList(this.matcherStack);
+&nbsp;        this.reset();
+&nbsp;        return lastMatchers;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

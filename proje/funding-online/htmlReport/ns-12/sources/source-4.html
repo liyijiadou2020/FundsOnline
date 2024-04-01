@@ -1,0 +1,167 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > RoleHandler</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.atguigu.crowd.mvc.handler</a>
+</div>
+
+<h1>Coverage Summary for Class: RoleHandler (com.atguigu.crowd.mvc.handler)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RoleHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.atguigu.crowd.mvc.handler;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.web.bind.annotation.RequestBody;
+&nbsp;import org.springframework.web.bind.annotation.RequestMapping;
+&nbsp;import org.springframework.web.bind.annotation.RequestParam;
+&nbsp;import org.springframework.web.bind.annotation.RestController;
+&nbsp;
+&nbsp;import com.atguigu.crowd.entity.Role;
+&nbsp;import com.atguigu.crowd.service.api.RoleService;
+&nbsp;import com.atguigu.crowd.util.ResultEntity;
+&nbsp;import com.github.pagehelper.PageInfo;
+&nbsp;
+&nbsp;@RestController
+<b class="nc">&nbsp;public class RoleHandler {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private RoleService roleService;
+&nbsp;
+&nbsp;    // @ResponseBody
+&nbsp;    @RequestMapping(&quot;/role/remove/by/role/id/array.json&quot;)
+&nbsp;    public ResultEntity&lt;String&gt; removeByRoleIdAarry(@RequestBody List&lt;Integer&gt; roleIdList) {
+&nbsp;
+<b class="nc">&nbsp;        roleService.removeRole(roleIdList);</b>
+&nbsp;
+<b class="nc">&nbsp;        return ResultEntity.successWithoutData();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // @ResponseBody
+&nbsp;    @RequestMapping(&quot;/role/update.json&quot;)
+&nbsp;    public ResultEntity&lt;String&gt; updateRole(Role role) {
+&nbsp;
+<b class="nc">&nbsp;        roleService.updateRole(role);</b>
+&nbsp;
+<b class="nc">&nbsp;        return ResultEntity.successWithoutData();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // @ResponseBody
+&nbsp;    @RequestMapping(&quot;/role/save.json&quot;)
+&nbsp;    public ResultEntity&lt;String&gt; saveRole(Role role) {
+&nbsp;
+<b class="nc">&nbsp;        roleService.saveRole(role);</b>
+&nbsp;
+<b class="nc">&nbsp;        return ResultEntity.successWithoutData();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // @ResponseBody
+&nbsp;    @RequestMapping(&quot;/role/get/page/info.json&quot;)
+&nbsp;    public ResultEntity&lt;PageInfo&lt;Role&gt;&gt; getPageInfo(
+&nbsp;        @RequestParam(value = &quot;pageNum&quot;, defaultValue = &quot;1&quot;) Integer pageNum,
+&nbsp;        @RequestParam(value = &quot;pageSize&quot;, defaultValue = &quot;5&quot;) Integer pageSize,
+&nbsp;        @RequestParam(value = &quot;keyword&quot;, defaultValue = &quot;&quot;) String keyword) {
+&nbsp;
+&nbsp;        // 调用Service方法获取分页数据
+<b class="nc">&nbsp;        PageInfo&lt;Role&gt; pageInfo = roleService.getPageInfo(pageNum, pageSize, keyword);</b>
+&nbsp;
+&nbsp;        // 封装到ResultEntity对象中返回（如果上面的操作抛出异常，交给异常映射机制处理）
+<b class="nc">&nbsp;        return ResultEntity.successWithData(pageInfo);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:49</div>
+</div>
+</body>
+</html>

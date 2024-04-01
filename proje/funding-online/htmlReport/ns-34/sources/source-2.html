@@ -1,0 +1,418 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > AnnotationWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.jar.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: AnnotationWriter (net.bytebuddy.jar.asm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AnnotationWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (65/65)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.jar.asm;
+&nbsp;
+&nbsp;final class AnnotationWriter extends AnnotationVisitor {
+&nbsp;    private final SymbolTable symbolTable;
+&nbsp;    private final boolean useNamedValues;
+&nbsp;    private final ByteVector annotation;
+&nbsp;    private final int numElementValuePairsOffset;
+&nbsp;    private int numElementValuePairs;
+&nbsp;    private final AnnotationWriter previousAnnotation;
+&nbsp;    private AnnotationWriter nextAnnotation;
+&nbsp;
+&nbsp;    AnnotationWriter(SymbolTable symbolTable, boolean useNamedValues, ByteVector annotation, AnnotationWriter previousAnnotation) {
+&nbsp;        super(589824);
+&nbsp;        this.symbolTable = symbolTable;
+&nbsp;        this.useNamedValues = useNamedValues;
+&nbsp;        this.annotation = annotation;
+&nbsp;        this.numElementValuePairsOffset = annotation.length == 0 ? -1 : annotation.length - 2;
+&nbsp;        this.previousAnnotation = previousAnnotation;
+&nbsp;        if (previousAnnotation != null) {
+&nbsp;            previousAnnotation.nextAnnotation = this;
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    static AnnotationWriter create(SymbolTable symbolTable, String descriptor, AnnotationWriter previousAnnotation) {
+&nbsp;        ByteVector annotation = new ByteVector();
+&nbsp;        annotation.putShort(symbolTable.addConstantUtf8(descriptor)).putShort(0);
+&nbsp;        return new AnnotationWriter(symbolTable, true, annotation, previousAnnotation);
+&nbsp;    }
+&nbsp;
+&nbsp;    static AnnotationWriter create(SymbolTable symbolTable, int typeRef, TypePath typePath, String descriptor, AnnotationWriter previousAnnotation) {
+&nbsp;        ByteVector typeAnnotation = new ByteVector();
+&nbsp;        TypeReference.putTarget(typeRef, typeAnnotation);
+&nbsp;        TypePath.put(typePath, typeAnnotation);
+&nbsp;        typeAnnotation.putShort(symbolTable.addConstantUtf8(descriptor)).putShort(0);
+&nbsp;        return new AnnotationWriter(symbolTable, true, typeAnnotation, previousAnnotation);
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visit(String name, Object value) {
+&nbsp;        ++this.numElementValuePairs;
+&nbsp;        if (this.useNamedValues) {
+&nbsp;            this.annotation.putShort(this.symbolTable.addConstantUtf8(name));
+&nbsp;        }
+&nbsp;
+&nbsp;        if (value instanceof String) {
+&nbsp;            this.annotation.put12(115, this.symbolTable.addConstantUtf8((String)value));
+&nbsp;        } else if (value instanceof Byte) {
+&nbsp;            this.annotation.put12(66, this.symbolTable.addConstantInteger((Byte)value).index);
+&nbsp;        } else if (value instanceof Boolean) {
+&nbsp;            int booleanValue = (Boolean)value ? 1 : 0;
+&nbsp;            this.annotation.put12(90, this.symbolTable.addConstantInteger(booleanValue).index);
+&nbsp;        } else if (value instanceof Character) {
+&nbsp;            this.annotation.put12(67, this.symbolTable.addConstantInteger((Character)value).index);
+&nbsp;        } else if (value instanceof Short) {
+&nbsp;            this.annotation.put12(83, this.symbolTable.addConstantInteger((Short)value).index);
+&nbsp;        } else if (value instanceof Type) {
+&nbsp;            this.annotation.put12(99, this.symbolTable.addConstantUtf8(((Type)value).getDescriptor()));
+&nbsp;        } else {
+&nbsp;            int var5;
+&nbsp;            int var6;
+&nbsp;            int intValue;
+&nbsp;            if (value instanceof byte[]) {
+&nbsp;                byte[] byteArray = (byte[])value;
+&nbsp;                this.annotation.put12(91, byteArray.length);
+&nbsp;                byte[] var4 = byteArray;
+&nbsp;                var5 = byteArray.length;
+&nbsp;
+&nbsp;                for(var6 = 0; var6 &lt; var5; ++var6) {
+&nbsp;                    intValue = var4[var6];
+&nbsp;                    this.annotation.put12(66, this.symbolTable.addConstantInteger(intValue).index);
+&nbsp;                }
+&nbsp;            } else if (value instanceof boolean[]) {
+&nbsp;                boolean[] booleanArray = (boolean[])value;
+&nbsp;                this.annotation.put12(91, booleanArray.length);
+&nbsp;                boolean[] var12 = booleanArray;
+&nbsp;                var5 = booleanArray.length;
+&nbsp;
+&nbsp;                for(var6 = 0; var6 &lt; var5; ++var6) {
+&nbsp;                    boolean booleanValue = var12[var6];
+&nbsp;                    this.annotation.put12(90, this.symbolTable.addConstantInteger(booleanValue ? 1 : 0).index);
+&nbsp;                }
+&nbsp;            } else if (value instanceof short[]) {
+&nbsp;                short[] shortArray = (short[])value;
+&nbsp;                this.annotation.put12(91, shortArray.length);
+&nbsp;                short[] var14 = shortArray;
+&nbsp;                var5 = shortArray.length;
+&nbsp;
+&nbsp;                for(var6 = 0; var6 &lt; var5; ++var6) {
+&nbsp;                    intValue = var14[var6];
+&nbsp;                    this.annotation.put12(83, this.symbolTable.addConstantInteger(intValue).index);
+&nbsp;                }
+&nbsp;            } else if (value instanceof char[]) {
+&nbsp;                char[] charArray = (char[])value;
+&nbsp;                this.annotation.put12(91, charArray.length);
+&nbsp;                char[] var16 = charArray;
+&nbsp;                var5 = charArray.length;
+&nbsp;
+&nbsp;                for(var6 = 0; var6 &lt; var5; ++var6) {
+&nbsp;                    char charValue = var16[var6];
+&nbsp;                    this.annotation.put12(67, this.symbolTable.addConstantInteger(charValue).index);
+&nbsp;                }
+&nbsp;            } else if (value instanceof int[]) {
+&nbsp;                int[] intArray = (int[])value;
+&nbsp;                this.annotation.put12(91, intArray.length);
+&nbsp;                int[] var18 = intArray;
+&nbsp;                var5 = intArray.length;
+&nbsp;
+&nbsp;                for(var6 = 0; var6 &lt; var5; ++var6) {
+<b class="fc">&nbsp;                    intValue = var18[var6];</b>
+<b class="fc">&nbsp;                    this.annotation.put12(73, this.symbolTable.addConstantInteger(intValue).index);</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;            } else if (value instanceof long[]) {</b>
+&nbsp;                long[] longArray = (long[])value;
+<b class="fc">&nbsp;                this.annotation.put12(91, longArray.length);</b>
+<b class="fc">&nbsp;                long[] var20 = longArray;</b>
+<b class="fc">&nbsp;                var5 = longArray.length;</b>
+&nbsp;
+&nbsp;                for(var6 = 0; var6 &lt; var5; ++var6) {
+&nbsp;                    long longValue = var20[var6];
+&nbsp;                    this.annotation.put12(74, this.symbolTable.addConstantLong(longValue).index);
+&nbsp;                }
+&nbsp;            } else if (value instanceof float[]) {
+&nbsp;                float[] floatArray = (float[])value;
+&nbsp;                this.annotation.put12(91, floatArray.length);
+&nbsp;                float[] var22 = floatArray;
+&nbsp;                var5 = floatArray.length;
+&nbsp;
+&nbsp;                for(var6 = 0; var6 &lt; var5; ++var6) {
+&nbsp;                    float floatValue = var22[var6];
+&nbsp;                    this.annotation.put12(70, this.symbolTable.addConstantFloat(floatValue).index);
+&nbsp;                }
+&nbsp;            } else if (value instanceof double[]) {
+&nbsp;                double[] doubleArray = (double[])value;
+&nbsp;                this.annotation.put12(91, doubleArray.length);
+&nbsp;                double[] var24 = doubleArray;
+&nbsp;                var5 = doubleArray.length;
+<b class="fc">&nbsp;</b>
+&nbsp;                for(var6 = 0; var6 &lt; var5; ++var6) {
+<b class="fc">&nbsp;                    double doubleValue = var24[var6];</b>
+<b class="fc">&nbsp;                    this.annotation.put12(68, this.symbolTable.addConstantDouble(doubleValue).index);</b>
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                Symbol symbol = this.symbolTable.addConstant(value);
+&nbsp;                this.annotation.put12(&quot;.s.IFJDCS&quot;.charAt(symbol.tag), symbol.index);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitEnum(String name, String descriptor, String value) {
+&nbsp;        ++this.numElementValuePairs;
+&nbsp;        if (this.useNamedValues) {
+&nbsp;            this.annotation.putShort(this.symbolTable.addConstantUtf8(name));
+&nbsp;        }
+&nbsp;
+&nbsp;        this.annotation.put12(101, this.symbolTable.addConstantUtf8(descriptor)).putShort(this.symbolTable.addConstantUtf8(value));
+&nbsp;    }
+&nbsp;
+&nbsp;    public AnnotationVisitor visitAnnotation(String name, String descriptor) {
+&nbsp;        ++this.numElementValuePairs;
+&nbsp;        if (this.useNamedValues) {
+&nbsp;            this.annotation.putShort(this.symbolTable.addConstantUtf8(name));
+&nbsp;        }
+&nbsp;
+&nbsp;        this.annotation.put12(64, this.symbolTable.addConstantUtf8(descriptor)).putShort(0);
+&nbsp;        return new AnnotationWriter(this.symbolTable, true, this.annotation, (AnnotationWriter)null);
+&nbsp;    }
+&nbsp;
+&nbsp;    public AnnotationVisitor visitArray(String name) {
+&nbsp;        ++this.numElementValuePairs;
+&nbsp;        if (this.useNamedValues) {
+&nbsp;            this.annotation.putShort(this.symbolTable.addConstantUtf8(name));
+&nbsp;        }
+&nbsp;
+&nbsp;        this.annotation.put12(91, 0);
+&nbsp;        return new AnnotationWriter(this.symbolTable, false, this.annotation, (AnnotationWriter)null);
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitEnd() {
+&nbsp;        if (this.numElementValuePairsOffset != -1) {
+&nbsp;            byte[] data = this.annotation.data;
+&nbsp;            data[this.numElementValuePairsOffset] = (byte)(this.numElementValuePairs &gt;&gt;&gt; 8);
+&nbsp;            data[this.numElementValuePairsOffset + 1] = (byte)this.numElementValuePairs;
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    int computeAnnotationsSize(String attributeName) {</b>
+<b class="fc">&nbsp;        if (attributeName != null) {</b>
+&nbsp;            this.symbolTable.addConstantUtf8(attributeName);
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        int attributeSize = 8;
+&nbsp;
+&nbsp;        for(AnnotationWriter annotationWriter = this; annotationWriter != null; annotationWriter = annotationWriter.previousAnnotation) {
+&nbsp;            attributeSize += annotationWriter.annotation.length;
+&nbsp;        }
+&nbsp;
+&nbsp;        return attributeSize;
+&nbsp;    }
+&nbsp;
+&nbsp;    static int computeAnnotationsSize(AnnotationWriter lastRuntimeVisibleAnnotation, AnnotationWriter lastRuntimeInvisibleAnnotation, AnnotationWriter lastRuntimeVisibleTypeAnnotation, AnnotationWriter lastRuntimeInvisibleTypeAnnotation) {
+&nbsp;        int size = 0;
+&nbsp;        if (lastRuntimeVisibleAnnotation != null) {
+&nbsp;            size += lastRuntimeVisibleAnnotation.computeAnnotationsSize(&quot;RuntimeVisibleAnnotations&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (lastRuntimeInvisibleAnnotation != null) {
+&nbsp;            size += lastRuntimeInvisibleAnnotation.computeAnnotationsSize(&quot;RuntimeInvisibleAnnotations&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (lastRuntimeVisibleTypeAnnotation != null) {
+&nbsp;            size += lastRuntimeVisibleTypeAnnotation.computeAnnotationsSize(&quot;RuntimeVisibleTypeAnnotations&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (lastRuntimeInvisibleTypeAnnotation != null) {
+&nbsp;            size += lastRuntimeInvisibleTypeAnnotation.computeAnnotationsSize(&quot;RuntimeInvisibleTypeAnnotations&quot;);
+&nbsp;        }
+&nbsp;
+&nbsp;        return size;
+&nbsp;    }
+&nbsp;
+&nbsp;    void putAnnotations(int attributeNameIndex, ByteVector output) {
+&nbsp;        int attributeLength = 2;
+&nbsp;        int numAnnotations = 0;
+&nbsp;        AnnotationWriter annotationWriter = this;
+&nbsp;
+&nbsp;        AnnotationWriter firstAnnotation;
+&nbsp;        for(firstAnnotation = null; annotationWriter != null; annotationWriter = annotationWriter.previousAnnotation) {
+&nbsp;            annotationWriter.visitEnd();
+&nbsp;            attributeLength += annotationWriter.annotation.length;
+&nbsp;            ++numAnnotations;
+&nbsp;            firstAnnotation = annotationWriter;
+&nbsp;        }
+&nbsp;
+&nbsp;        output.putShort(attributeNameIndex);
+&nbsp;        output.putInt(attributeLength);
+&nbsp;        output.putShort(numAnnotations);
+&nbsp;
+&nbsp;        for(annotationWriter = firstAnnotation; annotationWriter != null; annotationWriter = annotationWriter.nextAnnotation) {
+&nbsp;            output.putByteArray(annotationWriter.annotation.data, 0, annotationWriter.annotation.length);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    static void putAnnotations(SymbolTable symbolTable, AnnotationWriter lastRuntimeVisibleAnnotation, AnnotationWriter lastRuntimeInvisibleAnnotation, AnnotationWriter lastRuntimeVisibleTypeAnnotation, AnnotationWriter lastRuntimeInvisibleTypeAnnotation, ByteVector output) {
+&nbsp;        if (lastRuntimeVisibleAnnotation != null) {
+&nbsp;            lastRuntimeVisibleAnnotation.putAnnotations(symbolTable.addConstantUtf8(&quot;RuntimeVisibleAnnotations&quot;), output);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (lastRuntimeInvisibleAnnotation != null) {
+&nbsp;            lastRuntimeInvisibleAnnotation.putAnnotations(symbolTable.addConstantUtf8(&quot;RuntimeInvisibleAnnotations&quot;), output);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (lastRuntimeVisibleTypeAnnotation != null) {
+&nbsp;            lastRuntimeVisibleTypeAnnotation.putAnnotations(symbolTable.addConstantUtf8(&quot;RuntimeVisibleTypeAnnotations&quot;), output);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (lastRuntimeInvisibleTypeAnnotation != null) {
+&nbsp;            lastRuntimeInvisibleTypeAnnotation.putAnnotations(symbolTable.addConstantUtf8(&quot;RuntimeInvisibleTypeAnnotations&quot;), output);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    static int computeParameterAnnotationsSize(String attributeName, AnnotationWriter[] annotationWriters, int annotableParameterCount) {
+&nbsp;        int attributeSize = 7 + 2 * annotableParameterCount;
+&nbsp;
+&nbsp;        for(int i = 0; i &lt; annotableParameterCount; ++i) {
+&nbsp;            AnnotationWriter annotationWriter = annotationWriters[i];
+&nbsp;            attributeSize += annotationWriter == null ? 0 : annotationWriter.computeAnnotationsSize(attributeName) - 8;
+&nbsp;        }
+&nbsp;
+&nbsp;        return attributeSize;
+&nbsp;    }
+&nbsp;
+&nbsp;    static void putParameterAnnotations(int attributeNameIndex, AnnotationWriter[] annotationWriters, int annotableParameterCount, ByteVector output) {
+&nbsp;        int attributeLength = 1 + 2 * annotableParameterCount;
+&nbsp;
+&nbsp;        int i;
+&nbsp;        AnnotationWriter annotationWriter;
+&nbsp;        for(i = 0; i &lt; annotableParameterCount; ++i) {
+&nbsp;            annotationWriter = annotationWriters[i];
+&nbsp;            attributeLength += annotationWriter == null ? 0 : annotationWriter.computeAnnotationsSize((String)null) - 8;
+&nbsp;        }
+&nbsp;
+&nbsp;        output.putShort(attributeNameIndex);
+&nbsp;        output.putInt(attributeLength);
+&nbsp;        output.putByte(annotableParameterCount);
+&nbsp;
+&nbsp;        for(i = 0; i &lt; annotableParameterCount; ++i) {
+&nbsp;            annotationWriter = annotationWriters[i];
+&nbsp;            AnnotationWriter firstAnnotation = null;
+&nbsp;
+&nbsp;            int numAnnotations;
+&nbsp;            for(numAnnotations = 0; annotationWriter != null; annotationWriter = annotationWriter.previousAnnotation) {
+&nbsp;                annotationWriter.visitEnd();
+&nbsp;                ++numAnnotations;
+&nbsp;                firstAnnotation = annotationWriter;
+&nbsp;            }
+&nbsp;
+&nbsp;            output.putShort(numAnnotations);
+&nbsp;
+&nbsp;            for(annotationWriter = firstAnnotation; annotationWriter != null; annotationWriter = annotationWriter.nextAnnotation) {
+&nbsp;                output.putByteArray(annotationWriter.annotation.data, 0, annotationWriter.annotation.length);
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,206 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > StackTraceFilter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.exceptions.stacktrace</a>
+</div>
+
+<h1>Coverage Summary for Class: StackTraceFilter (org.mockito.internal.exceptions.stacktrace)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StackTraceFilter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (27/27)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.exceptions.stacktrace;
+&nbsp;
+&nbsp;import java.io.Serializable;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import org.mockito.exceptions.stacktrace.StackTraceCleaner;
+&nbsp;import org.mockito.internal.configuration.plugins.Plugins;
+<b class="fc">&nbsp;</b>
+&nbsp;public class StackTraceFilter implements Serializable {
+&nbsp;    static final long serialVersionUID = -5499819791513105700L;
+&nbsp;    private static final StackTraceCleaner CLEANER = Plugins.getStackTraceCleanerProvider().getStackTraceCleaner(new DefaultStackTraceCleaner());
+&nbsp;    private static Object JAVA_LANG_ACCESS;
+<b class="fc">&nbsp;    private static Method GET_STACK_TRACE_ELEMENT;</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public StackTraceFilter() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public StackTraceElement[] filter(StackTraceElement[] target, boolean keepTop) {
+&nbsp;        List&lt;StackTraceElement&gt; filtered = new ArrayList();
+&nbsp;        StackTraceElement[] result = target;
+<b class="fc">&nbsp;        int var5 = target.length;</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        for(int var6 = 0; var6 &lt; var5; ++var6) {</b>
+<b class="fc">&nbsp;            StackTraceElement element = result[var6];</b>
+<b class="fc">&nbsp;            if (CLEANER.isIn(element)) {</b>
+<b class="fc">&nbsp;                filtered.add(element);</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        result = new StackTraceElement[filtered.size()];
+<b class="fc">&nbsp;        return (StackTraceElement[])filtered.toArray(result);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public StackTraceElement filterFirst(Throwable target, boolean isInline) {
+&nbsp;        boolean shouldSkip = isInline;
+&nbsp;        if (GET_STACK_TRACE_ELEMENT != null) {
+&nbsp;            int i = 0;
+&nbsp;
+&nbsp;            while(true) {
+&nbsp;                try {
+&nbsp;                    StackTraceElement stackTraceElement = (StackTraceElement)GET_STACK_TRACE_ELEMENT.invoke(JAVA_LANG_ACCESS, target, i);
+&nbsp;                    if (CLEANER.isIn(stackTraceElement)) {
+<b class="fc">&nbsp;                        if (!shouldSkip) {</b>
+<b class="fc">&nbsp;                            return stackTraceElement;</b>
+<b class="fc">&nbsp;                        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;                        shouldSkip = false;
+&nbsp;                    }
+<b class="fc">&nbsp;                } catch (Exception var8) {</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                ++i;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        StackTraceElement[] var9 = target.getStackTrace();
+&nbsp;        int var5 = var9.length;
+&nbsp;
+&nbsp;        for(int var6 = 0; var6 &lt; var5; ++var6) {
+&nbsp;            StackTraceElement stackTraceElement = var9[var6];
+&nbsp;            if (CLEANER.isIn(stackTraceElement)) {
+&nbsp;                if (!shouldSkip) {
+&nbsp;                    return stackTraceElement;
+&nbsp;                }
+&nbsp;
+&nbsp;                shouldSkip = false;
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return null;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public String findSourceFile(StackTraceElement[] target, String defaultValue) {
+&nbsp;        StackTraceElement[] var3 = target;
+&nbsp;        int var4 = target.length;
+&nbsp;
+&nbsp;        for(int var5 = 0; var5 &lt; var4; ++var5) {
+&nbsp;            StackTraceElement e = var3[var5];
+&nbsp;            if (CLEANER.isIn(e)) {
+<b class="fc">&nbsp;                return e.getFileName();</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return defaultValue;</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    static {
+<b class="fc">&nbsp;        try {</b>
+&nbsp;            JAVA_LANG_ACCESS = Class.forName(&quot;sun.misc.SharedSecrets&quot;).getMethod(&quot;getJavaLangAccess&quot;).invoke((Object)null);
+&nbsp;            GET_STACK_TRACE_ELEMENT = Class.forName(&quot;sun.misc.JavaLangAccess&quot;).getMethod(&quot;getStackTraceElement&quot;, Throwable.class, Integer.TYPE);
+&nbsp;        } catch (Exception var1) {
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

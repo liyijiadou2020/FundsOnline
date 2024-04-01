@@ -1,0 +1,238 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > AdminServiceImplTest</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.atguigu.crowd.service.impl.test</a>
+</div>
+
+<h1>Coverage Summary for Class: AdminServiceImplTest (com.atguigu.crowd.service.impl.test)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AdminServiceImplTest</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (34/34)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.atguigu.crowd.service.impl.test;
+&nbsp;
+&nbsp;import com.atguigu.crowd.entity.Admin;
+&nbsp;import com.atguigu.crowd.exception.LoginAcctAlreadyInUseException;
+&nbsp;import com.atguigu.crowd.exception.LoginAcctAlreadyInUseForUpdateException;
+&nbsp;import com.atguigu.crowd.exception.LoginFailedException;
+&nbsp;import com.atguigu.crowd.mapper.AdminMapper;
+&nbsp;import com.atguigu.crowd.service.impl.AdminServiceImpl;
+&nbsp;import com.atguigu.crowd.util.CrowdUtil;
+&nbsp;import com.github.pagehelper.PageInfo;
+&nbsp;import org.junit.jupiter.api.BeforeEach;
+&nbsp;import org.junit.jupiter.api.Test;
+&nbsp;import org.mockito.InjectMocks;
+&nbsp;import org.mockito.Mock;
+&nbsp;import org.mockito.MockitoAnnotations;
+&nbsp;import org.springframework.dao.DuplicateKeyException;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import static org.junit.jupiter.api.Assertions.*;
+&nbsp;import static org.mockito.ArgumentMatchers.any;
+&nbsp;import static org.mockito.Mockito.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Created with IntelliJ IDEA 2023.2.2
+&nbsp; *
+&nbsp; * @author Li Yijia
+&nbsp; * @date 2024/3/21
+&nbsp; */
+&nbsp;public class AdminServiceImplTest {
+&nbsp;    @Mock
+&nbsp;    private AdminMapper adminMapper;
+&nbsp;
+&nbsp;    @InjectMocks
+&nbsp;    private AdminServiceImpl adminService;
+&nbsp;
+&nbsp;    @BeforeEach
+<b class="fc">&nbsp;    public void setup() {</b>
+&nbsp;        MockitoAnnotations.openMocks(this);
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+<b class="fc">&nbsp;    public void saveAdmin_Success() {</b>
+&nbsp;        Admin admin = new Admin(null, &quot;testUser&quot;, &quot;password&quot;, &quot;Test User&quot;, &quot;test@example.com&quot;, null);
+<b class="fc">&nbsp;        // doNothing().when(adminMapper).insert(any(Admin.class));</b>
+<b class="fc">&nbsp;        when(adminMapper.insert(admin)).thenReturn(1);</b>
+<b class="fc">&nbsp;        adminService.saveAdmin(admin);</b>
+&nbsp;        verify(adminMapper).insert(admin);
+&nbsp;        // assertDoesNotThrow(() -&gt; adminService.saveAdmin(admin));
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+<b class="fc">&nbsp;    public void saveAdmin_ThrowsExceptionOnDuplicateKey() {</b>
+<b class="fc">&nbsp;        Admin admin = new Admin(null, &quot;testUser&quot;, &quot;password&quot;, &quot;Test User&quot;, &quot;test@example.com&quot;, null);</b>
+<b class="fc">&nbsp;        doThrow(new DuplicateKeyException(&quot;Duplicate Key&quot;)).when(adminMapper).insert(any(Admin.class));</b>
+&nbsp;        assertThrows(LoginAcctAlreadyInUseException.class, () -&gt; adminService.saveAdmin(admin));
+&nbsp;    }
+&nbsp;
+&nbsp;    // -----------------------
+&nbsp;    @Test
+<b class="fc">&nbsp;    public void getAll_ReturnsNonEmptyList() {</b>
+<b class="fc">&nbsp;        List&lt;Admin&gt; expectedList = Arrays.asList(new Admin());</b>
+<b class="fc">&nbsp;        when(adminMapper.selectByExample(any())).thenReturn(expectedList);</b>
+<b class="fc">&nbsp;        List&lt;Admin&gt; resultList = adminService.getAll();</b>
+&nbsp;        assertFalse(resultList.isEmpty());
+&nbsp;    }
+&nbsp;
+&nbsp;    // -----------------------
+&nbsp;    @Test
+<b class="fc">&nbsp;    public void getAdminByLoginAcct_Success() {</b>
+<b class="fc">&nbsp;        String loginAcct = &quot;testUser&quot;;</b>
+<b class="fc">&nbsp;        String originPwd = &quot;password&quot;;</b>
+<b class="fc">&nbsp;        String afterPwd = CrowdUtil.md5(originPwd);</b>
+<b class="fc">&nbsp;        when(adminMapper.selectByExample(any())).thenReturn(</b>
+<b class="fc">&nbsp;            Collections.singletonList(new Admin(1, loginAcct, afterPwd, &quot;Test User&quot;, &quot;test@example.com&quot;, null)));</b>
+&nbsp;        assertDoesNotThrow(() -&gt; adminService.getAdminByLoginAcct(loginAcct, originPwd));
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+<b class="fc">&nbsp;    public void getAdminByLoginAcct_FailedLogin() {</b>
+<b class="fc">&nbsp;        when(adminMapper.selectByExample(any())).thenReturn(Collections.emptyList());</b>
+&nbsp;        assertThrows(LoginFailedException.class, () -&gt; adminService.getAdminByLoginAcct(&quot;wrongUser&quot;, &quot;password&quot;));
+&nbsp;    }
+&nbsp;
+&nbsp;    // -----------------------
+&nbsp;    @Test
+<b class="fc">&nbsp;    public void remove_Success() {</b>
+<b class="fc">&nbsp;        when(adminMapper.deleteByPrimaryKey(anyInt())).thenReturn(1);</b>
+&nbsp;        assertDoesNotThrow(() -&gt; adminService.remove(1));
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+<b class="fc">&nbsp;    public void remove_NonExistentAdmin() {</b>
+&nbsp;        doThrow(new RuntimeException(&quot;Admin not found&quot;)).when(adminMapper).deleteByPrimaryKey(anyInt());
+&nbsp;        // Так как метод не предполагает обработку исключений в случае отсутствия администратора, тестовый кейс
+<b class="fc">&nbsp;        // адаптирован под общий подход к исключениям</b>
+&nbsp;        assertThrows(RuntimeException.class, () -&gt; adminService.remove(-1));
+&nbsp;    }
+&nbsp;
+&nbsp;    // -----------------------
+&nbsp;    @Test
+<b class="fc">&nbsp;    public void update_Success() {</b>
+<b class="fc">&nbsp;        when(adminMapper.updateByPrimaryKeySelective(any(Admin.class))).thenReturn(1);</b>
+&nbsp;        assertDoesNotThrow(() -&gt; adminService.update(new Admin()));
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+<b class="fc">&nbsp;    public void update_ThrowsExceptionOnDuplicateKey() {</b>
+<b class="fc">&nbsp;        doThrow(new DuplicateKeyException(&quot;Duplicate Key&quot;)).when(adminMapper)</b>
+<b class="fc">&nbsp;            .updateByPrimaryKeySelective(any(Admin.class));</b>
+&nbsp;        assertThrows(LoginAcctAlreadyInUseForUpdateException.class, () -&gt; adminService.update(new Admin()));
+&nbsp;    }
+&nbsp;
+&nbsp;    // -----------------------
+&nbsp;    @Test
+<b class="fc">&nbsp;    public void saveAdminRoleRelationship_SuccessWithNonEmptyList() {</b>
+<b class="fc">&nbsp;        doNothing().when(adminMapper).deleteOLdRelationship(anyInt());</b>
+<b class="fc">&nbsp;        doNothing().when(adminMapper).insertNewRelationship(anyInt(), anyList());</b>
+&nbsp;        assertDoesNotThrow(() -&gt; adminService.saveAdminRoleRelationship(1, Arrays.asList(1, 2, 3)));
+&nbsp;    }
+&nbsp;
+&nbsp;    @Test
+<b class="fc">&nbsp;    public void saveAdminRoleRelationship_SuccessWithEmptyList() {</b>
+&nbsp;        doNothing().when(adminMapper).deleteOLdRelationship(anyInt());
+&nbsp;        // Поскольку в методе нет явной проверки на пустой список для вставки новых связей, предполагается, что операция
+<b class="fc">&nbsp;        // просто не выполняется, не вызывая ошибок.</b>
+&nbsp;        assertDoesNotThrow(() -&gt; adminService.saveAdminRoleRelationship(1, new ArrayList&lt;&gt;()));
+&nbsp;    }
+&nbsp;    // -----------------------
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

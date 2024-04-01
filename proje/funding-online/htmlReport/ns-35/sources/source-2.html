@@ -1,0 +1,249 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > SignatureWriter</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.jar.asm.signature</a>
+</div>
+
+<h1>Coverage Summary for Class: SignatureWriter (net.bytebuddy.jar.asm.signature)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SignatureWriter</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (31/31)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.jar.asm.signature;
+&nbsp;
+&nbsp;public class SignatureWriter extends SignatureVisitor {
+&nbsp;    private final StringBuilder stringBuilder = new StringBuilder();
+&nbsp;    private boolean hasFormals;
+&nbsp;    private boolean hasParameters;
+&nbsp;    private int argumentStack;
+&nbsp;
+&nbsp;    public SignatureWriter() {
+&nbsp;        super(589824);
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitFormalTypeParameter(String name) {
+&nbsp;        if (!this.hasFormals) {
+&nbsp;            this.hasFormals = true;
+&nbsp;            this.stringBuilder.append(&#39;&lt;&#39;);
+&nbsp;        }
+&nbsp;
+&nbsp;        this.stringBuilder.append(name);
+&nbsp;        this.stringBuilder.append(&#39;:&#39;);
+&nbsp;    }
+&nbsp;
+&nbsp;    public SignatureVisitor visitClassBound() {
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public SignatureVisitor visitInterfaceBound() {
+&nbsp;        this.stringBuilder.append(&#39;:&#39;);
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public SignatureVisitor visitSuperclass() {
+&nbsp;        this.endFormals();
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public SignatureVisitor visitInterface() {
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public SignatureVisitor visitParameterType() {
+&nbsp;        this.endFormals();
+&nbsp;        if (!this.hasParameters) {
+&nbsp;            this.hasParameters = true;
+&nbsp;            this.stringBuilder.append(&#39;(&#39;);
+&nbsp;        }
+&nbsp;
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public SignatureVisitor visitReturnType() {
+&nbsp;        this.endFormals();
+&nbsp;        if (!this.hasParameters) {
+&nbsp;            this.stringBuilder.append(&#39;(&#39;);
+&nbsp;        }
+&nbsp;
+&nbsp;        this.stringBuilder.append(&#39;)&#39;);
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public SignatureVisitor visitExceptionType() {
+&nbsp;        this.stringBuilder.append(&#39;^&#39;);
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitBaseType(char descriptor) {
+<b class="fc">&nbsp;        this.stringBuilder.append(descriptor);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitTypeVariable(String name) {
+&nbsp;        this.stringBuilder.append(&#39;T&#39;);
+&nbsp;        this.stringBuilder.append(name);
+&nbsp;        this.stringBuilder.append(&#39;;&#39;);
+&nbsp;    }
+&nbsp;
+&nbsp;    public SignatureVisitor visitArrayType() {
+&nbsp;        this.stringBuilder.append(&#39;[&#39;);
+&nbsp;        return this;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitClassType(String name) {
+&nbsp;        this.stringBuilder.append(&#39;L&#39;);
+&nbsp;        this.stringBuilder.append(name);
+&nbsp;        this.argumentStack *= 2;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitInnerClassType(String name) {
+&nbsp;        this.endArguments();
+&nbsp;        this.stringBuilder.append(&#39;.&#39;);
+&nbsp;        this.stringBuilder.append(name);
+&nbsp;        this.argumentStack *= 2;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitTypeArgument() {
+&nbsp;        if (this.argumentStack % 2 == 0) {
+&nbsp;            this.argumentStack |= 1;
+<b class="fc">&nbsp;            this.stringBuilder.append(&#39;&lt;&#39;);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        this.stringBuilder.append(&#39;*&#39;);
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public SignatureVisitor visitTypeArgument(char wildcard) {</b>
+&nbsp;        if (this.argumentStack % 2 == 0) {
+&nbsp;            this.argumentStack |= 1;
+&nbsp;            this.stringBuilder.append(&#39;&lt;&#39;);
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        if (wildcard != &#39;=&#39;) {</b>
+<b class="fc">&nbsp;            this.stringBuilder.append(wildcard);</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return this;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void visitEnd() {
+&nbsp;        this.endArguments();
+<b class="fc">&nbsp;        this.stringBuilder.append(&#39;;&#39;);</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public String toString() {
+<b class="fc">&nbsp;        return this.stringBuilder.toString();</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private void endFormals() {
+&nbsp;        if (this.hasFormals) {
+&nbsp;            this.hasFormals = false;
+&nbsp;            this.stringBuilder.append(&#39;&gt;&#39;);
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void endArguments() {
+<b class="fc">&nbsp;        if (this.argumentStack % 2 == 1) {</b>
+&nbsp;            this.stringBuilder.append(&#39;&gt;&#39;);
+&nbsp;        }
+&nbsp;
+&nbsp;        this.argumentStack /= 2;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

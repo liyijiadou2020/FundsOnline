@@ -1,0 +1,154 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > AbstractThrowsException</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.stubbing.answers</a>
+</div>
+
+<h1>Coverage Summary for Class: AbstractThrowsException (org.mockito.internal.stubbing.answers)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AbstractThrowsException</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.stubbing.answers;
+&nbsp;
+&nbsp;import org.mockito.internal.exceptions.Reporter;
+&nbsp;import org.mockito.internal.exceptions.stacktrace.ConditionalStackTraceFilter;
+&nbsp;import org.mockito.internal.util.MockUtil;
+&nbsp;import org.mockito.invocation.InvocationOnMock;
+&nbsp;import org.mockito.stubbing.Answer;
+&nbsp;import org.mockito.stubbing.ValidableAnswer;
+&nbsp;
+<b class="fc">&nbsp;public abstract class AbstractThrowsException implements Answer&lt;Object&gt;, ValidableAnswer {</b>
+&nbsp;    private final ConditionalStackTraceFilter filter = new ConditionalStackTraceFilter();
+<b class="fc">&nbsp;</b>
+&nbsp;    public AbstractThrowsException() {
+&nbsp;    }
+&nbsp;
+&nbsp;    protected abstract Throwable getThrowable();
+&nbsp;
+<b class="fc">&nbsp;    public Object answer(InvocationOnMock invocation) throws Throwable {</b>
+<b class="fc">&nbsp;        Throwable throwable = this.getThrowable();</b>
+&nbsp;        if (throwable == null) {
+&nbsp;            throw new IllegalStateException(&quot;throwable is null: you shall not call #answer if #validateFor fails!&quot;);
+&nbsp;        } else if (MockUtil.isMock(throwable)) {
+<b class="fc">&nbsp;            throw throwable;</b>
+&nbsp;        } else {
+&nbsp;            Throwable t = throwable.fillInStackTrace();
+<b class="fc">&nbsp;            if (t == null) {</b>
+&nbsp;                throw throwable;
+<b class="fc">&nbsp;            } else {</b>
+&nbsp;                this.filter.filter(t);
+&nbsp;                throw t;
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void validateFor(InvocationOnMock invocation) {
+&nbsp;        Throwable throwable = this.getThrowable();
+&nbsp;        if (throwable == null) {
+<b class="fc">&nbsp;            throw Reporter.cannotStubWithNullThrowable();</b>
+<b class="fc">&nbsp;        } else if (!(throwable instanceof RuntimeException) &amp;&amp; !(throwable instanceof Error)) {</b>
+&nbsp;            if (!(new InvocationInfo(invocation)).isValidException(throwable)) {
+&nbsp;                throw Reporter.checkedExceptionInvalid(throwable);
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

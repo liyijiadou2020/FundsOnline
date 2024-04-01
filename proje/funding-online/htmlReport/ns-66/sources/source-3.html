@@ -1,0 +1,161 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > Times</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.verification</a>
+</div>
+
+<h1>Coverage Summary for Class: Times (org.mockito.internal.verification)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Times</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.verification;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import org.mockito.exceptions.base.MockitoException;
+&nbsp;import org.mockito.internal.verification.api.VerificationData;
+&nbsp;import org.mockito.internal.verification.api.VerificationDataInOrder;
+&nbsp;import org.mockito.internal.verification.api.VerificationInOrderMode;
+&nbsp;import org.mockito.internal.verification.checkers.MissingInvocationChecker;
+&nbsp;import org.mockito.internal.verification.checkers.NumberOfInvocationsChecker;
+&nbsp;import org.mockito.invocation.Invocation;
+&nbsp;import org.mockito.invocation.MatchableInvocation;
+&nbsp;import org.mockito.verification.VerificationMode;
+&nbsp;
+&nbsp;public class Times implements VerificationInOrderMode, VerificationMode {
+&nbsp;    final int wantedCount;
+&nbsp;
+&nbsp;    public Times(int wantedNumberOfInvocations) {
+<b class="fc">&nbsp;        if (wantedNumberOfInvocations &lt; 0) {</b>
+<b class="fc">&nbsp;            throw new MockitoException(&quot;Negative value is not allowed here&quot;);</b>
+&nbsp;        } else {
+&nbsp;            this.wantedCount = wantedNumberOfInvocations;
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void verify(VerificationData data) {
+&nbsp;        List&lt;Invocation&gt; invocations = data.getAllInvocations();
+<b class="fc">&nbsp;        MatchableInvocation wanted = data.getTarget();</b>
+<b class="fc">&nbsp;        if (this.wantedCount &gt; 0) {</b>
+&nbsp;            MissingInvocationChecker.checkMissingInvocation(data.getAllInvocations(), data.getTarget());
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        NumberOfInvocationsChecker.checkNumberOfInvocations(invocations, wanted, this.wantedCount);
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public void verifyInOrder(VerificationDataInOrder data) {
+&nbsp;        List&lt;Invocation&gt; allInvocations = data.getAllInvocations();
+&nbsp;        MatchableInvocation wanted = data.getWanted();
+&nbsp;        if (this.wantedCount &gt; 0) {
+&nbsp;            MissingInvocationChecker.checkMissingInvocation(allInvocations, wanted, data.getOrderingContext());
+&nbsp;        }
+&nbsp;
+&nbsp;        NumberOfInvocationsChecker.checkNumberOfInvocations(allInvocations, wanted, this.wantedCount, data.getOrderingContext());
+&nbsp;    }
+&nbsp;
+&nbsp;    public String toString() {
+&nbsp;        return &quot;Wanted invocations count: &quot; + this.wantedCount;
+&nbsp;    }
+&nbsp;
+&nbsp;    public VerificationMode description(String description) {
+&nbsp;        return VerificationModeFactory.description(this, description);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

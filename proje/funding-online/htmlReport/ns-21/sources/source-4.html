@@ -1,0 +1,552 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ParameterList</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.description.method</a>
+</div>
+
+<h1>Coverage Summary for Class: ParameterList (net.bytebuddy.description.method)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">ParameterList$AbstractBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/15)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParameterList$Empty</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParameterList$Explicit$ForTypes</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParameterList$ForLoadedExecutable</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParameterList$ForLoadedExecutable$OfConstructor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParameterList$ForLoadedExecutable$OfMethod</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParameterList$ForTokens</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ParameterList$TypeSubstituting</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (45/45)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.description.method;
+&nbsp;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.security.AccessController;
+&nbsp;import java.security.PrivilegedAction;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import net.bytebuddy.build.AccessControllerPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.ByteCodeElement;
+&nbsp;import net.bytebuddy.description.type.TypeDefinition;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeList;
+&nbsp;import net.bytebuddy.matcher.ElementMatcher;
+&nbsp;import net.bytebuddy.matcher.FilterableList;
+&nbsp;import net.bytebuddy.utility.dispatcher.JavaDispatcher;
+&nbsp;import net.bytebuddy.utility.dispatcher.JavaDispatcher.Instance;
+&nbsp;import net.bytebuddy.utility.dispatcher.JavaDispatcher.Proxied;
+&nbsp;
+&nbsp;public interface ParameterList&lt;T extends ParameterDescription&gt; extends FilterableList&lt;T, ParameterList&lt;T&gt;&gt; {
+&nbsp;    TypeList.Generic asTypeList();
+&nbsp;
+&nbsp;    ByteCodeElement.Token.TokenList&lt;ParameterDescription.Token&gt; asTokenList(ElementMatcher&lt;? super TypeDescription&gt; var1);
+&nbsp;
+&nbsp;    ParameterList&lt;ParameterDescription.InDefinedShape&gt; asDefined();
+&nbsp;
+&nbsp;    boolean hasExplicitMetaData();
+&nbsp;
+&nbsp;    public static class Empty&lt;S extends ParameterDescription&gt; extends FilterableList.Empty&lt;S, ParameterList&lt;S&gt;&gt; implements ParameterList&lt;S&gt; {
+&nbsp;        public Empty() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean hasExplicitMetaData() {
+&nbsp;            return true;
+&nbsp;        }
+&nbsp;
+&nbsp;        public TypeList.Generic asTypeList() {
+&nbsp;            return new TypeList.Generic.Empty();
+&nbsp;        }
+&nbsp;
+&nbsp;        public ByteCodeElement.Token.TokenList&lt;ParameterDescription.Token&gt; asTokenList(ElementMatcher&lt;? super TypeDescription&gt; matcher) {
+&nbsp;            return new ByteCodeElement.Token.TokenList(new ParameterDescription.Token[0]);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ParameterList&lt;ParameterDescription.InDefinedShape&gt; asDefined() {
+&nbsp;            return this;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class TypeSubstituting extends AbstractBase&lt;ParameterDescription.InGenericShape&gt; {
+&nbsp;        private final MethodDescription.InGenericShape declaringMethod;
+&nbsp;        private final List&lt;? extends ParameterDescription&gt; parameterDescriptions;
+&nbsp;        private final TypeDescription.Generic.Visitor&lt;? extends TypeDescription.Generic&gt; visitor;
+&nbsp;
+&nbsp;        public TypeSubstituting(MethodDescription.InGenericShape declaringMethod, List&lt;? extends ParameterDescription&gt; parameterDescriptions, TypeDescription.Generic.Visitor&lt;? extends TypeDescription.Generic&gt; visitor) {
+&nbsp;            this.declaringMethod = declaringMethod;
+&nbsp;            this.parameterDescriptions = parameterDescriptions;
+&nbsp;            this.visitor = visitor;
+&nbsp;        }
+&nbsp;
+&nbsp;        public ParameterDescription.InGenericShape get(int index) {
+&nbsp;            return new ParameterDescription.TypeSubstituting(this.declaringMethod, (ParameterDescription)this.parameterDescriptions.get(index), this.visitor);
+&nbsp;        }
+&nbsp;
+&nbsp;        public int size() {
+&nbsp;            return this.parameterDescriptions.size();
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static class ForTokens extends AbstractBase&lt;ParameterDescription.InDefinedShape&gt; {
+&nbsp;        private final MethodDescription.InDefinedShape declaringMethod;
+&nbsp;        private final List&lt;? extends ParameterDescription.Token&gt; tokens;
+&nbsp;
+<b class="fc">&nbsp;        public ForTokens(MethodDescription.InDefinedShape declaringMethod, List&lt;? extends ParameterDescription.Token&gt; tokens) {</b>
+<b class="fc">&nbsp;            this.declaringMethod = declaringMethod;</b>
+<b class="fc">&nbsp;            this.tokens = tokens;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public ParameterDescription.InDefinedShape get(int index) {</b>
+&nbsp;            int offset = this.declaringMethod.isStatic() ? 0 : 1;
+&nbsp;
+&nbsp;            ParameterDescription.Token token;
+&nbsp;            for(Iterator var3 = this.tokens.subList(0, index).iterator(); var3.hasNext(); offset += token.getType().getStackSize().getSize()) {
+&nbsp;                token = (ParameterDescription.Token)var3.next();
+&nbsp;            }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            return new ParameterDescription.Latent(this.declaringMethod, (ParameterDescription.Token)this.tokens.get(index), index, offset);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public int size() {</b>
+&nbsp;            return this.tokens.size();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class Explicit&lt;S extends ParameterDescription&gt; extends AbstractBase&lt;S&gt; {
+&nbsp;        private final List&lt;? extends S&gt; parameterDescriptions;
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public Explicit(S... parameterDescription) {</b>
+<b class="fc">&nbsp;            this(Arrays.asList(parameterDescription));</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        public Explicit(List&lt;? extends S&gt; parameterDescriptions) {
+&nbsp;            this.parameterDescriptions = parameterDescriptions;
+&nbsp;        }
+&nbsp;
+&nbsp;        public S get(int index) {
+&nbsp;            return (ParameterDescription)this.parameterDescriptions.get(index);
+&nbsp;        }
+&nbsp;
+&nbsp;        public int size() {
+&nbsp;            return this.parameterDescriptions.size();
+&nbsp;        }
+&nbsp;
+&nbsp;        public static class ForTypes extends AbstractBase&lt;ParameterDescription.InDefinedShape&gt; {
+&nbsp;            private final MethodDescription.InDefinedShape methodDescription;
+&nbsp;            private final List&lt;? extends TypeDefinition&gt; typeDefinitions;
+&nbsp;
+&nbsp;            public ForTypes(MethodDescription.InDefinedShape methodDescription, TypeDefinition... typeDefinition) {
+&nbsp;                this(methodDescription, Arrays.asList(typeDefinition));
+&nbsp;            }
+&nbsp;
+&nbsp;            public ForTypes(MethodDescription.InDefinedShape methodDescription, List&lt;? extends TypeDefinition&gt; typeDefinitions) {
+&nbsp;                this.methodDescription = methodDescription;
+&nbsp;                this.typeDefinitions = typeDefinitions;
+&nbsp;            }
+&nbsp;
+&nbsp;            public ParameterDescription.InDefinedShape get(int index) {
+&nbsp;                int offset = this.methodDescription.isStatic() ? 0 : 1;
+&nbsp;
+&nbsp;                for(int previous = 0; previous &lt; index; ++previous) {
+<b class="fc">&nbsp;                    offset += ((TypeDefinition)this.typeDefinitions.get(previous)).getStackSize().getSize();</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                return new ParameterDescription.Latent(this.methodDescription, ((TypeDefinition)this.typeDefinitions.get(index)).asGenericType(), index, offset);
+&nbsp;            }
+&nbsp;
+&nbsp;            public int size() {
+&nbsp;                return this.typeDefinitions.size();
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract static class ForLoadedExecutable&lt;T&gt; extends AbstractBase&lt;ParameterDescription.InDefinedShape&gt; {
+&nbsp;        protected static final Executable EXECUTABLE;
+&nbsp;        protected final T executable;
+&nbsp;        protected final ParameterDescription.ForLoadedParameter.ParameterAnnotationSource parameterAnnotationSource;
+&nbsp;        private static final boolean ACCESS_CONTROLLER;
+&nbsp;
+<b class="fc">&nbsp;        protected ForLoadedExecutable(T executable, ParameterDescription.ForLoadedParameter.ParameterAnnotationSource parameterAnnotationSource) {</b>
+<b class="fc">&nbsp;            this.executable = executable;</b>
+<b class="fc">&nbsp;            this.parameterAnnotationSource = parameterAnnotationSource;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        private static &lt;T&gt; T doPrivileged(PrivilegedAction&lt;T&gt; action) {
+&nbsp;            return ACCESS_CONTROLLER ? AccessController.doPrivileged(action) : action.run();
+&nbsp;        }
+&nbsp;
+&nbsp;        public static ParameterList&lt;ParameterDescription.InDefinedShape&gt; of(Constructor&lt;?&gt; constructor) {
+&nbsp;            return of((Constructor)constructor, new ParameterDescription.ForLoadedParameter.ParameterAnnotationSource.ForLoadedConstructor(constructor));
+&nbsp;        }
+&nbsp;
+&nbsp;        public static ParameterList&lt;ParameterDescription.InDefinedShape&gt; of(Constructor&lt;?&gt; constructor, ParameterDescription.ForLoadedParameter.ParameterAnnotationSource parameterAnnotationSource) {
+&nbsp;            return (ParameterList)(EXECUTABLE.isInstance(constructor) ? new OfConstructor(constructor, parameterAnnotationSource) : new OfLegacyVmConstructor(constructor, parameterAnnotationSource));
+&nbsp;        }
+&nbsp;
+&nbsp;        public static ParameterList&lt;ParameterDescription.InDefinedShape&gt; of(Method method) {
+&nbsp;            return of((Method)method, new ParameterDescription.ForLoadedParameter.ParameterAnnotationSource.ForLoadedMethod(method));
+&nbsp;        }
+&nbsp;
+&nbsp;        public static ParameterList&lt;ParameterDescription.InDefinedShape&gt; of(Method method, ParameterDescription.ForLoadedParameter.ParameterAnnotationSource parameterAnnotationSource) {
+&nbsp;            return (ParameterList)(EXECUTABLE.isInstance(method) ? new OfMethod(method, parameterAnnotationSource) : new OfLegacyVmMethod(method, parameterAnnotationSource));
+&nbsp;        }
+&nbsp;
+&nbsp;        public int size() {
+&nbsp;            return EXECUTABLE.getParameterCount(this.executable);
+&nbsp;        }
+&nbsp;
+&nbsp;        static {
+&nbsp;            try {
+&nbsp;                Class.forName(&quot;java.security.AccessController&quot;, false, (ClassLoader)null);
+&nbsp;                ACCESS_CONTROLLER = Boolean.parseBoolean(System.getProperty(&quot;net.bytebuddy.securitymanager&quot;, &quot;true&quot;));
+&nbsp;            } catch (ClassNotFoundException var0) {
+&nbsp;                ACCESS_CONTROLLER = false;
+<b class="fc">&nbsp;            } catch (SecurityException var1) {</b>
+&nbsp;                ACCESS_CONTROLLER = true;
+&nbsp;            }
+&nbsp;
+&nbsp;            EXECUTABLE = (Executable)doPrivileged(JavaDispatcher.of(Executable.class));
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static class OfLegacyVmMethod extends AbstractBase&lt;ParameterDescription.InDefinedShape&gt; {
+&nbsp;            private final Method method;
+&nbsp;            private final Class&lt;?&gt;[] parameterType;
+&nbsp;            private final ParameterDescription.ForLoadedParameter.ParameterAnnotationSource parameterAnnotationSource;
+&nbsp;
+&nbsp;            protected OfLegacyVmMethod(Method method, ParameterDescription.ForLoadedParameter.ParameterAnnotationSource parameterAnnotationSource) {
+&nbsp;                this.method = method;
+&nbsp;                this.parameterType = method.getParameterTypes();
+&nbsp;                this.parameterAnnotationSource = parameterAnnotationSource;
+&nbsp;            }
+&nbsp;
+&nbsp;            public ParameterDescription.InDefinedShape get(int index) {
+&nbsp;                return new ParameterDescription.ForLoadedParameter.OfLegacyVmMethod(this.method, index, this.parameterType, this.parameterAnnotationSource);
+&nbsp;            }
+&nbsp;
+&nbsp;            public int size() {
+&nbsp;                return this.parameterType.length;
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static class OfLegacyVmConstructor extends AbstractBase&lt;ParameterDescription.InDefinedShape&gt; {
+&nbsp;            private final Constructor&lt;?&gt; constructor;
+&nbsp;            private final Class&lt;?&gt;[] parameterType;
+&nbsp;            private final ParameterDescription.ForLoadedParameter.ParameterAnnotationSource parameterAnnotationSource;
+&nbsp;
+&nbsp;            protected OfLegacyVmConstructor(Constructor&lt;?&gt; constructor, ParameterDescription.ForLoadedParameter.ParameterAnnotationSource parameterAnnotationSource) {
+<b class="fc">&nbsp;                this.constructor = constructor;</b>
+&nbsp;                this.parameterType = constructor.getParameterTypes();
+&nbsp;                this.parameterAnnotationSource = parameterAnnotationSource;
+&nbsp;            }
+&nbsp;
+&nbsp;            public ParameterDescription.InDefinedShape get(int index) {
+&nbsp;                return new ParameterDescription.ForLoadedParameter.OfLegacyVmConstructor(this.constructor, index, this.parameterType, this.parameterAnnotationSource);
+&nbsp;            }
+&nbsp;
+&nbsp;            public int size() {
+&nbsp;                return this.parameterType.length;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static class OfMethod extends ForLoadedExecutable&lt;Method&gt; {
+&nbsp;            protected OfMethod(Method method, ParameterDescription.ForLoadedParameter.ParameterAnnotationSource parameterAnnotationSource) {
+&nbsp;                super(method, parameterAnnotationSource);
+&nbsp;            }
+&nbsp;
+&nbsp;            public ParameterDescription.InDefinedShape get(int index) {
+&nbsp;                return new ParameterDescription.ForLoadedParameter.OfMethod((Method)this.executable, index, this.parameterAnnotationSource);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static class OfConstructor extends ForLoadedExecutable&lt;Constructor&lt;?&gt;&gt; {
+&nbsp;            protected OfConstructor(Constructor&lt;?&gt; constructor, ParameterDescription.ForLoadedParameter.ParameterAnnotationSource parameterAnnotationSource) {
+&nbsp;                super(constructor, parameterAnnotationSource);
+&nbsp;            }
+&nbsp;
+&nbsp;            public ParameterDescription.InDefinedShape get(int index) {
+&nbsp;                return new ParameterDescription.ForLoadedParameter.OfConstructor((Constructor)this.executable, index, this.parameterAnnotationSource);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        @Proxied(&quot;java.lang.reflect.Executable&quot;)
+&nbsp;        protected interface Executable {
+&nbsp;            @Instance
+&nbsp;            @Proxied(&quot;isInstance&quot;)
+&nbsp;            boolean isInstance(Object var1);
+&nbsp;
+&nbsp;            @Proxied(&quot;getParameterCount&quot;)
+&nbsp;            int getParameterCount(Object var1);
+&nbsp;
+&nbsp;            @Proxied(&quot;getParameters&quot;)
+&nbsp;            Object[] getParameters(Object var1);
+&nbsp;        }
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public abstract static class AbstractBase&lt;S extends ParameterDescription&gt; extends FilterableList.AbstractBase&lt;S, ParameterList&lt;S&gt;&gt; implements ParameterList&lt;S&gt; {
+&nbsp;        public AbstractBase() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean hasExplicitMetaData() {
+&nbsp;            Iterator var1 = this.iterator();
+&nbsp;
+&nbsp;            ParameterDescription parameterDescription;
+&nbsp;            do {
+&nbsp;                if (!var1.hasNext()) {
+&nbsp;                    return true;
+&nbsp;                }
+&nbsp;
+&nbsp;                parameterDescription = (ParameterDescription)var1.next();
+&nbsp;            } while(parameterDescription.isNamed() &amp;&amp; parameterDescription.hasModifiers());
+&nbsp;
+&nbsp;            return false;
+&nbsp;        }
+&nbsp;
+&nbsp;        public ByteCodeElement.Token.TokenList&lt;ParameterDescription.Token&gt; asTokenList(ElementMatcher&lt;? super TypeDescription&gt; matcher) {
+&nbsp;            List&lt;ParameterDescription.Token&gt; tokens = new ArrayList(this.size());
+&nbsp;            Iterator var3 = this.iterator();
+<b class="fc">&nbsp;</b>
+&nbsp;            while(var3.hasNext()) {
+&nbsp;                ParameterDescription parameterDescription = (ParameterDescription)var3.next();
+&nbsp;                tokens.add(parameterDescription.asToken(matcher));
+&nbsp;            }
+&nbsp;
+&nbsp;            return new ByteCodeElement.Token.TokenList(tokens);
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        public TypeList.Generic asTypeList() {
+&nbsp;            List&lt;TypeDescription.Generic&gt; types = new ArrayList(this.size());
+&nbsp;            Iterator var2 = this.iterator();
+&nbsp;
+&nbsp;            while(var2.hasNext()) {
+&nbsp;                ParameterDescription parameterDescription = (ParameterDescription)var2.next();
+&nbsp;                types.add(parameterDescription.getType());
+&nbsp;            }
+&nbsp;
+&nbsp;            return new TypeList.Generic.Explicit(types);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ParameterList&lt;ParameterDescription.InDefinedShape&gt; asDefined() {
+&nbsp;            List&lt;ParameterDescription.InDefinedShape&gt; declaredForms = new ArrayList(this.size());
+&nbsp;            Iterator var2 = this.iterator();
+&nbsp;
+&nbsp;            while(var2.hasNext()) {
+&nbsp;                ParameterDescription parameterDescription = (ParameterDescription)var2.next();
+&nbsp;                declaredForms.add(parameterDescription.asDefined());
+&nbsp;            }
+&nbsp;
+&nbsp;            return new Explicit(declaredForms);
+&nbsp;        }
+&nbsp;
+&nbsp;        protected ParameterList&lt;S&gt; wrap(List&lt;S&gt; values) {
+&nbsp;            return new Explicit(values);
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

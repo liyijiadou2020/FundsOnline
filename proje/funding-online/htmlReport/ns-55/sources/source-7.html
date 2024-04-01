@@ -1,0 +1,348 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > SubclassBytecodeGenerator</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.creation.bytebuddy</a>
+</div>
+
+<h1>Coverage Summary for Class: SubclassBytecodeGenerator (org.mockito.internal.creation.bytebuddy)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SubclassBytecodeGenerator</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (79/79)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.creation.bytebuddy;
+&nbsp;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.ObjectInputStream;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.lang.reflect.Modifier;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.Random;
+&nbsp;import net.bytebuddy.ByteBuddy;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.modifier.ModifierContributor;
+&nbsp;import net.bytebuddy.description.modifier.SynchronizationState;
+&nbsp;import net.bytebuddy.description.modifier.Visibility;
+&nbsp;import net.bytebuddy.dynamic.DynamicType;
+&nbsp;import net.bytebuddy.dynamic.Transformer.ForMethod;
+&nbsp;import net.bytebuddy.dynamic.loading.MultipleParentClassLoader;
+&nbsp;import net.bytebuddy.dynamic.scaffold.TypeValidation;
+&nbsp;import net.bytebuddy.implementation.FieldAccessor;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.implementation.MethodDelegation;
+&nbsp;import net.bytebuddy.implementation.attribute.MethodAttributeAppender;
+&nbsp;import net.bytebuddy.implementation.attribute.MethodAttributeAppender.ForInstrumentedMethod;
+&nbsp;import net.bytebuddy.implementation.attribute.MethodAttributeAppender.NoOp;
+&nbsp;import net.bytebuddy.matcher.ElementMatcher;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;import org.mockito.codegen.InjectionBase;
+&nbsp;import org.mockito.exceptions.base.MockitoException;
+&nbsp;import org.mockito.internal.util.StringUtil;
+&nbsp;import org.mockito.mock.SerializableMode;
+&nbsp;
+&nbsp;class SubclassBytecodeGenerator implements BytecodeGenerator {
+&nbsp;    private static final String CODEGEN_PACKAGE = &quot;org.mockito.codegen.&quot;;
+&nbsp;    private final SubclassLoader loader;
+&nbsp;    private final ModuleHandler handler;
+&nbsp;    private final ByteBuddy byteBuddy;
+&nbsp;    private final Random random;
+&nbsp;    private final Implementation readReplace;
+&nbsp;    private final ElementMatcher&lt;? super MethodDescription&gt; matcher;
+&nbsp;    private final Implementation dispatcher;
+&nbsp;    private final Implementation hashCode;
+&nbsp;    private final Implementation equals;
+&nbsp;    private final Implementation writeReplace;
+&nbsp;
+&nbsp;    public SubclassBytecodeGenerator() {
+&nbsp;        this(new SubclassInjectionLoader());
+&nbsp;    }
+&nbsp;
+&nbsp;    public SubclassBytecodeGenerator(SubclassLoader loader) {
+&nbsp;        this(loader, (Implementation)null, ElementMatchers.any());
+&nbsp;    }
+&nbsp;
+&nbsp;    public SubclassBytecodeGenerator(Implementation readReplace, ElementMatcher&lt;? super MethodDescription&gt; matcher) {
+<b class="fc">&nbsp;        this(new SubclassInjectionLoader(), readReplace, matcher);</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    protected SubclassBytecodeGenerator(SubclassLoader loader, Implementation readReplace, ElementMatcher&lt;? super MethodDescription&gt; matcher) {</b>
+&nbsp;        this.dispatcher = MethodDelegation.to(MockMethodInterceptor.DispatcherDefaultingToRealMethod.class);
+&nbsp;        this.hashCode = MethodDelegation.to(MockMethodInterceptor.ForHashCode.class);
+&nbsp;        this.equals = MethodDelegation.to(MockMethodInterceptor.ForEquals.class);
+&nbsp;        this.writeReplace = MethodDelegation.to(MockMethodInterceptor.ForWriteReplace.class);
+&nbsp;        this.loader = loader;
+&nbsp;        this.readReplace = readReplace;
+<b class="fc">&nbsp;        this.matcher = matcher;</b>
+&nbsp;        this.byteBuddy = (new ByteBuddy()).with(TypeValidation.DISABLED);
+&nbsp;        this.random = new Random();
+&nbsp;        this.handler = ModuleHandler.make(this.byteBuddy, loader, this.random);
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean needsSamePackageClassLoader(MockFeatures&lt;?&gt; features) {
+&nbsp;        if (Modifier.isPublic(features.mockedType.getModifiers()) &amp;&amp; features.mockedType.isInterface()) {
+&nbsp;            if (hasNonPublicTypeReference(features.mockedType)) {
+&nbsp;                return true;
+&nbsp;            } else {
+<b class="fc">&nbsp;                Iterator var1 = features.interfaces.iterator();</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                Class iface;</b>
+<b class="fc">&nbsp;                do {</b>
+<b class="fc">&nbsp;                    if (!var1.hasNext()) {</b>
+<b class="fc">&nbsp;                        return false;</b>
+<b class="fc">&nbsp;                    }</b>
+&nbsp;
+&nbsp;                    iface = (Class)var1.next();
+&nbsp;                    if (!Modifier.isPublic(iface.getModifiers())) {
+<b class="fc">&nbsp;                        return true;</b>
+<b class="fc">&nbsp;                    }</b>
+&nbsp;                } while(!hasNonPublicTypeReference(iface));
+&nbsp;
+&nbsp;                return true;
+&nbsp;            }
+<b class="fc">&nbsp;        } else {</b>
+&nbsp;            return true;
+&nbsp;        }
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    private static boolean hasNonPublicTypeReference(Class&lt;?&gt; iface) {
+&nbsp;        Method[] var1 = iface.getMethods();
+&nbsp;        int var2 = var1.length;
+&nbsp;
+&nbsp;        for(int var3 = 0; var3 &lt; var2; ++var3) {
+&nbsp;            Method method = var1[var3];
+&nbsp;            if (!Modifier.isPublic(method.getReturnType().getModifiers())) {
+<b class="fc">&nbsp;                return true;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            Class[] var5 = method.getParameterTypes();
+<b class="fc">&nbsp;            int var6 = var5.length;</b>
+<b class="fc">&nbsp;</b>
+&nbsp;            for(int var7 = 0; var7 &lt; var6; ++var7) {
+&nbsp;                Class&lt;?&gt; param = var5[var7];
+<b class="fc">&nbsp;                if (!Modifier.isPublic(param.getModifiers())) {</b>
+<b class="fc">&nbsp;                    return true;</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public &lt;T&gt; Class&lt;? extends T&gt; mockClass(MockFeatures&lt;T&gt; features) {
+&nbsp;        MultipleParentClassLoader.Builder loaderBuilder = (new MultipleParentClassLoader.Builder()).appendMostSpecific(new Class[]{features.mockedType}).appendMostSpecific(features.interfaces).appendMostSpecific(new Class[]{MockAccess.class, MockMethodInterceptor.DispatcherDefaultingToRealMethod.class}).appendMostSpecific(new Class[]{MockMethodInterceptor.class, MockMethodInterceptor.ForHashCode.class, MockMethodInterceptor.ForEquals.class});
+<b class="fc">&nbsp;        ClassLoader contextLoader = Thread.currentThread().getContextClassLoader();</b>
+&nbsp;        boolean shouldIncludeContextLoader = true;
+<b class="fc">&nbsp;        ClassLoader classLoader;</b>
+<b class="fc">&nbsp;        if (needsSamePackageClassLoader(features)) {</b>
+<b class="fc">&nbsp;            classLoader = loaderBuilder.build();</b>
+&nbsp;
+<b class="fc">&nbsp;            for(ClassLoader parent = contextLoader; parent != null; parent = parent.getParent()) {</b>
+&nbsp;                if (parent == classLoader) {
+&nbsp;                    shouldIncludeContextLoader = false;
+&nbsp;                    break;
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        if (shouldIncludeContextLoader) {
+&nbsp;            loaderBuilder = loaderBuilder.appendMostSpecific(new ClassLoader[]{contextLoader});
+&nbsp;        }
+&nbsp;
+&nbsp;        classLoader = loaderBuilder.build();
+&nbsp;        boolean localMock = classLoader == features.mockedType.getClassLoader() &amp;&amp; features.serializableMode != SerializableMode.ACROSS_CLASSLOADERS &amp;&amp; !this.isComingFromJDK(features.mockedType) &amp;&amp; (this.loader.isDisrespectingOpenness() || this.handler.isOpened(features.mockedType, MockAccess.class));
+&nbsp;        String typeName;
+&nbsp;        if (!localMock &amp;&amp; (!(this.loader instanceof MultipleParentClassLoader) || this.isComingFromJDK(features.mockedType))) {
+&nbsp;            typeName = InjectionBase.class.getPackage().getName() + &quot;.&quot; + features.mockedType.getSimpleName();
+&nbsp;        } else {
+&nbsp;            typeName = features.mockedType.getName();
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        String name = String.format(&quot;%s$%s$%d&quot;, typeName, &quot;MockitoMock&quot;, Math.abs(this.random.nextInt()));</b>
+&nbsp;        if (localMock) {
+<b class="fc">&nbsp;            this.handler.adjustModuleGraph(features.mockedType, MockAccess.class, false, true);</b>
+&nbsp;            Iterator var9 = features.interfaces.iterator();
+&nbsp;
+&nbsp;            while(var9.hasNext()) {
+&nbsp;                Class&lt;?&gt; iFace = (Class)var9.next();
+&nbsp;                this.handler.adjustModuleGraph(iFace, features.mockedType, true, false);
+&nbsp;                this.handler.adjustModuleGraph(features.mockedType, iFace, false, true);
+&nbsp;            }
+&nbsp;        } else {
+<b class="fc">&nbsp;            boolean exported = this.handler.isExported(features.mockedType);</b>
+<b class="fc">&nbsp;</b>
+&nbsp;            for(Iterator&lt;Class&lt;?&gt;&gt; it = features.interfaces.iterator(); exported &amp;&amp; it.hasNext(); exported = this.handler.isExported((Class)it.next())) {
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;            if (exported) {
+&nbsp;                assertVisibility(features.mockedType);
+<b class="fc">&nbsp;                Iterator var11 = features.interfaces.iterator();</b>
+&nbsp;
+&nbsp;                while(var11.hasNext()) {
+<b class="fc">&nbsp;                    Class&lt;?&gt; iFace = (Class)var11.next();</b>
+&nbsp;                    assertVisibility(iFace);
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                Class&lt;?&gt; hook = this.handler.injectionBase(classLoader, typeName);
+&nbsp;                assertVisibility(features.mockedType);
+&nbsp;                this.handler.adjustModuleGraph(features.mockedType, hook, true, false);
+<b class="fc">&nbsp;                Iterator var19 = features.interfaces.iterator();</b>
+<b class="fc">&nbsp;</b>
+&nbsp;                while(var19.hasNext()) {
+<b class="fc">&nbsp;                    Class&lt;?&gt; iFace = (Class)var19.next();</b>
+<b class="fc">&nbsp;                    assertVisibility(iFace);</b>
+<b class="fc">&nbsp;                    this.handler.adjustModuleGraph(iFace, hook, true, false);</b>
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        DynamicType.Builder&lt;T&gt; builder = this.byteBuddy.subclass(features.mockedType).name(name).ignoreAlso(isGroovyMethod()).annotateType(features.stripAnnotations ? new Annotation[0] : features.mockedType.getAnnotations()).implement(new ArrayList(features.interfaces)).method(this.matcher).intercept(this.dispatcher).transform(ForMethod.withModifiers(new ModifierContributor.ForMethod[]{SynchronizationState.PLAIN})).attribute((MethodAttributeAppender.Factory)(features.stripAnnotations ? NoOp.INSTANCE : ForInstrumentedMethod.INCLUDING_RECEIVER)).serialVersionUid(42L).defineField(&quot;mockitoInterceptor&quot;, MockMethodInterceptor.class, new ModifierContributor.ForField[]{Visibility.PRIVATE}).implement(new Type[]{MockAccess.class}).intercept(FieldAccessor.ofBeanProperty()).method(ElementMatchers.isHashCode()).intercept(this.hashCode).method(ElementMatchers.isEquals()).intercept(this.equals);
+&nbsp;        if (features.serializableMode == SerializableMode.ACROSS_CLASSLOADERS) {
+&nbsp;            builder = ((DynamicType.Builder)builder).implement(new Type[]{ByteBuddyCrossClassLoaderSerializationSupport.CrossClassLoaderSerializableMock.class}).intercept(this.writeReplace);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (this.readReplace != null) {
+&nbsp;            builder = ((DynamicType.Builder)builder).defineMethod(&quot;readObject&quot;, Void.TYPE, new ModifierContributor.ForMethod[]{Visibility.PRIVATE}).withParameters(new Type[]{ObjectInputStream.class}).throwing(new Type[]{ClassNotFoundException.class, IOException.class}).intercept(this.readReplace);
+&nbsp;        }
+&nbsp;
+&nbsp;        if (name.startsWith(&quot;org.mockito.codegen.&quot;) || classLoader instanceof MultipleParentClassLoader) {
+&nbsp;            builder = ((DynamicType.Builder)builder).ignoreAlso(ElementMatchers.isPackagePrivate().or(ElementMatchers.returns(ElementMatchers.isPackagePrivate())).or(ElementMatchers.hasParameters(ElementMatchers.whereAny(ElementMatchers.hasType(ElementMatchers.isPackagePrivate())))));
+&nbsp;        }
+&nbsp;
+&nbsp;        return ((DynamicType.Builder)builder).make().load(classLoader, this.loader.resolveStrategy(features.mockedType, classLoader, localMock)).getLoaded();
+&nbsp;    }
+&nbsp;
+&nbsp;    public void mockClassStatic(Class&lt;?&gt; type) {
+&nbsp;        throw new MockitoException(&quot;The subclass byte code generator cannot create static mocks&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    public void mockClassConstruction(Class&lt;?&gt; type) {
+&nbsp;        throw new MockitoException(&quot;The subclass byte code generator cannot create construction mocks&quot;);
+&nbsp;    }
+&nbsp;
+&nbsp;    private &lt;T&gt; Collection&lt;Class&lt;? super T&gt;&gt; getAllTypes(Class&lt;T&gt; type) {
+&nbsp;        Collection&lt;Class&lt;? super T&gt;&gt; supertypes = new LinkedList();
+<b class="fc">&nbsp;        supertypes.add(type);</b>
+&nbsp;
+<b class="fc">&nbsp;        for(Class&lt;? super T&gt; superType = type; superType != null; superType = superType.getSuperclass()) {</b>
+<b class="fc">&nbsp;            supertypes.add(superType);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        return supertypes;</b>
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    private static ElementMatcher&lt;MethodDescription&gt; isGroovyMethod() {</b>
+<b class="fc">&nbsp;        return ElementMatchers.isDeclaredBy(ElementMatchers.named(&quot;groovy.lang.GroovyObjectSupport&quot;)).or(ElementMatchers.isAnnotatedWith(ElementMatchers.named(&quot;groovy.transform.Internal&quot;)));</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    private boolean isComingFromJDK(Class&lt;?&gt; type) {</b>
+<b class="fc">&nbsp;        return type.getPackage() != null &amp;&amp; &quot;Java Runtime Environment&quot;.equalsIgnoreCase(type.getPackage().getImplementationTitle()) || type.getName().startsWith(&quot;java.&quot;) || type.getName().startsWith(&quot;javax.&quot;);</b>
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    private static void assertVisibility(Class&lt;?&gt; type) {</b>
+<b class="fc">&nbsp;        if (!Modifier.isPublic(type.getModifiers())) {</b>
+<b class="fc">&nbsp;            throw new MockitoException(StringUtil.join(new Object[]{&quot;Cannot create mock for &quot; + type, &quot;&quot;, &quot;The type is not public and its mock class is loaded by a different class loader.&quot;, &quot;This can have multiple reasons:&quot;, &quot; - You are mocking a class with additional interfaces of another class loader&quot;, &quot; - Mockito is loaded by a different class loader than the mocked type (e.g. with OSGi)&quot;, &quot; - The thread&#39;s context class loader is different than the mock&#39;s class loader&quot;}));</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

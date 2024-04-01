@@ -1,0 +1,189 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > TimeoutConfiguration</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.junit.jupiter.engine.extension</a>
+</div>
+
+<h1>Coverage Summary for Class: TimeoutConfiguration (org.junit.jupiter.engine.extension)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TimeoutConfiguration</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.junit.jupiter.engine.extension;
+&nbsp;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Optional;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;import java.util.function.Supplier;
+&nbsp;import org.junit.jupiter.api.extension.ExtensionContext;
+&nbsp;import org.junit.platform.commons.logging.Logger;
+&nbsp;import org.junit.platform.commons.logging.LoggerFactory;
+&nbsp;
+&nbsp;class TimeoutConfiguration {
+&nbsp;    private static final Logger logger = LoggerFactory.getLogger(TimeoutConfiguration.class);
+&nbsp;    private final TimeoutDurationParser parser = new TimeoutDurationParser();
+&nbsp;    private final Map&lt;String, Optional&lt;TimeoutDuration&gt;&gt; cache = new ConcurrentHashMap();
+&nbsp;    private final ExtensionContext extensionContext;
+&nbsp;
+&nbsp;    TimeoutConfiguration(ExtensionContext extensionContext) {
+&nbsp;        this.extensionContext = extensionContext;
+&nbsp;    }
+&nbsp;
+&nbsp;    Optional&lt;TimeoutDuration&gt; getDefaultTestMethodTimeout() {
+&nbsp;        return this.parseOrDefault(&quot;junit.jupiter.execution.timeout.test.method.default&quot;, this::getDefaultTestableMethodTimeout);
+&nbsp;    }
+&nbsp;
+&nbsp;    Optional&lt;TimeoutDuration&gt; getDefaultTestTemplateMethodTimeout() {
+&nbsp;        return this.parseOrDefault(&quot;junit.jupiter.execution.timeout.testtemplate.method.default&quot;, this::getDefaultTestableMethodTimeout);
+&nbsp;    }
+&nbsp;
+&nbsp;    Optional&lt;TimeoutDuration&gt; getDefaultTestFactoryMethodTimeout() {
+&nbsp;        return this.parseOrDefault(&quot;junit.jupiter.execution.timeout.testfactory.method.default&quot;, this::getDefaultTestableMethodTimeout);
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    Optional&lt;TimeoutDuration&gt; getDefaultBeforeAllMethodTimeout() {
+<b class="fc">&nbsp;        return this.parseOrDefault(&quot;junit.jupiter.execution.timeout.beforeall.method.default&quot;, this::getDefaultLifecycleMethodTimeout);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    Optional&lt;TimeoutDuration&gt; getDefaultBeforeEachMethodTimeout() {
+<b class="fc">&nbsp;        return this.parseOrDefault(&quot;junit.jupiter.execution.timeout.beforeeach.method.default&quot;, this::getDefaultLifecycleMethodTimeout);</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    Optional&lt;TimeoutDuration&gt; getDefaultAfterEachMethodTimeout() {
+&nbsp;        return this.parseOrDefault(&quot;junit.jupiter.execution.timeout.aftereach.method.default&quot;, this::getDefaultLifecycleMethodTimeout);
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    Optional&lt;TimeoutDuration&gt; getDefaultAfterAllMethodTimeout() {
+&nbsp;        return this.parseOrDefault(&quot;junit.jupiter.execution.timeout.afterall.method.default&quot;, this::getDefaultLifecycleMethodTimeout);
+&nbsp;    }
+&nbsp;
+&nbsp;    private Optional&lt;TimeoutDuration&gt; getDefaultTestableMethodTimeout() {
+&nbsp;        return this.parseOrDefault(&quot;junit.jupiter.execution.timeout.testable.method.default&quot;, this::getDefaultTimeout);
+&nbsp;    }
+&nbsp;
+&nbsp;    private Optional&lt;TimeoutDuration&gt; getDefaultLifecycleMethodTimeout() {
+&nbsp;        return this.parseOrDefault(&quot;junit.jupiter.execution.timeout.lifecycle.method.default&quot;, this::getDefaultTimeout);
+&nbsp;    }
+&nbsp;
+&nbsp;    private Optional&lt;TimeoutDuration&gt; getDefaultTimeout() {
+&nbsp;        return this.parseTimeoutDuration(&quot;junit.jupiter.execution.timeout.default&quot;);
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    private Optional&lt;TimeoutDuration&gt; parseOrDefault(String propertyName, Supplier&lt;Optional&lt;TimeoutDuration&gt;&gt; defaultSupplier) {
+&nbsp;        Optional&lt;TimeoutDuration&gt; timeoutConfiguration = this.parseTimeoutDuration(propertyName);
+&nbsp;        return timeoutConfiguration.isPresent() ? timeoutConfiguration : (Optional)defaultSupplier.get();
+&nbsp;    }
+&nbsp;
+&nbsp;    private Optional&lt;TimeoutDuration&gt; parseTimeoutDuration(String propertyName) {
+&nbsp;        return (Optional)this.cache.computeIfAbsent(propertyName, (key) -&gt; {
+&nbsp;            return this.extensionContext.getConfigurationParameter(key).map((value) -&gt; {
+&nbsp;                try {
+&nbsp;                    return this.parser.parse(value);
+&nbsp;                } catch (Exception var4) {
+<b class="fc">&nbsp;                    logger.warn(var4, () -&gt; {</b>
+&nbsp;                        return String.format(&quot;Ignored invalid timeout &#39;%s&#39; set via the &#39;%s&#39; configuration parameter.&quot;, value, key);
+&nbsp;                    });
+&nbsp;                    return null;
+<b class="fc">&nbsp;                }</b>
+&nbsp;            });
+&nbsp;        });
+&nbsp;    }
+<b class="fc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,299 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > TypeReference</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.jar.asm</a>
+</div>
+
+<h1>Coverage Summary for Class: TypeReference (net.bytebuddy.jar.asm)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TypeReference</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.jar.asm;
+&nbsp;
+&nbsp;public class TypeReference {
+&nbsp;    public static final int CLASS_TYPE_PARAMETER = 0;
+&nbsp;    public static final int METHOD_TYPE_PARAMETER = 1;
+&nbsp;    public static final int CLASS_EXTENDS = 16;
+&nbsp;    public static final int CLASS_TYPE_PARAMETER_BOUND = 17;
+&nbsp;    public static final int METHOD_TYPE_PARAMETER_BOUND = 18;
+&nbsp;    public static final int FIELD = 19;
+&nbsp;    public static final int METHOD_RETURN = 20;
+&nbsp;    public static final int METHOD_RECEIVER = 21;
+&nbsp;    public static final int METHOD_FORMAL_PARAMETER = 22;
+&nbsp;    public static final int THROWS = 23;
+&nbsp;    public static final int LOCAL_VARIABLE = 64;
+&nbsp;    public static final int RESOURCE_VARIABLE = 65;
+&nbsp;    public static final int EXCEPTION_PARAMETER = 66;
+&nbsp;    public static final int INSTANCEOF = 67;
+&nbsp;    public static final int NEW = 68;
+&nbsp;    public static final int CONSTRUCTOR_REFERENCE = 69;
+&nbsp;    public static final int METHOD_REFERENCE = 70;
+&nbsp;    public static final int CAST = 71;
+&nbsp;    public static final int CONSTRUCTOR_INVOCATION_TYPE_ARGUMENT = 72;
+&nbsp;    public static final int METHOD_INVOCATION_TYPE_ARGUMENT = 73;
+&nbsp;    public static final int CONSTRUCTOR_REFERENCE_TYPE_ARGUMENT = 74;
+&nbsp;    public static final int METHOD_REFERENCE_TYPE_ARGUMENT = 75;
+&nbsp;    private final int targetTypeAndInfo;
+&nbsp;
+&nbsp;    public TypeReference(int typeRef) {
+&nbsp;        this.targetTypeAndInfo = typeRef;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static TypeReference newTypeReference(int sort) {
+&nbsp;        return new TypeReference(sort &lt;&lt; 24);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static TypeReference newTypeParameterReference(int sort, int paramIndex) {
+&nbsp;        return new TypeReference(sort &lt;&lt; 24 | paramIndex &lt;&lt; 16);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static TypeReference newTypeParameterBoundReference(int sort, int paramIndex, int boundIndex) {
+&nbsp;        return new TypeReference(sort &lt;&lt; 24 | paramIndex &lt;&lt; 16 | boundIndex &lt;&lt; 8);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static TypeReference newSuperTypeReference(int itfIndex) {
+&nbsp;        return new TypeReference(268435456 | (itfIndex &amp; &#39;\uffff&#39;) &lt;&lt; 8);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static TypeReference newFormalParameterReference(int paramIndex) {
+&nbsp;        return new TypeReference(369098752 | paramIndex &lt;&lt; 16);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static TypeReference newExceptionReference(int exceptionIndex) {
+&nbsp;        return new TypeReference(385875968 | exceptionIndex &lt;&lt; 8);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static TypeReference newTryCatchReference(int tryCatchBlockIndex) {
+&nbsp;        return new TypeReference(1107296256 | tryCatchBlockIndex &lt;&lt; 8);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static TypeReference newTypeArgumentReference(int sort, int argIndex) {
+&nbsp;        return new TypeReference(sort &lt;&lt; 24 | argIndex);
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getSort() {
+&nbsp;        return this.targetTypeAndInfo &gt;&gt;&gt; 24;
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getTypeParameterIndex() {
+&nbsp;        return (this.targetTypeAndInfo &amp; 16711680) &gt;&gt; 16;
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getTypeParameterBoundIndex() {
+&nbsp;        return (this.targetTypeAndInfo &amp; &#39;\uff00&#39;) &gt;&gt; 8;
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getSuperTypeIndex() {
+&nbsp;        return (short)((this.targetTypeAndInfo &amp; 16776960) &gt;&gt; 8);
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getFormalParameterIndex() {
+&nbsp;        return (this.targetTypeAndInfo &amp; 16711680) &gt;&gt; 16;
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getExceptionIndex() {
+&nbsp;        return (this.targetTypeAndInfo &amp; 16776960) &gt;&gt; 8;
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getTryCatchBlockIndex() {
+&nbsp;        return (this.targetTypeAndInfo &amp; 16776960) &gt;&gt; 8;
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getTypeArgumentIndex() {
+&nbsp;        return this.targetTypeAndInfo &amp; 255;
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getValue() {
+&nbsp;        return this.targetTypeAndInfo;
+&nbsp;    }
+&nbsp;
+&nbsp;    static void putTarget(int targetTypeAndInfo, ByteVector output) {
+&nbsp;        switch (targetTypeAndInfo &gt;&gt;&gt; 24) {
+&nbsp;            case 0:
+&nbsp;            case 1:
+&nbsp;            case 22:
+&nbsp;                output.putShort(targetTypeAndInfo &gt;&gt;&gt; 16);
+&nbsp;                break;
+&nbsp;            case 2:
+&nbsp;            case 3:
+&nbsp;            case 4:
+&nbsp;            case 5:
+&nbsp;            case 6:
+&nbsp;            case 7:
+&nbsp;            case 8:
+&nbsp;            case 9:
+&nbsp;            case 10:
+&nbsp;            case 11:
+&nbsp;            case 12:
+&nbsp;            case 13:
+&nbsp;            case 14:
+&nbsp;            case 15:
+&nbsp;            case 24:
+&nbsp;            case 25:
+&nbsp;            case 26:
+&nbsp;            case 27:
+&nbsp;            case 28:
+&nbsp;            case 29:
+&nbsp;            case 30:
+&nbsp;            case 31:
+&nbsp;            case 32:
+&nbsp;            case 33:
+&nbsp;            case 34:
+&nbsp;            case 35:
+&nbsp;            case 36:
+&nbsp;            case 37:
+&nbsp;            case 38:
+&nbsp;            case 39:
+&nbsp;            case 40:
+&nbsp;            case 41:
+&nbsp;            case 42:
+&nbsp;            case 43:
+&nbsp;            case 44:
+&nbsp;            case 45:
+&nbsp;            case 46:
+&nbsp;            case 47:
+&nbsp;            case 48:
+&nbsp;            case 49:
+&nbsp;            case 50:
+&nbsp;            case 51:
+&nbsp;            case 52:
+&nbsp;            case 53:
+&nbsp;            case 54:
+&nbsp;            case 55:
+&nbsp;            case 56:
+&nbsp;            case 57:
+&nbsp;            case 58:
+&nbsp;            case 59:
+&nbsp;            case 60:
+&nbsp;            case 61:
+&nbsp;            case 62:
+&nbsp;            case 63:
+&nbsp;            case 64:
+&nbsp;            case 65:
+&nbsp;            default:
+&nbsp;                throw new IllegalArgumentException();
+&nbsp;            case 16:
+&nbsp;            case 17:
+&nbsp;            case 18:
+&nbsp;            case 23:
+&nbsp;            case 66:
+&nbsp;            case 67:
+&nbsp;            case 68:
+&nbsp;            case 69:
+&nbsp;            case 70:
+&nbsp;                output.put12(targetTypeAndInfo &gt;&gt;&gt; 24, (targetTypeAndInfo &amp; 16776960) &gt;&gt; 8);
+&nbsp;                break;
+&nbsp;            case 19:
+&nbsp;            case 20:
+&nbsp;            case 21:
+&nbsp;                output.putByte(targetTypeAndInfo &gt;&gt;&gt; 24);
+&nbsp;                break;
+&nbsp;            case 71:
+&nbsp;            case 72:
+&nbsp;            case 73:
+&nbsp;            case 74:
+&nbsp;            case 75:
+&nbsp;                output.putInt(targetTypeAndInfo);
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

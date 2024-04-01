@@ -1,0 +1,198 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > GraalImageCode</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.utility</a>
+</div>
+
+<h1>Coverage Summary for Class: GraalImageCode (net.bytebuddy.utility)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GraalImageCode</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.utility;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;import java.security.AccessController;
+&nbsp;import java.security.PrivilegedAction;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.build.AccessControllerPlugin.Enhance;
+&nbsp;import net.bytebuddy.utility.privilege.GetSystemPropertyAction;
+&nbsp;
+&nbsp;public enum GraalImageCode {
+&nbsp;    AGENT,
+&nbsp;    BUILD,
+&nbsp;    RUNTIME,
+&nbsp;    UNKNOWN,
+&nbsp;    NONE;
+&nbsp;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.MAYBE
+&nbsp;    )
+&nbsp;    private static GraalImageCode current;
+&nbsp;    private final boolean defined;
+<b class="fc">&nbsp;    private final boolean nativeImageExecution;</b>
+&nbsp;    private static final boolean ACCESS_CONTROLLER;
+&nbsp;
+&nbsp;    @SuppressFBWarnings(
+&nbsp;        value = {&quot;LI_LAZY_INIT_STATIC&quot;},
+<b class="fc">&nbsp;        justification = &quot;This behaviour is intended to avoid early binding in native images.&quot;</b>
+&nbsp;    )
+&nbsp;    public static GraalImageCode getCurrent() {
+&nbsp;        GraalImageCode current = GraalImageCode.current;
+&nbsp;        if (current == null) {
+<b class="fc">&nbsp;            String value = (String)doPrivileged(new GetSystemPropertyAction(&quot;org.graalvm.nativeimage.imagecode&quot;));</b>
+&nbsp;            if (value == null) {
+&nbsp;                current = NONE;
+&nbsp;            } else if (value.equalsIgnoreCase(&quot;agent&quot;)) {
+&nbsp;                current = AGENT;
+<b class="fc">&nbsp;            } else if (value.equalsIgnoreCase(&quot;runtime&quot;)) {</b>
+&nbsp;                current = RUNTIME;
+&nbsp;            } else if (value.equalsIgnoreCase(&quot;buildtime&quot;)) {
+&nbsp;                current = BUILD;
+&nbsp;            } else {
+<b class="fc">&nbsp;                current = UNKNOWN;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            GraalImageCode.current = current;
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        return current;
+&nbsp;    }
+&nbsp;
+&nbsp;    @Nonnull(
+&nbsp;        when = When.MAYBE
+&nbsp;    )
+&nbsp;    @Enhance
+&nbsp;    private static &lt;T&gt; T doPrivileged(PrivilegedAction&lt;T&gt; action) {
+&nbsp;        return ACCESS_CONTROLLER ? AccessController.doPrivileged(action) : action.run();
+&nbsp;    }
+&nbsp;
+&nbsp;    private GraalImageCode(boolean defined, boolean nativeImageExecution) {
+&nbsp;        this.defined = defined;
+&nbsp;        this.nativeImageExecution = nativeImageExecution;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public boolean isDefined() {</b>
+<b class="fc">&nbsp;        return this.defined;</b>
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public boolean isNativeImageExecution() {
+&nbsp;        return this.nativeImageExecution;
+&nbsp;    }
+&nbsp;
+&nbsp;    static {
+&nbsp;        try {
+&nbsp;            Class.forName(&quot;java.security.AccessController&quot;, false, (ClassLoader)null);
+&nbsp;            ACCESS_CONTROLLER = Boolean.parseBoolean(System.getProperty(&quot;net.bytebuddy.securitymanager&quot;, &quot;true&quot;));
+&nbsp;        } catch (ClassNotFoundException var0) {
+<b class="fc">&nbsp;            ACCESS_CONTROLLER = false;</b>
+&nbsp;        } catch (SecurityException var1) {
+<b class="fc">&nbsp;            ACCESS_CONTROLLER = true;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        AGENT = new GraalImageCode(&quot;AGENT&quot;, 0, true, false);
+&nbsp;        BUILD = new GraalImageCode(&quot;BUILD&quot;, 1, true, false);
+&nbsp;        RUNTIME = new GraalImageCode(&quot;RUNTIME&quot;, 2, true, true);
+&nbsp;        UNKNOWN = new GraalImageCode(&quot;UNKNOWN&quot;, 3, false, false);
+&nbsp;        NONE = new GraalImageCode(&quot;NONE&quot;, 4, false, false);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,155 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > DefaultValue</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.bytecode.constant</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultValue (net.bytebuddy.implementation.bytecode.constant)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DefaultValue</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (19/19)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.bytecode.constant;
+&nbsp;
+&nbsp;import net.bytebuddy.description.type.TypeDefinition;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation.Trivial;
+&nbsp;import net.bytebuddy.jar.asm.MethodVisitor;
+&nbsp;
+&nbsp;public enum DefaultValue implements StackManipulation {
+&nbsp;    INTEGER(IntegerConstant.ZERO),
+&nbsp;    LONG(LongConstant.ZERO),
+&nbsp;    FLOAT(FloatConstant.ZERO),
+&nbsp;    DOUBLE(DoubleConstant.ZERO),
+&nbsp;    VOID(Trivial.INSTANCE),
+&nbsp;    REFERENCE(NullConstant.INSTANCE);
+&nbsp;
+&nbsp;    private final StackManipulation stackManipulation;
+&nbsp;
+&nbsp;    private DefaultValue(StackManipulation stackManipulation) {
+<b class="fc">&nbsp;        this.stackManipulation = stackManipulation;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static StackManipulation of(TypeDefinition typeDefinition) {
+&nbsp;        if (typeDefinition.isPrimitive()) {
+&nbsp;            if (typeDefinition.represents(Long.TYPE)) {
+<b class="fc">&nbsp;                return LONG;</b>
+&nbsp;            } else if (typeDefinition.represents(Double.TYPE)) {
+&nbsp;                return DOUBLE;
+&nbsp;            } else if (typeDefinition.represents(Float.TYPE)) {
+&nbsp;                return FLOAT;
+<b class="fc">&nbsp;            } else {</b>
+&nbsp;                return typeDefinition.represents(Void.TYPE) ? VOID : INTEGER;
+&nbsp;            }
+&nbsp;        } else {
+&nbsp;            return REFERENCE;
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isValid() {
+&nbsp;        return this.stackManipulation.isValid();
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;        return this.stackManipulation.apply(methodVisitor, implementationContext);
+&nbsp;    }
+<b class="fc">&nbsp;}</b>
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

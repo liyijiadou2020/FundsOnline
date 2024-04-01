@@ -1,0 +1,381 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > MethodList</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.description.method</a>
+</div>
+
+<h1>Coverage Summary for Class: MethodList (net.bytebuddy.description.method)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">MethodList$AbstractBase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodList$Explicit</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodList$ForLoadedMethods</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodList$ForTokens</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">MethodList$TypeSubstituting</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (31/31)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.description.method;
+&nbsp;
+&nbsp;import java.lang.reflect.Constructor;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import net.bytebuddy.description.ByteCodeElement;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.matcher.ElementMatcher;
+&nbsp;import net.bytebuddy.matcher.FilterableList;
+&nbsp;
+&nbsp;public interface MethodList&lt;T extends MethodDescription&gt; extends FilterableList&lt;T, MethodList&lt;T&gt;&gt; {
+&nbsp;    ByteCodeElement.Token.TokenList&lt;MethodDescription.Token&gt; asTokenList(ElementMatcher&lt;? super TypeDescription&gt; var1);
+&nbsp;
+&nbsp;    List&lt;MethodDescription.SignatureToken&gt; asSignatureTokenList();
+&nbsp;
+&nbsp;    List&lt;MethodDescription.SignatureToken&gt; asSignatureTokenList(ElementMatcher&lt;? super TypeDescription&gt; var1, TypeDescription var2);
+&nbsp;
+&nbsp;    MethodList&lt;MethodDescription.InDefinedShape&gt; asDefined();
+&nbsp;
+&nbsp;    public static class Empty&lt;S extends MethodDescription&gt; extends FilterableList.Empty&lt;S, MethodList&lt;S&gt;&gt; implements MethodList&lt;S&gt; {
+&nbsp;        public Empty() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public ByteCodeElement.Token.TokenList&lt;MethodDescription.Token&gt; asTokenList(ElementMatcher&lt;? super TypeDescription&gt; matcher) {
+&nbsp;            return new ByteCodeElement.Token.TokenList(new MethodDescription.Token[0]);
+&nbsp;        }
+&nbsp;
+&nbsp;        public List&lt;MethodDescription.SignatureToken&gt; asSignatureTokenList() {
+&nbsp;            return Collections.emptyList();
+&nbsp;        }
+&nbsp;
+&nbsp;        public List&lt;MethodDescription.SignatureToken&gt; asSignatureTokenList(ElementMatcher&lt;? super TypeDescription&gt; matcher, TypeDescription typeDescription) {
+&nbsp;            return Collections.emptyList();
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodList&lt;MethodDescription.InDefinedShape&gt; asDefined() {
+&nbsp;            return this;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class TypeSubstituting extends AbstractBase&lt;MethodDescription.InGenericShape&gt; {
+&nbsp;        protected final TypeDescription.Generic declaringType;
+&nbsp;        protected final List&lt;? extends MethodDescription&gt; methodDescriptions;
+&nbsp;        protected final TypeDescription.Generic.Visitor&lt;? extends TypeDescription.Generic&gt; visitor;
+&nbsp;
+&nbsp;        public TypeSubstituting(TypeDescription.Generic declaringType, List&lt;? extends MethodDescription&gt; methodDescriptions, TypeDescription.Generic.Visitor&lt;? extends TypeDescription.Generic&gt; visitor) {
+&nbsp;            this.declaringType = declaringType;
+&nbsp;            this.methodDescriptions = methodDescriptions;
+&nbsp;            this.visitor = visitor;
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDescription.InGenericShape get(int index) {
+&nbsp;            return new MethodDescription.TypeSubstituting(this.declaringType, (MethodDescription)this.methodDescriptions.get(index), this.visitor);
+&nbsp;        }
+&nbsp;
+&nbsp;        public int size() {
+&nbsp;            return this.methodDescriptions.size();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class ForTokens extends AbstractBase&lt;MethodDescription.InDefinedShape&gt; {
+&nbsp;        private final TypeDescription declaringType;
+&nbsp;        private final List&lt;? extends MethodDescription.Token&gt; tokens;
+<b class="fc">&nbsp;</b>
+&nbsp;        public ForTokens(TypeDescription declaringType, MethodDescription.Token... token) {
+&nbsp;            this(declaringType, Arrays.asList(token));
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        public ForTokens(TypeDescription declaringType, List&lt;? extends MethodDescription.Token&gt; tokens) {
+&nbsp;            this.declaringType = declaringType;
+&nbsp;            this.tokens = tokens;
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDescription.InDefinedShape get(int index) {
+<b class="fc">&nbsp;            return new MethodDescription.Latent(this.declaringType, (MethodDescription.Token)this.tokens.get(index));</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public int size() {</b>
+<b class="fc">&nbsp;            return this.tokens.size();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class Explicit&lt;S extends MethodDescription&gt; extends AbstractBase&lt;S&gt; {
+&nbsp;        private final List&lt;? extends S&gt; methodDescriptions;
+&nbsp;
+&nbsp;        public Explicit(S... methodDescription) {
+&nbsp;            this(Arrays.asList(methodDescription));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Explicit(List&lt;? extends S&gt; methodDescriptions) {
+&nbsp;            this.methodDescriptions = methodDescriptions;
+&nbsp;        }
+&nbsp;
+&nbsp;        public S get(int index) {
+&nbsp;            return (MethodDescription)this.methodDescriptions.get(index);
+&nbsp;        }
+&nbsp;
+&nbsp;        public int size() {
+&nbsp;            return this.methodDescriptions.size();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static class ForLoadedMethods extends AbstractBase&lt;MethodDescription.InDefinedShape&gt; {
+&nbsp;        private final List&lt;? extends Method&gt; methods;
+&nbsp;        private final List&lt;? extends Constructor&lt;?&gt;&gt; constructors;
+&nbsp;
+&nbsp;        public ForLoadedMethods(Class&lt;?&gt; type) {
+&nbsp;            this(type.getDeclaredConstructors(), type.getDeclaredMethods());
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForLoadedMethods(Constructor&lt;?&gt;[] constructor, Method[] method) {
+&nbsp;            this(Arrays.asList(constructor), Arrays.asList(method));
+&nbsp;        }
+&nbsp;
+&nbsp;        public ForLoadedMethods(List&lt;? extends Constructor&lt;?&gt;&gt; constructors, List&lt;? extends Method&gt; methods) {
+&nbsp;            this.constructors = constructors;
+&nbsp;            this.methods = methods;
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDescription.InDefinedShape get(int index) {
+&nbsp;            return (MethodDescription.InDefinedShape)(index &lt; this.constructors.size() ? new MethodDescription.ForLoadedConstructor((Constructor)this.constructors.get(index)) : new MethodDescription.ForLoadedMethod((Method)this.methods.get(index - this.constructors.size())));
+&nbsp;        }
+&nbsp;
+&nbsp;        public int size() {
+&nbsp;            return this.constructors.size() + this.methods.size();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public abstract static class AbstractBase&lt;S extends MethodDescription&gt; extends FilterableList.AbstractBase&lt;S, MethodList&lt;S&gt;&gt; implements MethodList&lt;S&gt; {
+&nbsp;        public AbstractBase() {
+&nbsp;        }
+&nbsp;
+&nbsp;        protected MethodList&lt;S&gt; wrap(List&lt;S&gt; values) {
+&nbsp;            return new Explicit(values);
+&nbsp;        }
+&nbsp;
+&nbsp;        public ByteCodeElement.Token.TokenList&lt;MethodDescription.Token&gt; asTokenList(ElementMatcher&lt;? super TypeDescription&gt; matcher) {
+<b class="fc">&nbsp;            List&lt;MethodDescription.Token&gt; tokens = new ArrayList(this.size());</b>
+&nbsp;            Iterator var3 = this.iterator();
+&nbsp;
+&nbsp;            while(var3.hasNext()) {
+&nbsp;                MethodDescription methodDescription = (MethodDescription)var3.next();
+&nbsp;                tokens.add(methodDescription.asToken(matcher));
+&nbsp;            }
+&nbsp;
+&nbsp;            return new ByteCodeElement.Token.TokenList(tokens);
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public List&lt;MethodDescription.SignatureToken&gt; asSignatureTokenList() {</b>
+&nbsp;            List&lt;MethodDescription.SignatureToken&gt; tokens = new ArrayList(this.size());
+&nbsp;            Iterator var2 = this.iterator();
+&nbsp;
+&nbsp;            while(var2.hasNext()) {
+&nbsp;                MethodDescription methodDescription = (MethodDescription)var2.next();
+&nbsp;                tokens.add(methodDescription.asSignatureToken());
+&nbsp;            }
+&nbsp;
+&nbsp;            return tokens;
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public List&lt;MethodDescription.SignatureToken&gt; asSignatureTokenList(ElementMatcher&lt;? super TypeDescription&gt; matcher, TypeDescription typeDescription) {</b>
+&nbsp;            List&lt;MethodDescription.SignatureToken&gt; tokens = new ArrayList(this.size());
+&nbsp;            Iterator var4 = this.iterator();
+&nbsp;
+&nbsp;            while(var4.hasNext()) {
+&nbsp;                MethodDescription methodDescription = (MethodDescription)var4.next();
+&nbsp;                tokens.add(((MethodDescription.Token)methodDescription.asToken(matcher)).asSignatureToken(typeDescription));
+<b class="fc">&nbsp;            }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            return tokens;</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodList&lt;MethodDescription.InDefinedShape&gt; asDefined() {
+&nbsp;            List&lt;MethodDescription.InDefinedShape&gt; declaredForms = new ArrayList(this.size());
+&nbsp;            Iterator var2 = this.iterator();
+&nbsp;
+&nbsp;            while(var2.hasNext()) {
+<b class="fc">&nbsp;                MethodDescription methodDescription = (MethodDescription)var2.next();</b>
+&nbsp;                declaredForms.add(methodDescription.asDefined());
+&nbsp;            }
+&nbsp;
+&nbsp;            return new Explicit(declaredForms);
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

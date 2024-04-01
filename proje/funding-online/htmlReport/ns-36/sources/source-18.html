@@ -1,0 +1,349 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > StringMatcher</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.matcher</a>
+</div>
+
+<h1>Coverage Summary for Class: StringMatcher (net.bytebuddy.matcher)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">StringMatcher</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">StringMatcher$Mode</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StringMatcher$Mode$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StringMatcher$Mode$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StringMatcher$Mode$3</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StringMatcher$Mode$4</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StringMatcher$Mode$5</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StringMatcher$Mode$6</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StringMatcher$Mode$7</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StringMatcher$Mode$8</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">StringMatcher$Mode$9</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (26/26)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.matcher;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;
+&nbsp;@Enhance
+&nbsp;public class StringMatcher extends ElementMatcher.Junction.ForNonNullValues&lt;String&gt; {
+&nbsp;    private final String value;
+&nbsp;    private final Mode mode;
+&nbsp;
+&nbsp;    public StringMatcher(String value, Mode mode) {
+&nbsp;        this.value = value;
+&nbsp;        this.mode = mode;
+&nbsp;    }
+&nbsp;
+&nbsp;    protected boolean doMatch(String target) {
+&nbsp;        return this.mode.matches(this.value, target);
+&nbsp;    }
+&nbsp;
+&nbsp;    public String toString() {
+&nbsp;        return this.mode.getDescription() + &#39;(&#39; + this.value + &#39;)&#39;;
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean equals(Object var1) {
+&nbsp;        if (!super.equals(var1)) {
+&nbsp;            return false;
+&nbsp;        } else if (this == var1) {
+&nbsp;            return true;
+&nbsp;        } else if (var1 == null) {
+&nbsp;            return false;
+&nbsp;        } else if (this.getClass() != var1.getClass()) {
+&nbsp;            return false;
+&nbsp;        } else if (!this.mode.equals(((StringMatcher)var1).mode)) {
+&nbsp;            return false;
+&nbsp;        } else {
+&nbsp;            return this.value.equals(((StringMatcher)var1).value);
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public int hashCode() {</b>
+&nbsp;        return (super.hashCode() * 31 + this.value.hashCode()) * 31 + this.mode.hashCode();
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum Mode {
+&nbsp;        EQUALS_FULLY(&quot;equals&quot;) {
+&nbsp;            protected boolean matches(String expected, String actual) {
+<b class="fc">&nbsp;                return actual.equals(expected);</b>
+&nbsp;            }
+&nbsp;        },
+&nbsp;        EQUALS_FULLY_IGNORE_CASE(&quot;equalsIgnoreCase&quot;) {
+&nbsp;            protected boolean matches(String expected, String actual) {
+&nbsp;                return actual.equalsIgnoreCase(expected);
+&nbsp;            }
+&nbsp;        },
+&nbsp;        STARTS_WITH(&quot;startsWith&quot;) {
+&nbsp;            protected boolean matches(String expected, String actual) {
+&nbsp;                return actual.startsWith(expected);
+<b class="fc">&nbsp;            }</b>
+&nbsp;        },
+&nbsp;        STARTS_WITH_IGNORE_CASE(&quot;startsWithIgnoreCase&quot;) {
+&nbsp;            @SuppressFBWarnings(
+&nbsp;                value = {&quot;DM_CONVERT_CASE&quot;},
+<b class="fc">&nbsp;                justification = &quot;Both strings are transformed by the default locale.&quot;</b>
+&nbsp;            )
+&nbsp;            protected boolean matches(String expected, String actual) {
+<b class="fc">&nbsp;                return actual.toLowerCase().startsWith(expected.toLowerCase());</b>
+&nbsp;            }
+&nbsp;        },
+&nbsp;        ENDS_WITH(&quot;endsWith&quot;) {
+&nbsp;            protected boolean matches(String expected, String actual) {
+&nbsp;                return actual.endsWith(expected);
+&nbsp;            }
+<b class="fc">&nbsp;        },</b>
+&nbsp;        ENDS_WITH_IGNORE_CASE(&quot;endsWithIgnoreCase&quot;) {
+&nbsp;            @SuppressFBWarnings(
+&nbsp;                value = {&quot;DM_CONVERT_CASE&quot;},
+&nbsp;                justification = &quot;Both strings are transformed by the default locale.&quot;
+&nbsp;            )
+&nbsp;            protected boolean matches(String expected, String actual) {
+&nbsp;                return actual.toLowerCase().endsWith(expected.toLowerCase());
+&nbsp;            }
+&nbsp;        },
+<b class="fc">&nbsp;        CONTAINS(&quot;contains&quot;) {</b>
+&nbsp;            protected boolean matches(String expected, String actual) {
+&nbsp;                return actual.contains(expected);
+&nbsp;            }
+&nbsp;        },
+&nbsp;        CONTAINS_IGNORE_CASE(&quot;containsIgnoreCase&quot;) {
+&nbsp;            @SuppressFBWarnings(
+&nbsp;                value = {&quot;DM_CONVERT_CASE&quot;},
+&nbsp;                justification = &quot;Both strings are transformed by the default locale.&quot;
+&nbsp;            )
+<b class="fc">&nbsp;            protected boolean matches(String expected, String actual) {</b>
+&nbsp;                return actual.toLowerCase().contains(expected.toLowerCase());
+&nbsp;            }
+&nbsp;        },
+&nbsp;        MATCHES(&quot;matches&quot;) {
+&nbsp;            protected boolean matches(String expected, String actual) {
+&nbsp;                return actual.matches(expected);
+&nbsp;            }
+&nbsp;        };
+&nbsp;
+&nbsp;        private final String description;
+<b class="fc">&nbsp;</b>
+&nbsp;        private Mode(String description) {
+&nbsp;            this.description = description;
+&nbsp;        }
+&nbsp;
+&nbsp;        protected String getDescription() {
+&nbsp;            return this.description;
+&nbsp;        }
+&nbsp;
+&nbsp;        protected abstract boolean matches(String var1, String var2);
+<b class="fc">&nbsp;    }</b>
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,237 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ClassConstant</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.bytecode.constant</a>
+</div>
+
+<h1>Coverage Summary for Class: ClassConstant (net.bytebuddy.implementation.bytecode.constant)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClassConstant</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (15/15)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ClassConstant$ForReferenceType</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (20/20)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.bytecode.constant;
+&nbsp;
+&nbsp;import net.bytebuddy.ClassFileVersion;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackSize;
+&nbsp;import net.bytebuddy.jar.asm.MethodVisitor;
+&nbsp;import net.bytebuddy.jar.asm.Type;
+&nbsp;
+&nbsp;public enum ClassConstant implements StackManipulation {
+&nbsp;    VOID(Void.class),
+&nbsp;    BOOLEAN(Boolean.class),
+&nbsp;    BYTE(Byte.class),
+&nbsp;    SHORT(Short.class),
+&nbsp;    CHARACTER(Character.class),
+&nbsp;    INTEGER(Integer.class),
+&nbsp;    LONG(Long.class),
+&nbsp;    FLOAT(Float.class),
+&nbsp;    DOUBLE(Double.class);
+&nbsp;
+&nbsp;    private static final StackManipulation.Size SIZE = StackSize.SINGLE.toIncreasingSize();
+&nbsp;    private static final String PRIMITIVE_TYPE_FIELD = &quot;TYPE&quot;;
+<b class="fc">&nbsp;    private static final String CLASS_TYPE_INTERNAL_NAME = &quot;Ljava/lang/Class;&quot;;</b>
+&nbsp;    private final String fieldOwnerInternalName;
+&nbsp;
+&nbsp;    private ClassConstant(Class type) {
+&nbsp;        this.fieldOwnerInternalName = Type.getInternalName(type);
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public static StackManipulation of(TypeDescription typeDescription) {
+&nbsp;        if (!typeDescription.isPrimitive()) {
+&nbsp;            return new ForReferenceType(typeDescription);
+<b class="fc">&nbsp;        } else if (typeDescription.represents(Boolean.TYPE)) {</b>
+&nbsp;            return BOOLEAN;
+&nbsp;        } else if (typeDescription.represents(Byte.TYPE)) {
+&nbsp;            return BYTE;
+&nbsp;        } else if (typeDescription.represents(Short.TYPE)) {
+<b class="fc">&nbsp;            return SHORT;</b>
+&nbsp;        } else if (typeDescription.represents(Character.TYPE)) {
+&nbsp;            return CHARACTER;
+&nbsp;        } else if (typeDescription.represents(Integer.TYPE)) {
+&nbsp;            return INTEGER;
+<b class="fc">&nbsp;        } else if (typeDescription.represents(Long.TYPE)) {</b>
+&nbsp;            return LONG;
+&nbsp;        } else if (typeDescription.represents(Float.TYPE)) {
+&nbsp;            return FLOAT;
+&nbsp;        } else {
+<b class="fc">&nbsp;            return typeDescription.represents(Double.TYPE) ? DOUBLE : VOID;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isValid() {
+<b class="fc">&nbsp;        return true;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;        methodVisitor.visitFieldInsn(178, this.fieldOwnerInternalName, &quot;TYPE&quot;, &quot;Ljava/lang/Class;&quot;);
+<b class="fc">&nbsp;        return SIZE;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    protected static class ForReferenceType implements StackManipulation {
+<b class="fc">&nbsp;        private final TypeDescription typeDescription;</b>
+&nbsp;
+&nbsp;        protected ForReferenceType(TypeDescription typeDescription) {
+&nbsp;            this.typeDescription = typeDescription;
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        public boolean isValid() {
+&nbsp;            return true;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {</b>
+&nbsp;            if (implementationContext.getClassFileVersion().isAtLeast(ClassFileVersion.JAVA_V5) &amp;&amp; this.typeDescription.isVisibleTo(implementationContext.getInstrumentedType())) {
+&nbsp;                methodVisitor.visitLdcInsn(Type.getType(this.typeDescription.getDescriptor()));
+&nbsp;            } else {
+&nbsp;                methodVisitor.visitLdcInsn(this.typeDescription.getName());
+&nbsp;                methodVisitor.visitMethodInsn(184, &quot;java/lang/Class&quot;, &quot;forName&quot;, &quot;(Ljava/lang/String;)Ljava/lang/Class;&quot;, false);
+&nbsp;            }
+&nbsp;
+&nbsp;            return ClassConstant.SIZE;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.typeDescription.equals(((ForReferenceType)var1).typeDescription);
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public int hashCode() {</b>
+&nbsp;            return this.getClass().hashCode() * 31 + this.typeDescription.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

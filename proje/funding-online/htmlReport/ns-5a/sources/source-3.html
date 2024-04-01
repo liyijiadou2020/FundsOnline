@@ -1,0 +1,193 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > MockHandlerImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.handler</a>
+</div>
+
+<h1>Coverage Summary for Class: MockHandlerImpl (org.mockito.internal.handler)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MockHandlerImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (39/39)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.handler;
+&nbsp;
+&nbsp;import org.mockito.internal.creation.settings.CreationSettings;
+&nbsp;import org.mockito.internal.invocation.InvocationMatcher;
+&nbsp;import org.mockito.internal.invocation.MatchersBinder;
+&nbsp;import org.mockito.internal.listeners.StubbingLookupNotifier;
+&nbsp;import org.mockito.internal.progress.ThreadSafeMockingProgress;
+&nbsp;import org.mockito.internal.stubbing.InvocationContainerImpl;
+&nbsp;import org.mockito.internal.stubbing.OngoingStubbingImpl;
+&nbsp;import org.mockito.internal.stubbing.StubbedInvocationMatcher;
+&nbsp;import org.mockito.internal.stubbing.answers.DefaultAnswerValidator;
+&nbsp;import org.mockito.internal.util.MockUtil;
+&nbsp;import org.mockito.internal.verification.MockAwareVerificationMode;
+&nbsp;import org.mockito.internal.verification.VerificationDataImpl;
+&nbsp;import org.mockito.invocation.Invocation;
+&nbsp;import org.mockito.invocation.InvocationContainer;
+&nbsp;import org.mockito.invocation.MockHandler;
+&nbsp;import org.mockito.mock.MockCreationSettings;
+&nbsp;import org.mockito.verification.VerificationMode;
+&nbsp;
+&nbsp;public class MockHandlerImpl&lt;T&gt; implements MockHandler&lt;T&gt; {
+&nbsp;    private static final long serialVersionUID = -2917871070982574165L;
+&nbsp;    InvocationContainerImpl invocationContainer;
+&nbsp;    MatchersBinder matchersBinder = new MatchersBinder();
+&nbsp;    private final MockCreationSettings&lt;T&gt; mockSettings;
+&nbsp;
+&nbsp;    public MockHandlerImpl(MockCreationSettings&lt;T&gt; mockSettings) {
+&nbsp;        this.mockSettings = mockSettings;
+&nbsp;        this.matchersBinder = new MatchersBinder();
+&nbsp;        this.invocationContainer = new InvocationContainerImpl(mockSettings);
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Object handle(Invocation invocation) throws Throwable {
+&nbsp;        if (this.invocationContainer.hasAnswersForStubbing()) {
+<b class="fc">&nbsp;            InvocationMatcher invocationMatcher = this.matchersBinder.bindMatchers(ThreadSafeMockingProgress.mockingProgress().getArgumentMatcherStorage(), invocation);</b>
+<b class="fc">&nbsp;            this.invocationContainer.setMethodForStubbing(invocationMatcher);</b>
+&nbsp;            return null;
+<b class="fc">&nbsp;        } else {</b>
+<b class="fc">&nbsp;            VerificationMode verificationMode = ThreadSafeMockingProgress.mockingProgress().pullVerificationMode();</b>
+&nbsp;            InvocationMatcher invocationMatcher = this.matchersBinder.bindMatchers(ThreadSafeMockingProgress.mockingProgress().getArgumentMatcherStorage(), invocation);
+&nbsp;            ThreadSafeMockingProgress.mockingProgress().validateState();
+&nbsp;            if (verificationMode != null) {
+&nbsp;                if (MockUtil.areSameMocks(((MockAwareVerificationMode)verificationMode).getMock(), invocation.getMock())) {
+<b class="fc">&nbsp;                    VerificationDataImpl data = new VerificationDataImpl(this.invocationContainer, invocationMatcher);</b>
+&nbsp;                    verificationMode.verify(data);
+<b class="fc">&nbsp;                    return null;</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                ThreadSafeMockingProgress.mockingProgress().verificationStarted(verificationMode);</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+<b class="fc">&nbsp;            this.invocationContainer.setInvocationForPotentialStubbing(invocationMatcher);</b>
+&nbsp;            OngoingStubbingImpl&lt;T&gt; ongoingStubbing = new OngoingStubbingImpl(this.invocationContainer);
+<b class="fc">&nbsp;            ThreadSafeMockingProgress.mockingProgress().reportOngoingStubbing(ongoingStubbing);</b>
+<b class="fc">&nbsp;            StubbedInvocationMatcher stubbing = this.invocationContainer.findAnswerFor(invocation);</b>
+<b class="fc">&nbsp;            StubbingLookupNotifier.notifyStubbedAnswerLookup(invocation, stubbing, this.invocationContainer.getStubbingsAscending(), (CreationSettings)this.mockSettings);</b>
+&nbsp;            Object ret;
+<b class="fc">&nbsp;            if (stubbing != null) {</b>
+&nbsp;                stubbing.captureArgumentsFrom(invocation);
+&nbsp;
+<b class="fc">&nbsp;                try {</b>
+&nbsp;                    ret = stubbing.answer(invocation);
+&nbsp;                } finally {
+<b class="fc">&nbsp;                    ThreadSafeMockingProgress.mockingProgress().reportOngoingStubbing(ongoingStubbing);</b>
+<b class="fc">&nbsp;                }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                return ret;</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                ret = this.mockSettings.getDefaultAnswer().answer(invocation);</b>
+<b class="fc">&nbsp;                DefaultAnswerValidator.validateReturnValueFor(invocation, ret);</b>
+&nbsp;                this.invocationContainer.resetInvocationForPotentialStubbing(invocationMatcher);
+&nbsp;                return ret;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public MockCreationSettings&lt;T&gt; getMockSettings() {
+&nbsp;        return this.mockSettings;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    public InvocationContainer getInvocationContainer() {</b>
+<b class="fc">&nbsp;        return this.invocationContainer;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

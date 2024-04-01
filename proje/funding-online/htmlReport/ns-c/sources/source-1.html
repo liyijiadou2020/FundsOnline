@@ -1,0 +1,224 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > AppenderAttachableImpl</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">ch.qos.logback.core.spi</a>
+</div>
+
+<h1>Coverage Summary for Class: AppenderAttachableImpl (ch.qos.logback.core.spi)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AppenderAttachableImpl</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (12/12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package ch.qos.logback.core.spi;
+&nbsp;
+&nbsp;import ch.qos.logback.core.Appender;
+&nbsp;import ch.qos.logback.core.util.COWArrayList;
+&nbsp;import java.util.Iterator;
+&nbsp;
+&nbsp;public class AppenderAttachableImpl&lt;E&gt; implements AppenderAttachable&lt;E&gt; {
+&nbsp;    private final COWArrayList&lt;Appender&lt;E&gt;&gt; appenderList = new COWArrayList(new Appender[0]);
+&nbsp;    static final long START = System.currentTimeMillis();
+&nbsp;
+&nbsp;    public AppenderAttachableImpl() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public void addAppender(Appender&lt;E&gt; newAppender) {
+&nbsp;        if (newAppender == null) {
+&nbsp;            throw new IllegalArgumentException(&quot;Null argument disallowed&quot;);
+&nbsp;        } else {
+&nbsp;            this.appenderList.addIfAbsent(newAppender);
+&nbsp;        }
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public int appendLoopOnAppenders(E e) {
+<b class="fc">&nbsp;        int size = 0;</b>
+&nbsp;        Appender&lt;E&gt;[] appenderArray = (Appender[])this.appenderList.asTypedArray();
+&nbsp;        int len = appenderArray.length;
+&nbsp;
+&nbsp;        for(int i = 0; i &lt; len; ++i) {
+&nbsp;            appenderArray[i].doAppend(e);
+&nbsp;            ++size;
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        return size;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public Iterator&lt;Appender&lt;E&gt;&gt; iteratorForAppenders() {
+&nbsp;        return this.appenderList.iterator();
+&nbsp;    }
+&nbsp;
+&nbsp;    public Appender&lt;E&gt; getAppender(String name) {
+&nbsp;        if (name == null) {
+<b class="fc">&nbsp;            return null;</b>
+<b class="fc">&nbsp;        } else {</b>
+<b class="fc">&nbsp;            Iterator i$ = this.appenderList.iterator();</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            Appender appender;</b>
+<b class="fc">&nbsp;            do {</b>
+&nbsp;                if (!i$.hasNext()) {
+<b class="fc">&nbsp;                    return null;</b>
+&nbsp;                }
+&nbsp;
+&nbsp;                appender = (Appender)i$.next();
+&nbsp;            } while(!name.equals(appender.getName()));
+&nbsp;
+&nbsp;            return appender;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isAttached(Appender&lt;E&gt; appender) {
+&nbsp;        if (appender == null) {
+&nbsp;            return false;
+&nbsp;        } else {
+&nbsp;            Iterator i$ = this.appenderList.iterator();
+&nbsp;
+&nbsp;            Appender a;
+&nbsp;            do {
+&nbsp;                if (!i$.hasNext()) {
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;
+&nbsp;                a = (Appender)i$.next();
+&nbsp;            } while(a != appender);
+&nbsp;
+&nbsp;            return true;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public void detachAndStopAllAppenders() {
+&nbsp;        Iterator i$ = this.appenderList.iterator();
+&nbsp;
+&nbsp;        while(i$.hasNext()) {
+&nbsp;            Appender&lt;E&gt; a = (Appender)i$.next();
+&nbsp;            a.stop();
+&nbsp;        }
+&nbsp;
+&nbsp;        this.appenderList.clear();
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean detachAppender(Appender&lt;E&gt; appender) {
+&nbsp;        if (appender == null) {
+&nbsp;            return false;
+&nbsp;        } else {
+&nbsp;            boolean result = this.appenderList.remove(appender);
+&nbsp;            return result;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean detachAppender(String name) {
+&nbsp;        if (name == null) {
+&nbsp;            return false;
+&nbsp;        } else {
+&nbsp;            boolean removed = false;
+&nbsp;            Iterator i$ = this.appenderList.iterator();
+&nbsp;
+&nbsp;            while(i$.hasNext()) {
+&nbsp;                Appender&lt;E&gt; a = (Appender)i$.next();
+<b class="fc">&nbsp;                if (name.equals(a.getName())) {</b>
+&nbsp;                    removed = this.appenderList.remove(a);
+&nbsp;                    break;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            return removed;
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

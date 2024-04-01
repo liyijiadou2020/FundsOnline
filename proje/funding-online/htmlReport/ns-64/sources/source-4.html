@@ -1,0 +1,153 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ListUtil</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.util.collections</a>
+</div>
+
+<h1>Coverage Summary for Class: ListUtil (org.mockito.internal.util.collections)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ListUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.util.collections;
+&nbsp;
+&nbsp;import java.util.Collection;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.LinkedList;
+&nbsp;
+&nbsp;public final class ListUtil {
+&nbsp;    public static &lt;T&gt; LinkedList&lt;T&gt; filter(Collection&lt;T&gt; collection, Filter&lt;T&gt; filter) {
+&nbsp;        LinkedList&lt;T&gt; filtered = new LinkedList();
+&nbsp;        Iterator var3 = collection.iterator();
+&nbsp;
+<b class="fc">&nbsp;        while(var3.hasNext()) {</b>
+<b class="fc">&nbsp;            T t = var3.next();</b>
+<b class="fc">&nbsp;            if (!filter.isOut(t)) {</b>
+<b class="fc">&nbsp;                filtered.add(t);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        return filtered;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static &lt;FromT, To&gt; LinkedList&lt;To&gt; convert(Collection&lt;FromT&gt; collection, Converter&lt;FromT, To&gt; converter) {
+&nbsp;        LinkedList&lt;To&gt; converted = new LinkedList();
+&nbsp;        Iterator var3 = collection.iterator();
+&nbsp;
+&nbsp;        while(var3.hasNext()) {
+&nbsp;            FromT f = var3.next();
+&nbsp;            converted.add(converter.convert(f));
+&nbsp;        }
+&nbsp;
+&nbsp;        return converted;
+&nbsp;    }
+&nbsp;
+&nbsp;    private ListUtil() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface Converter&lt;FromT, To&gt; {
+&nbsp;        To convert(FromT var1);
+&nbsp;    }
+&nbsp;
+&nbsp;    public interface Filter&lt;T&gt; {
+&nbsp;        boolean isOut(T var1);
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

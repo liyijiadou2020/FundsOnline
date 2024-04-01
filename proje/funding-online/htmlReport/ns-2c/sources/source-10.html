@@ -1,0 +1,767 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > TargetMethodAnnotationDrivenBinder</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.bind.annotation</a>
+</div>
+
+<h1>Coverage Summary for Class: TargetMethodAnnotationDrivenBinder (net.bytebuddy.implementation.bind.annotation)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TargetMethodAnnotationDrivenBinder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TargetMethodAnnotationDrivenBinder$DelegationProcessor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (16/16)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TargetMethodAnnotationDrivenBinder$DelegationProcessor$Handler$Bound</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TargetMethodAnnotationDrivenBinder$DelegationProcessor$Handler$Unbound</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (4/4)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TargetMethodAnnotationDrivenBinder$ParameterBinder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TargetMethodAnnotationDrivenBinder$ParameterBinder$ForFieldBinding</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">TargetMethodAnnotationDrivenBinder$Record</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (10/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (60/60)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.bind.annotation;
+&nbsp;
+&nbsp;import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+&nbsp;import java.lang.annotation.Annotation;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Collections;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import javax.annotation.CheckForNull;
+&nbsp;import javax.annotation.Nonnull;
+&nbsp;import javax.annotation.meta.When;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.ValueHandling;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.ValueHandling.Sort;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationDescription;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationDescription.ForLoadedAnnotation;
+&nbsp;import net.bytebuddy.description.enumeration.EnumerationDescription;
+&nbsp;import net.bytebuddy.description.field.FieldDescription;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.method.ParameterDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.ForLoadedType;
+&nbsp;import net.bytebuddy.dynamic.scaffold.FieldLocator;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.implementation.bind.MethodDelegationBinder;
+&nbsp;import net.bytebuddy.implementation.bind.MethodDelegationBinder.Record.Illegal;
+&nbsp;import net.bytebuddy.implementation.bind.annotation.Argument.Binder;
+&nbsp;import net.bytebuddy.implementation.bind.annotation.Argument.BindingMechanic;
+&nbsp;import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding.Verifier;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.Assigner;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.ClassConstant;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.DefaultValue;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.DoubleConstant;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.FloatConstant;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.IntegerConstant;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.JavaConstantValue;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.LongConstant;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.TextConstant;
+&nbsp;import net.bytebuddy.implementation.bytecode.member.FieldAccess;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;import net.bytebuddy.utility.JavaConstant;
+&nbsp;import net.bytebuddy.utility.JavaType;
+&nbsp;import net.bytebuddy.utility.JavaConstant.MethodHandle;
+&nbsp;import net.bytebuddy.utility.JavaConstant.MethodType;
+&nbsp;
+&nbsp;@Enhance
+&nbsp;public class TargetMethodAnnotationDrivenBinder implements MethodDelegationBinder {
+&nbsp;    private final DelegationProcessor delegationProcessor;
+&nbsp;
+&nbsp;    protected TargetMethodAnnotationDrivenBinder(DelegationProcessor delegationProcessor) {
+&nbsp;        this.delegationProcessor = delegationProcessor;
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    public static MethodDelegationBinder of(List&lt;? extends ParameterBinder&lt;?&gt;&gt; parameterBinders) {
+&nbsp;        return new TargetMethodAnnotationDrivenBinder(TargetMethodAnnotationDrivenBinder.DelegationProcessor.of(parameterBinders));
+&nbsp;    }
+&nbsp;
+&nbsp;    public MethodDelegationBinder.Record compile(MethodDescription candidate) {
+&nbsp;        if (Verifier.check(candidate)) {
+&nbsp;            return Illegal.INSTANCE;
+&nbsp;        } else {
+&nbsp;            List&lt;DelegationProcessor.Handler&gt; handlers = new ArrayList(candidate.getParameters().size());
+&nbsp;            Iterator var3 = candidate.getParameters().iterator();
+&nbsp;
+<b class="fc">&nbsp;            while(var3.hasNext()) {</b>
+&nbsp;                ParameterDescription parameterDescription = (ParameterDescription)var3.next();
+&nbsp;                handlers.add(this.delegationProcessor.prepare(parameterDescription));
+&nbsp;            }
+&nbsp;
+&nbsp;            return new Record(candidate, handlers, net.bytebuddy.implementation.bind.annotation.RuntimeType.Verifier.check(candidate));
+&nbsp;        }
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public boolean equals(Object var1) {
+<b class="fc">&nbsp;        if (this == var1) {</b>
+<b class="fc">&nbsp;            return true;</b>
+<b class="fc">&nbsp;        } else if (var1 == null) {</b>
+<b class="fc">&nbsp;            return false;</b>
+<b class="fc">&nbsp;        } else if (this.getClass() != var1.getClass()) {</b>
+&nbsp;            return false;
+&nbsp;        } else {
+&nbsp;            return this.delegationProcessor.equals(((TargetMethodAnnotationDrivenBinder)var1).delegationProcessor);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public int hashCode() {
+&nbsp;        return this.getClass().hashCode() * 31 + this.delegationProcessor.hashCode();
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    protected static class DelegationProcessor {
+&nbsp;        private final Map&lt;? extends TypeDescription, ? extends ParameterBinder&lt;?&gt;&gt; parameterBinders;
+&nbsp;
+&nbsp;        protected DelegationProcessor(Map&lt;? extends TypeDescription, ? extends ParameterBinder&lt;?&gt;&gt; parameterBinders) {
+&nbsp;            this.parameterBinders = parameterBinders;
+&nbsp;        }
+&nbsp;
+&nbsp;        protected static DelegationProcessor of(List&lt;? extends ParameterBinder&lt;?&gt;&gt; parameterBinders) {
+&nbsp;            Map&lt;TypeDescription, ParameterBinder&lt;?&gt;&gt; parameterBinderMap = new HashMap();
+&nbsp;            Iterator var2 = parameterBinders.iterator();
+&nbsp;
+&nbsp;            ParameterBinder parameterBinder;
+&nbsp;            do {
+&nbsp;                if (!var2.hasNext()) {
+&nbsp;                    return new DelegationProcessor(parameterBinderMap);
+&nbsp;                }
+&nbsp;
+&nbsp;                parameterBinder = (ParameterBinder)var2.next();
+&nbsp;            } while(parameterBinderMap.put(ForLoadedType.of(parameterBinder.getHandledType()), parameterBinder) == null);
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;            throw new IllegalArgumentException(&quot;Attempt to bind two handlers to &quot; + parameterBinder.getHandledType());</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        protected Handler prepare(ParameterDescription target) {
+&nbsp;            Assigner.Typing typing = net.bytebuddy.implementation.bind.annotation.RuntimeType.Verifier.check(target);
+&nbsp;            Handler handler = new Handler.Unbound(target, typing);
+&nbsp;            Iterator var4 = target.getDeclaredAnnotations().iterator();
+&nbsp;
+&nbsp;            while(var4.hasNext()) {
+&nbsp;                AnnotationDescription annotation = (AnnotationDescription)var4.next();
+&nbsp;                ParameterBinder&lt;?&gt; parameterBinder = (ParameterBinder)this.parameterBinders.get(annotation.getAnnotationType());
+&nbsp;                if (parameterBinder != null &amp;&amp; ((Handler)handler).isBound()) {
+&nbsp;                    throw new IllegalStateException(&quot;Ambiguous binding for parameter annotated with two handled annotation types&quot;);
+<b class="fc">&nbsp;                }</b>
+&nbsp;
+&nbsp;                if (parameterBinder != null) {
+<b class="fc">&nbsp;                    handler = TargetMethodAnnotationDrivenBinder.DelegationProcessor.Handler.Bound.of(target, parameterBinder, annotation, typing);</b>
+<b class="fc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            return (Handler)handler;</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public boolean equals(Object var1) {</b>
+<b class="fc">&nbsp;            if (this == var1) {</b>
+&nbsp;                return true;
+<b class="fc">&nbsp;            } else if (var1 == null) {</b>
+<b class="fc">&nbsp;                return false;</b>
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.parameterBinders.equals(((DelegationProcessor)var1).parameterBinders);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.parameterBinders.hashCode();
+&nbsp;        }
+&nbsp;
+&nbsp;        protected interface Handler {
+&nbsp;            boolean isBound();
+&nbsp;
+&nbsp;            MethodDelegationBinder.ParameterBinding&lt;?&gt; bind(MethodDescription var1, Implementation.Target var2, Assigner var3);
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public static class Bound&lt;T extends Annotation&gt; implements Handler {
+&nbsp;                private final ParameterDescription target;
+&nbsp;                private final ParameterBinder&lt;T&gt; parameterBinder;
+<b class="fc">&nbsp;                private final AnnotationDescription.Loadable&lt;T&gt; annotation;</b>
+&nbsp;                private final Assigner.Typing typing;
+&nbsp;
+&nbsp;                protected Bound(ParameterDescription target, ParameterBinder&lt;T&gt; parameterBinder, AnnotationDescription.Loadable&lt;T&gt; annotation, Assigner.Typing typing) {
+&nbsp;                    this.target = target;
+&nbsp;                    this.parameterBinder = parameterBinder;
+&nbsp;                    this.annotation = annotation;
+&nbsp;                    this.typing = typing;
+&nbsp;                }
+&nbsp;
+&nbsp;                protected static Handler of(ParameterDescription target, ParameterBinder&lt;?&gt; parameterBinder, AnnotationDescription annotation, Assigner.Typing typing) {
+&nbsp;                    return new Bound(target, parameterBinder, annotation.prepare(parameterBinder.getHandledType()), typing);
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean isBound() {
+&nbsp;                    return true;
+&nbsp;                }
+&nbsp;
+&nbsp;                public MethodDelegationBinder.ParameterBinding&lt;?&gt; bind(MethodDescription source, Implementation.Target implementationTarget, Assigner assigner) {
+&nbsp;                    return this.parameterBinder.bind(this.annotation, source, this.target, implementationTarget, assigner, this.typing);
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.typing.equals(((Bound)var1).typing)) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.target.equals(((Bound)var1).target)) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.parameterBinder.equals(((Bound)var1).parameterBinder)) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.annotation.equals(((Bound)var1).annotation);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return (((this.getClass().hashCode() * 31 + this.target.hashCode()) * 31 + this.parameterBinder.hashCode()) * 31 + this.annotation.hashCode()) * 31 + this.typing.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public static class Unbound implements Handler {
+&nbsp;                private final ParameterDescription target;
+&nbsp;                private final Assigner.Typing typing;
+&nbsp;
+&nbsp;                protected Unbound(ParameterDescription target, Assigner.Typing typing) {
+&nbsp;                    this.target = target;
+&nbsp;                    this.typing = typing;
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean isBound() {
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;
+&nbsp;                public MethodDelegationBinder.ParameterBinding&lt;?&gt; bind(MethodDescription source, Implementation.Target implementationTarget, Assigner assigner) {
+&nbsp;                    return Binder.INSTANCE.bind(ForLoadedAnnotation.of(new DefaultArgument(this.target.getIndex())), source, this.target, implementationTarget, assigner, this.typing);
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.typing.equals(((Unbound)var1).typing)) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.target.equals(((Unbound)var1).target);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return (this.getClass().hashCode() * 31 + this.target.hashCode()) * 31 + this.typing.hashCode();
+&nbsp;                }
+&nbsp;
+&nbsp;                protected static class DefaultArgument implements Argument {
+&nbsp;                    private static final String VALUE = &quot;value&quot;;
+&nbsp;                    private static final String BINDING_MECHANIC = &quot;bindingMechanic&quot;;
+&nbsp;                    private final int parameterIndex;
+&nbsp;
+&nbsp;                    protected DefaultArgument(int parameterIndex) {
+&nbsp;                        this.parameterIndex = parameterIndex;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public int value() {
+&nbsp;                        return this.parameterIndex;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public Argument.BindingMechanic bindingMechanic() {
+&nbsp;                        return BindingMechanic.UNIQUE;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public Class&lt;Argument&gt; annotationType() {
+&nbsp;                        return Argument.class;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public int hashCode() {
+&nbsp;                        return (127 * &quot;bindingMechanic&quot;.hashCode() ^ BindingMechanic.UNIQUE.hashCode()) + (127 * &quot;value&quot;.hashCode() ^ this.parameterIndex);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public boolean equals(@CheckForNull Object other) {
+&nbsp;                        return this == other || other instanceof Argument &amp;&amp; this.parameterIndex == ((Argument)other).value();
+&nbsp;                    }
+&nbsp;
+&nbsp;                    public String toString() {
+&nbsp;                        return &quot;@&quot; + Argument.class.getName() + &quot;(bindingMechanic=&quot; + BindingMechanic.UNIQUE + &quot;, value=&quot; + this.parameterIndex + &quot;)&quot;;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @SuppressFBWarnings(
+&nbsp;        value = {&quot;IC_SUPERCLASS_USES_SUBCLASS_DURING_INITIALIZATION&quot;},
+&nbsp;        justification = &quot;Safe initialization is implied.&quot;
+&nbsp;    )
+&nbsp;    public interface ParameterBinder&lt;T extends Annotation&gt; {
+&nbsp;        List&lt;ParameterBinder&lt;?&gt;&gt; DEFAULTS = Collections.unmodifiableList(Arrays.asList(Binder.INSTANCE, net.bytebuddy.implementation.bind.annotation.AllArguments.Binder.INSTANCE, net.bytebuddy.implementation.bind.annotation.Origin.Binder.INSTANCE, net.bytebuddy.implementation.bind.annotation.This.Binder.INSTANCE, net.bytebuddy.implementation.bind.annotation.Super.Binder.INSTANCE, net.bytebuddy.implementation.bind.annotation.Default.Binder.INSTANCE, net.bytebuddy.implementation.bind.annotation.SuperCall.Binder.INSTANCE, net.bytebuddy.implementation.bind.annotation.DefaultCall.Binder.INSTANCE, net.bytebuddy.implementation.bind.annotation.SuperMethod.Binder.INSTANCE, net.bytebuddy.implementation.bind.annotation.DefaultMethod.Binder.INSTANCE, net.bytebuddy.implementation.bind.annotation.FieldValue.Binder.INSTANCE, net.bytebuddy.implementation.bind.annotation.StubValue.Binder.INSTANCE, net.bytebuddy.implementation.bind.annotation.Empty.Binder.INSTANCE));
+&nbsp;
+&nbsp;        Class&lt;T&gt; getHandledType();
+&nbsp;
+&nbsp;        MethodDelegationBinder.ParameterBinding&lt;?&gt; bind(AnnotationDescription.Loadable&lt;T&gt; var1, MethodDescription var2, ParameterDescription var3, Implementation.Target var4, Assigner var5, Assigner.Typing var6);
+&nbsp;
+&nbsp;        public abstract static class ForFieldBinding&lt;S extends Annotation&gt; implements ParameterBinder&lt;S&gt; {
+&nbsp;            protected static final String BEAN_PROPERTY = &quot;&quot;;
+&nbsp;
+&nbsp;            public ForFieldBinding() {
+&nbsp;            }
+&nbsp;
+&nbsp;            private static FieldLocator.Resolution resolveAccessor(FieldLocator fieldLocator, MethodDescription methodDescription) {
+&nbsp;                String fieldName;
+&nbsp;                if (ElementMatchers.isSetter().matches(methodDescription)) {
+&nbsp;                    fieldName = methodDescription.getInternalName().substring(3);
+&nbsp;                } else {
+&nbsp;                    if (!ElementMatchers.isGetter().matches(methodDescription)) {
+&nbsp;                        return net.bytebuddy.dynamic.scaffold.FieldLocator.Resolution.Illegal.INSTANCE;
+&nbsp;                    }
+&nbsp;
+&nbsp;                    fieldName = methodDescription.getInternalName().substring(methodDescription.getInternalName().startsWith(&quot;is&quot;) ? 2 : 3);
+&nbsp;                }
+&nbsp;
+&nbsp;                return fieldLocator.locate(Character.toLowerCase(fieldName.charAt(0)) + fieldName.substring(1));
+&nbsp;            }
+&nbsp;
+&nbsp;            public MethodDelegationBinder.ParameterBinding&lt;?&gt; bind(AnnotationDescription.Loadable&lt;S&gt; annotation, MethodDescription source, ParameterDescription target, Implementation.Target implementationTarget, Assigner assigner, Assigner.Typing typing) {
+&nbsp;                if (!this.declaringType(annotation).represents(Void.TYPE)) {
+&nbsp;                    if (this.declaringType(annotation).isPrimitive() || this.declaringType(annotation).isArray()) {
+&nbsp;                        throw new IllegalStateException(&quot;A primitive type or array type cannot declare a field: &quot; + source);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    if (!implementationTarget.getInstrumentedType().isAssignableTo(this.declaringType(annotation))) {
+&nbsp;                        return net.bytebuddy.implementation.bind.MethodDelegationBinder.ParameterBinding.Illegal.INSTANCE;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                FieldLocator fieldLocator = this.declaringType(annotation).represents(Void.TYPE) ? new FieldLocator.ForClassHierarchy(implementationTarget.getInstrumentedType()) : new FieldLocator.ForExactType(this.declaringType(annotation), implementationTarget.getInstrumentedType());
+&nbsp;                FieldLocator.Resolution resolution = this.fieldName(annotation).equals(&quot;&quot;) ? resolveAccessor((FieldLocator)fieldLocator, source) : ((FieldLocator)fieldLocator).locate(this.fieldName(annotation));
+&nbsp;                return (MethodDelegationBinder.ParameterBinding)(!resolution.isResolved() || source.isStatic() &amp;&amp; !resolution.getField().isStatic() ? net.bytebuddy.implementation.bind.MethodDelegationBinder.ParameterBinding.Illegal.INSTANCE : this.bind(resolution.getField(), annotation, source, target, implementationTarget, assigner));
+&nbsp;            }
+&nbsp;
+&nbsp;            protected abstract String fieldName(AnnotationDescription.Loadable&lt;S&gt; var1);
+&nbsp;
+&nbsp;            protected abstract TypeDescription declaringType(AnnotationDescription.Loadable&lt;S&gt; var1);
+&nbsp;
+&nbsp;            protected abstract MethodDelegationBinder.ParameterBinding&lt;?&gt; bind(FieldDescription var1, AnnotationDescription.Loadable&lt;S&gt; var2, MethodDescription var3, ParameterDescription var4, Implementation.Target var5, Assigner var6);
+&nbsp;        }
+&nbsp;
+&nbsp;        public abstract static class ForFixedValue&lt;S extends Annotation&gt; implements ParameterBinder&lt;S&gt; {
+&nbsp;            public ForFixedValue() {
+&nbsp;            }
+&nbsp;
+&nbsp;            public MethodDelegationBinder.ParameterBinding&lt;?&gt; bind(AnnotationDescription.Loadable&lt;S&gt; annotation, MethodDescription source, ParameterDescription target, Implementation.Target implementationTarget, Assigner assigner, Assigner.Typing typing) {
+&nbsp;                Object value = this.bind(annotation, source, target);
+&nbsp;                if (value == null) {
+&nbsp;                    return new MethodDelegationBinder.ParameterBinding.Anonymous(DefaultValue.of(target.getType()));
+&nbsp;                } else {
+&nbsp;                    Object stackManipulation;
+&nbsp;                    TypeDescription suppliedType;
+&nbsp;                    if (value instanceof Boolean) {
+&nbsp;                        stackManipulation = IntegerConstant.forValue((Boolean)value);
+&nbsp;                        suppliedType = ForLoadedType.of(Boolean.TYPE);
+&nbsp;                    } else if (value instanceof Byte) {
+&nbsp;                        stackManipulation = IntegerConstant.forValue((Byte)value);
+&nbsp;                        suppliedType = ForLoadedType.of(Byte.TYPE);
+&nbsp;                    } else if (value instanceof Short) {
+&nbsp;                        stackManipulation = IntegerConstant.forValue((Short)value);
+&nbsp;                        suppliedType = ForLoadedType.of(Short.TYPE);
+&nbsp;                    } else if (value instanceof Character) {
+&nbsp;                        stackManipulation = IntegerConstant.forValue((Character)value);
+&nbsp;                        suppliedType = ForLoadedType.of(Character.TYPE);
+&nbsp;                    } else if (value instanceof Integer) {
+&nbsp;                        stackManipulation = IntegerConstant.forValue((Integer)value);
+&nbsp;                        suppliedType = ForLoadedType.of(Integer.TYPE);
+&nbsp;                    } else if (value instanceof Long) {
+&nbsp;                        stackManipulation = LongConstant.forValue((Long)value);
+&nbsp;                        suppliedType = ForLoadedType.of(Long.TYPE);
+&nbsp;                    } else if (value instanceof Float) {
+&nbsp;                        stackManipulation = FloatConstant.forValue((Float)value);
+&nbsp;                        suppliedType = ForLoadedType.of(Float.TYPE);
+&nbsp;                    } else if (value instanceof Double) {
+&nbsp;                        stackManipulation = DoubleConstant.forValue((Double)value);
+&nbsp;                        suppliedType = ForLoadedType.of(Double.TYPE);
+&nbsp;                    } else if (value instanceof String) {
+&nbsp;                        stackManipulation = new TextConstant((String)value);
+&nbsp;                        suppliedType = TypeDescription.STRING;
+&nbsp;                    } else if (value instanceof Class) {
+&nbsp;                        stackManipulation = ClassConstant.of(ForLoadedType.of((Class)value));
+&nbsp;                        suppliedType = TypeDescription.CLASS;
+&nbsp;                    } else if (value instanceof TypeDescription) {
+&nbsp;                        stackManipulation = ClassConstant.of((TypeDescription)value);
+&nbsp;                        suppliedType = TypeDescription.CLASS;
+<b class="fc">&nbsp;                    } else if (value instanceof Enum) {</b>
+&nbsp;                        stackManipulation = FieldAccess.forEnumeration(new EnumerationDescription.ForLoadedEnumeration((Enum)value));
+&nbsp;                        suppliedType = ForLoadedType.of(((Enum)value).getDeclaringClass());
+&nbsp;                    } else if (value instanceof EnumerationDescription) {
+&nbsp;                        stackManipulation = FieldAccess.forEnumeration((EnumerationDescription)value);
+&nbsp;                        suppliedType = ((EnumerationDescription)value).getEnumerationType();
+&nbsp;                    } else if (JavaType.METHOD_HANDLE.isInstance(value)) {
+&nbsp;                        stackManipulation = new JavaConstantValue(MethodHandle.ofLoaded(value));
+&nbsp;                        suppliedType = JavaType.METHOD_HANDLE.getTypeStub();
+&nbsp;                    } else if (value instanceof JavaConstant.MethodHandle) {
+&nbsp;                        stackManipulation = new JavaConstantValue((JavaConstant.MethodHandle)value);
+&nbsp;                        suppliedType = JavaType.METHOD_HANDLE.getTypeStub();
+&nbsp;                    } else if (JavaType.METHOD_TYPE.isInstance(value)) {
+&nbsp;                        stackManipulation = new JavaConstantValue(MethodType.ofLoaded(value));
+&nbsp;                        suppliedType = JavaType.METHOD_HANDLE.getTypeStub();
+&nbsp;                    } else {
+&nbsp;                        if (!(value instanceof JavaConstant)) {
+&nbsp;                            throw new IllegalStateException(&quot;Not able to save in class&#39;s constant pool: &quot; + value);
+&nbsp;                        }
+&nbsp;
+&nbsp;                        stackManipulation = new JavaConstantValue((JavaConstant)value);
+&nbsp;                        suppliedType = ((JavaConstant)value).getTypeDescription();
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return new MethodDelegationBinder.ParameterBinding.Anonymous(new StackManipulation.Compound(new StackManipulation[]{(StackManipulation)stackManipulation, assigner.assign(suppliedType.asGenericType(), target.getType(), typing)}));
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            @Nonnull(
+&nbsp;                when = When.MAYBE
+&nbsp;            )
+&nbsp;            protected abstract Object bind(AnnotationDescription.Loadable&lt;S&gt; var1, MethodDescription var2, ParameterDescription var3);
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public static class OfConstant&lt;U extends Annotation&gt; extends ForFixedValue&lt;U&gt; {
+<b class="fc">&nbsp;                private final Class&lt;U&gt; type;</b>
+&nbsp;                @Nonnull(
+&nbsp;                    when = When.MAYBE
+&nbsp;                )
+&nbsp;                @ValueHandling(Sort.REVERSE_NULLABILITY)
+&nbsp;                private final Object value;
+&nbsp;
+<b class="fc">&nbsp;                protected OfConstant(Class&lt;U&gt; type, @Nonnull(when = When.MAYBE) Object value) {</b>
+<b class="fc">&nbsp;                    this.type = type;</b>
+&nbsp;                    this.value = value;
+<b class="fc">&nbsp;                }</b>
+&nbsp;
+<b class="fc">&nbsp;                public static &lt;V extends Annotation&gt; ParameterBinder&lt;V&gt; of(Class&lt;V&gt; type, @Nonnull(when = When.MAYBE) Object value) {</b>
+<b class="fc">&nbsp;                    return new OfConstant(type, value);</b>
+<b class="fc">&nbsp;                }</b>
+&nbsp;
+&nbsp;                public Class&lt;U&gt; getHandledType() {
+&nbsp;                    return this.type;
+&nbsp;                }
+&nbsp;
+&nbsp;                @Nonnull(
+&nbsp;                    when = When.MAYBE
+&nbsp;                )
+&nbsp;                protected Object bind(AnnotationDescription.Loadable&lt;U&gt; annotation, MethodDescription source, ParameterDescription target) {
+&nbsp;                    return this.value;
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else if (!this.type.equals(((OfConstant)var1).type)) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        Object var2 = ((OfConstant)var1).value;
+&nbsp;                        Object var3 = this.value;
+&nbsp;                        if (var2 != null) {
+&nbsp;                            if (var3 != null) {
+&nbsp;                                if (!var3.equals(var2)) {
+&nbsp;                                    return false;
+&nbsp;                                }
+&nbsp;
+&nbsp;                                return true;
+&nbsp;                            }
+&nbsp;                        } else if (var3 == null) {
+&nbsp;                            return true;
+&nbsp;                        }
+&nbsp;
+&nbsp;                        return false;
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    int var10000 = (this.getClass().hashCode() * 31 + this.type.hashCode()) * 31;
+&nbsp;                    Object var1 = this.value;
+&nbsp;                    if (var1 != null) {
+&nbsp;                        var10000 += var1.hashCode();
+&nbsp;                    }
+&nbsp;
+&nbsp;                    return var10000;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    protected static class Record implements MethodDelegationBinder.Record {
+&nbsp;        private final MethodDescription candidate;
+&nbsp;        private final List&lt;DelegationProcessor.Handler&gt; handlers;
+&nbsp;        private final Assigner.Typing typing;
+&nbsp;
+&nbsp;        protected Record(MethodDescription candidate, List&lt;DelegationProcessor.Handler&gt; handlers, Assigner.Typing typing) {
+<b class="fc">&nbsp;            this.candidate = candidate;</b>
+<b class="fc">&nbsp;            this.handlers = handlers;</b>
+&nbsp;            this.typing = typing;
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegationBinder.MethodBinding bind(Implementation.Target implementationTarget, MethodDescription source, MethodDelegationBinder.TerminationHandler terminationHandler, MethodDelegationBinder.MethodInvoker methodInvoker, Assigner assigner) {
+&nbsp;            if (!this.candidate.isAccessibleTo(implementationTarget.getInstrumentedType())) {
+&nbsp;                return net.bytebuddy.implementation.bind.MethodDelegationBinder.MethodBinding.Illegal.INSTANCE;
+&nbsp;            } else {
+&nbsp;                StackManipulation methodTermination = terminationHandler.resolve(assigner, this.typing, source, this.candidate);
+&nbsp;                if (!methodTermination.isValid()) {
+&nbsp;                    return net.bytebuddy.implementation.bind.MethodDelegationBinder.MethodBinding.Illegal.INSTANCE;
+&nbsp;                } else {
+<b class="fc">&nbsp;                    MethodDelegationBinder.MethodBinding.Builder methodDelegationBindingBuilder = new MethodDelegationBinder.MethodBinding.Builder(methodInvoker, this.candidate);</b>
+<b class="fc">&nbsp;                    Iterator var8 = this.handlers.iterator();</b>
+<b class="fc">&nbsp;</b>
+&nbsp;                    MethodDelegationBinder.ParameterBinding parameterBinding;
+&nbsp;                    do {
+<b class="fc">&nbsp;                        if (!var8.hasNext()) {</b>
+<b class="fc">&nbsp;                            return methodDelegationBindingBuilder.build(methodTermination);</b>
+&nbsp;                        }
+&nbsp;
+&nbsp;                        DelegationProcessor.Handler handler = (DelegationProcessor.Handler)var8.next();
+&nbsp;                        parameterBinding = handler.bind(source, implementationTarget, assigner);
+&nbsp;                    } while(parameterBinding.isValid() &amp;&amp; methodDelegationBindingBuilder.append(parameterBinding));
+&nbsp;
+&nbsp;                    return net.bytebuddy.implementation.bind.MethodDelegationBinder.MethodBinding.Illegal.INSTANCE;
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public String toString() {</b>
+<b class="fc">&nbsp;            return this.candidate.toString();</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;        public boolean equals(Object var1) {
+<b class="fc">&nbsp;            if (this == var1) {</b>
+<b class="fc">&nbsp;                return true;</b>
+&nbsp;            } else if (var1 == null) {
+<b class="fc">&nbsp;                return false;</b>
+<b class="fc">&nbsp;            } else if (this.getClass() != var1.getClass()) {</b>
+&nbsp;                return false;
+&nbsp;            } else if (!this.typing.equals(((Record)var1).typing)) {
+&nbsp;                return false;
+&nbsp;            } else if (!this.candidate.equals(((Record)var1).candidate)) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.handlers.equals(((Record)var1).handlers);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return ((this.getClass().hashCode() * 31 + this.candidate.hashCode()) * 31 + this.handlers.hashCode()) * 31 + this.typing.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

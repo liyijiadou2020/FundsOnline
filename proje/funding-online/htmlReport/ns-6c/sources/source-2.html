@@ -1,0 +1,230 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > PlatformDescription</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.objenesis.strategy</a>
+</div>
+
+<h1>Coverage Summary for Class: PlatformDescription (org.objenesis.strategy)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PlatformDescription</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.objenesis.strategy;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import org.objenesis.ObjenesisException;
+&nbsp;
+&nbsp;public final class PlatformDescription {
+&nbsp;    public static final String GNU = &quot;GNU libgcj&quot;;
+&nbsp;    public static final String HOTSPOT = &quot;Java HotSpot&quot;;
+&nbsp;    /** @deprecated */
+&nbsp;    @Deprecated
+&nbsp;    public static final String SUN = &quot;Java HotSpot&quot;;
+&nbsp;    public static final String OPENJDK = &quot;OpenJDK&quot;;
+&nbsp;    public static final String PERC = &quot;PERC&quot;;
+&nbsp;    public static final String DALVIK = &quot;Dalvik&quot;;
+&nbsp;    public static final String SPECIFICATION_VERSION = System.getProperty(&quot;java.specification.version&quot;);
+&nbsp;    public static final String VM_VERSION = System.getProperty(&quot;java.runtime.version&quot;);
+&nbsp;    public static final String VM_INFO = System.getProperty(&quot;java.vm.info&quot;);
+&nbsp;    public static final String VENDOR_VERSION = System.getProperty(&quot;java.vm.version&quot;);
+&nbsp;    public static final String VENDOR = System.getProperty(&quot;java.vm.vendor&quot;);
+&nbsp;    public static final String JVM_NAME = System.getProperty(&quot;java.vm.name&quot;);
+&nbsp;    public static final int ANDROID_VERSION = getAndroidVersion();
+&nbsp;    public static final boolean IS_ANDROID_OPENJDK = getIsAndroidOpenJDK();
+&nbsp;    public static final String GAE_VERSION = getGaeRuntimeVersion();
+&nbsp;
+&nbsp;    public static String describePlatform() {
+&nbsp;        String desc = &quot;Java &quot; + SPECIFICATION_VERSION + &quot; (VM vendor name=\&quot;&quot; + VENDOR + &quot;\&quot;, VM vendor version=&quot; + VENDOR_VERSION + &quot;, JVM name=\&quot;&quot; + JVM_NAME + &quot;\&quot;, JVM version=&quot; + VM_VERSION + &quot;, JVM info=&quot; + VM_INFO;
+&nbsp;        if (ANDROID_VERSION != 0) {
+&nbsp;            desc = desc + &quot;, API level=&quot; + ANDROID_VERSION;
+&nbsp;        }
+&nbsp;
+&nbsp;        desc = desc + &quot;)&quot;;
+&nbsp;        return desc;
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isThisJVM(String name) {
+&nbsp;        return JVM_NAME.startsWith(name);
+&nbsp;    }
+&nbsp;
+&nbsp;    public static boolean isAndroidOpenJDK() {
+&nbsp;        return IS_ANDROID_OPENJDK;
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean getIsAndroidOpenJDK() {
+&nbsp;        if (getAndroidVersion() == 0) {
+&nbsp;            return false;
+&nbsp;        } else {
+<b class="fc">&nbsp;            String bootClasspath = System.getProperty(&quot;java.boot.class.path&quot;);</b>
+<b class="fc">&nbsp;            return bootClasspath != null &amp;&amp; bootClasspath.toLowerCase().contains(&quot;core-oj.jar&quot;);</b>
+&nbsp;        }
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    public static boolean isAfterJigsaw() {
+&nbsp;        String version = SPECIFICATION_VERSION;
+<b class="fc">&nbsp;        return version.indexOf(46) &lt; 0;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public static boolean isAfterJava11() {</b>
+&nbsp;        if (!isAfterJigsaw()) {
+&nbsp;            return false;
+<b class="fc">&nbsp;        } else {</b>
+&nbsp;            int version = Integer.parseInt(SPECIFICATION_VERSION);
+&nbsp;            return version &gt;= 11;
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public static boolean isGoogleAppEngine() {</b>
+&nbsp;        return GAE_VERSION != null;
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    private static String getGaeRuntimeVersion() {
+&nbsp;        return System.getProperty(&quot;com.google.appengine.runtime.version&quot;);
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    private static int getAndroidVersion() {
+&nbsp;        return !isThisJVM(&quot;Dalvik&quot;) ? 0 : getAndroidVersion0();
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int getAndroidVersion0() {
+&nbsp;        Class clazz;
+&nbsp;        try {
+&nbsp;            clazz = Class.forName(&quot;android.os.Build$VERSION&quot;);
+&nbsp;        } catch (ClassNotFoundException var6) {
+&nbsp;            throw new ObjenesisException(var6);
+&nbsp;        }
+&nbsp;
+&nbsp;        Field field;
+&nbsp;        try {
+&nbsp;            field = clazz.getField(&quot;SDK_INT&quot;);
+&nbsp;        } catch (NoSuchFieldException var5) {
+&nbsp;            return getOldAndroidVersion(clazz);
+&nbsp;        }
+&nbsp;
+&nbsp;        try {
+&nbsp;            int version = (Integer)field.get((Object)null);
+&nbsp;            return version;
+&nbsp;        } catch (IllegalAccessException var4) {
+&nbsp;            throw new RuntimeException(var4);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private static int getOldAndroidVersion(Class&lt;?&gt; versionClass) {
+&nbsp;        Field field;
+&nbsp;        try {
+&nbsp;            field = versionClass.getField(&quot;SDK&quot;);
+<b class="fc">&nbsp;        } catch (NoSuchFieldException var5) {</b>
+&nbsp;            throw new ObjenesisException(var5);
+&nbsp;        }
+&nbsp;
+&nbsp;        String version;
+&nbsp;        try {
+&nbsp;            version = (String)field.get((Object)null);
+&nbsp;        } catch (IllegalAccessException var4) {
+&nbsp;            throw new RuntimeException(var4);
+&nbsp;        }
+&nbsp;
+&nbsp;        return Integer.parseInt(version);
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;    private PlatformDescription() {</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

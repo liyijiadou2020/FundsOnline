@@ -1,0 +1,315 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > TypeAttributeAppender</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.attribute</a>
+</div>
+
+<h1>Coverage Summary for Class: TypeAttributeAppender (net.bytebuddy.implementation.attribute)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">TypeAttributeAppender$ForInstrumentedType</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.attribute;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Arrays;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationDescription;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationList;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeList;
+&nbsp;import net.bytebuddy.implementation.attribute.AnnotationAppender.ForTypeAnnotations;
+&nbsp;import net.bytebuddy.jar.asm.ClassVisitor;
+&nbsp;
+&nbsp;public interface TypeAttributeAppender {
+&nbsp;    void apply(ClassVisitor var1, TypeDescription var2, AnnotationValueFilter var3);
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class Compound implements TypeAttributeAppender {
+&nbsp;        private final List&lt;TypeAttributeAppender&gt; typeAttributeAppenders;
+&nbsp;
+&nbsp;        public Compound(TypeAttributeAppender... typeAttributeAppender) {
+&nbsp;            this(Arrays.asList(typeAttributeAppender));
+&nbsp;        }
+&nbsp;
+&nbsp;        public Compound(List&lt;? extends TypeAttributeAppender&gt; typeAttributeAppenders) {
+&nbsp;            this.typeAttributeAppenders = new ArrayList();
+&nbsp;            Iterator var2 = typeAttributeAppenders.iterator();
+&nbsp;
+&nbsp;            while(var2.hasNext()) {
+&nbsp;                TypeAttributeAppender typeAttributeAppender = (TypeAttributeAppender)var2.next();
+&nbsp;                if (typeAttributeAppender instanceof Compound) {
+&nbsp;                    this.typeAttributeAppenders.addAll(((Compound)typeAttributeAppender).typeAttributeAppenders);
+&nbsp;                } else if (!(typeAttributeAppender instanceof NoOp)) {
+&nbsp;                    this.typeAttributeAppenders.add(typeAttributeAppender);
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        public void apply(ClassVisitor classVisitor, TypeDescription instrumentedType, AnnotationValueFilter annotationValueFilter) {
+&nbsp;            Iterator var4 = this.typeAttributeAppenders.iterator();
+&nbsp;
+&nbsp;            while(var4.hasNext()) {
+&nbsp;                TypeAttributeAppender typeAttributeAppender = (TypeAttributeAppender)var4.next();
+&nbsp;                typeAttributeAppender.apply(classVisitor, instrumentedType, annotationValueFilter);
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        public boolean equals(Object var1) {
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.typeAttributeAppenders.equals(((Compound)var1).typeAttributeAppenders);
+<b class="fc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.typeAttributeAppenders.hashCode();
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Enhance
+&nbsp;    public static class Explicit implements TypeAttributeAppender {
+&nbsp;        private final List&lt;? extends AnnotationDescription&gt; annotations;
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public Explicit(List&lt;? extends AnnotationDescription&gt; annotations) {</b>
+&nbsp;            this.annotations = annotations;
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public void apply(ClassVisitor classVisitor, TypeDescription instrumentedType, AnnotationValueFilter annotationValueFilter) {</b>
+<b class="fc">&nbsp;            AnnotationAppender appender = new AnnotationAppender.Default(new AnnotationAppender.Target.OnType(classVisitor));</b>
+<b class="fc">&nbsp;</b>
+&nbsp;            AnnotationDescription annotation;
+<b class="fc">&nbsp;            for(Iterator var5 = this.annotations.iterator(); var5.hasNext(); appender = ((AnnotationAppender)appender).append(annotation, annotationValueFilter)) {</b>
+<b class="fc">&nbsp;                annotation = (AnnotationDescription)var5.next();</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        public boolean equals(Object var1) {</b>
+&nbsp;            if (this == var1) {
+&nbsp;                return true;
+&nbsp;            } else if (var1 == null) {
+&nbsp;                return false;
+&nbsp;            } else if (this.getClass() != var1.getClass()) {
+&nbsp;                return false;
+&nbsp;            } else {
+&nbsp;                return this.annotations.equals(((Explicit)var1).annotations);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public int hashCode() {
+&nbsp;            return this.getClass().hashCode() * 31 + this.annotations.hashCode();
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum ForInstrumentedType implements TypeAttributeAppender {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private ForInstrumentedType() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public void apply(ClassVisitor classVisitor, TypeDescription instrumentedType, AnnotationValueFilter annotationValueFilter) {
+&nbsp;            AnnotationAppender annotationAppender = new AnnotationAppender.Default(new AnnotationAppender.Target.OnType(classVisitor));
+&nbsp;            AnnotationAppender annotationAppender = ForTypeAnnotations.ofTypeVariable(annotationAppender, annotationValueFilter, true, instrumentedType.getTypeVariables());
+&nbsp;            TypeDescription.Generic superClass = instrumentedType.getSuperClass();
+&nbsp;            if (superClass != null) {
+&nbsp;                annotationAppender = (AnnotationAppender)superClass.accept(ForTypeAnnotations.ofSuperClass(annotationAppender, annotationValueFilter));
+&nbsp;            }
+&nbsp;
+&nbsp;            int interfaceIndex = 0;
+&nbsp;
+&nbsp;            Iterator var7;
+&nbsp;            TypeDescription.Generic interfaceType;
+&nbsp;            for(var7 = instrumentedType.getInterfaces().iterator(); var7.hasNext(); annotationAppender = (AnnotationAppender)interfaceType.accept(ForTypeAnnotations.ofInterfaceType(annotationAppender, annotationValueFilter, interfaceIndex++))) {
+&nbsp;                interfaceType = (TypeDescription.Generic)var7.next();
+&nbsp;            }
+&nbsp;
+&nbsp;            AnnotationDescription annotation;
+&nbsp;            for(var7 = instrumentedType.getDeclaredAnnotations().iterator(); var7.hasNext(); annotationAppender = annotationAppender.append(annotation, annotationValueFilter)) {
+&nbsp;                annotation = (AnnotationDescription)var7.next();
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        @Enhance
+&nbsp;        public static class Differentiating implements TypeAttributeAppender {
+&nbsp;            private final int annotationIndex;
+&nbsp;            private final int typeVariableIndex;
+&nbsp;            private final int interfaceTypeIndex;
+&nbsp;
+&nbsp;            public Differentiating(TypeDescription typeDescription) {
+&nbsp;                this(typeDescription.getDeclaredAnnotations().size(), typeDescription.getTypeVariables().size(), typeDescription.getInterfaces().size());
+&nbsp;            }
+&nbsp;
+&nbsp;            protected Differentiating(int annotationIndex, int typeVariableIndex, int interfaceTypeIndex) {
+&nbsp;                this.annotationIndex = annotationIndex;
+&nbsp;                this.typeVariableIndex = typeVariableIndex;
+&nbsp;                this.interfaceTypeIndex = interfaceTypeIndex;
+&nbsp;            }
+&nbsp;
+&nbsp;            public void apply(ClassVisitor classVisitor, TypeDescription instrumentedType, AnnotationValueFilter annotationValueFilter) {
+&nbsp;                AnnotationAppender annotationAppender = new AnnotationAppender.Default(new AnnotationAppender.Target.OnType(classVisitor));
+&nbsp;                ForTypeAnnotations.ofTypeVariable((AnnotationAppender)annotationAppender, annotationValueFilter, true, this.typeVariableIndex, instrumentedType.getTypeVariables());
+&nbsp;                TypeList.Generic interfaceTypes = instrumentedType.getInterfaces();
+&nbsp;                int interfaceTypeIndex = this.interfaceTypeIndex;
+&nbsp;
+&nbsp;                TypeDescription.Generic interfaceType;
+&nbsp;                for(Iterator var7 = ((TypeList.Generic)interfaceTypes.subList(this.interfaceTypeIndex, interfaceTypes.size())).iterator(); var7.hasNext(); annotationAppender = (AnnotationAppender)interfaceType.accept(ForTypeAnnotations.ofInterfaceType((AnnotationAppender)annotationAppender, annotationValueFilter, interfaceTypeIndex++))) {
+&nbsp;                    interfaceType = (TypeDescription.Generic)var7.next();
+&nbsp;                }
+&nbsp;
+&nbsp;                AnnotationList declaredAnnotations = instrumentedType.getDeclaredAnnotations();
+&nbsp;
+&nbsp;                AnnotationDescription annotationDescription;
+&nbsp;                for(Iterator var11 = ((AnnotationList)declaredAnnotations.subList(this.annotationIndex, declaredAnnotations.size())).iterator(); var11.hasNext(); annotationAppender = ((AnnotationAppender)annotationAppender).append(annotationDescription, annotationValueFilter)) {
+&nbsp;                    annotationDescription = (AnnotationDescription)var11.next();
+&nbsp;                }
+&nbsp;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.annotationIndex != ((Differentiating)var1).annotationIndex) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.typeVariableIndex != ((Differentiating)var1).typeVariableIndex) {
+&nbsp;                    return false;
+&nbsp;                } else {
+&nbsp;                    return this.interfaceTypeIndex == ((Differentiating)var1).interfaceTypeIndex;
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return ((this.getClass().hashCode() * 31 + this.annotationIndex) * 31 + this.typeVariableIndex) * 31 + this.interfaceTypeIndex;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static enum NoOp implements TypeAttributeAppender {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private NoOp() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public void apply(ClassVisitor classVisitor, TypeDescription instrumentedType, AnnotationValueFilter annotationValueFilter) {
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

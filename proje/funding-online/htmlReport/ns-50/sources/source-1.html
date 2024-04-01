@@ -1,0 +1,203 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > ConstructorInjection</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.configuration.injection</a>
+</div>
+
+<h1>Coverage Summary for Class: ConstructorInjection (org.mockito.internal.configuration.injection)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConstructorInjection</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ConstructorInjection$SimpleArgumentResolver</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.configuration.injection;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.InvocationTargetException;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Set;
+&nbsp;import org.mockito.exceptions.base.MockitoException;
+&nbsp;import org.mockito.internal.exceptions.Reporter;
+&nbsp;import org.mockito.internal.util.reflection.FieldInitializationReport;
+&nbsp;import org.mockito.internal.util.reflection.FieldInitializer;
+&nbsp;
+&nbsp;public class ConstructorInjection extends MockInjectionStrategy {
+&nbsp;    public ConstructorInjection() {
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean processInjection(Field field, Object fieldOwner, Set&lt;Object&gt; mockCandidates) {
+&nbsp;        try {
+&nbsp;            SimpleArgumentResolver simpleArgumentResolver = new SimpleArgumentResolver(mockCandidates);
+&nbsp;            FieldInitializationReport report = (new FieldInitializer(fieldOwner, field, simpleArgumentResolver)).initialize();
+&nbsp;            return report.fieldWasInitializedUsingContructorArgs();
+&nbsp;        } catch (MockitoException var6) {
+&nbsp;            if (var6.getCause() instanceof InvocationTargetException) {
+&nbsp;                Throwable realCause = var6.getCause().getCause();
+&nbsp;                throw Reporter.fieldInitialisationThrewException(field, realCause);
+&nbsp;            } else {
+&nbsp;                return false;
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static class SimpleArgumentResolver implements FieldInitializer.ConstructorArgumentResolver {
+<b class="fc">&nbsp;        final Set&lt;Object&gt; objects;</b>
+&nbsp;
+&nbsp;        public SimpleArgumentResolver(Set&lt;Object&gt; objects) {
+&nbsp;            this.objects = objects;
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        public Object[] resolveTypeInstances(Class&lt;?&gt;... argTypes) {
+<b class="fc">&nbsp;            List&lt;Object&gt; argumentInstances = new ArrayList(argTypes.length);</b>
+<b class="fc">&nbsp;            Class[] var3 = argTypes;</b>
+&nbsp;            int var4 = argTypes.length;
+&nbsp;
+<b class="fc">&nbsp;            for(int var5 = 0; var5 &lt; var4; ++var5) {</b>
+<b class="fc">&nbsp;                Class&lt;?&gt; argType = var3[var5];</b>
+&nbsp;                argumentInstances.add(this.objectThatIsAssignableFrom(argType));
+&nbsp;            }
+&nbsp;
+&nbsp;            return argumentInstances.toArray();
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        private Object objectThatIsAssignableFrom(Class&lt;?&gt; argType) {
+&nbsp;            Iterator var2 = this.objects.iterator();
+&nbsp;
+&nbsp;            Object object;
+&nbsp;            do {
+&nbsp;                if (!var2.hasNext()) {
+&nbsp;                    return null;
+&nbsp;                }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;                object = var2.next();</b>
+&nbsp;            } while(!argType.isAssignableFrom(object.getClass()));
+&nbsp;
+&nbsp;            return object;
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

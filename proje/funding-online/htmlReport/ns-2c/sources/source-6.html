@@ -1,0 +1,286 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > DefaultMethod</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">net.bytebuddy.implementation.bind.annotation</a>
+</div>
+
+<h1>Coverage Summary for Class: DefaultMethod (net.bytebuddy.implementation.bind.annotation)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+  <tr>
+    <td class="name">DefaultMethod$Binder</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package net.bytebuddy.implementation.bind.annotation;
+&nbsp;
+&nbsp;import java.lang.annotation.Documented;
+&nbsp;import java.lang.annotation.ElementType;
+&nbsp;import java.lang.annotation.Retention;
+&nbsp;import java.lang.annotation.RetentionPolicy;
+&nbsp;import java.lang.annotation.Target;
+&nbsp;import java.lang.reflect.Method;
+&nbsp;import net.bytebuddy.build.HashCodeAndEqualsPlugin.Enhance;
+&nbsp;import net.bytebuddy.description.annotation.AnnotationDescription;
+&nbsp;import net.bytebuddy.description.method.MethodDescription;
+&nbsp;import net.bytebuddy.description.method.MethodList;
+&nbsp;import net.bytebuddy.description.method.ParameterDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription;
+&nbsp;import net.bytebuddy.description.type.TypeDescription.ForLoadedType;
+&nbsp;import net.bytebuddy.dynamic.TargetType;
+&nbsp;import net.bytebuddy.implementation.Implementation;
+&nbsp;import net.bytebuddy.implementation.MethodAccessorFactory.AccessType;
+&nbsp;import net.bytebuddy.implementation.bind.MethodDelegationBinder;
+&nbsp;import net.bytebuddy.implementation.bind.MethodDelegationBinder.ParameterBinding.Illegal;
+&nbsp;import net.bytebuddy.implementation.bytecode.StackManipulation;
+&nbsp;import net.bytebuddy.implementation.bytecode.assign.Assigner;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.MethodConstant;
+&nbsp;import net.bytebuddy.implementation.bytecode.constant.NullConstant;
+&nbsp;import net.bytebuddy.implementation.bytecode.member.FieldAccess;
+&nbsp;import net.bytebuddy.jar.asm.MethodVisitor;
+&nbsp;import net.bytebuddy.matcher.ElementMatchers;
+&nbsp;
+&nbsp;@Documented
+&nbsp;@Retention(RetentionPolicy.RUNTIME)
+&nbsp;@Target({ElementType.PARAMETER})
+&nbsp;public @interface DefaultMethod {
+&nbsp;    boolean cached() default true;
+&nbsp;
+&nbsp;    boolean privileged() default false;
+&nbsp;
+&nbsp;    Class&lt;?&gt; targetType() default void.class;
+&nbsp;
+&nbsp;    boolean nullIfImpossible() default false;
+&nbsp;
+&nbsp;    public static enum Binder implements TargetMethodAnnotationDrivenBinder.ParameterBinder&lt;DefaultMethod&gt; {
+&nbsp;        INSTANCE;
+&nbsp;
+&nbsp;        private static final MethodDescription.InDefinedShape CACHED;
+&nbsp;        private static final MethodDescription.InDefinedShape PRIVILEGED;
+&nbsp;        private static final MethodDescription.InDefinedShape TARGET_TYPE;
+&nbsp;        private static final MethodDescription.InDefinedShape NULL_IF_IMPOSSIBLE;
+&nbsp;
+&nbsp;        private Binder() {
+&nbsp;        }
+&nbsp;
+&nbsp;        public Class&lt;DefaultMethod&gt; getHandledType() {
+&nbsp;            return DefaultMethod.class;
+&nbsp;        }
+&nbsp;
+&nbsp;        public MethodDelegationBinder.ParameterBinding&lt;?&gt; bind(AnnotationDescription.Loadable&lt;DefaultMethod&gt; annotation, MethodDescription source, ParameterDescription target, Implementation.Target implementationTarget, Assigner assigner, Assigner.Typing typing) {
+&nbsp;            if (!target.getType().asErasure().isAssignableFrom(Method.class)) {
+&nbsp;                throw new IllegalStateException(&quot;Cannot assign Method type to &quot; + target);
+&nbsp;            } else if (source.isMethod()) {
+&nbsp;                TypeDescription typeDescription = (TypeDescription)annotation.getValue(TARGET_TYPE).resolve(TypeDescription.class);
+&nbsp;                Implementation.SpecialMethodInvocation specialMethodInvocation = ((MethodLocator)(typeDescription.represents(Void.TYPE) ? DefaultMethod.Binder.MethodLocator.ForImplicitType.INSTANCE : new MethodLocator.ForExplicitType(typeDescription))).resolve(implementationTarget, source).withCheckedCompatibilityTo(source.asTypeToken());
+&nbsp;                if (specialMethodInvocation.isValid()) {
+&nbsp;                    return new MethodDelegationBinder.ParameterBinding.Anonymous(new DelegationMethod(specialMethodInvocation, (Boolean)annotation.getValue(CACHED).resolve(Boolean.class), (Boolean)annotation.getValue(PRIVILEGED).resolve(Boolean.class)));
+&nbsp;                } else {
+&nbsp;                    return (MethodDelegationBinder.ParameterBinding)((Boolean)annotation.getValue(NULL_IF_IMPOSSIBLE).resolve(Boolean.class) ? new MethodDelegationBinder.ParameterBinding.Anonymous(NullConstant.INSTANCE) : Illegal.INSTANCE);
+&nbsp;                }
+&nbsp;            } else {
+&nbsp;                return (MethodDelegationBinder.ParameterBinding)((Boolean)annotation.getValue(NULL_IF_IMPOSSIBLE).resolve(Boolean.class) ? new MethodDelegationBinder.ParameterBinding.Anonymous(NullConstant.INSTANCE) : Illegal.INSTANCE);
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        static {
+&nbsp;            MethodList&lt;MethodDescription.InDefinedShape&gt; methodList = ForLoadedType.of(DefaultMethod.class).getDeclaredMethods();
+&nbsp;            CACHED = (MethodDescription.InDefinedShape)((MethodList)methodList.filter(ElementMatchers.named(&quot;cached&quot;))).getOnly();
+&nbsp;            PRIVILEGED = (MethodDescription.InDefinedShape)((MethodList)methodList.filter(ElementMatchers.named(&quot;privileged&quot;))).getOnly();
+&nbsp;            TARGET_TYPE = (MethodDescription.InDefinedShape)((MethodList)methodList.filter(ElementMatchers.named(&quot;targetType&quot;))).getOnly();
+&nbsp;            NULL_IF_IMPOSSIBLE = (MethodDescription.InDefinedShape)((MethodList)methodList.filter(ElementMatchers.named(&quot;nullIfImpossible&quot;))).getOnly();
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        @Enhance
+&nbsp;        protected static class DelegationMethod implements StackManipulation {
+&nbsp;            private final Implementation.SpecialMethodInvocation specialMethodInvocation;
+&nbsp;            private final boolean cached;
+<b class="fc">&nbsp;            private final boolean privileged;</b>
+&nbsp;
+&nbsp;            protected DelegationMethod(Implementation.SpecialMethodInvocation specialMethodInvocation, boolean cached, boolean privileged) {
+&nbsp;                this.specialMethodInvocation = specialMethodInvocation;
+&nbsp;                this.cached = cached;
+&nbsp;                this.privileged = privileged;
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean isValid() {
+&nbsp;                return this.specialMethodInvocation.isValid();
+&nbsp;            }
+&nbsp;
+&nbsp;            public StackManipulation.Size apply(MethodVisitor methodVisitor, Implementation.Context implementationContext) {
+&nbsp;                StackManipulation methodConstant = this.privileged ? MethodConstant.ofPrivileged(implementationContext.registerAccessorFor(this.specialMethodInvocation, AccessType.PUBLIC)) : MethodConstant.of(implementationContext.registerAccessorFor(this.specialMethodInvocation, AccessType.PUBLIC));
+&nbsp;                return ((StackManipulation)(this.cached ? FieldAccess.forField(implementationContext.cache(methodConstant, ForLoadedType.of(Method.class))).read() : methodConstant)).apply(methodVisitor, implementationContext);
+&nbsp;            }
+&nbsp;
+&nbsp;            public boolean equals(Object var1) {
+&nbsp;                if (this == var1) {
+&nbsp;                    return true;
+&nbsp;                } else if (var1 == null) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.getClass() != var1.getClass()) {
+&nbsp;                    return false;
+&nbsp;                } else if (this.cached != ((DelegationMethod)var1).cached) {
+&nbsp;                    return false;
+<b class="fc">&nbsp;                } else if (this.privileged != ((DelegationMethod)var1).privileged) {</b>
+<b class="fc">&nbsp;                    return false;</b>
+<b class="fc">&nbsp;                } else {</b>
+<b class="fc">&nbsp;                    return this.specialMethodInvocation.equals(((DelegationMethod)var1).specialMethodInvocation);</b>
+<b class="fc">&nbsp;                }</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            public int hashCode() {
+&nbsp;                return ((this.getClass().hashCode() * 31 + this.specialMethodInvocation.hashCode()) * 31 + this.cached) * 31 + this.privileged;
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        protected interface MethodLocator {
+&nbsp;            Implementation.SpecialMethodInvocation resolve(Implementation.Target var1, MethodDescription var2);
+&nbsp;
+&nbsp;            @Enhance
+&nbsp;            public static class ForExplicitType implements MethodLocator {
+&nbsp;                private final TypeDescription typeDescription;
+&nbsp;
+&nbsp;                protected ForExplicitType(TypeDescription typeDescription) {
+&nbsp;                    this.typeDescription = typeDescription;
+&nbsp;                }
+&nbsp;
+&nbsp;                public Implementation.SpecialMethodInvocation resolve(Implementation.Target implementationTarget, MethodDescription source) {
+&nbsp;                    if (!this.typeDescription.isInterface()) {
+&nbsp;                        throw new IllegalStateException(source + &quot; method carries default method call parameter on non-interface type&quot;);
+&nbsp;                    } else {
+&nbsp;                        return implementationTarget.invokeDefault(source.asSignatureToken(), TargetType.resolve(this.typeDescription, implementationTarget.getInstrumentedType()));
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public boolean equals(Object var1) {
+&nbsp;                    if (this == var1) {
+&nbsp;                        return true;
+&nbsp;                    } else if (var1 == null) {
+&nbsp;                        return false;
+&nbsp;                    } else if (this.getClass() != var1.getClass()) {
+&nbsp;                        return false;
+&nbsp;                    } else {
+&nbsp;                        return this.typeDescription.equals(((ForExplicitType)var1).typeDescription);
+&nbsp;                    }
+&nbsp;                }
+&nbsp;
+&nbsp;                public int hashCode() {
+&nbsp;                    return this.getClass().hashCode() * 31 + this.typeDescription.hashCode();
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;            public static enum ForImplicitType implements MethodLocator {
+&nbsp;                INSTANCE;
+&nbsp;
+&nbsp;                private ForImplicitType() {
+&nbsp;                }
+&nbsp;
+&nbsp;                public Implementation.SpecialMethodInvocation resolve(Implementation.Target implementationTarget, MethodDescription source) {
+&nbsp;                    return implementationTarget.invokeDefault(source.asSignatureToken());
+&nbsp;                }
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

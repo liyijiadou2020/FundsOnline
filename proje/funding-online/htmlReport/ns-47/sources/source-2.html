@@ -1,0 +1,378 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > NodeTestTask</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.junit.platform.engine.support.hierarchical</a>
+</div>
+
+<h1>Coverage Summary for Class: NodeTestTask (org.junit.platform.engine.support.hierarchical)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NodeTestTask</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (23/23)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">NodeTestTask$DefaultDynamicTestExecutor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (8/8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (26/26)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.junit.platform.engine.support.hierarchical;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.Iterator;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Map;
+&nbsp;import java.util.Objects;
+&nbsp;import java.util.Set;
+&nbsp;import java.util.concurrent.CancellationException;
+&nbsp;import java.util.concurrent.CompletableFuture;
+&nbsp;import java.util.concurrent.ConcurrentHashMap;
+&nbsp;import java.util.concurrent.ExecutionException;
+&nbsp;import java.util.concurrent.Future;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;import org.junit.platform.commons.JUnitException;
+&nbsp;import org.junit.platform.commons.logging.Logger;
+&nbsp;import org.junit.platform.commons.logging.LoggerFactory;
+&nbsp;import org.junit.platform.commons.util.ExceptionUtils;
+&nbsp;import org.junit.platform.commons.util.Preconditions;
+&nbsp;import org.junit.platform.commons.util.UnrecoverableExceptions;
+&nbsp;import org.junit.platform.engine.EngineExecutionListener;
+&nbsp;import org.junit.platform.engine.TestDescriptor;
+&nbsp;import org.junit.platform.engine.TestExecutionResult;
+&nbsp;import org.junit.platform.engine.UniqueId;
+&nbsp;
+&nbsp;class NodeTestTask&lt;C extends EngineExecutionContext&gt; implements HierarchicalTestExecutorService.TestTask {
+&nbsp;    private static final Logger logger = LoggerFactory.getLogger(NodeTestTask.class);
+&nbsp;    private static final Runnable NOOP = () -&gt; {
+&nbsp;    };
+&nbsp;    private final NodeTestTaskContext taskContext;
+&nbsp;    private final TestDescriptor testDescriptor;
+&nbsp;    private final Node&lt;C&gt; node;
+&nbsp;    private final Runnable finalizer;
+&nbsp;    private C parentContext;
+&nbsp;    private C context;
+&nbsp;    private Node.SkipResult skipResult;
+&nbsp;    private boolean started;
+&nbsp;    private ThrowableCollector throwableCollector;
+&nbsp;
+&nbsp;    NodeTestTask(NodeTestTaskContext taskContext, TestDescriptor testDescriptor) {
+&nbsp;        this(taskContext, testDescriptor, NOOP);
+&nbsp;    }
+&nbsp;
+&nbsp;    NodeTestTask(NodeTestTaskContext taskContext, TestDescriptor testDescriptor, Runnable finalizer) {
+&nbsp;        this.taskContext = taskContext;
+&nbsp;        this.testDescriptor = testDescriptor;
+&nbsp;        this.node = NodeUtils.asNode(testDescriptor);
+&nbsp;        this.finalizer = finalizer;
+&nbsp;    }
+&nbsp;
+&nbsp;    public ResourceLock getResourceLock() {
+&nbsp;        return this.taskContext.getExecutionAdvisor().getResourceLock(this.testDescriptor);
+&nbsp;    }
+&nbsp;
+&nbsp;    public Node.ExecutionMode getExecutionMode() {
+&nbsp;        return (Node.ExecutionMode)this.taskContext.getExecutionAdvisor().getForcedExecutionMode(this.testDescriptor).orElse(this.node.getExecutionMode());
+&nbsp;    }
+&nbsp;
+&nbsp;    void setParentContext(C parentContext) {
+&nbsp;        this.parentContext = parentContext;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void execute() {
+&nbsp;        try {
+&nbsp;            this.throwableCollector = this.taskContext.getThrowableCollectorFactory().create();
+&nbsp;            this.prepare();
+&nbsp;            if (this.throwableCollector.isEmpty()) {
+&nbsp;                this.checkWhetherSkipped();
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.throwableCollector.isEmpty() &amp;&amp; !this.skipResult.isSkipped()) {
+&nbsp;                this.executeRecursively();
+&nbsp;            }
+&nbsp;
+&nbsp;            if (this.context != null) {
+&nbsp;                this.cleanUp();
+&nbsp;            }
+&nbsp;
+&nbsp;            this.reportCompletion();
+&nbsp;        } finally {
+&nbsp;            if (Thread.interrupted()) {
+&nbsp;                logger.debug(() -&gt; {
+&nbsp;                    return String.format(&quot;Execution of TestDescriptor with display name [%s] and unique ID [%s] failed to clear the &#39;interrupted status&#39; flag for the current thread. JUnit has cleared the flag, but you may wish to investigate why the flag was not cleared by user code.&quot;, this.testDescriptor.getDisplayName(), this.testDescriptor.getUniqueId());
+&nbsp;                });
+&nbsp;            }
+&nbsp;
+&nbsp;            this.finalizer.run();
+&nbsp;        }
+&nbsp;
+&nbsp;        this.context = null;
+<b class="fc">&nbsp;    }</b>
+<b class="fc">&nbsp;</b>
+&nbsp;    private void prepare() {
+<b class="fc">&nbsp;        this.throwableCollector.execute(() -&gt; {</b>
+&nbsp;            this.context = this.node.prepare(this.parentContext);
+&nbsp;        });
+&nbsp;        this.parentContext = null;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void checkWhetherSkipped() {
+&nbsp;        this.throwableCollector.execute(() -&gt; {
+&nbsp;            this.skipResult = this.node.shouldBeSkipped(this.context);
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    private void executeRecursively() {
+&nbsp;        this.taskContext.getListener().executionStarted(this.testDescriptor);
+&nbsp;        this.started = true;
+&nbsp;        this.throwableCollector.execute(() -&gt; {
+&nbsp;            this.node.around(this.context, (ctx) -&gt; {
+&nbsp;                this.context = ctx;
+&nbsp;                this.throwableCollector.execute(() -&gt; {
+&nbsp;                    List&lt;NodeTestTask&lt;C&gt;&gt; children = (List)this.testDescriptor.getChildren().stream().map((descriptor) -&gt; {
+&nbsp;                        return new NodeTestTask(this.taskContext, descriptor);
+&nbsp;                    }).collect(Collectors.toCollection(ArrayList::new));
+&nbsp;                    this.context = this.node.before(this.context);
+&nbsp;                    Node.DynamicTestExecutor dynamicTestExecutor = new DefaultDynamicTestExecutor();
+&nbsp;                    this.context = this.node.execute(this.context, dynamicTestExecutor);
+&nbsp;                    if (!children.isEmpty()) {
+&nbsp;                        children.forEach((child) -&gt; {
+&nbsp;                            child.setParentContext(this.context);
+&nbsp;                        });
+&nbsp;                        this.taskContext.getExecutorService().invokeAll(children);
+&nbsp;                    }
+&nbsp;
+&nbsp;                    ThrowableCollector var10000 = this.throwableCollector;
+&nbsp;                    Objects.requireNonNull(dynamicTestExecutor);
+&nbsp;                    var10000.execute(dynamicTestExecutor::awaitFinished);
+&nbsp;                });
+<b class="fc">&nbsp;                this.throwableCollector.execute(() -&gt; {</b>
+&nbsp;                    this.node.after(this.context);
+<b class="fc">&nbsp;                });</b>
+<b class="fc">&nbsp;            });</b>
+<b class="fc">&nbsp;        });</b>
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+<b class="fc">&nbsp;    private void cleanUp() {</b>
+<b class="fc">&nbsp;        this.throwableCollector.execute(() -&gt; {</b>
+<b class="fc">&nbsp;            this.node.cleanUp(this.context);</b>
+&nbsp;        });
+&nbsp;    }
+<b class="fc">&nbsp;</b>
+&nbsp;    private void reportCompletion() {
+<b class="fc">&nbsp;        if (this.throwableCollector.isEmpty() &amp;&amp; this.skipResult.isSkipped()) {</b>
+<b class="fc">&nbsp;            try {</b>
+&nbsp;                this.node.nodeSkipped(this.context, this.testDescriptor, this.skipResult);
+<b class="fc">&nbsp;            } catch (Throwable var2) {</b>
+&nbsp;                UnrecoverableExceptions.rethrowIfUnrecoverable(var2);
+&nbsp;                logger.debug(var2, () -&gt; {
+&nbsp;                    return String.format(&quot;Failed to invoke nodeSkipped() on Node %s&quot;, this.testDescriptor.getUniqueId());
+&nbsp;                });
+<b class="fc">&nbsp;            }</b>
+&nbsp;
+&nbsp;            this.taskContext.getListener().executionSkipped(this.testDescriptor, (String)this.skipResult.getReason().orElse(&quot;&lt;unknown&gt;&quot;));
+<b class="fc">&nbsp;        } else {</b>
+&nbsp;            if (!this.started) {
+&nbsp;                this.taskContext.getListener().executionStarted(this.testDescriptor);
+&nbsp;            }
+&nbsp;
+&nbsp;            try {
+<b class="fc">&nbsp;                this.node.nodeFinished(this.context, this.testDescriptor, this.throwableCollector.toTestExecutionResult());</b>
+&nbsp;            } catch (Throwable var3) {
+&nbsp;                UnrecoverableExceptions.rethrowIfUnrecoverable(var3);
+&nbsp;                logger.debug(var3, () -&gt; {
+<b class="fc">&nbsp;                    return String.format(&quot;Failed to invoke nodeFinished() on Node %s&quot;, this.testDescriptor.getUniqueId());</b>
+&nbsp;                });
+&nbsp;            }
+&nbsp;
+&nbsp;            this.taskContext.getListener().executionFinished(this.testDescriptor, this.throwableCollector.toTestExecutionResult());
+&nbsp;            this.throwableCollector = null;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    private class DefaultDynamicTestExecutor implements Node.DynamicTestExecutor {
+&nbsp;        private final Map&lt;UniqueId, DynamicTaskState&gt; unfinishedTasks;
+&nbsp;
+<b class="fc">&nbsp;        private DefaultDynamicTestExecutor() {</b>
+&nbsp;            this.unfinishedTasks = new ConcurrentHashMap();
+&nbsp;        }
+&nbsp;
+&nbsp;        public void execute(TestDescriptor testDescriptor) {
+<b class="fc">&nbsp;            this.execute(testDescriptor, NodeTestTask.this.taskContext.getListener());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        public Future&lt;?&gt; execute(TestDescriptor testDescriptor, EngineExecutionListener executionListener) {
+&nbsp;            Preconditions.notNull(testDescriptor, &quot;testDescriptor must not be null&quot;);
+&nbsp;            Preconditions.notNull(executionListener, &quot;executionListener must not be null&quot;);
+<b class="fc">&nbsp;            executionListener.dynamicTestRegistered(testDescriptor);</b>
+<b class="fc">&nbsp;            Set&lt;ExclusiveResource&gt; exclusiveResources = NodeUtils.asNode(testDescriptor).getExclusiveResources();</b>
+&nbsp;            if (!exclusiveResources.isEmpty()) {
+&nbsp;                executionListener.executionStarted(testDescriptor);
+&nbsp;                String message = &quot;Dynamic test descriptors must not declare exclusive resources: &quot; + exclusiveResources;
+<b class="fc">&nbsp;                executionListener.executionFinished(testDescriptor, TestExecutionResult.failed(new JUnitException(message)));</b>
+<b class="fc">&nbsp;                return CompletableFuture.completedFuture((Object)null);</b>
+&nbsp;            } else {
+&nbsp;                UniqueId uniqueId = testDescriptor.getUniqueId();
+&nbsp;                NodeTestTask&lt;C&gt; nodeTestTask = new NodeTestTask(NodeTestTask.this.taskContext.withListener(executionListener), testDescriptor, () -&gt; {
+&nbsp;                    this.unfinishedTasks.remove(uniqueId);
+&nbsp;                });
+&nbsp;                nodeTestTask.setParentContext(NodeTestTask.this.context);
+&nbsp;                this.unfinishedTasks.put(uniqueId, NodeTestTask.DynamicTaskState.unscheduled());
+&nbsp;                Future&lt;Void&gt; future = NodeTestTask.this.taskContext.getExecutorService().submit(nodeTestTask);
+&nbsp;                this.unfinishedTasks.computeIfPresent(uniqueId, (__, state) -&gt; {
+&nbsp;                    return NodeTestTask.DynamicTaskState.scheduled(future);
+&nbsp;                });
+&nbsp;                return future;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        public void awaitFinished() throws InterruptedException {
+&nbsp;            Iterator var1 = this.unfinishedTasks.values().iterator();
+&nbsp;
+&nbsp;            while(var1.hasNext()) {
+&nbsp;                DynamicTaskState state = (DynamicTaskState)var1.next();
+&nbsp;
+&nbsp;                try {
+&nbsp;                    state.awaitFinished();
+&nbsp;                } catch (CancellationException var4) {
+&nbsp;                } catch (ExecutionException var5) {
+&nbsp;                    ExceptionUtils.throwAsUncheckedException(var5.getCause());
+&nbsp;                }
+&nbsp;            }
+&nbsp;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @FunctionalInterface
+<b class="fc">&nbsp;    private interface DynamicTaskState {</b>
+&nbsp;        DynamicTaskState UNSCHEDULED = () -&gt; {
+&nbsp;        };
+&nbsp;
+&nbsp;        static DynamicTaskState unscheduled() {
+&nbsp;            return UNSCHEDULED;
+&nbsp;        }
+&nbsp;
+&nbsp;        static DynamicTaskState scheduled(Future&lt;Void&gt; future) {
+&nbsp;            Objects.requireNonNull(future);
+&nbsp;            return future::get;
+&nbsp;        }
+&nbsp;
+&nbsp;        void awaitFinished() throws CancellationException, ExecutionException, InterruptedException;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>

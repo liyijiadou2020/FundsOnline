@@ -1,0 +1,178 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > MockAnnotationProcessor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">org.mockito.internal.configuration</a>
+</div>
+
+<h1>Coverage Summary for Class: MockAnnotationProcessor (org.mockito.internal.configuration)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MockAnnotationProcessor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;//
+&nbsp;// Source code recreated from a .class file by IntelliJ IDEA
+&nbsp;// (powered by FernFlower decompiler)
+&nbsp;//
+&nbsp;
+&nbsp;package org.mockito.internal.configuration;
+&nbsp;
+&nbsp;import java.lang.reflect.Field;
+&nbsp;import java.lang.reflect.ParameterizedType;
+&nbsp;import java.lang.reflect.Type;
+&nbsp;import java.util.Objects;
+&nbsp;import org.mockito.Mock;
+&nbsp;import org.mockito.MockSettings;
+&nbsp;import org.mockito.MockedConstruction;
+&nbsp;import org.mockito.MockedStatic;
+&nbsp;import org.mockito.Mockito;
+&nbsp;import org.mockito.exceptions.base.MockitoException;
+&nbsp;import org.mockito.internal.util.StringUtil;
+&nbsp;import org.mockito.internal.util.Supplier;
+&nbsp;
+&nbsp;public class MockAnnotationProcessor implements FieldAnnotationProcessor&lt;Mock&gt; {
+&nbsp;    public MockAnnotationProcessor() {
+<b class="fc">&nbsp;    }</b>
+&nbsp;
+&nbsp;    public Object process(Mock annotation, Field field) {
+<b class="fc">&nbsp;        Class var10001 = field.getType();</b>
+<b class="fc">&nbsp;        Objects.requireNonNull(field);</b>
+&nbsp;        return processAnnotationForMock(annotation, var10001, field::getGenericType, field.getName());
+&nbsp;    }
+&nbsp;
+&nbsp;    public static Object processAnnotationForMock(Mock annotation, Class&lt;?&gt; type, Supplier&lt;Type&gt; genericType, String name) {
+<b class="fc">&nbsp;        MockSettings mockSettings = Mockito.withSettings();</b>
+<b class="fc">&nbsp;        if (annotation.extraInterfaces().length &gt; 0) {</b>
+&nbsp;            mockSettings.extraInterfaces(annotation.extraInterfaces());
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+<b class="fc">&nbsp;        if (&quot;&quot;.equals(annotation.name())) {</b>
+&nbsp;            mockSettings.name(name);
+&nbsp;        } else {
+&nbsp;            mockSettings.name(annotation.name());
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;        if (annotation.serializable()) {
+<b class="fc">&nbsp;            mockSettings.serializable();</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if (annotation.stubOnly()) {</b>
+&nbsp;            mockSettings.stubOnly();
+&nbsp;        }
+&nbsp;
+&nbsp;        if (annotation.lenient()) {
+<b class="fc">&nbsp;            mockSettings.lenient();</b>
+&nbsp;        }
+<b class="fc">&nbsp;</b>
+&nbsp;        mockSettings.defaultAnswer(annotation.answer());
+&nbsp;        if (type == MockedStatic.class) {
+&nbsp;            return Mockito.mockStatic(inferParameterizedType((Type)genericType.get(), name, MockedStatic.class.getSimpleName()), mockSettings);
+&nbsp;        } else {
+<b class="fc">&nbsp;            return type == MockedConstruction.class ? Mockito.mockConstruction(inferParameterizedType((Type)genericType.get(), name, MockedConstruction.class.getSimpleName()), mockSettings) : Mockito.mock(type, mockSettings);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    static Class&lt;?&gt; inferParameterizedType(Type type, String name, String sort) {
+&nbsp;        if (type instanceof ParameterizedType) {
+<b class="fc">&nbsp;            ParameterizedType parameterizedType = (ParameterizedType)type;</b>
+&nbsp;            Type[] arguments = parameterizedType.getActualTypeArguments();
+&nbsp;            if (arguments.length == 1 &amp;&amp; arguments[0] instanceof Class) {
+&nbsp;                return (Class)arguments[0];
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;        throw new MockitoException(StringUtil.join(new Object[]{&quot;Mockito cannot infer a static mock from a raw type for &quot; + name, &quot;&quot;, &quot;Instead of @Mock &quot; + sort + &quot; you need to specify a parameterized type&quot;, &quot;For example, if you would like to mock Sample.class, specify&quot;, &quot;&quot;, &quot;@Mock &quot; + sort + &quot;&lt;Sample&gt;&quot;, &quot;&quot;, &quot;as the type parameter. If the type is itself parameterized, it should be specified as raw type.&quot;}));
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:49</div>
+</div>
+</body>
+</html>

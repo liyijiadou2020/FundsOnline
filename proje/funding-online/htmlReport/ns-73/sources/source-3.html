@@ -1,0 +1,101 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=GBK"> 
+  <title>Coverage Report > MenuMapper</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.atguigu.crowd.mapper</a>
+</div>
+
+<h1>Coverage Summary for Class: MenuMapper (com.atguigu.crowd.mapper)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">MenuMapper</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.atguigu.crowd.mapper;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;import org.apache.ibatis.annotations.Param;
+&nbsp;
+&nbsp;import com.atguigu.crowd.entity.Menu;
+&nbsp;import com.atguigu.crowd.entity.MenuExample;
+&nbsp;
+&nbsp;public interface MenuMapper {
+&nbsp;
+&nbsp;    int countByExample(MenuExample example);
+&nbsp;
+&nbsp;    int deleteByExample(MenuExample example);
+&nbsp;
+&nbsp;    int deleteByPrimaryKey(Integer id);
+&nbsp;
+&nbsp;    int insert(Menu record);
+&nbsp;
+&nbsp;    int insertSelective(Menu record);
+&nbsp;
+&nbsp;    List&lt;Menu&gt; selectByExample(MenuExample example);
+&nbsp;
+&nbsp;    Menu selectByPrimaryKey(Integer id);
+&nbsp;
+&nbsp;    int updateByExampleSelective(@Param(&quot;record&quot;) Menu record, @Param(&quot;example&quot;) MenuExample example);
+&nbsp;
+&nbsp;    int updateByExample(@Param(&quot;record&quot;) Menu record, @Param(&quot;example&quot;) MenuExample example);
+&nbsp;
+&nbsp;    int updateByPrimaryKeySelective(Menu record);
+&nbsp;
+&nbsp;    int updateByPrimaryKey(Menu record);
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2024-03-22 12:48</div>
+</div>
+</body>
+</html>
