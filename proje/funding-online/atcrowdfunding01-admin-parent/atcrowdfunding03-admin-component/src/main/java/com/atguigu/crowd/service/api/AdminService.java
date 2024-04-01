@@ -7,6 +7,10 @@ import com.github.pagehelper.PageInfo;
 
 public interface AdminService {
 
+    /**
+     * 添加一个管理员用户
+     * @param admin 管理员用户
+     */
     void saveAdmin(Admin admin);
 
     List<Admin> getAll();

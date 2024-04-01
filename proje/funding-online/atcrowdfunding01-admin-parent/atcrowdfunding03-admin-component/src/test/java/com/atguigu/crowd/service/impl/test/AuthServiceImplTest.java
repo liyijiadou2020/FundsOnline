@@ -99,9 +99,7 @@ public void getAssignedAuthIdByRoleId_ReturnsIdList() {
     public void saveRoleAuthRelathinship_InvalidKeyInMap() {
         Map<String, List<Integer>> map = new HashMap<>();
         map.put("wrongKey", Collections.singletonList(1));
-
         // Настройка и ожидание не требуется, так как метод не будет вызван из-за неправильного ключа
-
         assertThrows(Exception.class, () -> authService.saveRoleAuthRelathinship(map));
     }
 

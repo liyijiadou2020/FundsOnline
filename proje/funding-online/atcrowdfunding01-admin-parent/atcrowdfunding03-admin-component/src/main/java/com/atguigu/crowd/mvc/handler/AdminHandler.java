@@ -46,9 +46,7 @@ public class AdminHandler {
 
     @RequestMapping("/admin/save.html")
     public String save(Admin admin) {
-
         adminService.saveAdmin(admin);
-
         return "redirect:/admin/get/page.html?pageNum=" + Integer.MAX_VALUE;
     }
 

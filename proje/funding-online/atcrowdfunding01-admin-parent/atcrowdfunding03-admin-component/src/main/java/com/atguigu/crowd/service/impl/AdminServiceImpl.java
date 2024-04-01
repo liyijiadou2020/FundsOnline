@@ -31,9 +31,12 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private AdminMapper adminMapper;
 
+    /**
+     * 向数据库中添加一名管理员
+     * @param admin
+     */
     @Override
     public void saveAdmin(Admin admin) {
-
         // 1.密码加密
         String userPswd = admin.getUserPswd();
         userPswd = CrowdUtil.md5(userPswd);
@@ -50,9 +53,7 @@ public class AdminServiceImpl implements AdminService {
             adminMapper.insert(admin);
         } catch (Exception e) {
             e.printStackTrace();
-
             logger.info("异常全类名=" + e.getClass().getName());
-
             if (e instanceof DuplicateKeyException) {
                 throw new LoginAcctAlreadyInUseException(CrowdConstant.MESSAGE_LOGIN_ACCT_ALREADY_IN_USE);
             }
@@ -60,11 +61,21 @@ public class AdminServiceImpl implements AdminService {
 
     }
 
+    /**
+     * 获取管理员列表
+     * @return
+     */
     @Override
     public List<Admin> getAll() {
         return adminMapper.selectByExample(new AdminExample());
     }
 
+    /**
+     * 通过账号查找管理员
+     * @param loginAcct
+     * @param userPswd
+     * @return
+     */
     @Override
     public Admin getAdminByLoginAcct(String loginAcct, String userPswd) {
 
@@ -155,10 +166,8 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void saveAdminRoleRelationship(Integer adminId, List<Integer> roleIdList) {
         // 为了简化操作：先根据adminId删除旧的数据，再根据roleIdList保存全部新的数据
-
         // 1.根据adminId删除旧的关联关系数据
         adminMapper.deleteOLdRelationship(adminId);
-
         // 2.根据roleIdList和adminId保存新的关联关系
         if (roleIdList != null && roleIdList.size() > 0) {
             adminMapper.insertNewRelationship(adminId, roleIdList);
