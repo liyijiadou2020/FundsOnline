@@ -7,9 +7,19 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="atcrowdfunding02-admin-webui" />
-        <module name="atcrowdfunding05-common-util" />
-        <module name="atcrowdfunding06-common-reverse" />
+        <module name="atcrowdfunding14-member-order-consumer" />
+        <module name="atcrowdfunding16-member-zuul" />
         <module name="atcrowdfunding04-admin-entity" />
+        <module name="atcrowdfunding17-member-api" />
+        <module name="atcrowdfunding08-member-eureka" />
+        <module name="atcrowdfunding06-common-reverse" />
+        <module name="atcrowdfunding10-member-mysql-provider" />
+        <module name="atcrowdfunding09-member-entity" />
+        <module name="atcrowdfunding15-member-pay-consumer" />
+        <module name="atcrowdfunding12-member-authentication-consumer" />
+        <module name="atcrowdfunding05-common-util" />
+        <module name="atcrowdfunding11-member-redis-provider" />
+        <module name="atcrowdfunding13-member-project-consumer" />
         <module name="atcrowdfunding03-admin-component" />
       </profile>
     </annotationProcessing>

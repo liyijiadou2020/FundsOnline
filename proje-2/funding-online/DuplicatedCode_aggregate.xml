@@ -1,8 +1,0 @@
-<root>
-<duplicate cost="1" hash="0">
-  <fragment file="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AdminExample.java" line="583" start="18064" end="18347" />
-  <fragment file="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/AuthExample.java" line="432" start="12699" end="12982" />
-  <fragment file="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/MenuExample.java" line="502" start="14599" end="14882" />
-  <fragment file="file://$PROJECT_DIR$/atcrowdfunding01-admin-parent/atcrowdfunding04-admin-entity/src/main/java/com/atguigu/crowd/entity/RoleExample.java" line="302" start="8284" end="8567" />
-</duplicate>
-</root>

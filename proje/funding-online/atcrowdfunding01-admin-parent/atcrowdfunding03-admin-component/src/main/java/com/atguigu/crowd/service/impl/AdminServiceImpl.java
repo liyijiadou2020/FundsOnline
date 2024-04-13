@@ -21,6 +21,8 @@ import com.atguigu.crowd.util.CrowdUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 
+import static com.atguigu.crowd.constant.CrowdConstant.MESSAGE_STRING_INVALIDATE;
+
 /**
  * AdminService 接口的具体实现，实现了操作Admin对象的业务逻辑。
  */
@@ -150,6 +152,10 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void update(Admin admin) {
+
+        // if (admin==null) {
+        //     throw new IllegalArgumentException(CrowdConstant.MESSAGE_STRING_INVALIDATE);
+        // }
 
         // “Selective”表示有选择的更新，对于null值的字段不更新
         try {

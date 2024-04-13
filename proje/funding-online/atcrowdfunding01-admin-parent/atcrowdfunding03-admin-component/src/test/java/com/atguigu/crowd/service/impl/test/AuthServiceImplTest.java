@@ -96,6 +96,17 @@ public void getAssignedAuthIdByRoleId_ReturnsIdList() {
     }
 
     @Test
+    public void saveRoleAuthRelathinship_SuccessWithNullList() {
+        Map<String, List<Integer>> map = new HashMap<>();
+        map.put("roleId", Collections.singletonList(1));
+        map.put("authIdArray", null);
+
+        doNothing().when(authMapper).deleteOldRelationship(anyInt());
+
+        assertDoesNotThrow(() -> authService.saveRoleAuthRelathinship(map));
+    }
+
+    @Test
     public void saveRoleAuthRelathinship_InvalidKeyInMap() {
         Map<String, List<Integer>> map = new HashMap<>();
         map.put("wrongKey", Collections.singletonList(1));
